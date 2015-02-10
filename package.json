@@ -1,0 +1,32 @@
+{
+  "name": "fury",
+  "description": "API Blueprint SDK",
+  "version": "0.1.0",
+  "author": "Apiary.io <support@apiary.io>",
+  "main": "./lib/fury",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:apiaryio/fury.git"
+  },
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "scripts": {
+    "test": "scripts/test",
+    "prepublish": "scripts/build"
+  },
+  "dependencies": {
+    "coffee-script": "~1.8",
+    "apiary-blueprint-parser": "",
+    "protagonist": "~0.17.1",
+    "request": "",
+    "sanitizer": "",
+    "underscore": "",
+    "robotskirt": ""
+  },
+  "devDependencies": {
+    "chai": "~1.10.0",
+    "mocha": "~2.0.1"
+  },
+  "license": "MIT"
+}
