@@ -26,7 +26,10 @@
   },
   "devDependencies": {
     "chai": "~1.10.0",
-    "mocha": "~2.0.1"
+    "coffee-coverage": "^0.4.4",
+    "jscoverage": "^0.5.9",
+    "mocha": "~2.0.1",
+    "mocha-lcov-reporter": "0.0.1"
   },
   "license": "MIT"
 }

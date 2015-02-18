@@ -1,0 +1,40 @@
+#!/bin/sh
+# Usage:
+# ./scripts/cov [reporter]
+#
+# Example:
+# ./scripts/cov html-cov > cov.html
+
+REPORTER=$1
+echo "Using Mocha reporter: $REPORTER" 1>&2
+
+# prepare dir for instrumented code
+mkdir -p ./src-cov/src
+
+# copy all .js files from ./src to temp isntrumented directory
+cd src/
+find . -name "*.js" -type f -print | cpio -pvdmB ../src-cov/src 2> /dev/null
+cd ../
+
+# instrument all .js
+cd src-cov/
+for i in `find . -name "*.js" -type f`; do
+  echo $i
+  ../node_modules/.bin/jscoverage $i $i
+done
+cd ../
+
+# instrument coffee code
+./node_modules/coffee-coverage/bin/coffeecoverage --exclude node_modules,.git,test --path relative . ./src-cov 1>&2
+
+# move tests under src-cov dir scope
+cp -r ./test ./src-cov/test
+
+# it does what it does
+cp ./package.json ./src-cov
+
+# run test for bot, .coffee and .js
+find ./src-cov/test/unit | grep "\-test" | xargs ./node_modules/mocha/bin/mocha  --reporter $REPORTER --compilers 'coffee:coffee-script/register'
+
+# clean-up
+rm -rf ./src-cov
