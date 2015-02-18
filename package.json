@@ -27,6 +27,7 @@
   "devDependencies": {
     "chai": "~1.10.0",
     "coffee-coverage": "^0.4.4",
+    "coveralls": "^2.11.2",
     "jscoverage": "^0.5.9",
     "mocha": "~2.0.1",
     "mocha-lcov-reporter": "0.0.1"
