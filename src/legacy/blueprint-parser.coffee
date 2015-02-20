@@ -10,10 +10,10 @@ apiaryBlueprintAdapter = require './apiary-blueprint-adapter'
 
 NEW_VERSION_REGEXP = new RegExp '^(((VERSION:( |\t)2)|(FORMAT:( |\t)(X-)?1A))\n)', 'i'
 
-STRICT_OPTIONS =  
+STRICT_OPTIONS =
   requireBlueprintName: true
 
-# TODO:
+# Default async parser timeout
 # PARSER_TIMEOUT = parseInt process.env.PARSER_TIMEOUT, 10
 
 countLines = (code, index) ->
@@ -31,27 +31,29 @@ getLocalAst = ({code, vanity, sourcemap, emitter}, cb) ->
   vanity ?= ''
   emitter ?= DefaultFuryEmitter()
 
-  alreadyDone = false
+  # alreadyDone = false
+
   if code.match(NEW_VERSION_REGEXP)
 
-    parsingTimedOut = ->
-      if alreadyDone then return
-      alreadyDone = true
-
-      emitter.emit 'error', "PARSE_TIMEOUT : Parsing took too much time for vanity '#{vanity}'"
-
-      err = new Error('Parsing took too much time for vanity "#{vanity}"');
-      err.errType = 'PARSE_TIMEOUT'
-      err.message = ''.concat err.toString()
-      err.description = ''.concat err.toString()
-      err.location = [{index: 1, length: 0}]
-      err.line = 1
-      cb err
-      return
+    # TODO: revisit timeout handling
+    # parsingTimedOut = ->
+    #   if alreadyDone then return
+    #   alreadyDone = true
+    #
+    #   emitter.emit 'error', "PARSE_TIMEOUT : Parsing took too much time for vanity '#{vanity}'"
+    #
+    #   err = new Error('Parsing took too much time for vanity "#{vanity}"');
+    #   err.errType = 'PARSE_TIMEOUT'
+    #   err.message = ''.concat err.toString()
+    #   err.description = ''.concat err.toString()
+    #   err.location = [{index: 1, length: 0}]
+    #   err.line = 1
+    #   cb err
+    #   return
 
     # Perphaps protagonist can handle the timeouts?
     # TODO: Seems this code does not work with current test
-    timer = null # setTimeout(parsingTimedOut, PARSER_TIMEOUT)
+    # timer = null # setTimeout(parsingTimedOut, PARSER_TIMEOUT)
 
     t = process.hrtime()
 
@@ -66,10 +68,10 @@ getLocalAst = ({code, vanity, sourcemap, emitter}, cb) ->
 
       emitter.emit 'metric', 'snowcrashParse', execTime
 
-      clearTimeout(timer)
+      #clearTimeout(timer)
 
-      if alreadyDone then return
-      alreadyDone = true
+      #if alreadyDone then return
+      #alreadyDone = true
       if err
         err.errType = 'PARSE_ERROR'
 

@@ -1,5 +1,10 @@
 var events = require('events');
 
+// Default logging function
+function log(message) {
+  //console.log(message);
+}
+
 // Default Fury EventEmitter
 //  using primitive console logging
 //
@@ -10,19 +15,19 @@ function DefaultFuryEmitter() {
   // Error event
   //  sent in the case of an unrecoverable error
   eventEmitter.on('error', function(message) {
-    console.log(message);
+    log(message);
   });
 
   // Debugging event
   //  sent for debugging purposes
   eventEmitter.on('log', function(message) {
-    console.log(message);
+    log(message);
   });
 
   // Metric event
   //  sent when an event performance has been measured
   eventEmitter.on('metric', function(eventName, elaspedTime) {
-    console.log(eventName + ' ' + elaspedTime);
+    log(eventName + ' ' + elaspedTime);
   });
 
   return eventEmitter;

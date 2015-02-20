@@ -38,9 +38,9 @@ and Apiary Blueprint parsing:
 
 ```js
 var parser = require('fury').legacyBlueprintParser
-var blueprintSource = '# My API\n';
+var source = '# My API\n';
 
-parser.parse(blueprintSource, function(error, api, warnings) {
+parser.parse({ code: source }, function(error, api, warnings) {
 
     console.log(api.name);
 });
