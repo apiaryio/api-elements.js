@@ -1,9 +1,9 @@
 {assert} = require 'chai'
 
-LegacyParser = require '../../../src/legacy/blueprint-parser'
-APIBlueprintAdapter = require '../../../src/legacy/api-blueprint-adapter'
-ApiaryBlueprintAdapter = require '../../../src/legacy/apiary-blueprint-adapter'
-ObjectHelper = require '../../../src/legacy/object-helper'
+bluperintParser = require '../../../src/legacy/blueprint-parser'
+apiBlueprintAdapter = require '../../../src/legacy/api-blueprint-adapter'
+apiaryBlueprintAdapter = require '../../../src/legacy/apiary-blueprint-adapter'
+objectHelper = require '../../../src/legacy/object-helper'
 
 describe 'Blueprint Tests', ->
   describe 'Version 2 Tests', ->
@@ -14,7 +14,7 @@ describe 'Blueprint Tests', ->
                # API name
                '''
 
-        LegacyParser.parse {code}, (err, newAst) ->
+        bluperintParser.parse {code}, (err, newAst) ->
           ast = newAst
           done err
 
@@ -42,7 +42,7 @@ describe 'Blueprint Tests', ->
                            Hello World
                '''
 
-        LegacyParser.parse {code}, (err, newAst) ->
+        bluperintParser.parse {code}, (err, newAst) ->
           ast = newAst
           done err
 
@@ -74,7 +74,7 @@ describe 'Blueprint Tests', ->
         < 200
         '''
 
-        LegacyParser.parse {code}, (err, newAst) ->
+        bluperintParser.parse {code}, (err, newAst) ->
           ast = newAst
           done err
 
@@ -101,7 +101,7 @@ describe 'Blueprint Tests', ->
         { "status": "created", "url": "/shopping-cart/2" }
         '''
 
-        LegacyParser.parse {code}, (err, newAst) ->
+        bluperintParser.parse {code}, (err, newAst) ->
           ast = newAst
           done err
 
@@ -161,7 +161,7 @@ describe 'Blueprint Tests', ->
 -- S20 --
 '''
         parseTimestamp = Date.now() # Since parser is blocking result to comparing timestamps
-        LegacyParser.parse {code}, (err, ast) ->
+        bluperintParser.parse {code}, (err, ast) ->
           assert.isNull err
           assert.isDefined ast
           assert.strictEqual ast.sections.length, 20
@@ -277,7 +277,7 @@ describe 'Blueprint Tests', ->
       describe "When I transform an AST from Protagonist v#{version}", ->
         ast = undefined
         before (done) ->
-          APIBlueprintAdapter.transform astCache, [], (err, newAst) ->
+          apiBlueprintAdapter.transform astCache, [], (err, newAst) ->
             ast = newAst
             done err
 
@@ -307,13 +307,13 @@ describe 'Blueprint Tests', ->
     describe 'null', ->
       data = undefined
       before ->
-        data = ObjectHelper.ensureObjectOfObjects null
+        data = objectHelper.ensureObjectOfObjects null
       it 'results in {}', -> assert.deepEqual data, {}
 
     describe 'object', ->
       data = undefined
       before ->
-        data = ObjectHelper.ensureObjectOfObjects
+        data = objectHelper.ensureObjectOfObjects
           'Accept-Language': {'value': 'cs'}
           'Accept': {'value': 'beverage/beer'}
       it 'results in the same object', -> assert.deepEqual data,
@@ -323,7 +323,7 @@ describe 'Blueprint Tests', ->
     describe 'array of objects', ->
       data = undefined
       before ->
-        data = ObjectHelper.ensureObjectOfObjects [
+        data = objectHelper.ensureObjectOfObjects [
           {'name': 'Accept-Language', 'value': 'cs'}
           {'name': 'Accept', 'value': 'beverage/beer'}
         ]
@@ -334,7 +334,7 @@ describe 'Blueprint Tests', ->
     describe 'array of objects with custom key selected', ->
       data = undefined
       before ->
-        data = ObjectHelper.ensureObjectOfObjects [
+        data = objectHelper.ensureObjectOfObjects [
           {'name': 'Accept-Language', 'value': 'cs'}
           {'name': 'Accept', 'value': 'beverage/beer'}
         ], 'value'
@@ -354,7 +354,7 @@ describe 'Test errors and warnings', ->
 
       '''
 
-      LegacyParser.parse {code}, (err, newAst, warnings) ->
+      bluperintParser.parse {code}, (err, newAst, warnings) ->
         if err
           errors = err
         done()
@@ -375,7 +375,7 @@ describe 'Test errors and warnings', ->
       < 200
       '''
 
-      LegacyParser.parse {code}, (err, newAst, warnings) ->
+      bluperintParser.parse {code}, (err, newAst, warnings) ->
         if err
           errors = err
         ast = newAst
@@ -397,7 +397,7 @@ describe 'Test errors and warnings', ->
 
       '''
 
-      LegacyParser.parse {code}, (err, newAst, warnings) ->
+      bluperintParser.parse {code}, (err, newAst, warnings) ->
         if warnings then warn = warnings
         ast = newAst
         done err

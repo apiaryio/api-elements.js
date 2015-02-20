@@ -37,10 +37,10 @@ and Apiary Blueprint parsing:
 
 
 ```js
-var parser = require('fury').LegacyBlueprintParser
-var apiBlueprintSource = "# My API\n";
+var parser = require('fury').legacyBlueprintParser
+var blueprintSource = '# My API\n';
 
-parser.parse(apiBlueprintSource, function(error, api, warnings) {
+parser.parse(blueprintSource, function(error, api, warnings) {
 
     console.log(api.name);
 });

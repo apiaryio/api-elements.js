@@ -1,6 +1,6 @@
-BlueprintSDK = require './blueprint'
-ObjectHelper = require './object-helper'
-Markdown = require './markdown'
+blueprintAPI = require './blueprint'
+objectHelper = require './object-helper'
+markdown = require './markdown'
 
 trimLastNewline = (s) ->
   unless s
@@ -32,7 +32,7 @@ trimLastNewline = (s) ->
 # ```
 legacyHeadersFrom1AHeaders = (headers) ->
   legacyHeaders = {}
-  for own key, header of ObjectHelper.ensureObjectOfObjects(headers) or {} when header?.value?
+  for own key, header of objectHelper.ensureObjectOfObjects(headers) or {} when header?.value?
     legacyHeaders[key] = header.value
   legacyHeaders
 
@@ -66,13 +66,13 @@ legacyRequestsFrom1AExamples = (action, resource) ->
 #
 # Transform 1A Format Request into 'legacy request'
 legacyRequestFrom1ARequest = (request, action, resource, exampleId = undefined) ->
-  legacyRequest = new BlueprintSDK.Request
+  legacyRequest = new blueprintAPI.Request
     headers: legacyHeadersCombinedFrom1A request, action, resource
     exampleId: exampleId
 
   if request.description
     legacyRequest.description     = trimLastNewline request.description
-    legacyRequest.htmlDescription = trimLastNewline Markdown.toHtmlSync request.description
+    legacyRequest.htmlDescription = trimLastNewline markdown.toHtmlSync request.description
   else
     legacyRequest.description     = ''
     legacyRequest.htmlDescription = ''
@@ -97,13 +97,13 @@ legacyResponsesFrom1AExamples = (action, resource) ->
 #
 # Transform 1A Format Response into 'legacy response'
 legacyResponseFrom1AResponse = (response, action, resource, exampleId = undefined) ->
-  legacyResponse = new BlueprintSDK.Response
+  legacyResponse = new blueprintAPI.Response
     headers: legacyHeadersCombinedFrom1A response, action, resource
     exampleId: exampleId
 
   if response.description
     legacyResponse.description     = trimLastNewline response.description
-    legacyResponse.htmlDescription = trimLastNewline Markdown.toHtmlSync response.description
+    legacyResponse.htmlDescription = trimLastNewline markdown.toHtmlSync response.description
   else
     legacyResponse.description     = ''
     legacyResponse.htmlDescription = ''
@@ -129,12 +129,12 @@ getParametersOf = (obj) ->
     return undefined
 
   params = []
-  paramsObj = ObjectHelper.ensureObjectOfObjects obj.parameters
+  paramsObj = objectHelper.ensureObjectOfObjects obj.parameters
 
   for own key, param of paramsObj
     param.key = key
     if param.description
-      param.description = Markdown.toHtmlSync param.description
+      param.description = markdown.toHtmlSync param.description
     param.values = ((if typeof item is 'string' then item else item.value) for item in param.values)
     params.push param
 
@@ -156,7 +156,7 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
 
   for action, actionIndex in resource.actions or []
     # Combine resource & action section, preferring action
-    legacyResource = new BlueprintSDK.Resource responses: [], requests: []
+    legacyResource = new blueprintAPI.Resource responses: [], requests: []
 
     legacyResource.url         = legacyUrlConverterFn resource.uriTemplate
     legacyResource.uriTemplate = resource.uriTemplate
@@ -171,7 +171,7 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
     legacyResource.description = trimLastNewline resource.description
 
     if resource.description?.length
-      legacyResource.htmlDescription = trimLastNewline Markdown.toHtmlSync resource.description.trim()
+      legacyResource.htmlDescription = trimLastNewline markdown.toHtmlSync resource.description.trim()
     else
       legacyResource.htmlDescription = ''
 
@@ -184,7 +184,7 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
 
     unless !resource.model
       legacyResource.model = resource.model
-      legacyResource.model.description = Markdown.toHtmlSync resource.model.description
+      legacyResource.model.description = markdown.toHtmlSync resource.model.description
       legacyResource.model.headers = legacyHeadersFrom1AHeaders resource.model.headers
     else
       legacyResource.model = {}
@@ -196,7 +196,7 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
 
     if action.description
       legacyResource.actionDescription     = trimLastNewline action.description
-      legacyResource.actionHtmlDescription = trimLastNewline Markdown.toHtmlSync action.description
+      legacyResource.actionHtmlDescription = trimLastNewline markdown.toHtmlSync action.description
     else
       legacyResource.actionDescription     = ''
       legacyResource.actionHtmlDescription = ''
@@ -218,17 +218,17 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
 # once we'll be comfortable with new format and it'll be our default.
 legacyASTfrom1AAST = (ast, warnings, cb) ->
   # Blueprint
-  legacyAST = new BlueprintSDK.Blueprint
+  legacyAST = new blueprintAPI.Blueprint
     name: ast.name
-    version: BlueprintSDK.Version
+    version: blueprintAPI.Version
     metadata: []
 
   legacyAST.description = "#{ast.description}".trim() or ''
-  legacyAST.htmlDescription = trimLastNewline Markdown.toHtmlSync ast.description
+  legacyAST.htmlDescription = trimLastNewline markdown.toHtmlSync ast.description
 
   # Metadata
   metadata = []
-  for own metaKey, metaVal of ObjectHelper.ensureObjectOfObjects ast.metadata
+  for own metaKey, metaVal of objectHelper.ensureObjectOfObjects ast.metadata
     if metaKey is 'HOST'
       legacyAST.location = metaVal.value
       continue
@@ -255,7 +255,7 @@ legacyASTfrom1AAST = (ast, warnings, cb) ->
 
   # Resource Group Section(s) (was: Section)
   for resourceGroup in ast.resourceGroups
-    legacySection = new BlueprintSDK.Section
+    legacySection = new blueprintAPI.Section
       name: resourceGroup.name
       resources: []
 
@@ -263,7 +263,7 @@ legacyASTfrom1AAST = (ast, warnings, cb) ->
 
     if resourceGroupDescription
       legacySection.description =     trimLastNewline resourceGroupDescription
-      legacySection.htmlDescription = trimLastNewline Markdown.toHtmlSync resourceGroupDescription
+      legacySection.htmlDescription = trimLastNewline markdown.toHtmlSync resourceGroupDescription
     else
       legacySection.description     = ''
       legacySection.htmlDescription = ''

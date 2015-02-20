@@ -4,7 +4,6 @@ fillProps = (object, props, defaults) ->
   for key of defaults
     object[key] = props[key] ? defaults[key]
 
-
 combineParts = (separator, builder) ->
   parts = []
   builder(parts)

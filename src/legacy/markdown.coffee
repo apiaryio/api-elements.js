@@ -1,11 +1,10 @@
 # This is our Markdown parser implementation
 # Uses Robotskirt, which is a node binding for a C markdown parser Sundown (also used by Github)
-_         = require 'underscore'
-#marked    = require 'marked'
-rs        = require 'robotskirt'
+_ = require 'underscore'
+rs = require 'robotskirt'
 sanitizer = require 'sanitizer'
 
-renderer  = new rs.HtmlRenderer()
+renderer = new rs.HtmlRenderer()
 
 flags = [
   # ### Autolink

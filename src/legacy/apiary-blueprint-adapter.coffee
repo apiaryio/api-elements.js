@@ -1,8 +1,8 @@
-BlueprintSDK = require './blueprint'
-Markdown = require './markdown'
+blueprintAPI = require './blueprint'
+markdown = require './markdown'
 
-applyMarkdownHtml = (obj, targetHtmlProperty) ->
-  obj[targetHtmlProperty] = Markdown.toHtmlSync(obj.description or '').trim()
+applymarkdownHtml = (obj, targetHtmlProperty) ->
+  obj[targetHtmlProperty] = markdown.toHtmlSync(obj.description or '').trim()
   obj
 
 
@@ -11,20 +11,20 @@ applyMarkdownHtml = (obj, targetHtmlProperty) ->
 # _**Note:**_ `apiaryAst` is AST of the Old Blueprint Format.
 #
 # Go through the AST object and render
-# Markdown descriptions.
+# markdown descriptions.
 apiaryAstToApplicationAst = (ast) ->
-  plainJsObject = applyMarkdownHtml ast.toJSON(), 'htmlDescription'
+  plainJsObject = applymarkdownHtml ast.toJSON(), 'htmlDescription'
 
   for section, sectionKey in plainJsObject.sections or [] when section.resources?.length
     for resource, resourceKey in section.resources
-      section.resources[resourceKey] = applyMarkdownHtml resource, 'htmlDescription'
+      section.resources[resourceKey] = applymarkdownHtml resource, 'htmlDescription'
       section.resources[resourceKey].requests = [section.resources[resourceKey].request]
 
-    plainJsObject.sections[sectionKey] = applyMarkdownHtml section, 'htmlDescription'
+    plainJsObject.sections[sectionKey] = applymarkdownHtml section, 'htmlDescription'
 
-  plainJsObject.version = BlueprintSDK.Version
+  plainJsObject.version = blueprintAPI.Version
 
-  return BlueprintSDK.Blueprint.fromJSON plainJsObject
+  return blueprintAPI.Blueprint.fromJSON plainJsObject
 
 module.exports = {
     transform: apiaryAstToApplicationAst

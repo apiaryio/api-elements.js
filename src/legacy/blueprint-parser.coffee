@@ -1,16 +1,16 @@
 #
 # Legacy Blueprint parsing interface
 #
-ApiaryBlueprintParser = require 'apiary-blueprint-parser'
-Protagonist = require 'protagonist'
+apiaryBlueprintParser = require 'apiary-blueprint-parser'
+protagonist = require 'protagonist'
 
 DefaultFuryEmitter = require '../fury-emitter'
-APIBlueprintAdapter = require './api-blueprint-adapter'
-ApiaryBlueprintAdapter = require './apiary-blueprint-adapter'
+apiBlueprintAdapter = require './api-blueprint-adapter'
+apiaryBlueprintAdapter = require './apiary-blueprint-adapter'
 
 NEW_VERSION_REGEXP = new RegExp '^(((VERSION:( |\t)2)|(FORMAT:( |\t)(X-)?1A))\n)', 'i'
 
-STRICT_OPTIONS =
+STRICT_OPTIONS =  
   requireBlueprintName: true
 
 # TODO:
@@ -60,7 +60,7 @@ getLocalAst = ({code, vanity, sourcemap, emitter}, cb) ->
     if sourcemap
       options['exportSourcemap'] = true
 
-    Protagonist.parse code, options, (err, result) ->
+    protagonist.parse code, options, (err, result) ->
       execTime = process.hrtime t
       execTime = execTime[0] + execTime[1]*10e-9 # ns to s
 
@@ -78,7 +78,7 @@ getLocalAst = ({code, vanity, sourcemap, emitter}, cb) ->
         err.line = countLines code, err.location[0]?.index
         return cb err
 
-      APIBlueprintAdapter.transform result.ast, (result.warnings or []), (err, ast, warnings) ->
+      apiBlueprintAdapter.transform result.ast, (result.warnings or []), (err, ast, warnings) ->
         return cb err, ast, warnings, result.sourcemap, result.ast
 
   else
@@ -87,7 +87,7 @@ getLocalAst = ({code, vanity, sourcemap, emitter}, cb) ->
       apiaryAst = getAstSync code
     catch err
       return cb err
-    cb null, ApiaryBlueprintAdapter.transform apiaryAst
+    cb null, apiaryBlueprintAdapter.transform apiaryAst
 
 # ## Synchronous version that parses blueprint internally
 # ** !!!Cannot be used with new blueprint parser!!! **
@@ -95,7 +95,7 @@ getLocalAst = ({code, vanity, sourcemap, emitter}, cb) ->
 # Do not use unless absolutely needed
 # Might throw error (propagates one from underlying implementation)
 getAstSync = (code) ->
-  ApiaryBlueprintParser.parse code
+  apiaryBlueprintParser.parse code
 
 module.exports = {
   parseApiaryBlueprintSync: getAstSync
