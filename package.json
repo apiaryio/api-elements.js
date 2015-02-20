@@ -1,6 +1,6 @@
 {
-  "name": "fury",
-  "description": "API Blueprint SDK",
+  "name": "fury.js",
+  "description": "API Description SDK",
   "version": "0.1.0",
   "author": "Apiary.io <support@apiary.io>",
   "main": "./lib/fury",

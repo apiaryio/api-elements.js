@@ -397,6 +397,5 @@ module.exports = {
   Resource
   Request
   Response
-  JsonSchemaValidation
   Version: CURRENT_AST_VERSION
 }
