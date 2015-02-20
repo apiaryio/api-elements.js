@@ -16,7 +16,7 @@
     "prepublish": "scripts/build"
   },
   "dependencies": {
-    "coffee-script": "~1.8",
+    "coffee-script": "~1.9",
     "apiary-blueprint-parser": "",
     "protagonist": "~0.17.1",
     "request": "",
@@ -25,11 +25,11 @@
     "robotskirt": ""
   },
   "devDependencies": {
-    "chai": "~1.10.0",
+    "chai": "~2.0",
     "coffee-coverage": "^0.4.4",
     "coveralls": "^2.11.2",
     "jscoverage": "^0.5.9",
-    "mocha": "~2.0.1",
+    "mocha": "~2.1",
     "mocha-lcov-reporter": "0.0.1"
   },
   "license": "MIT"

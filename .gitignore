@@ -2,3 +2,5 @@ node_modules
 /lib
 .vagrant
 npm-debug.log
+
+cov.html
