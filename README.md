@@ -2,8 +2,8 @@
 
 [![Circle CI](https://circleci.com/gh/apiaryio/fury.js.svg?style=svg)](https://circleci.com/gh/apiaryio/fury.js)
 [![Coverage Status](https://coveralls.io/repos/apiaryio/fury/badge.svg?branch=master)](https://coveralls.io/r/apiaryio/fury?branch=master)
-[![Dependency Status](https://david-dm.org/apiaryio/fury.svg)](https://david-dm.org/apiaryio/fury)
-[![devDependency Status](https://david-dm.org/apiaryio/fury/dev-status.svg)](https://david-dm.org/apiaryio/fury#info=devDependencies)
+[![Dependency Status](https://david-dm.org/apiaryio/fury.js.svg)](https://david-dm.org/apiaryio/fury.js)
+[![devDependency Status](https://david-dm.org/apiaryio/fury.js/dev-status.svg)](https://david-dm.org/apiaryio/fury.js#info=devDependencies)
 
 API Description SDK
 
