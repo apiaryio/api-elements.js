@@ -1,7 +1,7 @@
 # Fury.js
 
 [![Circle CI](https://circleci.com/gh/apiaryio/fury.js.svg?style=svg)](https://circleci.com/gh/apiaryio/fury.js)
-[![Coverage Status](https://coveralls.io/repos/apiaryio/fury/badge.svg?branch=master)](https://coveralls.io/r/apiaryio/fury?branch=master)
+[![Coverage Status](https://coveralls.io/repos/apiaryio/fury.js/badge.svg)](https://coveralls.io/r/apiaryio/fury.js)
 [![Dependency Status](https://david-dm.org/apiaryio/fury.js.svg)](https://david-dm.org/apiaryio/fury.js)
 [![devDependency Status](https://david-dm.org/apiaryio/fury.js/dev-status.svg)](https://david-dm.org/apiaryio/fury.js#info=devDependencies)
 
