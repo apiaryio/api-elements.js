@@ -14,7 +14,9 @@ STRICT_OPTIONS =
   requireBlueprintName: true
 
 # Default async parser timeout
-# PARSER_TIMEOUT = parseInt process.env.PARSER_TIMEOUT, 10
+process.env.PARSER_TIMEOUT ?= 10000
+PARSER_TIMEOUT = parseInt process.env.PARSER_TIMEOUT, 10
+console.log '\nTIMEOUT: ' + PARSER_TIMEOUT + '\n\n'
 
 countLines = (code, index) ->
   if index > 0
@@ -27,63 +29,80 @@ countLines = (code, index) ->
 #
 # Parses API blueprint, gets AST and
 # transforms the AST in the Application AST.
-getLocalAst = ({code, vanity, sourcemap, emitter}, cb) ->
-  vanity ?= ''
+#
+# @param [String] code source to be parsed
+# @param [String] blueprintId identifier of the blueprint being parsed
+# @param [Boolean] sourcemap true to produce source map, false otherwise
+# @param [EventEmitter] emitter to be used for reporting
+getLocalAst = ({code, blueprintId, sourcemap, emitter}, cb) ->
+  blueprintId ?= ''
   emitter ?= DefaultFuryEmitter()
 
-  # alreadyDone = false
-
   if code.match(NEW_VERSION_REGEXP)
+    # Parsing new API Blueprint (>= Format 1A )
 
-    # TODO: revisit timeout handling
-    # parsingTimedOut = ->
-    #   if alreadyDone then return
-    #   alreadyDone = true
-    #
-    #   emitter.emit 'error', "PARSE_TIMEOUT : Parsing took too much time for vanity '#{vanity}'"
-    #
-    #   err = new Error('Parsing took too much time for vanity "#{vanity}"');
-    #   err.errType = 'PARSE_TIMEOUT'
-    #   err.message = ''.concat err.toString()
-    #   err.description = ''.concat err.toString()
-    #   err.location = [{index: 1, length: 0}]
-    #   err.line = 1
-    #   cb err
-    #   return
+    parseHasFinished = false
 
-    # Perphaps protagonist can handle the timeouts?
-    # TODO: Seems this code does not work with current test
-    # timer = null # setTimeout(parsingTimedOut, PARSER_TIMEOUT)
+    # Handle parsing timeout
+    #   do nothing if parsing has already finished otherwise stop parsing & fire
+    #   an error
+    timeoutHandler = ->
+      if parseHasFinished then return
+      parseHasFinished = true
 
-    t = process.hrtime()
+      errorType = 'PARSE_TIMEOUT'
+      errorMessage = 'Parsing of \'#{blueprintId}\' has timed out'
 
+      emitter.emit 'error', errorType + ' ' + errorMessage
+
+      err = new Error(errorMessage);
+      err.errType = errorType
+      err.message = ''.concat err.toString()
+      err.description = ''.concat err.toString()
+      err.location = [{index: 1, length: 0}]
+      err.line = 1
+
+      return cb err
+
+    # Prepare options
     options = STRICT_OPTIONS
-
     if sourcemap
       options['exportSourcemap'] = true
 
+    # Start timeout timer
+    timeoutTimer = setTimeout(timeoutHandler, PARSER_TIMEOUT)
+
+    # Parsing metric
+    t = process.hrtime()
+
     protagonist.parse code, options, (err, result) ->
+
+      # Parsing metric
       execTime = process.hrtime t
       execTime = execTime[0] + execTime[1]*10e-9 # ns to s
-
       emitter.emit 'metric', 'snowcrashParse', execTime
 
-      #clearTimeout(timer)
+      # Stop the timeout timer
+      clearTimeout(timeoutTimer)
 
-      #if alreadyDone then return
-      #alreadyDone = true
+      # Check if timed-out
+      if parseHasFinished then return
+      parseHasFinished = true
+
       if err
         err.errType = 'PARSE_ERROR'
 
-        emitter.emit 'error', "PARSE_ERROR: '#{vanity}'" + JSON.stringify err
+        emitter.emit 'error', "PARSE_ERROR: '#{blueprintId}'" + JSON.stringify err
 
         err.line = countLines code, err.location[0]?.index
         return cb err
 
+      # Transform API Blueprint AST into Blueprint strcuture
       apiBlueprintAdapter.transform result.ast, (result.warnings or []), (err, ast, warnings) ->
         return cb err, ast, warnings, result.sourcemap, result.ast
 
   else
+    # Parse legacy Apiary Blueprint
     try
       # FIXME: Well, invent asynchronous parsing in parser
       apiaryAst = getAstSync code
