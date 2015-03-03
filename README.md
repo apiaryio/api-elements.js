@@ -21,16 +21,18 @@ Fury.js is available as npm module.
 Install globally:
 
 ```sh
-$ npm install -g fury.js
+$ npm install -g fury
 ```
 
 or as a dependency:
 
 ```sh
-$ npm install --save fury.js
+$ npm install --save fury
 ```
 
 ### Interface
+
+#### API Blueprint Parsing
 
 In the interim period Fury.js offers only "legacy" interface for API Blueprint
 and Apiary Blueprint parsing:
@@ -45,5 +47,10 @@ parser.parse({ code: source }, function(error, api, warnings) {
     console.log(api.name);
 });
 ```
+#### Markdown Rendering
+
+```js
+```
+
 
 [API Blueprint]: http://apiblueprint.org
