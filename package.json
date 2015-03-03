@@ -1,7 +1,7 @@
 {
   "name": "fury",
   "description": "API Description SDK",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "Apiary.io <support@apiary.io>",
   "main": "./lib/fury",
   "repository": {
