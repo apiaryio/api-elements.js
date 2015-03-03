@@ -39,7 +39,7 @@ and Apiary Blueprint parsing:
 
 
 ```js
-var parser = require('fury').legacyBlueprintParser
+var parser = require('fury').legacyBlueprintParser;
 var source = '# My API\n';
 
 parser.parse({ code: source }, function(error, api, warnings) {
@@ -49,8 +49,18 @@ parser.parse({ code: source }, function(error, api, warnings) {
 ```
 #### Markdown Rendering
 
-```js
-```
+The legacy interface also offers access to Markdown rendered as used internally
+by API and Apiary Blueprint parsers.
 
+```js
+var markdownRenderer = require('fury').legacyMarkdownRenderer;
+var source = '# My API\n';
+
+
+markdownRenderer.toHTML(source, {}, function(error, html) {
+
+    console.log(html);
+});
+```
 
 [API Blueprint]: http://apiblueprint.org
