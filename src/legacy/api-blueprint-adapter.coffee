@@ -184,8 +184,13 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
 
     unless !resource.model
       legacyResource.model = resource.model
-      legacyResource.model.description = markdown.toHtmlSync resource.model.description
-      legacyResource.model.headers = legacyHeadersFrom1AHeaders resource.model.headers
+
+      if resource.model.description && resource.model.description.length
+        legacyResource.model.description = markdown.toHtmlSync resource.model.description
+
+      if resource.model.headers && resource.model.headers.length
+        legacyResource.model.headers = legacyHeadersFrom1AHeaders resource.model.headers
+        
     else
       legacyResource.model = {}
 
