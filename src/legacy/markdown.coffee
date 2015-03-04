@@ -90,8 +90,12 @@ toHtml = (markdown, options={}, cb) ->
   if _.isFunction options
     [cb, options] = [options, {}]
 
+  unless cb
+    return parseMarkdown(markdown, options)
+
   unless markdown
     return cb null, ''
+    
   cb null, parseMarkdown(markdown, options)
 
 

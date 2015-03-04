@@ -1,3 +1,8 @@
-test:
-  post:
-    - ./scripts/coveralls
+# FIXME:
+# Coveralls are failing due to
+#
+# TypeError: Object #<Object> has no method '_$jscmd'
+#
+# test:
+#   post:
+#     - ./scripts/coveralls
