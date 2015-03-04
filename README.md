@@ -57,7 +57,7 @@ var markdownRenderer = require('fury').legacyMarkdownRenderer;
 var source = '# My API\n';
 
 
-markdownRenderer.toHTML(source, {}, function(error, html) {
+markdownRenderer.toHtml(source, {}, function(error, html) {
 
     console.log(html);
 });
