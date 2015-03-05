@@ -30,13 +30,12 @@ or as a dependency:
 $ npm install --save fury
 ```
 
-### Interface
+### Legacy Interface
+
+For now Fury.js offers only "legacy" interface for API Blueprint
+and Apiary Blueprint parsing.
 
 #### API Blueprint Parsing
-
-In the interim period Fury.js offers only "legacy" interface for API Blueprint
-and Apiary Blueprint parsing:
-
 
 ```js
 var parser = require('fury').legacyBlueprintParser;

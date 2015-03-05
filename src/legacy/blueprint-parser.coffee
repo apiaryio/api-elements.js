@@ -8,7 +8,7 @@ DefaultFuryEmitter = require '../fury-emitter'
 apiBlueprintAdapter = require './api-blueprint-adapter'
 apiaryBlueprintAdapter = require './apiary-blueprint-adapter'
 
-NEW_VERSION_REGEXP = new RegExp '^(((VERSION:( |\t)2)|(FORMAT:( |\t)(X-)?1A))\n)', 'i'
+NEW_VERSION_REGEXP = new RegExp '^[\uFEFF]?(((VERSION:( |\t)2)|(FORMAT:( |\t)(X-)?1A))\n)', 'i'
 
 STRICT_OPTIONS =
   requireBlueprintName: true
