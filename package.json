@@ -16,12 +16,12 @@
     "prepublish": "scripts/build"
   },
   "dependencies": {
-    "coffee-script": "~1.9",
     "apiary-blueprint-parser": "",
-    "protagonist": "~0.17.1",
+    "coffee-script": "~1.9",
+    "drafter": "^0.1.0",
+    "robotskirt": "",
     "sanitizer": "",
-    "underscore": "",
-    "robotskirt": ""
+    "underscore": ""
   },
   "devDependencies": {
     "chai": "~2.1",
