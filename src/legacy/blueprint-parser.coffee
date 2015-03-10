@@ -16,7 +16,6 @@ STRICT_OPTIONS =
 # Default async parser timeout
 process.env.PARSER_TIMEOUT ?= 10000
 PARSER_TIMEOUT = parseInt process.env.PARSER_TIMEOUT, 10
-console.log '\nTIMEOUT: ' + PARSER_TIMEOUT + '\n\n'
 
 countLines = (code, index) ->
   if index > 0
