@@ -74,7 +74,7 @@ getLocalAst = ({code, blueprintId, sourcemap, emitter}, cb) ->
     # Parsing metric
     t = process.hrtime()
 
-    drafter = new Drafter(options)
+    drafter = new Drafter options
     drafter.make code, (err, result) ->
       # Parsing metric
       execTime = process.hrtime t
