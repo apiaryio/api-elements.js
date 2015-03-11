@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "apiary-blueprint-parser": "",
-    "coffee-script": "~1.9",
     "drafter": "0.1.1",
     "robotskirt": "",
     "sanitizer": "",
@@ -26,6 +25,7 @@
   "devDependencies": {
     "chai": "~2.1",
     "coffee-coverage": "^0.4.4",
+    "coffee-script": "~1.9",    
     "coveralls": "^2.11.2",
     "jscoverage": "^0.5.9",
     "mocha": "~2.1",
