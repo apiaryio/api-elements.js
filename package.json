@@ -1,7 +1,7 @@
 {
   "name": "fury",
   "description": "API Description SDK",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "author": "Apiary.io <support@apiary.io>",
   "main": "./lib/fury",
   "repository": {
@@ -18,7 +18,7 @@
   "dependencies": {
     "apiary-blueprint-parser": "",
     "coffee-script": "~1.9",
-    "drafter": "^0.1.0",
+    "drafter": "0.1.1",
     "robotskirt": "",
     "sanitizer": "",
     "underscore": ""
