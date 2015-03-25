@@ -50,6 +50,21 @@ legacyHeadersCombinedFrom1A = (resOrReq, action, resource) ->
         headers[key] = header
   headers
 
+# TODO:
+getAttributesElements = (elementContent) ->
+  elements = { attributes: undefined, resolvedAttributes: undefined }
+  return elements if !elementContent or elementContent.length == 0
+
+  dataStructures = elementContent.filter (item) ->
+    item.element is 'dataStructure'
+
+  resolvedDataStructure = elementContent.filter (item) ->
+    item.element is 'resolvedDataStructure'
+
+  elements.attributes = dataStructures.shift()
+  elements.resolvedAttributes = resolvedDataStructure.shift()
+
+  elements
 
 legacyRequestsFrom1AExamples = (action, resource) ->
   requests = []
@@ -82,6 +97,12 @@ legacyRequestFrom1ARequest = (request, action, resource, exampleId = undefined) 
   legacyRequest.body   = trimLastNewline(request.body)  or ''
   legacyRequest.name   = request.name or ''
   legacyRequest.schema = trimLastNewline(request.schema) or ''
+
+  # Attributes
+  attributesElements = getAttributesElements(request.content)
+  legacyRequest.attributes = attributesElements.attributes
+  legacyRequest.resolvedAttributes = attributesElements.resolvedAttributes
+
 
   legacyRequest
 
@@ -117,6 +138,11 @@ legacyResponseFrom1AResponse = (response, action, resource, exampleId = undefine
   # the `name` property, see https://github.com/apiaryio/snowcrash/wiki/API-Blueprint-AST-Media-Types.
   legacyResponse.name   = response.name or ''
   legacyResponse.status = response.name or ''
+
+  # Attributes
+  attributesElements = getAttributesElements(response.content)
+  legacyResponse.attributes = attributesElements.attributes
+  legacyResponse.resolvedAttributes = attributesElements.resolvedAttributes
 
   legacyResponse
 
@@ -190,7 +216,7 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
 
       if resource.model.headers && resource.model.headers.length
         legacyResource.model.headers = legacyHeadersFrom1AHeaders resource.model.headers
-        
+
     else
       legacyResource.model = {}
 
@@ -213,6 +239,16 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
 
     # Responses
     legacyResource.responses = legacyResponsesFrom1AExamples action, resource
+
+    # Resource Attributes
+    attributesElements = getAttributesElements(resource.content)
+    legacyResource.attributes = attributesElements.attributes
+    legacyResource.resolvedAttributes = attributesElements.resolvedAttributes
+
+    # Action Attributes
+    attributesElements = getAttributesElements(action.content)
+    legacyResource.actionAttributes = attributesElements.attributes
+    legacyResource.resolvedActionAttributes = attributesElements.resolvedAttributes
 
     legacyResources.push legacyResource
   legacyResources

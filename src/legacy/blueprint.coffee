@@ -1,4 +1,4 @@
-CURRENT_AST_VERSION = 17
+CURRENT_AST_VERSION = 18
 
 fillProps = (object, props, defaults) ->
   for key of defaults
@@ -183,6 +183,10 @@ class Resource
       request:             Request.fromJSON(json.request) # First request in the `request` array
       requests:            Request.fromJSON(r) for r in json.requests or []   # Array of requests
       responses:           Response.fromJSON(r) for r in json.responses or [] # Array of responses
+      attributes:          json.attributes
+      resolvedAttributes:  json.resolvedAttributes
+      actionAttributes:    json.actionAttributes
+      resolvedActionAttributes: json.resolvedActionAttributes
 
   constructor: (props = {}) ->
     fillProps this, props,
@@ -207,6 +211,10 @@ class Resource
       request:             undefined
       requests:            []
       responses:           []
+      attributes:          undefined
+      resolvedAttributes:  undefined
+      actionAttributes:    undefined
+      resolvedActionAttributes: undefined
 
   getUrlFragment: -> "#{@method.toLowerCase()}-#{encodeURIComponent @url}"
 
@@ -251,6 +259,10 @@ class Resource
     request:     @request?.toJSON()
     requests:    r.toJSON() for r in @requests or []
     responses:   r.toJSON() for r in @responses or []
+    @attributes
+    @resolvedAttributes
+    @actionAttributes
+    @resolvedActionAttributes
   }
 
   # ### `toBlueprint`
@@ -281,6 +293,8 @@ class Request
       body:        json.body
       schema:      json.schema
       exampleId:   json.exampleId
+      attributes:  json.attributes
+      resolvedAttributes: json.resolvedAttributes
 
   constructor: (props = {}) ->
     fillProps this, props,
@@ -292,6 +306,8 @@ class Request
       body:        undefined
       schema:      undefined
       exampleId:   0
+      attributes:  undefined
+      resolvedAttributes: undefined
 
   toJSON: -> return {
     @name
@@ -302,6 +318,8 @@ class Request
     @body
     @schema
     @exampleId
+    @attributes
+    @resolvedAttributes
   }
 
   # ### `toBlueprint`
@@ -325,6 +343,8 @@ class Response
       body:        json.body
       schema:      json.schema
       exampleId:   json.exampleId
+      attributes:  json.attributes
+      resolvedAttributes: json.resolvedAttributes
 
   constructor: (props = {}) ->
     fillProps this, props,
@@ -336,6 +356,8 @@ class Response
       body:        undefined
       schema:      undefined
       exampleId:   0
+      attributes:  undefined
+      resolvedAttributes: undefined
 
   toJSON: -> return {
     @status
@@ -346,6 +368,8 @@ class Response
     @body
     @schema
     @exampleId
+    @attributes
+    @resolvedAttributes
   }
 
   # ### `toBlueprint`
