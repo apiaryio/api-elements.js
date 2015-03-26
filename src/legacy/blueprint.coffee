@@ -36,6 +36,7 @@ class Blueprint
       htmlDescription: json.htmlDescription # Rendered description of the API
       sections:        Section.fromJSON(s) for s in json.sections or [] # Array of resource groups
       validations:     JsonSchemaValidation.fromJSON(v) for v in json.validations or [] # Array of JSON Schemas
+      dataStructures:  json.dataStructures  # Array of data struture elements
 
   constructor: (props = {}) ->
     fillProps this, props,
@@ -47,6 +48,7 @@ class Blueprint
       htmlDescription: null
       sections:        []
       validations:     []
+      dataStructures:  []
 
   # ### `resources`
   #
@@ -91,6 +93,7 @@ class Blueprint
       @htmlDescription
       sections:    s.toJSON(urlPrefixPosition) for s in @sections
       validations: v.toJSON(urlPrefixPosition) for v in @validations
+      @dataStructures
     }
 
   # ### `toBlueprint`
@@ -183,10 +186,10 @@ class Resource
       request:             Request.fromJSON(json.request) # First request in the `request` array
       requests:            Request.fromJSON(r) for r in json.requests or []   # Array of requests
       responses:           Response.fromJSON(r) for r in json.responses or [] # Array of responses
-      attributes:          json.attributes
-      resolvedAttributes:  json.resolvedAttributes
-      actionAttributes:    json.actionAttributes
-      resolvedActionAttributes: json.resolvedActionAttributes
+      attributes:          json.attributes          # Resource attributes
+      resolvedAttributes:  json.resolvedAttributes  # Expanded resource attributes
+      actionAttributes:    json.actionAttributes    # Action attributes
+      resolvedActionAttributes: json.resolvedActionAttributes # Expanded action attributes
 
   constructor: (props = {}) ->
     fillProps this, props,
@@ -293,8 +296,8 @@ class Request
       body:        json.body
       schema:      json.schema
       exampleId:   json.exampleId
-      attributes:  json.attributes
-      resolvedAttributes: json.resolvedAttributes
+      attributes:  json.attributes          # Request attributes
+      resolvedAttributes: json.resolvedAttributes # Expanded request attributes
 
   constructor: (props = {}) ->
     fillProps this, props,
@@ -413,6 +416,9 @@ class JsonSchemaValidation
     combineParts "\n", (parts) =>
       parts.push "#{@method} #{@url.slice(urlPrefixPosition)}"
       parts.push escapeBody(@body) if @body
+
+class DataStructure
+
 
 module.exports = {
   Blueprint

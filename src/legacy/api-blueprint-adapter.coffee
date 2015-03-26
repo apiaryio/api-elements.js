@@ -319,6 +319,13 @@ legacyASTfrom1AAST = (ast, warnings, cb) ->
 
     legacyAST.sections.push legacySection
 
+  # Data Structures
+  if ast.content and ast.content.length
+    legacyAST.dataStructures = (item.content[0] for item in ast.content when item.element is 'category'\
+                                                                              and item.content\
+                                                                              and item.content.length\
+                                                                              and item.content[0].element is 'dataStructure')
+
   cb null, legacyAST, warnings
 
 module.exports = {

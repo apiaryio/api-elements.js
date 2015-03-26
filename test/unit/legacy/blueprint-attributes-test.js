@@ -23,7 +23,6 @@ describe('Attributes for', function() {
   var parserError = null;
   var parsedAPI = null;
   var parserWarnings = null;
-  var resourceAttributes = undefined;
 
   var resourceAttributes = undefined;
   var resolvedResourceAttributes = undefined;
@@ -72,7 +71,7 @@ describe('Attributes for', function() {
         assert.isDefined(resolvedResourceAttributes);
       });
 
-      it('and of \'dataStructure\' type', function() {
+      it('and of \'resolvedDataStructure\' type', function() {
         assert.equal(resolvedResourceAttributes.element, 'resolvedDataStructure');
       });
     });
@@ -112,7 +111,7 @@ describe('Attributes for', function() {
         assert.isDefined(resolvedRequestAttributes);
       });
 
-      it('and of \'dataStructure\' type', function() {
+      it('and of \'resolvedDataStructure\' type', function() {
         assert.equal(resolvedRequestAttributes.element, 'resolvedDataStructure');
       });
     });
@@ -132,10 +131,46 @@ describe('Attributes for', function() {
         assert.isDefined(resolvedResponseAttributes);
       });
 
-      it('and of \'dataStructure\' type', function() {
+      it('and of \'resolvedDataStructure\' type', function() {
         assert.equal(resolvedResponseAttributes.element, 'resolvedDataStructure');
       });
     });
+  });
+
+});
+
+describe('Data Structure section', function() {
+  var source =  'FORMAT: 1A\n\n' +
+                '# API\n' +
+                '# Data Structures\n' +
+                '## Person (object)\n' +
+                '+ name (string)\n\n';
+
+  var parserError = null;
+  var parsedAPI = null;
+  var parserWarnings = null;
+
+  before(function(done) {
+    bluperintParser.parse({code: source}, function(error, api, warnings) {
+      parserError = error;
+      parsedAPI = api;
+      parserWarnings = warnings;
+
+      done();
+    });
+  });
+
+  it ('is defined', function() {
+    assert.isDefined(parsedAPI.dataStructures);
+    assert.isArray(parsedAPI.dataStructures);
+  });
+
+  it ('contains one element', function() {
+    assert.equal(parsedAPI.dataStructures.length, 1);
+  });
+
+  it ('the element is of \'dataStructure\' type', function() {
+    assert.equal(parsedAPI.dataStructures[0].element, 'dataStructure');
   });
 
 });
