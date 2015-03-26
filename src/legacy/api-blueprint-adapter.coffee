@@ -50,7 +50,10 @@ legacyHeadersCombinedFrom1A = (resOrReq, action, resource) ->
         headers[key] = header
   headers
 
-# TODO:
+# Retrieves attributes elements from an element content
+#
+# @param elementContent [Array] Element's content
+# @return [Object] Hash of `attributes` and `resolvedAttributes` elements
 getAttributesElements = (elementContent) ->
   elements = { attributes: undefined, resolvedAttributes: undefined }
   return elements if !elementContent or elementContent.length == 0

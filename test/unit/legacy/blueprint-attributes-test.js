@@ -36,10 +36,6 @@ describe('Attributes for', function() {
 
   before(function(done) {
     bluperintParser.parse({code: source}, function(error, api, warnings) {
-
-      // TODO: Remove following line
-      //console.log('\n' + JSON.stringify(api, '', 2) + '\n');
-
       parserError = error;
       parsedAPI = api;
       parserWarnings = warnings;
