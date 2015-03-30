@@ -218,6 +218,8 @@ class Resource
       resolvedAttributes:  undefined
       actionAttributes:    undefined
       resolvedActionAttributes: undefined
+      actionRelation:      undefined
+      actionUriTemplate:   undefined
 
   getUrlFragment: -> "#{@method.toLowerCase()}-#{encodeURIComponent @url}"
 

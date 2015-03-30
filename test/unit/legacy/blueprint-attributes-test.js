@@ -174,3 +174,52 @@ describe('Data Structure section', function() {
   });
 
 });
+
+describe('Expose relation and urlTemplate for action', function() {
+  var source =  'FORMAT: 1A\n\n' +
+                '# API\n' +
+                '## User [/user]\n\n' +
+                '## Retrieve [GET /user/{id}]\n\n' +
+                '+ Relation: fetch\n\n' +
+                '+ Response 200\n\n' +
+                '## Create [POST]\n\n' +
+                '+ Response 201\n\n';
+
+  var parserError = null;
+  var parsedAPI = null;
+  var parserWarnings = null;
+
+  var getAction = null;
+  var postAction = null;
+
+  before(function(done) {
+    bluperintParser.parse({code: source}, function(error, api, warnings) {
+      parserError = error;
+      parsedAPI = api;
+      parserWarnings = warnings;
+
+      getAction = parsedAPI.sections[0].resources[0];
+      postAction = parsedAPI.sections[0].resources[1];
+
+      done();
+    });
+  });
+
+  it ('is defined', function() {
+    assert.isDefined(getAction.actionRelation);
+    assert.isDefined(getAction.actionUriTemplate);
+
+    assert.isDefined(postAction.actionRelation);
+    assert.isDefined(postAction.actionUriTemplate);
+  });
+
+  it ('is correctly set', function() {
+    assert.equal(getAction.actionRelation, 'fetch');
+    assert.equal(getAction.actionUriTemplate, '/user/{id}');
+
+    assert.equal(postAction.actionRelation, '');
+    assert.equal(postAction.actionUriTemplate, '');
+  });
+
+
+});
