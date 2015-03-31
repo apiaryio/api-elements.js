@@ -253,6 +253,10 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
     legacyResource.actionAttributes = attributesElements.attributes
     legacyResource.resolvedActionAttributes = attributesElements.resolvedAttributes
 
+    if action.attributes
+      legacyResource.actionRelation = action.attributes.relation
+      legacyResource.actionUriTemplate = action.attributes.uriTemplate 
+
     legacyResources.push legacyResource
   legacyResources
 

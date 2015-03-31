@@ -183,13 +183,15 @@ class Resource
       parameters:          json.parameters          # Resource and action URI parameters
       resourceParameters:  json.resourceParameters  # Resource URI parameters
       actionParameters:    json.actionParameters    # Action URI parameters
-      request:             Request.fromJSON(json.request) # First request in the `request` array
+      request:             if json.request then Request.fromJSON(json.request) else json.request # First request in the `request` array
       requests:            Request.fromJSON(r) for r in json.requests or []   # Array of requests
       responses:           Response.fromJSON(r) for r in json.responses or [] # Array of responses
       attributes:          json.attributes          # Resource attributes
       resolvedAttributes:  json.resolvedAttributes  # Expanded resource attributes
       actionAttributes:    json.actionAttributes    # Action attributes
       resolvedActionAttributes: json.resolvedActionAttributes # Expanded action attributes
+      actionRelation:      json.actionRelation
+      actionUriTemplate:   json.actionUriTemplate
 
   constructor: (props = {}) ->
     fillProps this, props,
@@ -218,6 +220,8 @@ class Resource
       resolvedAttributes:  undefined
       actionAttributes:    undefined
       resolvedActionAttributes: undefined
+      actionRelation:      undefined
+      actionUriTemplate:   undefined
 
   getUrlFragment: -> "#{@method.toLowerCase()}-#{encodeURIComponent @url}"
 
@@ -266,6 +270,8 @@ class Resource
     @resolvedAttributes
     @actionAttributes
     @resolvedActionAttributes
+    @actionRelation
+    @actionUriTemplate
   }
 
   # ### `toBlueprint`
