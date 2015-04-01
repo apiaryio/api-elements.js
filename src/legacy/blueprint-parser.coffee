@@ -50,7 +50,7 @@ getLocalAst = ({code, blueprintId, sourcemap, emitter}, cb) ->
       parseHasFinished = true
 
       errorType = 'PARSE_TIMEOUT'
-      errorMessage = 'Parsing of \'#{blueprintId}\' has timed out'
+      errorMessage = "Parsing of #{blueprintId} has timed out"
 
       emitter.emit 'error', errorType + ' ' + errorMessage
 
