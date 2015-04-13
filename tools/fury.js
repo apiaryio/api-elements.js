@@ -26,8 +26,10 @@ function createParseFunction(filePath) {
       }
 
       // For debug puproses
-      if (PRINT_PARSE_RESULT)
+      if (PRINT_PARSE_RESULT) {
+        console.log('Parse results:');
         console.log(JSON.stringify(api, null, 2));
+      }
       return callback();
     });
   };
@@ -58,8 +60,7 @@ var series = [];
 var stats = fs.statSync(args[0]);
 if (stats.isFile()) {
   series.push(createParseFunction(args[0]));
-}
-else if (stats.isDirectory()) {
+} else if (stats.isDirectory()) {
   series = collectDirectory(args[0]);
 }
 
