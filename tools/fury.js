@@ -5,6 +5,7 @@ var async = require('async');
 
 // TODO: Turn into a CLI argument
 var PRINT_PARSE_RESULT = false;
+var BREAK_ON_ERROR = false;
 
 // Process arguments
 var args = process.argv.slice(2);
@@ -21,8 +22,13 @@ function createParseFunction(filePath) {
     console.log('processing ' + filePath + ' ...');
     parser.parse({ code: data }, function(error, api, warnings) {
       if (error) {
-
-        return callback(error);
+        if (BREAK_ON_ERROR) {
+          return callback(error);
+        }
+        else {
+          console.log(JSON.stringify(error, null, 2));
+          return callback();
+        }
       }
 
       // For debug puproses
