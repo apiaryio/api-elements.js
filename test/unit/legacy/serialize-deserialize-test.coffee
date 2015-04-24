@@ -1,6 +1,6 @@
 {assert} = require 'chai'
 
-blueprint = require '../../../src/legacy/blueprint'
+blueprint = require '../../../lib/legacy/blueprint'
 
 describe 'Blueprint de/serialization Tests', ->
   describe 'Try de/serialize empty resource class', ->

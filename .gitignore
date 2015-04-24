@@ -3,4 +3,5 @@ node_modules
 .vagrant
 npm-debug.log
 
-cov.html
+.DS_Store
+coverage

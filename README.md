@@ -62,4 +62,23 @@ markdownRenderer.toHtml(source, {}, function(error, html) {
 });
 ```
 
+## Development
+
+### Building & Testing
+Parts of Fury.js are written in Coffeescript, so you must build the final library before it can be used. All of the build/test/etc commands are run through npm:
+
+```sh
+# Build the library
+npm run build
+
+# Run the unit and integration tests
+npm test
+
+# Generate a coverage report
+npm run coverage
+
+# Open the HTML report
+open coverage/lcov-report/index.html
+```
+
 [API Blueprint]: http://apiblueprint.org
