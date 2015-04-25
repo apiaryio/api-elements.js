@@ -1,5 +1,5 @@
 var assert = require('chai').assert;
-var bluperintParser = require('../../../src/legacy/blueprint-parser');
+var bluperintParser = require('../../../lib/legacy/blueprint-parser');
 
 describe('Attributes for', function() {
   var source =  'FORMAT: 1A\n\n' +

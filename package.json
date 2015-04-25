@@ -12,8 +12,14 @@
     "node": ">= 0.10.x"
   },
   "scripts": {
-    "test": "scripts/test",
-    "prepublish": "scripts/build"
+    "build": "coffee -b -c -o lib/ src/ && cpy 'src/**/*.js' lib",
+    "precoverage": "npm run build",
+    "coverage": "istanbul cover _mocha -- --compilers coffee:coffee-script/register -R spec --recursive",
+    "precoveralls": "npm run coverage",
+    "coveralls": "coveralls <coverage/lcov.info",
+    "pretest": "npm run build",
+    "test": "mocha --compilers coffee:coffee-script/register -R spec --recursive",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "apiary-blueprint-parser": "",
@@ -23,14 +29,13 @@
     "underscore": ""
   },
   "devDependencies": {
+    "async": "~0.9.0",
     "chai": "~2.1",
-    "coffee-coverage": "^0.4.4",
     "coffee-script": "~1.9",
     "coveralls": "^2.11.2",
-    "jscoverage": "^0.5.9",
-    "mocha": "~2.1",
-    "mocha-lcov-reporter": "0.0.2",
-    "async": "~0.9.0"
+    "cpy": "^3.1.0",
+    "istanbul": "^0.3.13",
+    "mocha": "~2.1"
   },
   "license": "MIT"
 }

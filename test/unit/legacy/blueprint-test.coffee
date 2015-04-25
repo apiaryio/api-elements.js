@@ -1,9 +1,9 @@
 {assert} = require 'chai'
 
-bluperintParser = require '../../../src/legacy/blueprint-parser'
-apiBlueprintAdapter = require '../../../src/legacy/api-blueprint-adapter'
-apiaryBlueprintAdapter = require '../../../src/legacy/apiary-blueprint-adapter'
-objectHelper = require '../../../src/legacy/object-helper'
+bluperintParser = require '../../../lib/legacy/blueprint-parser'
+apiBlueprintAdapter = require '../../../lib/legacy/api-blueprint-adapter'
+apiaryBlueprintAdapter = require '../../../lib/legacy/apiary-blueprint-adapter'
+objectHelper = require '../../../lib/legacy/object-helper'
 
 describe 'Blueprint Tests', ->
   describe 'Version 2 Tests', ->

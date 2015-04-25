@@ -1,5 +1,5 @@
 {assert} = require 'chai'
-markdown = require '../../../src/legacy/markdown'
+markdown = require '../../../lib/legacy/markdown'
 
 describe 'Markdown', ->
   describe '#toHtml', ->

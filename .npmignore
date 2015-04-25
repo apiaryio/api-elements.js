@@ -2,6 +2,6 @@ src/
 .travis.yml
 circle.yml
 .git*
-cov.html
+coverage
 .vagrant
 .npmignore
