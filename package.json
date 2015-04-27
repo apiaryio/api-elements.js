@@ -12,14 +12,14 @@
     "node": ">= 0.10.x"
   },
   "scripts": {
-    "build": "coffee -b -c -o lib/ src/ && cpy 'src/**/*.js' lib",
-    "precoverage": "npm run build",
+    "compile": "coffee -b -c -o lib/ src/ && cpy 'src/**/*.js' lib",
+    "precoverage": "npm run compile",
     "coverage": "istanbul cover _mocha -- --compilers coffee:coffee-script/register -R spec --recursive",
     "precoveralls": "npm run coverage",
     "coveralls": "coveralls <coverage/lcov.info",
-    "pretest": "npm run build",
+    "pretest": "npm run compile",
     "test": "mocha --compilers coffee:coffee-script/register -R spec --recursive",
-    "prepublish": "npm run build"
+    "prepublish": "npm run compile"
   },
   "dependencies": {
     "apiary-blueprint-parser": "",

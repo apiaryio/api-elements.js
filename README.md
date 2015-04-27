@@ -69,7 +69,7 @@ Parts of Fury.js are written in Coffeescript, so you must build the final librar
 
 ```sh
 # Build the library
-npm run build
+npm run compile
 
 # Run the unit and integration tests
 npm test
