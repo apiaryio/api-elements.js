@@ -1,6 +1,22 @@
 var assert = require('chai').assert;
-var legacyParser = require('../../src/fury').legacyBlueprintParser
-var legacyRenderer = require('../../src/fury').legacyMarkdownRenderer
+var fury = require('../../lib/fury');
+var legacyParser = require('../../lib/fury').legacyBlueprintParser
+var legacyRenderer = require('../../lib/fury').legacyMarkdownRenderer
+
+describe ('Refract parser', function () {
+  it ('Should parse a refract shorthand API', function () {
+    var api = new fury.Api([
+      'category', {'class': ['api'], 'title': 'My API'}, {}, [
+        ['category', {'class': ['resourceGroup']}, {}, [
+          ['resource', {}, {}, null]
+        ]]
+      ]
+    ]);
+
+    assert.ok(api);
+    assert.equal(api.title, 'My API')
+  });
+})
 
 describe('Using legacy parser', function() {
 
@@ -78,7 +94,7 @@ describe('Using legacy Markdown renderer', function() {
       });
     });
 
-    if ('should succeed', function() {
+    it ('should succeed', function() {
       assert.isNull(renderError);
     });
 
