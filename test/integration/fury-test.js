@@ -1,22 +1,97 @@
 var assert = require('chai').assert;
 var fury = require('../../lib/fury');
-var legacyParser = require('../../lib/fury').legacyBlueprintParser
-var legacyRenderer = require('../../lib/fury').legacyMarkdownRenderer
+var legacyParser = require('../../lib/fury').legacyBlueprintParser;
+var legacyRenderer = require('../../lib/fury').legacyMarkdownRenderer;
 
-describe ('Refract parser', function () {
-  it ('Should parse a refract shorthand API', function () {
-    var api = new fury.Api([
-      'category', {'class': ['api'], 'title': 'My API'}, {}, [
-        ['category', {'class': ['resourceGroup']}, {}, [
-          ['resource', {}, {}, null]
-        ]]
-      ]
-    ]);
+describe('Refract loader', function () {
+  describe('autodetect', function () {
+    it('should support shorthand', function () {
+      let api = fury.load(['category', {'class': 'api'}, {}, []]);
+      assert(api);
+    });
 
-    assert.ok(api);
-    assert.equal(api.title, 'My API')
+    it('should support long-form', function () {
+      let api = fury.load({
+        element: 'category',
+        meta: {
+          'class': 'api'
+        },
+        content: []
+      });
+      assert(api);
+    });
   });
-})
+
+  describe('shorthand', function () {
+    var api;
+
+    before(function () {
+      api = fury.load([
+        'category', {'class': ['api'], 'title': 'My API'}, {}, [
+          ['category', {'class': ['resourceGroup'], title: 'My Group'}, {}, [
+            ['resource', {title: 'Frob'}, {href: '/frob'}, [
+              ['dataStructure', {}, {}, [
+                ['string', {name: 'id'}, {}, null],
+                ['string', {name: 'tag'}, {}, null]
+              ]],
+              ['transition', {}, {}, [
+                ['httpTransaction', {}, {}, [
+                  ['httpRequest', {headers: ['httpHeaders', {}, {}, [
+                    ['string', {name: 'Content-Type'}, {}, 'application/json']
+                  ]]}, {}, null],
+                  ['httpResponse', {}, {statusCode: 200}, [
+                    ['asset', {'class': 'messageBody'}, {}, '{"id": "1", "tag": "foo"}']
+                  ]]
+                ]]
+              ]]
+            ]]
+          ]]
+        ]
+      ]);
+    });
+
+    it('should parse a refract shorthand API', function () {
+      assert.ok(api);
+    });
+
+    it('should contain a title', function () {
+      assert.equal(api.title, 'My API');
+    });
+
+    it('should contain a single resource group', function () {
+      assert.equal(api.resourceGroups.length, 1);
+      assert.equal(api.resourceGroups[0].title, 'My Group');
+    });
+
+    it('should contain a single resource', function () {
+      assert.equal(api.resourceGroups[0].resources.length, 1);
+    });
+
+    it('should contain a single transition', function () {
+      assert.equal(api.resourceGroups[0].resources[0].transitions.length, 1);
+    });
+
+    it('should contain a single transaction', function () {
+      assert.equal(api.resourceGroups[0].resources[0].transitions[0]
+                   .transactions.length, 1);
+    });
+
+    it('Should contain a request', function () {
+      var resource = api.resourceGroups[0].resources[0];
+      var request = resource.transitions[0].transactions[0].request;
+
+      assert(request);
+    });
+
+    it('Should contain a response', function () {
+      var resource = api.resourceGroups[0].resources[0];
+      var response = resource.transitions[0].transactions[0].response;
+
+      assert(response);
+      assert.equal(response.statusCode, 200);
+    });
+  });
+});
 
 describe('Using legacy parser', function() {
 

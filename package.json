@@ -31,7 +31,8 @@
     },
     "rules": {
       "quotes": [1, "single", "avoid-escape"],
-      "strict": "never"
+      "strict": "never",
+      "no-use-before-define": "never"
     }
   },
   "dependencies": {
