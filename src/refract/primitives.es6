@@ -5,6 +5,12 @@
 import _ from 'underscore';
 
 /*
+ * A private symbol for subclasses to set key names of attributes which should
+ * be converted from refract elements rather than simple types.
+ */
+export const attributeElementKeys = Symbol('attributeElementKeys');
+
+/*
  * ElementType is the base element from which all other elements are built.
  * It has no specific information about how to handle the content, but is
  * able to convert to and from Refract/Javascript.
@@ -15,6 +21,8 @@ export class ElementType {
     this.meta = meta;
     this.attributes = attributes;
     this.content = content;
+
+    this[attributeElementKeys] = [];
   }
 
   toValue() {
@@ -22,18 +30,51 @@ export class ElementType {
   }
 
   toRefract(options={}) {
+    let attributes = this.convertAttributesToRefract('toRefract');
     let initial = {
       element: this.element,
       meta: this.meta,
-      attributes: this.attributes,
+      attributes,
       content: this.content
     };
     return _.extend(initial, options);
   }
 
-  toCompactRefract(options={}) {
-    let dom = this.toRefract(options);
-    return [dom.element, dom.meta, dom.attributes, dom.content];
+  toCompactRefract() {
+    let attributes = this.convertAttributesToRefract('toCompactRefract');
+    return [this.element, this.meta, attributes, this.content];
+  }
+
+  /*
+   * Some attributes may be elements. This is domain-specific knowledge, so
+   * a subclass *MUST* define the attribute element names to convert. This
+   * method handles the actual serialization to refract.
+   */
+  convertAttributesToRefract(functionName) {
+    let attributes = {};
+
+    for (let name of this.attributes) {
+      if (this[attributeElementKeys].indexOf(name) !== -1) {
+        attributes[name] = this.attributes[name][functionName]();
+      } else {
+        attributes[name] = this.attributes[name];
+      }
+    }
+
+    return attributes;
+  }
+
+  /*
+   * Some attributes may be elements. This is domain-specific knowledge, so
+   * a subclass *MUST* define the attribute element names to convert. This
+   * method handles the actual conversion when loading.
+   */
+  convertAttributesToElements(conversionFunc) {
+    for (let name of this[attributeElementKeys]) {
+      if (this.attributes[name]) {
+        this.attributes[name] = conversionFunc(this.attributes[name]);
+      }
+    }
   }
 
   fromRefract(dom) {
@@ -41,16 +82,21 @@ export class ElementType {
     this.meta = dom.meta;
     this.attributes = dom.attributes;
     this.content = dom.content;
+
+    this.convertAttributesToElements(convertFromRefract);
+
     return this;
   }
 
   fromCompactRefract(tuple) {
-    return this.fromRefract({
-      element: tuple[0],
-      meta: tuple[1],
-      attributes: tuple[2],
-      content: tuple[3]
-    });
+    this.element = tuple[0];
+    this.meta = tuple[1];
+    this.attributes = tuple[2];
+    this.content = tuple[3];
+
+    this.convertAttributesToElements(convertFromCompactRefract);
+
+    return this;
   }
 
   get() {
@@ -109,10 +155,11 @@ class Collection extends ElementType {
   }
 
   toCompactRefract() {
+    let attributes = this.convertAttributesToRefract('toCompactRefract');
     let compactDoms = this.content.map((el) => {
       return el.toCompactRefract();
     });
-    return [this.element, this.meta, this.attributes, compactDoms];
+    return [this.element, this.meta, attributes, compactDoms];
   }
 
   fromRefract(dom) {
@@ -122,6 +169,9 @@ class Collection extends ElementType {
     this.content = (dom.content || []).map((content) => {
       return convertFromRefract(content);
     });
+
+    this.convertAttributesToElements(convertFromRefract);
+
     return this;
   }
 
@@ -132,6 +182,9 @@ class Collection extends ElementType {
     this.content = (tuple[3] || []).map((content) => {
       return convertFromCompactRefract(content);
     });
+
+    this.convertAttributesToElements(convertFromCompactRefract);
+
     return this;
   }
 
@@ -236,7 +289,7 @@ export class ObjectType extends Collection {
 
   keys() {
     return this.content.map((value) => {
-      return value.attributes.name;
+      return value.meta.name;
     });
   }
 

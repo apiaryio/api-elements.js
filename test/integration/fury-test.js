@@ -29,17 +29,22 @@ describe('Refract loader', function () {
       api = fury.load([
         'category', {'class': ['api'], 'title': 'My API'}, {}, [
           ['category', {'class': ['resourceGroup'], title: 'My Group'}, {}, [
-            ['resource', {title: 'Frob'}, {href: '/frob'}, [
+            ['resource', {title: 'Frob'}, {
+              href: '/frobs/{id}',
+              hrefVariables: ['hrefVariables', {}, {}, [
+                  ['string', {name: 'id'}, {}, '']
+                ]]
+              }, [
               ['dataStructure', {}, {}, [
                 ['string', {name: 'id'}, {}, null],
                 ['string', {name: 'tag'}, {}, null]
               ]],
               ['transition', {}, {}, [
                 ['httpTransaction', {}, {}, [
-                  ['httpRequest', {headers: ['httpHeaders', {}, {}, [
+                  ['httpRequest', {}, {}, null],
+                  ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
                     ['string', {name: 'Content-Type'}, {}, 'application/json']
-                  ]]}, {}, null],
-                  ['httpResponse', {}, {statusCode: 200}, [
+                  ]]}, [
                     ['asset', {'class': 'messageBody'}, {}, '{"id": "1", "tag": "foo"}']
                   ]]
                 ]]
@@ -67,6 +72,12 @@ describe('Refract loader', function () {
       assert.equal(api.resourceGroups[0].resources.length, 1);
     });
 
+    it('should have an `id` href variable', function () {
+      var resource = api.resourceGroups[0].resources[0];
+      assert.equal(resource.hrefVariables.length, 1);
+      assert.equal(resource.hrefVariables.keys()[0], 'id');
+    });
+
     it('should contain a single transition', function () {
       assert.equal(api.resourceGroups[0].resources[0].transitions.length, 1);
     });
@@ -89,6 +100,16 @@ describe('Refract loader', function () {
 
       assert(response);
       assert.equal(response.statusCode, 200);
+    });
+
+    it('should set content-type header in the response', function () {
+      var resource = api.resourceGroups[0].resources[0];
+      var response = resource.transitions[0].transactions[0].response;
+
+      // TODO: this is ugly as hell... there must be a better way.
+      //       maybe we need an extra hook for serialization since realistically
+      //       it's unlikely headers could contain nested complex elements.
+      assert.equal(response.headers.get(0).content, 'application/json');
     });
   });
 });

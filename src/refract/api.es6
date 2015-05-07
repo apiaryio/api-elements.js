@@ -18,7 +18,7 @@
  *   + Data structure
  */
 
-import {ElementType, ArrayType, ObjectType, TypeRegistry} from './primitives';
+import {attributeElementKeys, ElementType, ArrayType, ObjectType, TypeRegistry} from './primitives';
 import {filterBy} from './util';
 
 /*
@@ -44,6 +44,7 @@ class ApiBaseArray extends ArrayType {
 }
 
 class HttpHeaders extends ApiBaseArray {}
+class HrefVariables extends ObjectType {}
 
 export class Asset extends ElementType {
   get contentType() {
@@ -64,6 +65,12 @@ export class Asset extends ElementType {
 }
 
 class HttpMessagePayload extends ApiBaseArray {
+  constructor(...args) {
+    super(...args);
+
+    this[attributeElementKeys] = ['headers'];
+  }
+
   get headers() {
     return this.attributes.headers;
   }
@@ -140,6 +147,12 @@ export class HttpTransaction extends ApiBaseArray {
 }
 
 export class Transition extends ApiBaseArray {
+  constructor(...args) {
+    super(...args);
+
+    this[attributeElementKeys] = ['parameters', 'attributes'];
+  }
+
   get relation() {
     return this.attributes.relation;
   }
@@ -181,6 +194,12 @@ export class Transition extends ApiBaseArray {
 }
 
 export class Resource extends ApiBaseArray {
+  constructor(...args) {
+    super(...args);
+
+    this[attributeElementKeys] = ['hrefVariables'];
+  }
+
   get href() {
     return this.attributes.href;
   }
@@ -237,6 +256,7 @@ TypeRegistry.elementMap.resource = Resource;
 TypeRegistry.elementMap.transition = Transition;
 TypeRegistry.elementMap.httpTransaction = HttpTransaction;
 TypeRegistry.elementMap.httpHeaders = HttpHeaders;
+TypeRegistry.elementMap.hrefVariables = HrefVariables;
 TypeRegistry.elementMap.asset = Asset;
 TypeRegistry.elementMap.httpRequest = HttpRequest;
 TypeRegistry.elementMap.httpResponse = HttpResponse;
