@@ -29,6 +29,7 @@ describe('Refract loader', function () {
       api = fury.load([
         'category', {'class': ['api'], 'title': 'My API'}, {}, [
           ['category', {'class': ['resourceGroup'], title: 'My Group'}, {}, [
+            ['copy', {}, {contentType: 'text/plain'}, 'Extra text'],
             ['resource', {title: 'Frob'}, {
               href: '/frobs/{id}',
               hrefVariables: ['hrefVariables', {}, {}, [
@@ -66,6 +67,11 @@ describe('Refract loader', function () {
     it('should contain a single resource group', function () {
       assert.equal(api.resourceGroups.length, 1);
       assert.equal(api.resourceGroups[0].title, 'My Group');
+    });
+
+    it('should contain a single copy element', function () {
+      assert.equal(api.resourceGroups[0].copy.length, 1);
+      assert.equal(api.resourceGroups[0].copy[0].content, 'Extra text');
     });
 
     it('should contain a single resource', function () {
@@ -106,10 +112,11 @@ describe('Refract loader', function () {
       var resource = api.resourceGroups[0].resources[0];
       var response = resource.transitions[0].transactions[0].response;
 
-      // TODO: this is ugly as hell... there must be a better way.
-      //       maybe we need an extra hook for serialization since realistically
-      //       it's unlikely headers could contain nested complex elements.
+      // Get the header element by index and read the value
       assert.equal(response.headers.get(0).content, 'application/json');
+
+      // Convenience to get a header by name
+      assert.equal(response.header('content-type'), 'application/json');
     });
   });
 });

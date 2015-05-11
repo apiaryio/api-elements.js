@@ -220,11 +220,15 @@ class Collection extends ElementType {
     this.push(value);
   }
 
-  findElements(condition, results=[]) {
+  findElements(condition, options={}) {
+    const recursive = options.recursive === undefined ? false : options.recursive;
+    const results = options.results === undefined ? [] : options.results;
+
     this.content.forEach((el) => {
-      switch (el.element) {
-        case 'object': case 'array':
-          el.findElements(condition, results);
+      // We use duck-typing here to support any registered class that
+      // may contain other elements.
+      if (recursive && (el.findElements !== undefined)) {
+          el.findElements(condition, {results, recursive});
       }
       if (condition(el)) {
         results.push(el);

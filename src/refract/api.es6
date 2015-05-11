@@ -3,6 +3,7 @@
  *
  * + Category - API, resource group
  *   + Category
+ *   + Copy
  *   + Resource
  *     + Transition
  *       + Transaction
@@ -18,7 +19,10 @@
  *   + Data structure
  */
 
-import {attributeElementKeys, ElementType, ArrayType, ObjectType, TypeRegistry} from './primitives';
+import {
+  ArrayType, attributeElementKeys, ElementType, ObjectType, StringType,
+  TypeRegistry
+} from './primitives';
 import {filterBy} from './util';
 
 /*
@@ -77,6 +81,14 @@ class HttpMessagePayload extends ApiBaseArray {
 
   set headers(value) {
     this.attributes.headers = value;
+  }
+
+  header(name) {
+    const header = this.attributes.headers.content.filter(filterBy.bind(this, {
+      name,
+      ignoreCase: true
+    }))[0];
+    return header ? header.content : header;
   }
 
   get dataStructure() {
@@ -231,6 +243,16 @@ export class Resource extends ApiBaseArray {
 
 export class DataStructure extends ObjectType {}
 
+export class Copy extends StringType {
+  get contentType() {
+    return this.attributes.contentType;
+  }
+
+  set contentType(value) {
+    this.attributes.contentType = value;
+  }
+}
+
 export class Category extends ApiBaseArray {
   get resourceGroups() {
     return this.findElements(filterBy.bind(this, {
@@ -240,7 +262,13 @@ export class Category extends ApiBaseArray {
 
   get dataStructures() {
     return this.findElements(filterBy.bind(this, {
-      element: 'dataStructure'
+      className: 'dataStructures'
+    }));
+  }
+
+  get scenarios() {
+    return this.findElements(filterBy.bind(this, {
+      className: 'scenario'
     }));
   }
 
@@ -249,9 +277,16 @@ export class Category extends ApiBaseArray {
       element: 'resource'
     }));
   }
+
+  get copy() {
+    return this.findElements(filterBy.bind(this, {
+      element: 'copy'
+    }));
+  }
 }
 
 TypeRegistry.elementMap.category = Category;
+TypeRegistry.elementMap.copy = Copy;
 TypeRegistry.elementMap.resource = Resource;
 TypeRegistry.elementMap.transition = Transition;
 TypeRegistry.elementMap.httpTransaction = HttpTransaction;
