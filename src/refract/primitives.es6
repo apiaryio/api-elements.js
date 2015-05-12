@@ -123,6 +123,10 @@ export class StringType extends ElementType {
   constructor(meta, attributes, value) {
     super('string', meta, attributes, value);
   }
+
+  get length() {
+    return this.content.length;
+  }
 }
 
 export class NumberType extends ElementType {
