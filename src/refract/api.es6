@@ -189,14 +189,14 @@ export class Transition extends ApiBaseArray {
     this.attributes.parameters = value;
   }
 
-  // TODO: Name is already taken... hmm.
-  // get attributes() {
-  //   return this.attributes.attributes;
-  // }
-  //
-  // set attributes(value) {
-  //   this.attributes.attributes = value;
-  // }
+  // The key `attributes` is already taken, so `attr` is used instead.
+  get attr() {
+    return this.attributes.attributes;
+  }
+
+  set attr(value) {
+    this.attributes.attributes = value;
+  }
 
   get transactions() {
     return this.findElements(filterBy.bind(this, {
