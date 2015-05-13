@@ -1,7 +1,13 @@
 import minim from 'minim';
+import * as apiBlueprintAdapter from './adapters/api-blueprint';
 
 // Register API primitives
 import './refract/api';
+
+// Registry of format adapters
+export const adapters = [
+  apiBlueprintAdapter
+];
 
 /*
  * Load serialized refract elements into Javascript objects.
@@ -27,7 +33,44 @@ export function load(elements) {
  * these into objects.
  */
 export function parse({source, sourceMap=false}, done) {
-  done(new Error('Not implemented!'));
+  let adapter;
+
+  for (let i = 0; i < adapters.length; i++) {
+    if (adapters[i].detect(source)) {
+      adapter = adapters[i];
+      break;
+    }
+  }
+
+  if (adapter) {
+    adapter.parse({source, sourceMap}, function (err, elements) {
+      if (err) { return done(err); }
+
+      done(null, load(elements));
+    });
+  } else {
+    done(new Error('Document did not match any registered adapter!'));
+  }
+}
+
+/*
+ * Serialize a parsed API into the given output format.
+ */
+export function serialize({api, adapterName='api-blueprint'}, done) {
+  let adapter;
+
+  for (let i = 0; i < adapters.length; i++) {
+    if (adapters[i].name === adapterName) {
+      adapter = adapters[i];
+      break;
+    }
+  }
+
+  if (adapter) {
+    adapter.serialize({api}, done);
+  } else {
+    done(new Error('Name did not match any registered adapter!'));
+  }
 }
 
 /*

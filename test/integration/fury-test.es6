@@ -3,6 +3,44 @@ var fury = require('../../lib/fury');
 var legacyParser = require('../../lib/fury').legacyBlueprintParser;
 var legacyRenderer = require('../../lib/fury').legacyMarkdownRenderer;
 
+describe('Parser', function () {
+  it('should recognize API Blueprint', function (done) {
+    const source = 'FORMAT: 1A\n\n# My API\n';
+    fury.parse({source}, function (err, api) {
+      assert(api);
+      done(err);
+    });
+  });
+
+  it('should error on unknown input', function (done) {
+    const source = 'unknown';
+    fury.parse({source}, function (err) {
+      assert(err);
+      done();
+    });
+  });
+
+  it('should support custom adapters', function (done) {
+    const adapter = {
+      name: 'my-adapter',
+      detect: function () {
+        return true;
+      },
+      parse: function ({source}, parsed) {
+        parsed(null, ['string', {}, {}, source]);
+      }
+    };
+
+    fury.adapters.push(adapter);
+
+    fury.parse({source: 'dummy'}, function (err, api) {
+      fury.adapters.pop();
+      assert.equal(api.content, 'dummy');
+      done(err);
+    });
+  });
+});
+
 describe('Refract loader', function () {
   describe('autodetect', function () {
     it('should support shorthand', function () {
