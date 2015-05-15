@@ -23,21 +23,10 @@
     "test": "mocha --compilers es6:babel/register,coffee:coffee-script/register -R spec --recursive",
     "prepublish": "npm run compile"
   },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "env": {
-      "node": true,
-      "mocha": true
-    },
-    "rules": {
-      "quotes": [1, "single", "avoid-escape"],
-      "strict": "never",
-      "no-use-before-define": "never"
-    }
-  },
   "dependencies": {
     "apiary-blueprint-parser": "",
     "drafter": "^0.2.5",
+    "minim": "^0.2.0",
     "robotskirt": "",
     "sanitizer": "",
     "underscore": ""

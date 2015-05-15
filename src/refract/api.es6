@@ -21,8 +21,8 @@
 
 import {
   ArrayType, attributeElementKeys, ElementType, ObjectType, StringType,
-  TypeRegistry
-} from './primitives';
+  registry
+} from 'minim';
 import {filterBy} from './util';
 
 /*
@@ -92,27 +92,27 @@ class HttpMessagePayload extends ApiBaseArray {
   }
 
   get dataStructure() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'dataStructure'
-    }))[0];
+    })).get(0);
   }
 
   get messageBody() {
     // Returns the *first* message body. Only one should be defined according
     // to the spec, but it's possible to include more.
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'asset',
       className: 'messageBody'
-    }))[0];
+    })).get(0);
   }
 
   get messageBodySchema() {
     // Returns the *first* message body schema. Only one should be defined
     // according to the spec, but it's possible to include more.
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'asset',
       className: 'messageBodySchema'
-    }))[0];
+    })).get(0);
   }
 }
 
@@ -146,15 +146,15 @@ export class HttpResponse extends HttpMessagePayload {
 
 export class HttpTransaction extends ApiBaseArray {
   get request() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'httpRequest'
-    }))[0];
+    })).get(0);
   }
 
   get response() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'httpResponse'
-    }))[0];
+    })).get(0);
   }
 }
 
@@ -199,7 +199,7 @@ export class Transition extends ApiBaseArray {
   }
 
   get transactions() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'httpTransaction'
     }));
   }
@@ -229,15 +229,15 @@ export class Resource extends ApiBaseArray {
   }
 
   get transitions() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'transition'
     }));
   }
 
   get dataStructure() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'dataStructure'
-    }))[0];
+    })).get(0);
   }
 }
 
@@ -255,43 +255,45 @@ export class Copy extends StringType {
 
 export class Category extends ApiBaseArray {
   get resourceGroups() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       className: 'resourceGroup'
     }));
   }
 
   get dataStructures() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       className: 'dataStructures'
     }));
   }
 
   get scenarios() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       className: 'scenario'
     }));
   }
 
   get resources() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'resource'
     }));
   }
 
   get copy() {
-    return this.findElements(filterBy.bind(this, {
+    return this.children(filterBy.bind(this, {
       element: 'copy'
     }));
   }
 }
 
-TypeRegistry.elementMap.category = Category;
-TypeRegistry.elementMap.copy = Copy;
-TypeRegistry.elementMap.resource = Resource;
-TypeRegistry.elementMap.transition = Transition;
-TypeRegistry.elementMap.httpTransaction = HttpTransaction;
-TypeRegistry.elementMap.httpHeaders = HttpHeaders;
-TypeRegistry.elementMap.hrefVariables = HrefVariables;
-TypeRegistry.elementMap.asset = Asset;
-TypeRegistry.elementMap.httpRequest = HttpRequest;
-TypeRegistry.elementMap.httpResponse = HttpResponse;
+// Register the API and Resource element types.
+registry
+  .register('category', Category)
+  .register('copy', Copy)
+  .register('resource', Resource)
+  .register('transition', Transition)
+  .register('httpTransaction', HttpTransaction)
+  .register('httpHeaders', HttpHeaders)
+  .register('hrefVariables', HrefVariables)
+  .register('asset', Asset)
+  .register('httpRequest', HttpRequest)
+  .register('httpResponse', HttpResponse);

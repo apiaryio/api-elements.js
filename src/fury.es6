@@ -1,4 +1,4 @@
-import * as refract from './refract/primitives';
+import minim from 'minim';
 import * as apiBlueprintAdapter from './adapters/api-blueprint';
 
 // Register API primitives
@@ -18,9 +18,9 @@ export function load(elements) {
   // Support both shorthand syntax and the long-form refract, attempting
   // to autodetect which we are getting.
   if (Array.isArray(elements)) {
-    api = refract.convertFromCompactRefract(elements);
+    api = minim.convertFromCompactRefract(elements);
   } else {
-    api = refract.convertFromRefract(elements);
+    api = minim.convertFromRefract(elements);
   }
 
   return api;
@@ -43,7 +43,7 @@ export function parse({source, sourceMap=false}, done) {
   }
 
   if (adapter) {
-    adapter.parse({source, sourceMap}, function (err, elements) {
+    adapter.parse({source, sourceMap}, (err, elements) => {
       if (err) { return done(err); }
 
       done(null, load(elements));
@@ -73,6 +73,7 @@ export function serialize({api, adapterName='api-blueprint'}, done) {
   }
 }
 
+/* eslint block-scoped-var:1 */
 export {default as legacyAPI} from './legacy/blueprint';
 export {default as legacyBlueprintParser} from './legacy/blueprint-parser';
 export {default as legacyMarkdownRenderer} from './legacy/markdown';

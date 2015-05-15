@@ -89,7 +89,7 @@ function filterFunc(item){
 }
 
 console.log('All API request URIs:');
-api.findElements(filterFunc, {recursive: true}).forEach(function (request) {
+api.find(filterFunc).forEach(function (request) {
   console.log(`${request.method} ${request.href}`)
 });
 ```

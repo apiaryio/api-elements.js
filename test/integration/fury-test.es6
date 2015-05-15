@@ -104,51 +104,51 @@ describe('Refract loader', function () {
 
     it('should contain a single resource group', function () {
       assert.equal(api.resourceGroups.length, 1);
-      assert.equal(api.resourceGroups[0].title, 'My Group');
+      assert.equal(api.resourceGroups.get(0).title, 'My Group');
     });
 
     it('should contain a single copy element', function () {
-      assert.equal(api.resourceGroups[0].copy.length, 1);
-      assert.equal(api.resourceGroups[0].copy[0].content, 'Extra text');
+      assert.equal(api.resourceGroups.get(0).copy.length, 1);
+      assert.equal(api.resourceGroups.get(0).copy.get(0).content, 'Extra text');
     });
 
     it('should contain a single resource', function () {
-      assert.equal(api.resourceGroups[0].resources.length, 1);
+      assert.equal(api.resourceGroups.get(0).resources.length, 1);
     });
 
     it('should have an `id` href variable', function () {
-      var resource = api.resourceGroups[0].resources[0];
+      var resource = api.resourceGroups.get(0).resources.get(0);
       assert.equal(resource.hrefVariables.length, 1);
       assert.equal(resource.hrefVariables.keys()[0], 'id');
     });
 
     it('should contain a single transition', function () {
-      assert.equal(api.resourceGroups[0].resources[0].transitions.length, 1);
+      assert.equal(api.resourceGroups.get(0).resources.get(0).transitions.length, 1);
     });
 
     it('should contain a single transaction', function () {
-      assert.equal(api.resourceGroups[0].resources[0].transitions[0]
+      assert.equal(api.resourceGroups.get(0).resources.get(0).transitions.get(0)
                    .transactions.length, 1);
     });
 
     it('Should contain a request', function () {
-      var resource = api.resourceGroups[0].resources[0];
-      var request = resource.transitions[0].transactions[0].request;
+      var resource = api.resourceGroups.get(0).resources.get(0);
+      var request = resource.transitions.get(0).transactions.get(0).request;
 
       assert(request);
     });
 
     it('Should contain a response', function () {
-      var resource = api.resourceGroups[0].resources[0];
-      var response = resource.transitions[0].transactions[0].response;
+      var resource = api.resourceGroups.get(0).resources.get(0);
+      var response = resource.transitions.get(0).transactions.get(0).response;
 
       assert(response);
       assert.equal(response.statusCode, 200);
     });
 
     it('should set content-type header in the response', function () {
-      var resource = api.resourceGroups[0].resources[0];
-      var response = resource.transitions[0].transactions[0].response;
+      var resource = api.resourceGroups.get(0).resources.get(0);
+      var response = resource.transitions.get(0).transactions.get(0).response;
 
       // Get the header element by index and read the value
       assert.equal(response.headers.get(0).content, 'application/json');
