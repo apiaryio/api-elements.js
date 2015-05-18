@@ -94,48 +94,6 @@ api.find(filterFunc).forEach(function (request) {
 });
 ```
 
-#### Writing an Adapter
-
-Adapters convert from an input format such as API Blueprint into refract elements. This allows a single, consistent interface to be used to interact with multiple input API description formats. Writing your own adapter allows you to add support for new input formats.
-
-Adapters are made up of a name and three public functions: `detect`, `parse`, and an optional `serialize`. A simple example might look like this:
-
-```js
-export const name = 'my-adapter';
-
-export function detect(source) {
-  return source.match(/some-test/i) !== null;
-}
-
-export function parse({source, sourceMap}, done) {
-  // Here you convert the source into refract elements.
-  // ...
-  done(null, elements);
-}
-
-export function serialize(api, done) {
-  // Here you convert from javascript objects to the serialized
-  // source format.
-  // ...
-  done(null, outputString);
-}
-```
-
-Now you can register your adapter with Fury.js:
-
-```js
-import * as fury from 'fury';
-import * as myAdapter from './my-adapter';
-
-// Register my custom adapter
-fury.adapters.unshift(myAdapter);
-
-// Now parse my custom input format!
-fury.parse({source: 'some-test\n...'}, function (err, api) {
-  console.log(api.title);
-});
-```
-
 ### Legacy Interface
 
 This is the older "legacy" interface for API Blueprint and Apiary Blueprint parsing.
