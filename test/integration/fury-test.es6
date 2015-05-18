@@ -3,40 +3,63 @@ var fury = require('../../lib/fury');
 var legacyParser = require('../../lib/fury').legacyBlueprintParser;
 var legacyRenderer = require('../../lib/fury').legacyMarkdownRenderer;
 
-describe('Parser', function () {
-  it('should recognize API Blueprint', function (done) {
+describe('Parser', () => {
+  it('should recognize API Blueprint', (done) => {
     const source = 'FORMAT: 1A\n\n# My API\n';
-    fury.parse({source}, function (err, api) {
+    fury.parse({source}, (err, api) => {
       assert(api);
       done(err);
     });
   });
 
-  it('should error on unknown input', function (done) {
+  it('should error on unknown input', (done) => {
     const source = 'unknown';
-    fury.parse({source}, function (err) {
+    fury.parse({source}, (err) => {
       assert(err);
       done();
     });
   });
 
-  it('should support custom adapters', function (done) {
-    const adapter = {
-      name: 'my-adapter',
-      detect: function () {
-        return true;
-      },
-      parse: function ({source}, parsed) {
-        parsed(null, ['string', {}, {}, source]);
-      }
-    };
+  describe('custom adapters', () => {
+    before(() => {
+      const adapter = {
+        name: 'passthrough',
+        mediaTypes: ['text/vnd.passthrough'],
+        detect: () => true,
+        parse: ({source}, parsed) => {
+          parsed(null, ['string', {}, {}, source]);
+        },
+        serialize: ({api}, serialized) => {
+          serialized(null, api);
+        }
+      };
 
-    fury.adapters.push(adapter);
+      fury.adapters.push(adapter);
+    });
 
-    fury.parse({source: 'dummy'}, function (err, api) {
+    after(() => {
       fury.adapters.pop();
-      assert.equal(api.content, 'dummy');
-      done(err);
+    });
+
+    it('should parse through mediatype', (done) => {
+      fury.parse({source: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, api) => {
+        assert.equal(api.content, 'dummy');
+        done(err);
+      });
+    });
+
+    it('should parse through autodetect', (done) => {
+      fury.parse({source: 'dummy'}, (err, api) => {
+        assert.equal(api.content, 'dummy');
+        done(err);
+      });
+    });
+
+    it('should serialize through mediatype', (done) => {
+      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, serialized) => {
+        assert.equal(serialized, 'dummy');
+        done(err);
+      });
     });
   });
 });

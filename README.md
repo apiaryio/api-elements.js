@@ -99,12 +99,15 @@ api.find(filterFunc).forEach(function (request) {
 
 Adapters convert from an input format such as API Blueprint into refract elements. This allows a single, consistent interface to be used to interact with multiple input API description formats. Writing your own adapter allows you to add support for new input formats.
 
-Adapters are made up of a name and three public functions: `detect`, `parse`, and an optional `serialize`. A simple example might look like this:
+Adapters are made up of a name, a list of media types, and three public functions: `detect`, `parse`, and an optional `serialize`. A simple example might look like this:
 
 ```js
 export const name = 'my-adapter';
+export const mediaTypes = ['text/vnd.my-adapter'];
 
 export function detect(source) {
+  // If no media type is know, then we fall back to auto-detection. Here you
+  // can check the source and see if you think you can parse it.
   return source.match(/some-test/i) !== null;
 }
 

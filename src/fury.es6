@@ -27,23 +27,39 @@ export function load(elements) {
 }
 
 /*
+ * Find an adapter by a given media type. If no adapter is found, then
+ * undefined is returned.
+ */
+function findAdapter(mediaType) {
+  for (let i = 0; i < adapters.length; i++) {
+    if (adapters[i].mediaTypes.indexOf(mediaType) !== -1) {
+      return adapters[i];
+    }
+  }
+}
+
+/*
  * Parse an input document into Javascript objects. This method uses
  * the registered adapters to automatically detect the input format,
  * then uses the adapter to convert into refract elements and loads
  * these into objects.
  */
-export function parse({source, sourceMap=false}, done) {
+export function parse({source, mediaType, generateSourceMap=false}, done) {
   let adapter;
 
-  for (let i = 0; i < adapters.length; i++) {
-    if (adapters[i].detect(source)) {
-      adapter = adapters[i];
-      break;
+  if (mediaType) {
+    adapter = findAdapter(mediaType);
+  } else {
+    for (let i = 0; i < adapters.length; i++) {
+      if (adapters[i].detect(source)) {
+        adapter = adapters[i];
+        break;
+      }
     }
   }
 
   if (adapter) {
-    adapter.parse({source, sourceMap}, function (err, elements) {
+    adapter.parse({source, generateSourceMap}, (err, elements) => {
       if (err) { return done(err); }
 
       done(null, load(elements));
@@ -56,20 +72,13 @@ export function parse({source, sourceMap=false}, done) {
 /*
  * Serialize a parsed API into the given output format.
  */
-export function serialize({api, adapterName='api-blueprint'}, done) {
-  let adapter;
-
-  for (let i = 0; i < adapters.length; i++) {
-    if (adapters[i].name === adapterName) {
-      adapter = adapters[i];
-      break;
-    }
-  }
+export function serialize({api, mediaType='text/vnd.apiblueprint'}, done) {
+  let adapter = findAdapter(mediaType);
 
   if (adapter) {
     adapter.serialize({api}, done);
   } else {
-    done(new Error('Name did not match any registered adapter!'));
+    done(new Error('Media type did not match any registered adapter!'));
   }
 }
 

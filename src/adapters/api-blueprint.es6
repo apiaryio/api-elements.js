@@ -4,9 +4,13 @@ import Drafter from 'drafter';
 const FORMAT1A = /^[\uFEFF]?(((VERSION:( |\t)2)|(FORMAT:( |\t)(X-)?1A))\n)/i;
 
 export const name = 'api-blueprint';
+export const mediaTypes = [
+  'text/vnd.apiblueprint'
+];
 
 /*
- * Automatically detect the API Blueprint format.
+ * Automatically detect the API Blueprint format if the media type of the
+ * input source is not available.
  */
 export function detect(source) {
   return source.match(FORMAT1A) !== null;
@@ -15,9 +19,9 @@ export function detect(source) {
 /*
  * Parse an API Blueprint into refract elements.
  */
-export function parse({source, sourceMap}, done) {
+export function parse({source, generateSourceMap}, done) {
   const drafter = new Drafter({
-    exportSourcemap: sourceMap
+    exportSourcemap: generateSourceMap
   });
   drafter.make(source, function (err, result) {
     // TODO: Figure out what exactly drafter is returning and how
