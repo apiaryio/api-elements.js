@@ -82,13 +82,6 @@ export function serialize({api, mediaType='text/vnd.apiblueprint'}, done) {
   }
 }
 
-/*
- * Serialize a parsed API into the given output format.
- */
-export function serialize({api, adapterName='api-blueprint'}, done) {
-  done(new Error('Not implemented!'));
-}
-
 /* eslint block-scoped-var:1 */
 export {default as legacyAPI} from './legacy/blueprint';
 export {default as legacyBlueprintParser} from './legacy/blueprint-parser';

@@ -26,12 +26,8 @@ describe('Parser', () => {
         name: 'passthrough',
         mediaTypes: ['text/vnd.passthrough'],
         detect: () => true,
-        parse: ({source}, parsed) => {
-          parsed(null, ['string', {}, {}, source]);
-        },
-        serialize: ({api}, serialized) => {
-          serialized(null, api);
-        }
+        parse: ({source}, done) => done(null, ['string', {}, {}, source]),
+        serialize: ({api}, done) => done(null, api)
       };
 
       fury.adapters.push(adapter);
