@@ -3,8 +3,7 @@
  * in the list.
  */
 function hasClass(element, name) {
-  return element.meta && element.meta.class &&
-         element.meta.class.indexOf &&
+  return element.meta && Array.isArray(element.meta.class) &&
          element.meta.class.indexOf(name) !== -1;
 }
 

@@ -89,6 +89,7 @@ function filterFunc(item){
 }
 
 console.log('All API request URIs:');
+
 api.find(filterFunc).forEach(function (request) {
   console.log(`${request.method} ${request.href}`)
 });
