@@ -64,14 +64,14 @@ describe('Parser', () => {
   });
 });
 
-describe('Refract loader', function () {
-  describe('autodetect', function () {
-    it('should support shorthand', function () {
+describe('Refract loader', () => {
+  describe('autodetect', () => {
+    it('should support shorthand', () => {
       let api = fury.load(['category', {'class': 'api'}, {}, []]);
       assert(api);
     });
 
-    it('should support long-form', function () {
+    it('should support long-form', () => {
       let api = fury.load({
         element: 'category',
         meta: {
@@ -83,10 +83,10 @@ describe('Refract loader', function () {
     });
   });
 
-  describe('shorthand', function () {
-    var api;
+  describe('shorthand', () => {
+    let api;
 
-    before(function () {
+    before(() => {
       api = fury.load([
         'category', {'class': ['api'], 'title': 'My API'}, {}, [
           ['category', {'class': ['resourceGroup'], title: 'My Group'}, {}, [
@@ -117,61 +117,61 @@ describe('Refract loader', function () {
       ]);
     });
 
-    it('should parse a refract shorthand API', function () {
+    it('should parse a refract shorthand API', () => {
       assert.ok(api);
     });
 
-    it('should contain a title', function () {
+    it('should contain a title', () => {
       assert.equal(api.title, 'My API');
     });
 
-    it('should contain a single resource group', function () {
+    it('should contain a single resource group', () => {
       assert.equal(api.resourceGroups.length, 1);
       assert.equal(api.resourceGroups.get(0).title, 'My Group');
     });
 
-    it('should contain a single copy element', function () {
+    it('should contain a single copy element', () => {
       assert.equal(api.resourceGroups.get(0).copy.length, 1);
       assert.equal(api.resourceGroups.get(0).copy.get(0).content, 'Extra text');
     });
 
-    it('should contain a single resource', function () {
+    it('should contain a single resource', () => {
       assert.equal(api.resourceGroups.get(0).resources.length, 1);
     });
 
-    it('should have an `id` href variable', function () {
-      var resource = api.resourceGroups.get(0).resources.get(0);
+    it('should have an `id` href variable', () => {
+      const resource = api.resourceGroups.get(0).resources.get(0);
       assert.equal(resource.hrefVariables.length, 1);
       assert.equal(resource.hrefVariables.keys()[0], 'id');
     });
 
-    it('should contain a single transition', function () {
+    it('should contain a single transition', () => {
       assert.equal(api.resourceGroups.get(0).resources.get(0).transitions.length, 1);
     });
 
-    it('should contain a single transaction', function () {
+    it('should contain a single transaction', () => {
       assert.equal(api.resourceGroups.get(0).resources.get(0).transitions.get(0)
                    .transactions.length, 1);
     });
 
-    it('Should contain a request', function () {
-      var resource = api.resourceGroups.get(0).resources.get(0);
-      var request = resource.transitions.get(0).transactions.get(0).request;
+    it('Should contain a request', () => {
+      const resource = api.resourceGroups.get(0).resources.get(0);
+      const request = resource.transitions.get(0).transactions.get(0).request;
 
       assert(request);
     });
 
-    it('Should contain a response', function () {
-      var resource = api.resourceGroups.get(0).resources.get(0);
-      var response = resource.transitions.get(0).transactions.get(0).response;
+    it('Should contain a response', () => {
+      const resource = api.resourceGroups.get(0).resources.get(0);
+      const response = resource.transitions.get(0).transactions.get(0).response;
 
       assert(response);
       assert.equal(response.statusCode, 200);
     });
 
-    it('should set content-type header in the response', function () {
-      var resource = api.resourceGroups.get(0).resources.get(0);
-      var response = resource.transitions.get(0).transactions.get(0).response;
+    it('should set content-type header in the response', () => {
+      const resource = api.resourceGroups.get(0).resources.get(0);
+      const response = resource.transitions.get(0).transactions.get(0).response;
 
       // Get the header element by index and read the value
       assert.equal(response.headers.get(0).content, 'application/json');
@@ -182,19 +182,18 @@ describe('Refract loader', function () {
   });
 });
 
-describe('Using legacy parser', function() {
+describe('Using legacy parser', () => {
+  let parserError = null;
+  let parsedAPI = null;
+  let parserWarnings = null;
 
-  var parserError = null;
-  var parsedAPI = null;
-  var parserWarnings = null;
-
-  describe('to parse API Blueprint', function() {
+  describe('to parse API Blueprint', () => {
     before(function(done) {
-      var blueprintSource = 'FORMAT: 1A\n' +
-                            '\n' +
-                            '# My API\n';
+      const blueprintSource = 'FORMAT: 1A\n' +
+                              '\n' +
+                              '# My API\n';
 
-      legacyParser.parse({code: blueprintSource}, function(error, api, warnings) {
+      legacyParser.parse({code: blueprintSource}, (error, api, warnings) => {
         parserError = error;
         parsedAPI = api;
         parserWarnings = warnings;
@@ -202,25 +201,24 @@ describe('Using legacy parser', function() {
       });
     });
 
-    it ('should succeed', function() {
+    it('should succeed', () => {
       assert.isNull(parserError);
     });
 
-    it ('API should be defined', function() {
+    it('API should be defined', () => {
       assert.isDefined(parsedAPI);
     });
 
-    it ('API name should be "My API"', function() {
+    it('API name should be "My API"', () => {
       assert.equal(parsedAPI.name, 'My API');
     });
   });
 
-  describe('to parse Apiary Blueprint', function() {
+  describe('to parse Apiary Blueprint', () => {
+    before((done) => {
+      const blueprintSource = '\n--- Sample API v2 ---\n';
 
-    before(function(done) {
-      var blueprintSource = '\n--- Sample API v2 ---\n';
-
-      legacyParser.parse({code: blueprintSource}, function(error, api, warnings) {
+      legacyParser.parse({code: blueprintSource}, (error, api, warnings) => {
         parserError = error;
         parsedAPI = api;
         parserWarnings = warnings;
@@ -228,48 +226,45 @@ describe('Using legacy parser', function() {
       });
     });
 
-    it ('should succeed', function() {
+    it('should succeed', () => {
       assert.isNull(parserError);
     });
 
-    it ('API should be defined', function() {
+    it('API should be defined', () => {
       assert.isDefined(parsedAPI);
     });
 
-    it ('API name should be "Sample API v2"', function() {
+    it('API name should be "Sample API v2"', () => {
       assert.equal(parsedAPI.name, 'Sample API v2');
     });
   });
 });
 
-describe('Using legacy Markdown renderer', function() {
-  describe('to render Markdown', function() {
+describe('Using legacy Markdown renderer', () => {
+  describe('to render Markdown', () => {
+    let renderError = null;
+    let renderResult = null;
 
-    var renderError = null;
-    var renderResult = null;
+    before((done) => {
+      const source = '# My API\n';
 
-    before(function(done) {
-      var source = '# My API\n';
-
-      legacyRenderer.toHtml(source, {}, function(error, html) {
+      legacyRenderer.toHtml(source, {}, (error, html) => {
         renderError = error;
         renderResult = html;
         done();
       });
     });
 
-    it ('should succeed', function() {
+    it('should succeed', () => {
       assert.isNull(renderError);
     });
 
-    it ('result should be defined', function() {
+    it('result should be defined', () => {
       assert.isDefined(renderResult);
     });
 
-    it ('result should be rendered correctly', function() {
-      assert.equal(renderResult, "<h1>My API</h1>\n");
+    it('result should be rendered correctly', () => {
+      assert.equal(renderResult, '<h1>My API</h1>\n');
     });
-
   });
-
 });
