@@ -30,10 +30,74 @@ or as a dependency:
 $ npm install --save fury
 ```
 
+### Refract Interface
+
+Fury.js offers an interface based on the [Refract Project](https://github.com/refractproject/refract-spec) element specification and makes use of the API, resource, and MSON namespaces. Adapters convert from formats such as API Blueprint into Refract elements and Fury.js exposes these with API-related convenience functionality. For example:
+
+```js
+import * as fury from 'fury';
+const source = '# My API\n...';
+
+fury.parse({source}, function(err, api, warnings) {
+  console.log(api.title);
+});
+```
+
+Once you have a parsed API it is easy to traverse:
+
+```js
+api.resourceGroups.forEach(function (resourceGroup) {
+  console.log(resourceGroup.title);
+
+  resourceGroup.resources.forEach(function (resource) {
+    console.log(resource.title);
+
+    resource.transitions.forEach(function (transition) {
+      console.log(transition.title);
+
+      transition.transactions.forEach(function (transaction) {
+        const request = transaction.request;
+        const response = transaction.response;
+
+        console.log(`${request.method} ${request.href}`);
+        console.log(`${response.statusCode} (${response.header('Content-Type')})`);
+        console.log(response.messageBody);
+      });
+    });
+  });
+});
+```
+
+It is also possible to do complex document-wide searching and filtering. For example, to print out a listing of HTTP methods and paths for all defined example requests:
+
+```js
+/*
+ * Prints out something like:
+ *
+ * POST /frobs
+ * GET /frobs
+ * GET /frobs/{id}
+ * PUT /frobs/{id}
+ * DELETE /frobs/{id}
+ */
+function filterFunc(item){
+  if (item.element === 'httpRequest' && item.statusCode === 200) {
+    return true;
+  }
+
+  return false;
+}
+
+console.log('All API request URIs:');
+
+api.find(filterFunc).forEach(function (request) {
+  console.log(`${request.method} ${request.href}`)
+});
+```
+
 ### Legacy Interface
 
-For now Fury.js offers only "legacy" interface for API Blueprint
-and Apiary Blueprint parsing.
+This is the older "legacy" interface for API Blueprint and Apiary Blueprint parsing.
 
 #### API Blueprint Parsing
 
