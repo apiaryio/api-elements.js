@@ -23,6 +23,7 @@ export function parse({source, generateSourceMap}, done) {
   const drafter = new Drafter({
     exportSourcemap: generateSourceMap
   });
+
   drafter.make(source, (err, result) => {
     // TODO: Figure out what exactly drafter is returning and how
     //       to request refract output.

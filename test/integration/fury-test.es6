@@ -1,7 +1,32 @@
-var assert = require('chai').assert;
-var fury = require('../../lib/fury');
-var legacyParser = require('../../lib/fury').legacyBlueprintParser;
-var legacyRenderer = require('../../lib/fury').legacyMarkdownRenderer;
+import {assert} from 'chai';
+import fury, {
+  Fury, legacyBlueprintParser, legacyMarkdownRenderer
+} from '../../lib/fury';
+
+describe('Nodes.js require', () => {
+  it('should work without needing to use `.default`', () => {
+    assert(require('../../lib/fury').parse);
+  });
+});
+
+describe('Fury class', () => {
+  it('should be able to create many instances', () => {
+    const fury1 = new Fury();
+    const fury2 = new Fury();
+
+    assert(fury1);
+    assert(fury2);
+  });
+
+  it('has unique adapters', () => {
+    const fury1 = new Fury();
+    const fury2 = new Fury();
+
+    fury2.adapters.push('foo');
+
+    assert.notDeepEqual(fury1.adapters, fury2.adapters);
+  });
+});
 
 describe('Parser', () => {
   it('should recognize API Blueprint', (done) => {
@@ -189,7 +214,7 @@ describe('Using legacy parser', () => {
                               '\n' +
                               '# My API\n';
 
-      legacyParser.parse({code: blueprintSource}, (error, api, warnings) => {
+      legacyBlueprintParser.parse({code: blueprintSource}, (error, api, warnings) => {
         parserError = error;
         parsedAPI = api;
         parserWarnings = warnings;
@@ -214,7 +239,7 @@ describe('Using legacy parser', () => {
     before((done) => {
       const blueprintSource = '\n--- Sample API v2 ---\n';
 
-      legacyParser.parse({code: blueprintSource}, (error, api, warnings) => {
+      legacyBlueprintParser.parse({code: blueprintSource}, (error, api, warnings) => {
         parserError = error;
         parsedAPI = api;
         parserWarnings = warnings;
@@ -244,7 +269,7 @@ describe('Using legacy Markdown renderer', () => {
     before((done) => {
       const source = '# My API\n';
 
-      legacyRenderer.toHtml(source, {}, (error, html) => {
+      legacyMarkdownRenderer.toHtml(source, {}, (error, html) => {
         renderError = error;
         renderResult = html;
         done();
