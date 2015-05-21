@@ -35,7 +35,7 @@ $ npm install --save fury
 Fury.js offers an interface based on the [Refract Project](https://github.com/refractproject/refract-spec) element specification and makes use of the API, resource, and MSON namespaces. Adapters convert from formats such as API Blueprint into Refract elements and Fury.js exposes these with API-related convenience functionality. For example:
 
 ```js
-import * as fury from 'fury';
+import fury from 'fury';
 const source = '# My API\n...';
 
 fury.parse({source}, function(err, api, warnings) {
@@ -92,6 +92,64 @@ console.log('All API request URIs:');
 
 api.find(filterFunc).forEach(function (request) {
   console.log(`${request.method} ${request.href}`)
+});
+```
+
+#### Multiple Fury Instances
+
+There may come a day when you need to have multiple Fury instances with different adapters or other options set up in the same program. This is possible via the `Fury` class:
+
+```js
+import {Fury} from 'fury';
+
+const fury1 = new Fury();
+const fury2 = new Fury();
+
+fury1.parse(...);
+```
+
+#### Writing an Adapter
+
+Adapters convert from an input format such as API Blueprint into refract elements. This allows a single, consistent interface to be used to interact with multiple input API description formats. Writing your own adapter allows you to add support for new input formats.
+
+Adapters are made up of a name, a list of media types, and three public functions: `detect`, `parse`, and an optional `serialize`. A simple example might look like this:
+
+```js
+export const name = 'my-adapter';
+export const mediaTypes = ['text/vnd.my-adapter'];
+
+export function detect(source) {
+  // If no media type is know, then we fall back to auto-detection. Here you
+  // can check the source and see if you think you can parse it.
+  return source.match(/some-test/i) !== null;
+}
+
+export function parse({source, generateSourceMap}, done) {
+  // Here you convert the source into refract elements.
+  // ...
+  done(null, elements);
+}
+
+export function serialize(api, done) {
+  // Here you convert `api` from javascript element objects to the serialized
+  // source format.
+  // ...
+  done(null, outputString);
+}
+```
+
+Now you can register your adapter with Fury.js:
+
+```js
+import fury from 'fury';
+import * as myAdapter from './my-adapter';
+
+// Register my custom adapter
+fury.adapters.unshift(myAdapter);
+
+// Now parse my custom input format!
+fury.parse({source: 'some-test\n...'}, function (err, api) {
+  console.log(api.title);
 });
 ```
 
