@@ -1,13 +1,4 @@
 /*
- * Returns `true` if there is a `class` attribute list and `name` is present
- * in the list.
- */
-function hasClass(element, name) {
-  return element.meta && Array.isArray(element.meta.class) &&
-         element.meta.class.indexOf(name) !== -1;
-}
-
-/*
  * A function to help filtering elements by certain criteria based on
  * a simple configuration. Usage:
  *
@@ -22,19 +13,19 @@ function hasClass(element, name) {
  * - ignoreCase: don't care about casing when comparing the name
  */
 export function filterBy(options, item) {
-  if (options.className && !hasClass(item, options.className)) {
+  if (options.className && item.meta.class.contains(options.className)) {
     return false;
   }
   if (options.element && item.element !== options.element) {
     return false;
   }
-  if (options.name && item.meta && item.meta.name) {
+  if (options.name && item.meta.name.toValue()) {
     if (options.ignoreCase) {
-      if (item.meta.name.toLowerCase() !== options.name.toLowerCase()) {
+      if (item.meta.name.toValue().toLowerCase() !== options.name.toLowerCase()) {
         return false;
       }
     } else {
-      if (item.meta.name !== options.name) {
+      if (item.meta.name.toValue() !== options.name) {
         return false;
       }
     }
