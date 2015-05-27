@@ -1,7 +1,35 @@
 import Drafter from 'drafter';
+import path from 'path';
+import swig from 'swig';
 
 // Auto-detect via the API Blueprint format metadata.
 const FORMAT1A = /^[\uFEFF]?(((VERSION:( |\t)2)|(FORMAT:( |\t)(X-)?1A))\n)/i;
+
+const TEMPLATE = path.join(
+  __dirname, '..', '..', 'templates', 'api-blueprint.swig');
+
+/*
+ * Indent every line except the first by a number of spaces.
+ *
+ * e.g. indent('foo\nbar\nbaz', 4)
+ *      => 'foo\n    bar\n    baz'
+ */
+function indent(input, spaces) {
+  let pre = '';
+  let lines = [];
+
+  for (let _ = 0; _ < spaces; _++) {
+    pre += ' ';
+  }
+
+  for (let line of input.split('\n')) {
+    lines.push(pre + line);
+  }
+
+  return lines.join('\n').trim();
+}
+
+swig.setFilter('indent', indent);
 
 export const name = 'api-blueprint';
 export const mediaTypes = [
@@ -35,6 +63,22 @@ export function parse({source, generateSourceMap}, done) {
  * Serialize an API into API Blueprint.
  */
 export function serialize({api}, done) {
-  // TODO: This should probably just be another call to drafter.
-  done(new Error('Not implemented yet!'));
+  let template;
+  let output;
+
+  try {
+    template = swig.compileFile(TEMPLATE, {autoescape: false});
+  } catch (err) {
+    return done(err);
+  }
+
+  try {
+    output = template({api});
+  } catch (err) {
+    return done(err);
+  }
+
+  // Attempt to filter out extra spacing
+  output = output.replace(/\n\s*\n\s*\n/g, '\n\n');
+  done(null, output);
 }

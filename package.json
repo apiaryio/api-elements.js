@@ -29,6 +29,7 @@
     "minim": "^0.4.0",
     "robotskirt": "",
     "sanitizer": "",
+    "swig": "^1.4.2",
     "underscore": ""
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "coffee-script": "~1.9",
     "coveralls": "^2.11.2",
     "eslint": "^0.21.2",
+    "glob": "^5.0.10",
     "istanbul": "^0.3.13",
     "mocha": "^2.2.5"
   },

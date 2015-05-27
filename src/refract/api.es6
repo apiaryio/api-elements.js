@@ -45,6 +45,11 @@ class ApiBaseArray extends ArrayType {
   set description(value) {
     this.meta.description.set(value);
   }
+
+  hasClass(name) {
+    return this.meta && this.meta.class && this.meta.class.indexOf &&
+           this.meta.class.indexOf(name) !== -1;
+  }
 }
 
 class HttpHeaders extends ApiBaseArray {}
@@ -89,11 +94,25 @@ class HttpMessagePayload extends ApiBaseArray {
   }
 
   header(name) {
-    const header = this.attributes.headers.content.filter(filterBy.bind(this, {
-      name,
-      ignoreCase: true
-    }))[0];
+    const headers = this.attributes.headers;
+    let header = null;
+
+    if (headers) {
+      header = headers.content.filter(filterBy.bind(this, {
+        name,
+        ignoreCase: true
+      }))[0];
+    }
+
     return header ? header.content : header;
+  }
+
+  get contentType() {
+    if (this.header('Content-Type')) {
+      return this.header('Content-Type');
+    }
+
+    return this.content && this.content.contentType;
   }
 
   get dataStructure() {
@@ -187,6 +206,14 @@ export class Transition extends ApiBaseArray {
 
   set href(value) {
     this.attributes.href = value;
+  }
+
+  get computedHref() {
+    try {
+      return this.href ? this.href : this.transactions.get(0).request.href;
+    } catch (err) {
+      return null;
+    }
   }
 
   get parameters() {

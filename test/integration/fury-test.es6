@@ -3,6 +3,35 @@ import fury, {
   Fury, legacyBlueprintParser, legacyMarkdownRenderer
 } from '../../lib/fury';
 
+const refractedApi = [
+  'category', {'class': ['api'], title: 'My API', description: 'An API description.'}, {}, [
+    ['category', {'class': ['resourceGroup'], title: 'My Group', description: 'This is a group of resources'}, {}, [
+      ['copy', {}, {contentType: 'text/plain'}, 'Extra text'],
+      ['resource', {title: 'Frob', description: 'A frob does something.'}, {
+        href: '/frobs/{id}',
+        hrefVariables: ['hrefVariables', {}, {}, [
+            ['string', {name: 'id'}, {}, '']
+          ]]
+        }, [
+        ['dataStructure', {}, {}, [
+          ['string', {name: 'id'}, {}, null],
+          ['string', {name: 'tag'}, {}, null]
+        ]],
+        ['transition', {}, {}, [
+          ['httpTransaction', {title: 'Get a frob', description: 'Gets information about a single frob instance'}, {}, [
+            ['httpRequest', {}, {method: 'GET'}, null],
+            ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
+              ['string', {name: 'Content-Type'}, {}, 'application/json']
+            ]]}, [
+              ['asset', {'class': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
+            ]]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]
+];
+
 describe('Nodes.js require', () => {
   it('should work without needing to use `.default`', () => {
     assert(require('../../lib/fury').parse);
@@ -108,34 +137,7 @@ describe('Refract loader', () => {
     let api;
 
     before(() => {
-      api = fury.load([
-        'category', {'class': ['api'], 'title': 'My API'}, {}, [
-          ['category', {'class': ['resourceGroup'], title: 'My Group'}, {}, [
-            ['copy', {}, {contentType: 'text/plain'}, 'Extra text'],
-            ['resource', {title: 'Frob'}, {
-              href: '/frobs/{id}',
-              hrefVariables: ['hrefVariables', {}, {}, [
-                  ['string', {name: 'id'}, {}, '']
-                ]]
-              }, [
-              ['dataStructure', {}, {}, [
-                ['string', {name: 'id'}, {}, null],
-                ['string', {name: 'tag'}, {}, null]
-              ]],
-              ['transition', {}, {}, [
-                ['httpTransaction', {}, {}, [
-                  ['httpRequest', {}, {}, null],
-                  ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
-                    ['string', {name: 'Content-Type'}, {}, 'application/json']
-                  ]]}, [
-                    ['asset', {'class': 'messageBody'}, {}, '{"id": "1", "tag": "foo"}']
-                  ]]
-                ]]
-              ]]
-            ]]
-          ]]
-        ]
-      ]);
+      api = fury.load(refractedApi);
     });
 
     it('should parse a refract shorthand API', () => {
