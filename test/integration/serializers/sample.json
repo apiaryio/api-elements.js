@@ -5,7 +5,7 @@
       ["resource", {"title": "Frob", "description": "A frob does something."}, {
         "href": "/frobs/{id}",
         "hrefVariables": ["hrefVariables", {}, {}, [
-            ["string", {"name": "id"}, {}, ""]
+            ["string", {"name": "id", "description": "Unique identifier"}, {"typeAttributes": ["required"]}, ""]
           ]]
         }, [
         ["dataStructure", {}, {}, [
@@ -16,9 +16,11 @@
           ["httpTransaction", {"title": "Get a frob", "description": "Gets information about a single frob instance"}, {}, [
             ["httpRequest", {}, {"method": "GET"}, null],
             ["httpResponse", {}, {"statusCode": 200, "headers": ["httpHeaders", {}, {}, [
-              ["string", {"name": "Content-Type"}, {}, "application/json"]
+              ["string", {"name": "Content-Type"}, {}, "application/json"],
+              ["string", {"name": "Authorization"}, {}, "Bearer abc123"]
             ]]}, [
-              ["asset", {"class": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tag\": \"foo\"\n}\n"]
+              ["asset", {"class": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tag\": \"foo\"\n}\n"],
+              ["asset", {"class": ["messageBodySchema"]}, {}, "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"tag\": {\n      \"type\": \"string\"\n    }\n  }\n}"]
             ]]
           ]]
         ]]

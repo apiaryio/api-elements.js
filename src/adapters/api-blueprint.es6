@@ -29,7 +29,31 @@ function indent(input, spaces) {
   return lines.join('\n').trim();
 }
 
+/*
+ * Given a message payload, return true iff it only has a body defined and
+ * optionally has a content-type and nothing else. This lets us know when to
+ * use a shorthand syntax in the template.
+ */
+function bodyOnly(payload) {
+  let headers;
+
+  // First, we need to filter out the content-type header. This is handled
+  // outside of the payload (e.g. `+ Response (application/json)`)
+  if (payload.headers) {
+    headers = payload.headers.filter(
+      h => h.meta.name.toLowerCase() !== 'content-type');
+  }
+
+  if (payload.messageBody && !(headers.length || payload.dataStructure ||
+                               payload.messageBodySchema)) {
+    return true;
+  }
+
+  return false;
+}
+
 swig.setFilter('indent', indent);
+swig.setFilter('bodyOnly', bodyOnly);
 
 export const name = 'api-blueprint';
 export const mediaTypes = [

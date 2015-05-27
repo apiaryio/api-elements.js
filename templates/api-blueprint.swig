@@ -6,12 +6,15 @@ FORMAT: 1A
 
 
 {% macro renderExample(example) %}
+{% if example|bodyOnly %}
+        {{ example.messageBody.content|indent(8) }}
+{% else %}
   {% if example.headers && example.headers.length > 1 %}
     + Headers
 
       {% for header in example.headers.content %}
         {% if header.meta.name.toLowerCase() != 'content-type' %}
-        + {{ header.meta.name }}: {{ header.content }}
+            {{ header.meta.name }}: {{ header.content }}
         {% endif %}
       {% endfor %}
 
@@ -22,7 +25,29 @@ FORMAT: 1A
             {{ example.messageBody.content|indent(12) }}
 
   {% endif %}
+  {% if example.messageBodySchema %}
+    + Schema
+
+            {{ example.messageBodySchema.content|indent(12) }}
+
+  {% endif %}
+{% endif %}
 {% endmacro %}
+
+
+
+
+
+
+{% macro renderParameters(hrefVariables) %}
++ Parameters
+
+  {% for hrefVar in hrefVariables.content %}
+    + {{ hrefVar.meta.name }}{% if hrefVar.attributes.typeAttributes %} ({{ hrefVar.attributes.typeAttributes }}){% endif %}{% if hrefVar.meta.description %} - {{ hrefVar.meta.description }}{% endif %}
+  {% endfor %}
+
+{% endmacro %}
+
 
 
 
@@ -45,12 +70,16 @@ FORMAT: 1A
 
 {% macro renderTransition(transition) %}
 {% if transition.title %}
-#### {{ transition.title }} ({{ transition.transactions.get(0).request.method }}{% if transition.computedHref %} {{ transition.computedHref }}{% endif %}
+#### {{ transition.title }} [{{ transition.transactions.get(0).request.method }}{% if transition.computedHref %} {{ transition.computedHref }}{% endif %}]
 {% else %}
 #### {{ transition.transactions.get(0).request.method }}{% if transition.computedHref %} {{ transition.computedHref }}{% endif %}
 {% endif %}
 
 {{ transition.description }}
+
+{% if resource.parameters.length %}
+{{ renderParameters(resource.parameters) }}
+{% endif %}
 
 {% for transaction in transition.transactions.content %}
   {{ renderTransaction(transaction) }}
@@ -63,9 +92,12 @@ FORMAT: 1A
 
 {% macro renderResource(resource) %}
 {% if resource.title %}
-### {{ resource.title }} ({{ resource.href }})
+### {{ resource.title }} [{{ resource.href }}]
 
 {{ resource.description }}
+{% endif %}
+{% if resource.hrefVariables.length %}
+{{ renderParameters(resource.hrefVariables) }}
 {% endif %}
 {% for transition in resource.transitions.content %}
   {{ renderTransition(transition) }}

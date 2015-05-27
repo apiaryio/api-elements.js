@@ -8,17 +8,39 @@ An API description.
 
 This is a group of resources
 
-### Frob (/frobs/{id})
+### Frob [/frobs/{id}]
 
 A frob does something.
+
++ Parameters
+
+    + id (required) - Unique identifier
 
 #### GET
 
 + Response 200 (application/json)
+
+    + Headers
+
+            Authorization: Bearer abc123
 
     + Body
 
             {
               "id": "1",
               "tag": "foo"
+            }
+
+    + Schema
+
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
             }
