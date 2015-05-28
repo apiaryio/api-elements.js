@@ -77,8 +77,12 @@ FORMAT: 1A
 
 {{ transition.description }}
 
-{% if resource.parameters.length %}
-{{ renderParameters(resource.parameters) }}
+{% if transition.parameters.length %}
+  {{ renderParameters(transition.parameters) }}
+{% endif %}
+
+{% if transition.relation %}
++ Relation: {{ transition.relation }}
 {% endif %}
 
 {% for transaction in transition.transactions.content %}
