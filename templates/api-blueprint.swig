@@ -114,10 +114,28 @@ FORMAT: 1A
 
 {{ group.description }}
 {% endif %}
-{% for resource in group.resources.content %}
-  {{ renderResource(resource) }}
-{% endfor %}
+{{ renderCategory(group) }}
 {% endmacro %}
+
+
+
+
+
+{% macro renderCategory(category) %}
+  {# Categories can contain copy (text) elements, other categories, and resources #}
+  {% for item in category.content %}
+    {% if item.element === 'copy' %}
+{{ item.content }}
+    {% endif %}
+    {% if item.element === 'category' && item.meta.class.indexOf('resourceGroup') !== -1 %}
+      {{ renderGroup(item) }}
+    {% endif %}
+    {% if item.element === 'resource' %}
+      {{ renderResource(item) }}
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
 
 
 
@@ -127,11 +145,4 @@ FORMAT: 1A
 
 {{ api.description }}
 
-{% for item in api.content %}
-  {% if item.meta.class.indexOf('resourceGroup') !== -1 %}
-    {{ renderGroup(item) }}
-  {% endif %}
-  {% if item.element === 'resource' %}
-    {{ renderResource(item) }}
-  {% endif %}
-{% endfor %}
+{{ renderCategory(api) }}
