@@ -29,7 +29,7 @@ describe('Serializers', () => {
 
           fury.serialize({api: refract, mediaType: 'text/vnd.apiblueprint'}, (serializeErr, serialized) => {
             if (serializeErr) { return done(serializeErr); }
-            assert.deepEqual(serialized.trim(), expectedBlueprint.trim());
+            assert.deepEqual(expectedBlueprint.trim(), serialized.trim());
             done();
           });
         });
