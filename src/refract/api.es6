@@ -31,19 +31,19 @@ import {filterBy} from './util';
  */
 class ApiBaseArray extends ArrayType {
   get title() {
-    return this.meta.title;
+    return this.meta.title.toValue();
   }
 
   set title(value) {
-    this.meta.title = value;
+    this.meta.title.set(value);
   }
 
   get description() {
-    return this.meta.description;
+    return this.meta.description.toValue();
   }
 
   set description(value) {
-    this.meta.description = value;
+    this.meta.description.set(value);
   }
 }
 
@@ -51,6 +51,11 @@ class HttpHeaders extends ApiBaseArray {}
 class HrefVariables extends ObjectType {}
 
 export class Asset extends ElementType {
+  constructor(...args) {
+    super(...args);
+    this.element = 'asset';
+  }
+
   get contentType() {
     return this.attributes.contentType;
   }
@@ -92,31 +97,32 @@ class HttpMessagePayload extends ApiBaseArray {
   }
 
   get dataStructure() {
-    return this.children(filterBy.bind(this, {
-      element: 'dataStructure'
-    })).get(0);
+    return this.filter(item => item.element === 'dataStructure').first();
   }
 
   get messageBody() {
     // Returns the *first* message body. Only one should be defined according
     // to the spec, but it's possible to include more.
-    return this.children(filterBy.bind(this, {
-      element: 'asset',
-      className: 'messageBody'
-    })).get(0);
+    return this.filter((item) => {
+      return item.element === 'asset' && item.meta.class.contains('messageBody');
+    }).first();
   }
 
   get messageBodySchema() {
     // Returns the *first* message body schema. Only one should be defined
     // according to the spec, but it's possible to include more.
-    return this.children(filterBy.bind(this, {
-      element: 'asset',
-      className: 'messageBodySchema'
-    })).get(0);
+    return this.filter((item) => {
+      return item.element === 'asset' && item.meta.class.contains('messageBodySchema');
+    }).first();
   }
 }
 
 export class HttpRequest extends HttpMessagePayload {
+  constructor(...args) {
+    super(...args);
+    this.element = 'httpRequest';
+  }
+
   get method() {
     return this.attributes.method;
   }
@@ -145,16 +151,17 @@ export class HttpResponse extends HttpMessagePayload {
 }
 
 export class HttpTransaction extends ApiBaseArray {
+  constructor(...args) {
+    super(...args);
+    this.element = 'httpTransaction';
+  }
+
   get request() {
-    return this.children(filterBy.bind(this, {
-      element: 'httpRequest'
-    })).get(0);
+    return this.filter(item => item.element === 'httpRequest').first();
   }
 
   get response() {
-    return this.children(filterBy.bind(this, {
-      element: 'httpResponse'
-    })).get(0);
+    return this.filter(item => item.element === 'httpResponse').first();
   }
 }
 
@@ -162,6 +169,7 @@ export class Transition extends ApiBaseArray {
   constructor(...args) {
     super(...args);
 
+    this.element = 'transition';
     this[attributeElementKeys] = ['parameters', 'attributes'];
   }
 
@@ -199,9 +207,7 @@ export class Transition extends ApiBaseArray {
   }
 
   get transactions() {
-    return this.children(filterBy.bind(this, {
-      element: 'httpTransaction'
-    }));
+    return this.filter(item => item.element === 'httpTransaction');
   }
 }
 
@@ -209,6 +215,7 @@ export class Resource extends ApiBaseArray {
   constructor(...args) {
     super(...args);
 
+    this.element = 'resource';
     this[attributeElementKeys] = ['hrefVariables'];
   }
 
@@ -229,21 +236,27 @@ export class Resource extends ApiBaseArray {
   }
 
   get transitions() {
-    return this.children(filterBy.bind(this, {
-      element: 'transition'
-    }));
+    return this.filter(item => item.element === 'transition');
   }
 
   get dataStructure() {
-    return this.children(filterBy.bind(this, {
-      element: 'dataStructure'
-    })).get(0);
+    return this.filter(item => item.element === 'dataStructure').first();
   }
 }
 
-export class DataStructure extends ObjectType {}
+export class DataStructure extends ObjectType {
+  constructor(...args) {
+    super(...args);
+    this.element = 'dataStructure';
+  }
+}
 
 export class Copy extends StringType {
+  constructor(...args) {
+    super(...args);
+    this.element = 'copy';
+  }
+
   get contentType() {
     return this.attributes.contentType;
   }
@@ -254,34 +267,29 @@ export class Copy extends StringType {
 }
 
 export class Category extends ApiBaseArray {
+  constructor(...args) {
+    super(...args);
+    this.element = 'category';
+  }
+
   get resourceGroups() {
-    return this.children(filterBy.bind(this, {
-      className: 'resourceGroup'
-    }));
+    return this.filter(item => item.meta.class.contains('resourceGroup'));
   }
 
   get dataStructures() {
-    return this.children(filterBy.bind(this, {
-      className: 'dataStructures'
-    }));
+    return this.filter(item => item.meta.class.contains('dataStructures'));
   }
 
   get scenarios() {
-    return this.children(filterBy.bind(this, {
-      className: 'scenario'
-    }));
+    return this.filter(item => item.meta.class.contains('scenario'));
   }
 
   get resources() {
-    return this.children(filterBy.bind(this, {
-      element: 'resource'
-    }));
+    return this.filter(item => item.element === 'resource');
   }
 
   get copy() {
-    return this.children(filterBy.bind(this, {
-      element: 'copy'
-    }));
+    return this.filter(item => item.element === 'copy');
   }
 }
 

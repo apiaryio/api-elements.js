@@ -26,7 +26,7 @@
   "dependencies": {
     "apiary-blueprint-parser": "",
     "drafter": "^0.2.5",
-    "minim": "^0.3.0",
+    "minim": "^0.4.0",
     "robotskirt": "",
     "sanitizer": "",
     "underscore": ""
