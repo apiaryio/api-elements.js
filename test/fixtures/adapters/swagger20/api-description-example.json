@@ -1,0 +1,1228 @@
+{
+  "element": "category",
+  "meta": {
+    "class": [
+      "api"
+    ],
+    "title": "Swagger Sample App",
+    "description": "This is a sample server Petstore server.  You can find out more about Swagger \n    at <a href=\"http://swagger.wordnik.com\">http://swagger.wordnik.com</a> or on irc.freenode.net, #swagger.  For this sample,\n    you can use the api key \"special-key\" to test the authorization filters"
+  },
+  "attributes": {},
+  "content": [
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /pet"
+      },
+      "attributes": {
+        "href": "/pet"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Update an existing pet",
+            "title": "updatePet"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "PUT"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"$ref\":\"#/definitions/Pet\",\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "PUT"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"$ref\":\"#/definitions/Pet\",\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "404"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "PUT"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"$ref\":\"#/definitions/Pet\",\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "405"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /pet/findByStatus"
+      },
+      "attributes": {
+        "href": "/api/pet/findByStatus{?status}",
+        "hrefVariables": {
+          "element": "hrefVariables",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "attributes": {
+                "typeAttributes": [
+                  "required"
+                ]
+              },
+              "meta": {},
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "status"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": ""
+                }
+              }
+            }
+          ]
+        }
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Finds Pets by status",
+            "title": "findPetsByStatus"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /pet/findByTags"
+      },
+      "attributes": {
+        "href": "/api/pet/findByTags{?tags}",
+        "hrefVariables": {
+          "element": "hrefVariables",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "attributes": {
+                "typeAttributes": [
+                  "required"
+                ]
+              },
+              "meta": {},
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "tags"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": ""
+                }
+              }
+            }
+          ]
+        }
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Finds Pets by tags",
+            "title": "findPetsByTags"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /pet/{petId}"
+      },
+      "attributes": {
+        "href": "/pet/{petId}",
+        "hrefVariables": {
+          "element": "hrefVariables",
+          "meta": {},
+          "attributes": {},
+          "content": []
+        }
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Updates a pet in the store with form data",
+            "title": "updatePetWithForm"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "POST"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "405"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Find pet by ID",
+            "title": "getPetById"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "404"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Deletes a pet",
+            "title": "deletePet"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "DELETE"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "transition",
+          "meta": {
+            "description": "partial updates to a pet",
+            "title": "partialUpdate"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "PATCH"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"$ref\":\"#/definitions/Pet\",\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /pet/uploadImage"
+      },
+      "attributes": {
+        "href": "/pet/uploadImage"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "uploads an image",
+            "title": "uploadFile"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "POST"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "200"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /user/createWithArray"
+      },
+      "attributes": {
+        "href": "/user/createWithArray"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Creates list of users with given input array",
+            "title": "createUsersWithArrayInput"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "POST"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "200"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /user/createWithList"
+      },
+      "attributes": {
+        "href": "/user/createWithList"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Creates list of users with given list input",
+            "title": "createUsersWithListInput"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "POST"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "200"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /user/{username}"
+      },
+      "attributes": {
+        "href": "/user/{username}",
+        "hrefVariables": {
+          "element": "hrefVariables",
+          "meta": {},
+          "attributes": {},
+          "content": []
+        }
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Updated user",
+            "title": "updateUser"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "PUT"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"$ref\":\"#/definitions/User\",\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "PUT"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"$ref\":\"#/definitions/User\",\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "404"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Delete user",
+            "title": "deleteUser"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "DELETE"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "DELETE"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "404"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Get user by user name",
+            "title": "getUserByName"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "404"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /user/login"
+      },
+      "attributes": {
+        "href": "/api/user/login{?username,password}",
+        "hrefVariables": {
+          "element": "hrefVariables",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "attributes": {
+                "typeAttributes": [
+                  "required"
+                ]
+              },
+              "meta": {},
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "username"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": ""
+                }
+              }
+            },
+            {
+              "element": "member",
+              "attributes": {
+                "typeAttributes": [
+                  "required"
+                ]
+              },
+              "meta": {},
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "password"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": ""
+                }
+              }
+            }
+          ]
+        }
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Logs user into the system",
+            "title": "loginUser"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /user/logout"
+      },
+      "attributes": {
+        "href": "/user/logout"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Logs out current logged in user session",
+            "title": "logoutUser"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "200"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /user"
+      },
+      "attributes": {
+        "href": "/user"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Create user",
+            "title": "createUser"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "POST"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"$ref\":\"#/definitions/User\",\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "200"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /store/order"
+      },
+      "attributes": {
+        "href": "/store/order"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Place an order for a pet",
+            "title": "placeOrder"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "POST"
+                  },
+                  "content": [
+                    {
+                      "element": "asset",
+                      "meta": {
+                        "class": [
+                          "messageBodySchema"
+                        ]
+                      },
+                      "attributes": {
+                        "contentType": "application/schema+json"
+                      },
+                      "content": "{\"$ref\":\"#/definitions/Order\",\"definitions\":{\"Tag\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Pet\":{\"required\":[\"id\",\"name\"],\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\",\"description\":\"unique identifier for the pet\",\"minimum\":0,\"maximum\":100,\"default\":-1},\"category\":{\"$ref\":\"#/definitions/Category\"},\"name\":{\"type\":\"string\"},\"photoUrls\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"tags\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Tag\"}},\"status\":{\"type\":\"string\",\"description\":\"pet status in the store\",\"enum\":[\"available\",\"pending\",\"sold\"]}}},\"Category\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"name\":{\"type\":\"string\"}}},\"Animal\":{\"required\":[\"id\",\"type\"],\"properties\":{\"id\":{\"type\":\"long\"},\"type\":{\"type\":\"string\"}},\"discriminator\":\"type\"},\"Cat\":{\"required\":[\"likesMilk\"],\"properties\":{\"likesMilk\":{\"type\":\"boolean\"}},\"allOf\":[{\"$ref\":\"#/definitions/Animal\"}]},\"User\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"firstName\":{\"type\":\"string\"},\"username\":{\"type\":\"string\"},\"lastName\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"password\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userStatus\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"User Status\",\"enum\":[\"1-registered\",\"2-active\",\"3-closed\"]}}},\"Order\":{\"properties\":{\"id\":{\"type\":\"integer\",\"format\":\"int64\"},\"petId\":{\"type\":\"integer\",\"format\":\"int64\"},\"quantity\":{\"type\":\"integer\",\"format\":\"int32\"},\"status\":{\"type\":\"string\",\"description\":\"Order Status\",\"enum\":[\"placed\",\" approved\",\" delivered\"]},\"shipDate\":{\"type\":\"string\",\"format\":\"date-time\"}}}}}"
+                    }
+                  ]
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /store/order/{orderId}"
+      },
+      "attributes": {
+        "href": "/store/order/{orderId}",
+        "hrefVariables": {
+          "element": "hrefVariables",
+          "meta": {},
+          "attributes": {},
+          "content": []
+        }
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Delete purchase order by ID",
+            "title": "deleteOrder"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "DELETE"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "DELETE"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "404"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Find purchase order by ID",
+            "title": "getOrderById"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "400"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {
+                    "statusCode": "404"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -186,6 +186,11 @@ export class HttpRequest extends HttpMessagePayload {
 }
 
 export class HttpResponse extends HttpMessagePayload {
+  constructor(...args) {
+    super(...args);
+    this.element = 'httpResponse';
+  }
+
   get statusCode() {
     return this.attributes.statusCode;
   }
