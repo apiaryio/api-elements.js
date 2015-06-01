@@ -30,7 +30,7 @@ function indent(input, spaces) {
 }
 
 /*
- * Given a message payload, return true iff it only has a body defined and
+ * Given a message payload, return true if it only has a body defined and
  * optionally has a content-type and nothing else. This lets us know when to
  * use a shorthand syntax in the template.
  */
@@ -40,16 +40,11 @@ function bodyOnly(payload) {
   // First, we need to filter out the content-type header. This is handled
   // outside of the payload (e.g. `+ Response (application/json)`)
   if (payload.headers) {
-    headers = payload.headers.filter(
-      h => h.meta.name.toLowerCase() !== 'content-type');
+    headers = payload.headers.exclude('Content-Type');
   }
 
-  if (payload.messageBody && !(headers.length || payload.dataStructure ||
-                               payload.messageBodySchema)) {
-    return true;
-  }
-
-  return false;
+  return payload.messageBody && !(headers.length || payload.dataStructure ||
+                                  payload.messageBodySchema);
 }
 
 swig.setFilter('indent', indent);

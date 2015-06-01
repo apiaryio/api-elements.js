@@ -10,8 +10,11 @@ const refractedApi = [
       ['resource', {title: 'Frob', description: 'A frob does something.'}, {
         href: '/frobs/{id}',
         hrefVariables: ['hrefVariables', {}, {}, [
-            ['string', {name: 'id'}, {}, '']
-          ]]
+          ['member', {}, {}, {
+            'key': ['string', {}, {}, 'id'],
+            'value': ['string', {}, {}, '']
+          }]
+        ]]
         }, [
         ['dataStructure', {}, {}, [
           ['string', {name: 'id'}, {}, null],

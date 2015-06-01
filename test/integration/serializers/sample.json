@@ -5,7 +5,10 @@
       ["resource", {"title": "Frob", "description": "A frob does something."}, {
         "href": "/frobs/{id}",
         "hrefVariables": ["hrefVariables", {}, {}, [
-            ["string", {"name": "id", "description": "Unique identifier"}, {"typeAttributes": ["required"]}, ""]
+            ["member", {}, {}, {
+              "key": ["string", {}, {}, "id"],
+              "value": ["string", {"description": "Unique identifier"}, {"typeAttributes": ["required"]}, ""]
+            }]
           ]]
         }, [
         ["dataStructure", {}, {}, [

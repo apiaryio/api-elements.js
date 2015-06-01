@@ -19,13 +19,13 @@ export function filterBy(options, item) {
   if (options.element && item.element !== options.element) {
     return false;
   }
-  if (options.name && item.meta.name.toValue()) {
+  if (options.name && item.meta.name) {
     if (options.ignoreCase) {
-      if (item.meta.name.toValue().toLowerCase() !== options.name.toLowerCase()) {
+      if (item.meta.name.toLowerCase() !== options.name.toLowerCase()) {
         return false;
       }
     } else {
-      if (item.meta.name.toValue() !== options.name) {
+      if (item.meta.name !== options.name) {
         return false;
       }
     }

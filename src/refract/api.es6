@@ -31,19 +31,19 @@ import {filterBy} from './util';
  */
 class ApiBaseArray extends ArrayType {
   get title() {
-    return this.meta.title.toValue();
+    return this.meta.title && this.meta.title.toValue();
   }
 
   set title(value) {
-    this.meta.title.set(value);
+    this.meta.title = value;
   }
 
   get description() {
-    return this.meta.description.toValue();
+    return this.meta.description && this.meta.description.toValue();
   }
 
   set description(value) {
-    this.meta.description.set(value);
+    this.meta.description = value;
   }
 
   hasClass(name) {
@@ -52,7 +52,28 @@ class ApiBaseArray extends ArrayType {
   }
 }
 
-class HttpHeaders extends ApiBaseArray {}
+class HttpHeaders extends ApiBaseArray {
+  constructor(...args) {
+    super(...args);
+    this.element = 'httpHeaders';
+  }
+
+  exclude(name) {
+    return this.filter(item => {
+      let itemName = item.meta.getProperty('name');
+
+      if (!itemName) {
+        // This can't possibly match, so we include it in the results.
+        return true;
+      }
+
+      // Note: this may not be a string, hence the duck-type check below!
+      itemName = itemName.toValue();
+      return !(itemName.toLowerCase) || itemName.toLowerCase() !== name.toLowerCase();
+    });
+  }
+}
+
 class HrefVariables extends ObjectType {}
 
 export class Asset extends ElementType {

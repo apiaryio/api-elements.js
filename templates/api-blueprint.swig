@@ -9,13 +9,11 @@ FORMAT: 1A
 {% if example|bodyOnly %}
         {{ example.messageBody.content|indent(8) }}
 {% else %}
-  {% if example.headers && example.headers.length > 1 %}
+  {% if example.headers.exclude('Content-Type').length %}
     + Headers
 
-      {% for header in example.headers.content %}
-        {% if header.meta.name.toLowerCase() != 'content-type' %}
-            {{ header.meta.name }}: {{ header.content }}
-        {% endif %}
+      {% for header in example.headers.exclude('Content-Type').content %}
+            {{ header.meta.getProperty('name').content }}: {{ header.content }}
       {% endfor %}
 
   {% endif %}
@@ -42,8 +40,8 @@ FORMAT: 1A
 {% macro renderParameters(hrefVariables) %}
 + Parameters
 
-  {% for hrefVar in hrefVariables.content %}
-    + {{ hrefVar.meta.name }}{% if hrefVar.attributes.typeAttributes %} ({{ hrefVar.attributes.typeAttributes }}){% endif %}{% if hrefVar.meta.description %} - {{ hrefVar.meta.description }}{% endif %}
+  {% for item in hrefVariables.content %}
+    + {{ item.key.toValue() }}{% if item.value.attributes.typeAttributes %} ({{ item.value.attributes.typeAttributes }}){% endif %}{% if item.value.meta.description %} - {{ item.value.meta.description.toValue() }}{% endif %}
   {% endfor %}
 
 {% endmacro %}
