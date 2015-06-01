@@ -74,7 +74,12 @@ class HttpHeaders extends ApiBaseArray {
   }
 }
 
-class HrefVariables extends ObjectType {}
+class HrefVariables extends ObjectType {
+  constructor(...args) {
+    super(...args);
+    this.element = 'hrefVariables';
+  }
+}
 
 export class Asset extends ElementType {
   constructor(...args) {

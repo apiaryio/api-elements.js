@@ -41,7 +41,7 @@ FORMAT: 1A
 + Parameters
 
   {% for item in hrefVariables.content %}
-    + {{ item.key.toValue() }}{% if item.value.attributes.typeAttributes %} ({{ item.value.attributes.typeAttributes }}){% endif %}{% if item.value.meta.description %} - {{ item.value.meta.description.toValue() }}{% endif %}
+    + {{ item.key.toValue() }}{% if item.attributes.typeAttributes %} ({{ item.attributes.typeAttributes }}){% endif %}{% if item.value.meta.description.toValue() %} - {{ item.value.meta.description.toValue() }}{% endif %}
   {% endfor %}
 
 {% endmacro %}
@@ -93,8 +93,8 @@ FORMAT: 1A
 
 
 {% macro renderResource(resource) %}
-{% if resource.title %}
-### {{ resource.title }} [{{ resource.href }}]
+{% if !resource|resourceShorthand %}
+### {{ resource.title|default('Resource') }} [{{ resource.href }}]
 
 {{ resource.description }}
 {% endif %}
@@ -111,11 +111,10 @@ FORMAT: 1A
 
 
 {% macro renderGroup(group) %}
-{% if group.title || group.description %}
 ## Group {{ group.title }}
 
 {{ group.description }}
-{% endif %}
+
 {{ renderCategory(group) }}
 {% endmacro %}
 

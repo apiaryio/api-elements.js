@@ -47,8 +47,19 @@ function bodyOnly(payload) {
                                   payload.messageBodySchema);
 }
 
+/*
+ * Detect when it is okay to use a resource shorthand, i.e. skip the resource
+ * header and just do a single action with a URI.
+ */
+function resourceShorthand(resource) {
+  return (!resource.title && !resource.description &&
+          resource.transitions.length === 1 &&
+          resource.transitions.get(0).computedHref);
+}
+
 swig.setFilter('indent', indent);
 swig.setFilter('bodyOnly', bodyOnly);
+swig.setFilter('resourceShorthand', resourceShorthand);
 
 export const name = 'api-blueprint';
 export const mediaTypes = [
