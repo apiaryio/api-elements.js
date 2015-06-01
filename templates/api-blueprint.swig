@@ -66,11 +66,11 @@ FORMAT: 1A
 
 
 
-{% macro renderTransition(transition) %}
+{% macro renderTransition(transition, href) %}
 {% if transition.title %}
-#### {{ transition.title }} [{{ transition.transactions.get(0).request.method }}{% if transition.computedHref %} {{ transition.computedHref }}{% endif %}]
+#### {{ transition.title }} [{{ transition.transactions.get(0).request.method }}{% if href %} {{ href }}{% elseif transition.computedHref %} {{ transition.computedHref }}{% endif %}]
 {% else %}
-#### {{ transition.transactions.get(0).request.method }}{% if transition.computedHref %} {{ transition.computedHref }}{% endif %}
+#### {{ transition.transactions.get(0).request.method }}{% if href %} {{ href }}{% elseif transition.computedHref %} {{ transition.computedHref }}{% endif %}
 {% endif %}
 
 {{ transition.description }}
@@ -94,15 +94,22 @@ FORMAT: 1A
 
 {% macro renderResource(resource) %}
 {% if !resource|resourceShorthand %}
+{% set href = null %}
 ### {{ resource.title|default('Resource') }} [{{ resource.href }}]
 
 {{ resource.description }}
+{% else %}
+  {#
+    We are using the shorthand, make sure to pass any href down to the
+    transition layer.
+  #}
+  {% set href = resource.href %}
 {% endif %}
 {% if resource.hrefVariables.length %}
 {{ renderParameters(resource.hrefVariables) }}
 {% endif %}
 {% for transition in resource.transitions.content %}
-  {{ renderTransition(transition) }}
+  {{ renderTransition(transition, href) }}
 {% endfor %}
 {% endmacro %}
 
