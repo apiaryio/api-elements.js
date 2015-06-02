@@ -2,6 +2,7 @@ import {assert} from 'chai';
 import fury, {
   Fury, legacyBlueprintParser, legacyMarkdownRenderer
 } from '../../lib/fury';
+import minim from 'minim';
 
 const refractedApi = [
   'category', {'class': ['api'], title: 'My API', description: 'An API description.'}, {}, [
@@ -102,6 +103,17 @@ describe('Parser', () => {
     });
 
     it('should parse through autodetect', (done) => {
+      fury.parse({source: 'dummy'}, (err, api) => {
+        assert.equal(api.content, 'dummy');
+        done(err);
+      });
+    });
+
+    it('should parse when returning element instances', (done) => {
+      // Modify the parse method to return an element instance
+      fury.adapters[fury.adapters.length - 1].parse = ({source}, cb) =>
+        cb(null, new minim.StringType(source));
+
       fury.parse({source: 'dummy'}, (err, api) => {
         assert.equal(api.content, 'dummy');
         done(err);
