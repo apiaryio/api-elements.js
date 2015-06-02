@@ -57,9 +57,29 @@ function resourceShorthand(resource) {
           resource.transitions.get(0).computedHref);
 }
 
+/*
+ * Attempt to print out a pretty version of some input. Currently supported
+ * inputs include:
+ *
+ * - JSON
+ *
+ */
+function pretty(input) {
+  let prettified;
+
+  try {
+    prettified = JSON.stringify(JSON.parse(input), null, 2);
+  } catch (err) {
+    prettified = input;
+  }
+
+  return prettified;
+}
+
 swig.setFilter('indent', indent);
 swig.setFilter('bodyOnly', bodyOnly);
 swig.setFilter('resourceShorthand', resourceShorthand);
+swig.setFilter('pretty', pretty);
 
 export const name = 'api-blueprint';
 export const mediaTypes = [
