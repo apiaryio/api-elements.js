@@ -1,0 +1,50 @@
+FORMAT: 1A
+
+# My API
+
+An API description.
+
+## Group My Group
+
+This is a group of resources
+
+Extra text
+
+### Frob [/frobs/{id}]
+
+A frob does something.
+
++ Parameters
+
+    + id (required) - Unique identifier
+
+#### GET
+
++ Relation: Frob
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Authorization: Bearer abc123
+
+    + Body
+
+            {
+              "id": "1",
+              "tag": "foo"
+            }
+
+    + Schema
+
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+            }

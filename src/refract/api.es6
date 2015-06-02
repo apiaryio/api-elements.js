@@ -31,24 +31,55 @@ import {filterBy} from './util';
  */
 class ApiBaseArray extends ArrayType {
   get title() {
-    return this.meta.title.toValue();
+    return this.meta.title && this.meta.title.toValue();
   }
 
   set title(value) {
-    this.meta.title.set(value);
+    this.meta.title = value;
   }
 
   get description() {
-    return this.meta.description.toValue();
+    return this.meta.description && this.meta.description.toValue();
   }
 
   set description(value) {
-    this.meta.description.set(value);
+    this.meta.description = value;
+  }
+
+  hasClass(name) {
+    return this.meta && this.meta.class && this.meta.class.indexOf &&
+           this.meta.class.indexOf(name) !== -1;
   }
 }
 
-class HttpHeaders extends ApiBaseArray {}
-class HrefVariables extends ObjectType {}
+class HttpHeaders extends ApiBaseArray {
+  constructor(...args) {
+    super(...args);
+    this.element = 'httpHeaders';
+  }
+
+  exclude(name) {
+    return this.filter(item => {
+      let itemName = item.meta.getProperty('name');
+
+      if (!itemName) {
+        // This can't possibly match, so we include it in the results.
+        return true;
+      }
+
+      // Note: this may not be a string, hence the duck-type check below!
+      itemName = itemName.toValue();
+      return !(itemName.toLowerCase) || itemName.toLowerCase() !== name.toLowerCase();
+    });
+  }
+}
+
+class HrefVariables extends ObjectType {
+  constructor(...args) {
+    super(...args);
+    this.element = 'hrefVariables';
+  }
+}
 
 export class Asset extends ElementType {
   constructor(...args) {
@@ -89,11 +120,25 @@ class HttpMessagePayload extends ApiBaseArray {
   }
 
   header(name) {
-    const header = this.attributes.headers.content.filter(filterBy.bind(this, {
-      name,
-      ignoreCase: true
-    }))[0];
+    const headers = this.attributes.headers;
+    let header = null;
+
+    if (headers) {
+      header = headers.content.filter(filterBy.bind(this, {
+        name,
+        ignoreCase: true
+      }))[0];
+    }
+
     return header ? header.content : header;
+  }
+
+  get contentType() {
+    if (this.header('Content-Type')) {
+      return this.header('Content-Type');
+    }
+
+    return this.content && this.content.contentType;
   }
 
   get dataStructure() {
@@ -187,6 +232,14 @@ export class Transition extends ApiBaseArray {
 
   set href(value) {
     this.attributes.href = value;
+  }
+
+  get computedHref() {
+    try {
+      return this.href ? this.href : this.transactions.get(0).request.href;
+    } catch (err) {
+      return null;
+    }
   }
 
   get parameters() {
