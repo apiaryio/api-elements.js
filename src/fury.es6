@@ -69,7 +69,11 @@ class Fury {
       adapter.parse({source, generateSourceMap}, (err, elements) => {
         if (err) { return done(err); }
 
-        done(null, this.load(elements));
+        if (elements instanceof minim.ElementType) {
+          done(null, elements);
+        } else {
+          done(null, this.load(elements));
+        }
       });
     } else {
       done(new Error('Document did not match any registered adapter!'));
