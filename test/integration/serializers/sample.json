@@ -23,7 +23,7 @@
               ["string", {"name": "Authorization"}, {}, "Bearer abc123"]
             ]]}, [
               ["asset", {"class": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tag\": \"foo\"\n}\n"],
-              ["asset", {"class": ["messageBodySchema"]}, {}, "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"tag\": {\n      \"type\": \"string\"\n    }\n  }\n}"]
+              ["asset", {"class": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tag\": {      \"type\": \"string\"}}}"]
             ]]
           ]]
         ]]

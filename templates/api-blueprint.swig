@@ -20,13 +20,13 @@ FORMAT: 1A
   {% if example.messageBody %}
     + Body
 
-            {{ example.messageBody.content|indent(12) }}
+            {{ example.messageBody.content|pretty|indent(12) }}
 
   {% endif %}
   {% if example.messageBodySchema %}
     + Schema
 
-            {{ example.messageBodySchema.content|indent(12) }}
+            {{ example.messageBodySchema.content|pretty|indent(12) }}
 
   {% endif %}
 {% endif %}
