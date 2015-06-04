@@ -17,6 +17,9 @@ FORMAT: 1A
       {% endfor %}
 
   {% endif %}
+  {% if example.dataStructure %}
+    {{ example.dataStructure|mson|indent(4) }}
+  {% endif %}
   {% if example.messageBody %}
     + Body
 
@@ -108,6 +111,9 @@ FORMAT: 1A
 {% if resource.hrefVariables.length %}
 {{ renderParameters(resource.hrefVariables) }}
 {% endif %}
+{% if resource.dataStructure %}
+{{ resource.dataStructure|mson }}
+{% endif %}
 {% for transition in resource.transitions.content %}
   {{ renderTransition(transition, href) }}
 {% endfor %}
@@ -129,14 +135,30 @@ FORMAT: 1A
 
 
 
+{% macro renderDataStructures(dataStructures) %}
+## Data Structures
+
+{% for dataStructure in dataStructures.content %}
+{{ dataStructure|mson }}
+{% endfor %}
+{% endmacro %}
+
+
+
+
+
+
 {% macro renderCategory(category) %}
   {# Categories can contain copy (text) elements, other categories, and resources #}
   {% for item in category.content %}
     {% if item.element === 'copy' %}
 {{ item.content }}
     {% endif %}
-    {% if item.element === 'category' && item.meta.class.indexOf('resourceGroup') !== -1 %}
+    {% if item.element === 'category' && item.meta.class.contains('resourceGroup') %}
       {{ renderGroup(item) }}
+    {% endif %}
+    {% if item.element === 'category' && item.meta.class.contains('dataStructure') %}
+      {{ renderDataStructures(item) }}
     {% endif %}
     {% if item.element === 'resource' %}
       {{ renderResource(item) }}

@@ -1,4 +1,5 @@
 import Drafter from 'drafter';
+import mson from './mson';
 import path from 'path';
 import swig from 'swig';
 
@@ -76,6 +77,7 @@ function pretty(input) {
   return prettified;
 }
 
+swig.setFilter('mson', mson);
 swig.setFilter('indent', indent);
 swig.setFilter('bodyOnly', bodyOnly);
 swig.setFilter('resourceShorthand', resourceShorthand);

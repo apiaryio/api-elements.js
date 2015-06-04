@@ -357,4 +357,5 @@ registry
   .register('hrefVariables', HrefVariables)
   .register('asset', Asset)
   .register('httpRequest', HttpRequest)
-  .register('httpResponse', HttpResponse);
+  .register('httpResponse', HttpResponse)
+  .register('dataStructure', DataStructure);
