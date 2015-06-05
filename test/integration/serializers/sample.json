@@ -19,14 +19,14 @@
           ["member", {}, {}, {
             "key": ["string", {}, {}, "tags"],
             "value": ["array", {}, {}, [
-                ["object", {}, {}, [
-                  ["member", {}, {"typeAttributes": ["required"]}, {
+                ["object", {"description": "Describes a tag.\n\nEach tag has a name and a number of times it was used."}, {}, [
+                  ["member", {"description": "Tag name."}, {"typeAttributes": ["required"]}, {
                     "key": ["string", {}, {}, "name"],
                     "value": ["string", {}, {}, null]
                   }],
-                  ["member", {}, {}, {
+                  ["member", {"description": "I am some long content.\n\n- one\n- two\n"}, {}, {
                     "key": ["string", {}, {}, "count"],
-                    "value": ["number", {}, {}, 23]
+                    "value": ["number", {}, {"default": 1}, 23]
                   }]
                 ]]
             ]]

@@ -4,8 +4,9 @@
 
 /*
  * Indent a piece of multiline text by a number of spaces.
+ * Setting `first` to `true` will also indent the first line.
  */
-function indent(input, spaces) {
+function indent(input, spaces, options={first: false}) {
    let pre = '';
    let lines = [];
 
@@ -18,7 +19,13 @@ function indent(input, spaces) {
      lines.push(line ? pre + line : line);
    }
 
-   return lines.join('\n').trim();
+   lines = lines.join('\n').trim();
+
+   if (options.first) {
+     lines = pre + lines;
+   }
+
+   return lines;
  }
 
 /*
@@ -66,16 +73,41 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
     str += ` (${attributes.join(', ')})`;
   }
 
-  // Finally, an optional description
-  if (attributesElement.attributes &&
-      attributesElement.attributes.description) {
-    // TODO: Handle multiline or very long descriptions
-    str += ` - ${attributesElement.attributes.description}`;
+  // This flag determines when to use a block description within a list entry
+  // instead of just ending the list entry line with the description. This
+  // means that some other special values like `+ Properties` will get used
+  // later during rendering.
+  let useLongDescription = false;
+  if (element.attributes &&
+      element.attributes.default !== undefined ||
+      element.attributes.sample !== undefined) {
+    useLongDescription = true;
   }
 
-  // TODO: Handle default, sample, and other special array items here,
-  //       keeping in mind that they force extra indentation below as well
-  //       as the use of special values like `+ Properties`.
+  // Finally, an optional description
+  let description = attributesElement.meta.description.toValue();
+  if (description) {
+    if (description.indexOf('\n') !== -1) {
+      // Multiline description, so we can't use the short form!
+      useLongDescription = true;
+    }
+
+    if (useLongDescription) {
+      str += `\n${description}`;
+    } else {
+      str += ` - ${description}`;
+    }
+  }
+
+  // Handle special list items like default/sample here as they are part
+  // of the description, before the content (sub-elements) are rendere.
+  if (element.attributes.default !== undefined) {
+    str += `\n+ Default: ${element.attributes.default}\n`;
+  }
+
+  if (element.attributes.sample !== undefined) {
+    str += `\n+ Sample: ${element.attributes.sample}\n`;
+  }
 
   // Now, depending on the content type, we will recursively handle child
   // elements within objects and arrays.
@@ -86,12 +118,15 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
       str += '\n';
     }
 
+    let renderedContent = '';
+    let objectLike = null;
     for (let item of element.content) {
       // Note: the `initialIndent` option above works because we specifically
       //       do *not* pass it down the rabbit hole here.
       if (item.element === 'member') {
         // This is an object type or something similar.
-        str += handle(item.key.content, item.value, {
+        objectLike = true;
+        renderedContent += handle(item.key.content, item.value, {
           parent: element,
           spaces,
           marker,
@@ -99,12 +134,26 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
         });
       } else {
         // This is an array type or something similar.
-        str += handle(item.meta.title.toValue(), item, {
+        objectLike = false;
+        renderedContent += handle(item.meta.title.toValue(), item, {
           parent: element,
           spaces,
           marker
         });
       }
+    }
+
+    if (!useLongDescription) {
+      str += renderedContent;
+    } else if (renderedContent.length) {
+      // There is rendered content
+      if (objectLike) {
+        str += `\n+ Properties\n`;
+      } else {
+        str += `\n+ Items\n`;
+      }
+
+      str += indent(renderedContent, spaces, {first: true});
     }
   }
 
