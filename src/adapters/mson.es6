@@ -42,6 +42,50 @@ function getTypeAttributes(element, attributes={}) {
   return typeAttributes.concat(attributes.typeAttributes || []);
 }
 
+function handleContent(element, spaces, marker) {
+  let renderedContent = '';
+  let objectLike = null;
+
+  if (element.content === undefined) {
+    return [renderedContent, objectLike];
+  }
+
+  for (let item of element.content) {
+    // Note: the `initialIndent` option above works because we specifically
+    //       do *not* pass it down the rabbit hole here.
+    if (item.element === 'member') {
+      // This is an object type or something similar.
+      objectLike = true;
+      /* eslint-disable block-scoped-var */
+      renderedContent += handle(item.key.content, item.value, {
+        parent: element,
+        spaces,
+        marker,
+        attributesElement: item
+      });
+      /* eslint-enable block-scoped-var */
+    } else if (item.element === 'ref') {
+      renderedContent += `${marker} Include ${item.content.href}\n`;
+    } else if (item.element === 'select') {
+      // This is a `OneOf` mutually exclusive type. Currently not
+      // supported as it needs some support upstream in Minim.
+      console.warn('MSON select/option elements are not yet supported!');
+    } else {
+      // This is an array type or something similar.
+      objectLike = false;
+      /* eslint-disable block-scoped-var */
+      renderedContent += handle(item.meta.title.toValue(), item, {
+        parent: element,
+        spaces,
+        marker
+      });
+      /* eslint-enable block-scoped-var */
+    }
+  }
+
+  return [renderedContent, objectLike];
+}
+
 /*
  * Handle the rendering of an element based on its element type. This function
  * will call itself recursively to handle child elements for objects and
@@ -102,11 +146,11 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
   // Handle special list items like default/sample here as they are part
   // of the description, before the content (sub-elements) are rendere.
   if (element.attributes.default !== undefined) {
-    str += `\n+ Default: ${element.attributes.default}\n`;
+    str += `\n${marker} Default: ${element.attributes.default}\n`;
   }
 
   if (element.attributes.sample !== undefined) {
-    str += `\n+ Sample: ${element.attributes.sample}\n`;
+    str += `\n${marker} Sample: ${element.attributes.sample}\n`;
   }
 
   // Now, depending on the content type, we will recursively handle child
@@ -118,39 +162,16 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
       str += '\n';
     }
 
-    let renderedContent = '';
-    let objectLike = null;
-    for (let item of element.content) {
-      // Note: the `initialIndent` option above works because we specifically
-      //       do *not* pass it down the rabbit hole here.
-      if (item.element === 'member') {
-        // This is an object type or something similar.
-        objectLike = true;
-        renderedContent += handle(item.key.content, item.value, {
-          parent: element,
-          spaces,
-          marker,
-          attributesElement: item
-        });
-      } else {
-        // This is an array type or something similar.
-        objectLike = false;
-        renderedContent += handle(item.meta.title.toValue(), item, {
-          parent: element,
-          spaces,
-          marker
-        });
-      }
-    }
+    let [renderedContent, objectLike] = handleContent(element, spaces, marker);
 
     if (!useLongDescription) {
       str += renderedContent;
     } else if (renderedContent.length) {
       // There is rendered content
       if (objectLike) {
-        str += `\n+ Properties\n`;
+        str += `\n${marker} Properties\n`;
       } else {
-        str += `\n+ Items\n`;
+        str += `\n${marker} Items\n`;
       }
 
       str += indent(renderedContent, spaces, {first: true});
