@@ -42,6 +42,10 @@ function getTypeAttributes(element, attributes={}) {
   return typeAttributes.concat(attributes.typeAttributes || []);
 }
 
+/*
+ * Handle any element content, e.g. list items, object members, etc.
+ * Note, this recursively calls the `handle` method.
+ */
 function handleContent(element, spaces, marker) {
   let renderedContent = '';
   let objectLike = null;
@@ -87,35 +91,12 @@ function handleContent(element, spaces, marker) {
 }
 
 /*
- * Handle the rendering of an element based on its element type. This function
- * will call itself recursively to handle child elements for objects and
- * arrays.
+ * Handle the description and any element content, including support
+ * for both inline and long-form descriptions.
  */
-function handle(name, element, {parent=null, spaces=4, marker='+',
-                                initialMarker='+',
-                                initialIndent=true,
-                                attributesElement=element}) {
+function handleDescription(description, element, spaces, marker) {
   const elementName = element.element;
-  let str = initialMarker;
-
-  // Start with the item name if it has one.
-  if (name) {
-    str += ` ${name}`;
-  }
-
-  // Next, comes the optional example value
-  if (typeof element.content !== 'object') {
-    if (parent && parent.element !== 'array') {
-      str += ':';
-    }
-    str += ` ${element.content}`;
-  }
-
-  // Then the type and attribute information (e.g. required)
-  let attributes = getTypeAttributes(element, attributesElement.attributes);
-  if (attributes.length) {
-    str += ` (${attributes.join(', ')})`;
-  }
+  let str = '';
 
   // This flag determines when to use a block description within a list entry
   // instead of just ending the list entry line with the description. This
@@ -129,7 +110,6 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
   }
 
   // Finally, an optional description
-  let description = attributesElement.meta.description.toValue();
   if (description) {
     if (description.indexOf('\n') !== -1) {
       // Multiline description, so we can't use the short form!
@@ -170,6 +150,10 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
       // There is rendered content
       if (objectLike) {
         str += `\n${marker} Properties\n`;
+      } else if (elementName === 'enum') {
+        // An enum is a special case where the content is a list
+        // but you use `Members` rather than `Items`.
+        str += `\n${marker} Members\n`;
       } else {
         str += `\n${marker} Items\n`;
       }
@@ -177,6 +161,42 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
       str += indent(renderedContent, spaces, {first: true});
     }
   }
+
+  return str;
+}
+
+/*
+ * Handle the rendering of an element based on its element type. This function
+ * will call itself recursively to handle child elements for objects and
+ * arrays.
+ */
+function handle(name, element, {parent=null, spaces=4, marker='+',
+                                initialMarker='+',
+                                initialIndent=true,
+                                attributesElement=element}) {
+  let str = initialMarker;
+
+  // Start with the item name if it has one.
+  if (name) {
+    str += ` ${name}`;
+  }
+
+  // Next, comes the optional example value
+  if (typeof element.content !== 'object') {
+    if (parent && parent.element !== 'array') {
+      str += ':';
+    }
+    str += ` ${element.content}`;
+  }
+
+  // Then the type and attribute information (e.g. required)
+  let attributes = getTypeAttributes(element, attributesElement.attributes);
+  if (attributes.length) {
+    str += ` (${attributes.join(', ')})`;
+  }
+
+  str += handleDescription(attributesElement.meta.description.toValue(),
+                           element, spaces, marker);
 
   // Return the entire block indented to the correct number of spaces.
   if (initialIndent) {
