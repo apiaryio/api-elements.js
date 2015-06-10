@@ -18,6 +18,25 @@ A frob does something.
 
     + id (required) - Unique identifier
 
++ Attributes
+
+    + id (required)
+    + tags (array)
+        + (object)
+            Describes a tag.
+
+            Each tag has a name and a number of times it was used.
+
+            + Properties
+                + name (required) - Tag name.
+                + count: 23 (number)
+                    I am some long content.
+
+                    - one
+                    - two
+
+                    + Default: 1
+
 #### GET
 
 + Relation: Frob
@@ -32,7 +51,12 @@ A frob does something.
 
             {
               "id": "1",
-              "tag": "foo"
+              "tags": [
+                {
+                  "name": "foo",
+                  "count": 23
+                }
+              ]
             }
 
     + Schema
@@ -43,8 +67,14 @@ A frob does something.
                 "id": {
                   "type": "string"
                 },
-                "tag": {
-                  "type": "string"
+                "tags": {
+                  "type": "array"
                 }
               }
             }
+
+## Data Structures
+
+### User
+
++ name (required)

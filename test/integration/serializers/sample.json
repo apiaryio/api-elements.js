@@ -12,8 +12,25 @@
           ]]
         }, [
         ["dataStructure", {}, {}, [
-          ["string", {"name": "id"}, {}, null],
-          ["string", {"name": "tag"}, {}, null]
+          ["member", {}, {"typeAttributes": ["required"]}, {
+            "key": ["string", {}, {}, "id"],
+            "value": ["string", {}, {}, null]
+          }],
+          ["member", {}, {}, {
+            "key": ["string", {}, {}, "tags"],
+            "value": ["array", {}, {}, [
+                ["object", {"description": "Describes a tag.\n\nEach tag has a name and a number of times it was used."}, {}, [
+                  ["member", {"description": "Tag name."}, {"typeAttributes": ["required"]}, {
+                    "key": ["string", {}, {}, "name"],
+                    "value": ["string", {}, {}, null]
+                  }],
+                  ["member", {"description": "I am some long content.\n\n- one\n- two\n"}, {}, {
+                    "key": ["string", {}, {}, "count"],
+                    "value": ["number", {}, {"default": 1}, 23]
+                  }]
+                ]]
+            ]]
+          }]
         ]],
         ["transition", {}, {"relation": "Frob"}, [
           ["httpTransaction", {"title": "Get a frob", "description": "Gets information about a single frob instance"}, {}, [
@@ -22,11 +39,19 @@
               ["string", {"name": "Content-Type"}, {}, "application/json"],
               ["string", {"name": "Authorization"}, {}, "Bearer abc123"]
             ]]}, [
-              ["asset", {"class": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tag\": \"foo\"\n}\n"],
-              ["asset", {"class": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tag\": {      \"type\": \"string\"}}}"]
+              ["asset", {"class": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tags\": [\n    {\n      \"name\": \"foo\",\n      \"count\": 23\n    }\n  ]\n}\n"],
+              ["asset", {"class": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tags\": {      \"type\": \"array\"}}}"]
             ]]
           ]]
         ]]
+      ]]
+    ]],
+    ["category", {"class": ["dataStructure"]}, {}, [
+      ["dataStructure", {"title": "User"}, {}, [
+        ["member", {}, {"typeAttributes": ["required"]}, {
+          "key": ["string", {}, {}, "name"],
+          "value": ["string", {}, {}, null]
+        }]
       ]]
     ]]
   ]
