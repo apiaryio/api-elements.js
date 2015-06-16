@@ -13,10 +13,26 @@
         },
         "termsOfService": "http://helloreverb.com/terms/"
     },
+    "tags": [
+    {
+        "description": "Operations about pets",
+        "name": "pet"
+    },
+    {
+        "description": "Operations about user",
+        "name": "user"
+    },
+    {
+        "description": "Operations about store",
+        "name": "store"
+    }],
     "paths": {
         "/pet": {
             "put": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified"
+                    },
                     "400": {
                         "description": "Invalid ID supplied"
                     },
@@ -30,6 +46,9 @@
                 "description": "",
                 "summary": "Update an existing pet",
                 "operationId": "updatePet",
+                "tags": [
+                    "pet"
+                ],
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -52,6 +71,15 @@
         "/pet/findByStatus": {
             "get": {
                 "responses": {
+                    "200": {
+                      "description": "No response was specified",
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/Pet"
+                        }
+                      }
+                    },
                     "400": {
                         "description": "Invalid status value"
                     }
@@ -59,6 +87,9 @@
                 "description": "",
                 "summary": "Finds Pets by status",
                 "operationId": "findPetsByStatus",
+                "tags": [
+                    "pet"
+                ],
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -79,6 +110,15 @@
         "/pet/findByTags": {
             "get": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/Pet"
+                          }
+                        }
+                    },
                     "400": {
                         "description": "Invalid tag value"
                     }
@@ -86,6 +126,9 @@
                 "description": "",
                 "summary": "Finds Pets by tags",
                 "operationId": "findPetsByTags",
+                "tags": [
+                    "pet"
+                ],
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -106,6 +149,9 @@
         "/pet/{petId}": {
             "post": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified"
+                    },
                     "405": {
                         "description": "Invalid input"
                     }
@@ -113,6 +159,9 @@
                 "description": "",
                 "summary": "Updates a pet in the store with form data",
                 "operationId": "updatePetWithForm",
+                "tags": [
+                    "pet"
+                ],
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -145,6 +194,12 @@
             },
             "get": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    },
                     "400": {
                         "description": "Invalid ID supplied"
                     },
@@ -155,6 +210,9 @@
                 "description": "",
                 "summary": "Find pet by ID",
                 "operationId": "getPetById",
+                "tags": [
+                    "pet"
+                ],
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -168,7 +226,7 @@
                         "name": "petId",
                         "required": true,
                         "type": "integer",
-                        "default": -1,
+                        "default": 1,
                         "maximum": 100000,
                         "minimum": 1
                     }
@@ -176,6 +234,9 @@
             },
             "delete": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified"
+                    },
                     "400": {
                         "description": "Invalid pet value"
                     }
@@ -183,6 +244,9 @@
                 "description": "",
                 "summary": "Deletes a pet",
                 "operationId": "deletePet",
+                "tags": [
+                    "pet"
+                ],
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -201,6 +265,15 @@
             },
             "patch": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/Pet"
+                          }
+                        }
+                    },
                     "400": {
                         "description": "Invalid tag value"
                     }
@@ -208,6 +281,9 @@
                 "description": "",
                 "summary": "partial updates to a pet",
                 "operationId": "partialUpdate",
+                "tags": [
+                    "pet"
+                ],
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -244,6 +320,9 @@
                 "description": "",
                 "summary": "uploads an image",
                 "operationId": "uploadFile",
+                "tags": [
+                    "pet"
+                ],
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -278,6 +357,9 @@
                 "description": "",
                 "summary": "Creates list of users with given input array",
                 "operationId": "createUsersWithArrayInput",
+                "tags": [
+                    "user"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -287,9 +369,11 @@
                         "description": "List of user object",
                         "name": "body",
                         "required": true,
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/User"
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                              "$ref": "#/definitions/User"
+                          }
                         }
                     }
                 ]
@@ -305,6 +389,9 @@
                 "description": "",
                 "summary": "Creates list of users with given list input",
                 "operationId": "createUsersWithListInput",
+                "tags": [
+                    "user"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -314,9 +401,11 @@
                         "description": "List of user object",
                         "name": "body",
                         "required": true,
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/User"
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                              "$ref": "#/definitions/User"
+                          }
                         }
                     }
                 ]
@@ -325,6 +414,9 @@
         "/user/{username}": {
             "put": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified"
+                    },
                     "400": {
                         "description": "Invalid username supplied"
                     },
@@ -335,6 +427,9 @@
                 "description": "",
                 "summary": "Updated user",
                 "operationId": "updateUser",
+                "tags": [
+                    "user"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -359,6 +454,9 @@
             },
             "delete": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified"
+                    },
                     "400": {
                         "description": "Invalid username supplied"
                     },
@@ -369,6 +467,9 @@
                 "description": "",
                 "summary": "Delete user",
                 "operationId": "deleteUser",
+                "tags": [
+                    "user"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -384,6 +485,12 @@
             },
             "get": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                          "$ref": "#/definitions/User"
+                        }
+                    },
                     "400": {
                         "description": "Invalid username supplied"
                     },
@@ -394,6 +501,9 @@
                 "description": "",
                 "summary": "Get user by user name",
                 "operationId": "getUserByName",
+                "tags": [
+                    "user"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -411,6 +521,12 @@
         "/user/login": {
             "get": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                          "type": "string"
+                        }
+                    },
                     "400": {
                         "description": "Invalid username and password combination"
                     }
@@ -418,6 +534,9 @@
                 "description": "",
                 "summary": "Logs user into the system",
                 "operationId": "loginUser",
+                "tags": [
+                    "user"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -449,6 +568,9 @@
                 "description": "",
                 "summary": "Logs out current logged in user session",
                 "operationId": "logoutUser",
+                "tags": [
+                    "user"
+                ],
                 "produces": [
                     "application/json"
                 ]
@@ -464,6 +586,9 @@
                 "description": "",
                 "summary": "Create user",
                 "operationId": "createUser",
+                "tags": [
+                    "user"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -483,6 +608,9 @@
         "/store/order": {
             "post": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified"
+                    },
                     "400": {
                         "description": "Invalid order"
                     }
@@ -490,6 +618,9 @@
                 "description": "",
                 "summary": "Place an order for a pet",
                 "operationId": "placeOrder",
+                "tags": [
+                    "store"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -509,6 +640,9 @@
         "/store/order/{orderId}": {
             "delete": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified"
+                    },
                     "400": {
                         "description": "Invalid ID supplied"
                     },
@@ -519,6 +653,9 @@
                 "description": "",
                 "summary": "Delete purchase order by ID",
                 "operationId": "deleteOrder",
+                "tags": [
+                    "store"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -534,6 +671,12 @@
             },
             "get": {
                 "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    },
                     "400": {
                         "description": "Invalid ID supplied"
                     },
@@ -544,6 +687,9 @@
                 "description": "",
                 "summary": "Find purchase order by ID",
                 "operationId": "getOrderById",
+                "tags": [
+                    "store"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -609,7 +755,7 @@
                     "description": "unique identifier for the pet",
                     "minimum": 0,
                     "maximum": 100,
-                    "default": -1
+                    "default": 1
                 },
                 "category": {
                     "$ref": "#/definitions/Category"
@@ -658,7 +804,7 @@
             ],
             "properties": {
                 "id": {
-                    "type": "long"
+                    "type": "integer"
                 },
                 "type": {
                     "type": "string"
@@ -667,17 +813,19 @@
             "discriminator": "type"
         },
         "Cat": {
-            "required": [
-                "likesMilk"
-            ],
-            "properties": {
-                "likesMilk": {
-                    "type": "boolean"
-                }
-            },
             "allOf": [
                 {
                     "$ref": "#/definitions/Animal"
+                },
+                {
+                    "required": [
+                        "likesMilk"
+                    ],
+                    "properties": {
+                        "likesMilk": {
+                            "type": "boolean"
+                        }
+                    }
                 }
             ]
         },
