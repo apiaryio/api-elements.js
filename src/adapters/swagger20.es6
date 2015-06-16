@@ -1,6 +1,6 @@
 import _ from 'underscore';
 
-import { registry, MemberType } from 'minim';
+import { registry, MemberType, BooleanType, NumberType, StringType } from 'minim';
 import '../refract/api';
 
 // Define API Description elements
@@ -79,27 +79,42 @@ export function parse({ source }, done) {
         resource.attributes.href = href;
       }
 
-      // For each uriParameter, create an hrefVariable
-      if (uriParameters.length > 0) {
-        resource.hrefVariables = new HrefVariables();
-
-        _.each(queryParameters, (parameter) => {
-          // TODO: allow for multiple types
-          // Currently only allows for strings
-          let member = new MemberType(parameter.name, '');
-          resource.hrefVariables.content.push(member);
-
-          if (parameter.required) {
-            member.attributes.typeAttributes = ['required'];
-          }
-        });
-      }
-
       let transition = new Transition();
       resource.content.push(transition);
 
       transition.meta.description.set(methodValue.summary);
       transition.meta.title.set(methodValue.operationId);
+
+      // For each uriParameter, create an hrefVariable
+      if (uriParameters.length > 0) {
+        transition.parameters = new HrefVariables();
+
+        _.each(uriParameters, (parameter) => {
+          let memberValue;
+
+          // Convert from Swagger types to Minim elements
+          if (parameter.type === 'string') {
+            memberValue = new StringType('');
+          } else if (parameter.type === 'integer' || parameter.type === 'number') {
+            memberValue = new NumberType();
+          } else if (parameter.type === 'boolean') {
+            memberValue = new BooleanType();
+          }
+
+          // TODO: Update when Minim has better support for elements as values
+          // should be: new MemberType(parameter.name, memberValue);
+          let member = new MemberType(parameter.name);
+          member.content.value = memberValue;
+
+          member.meta.description = parameter.description;
+
+          if (parameter.required) {
+            member.attributes.typeAttributes = ['required'];
+          }
+
+          transition.parameters.content.push(member);
+        });
+      }
 
       let schemaAsset;
 
