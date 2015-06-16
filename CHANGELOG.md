@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Better parameter support for Swagger parser. (#26)
+
 ## 0.8.0 - 12 June 2015
 
 - Expose a new [Refract][]-based interface through `fury.parse`, `fury.load`,
