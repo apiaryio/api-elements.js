@@ -144,37 +144,7 @@
         "title": "Resource /pet/findByStatus"
       },
       "attributes": {
-        "href": "/api/pet/findByStatus{?status}",
-        "hrefVariables": {
-          "element": "hrefVariables",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "attributes": {
-                "typeAttributes": [
-                  "required"
-                ]
-              },
-              "meta": {},
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "status"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": ""
-                }
-              }
-            }
-          ]
-        }
+        "href": "/api/pet/findByStatus{?status}"
       },
       "content": [
         {
@@ -183,7 +153,40 @@
             "description": "Finds Pets by status",
             "title": "findPetsByStatus"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "Status values that need to be considered for filter"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "status"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -218,37 +221,7 @@
         "title": "Resource /pet/findByTags"
       },
       "attributes": {
-        "href": "/api/pet/findByTags{?tags}",
-        "hrefVariables": {
-          "element": "hrefVariables",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "attributes": {
-                "typeAttributes": [
-                  "required"
-                ]
-              },
-              "meta": {},
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "tags"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": ""
-                }
-              }
-            }
-          ]
-        }
+        "href": "/api/pet/findByTags{?tags}"
       },
       "content": [
         {
@@ -257,7 +230,40 @@
             "description": "Finds Pets by tags",
             "title": "findPetsByTags"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "Tags to filter by"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "tags"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -292,13 +298,7 @@
         "title": "Resource /pet/{petId}"
       },
       "attributes": {
-        "href": "/pet/{petId}",
-        "hrefVariables": {
-          "element": "hrefVariables",
-          "meta": {},
-          "attributes": {},
-          "content": []
-        }
+        "href": "/pet/{petId}"
       },
       "content": [
         {
@@ -307,7 +307,40 @@
             "description": "Updates a pet in the store with form data",
             "title": "updatePetWithForm"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "ID of pet that needs to be updated"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "petId"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -340,7 +373,40 @@
             "description": "Find pet by ID",
             "title": "getPetById"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "ID of pet that needs to be fetched"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "petId"
+                    },
+                    "value": {
+                      "element": "number",
+                      "meta": {},
+                      "attributes": {},
+                      "content": null
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -396,7 +462,40 @@
             "description": "Deletes a pet",
             "title": "deletePet"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "Pet id to delete"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "petId"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -429,7 +528,40 @@
             "description": "partial updates to a pet",
             "title": "partialUpdate"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "ID of pet that needs to be fetched"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "petId"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -635,13 +767,7 @@
         "title": "Resource /user/{username}"
       },
       "attributes": {
-        "href": "/user/{username}",
-        "hrefVariables": {
-          "element": "hrefVariables",
-          "meta": {},
-          "attributes": {},
-          "content": []
-        }
+        "href": "/user/{username}"
       },
       "content": [
         {
@@ -650,7 +776,40 @@
             "description": "Updated user",
             "title": "updateUser"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "name that need to be deleted"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "username"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -732,7 +891,40 @@
             "description": "Delete user",
             "title": "deleteUser"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "The name that needs to be deleted"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "username"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -788,7 +980,40 @@
             "description": "Get user by user name",
             "title": "getUserByName"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "The name that needs to be fetched. Use user1 for testing."
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "username"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -846,60 +1071,7 @@
         "title": "Resource /user/login"
       },
       "attributes": {
-        "href": "/api/user/login{?username,password}",
-        "hrefVariables": {
-          "element": "hrefVariables",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "attributes": {
-                "typeAttributes": [
-                  "required"
-                ]
-              },
-              "meta": {},
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "username"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": ""
-                }
-              }
-            },
-            {
-              "element": "member",
-              "attributes": {
-                "typeAttributes": [
-                  "required"
-                ]
-              },
-              "meta": {},
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "password"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": ""
-                }
-              }
-            }
-          ]
-        }
+        "href": "/api/user/login{?username,password}"
       },
       "content": [
         {
@@ -908,7 +1080,65 @@
             "description": "Logs user into the system",
             "title": "loginUser"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "The user name for login"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "username"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                },
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "The password for login in clear text"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "password"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -1101,13 +1331,7 @@
         "title": "Resource /store/order/{orderId}"
       },
       "attributes": {
-        "href": "/store/order/{orderId}",
-        "hrefVariables": {
-          "element": "hrefVariables",
-          "meta": {},
-          "attributes": {},
-          "content": []
-        }
+        "href": "/store/order/{orderId}"
       },
       "content": [
         {
@@ -1116,7 +1340,40 @@
             "description": "Delete purchase order by ID",
             "title": "deleteOrder"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "ID of the order that needs to be deleted"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "orderId"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
@@ -1172,7 +1429,40 @@
             "description": "Find purchase order by ID",
             "title": "getOrderById"
           },
-          "attributes": {},
+          "attributes": {
+            "parameters": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "ID of pet that needs to be fetched"
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "orderId"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "content": [
             {
               "element": "httpTransaction",
