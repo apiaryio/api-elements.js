@@ -25,6 +25,7 @@
     "apiary-blueprint-parser": "",
     "babel-runtime": "^5.5.6",
     "drafter": "^0.2.5",
+    "json-schema-deref-sync": "^0.1.1",
     "minim": "^0.5.0",
     "robotskirt": "",
     "sanitizer": "",

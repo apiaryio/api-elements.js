@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import deref from 'json-schema-deref-sync';
 
 import { registry, MemberType, BooleanType, NumberType, StringType } from 'minim';
 import '../refract/api';
@@ -120,7 +121,8 @@ export function parse({ source }, done) {
 
       // Body parameters define schema
       if (bodyParameter) {
-        schemaAsset = new Asset(JSON.stringify(_.extend({}, bodyParameter.schema, schemaDefinitions)));
+        let jsonSchema = deref(_.extend({}, bodyParameter.schema, schemaDefinitions));
+        schemaAsset = new Asset(JSON.stringify(jsonSchema));
         schemaAsset.meta.class.push('messageBodySchema');
         schemaAsset.attributes.contentType = 'application/schema+json';
       }
