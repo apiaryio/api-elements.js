@@ -49,8 +49,12 @@ export function parse({ source }, done) {
     // For now, give a title of the HREF
     resource.meta.title.set('Resource ' + href);
 
+    // TODO: Handle parameters on a resource level
+    // See https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#path-item-object
+    let relevantPaths = _.omit(pathValue, 'parameters', '$ref');
+
     // Each path is an object with methods as properties
-    _.each(pathValue, (methodValue, method) => {
+    _.each(relevantPaths, (methodValue, method) => {
       let methodValueParameters = methodValue.parameters || [];
 
       let queryParameters = methodValueParameters.filter((parameter) => {
@@ -121,7 +125,16 @@ export function parse({ source }, done) {
 
       // Body parameters define schema
       if (bodyParameter) {
-        let jsonSchema = deref(_.extend({}, bodyParameter.schema, schemaDefinitions));
+        let jsonSchemaWithRefs = _.extend({}, bodyParameter.schema, schemaDefinitions);
+        let jsonSchema;
+
+        // In case there are errors with `deref`, which can happen with circular $refs
+        try {
+          jsonSchema = deref(_.extend({}, bodyParameter.schema, schemaDefinitions));
+        } catch(error) {
+          jsonSchema = jsonSchemaWithRefs;
+        }
+
         schemaAsset = new Asset(JSON.stringify(jsonSchema));
         schemaAsset.meta.class.push('messageBodySchema');
         schemaAsset.attributes.contentType = 'application/schema+json';
