@@ -23,6 +23,32 @@ export function detect(source) {
   return source.swagger === '2.0';
 }
 
+function convertParameterToElement(parameter) {
+  let memberValue;
+
+  // Convert from Swagger types to Minim elements
+  if (parameter.type === 'string') {
+    memberValue = new StringType('');
+  } else if (parameter.type === 'integer' || parameter.type === 'number') {
+    memberValue = new NumberType();
+  } else if (parameter.type === 'boolean') {
+    memberValue = new BooleanType();
+  }
+
+  // TODO: Update when Minim has better support for elements as values
+  // should be: new MemberType(parameter.name, memberValue);
+  let member = new MemberType(parameter.name);
+  member.content.value = memberValue;
+
+  member.meta.description = parameter.description;
+
+  if (parameter.required) {
+    member.attributes.typeAttributes = ['required'];
+  }
+
+  return member;
+}
+
 /*
  * Parse Swagger 2.0 into Refract elements
  */
@@ -48,6 +74,19 @@ export function parse({ source }, done) {
     // TODO: Better title and description for the resources
     // For now, give a title of the HREF
     resource.meta.title.set('Resource ' + href);
+
+    let pathObjectParameters = pathValue.parameters || [];
+
+    // TODO: Currently this only supports URI parameters for `path` and `query`.
+    // It should add support for `body` parameters as well.
+    if (pathObjectParameters.length > 0) {
+      resource.hrefVariables = new HrefVariables();
+
+      pathObjectParameters
+        .filter((parameter) => parameter.in === 'query' || parameter.in === 'path')
+        .map(convertParameterToElement)
+        .forEach((member) => resource.hrefVariables.content.push(member));
+    }
 
     // TODO: Handle parameters on a resource level
     // See https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#path-item-object
@@ -94,31 +133,9 @@ export function parse({ source }, done) {
       if (uriParameters.length > 0) {
         transition.parameters = new HrefVariables();
 
-        _.each(uriParameters, (parameter) => {
-          let memberValue;
-
-          // Convert from Swagger types to Minim elements
-          if (parameter.type === 'string') {
-            memberValue = new StringType('');
-          } else if (parameter.type === 'integer' || parameter.type === 'number') {
-            memberValue = new NumberType();
-          } else if (parameter.type === 'boolean') {
-            memberValue = new BooleanType();
-          }
-
-          // TODO: Update when Minim has better support for elements as values
-          // should be: new MemberType(parameter.name, memberValue);
-          let member = new MemberType(parameter.name);
-          member.content.value = memberValue;
-
-          member.meta.description = parameter.description;
-
-          if (parameter.required) {
-            member.attributes.typeAttributes = ['required'];
-          }
-
-          transition.parameters.content.push(member);
-        });
+        uriParameters
+          .map(convertParameterToElement)
+          .forEach((member) => transition.parameters.content.push(member));
       }
 
       let schemaAsset;

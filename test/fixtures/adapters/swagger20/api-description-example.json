@@ -180,7 +180,39 @@
         "title": "Resource /pet/findByStatus"
       },
       "attributes": {
-        "href": "/api/pet/findByStatus{?status}"
+        "href": "/api/pet/findByStatus{?status}",
+        "hrefVariables": {
+          "element": "hrefVariables",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "attributes": {
+                "typeAttributes": [
+                  "required"
+                ]
+              },
+              "meta": {
+                "description": "Status values that need to be considered for filter"
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "status"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": ""
+                }
+              }
+            }
+          ]
+        }
       },
       "content": [
         {

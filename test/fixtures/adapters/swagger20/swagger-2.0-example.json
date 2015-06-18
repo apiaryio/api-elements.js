@@ -105,7 +105,16 @@
                         "type": "string"
                     }
                 ]
-            }
+            },
+            "parameters": [
+                {
+                    "in": "query",
+                    "description": "Status values that need to be considered for filter",
+                    "name": "status",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
         },
         "/pet/findByTags": {
             "get": {
