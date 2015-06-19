@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.8.1 - 19 June 2015
 
 - Better parameter support for Swagger parser. (#26)
 - Dereferncing of local references in JSON Schemas (#27)
