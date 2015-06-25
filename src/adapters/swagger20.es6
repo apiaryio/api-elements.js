@@ -49,6 +49,28 @@ function convertParameterToElement(parameter) {
   return member;
 }
 
+function derefJsonSchema(jsonSchemaWithRefs) {
+  let jsonSchema;
+
+  // In case there are errors with `deref`, which can happen with circular $refs
+  try {
+    jsonSchema = deref(jsonSchemaWithRefs);
+  } catch(error) {
+    jsonSchema = jsonSchemaWithRefs;
+  }
+
+  return jsonSchema;
+}
+
+function createAssetFromJsonSchema(jsonSchemaWithRefs) {
+  let jsonSchema = derefJsonSchema(jsonSchemaWithRefs);
+  let schemaAsset = new Asset(JSON.stringify(jsonSchema));
+  schemaAsset.meta.class.push('messageBodySchema');
+  schemaAsset.attributes.contentType = 'application/schema+json';
+
+  return schemaAsset;
+}
+
 /*
  * Parse Swagger 2.0 into Refract elements
  */
@@ -106,11 +128,9 @@ export function parse({ source }, done) {
       });
 
       // Body parameters are ones that define JSON Schema
-      let bodyParameter = _.first(
-        methodValueParameters.filter((parameter) => {
-          return parameter.in === 'body';
-        })
-      );
+      let bodyParameters = methodValueParameters.filter((parameter) => {
+        return parameter.in === 'body';
+      });
 
       // Query parameters are added the HREF if they exist
       if (queryParameters.length > 0) {
@@ -145,25 +165,6 @@ export function parse({ source }, done) {
           .forEach((member) => transition.parameters.content.push(member));
       }
 
-      let schemaAsset;
-
-      // Body parameters define schema
-      if (bodyParameter) {
-        let jsonSchemaWithRefs = _.extend({}, bodyParameter.schema, schemaDefinitions);
-        let jsonSchema;
-
-        // In case there are errors with `deref`, which can happen with circular $refs
-        try {
-          jsonSchema = deref(_.extend({}, bodyParameter.schema, schemaDefinitions));
-        } catch(error) {
-          jsonSchema = jsonSchemaWithRefs;
-        }
-
-        schemaAsset = new Asset(JSON.stringify(jsonSchema));
-        schemaAsset.meta.class.push('messageBodySchema');
-        schemaAsset.attributes.contentType = 'application/schema+json';
-      }
-
       // Currently, default responses are not supported in API Description format
       let relevantResponses = _.omit(methodValue.responses, 'default');
 
@@ -178,9 +179,12 @@ export function parse({ source }, done) {
 
         request.attributes.method = method.toUpperCase();
 
-        if (schemaAsset) {
+        // Body parameters define request schemas
+        _.each(bodyParameters, function(bodyParameter) {
+          let jsonSchemaWithDefinitions = _.extend({}, bodyParameter.schema, schemaDefinitions);
+          let schemaAsset = createAssetFromJsonSchema(jsonSchemaWithDefinitions);
           request.content.push(schemaAsset);
-        }
+        });
 
         // TODO: Decide what to do with request hrefs
         // If the URI is templated, we don't want to add it to the request
