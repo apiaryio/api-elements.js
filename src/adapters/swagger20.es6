@@ -126,7 +126,14 @@ export function parse({ source }, done) {
       let transition = new Transition();
       resource.content.push(transition);
 
-      transition.meta.description.set(methodValue.summary);
+      // Prefer description over summary since description is more complete.
+      // According to spec, summary SHOULD only be 120 characters
+      if (methodValue.description) {
+        transition.meta.description.set(methodValue.description);
+      } else if (methodValue.summary) {
+        transition.meta.description.set(methodValue.summary);
+      }
+
       transition.meta.title.set(methodValue.operationId);
 
       // For each uriParameter, create an hrefVariable

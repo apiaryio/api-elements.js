@@ -43,8 +43,8 @@
                         "description": "Validation exception"
                     }
                 },
-                "description": "",
-                "summary": "Update an existing pet",
+                "description": "Update an existing pet",
+                "summary": "",
                 "operationId": "updatePet",
                 "tags": [
                     "pet"
@@ -84,8 +84,8 @@
                         "description": "Invalid status value"
                     }
                 },
-                "description": "",
-                "summary": "Finds Pets by status",
+                "description": "Finds Pets by status",
+                "summary": "For tests: should be ignored.",
                 "operationId": "findPetsByStatus",
                 "tags": [
                     "pet"
