@@ -41,6 +41,9 @@
                     },
                     "405": {
                         "description": "Validation exception"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
                     }
                 },
                 "description": "Update an existing pet",

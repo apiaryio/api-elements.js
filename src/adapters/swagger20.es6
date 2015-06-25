@@ -164,8 +164,11 @@ export function parse({ source }, done) {
         schemaAsset.attributes.contentType = 'application/schema+json';
       }
 
+      // Currently, default responses are not supported in API Description format
+      let relevantResponses = _.omit(methodValue.responses, 'default');
+
       // Transactions are created for each response in the document
-      _.each(methodValue.responses, (responseValue, statusCode) => {
+      _.each(relevantResponses, (responseValue, statusCode) => {
         let transaction = new HttpTransaction();
         transition.content.push(transaction);
 
