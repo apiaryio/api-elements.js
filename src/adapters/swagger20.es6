@@ -186,6 +186,13 @@ export function parse({ source }, done) {
           request.content.push(schemaAsset);
         });
 
+        // Responses can have schemas in Swagger
+        if (responseValue.schema) {
+          let jsonSchemaWithDefinitions = _.extend({}, responseValue.schema, schemaDefinitions);
+          let schemaAsset = createAssetFromJsonSchema(jsonSchemaWithDefinitions);
+          response.content.push(schemaAsset);
+        }
+
         // TODO: Decide what to do with request hrefs
         // If the URI is templated, we don't want to add it to the request
         // if (uriParameters.length === 0) {
