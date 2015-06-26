@@ -13,8 +13,7 @@ FORMAT: 1A
     + Headers
 
       {% for header in example.headers.exclude('Content-Type').content %}
-            {{ header.meta.getProperty('name').content }}: {{ header.content }}
-      {% endfor %}
+            {{ header.meta.getProperty('name').content }}: {{ header.content }}{% endfor %}
 
   {% endif %}
   {% if example.dataStructure %}
@@ -44,8 +43,7 @@ FORMAT: 1A
 + Parameters
 
   {% for item in hrefVariables.content %}
-    + {{ item.key.toValue() }}{% if item.attributes.typeAttributes %} ({{ item.attributes.typeAttributes }}){% endif %}{% if item.value.meta.description.toValue() %} - {{ item.value.meta.description.toValue() }}{% endif %}
-  {% endfor %}
+    + {{ item.key.toValue() }}{% if item.attributes.typeAttributes %} ({{ item.attributes.typeAttributes }}){% endif %}{% if item.value.meta.description.toValue() %} - {{ item.value.meta.description.toValue() }}{% endif %}{% endfor %}
 
 {% endmacro %}
 
