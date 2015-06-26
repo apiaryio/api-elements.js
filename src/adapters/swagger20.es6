@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import deref from 'json-schema-deref-sync';
 
-import { registry, MemberType, BooleanType, NumberType, StringType } from 'minim';
+import { registry, MemberType, BooleanType, NumberType, StringType, ArrayType } from 'minim';
 import '../refract/api';
 
 // Define API Description elements
@@ -33,6 +33,11 @@ function convertParameterToElement(parameter) {
     memberValue = new NumberType();
   } else if (parameter.type === 'boolean') {
     memberValue = new BooleanType();
+  } else if (parameter.type === 'array') {
+    memberValue = new ArrayType();
+  } else {
+    // Default to a string in case we get a type we haven't seen
+    memberValue = new StringType('');
   }
 
   // TODO: Update when Minim has better support for elements as values
@@ -44,6 +49,12 @@ function convertParameterToElement(parameter) {
 
   if (parameter.required) {
     member.attributes.typeAttributes = ['required'];
+  }
+
+  // If there is a default, it is set on the member value instead of the member
+  // element itself because the default value applies to the value.
+  if (parameter.default) {
+    memberValue.attributes.default = parameter.default;
   }
 
   return member;

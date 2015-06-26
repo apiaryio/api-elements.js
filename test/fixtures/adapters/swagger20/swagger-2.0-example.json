@@ -101,11 +101,21 @@
                 ],
                 "parameters": [
                     {
+                        "name": "status",
                         "in": "query",
                         "description": "Status values that need to be considered for filter",
-                        "name": "status",
                         "required": true,
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                        "type": "string",
+                        "enum": [
+                          "available",
+                          "pending",
+                          "sold"
+                        ],
+                        "default": "available"
+                        },
+                        "collectionFormat": "csv"
                     }
                 ]
             },
@@ -154,6 +164,13 @@
                         "name": "tags",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "description": "For tests. Unknown type of query parameter.",
+                        "name": "unknown",
+                        "required": true,
+                        "type": "unknown"
                     }
                 ]
             }
