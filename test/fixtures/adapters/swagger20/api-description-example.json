@@ -245,10 +245,10 @@
                       "content": "status"
                     },
                     "value": {
-                      "element": "string",
+                      "element": "array",
                       "meta": {},
                       "attributes": {},
-                      "content": ""
+                      "content": []
                     }
                   }
                 }
@@ -325,7 +325,7 @@
         "title": "Resource /pet/findByTags"
       },
       "attributes": {
-        "href": "/api/pet/findByTags{?tags}"
+        "href": "/api/pet/findByTags{?tags,unknown}"
       },
       "content": [
         {
@@ -356,6 +356,31 @@
                       "meta": {},
                       "attributes": {},
                       "content": "tags"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                },
+                {
+                  "element": "member",
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "meta": {
+                    "description": "For tests. Unknown type of query parameter."
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "unknown"
                     },
                     "value": {
                       "element": "string",
@@ -562,7 +587,9 @@
                     "value": {
                       "element": "number",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "default": 1
+                      },
                       "content": null
                     }
                   }
