@@ -82,6 +82,21 @@ function createAssetFromJsonSchema(jsonSchemaWithRefs) {
   return schemaAsset;
 }
 
+function createTransaction(transition, method) {
+  let transaction = new HttpTransaction();
+  transaction.content = [new HttpRequest(), new HttpResponse()];
+
+  if (transition) {
+    transition.content.push(transaction);
+  }
+
+  if (method) {
+    transaction.request.attributes.method = method.toUpperCase();
+  }
+
+  return transaction;
+}
+
 /*
  * Parse Swagger 2.0 into Refract elements
  */
@@ -179,16 +194,15 @@ export function parse({ source }, done) {
       // Currently, default responses are not supported in API Description format
       let relevantResponses = _.omit(methodValue.responses, 'default');
 
+      if (_.keys(relevantResponses).length === 0) {
+        createTransaction(transition, method);
+      }
+
       // Transactions are created for each response in the document
       _.each(relevantResponses, (responseValue, statusCode) => {
-        let transaction = new HttpTransaction();
-        transition.content.push(transaction);
-
-        let request = new HttpRequest();
-        let response = new HttpResponse();
-        transaction.content = [request, response];
-
-        request.attributes.method = method.toUpperCase();
+        let transaction = createTransaction(transition, method);
+        let request = transaction.request;
+        let response = transaction.response;
 
         // Body parameters define request schemas
         _.each(bodyParameters, function(bodyParameter) {

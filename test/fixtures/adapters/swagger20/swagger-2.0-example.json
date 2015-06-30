@@ -27,6 +27,25 @@
         "name": "store"
     }],
     "paths": {
+        "/empty-responses": {
+            "get": {
+                "description": "Empty responses",
+                "summary": "",
+                "operationId": "emptyResponses"
+            }
+        },
+        "/only-default-response": {
+            "get": {
+                "responses": {
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "description": "Only default response set",
+                "summary": "",
+                "operationId": "onlyDefaultResponse"
+            }
+        },
         "/pet": {
             "put": {
                 "responses": {
