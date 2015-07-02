@@ -57,8 +57,8 @@ FORMAT: 1A
 + Request{% if transaction.request.contentType %} ({{ transaction.request.contentType }}){% endif %}
 {{ renderExample(transaction.request) }}
 {% endif %}
-{% if transaction.response %}
-+ Response{% if transaction.response.statusCode %} {{ transaction.response.statusCode }}{% endif %}{% if transaction.response.contentType %} ({{ transaction.response.contentType }}){% endif %}
+{% if transaction.response && transaction.response.statusCode %}
++ Response {{ transaction.response.statusCode }}{% if transaction.response.contentType %} ({{ transaction.response.contentType }}){% endif %}
 {{ renderExample(transaction.response) }}
 {% endif %}
 {% endmacro %}
