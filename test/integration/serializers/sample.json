@@ -43,6 +43,12 @@
               ["asset", {"class": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tags\": {      \"type\": \"array\"}}}"]
             ]]
           ]]
+        ]],
+        ["transition", {"title": "Restart a frob", "description": "Restart a frob instance"}, {"relation": "restart"}, [
+          ["httpTransaction", {}, {}, [
+            ["httpRequest", {}, {"method": "POST"}, []],
+            ["httpResponse", {}, {}, []]
+          ]]
         ]]
       ]]
     ]],
