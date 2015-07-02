@@ -12,6 +12,90 @@
     {
       "element": "resource",
       "meta": {
+        "title": "Resource /empty-responses"
+      },
+      "attributes": {
+        "href": "/empty-responses"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Empty responses",
+            "title": "emptyResponses"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {},
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
+        "title": "Resource /only-default-response"
+      },
+      "attributes": {
+        "href": "/only-default-response"
+      },
+      "content": [
+        {
+          "element": "transition",
+          "meta": {
+            "description": "Only default response set",
+            "title": "onlyDefaultResponse"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "httpTransaction",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpRequest",
+                  "meta": {},
+                  "attributes": {
+                    "method": "GET"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "httpResponse",
+                  "meta": {},
+                  "attributes": {},
+                  "content": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "resource",
+      "meta": {
         "title": "Resource /pet"
       },
       "attributes": {
