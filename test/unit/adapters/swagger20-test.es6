@@ -32,7 +32,7 @@ describe('Swagger Adapter', () => {
     });
 
     it('correctly parses the document', () => {
-      assert.deepEqual(parsedDocument, apiDescriptionExample)
+      assert.deepEqual(parsedDocument, apiDescriptionExample);
     });
   });
 });

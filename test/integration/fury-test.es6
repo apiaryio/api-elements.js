@@ -112,7 +112,7 @@ describe('Parser', () => {
     it('should parse when returning element instances', (done) => {
       // Modify the parse method to return an element instance
       fury.adapters[fury.adapters.length - 1].parse = ({source}, cb) =>
-        cb(null, new minim.StringType(source));
+        cb(null, new minim.StringElement(source));
 
       fury.parse({source: 'dummy'}, (err, api) => {
         assert.equal(api.content, 'dummy');
@@ -212,7 +212,7 @@ describe('Refract loader', () => {
       const response = resource.transitions.get(0).transactions.get(0).response;
 
       // Get the header element by index and read the value
-      assert.equal(response.headers.get(0).content, 'application/json');
+      assert.equal(response.headers.get(0).toValue(), 'application/json');
 
       // Convenience to get a header by name
       assert.equal(response.header('content-type'), 'application/json');

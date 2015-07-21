@@ -32,14 +32,21 @@ function indent(input, spaces, options={first: false}) {
  * Get type information for an element, such as the element name, whether
  * it is required, etc. Returns an array of strings.
  */
-function getTypeAttributes(element, attributes={}) {
+function getTypeAttributes(element, attributes) {
   let typeAttributes = [];
 
   if (element.element !== 'string' && element.element !== 'dataStructure') {
     typeAttributes.push(element.element);
   }
 
-  return typeAttributes.concat(attributes.typeAttributes || []);
+  if (attributes) {
+    const tmp = attributes.get('typeAttributes');
+    if (tmp) {
+      typeAttributes = typeAttributes.concat(tmp.toValue() || []);
+    }
+  }
+
+  return typeAttributes;
 }
 
 /*
@@ -78,7 +85,7 @@ function handleContent(element, spaces, marker) {
       // This is an array type or something similar.
       objectLike = false;
       /* eslint-disable block-scoped-var */
-      renderedContent += handle(item.meta.title.toValue(), item, {
+      renderedContent += handle(item.title, item, {
         parent: element,
         spaces,
         marker
@@ -125,12 +132,14 @@ function handleDescription(description, element, spaces, marker) {
 
   // Handle special list items like default/sample here as they are part
   // of the description, before the content (sub-elements) are rendere.
-  if (element.attributes.default !== undefined) {
-    str += `\n${marker} Default: ${element.attributes.default}\n`;
+  const defaultValue = element.attributes.getValue('default');
+  if (defaultValue !== undefined) {
+    str += `\n${marker} Default: ${defaultValue}\n`;
   }
 
-  if (element.attributes.sample !== undefined) {
-    str += `\n${marker} Sample: ${element.attributes.sample}\n`;
+  const sampleValue = element.attributes.getValue('sample');
+  if (sampleValue !== undefined) {
+    str += `\n${marker} Sample: ${sampleValue}\n`;
   }
 
   // Now, depending on the content type, we will recursively handle child
@@ -195,7 +204,7 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
     str += ` (${attributes.join(', ')})`;
   }
 
-  str += handleDescription(attributesElement.meta.description.toValue(),
+  str += handleDescription(attributesElement.description,
                            element, spaces, marker);
 
   // Return the entire block indented to the correct number of spaces.
@@ -212,7 +221,7 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
 export default function render(mson) {
   // Render *either* ### Title or + Attributes as the base element to support
   // both a data structures section and resource / payload attributes.
-  const title = mson.meta.title.toValue();
+  const title = mson.title;
 
   return handle(title || 'Attributes', mson, {
     initialMarker: title ? '###' : '+',
