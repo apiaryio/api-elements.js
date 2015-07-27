@@ -18,8 +18,14 @@ const refractedApi = [
         ]]
         }, [
         ['dataStructure', {}, {}, [
-          ['string', {name: 'id'}, {}, null],
-          ['string', {name: 'tag'}, {}, null]
+          ["member", {}, {"typeAttributes": ["required"]}, {
+            "key": ["string", {}, {}, "id"],
+            "value": ["string", {}, {}, null]
+          }],
+          ["member", {}, {}, {
+            "key": ["string", {}, {}, "tag"],
+            "value": ["string", {}, {}, null]
+          }]
         ]],
         ['transition', {}, {}, [
           ['httpTransaction', {title: 'Get a frob', description: 'Gets information about a single frob instance'}, {}, [
