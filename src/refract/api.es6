@@ -58,12 +58,12 @@ export class Asset extends BaseElement {
     this.element = 'asset';
   }
 
-  get contentElement() {
-    return this.attributes.getValue('contentElement');
+  get contentType() {
+    return this.attributes.getValue('contentType');
   }
 
-  set contentElement(value) {
-    this.attributes.set('contentElement', value);
+  set contentType(value) {
+    this.attributes.set('contentType', value);
   }
 
   get href() {
