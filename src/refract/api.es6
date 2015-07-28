@@ -20,39 +20,11 @@
  */
 
 import {
-  ArrayType, attributeElementKeys, ElementType, ObjectType, StringType,
-  registry
+  ArrayElement, BaseElement, ObjectElement, StringElement, registry
 } from 'minim';
 import {filterBy} from './util';
 
-/*
- * A base element which provides some conveniences for all API-related
- * elements.
- */
-class ApiBaseArray extends ArrayType {
-  get title() {
-    return this.meta.title && this.meta.title.toValue();
-  }
-
-  set title(value) {
-    this.meta.title = value;
-  }
-
-  get description() {
-    return this.meta.description && this.meta.description.toValue();
-  }
-
-  set description(value) {
-    this.meta.description = value;
-  }
-
-  hasClass(name) {
-    return this.meta && this.meta.class && this.meta.class.indexOf &&
-           this.meta.class.indexOf(name) !== -1;
-  }
-}
-
-class HttpHeaders extends ApiBaseArray {
+class HttpHeaders extends ArrayElement {
   constructor(...args) {
     super(...args);
     this.element = 'httpHeaders';
@@ -60,67 +32,65 @@ class HttpHeaders extends ApiBaseArray {
 
   exclude(name) {
     return this.filter(item => {
-      let itemName = item.meta.getProperty('name');
+      let itemName = item.name;
 
       if (!itemName) {
         // This can't possibly match, so we include it in the results.
         return true;
       }
 
-      // Note: this may not be a string, hence the duck-type check below!
-      itemName = itemName.toValue();
+      // Note: this may not be a string, hence the duck-Element check below!
       return !(itemName.toLowerCase) || itemName.toLowerCase() !== name.toLowerCase();
     });
   }
 }
 
-class HrefVariables extends ObjectType {
+class HrefVariables extends ObjectElement {
   constructor(...args) {
     super(...args);
     this.element = 'hrefVariables';
   }
 }
 
-export class Asset extends ElementType {
+export class Asset extends BaseElement {
   constructor(...args) {
     super(...args);
     this.element = 'asset';
   }
 
   get contentType() {
-    return this.attributes.contentType;
+    return this.attributes.getValue('contentType');
   }
 
   set contentType(value) {
-    this.attributes.contentType = value;
+    this.attributes.set('contentType', value);
   }
 
   get href() {
-    return this.attributes.href;
+    return this.attributes.getValue('href');
   }
 
   set href(value) {
-    this.attributes.href = value;
+    this.attributes.set('href', value);
   }
 }
 
-class HttpMessagePayload extends ApiBaseArray {
+class HttpMessagePayload extends ArrayElement {
   constructor(...args) {
     super(...args);
-
-    this[attributeElementKeys] = ['headers'];
+    this._attributeElementKeys = ['headers'];
   }
 
   get headers() {
-    return this.attributes.headers;
+    return this.attributes.get('headers');
   }
 
   set headers(value) {
-    this.attributes.headers = value;
+    this.attributes.set('headers', value);
   }
 
   header(name) {
-    const headers = this.attributes.headers;
+    const headers = this.attributes.get('headers');
     let header = null;
 
     if (headers) {
@@ -128,9 +98,13 @@ class HttpMessagePayload extends ApiBaseArray {
         name,
         ignoreCase: true
       }))[0];
+
+      if (header) {
+        header = header.toValue();
+      }
     }
 
-    return header ? header.content : header;
+    return header;
   }
 
   get contentType() {
@@ -142,14 +116,14 @@ class HttpMessagePayload extends ApiBaseArray {
   }
 
   get dataStructure() {
-    return this.filter(item => item.element === 'dataStructure').first();
+    return this.findByElement('dataStructure').first();
   }
 
   get messageBody() {
     // Returns the *first* message body. Only one should be defined according
     // to the spec, but it's possible to include more.
     return this.filter((item) => {
-      return item.element === 'asset' && item.meta.class.contains('messageBody');
+      return item.element === 'asset' && item.class.contains('messageBody');
     }).first();
   }
 
@@ -157,7 +131,7 @@ class HttpMessagePayload extends ApiBaseArray {
     // Returns the *first* message body schema. Only one should be defined
     // according to the spec, but it's possible to include more.
     return this.filter((item) => {
-      return item.element === 'asset' && item.meta.class.contains('messageBodySchema');
+      return item.element === 'asset' && item.class.contains('messageBodySchema');
     }).first();
   }
 }
@@ -169,19 +143,19 @@ export class HttpRequest extends HttpMessagePayload {
   }
 
   get method() {
-    return this.attributes.method;
+    return this.attributes.getValue('method');
   }
 
   set method(value) {
-    this.attributes.method = value;
+    this.attributes.set('method', value);
   }
 
   get href() {
-    return this.attributes.href;
+    return this.attributes.getValue('href');
   }
 
   set href(value) {
-    this.attributes.href = value;
+    this.attributes.set('href', value);
   }
 }
 
@@ -192,51 +166,55 @@ export class HttpResponse extends HttpMessagePayload {
   }
 
   get statusCode() {
-    return this.attributes.statusCode;
+    return this.attributes.getValue('statusCode');
   }
 
   set statusCode(value) {
-    this.attributes.statusCode = value;
+    this.attributes.set('statusCode', value);
   }
 }
 
-export class HttpTransaction extends ApiBaseArray {
+export class HttpTransaction extends ArrayElement {
   constructor(...args) {
     super(...args);
     this.element = 'httpTransaction';
   }
 
   get request() {
-    return this.filter(item => item.element === 'httpRequest').first();
+    return this.findByElement('httpRequest').first();
   }
 
   get response() {
-    return this.filter(item => item.element === 'httpResponse').first();
+    return this.findByElement('httpResponse').first();
   }
 }
 
-export class Transition extends ApiBaseArray {
+export class Transition extends ArrayElement {
   constructor(...args) {
     super(...args);
 
     this.element = 'transition';
-    this[attributeElementKeys] = ['parameters', 'attributes'];
+    this._attributeElementKeys = ['parameters', 'attributes'];
+  }
+
+  get method() {
+    return this.transactions.get(0).request.method;
   }
 
   get relation() {
-    return this.attributes.relation;
+    return this.attributes.getValue('relation');
   }
 
   set relation(value) {
-    this.attributes.relation = value;
+    this.attributes.set('relation', value);
   }
 
   get href() {
-    return this.attributes.href;
+    return this.attributes.getValue('href');
   }
 
   set href(value) {
-    this.attributes.href = value;
+    this.attributes.set('href', value);
   }
 
   get computedHref() {
@@ -248,68 +226,68 @@ export class Transition extends ApiBaseArray {
   }
 
   get parameters() {
-    return this.attributes.parameters;
+    return this.attributes.get('parameters');
   }
 
   set parameters(value) {
-    this.attributes.parameters = value;
+    this.attributes.set('parameters', value);
   }
 
   // The key `attributes` is already taken, so `attr` is used instead.
   get attr() {
-    return this.attributes.attributes;
+    return this.attributes.get('attributes');
   }
 
   set attr(value) {
-    this.attributes.attributes = value;
+    this.attributes.set('attributes', value);
   }
 
   get transactions() {
-    return this.filter(item => item.element === 'httpTransaction');
+    return this.findByElement('httpTransaction');
   }
 }
 
-export class Resource extends ApiBaseArray {
+export class Resource extends ArrayElement {
   constructor(...args) {
     super(...args);
 
     this.element = 'resource';
-    this[attributeElementKeys] = ['hrefVariables'];
+    this._attributeElementKeys = ['hrefVariables'];
   }
 
   get href() {
-    return this.attributes.href;
+    return this.attributes.getValue('href');
   }
 
   set href(value) {
-    this.attributes.href = value;
+    this.attributes.set('href', value);
   }
 
   get hrefVariables() {
-    return this.attributes.hrefVariables;
+    return this.attributes.get('hrefVariables');
   }
 
   set hrefVariables(value) {
-    this.attributes.hrefVariables = value;
+    this.attributes.set('hrefVariables', value);
   }
 
   get transitions() {
-    return this.filter(item => item.element === 'transition');
+    return this.findByElement('transition');
   }
 
   get dataStructure() {
-    return this.filter(item => item.element === 'dataStructure').first();
+    return this.findByElement('dataStructure').first();
   }
 }
 
-export class DataStructure extends ObjectType {
+export class DataStructure extends ObjectElement {
   constructor(...args) {
     super(...args);
     this.element = 'dataStructure';
   }
 }
 
-export class Copy extends StringType {
+export class Copy extends StringElement {
   constructor(...args) {
     super(...args);
     this.element = 'copy';
@@ -320,38 +298,38 @@ export class Copy extends StringType {
   }
 
   set contentType(value) {
-    this.attributes.contentType = value;
+    this.attributes.set('contentType', value);
   }
 }
 
-export class Category extends ApiBaseArray {
+export class Category extends ArrayElement {
   constructor(...args) {
     super(...args);
     this.element = 'category';
   }
 
   get resourceGroups() {
-    return this.filter(item => item.meta.class.contains('resourceGroup'));
+    return this.findByClass('resourceGroup');
   }
 
   get dataStructures() {
-    return this.filter(item => item.meta.class.contains('dataStructures'));
+    return this.findByClass('dataStructures');
   }
 
   get scenarios() {
-    return this.filter(item => item.meta.class.contains('scenario'));
+    return this.findByClass('scenario');
   }
 
   get resources() {
-    return this.filter(item => item.element === 'resource');
+    return this.findByElement('resource');
   }
 
   get copy() {
-    return this.filter(item => item.element === 'copy');
+    return this.findByElement('copy');
   }
 }
 
-// Register the API and Resource element types.
+// Register the API and Resource element Elements.
 registry
   .register('category', Category)
   .register('copy', Copy)

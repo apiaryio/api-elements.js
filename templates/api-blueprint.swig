@@ -13,7 +13,7 @@ FORMAT: 1A
     + Headers
 
       {% for header in example.headers.exclude('Content-Type').content %}
-            {{ header.meta.getProperty('name').content }}: {{ header.content }}{% endfor %}
+            {{ header.name }}: {{ header.content }}{% endfor %}
 
   {% endif %}
   {% if example.dataStructure %}
@@ -43,7 +43,8 @@ FORMAT: 1A
 + Parameters
 
   {% for item in hrefVariables.content %}
-    + {{ item.key.toValue() }}{% if item.attributes.typeAttributes %} ({{ item.attributes.typeAttributes }}){% endif %}{% if item.value.meta.description.toValue() %} - {{ item.value.meta.description.toValue() }}{% endif %}{% endfor %}
+    {% set typeAttributes = item.attributes.get('typeAttributes') %}
+    + {{ item.key.toValue() }}{% if typeAttributes %} ({{ typeAttributes.toValue() }}){% endif %}{% if item.value.description %} - {{ item.value.description }}{% endif %}{% endfor %}
 
 {% endmacro %}
 
@@ -53,13 +54,15 @@ FORMAT: 1A
 
 
 {% macro renderTransaction(transaction) %}
-{% if transaction.request && (transaction.request.contentType || transaction.request.headers || transaction.request.dataStructure || transaction.request.messageBody || transaction.request.messageBodySchema) %}
-+ Request{% if transaction.request.contentType %} ({{ transaction.request.contentType }}){% endif %}
-{{ renderExample(transaction.request) }}
+{% set request = transaction.request %}
+{% set response = transaction.response %}
+{% if request && (request.contentType || request.headers || request.dataStructure || request.messageBody || request.messageBodySchema) %}
++ Request{% if request.contentType %} ({{ request.contentType }}){% endif %}
+{{ renderExample(request) }}
 {% endif %}
-{% if transaction.response && transaction.response.statusCode %}
-+ Response {{ transaction.response.statusCode }}{% if transaction.response.contentType %} ({{ transaction.response.contentType }}){% endif %}
-{{ renderExample(transaction.response) }}
+{% if response && response.statusCode %}
++ Response {{ response.statusCode }}{% if response.contentType %} ({{ response.contentType }}){% endif %}
+{{ renderExample(response) }}
 {% endif %}
 {% endmacro %}
 
@@ -69,9 +72,9 @@ FORMAT: 1A
 
 {% macro renderTransition(transition, href) %}
 {% if transition.title %}
-#### {{ transition.title }} [{{ transition.transactions.get(0).request.method }}{% if href %} {{ href }}{% elseif transition.computedHref %} {{ transition.computedHref }}{% endif %}]
+#### {{ transition.title }} [{{ transition.method }}{% if href %} {{ href }}{% elseif transition.computedHref %} {{ transition.computedHref }}{% endif %}]
 {% else %}
-#### {{ transition.transactions.get(0).request.method }}{% if href %} {{ href }}{% elseif transition.computedHref %} {{ transition.computedHref }}{% endif %}
+#### {{ transition.method }}{% if href %} {{ href }}{% elseif transition.computedHref %} {{ transition.computedHref }}{% endif %}
 {% endif %}
 
 {{ transition.description }}
@@ -152,10 +155,10 @@ FORMAT: 1A
     {% if item.element === 'copy' %}
 {{ item.content }}
     {% endif %}
-    {% if item.element === 'category' && item.meta.class.contains('resourceGroup') %}
+    {% if item.element === 'category' && item.class.contains('resourceGroup') %}
       {{ renderGroup(item) }}
     {% endif %}
-    {% if item.element === 'category' && item.meta.class.contains('dataStructure') %}
+    {% if item.element === 'category' && item.class.contains('dataStructure') %}
       {{ renderDataStructures(item) }}
     {% endif %}
     {% if item.element === 'resource' %}

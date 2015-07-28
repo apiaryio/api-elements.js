@@ -1,7 +1,10 @@
 import _ from 'underscore';
 import deref from 'json-schema-deref-sync';
 
-import { registry, MemberType, BooleanType, NumberType, StringType, ArrayType } from 'minim';
+import {
+  registry, MemberElement, BooleanElement, NumberElement, StringElement,
+  ArrayElement
+} from 'minim';
 import '../refract/api';
 
 // Define API Description elements
@@ -28,33 +31,33 @@ function convertParameterToElement(parameter) {
 
   // Convert from Swagger types to Minim elements
   if (parameter.type === 'string') {
-    memberValue = new StringType('');
+    memberValue = new StringElement('');
   } else if (parameter.type === 'integer' || parameter.type === 'number') {
-    memberValue = new NumberType();
+    memberValue = new NumberElement();
   } else if (parameter.type === 'boolean') {
-    memberValue = new BooleanType();
+    memberValue = new BooleanElement();
   } else if (parameter.type === 'array') {
-    memberValue = new ArrayType();
+    memberValue = new ArrayElement();
   } else {
     // Default to a string in case we get a type we haven't seen
-    memberValue = new StringType('');
+    memberValue = new StringElement('');
   }
 
   // TODO: Update when Minim has better support for elements as values
   // should be: new MemberType(parameter.name, memberValue);
-  let member = new MemberType(parameter.name);
+  let member = new MemberElement(parameter.name);
   member.content.value = memberValue;
 
-  member.meta.description = parameter.description;
+  member.description = parameter.description;
 
   if (parameter.required) {
-    member.attributes.typeAttributes = ['required'];
+    member.attributes.set('typeAttributes', ['required']);
   }
 
   // If there is a default, it is set on the member value instead of the member
   // element itself because the default value applies to the value.
   if (parameter.default) {
-    memberValue.attributes.default = parameter.default;
+    memberValue.attributes.set('default', parameter.default);
   }
 
   return member;
@@ -76,8 +79,8 @@ function derefJsonSchema(jsonSchemaWithRefs) {
 function createAssetFromJsonSchema(jsonSchemaWithRefs) {
   let jsonSchema = derefJsonSchema(jsonSchemaWithRefs);
   let schemaAsset = new Asset(JSON.stringify(jsonSchema));
-  schemaAsset.meta.class.push('messageBodySchema');
-  schemaAsset.attributes.contentType = 'application/schema+json';
+  schemaAsset.class.push('messageBodySchema');
+  schemaAsset.attributes.set('contentType', 'application/schema+json');
 
   return schemaAsset;
 }
@@ -91,7 +94,7 @@ function createTransaction(transition, method) {
   }
 
   if (method) {
-    transaction.request.attributes.method = method.toUpperCase();
+    transaction.request.attributes.set('method', method.toUpperCase());
   }
 
   return transaction;
@@ -109,9 +112,9 @@ export function parse({ source }, done) {
   let api = new Category();
 
   // Root API Element
-  api.meta.class.push('api');
-  api.meta.title.set(source.info.title);
-  api.meta.description.set(source.info.description);
+  api.class.push('api');
+  api.meta.set('title', source.info.title);
+  api.meta.set('description', source.info.description);
 
   // Swagger has a paths object to loop through
   // The key is the href
@@ -121,7 +124,7 @@ export function parse({ source }, done) {
 
     // TODO: Better title and description for the resources
     // For now, give a title of the HREF
-    resource.meta.title.set('Resource ' + href);
+    resource.meta.set('title', 'Resource ' + href);
 
     let pathObjectParameters = pathValue.parameters || [];
 
@@ -164,9 +167,9 @@ export function parse({ source }, done) {
           return parameter.name;
         });
 
-        resource.attributes.href = basePath + href + '{?' + queryParameterNames.join(',') + '}';
+        resource.attributes.set('href', basePath + href + '{?' + queryParameterNames.join(',') + '}');
       } else {
-        resource.attributes.href = href;
+        resource.attributes.set('href', href);
       }
 
       let transition = new Transition();
@@ -175,12 +178,12 @@ export function parse({ source }, done) {
       // Prefer description over summary since description is more complete.
       // According to spec, summary SHOULD only be 120 characters
       if (methodValue.description) {
-        transition.meta.description.set(methodValue.description);
+        transition.meta.set('description', methodValue.description);
       } else if (methodValue.summary) {
-        transition.meta.description.set(methodValue.summary);
+        transition.meta.set('description', methodValue.summary);
       }
 
-      transition.meta.title.set(methodValue.operationId);
+      transition.meta.set('title', methodValue.operationId);
 
       // For each uriParameter, create an hrefVariable
       if (uriParameters.length > 0) {
@@ -224,7 +227,7 @@ export function parse({ source }, done) {
         //   request.attributes.href = href;
         // }
 
-        response.attributes.statusCode = statusCode;
+        response.attributes.set('statusCode', statusCode);
       });
     });
   });

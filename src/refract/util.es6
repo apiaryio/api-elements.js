@@ -19,13 +19,15 @@ export function filterBy(options, item) {
   if (options.element && item.element !== options.element) {
     return false;
   }
-  if (options.name && item.meta.name) {
+
+  let name = item.name;
+  if (options.name && name) {
     if (options.ignoreCase) {
-      if (item.meta.name.toLowerCase() !== options.name.toLowerCase()) {
+      if (name.toLowerCase() !== options.name.toLowerCase()) {
         return false;
       }
     } else {
-      if (item.meta.name !== options.name) {
+      if (name !== options.name) {
         return false;
       }
     }
