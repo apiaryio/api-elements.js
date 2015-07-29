@@ -187,7 +187,7 @@ legacyResourcesFrom1AResource = (legacyUrlConverterFn, resource) ->
     # Combine resource & action section, preferring action
     legacyResource = new blueprintAPI.Resource responses: [], requests: []
 
-    legacyResource.url         = legacyUrlConverterFn resource.uriTemplate
+    legacyResource.url         = legacyUrlConverterFn action.attributes?.uriTemplate or resource.uriTemplate
     legacyResource.uriTemplate = resource.uriTemplate
 
     legacyResource.method = action.method
