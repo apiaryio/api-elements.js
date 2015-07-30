@@ -221,4 +221,8 @@ describe('Expose relation and urlTemplate for action', function() {
     assert.equal(postAction.actionUriTemplate, '');
   });
 
+  it ('is equal to url when advanced action', function () {
+    assert.equal(getAction.url, getAction.actionUriTemplate);
+  });
+
 });
