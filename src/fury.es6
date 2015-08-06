@@ -7,8 +7,8 @@ import legacyAPI from './legacy/blueprint';
 import legacyBlueprintParser from './legacy/blueprint-parser';
 import legacyMarkdownRenderer from './legacy/markdown';
 
-// Register API primitives
-import './refract/api';
+// Register Parse Result and API description primitives
+import './refract/parseResult';
 
 /*
  * Find an adapter by a given media type. If no adapter is found, then

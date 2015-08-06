@@ -3,7 +3,7 @@ var events = require('events');
 // Default logging function
 function log(message) {
   /*eslint no-unused-vars: 0 */
-  //console.log(message);
+  // console.log(message);
 }
 
 // Default Fury EventEmitter
