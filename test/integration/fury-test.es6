@@ -5,42 +5,45 @@ import fury, {
 import minim from 'minim';
 
 const refractedApi = [
-  'category', {'class': ['api'], title: 'My API', description: 'An API description.'}, {}, [
-    ['category', {'class': ['resourceGroup'], title: 'My Group', description: 'This is a group of resources'}, {}, [
-      ['copy', {}, {contentType: 'text/plain'}, 'Extra text'],
-      ['resource', {title: 'Frob', description: 'A frob does something.'}, {
-        href: '/frobs/{id}',
-        hrefVariables: ['hrefVariables', {}, {}, [
-          ['member', {}, {}, {
-            'key': ['string', {}, {}, 'id'],
-            'value': ['string', {}, {}, '']
-          }]
-        ]]
-        }, [
-        ['dataStructure', {}, {}, [
-          ["member", {}, {"typeAttributes": ["required"]}, {
-            "key": ["string", {}, {}, "id"],
-            "value": ["string", {}, {}, null]
-          }],
-          ["member", {}, {}, {
-            "key": ["string", {}, {}, "tag"],
-            "value": ["string", {}, {}, null]
-          }]
-        ]],
-        ['transition', {}, {}, [
-          ['httpTransaction', {title: 'Get a frob', description: 'Gets information about a single frob instance'}, {}, [
-            ['httpRequest', {}, {method: 'GET'}, null],
-            ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
-              ['string', {name: 'Content-Type'}, {}, 'application/json']
-            ]]}, [
-              ['asset', {'class': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
+  'parseResult', {}, {}, [
+    ['category', {'class': ['api'], title: 'My API', description: 'An API description.'}, {}, [
+      ['category', {'class': ['resourceGroup'], title: 'My Group', description: 'This is a group of resources'}, {}, [
+        ['copy', {}, {contentType: 'text/plain'}, 'Extra text'],
+        ['resource', {title: 'Frob', description: 'A frob does something.'}, {
+          href: '/frobs/{id}',
+          hrefVariables: ['hrefVariables', {}, {}, [
+            ['member', {}, {}, {
+              'key': ['string', {}, {}, 'id'],
+              'value': ['string', {}, {}, '']
+            }]
+          ]]
+          }, [
+          ['dataStructure', {}, {}, [
+            ['member', {}, {'typeAttributes': ['required']}, {
+              'key': ['string', {}, {}, 'id'],
+              'value': ['string', {}, {}, null]
+            }],
+            ['member', {}, {}, {
+              'key': ['string', {}, {}, 'tag'],
+              'value': ['string', {}, {}, null]
+            }]
+          ]],
+          ['transition', {}, {}, [
+            ['httpTransaction', {title: 'Get a frob', description: 'Gets information about a single frob instance'}, {}, [
+              ['httpRequest', {}, {method: 'GET'}, null],
+              ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
+                ['string', {name: 'Content-Type'}, {}, 'application/json']
+              ]]}, [
+                ['asset', {'class': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
+              ]]
             ]]
           ]]
         ]]
       ]]
-    ]]
-  ]
-];
+    ]
+  ],
+  ['annotation', {'class': ['warning']}, {'code': 6, 'sourceMap': [[0, 10]]}, 'description']
+]];
 
 describe('Nodes.js require', () => {
   it('should work without needing to use `.default`', () => {
@@ -70,8 +73,8 @@ describe('Fury class', () => {
 describe('Parser', () => {
   it('should recognize API Blueprint', (done) => {
     const source = 'FORMAT: 1A\n\n# My API\n';
-    fury.parse({source}, (err, api) => {
-      assert(api);
+    fury.parse({source}, (err, result) => {
+      assert(result);
       done(err);
     });
   });
@@ -102,15 +105,15 @@ describe('Parser', () => {
     });
 
     it('should parse through mediatype', (done) => {
-      fury.parse({source: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, api) => {
-        assert.equal(api.content, 'dummy');
+      fury.parse({source: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, result) => {
+        assert.equal(result.content, 'dummy');
         done(err);
       });
     });
 
     it('should parse through autodetect', (done) => {
-      fury.parse({source: 'dummy'}, (err, api) => {
-        assert.equal(api.content, 'dummy');
+      fury.parse({source: 'dummy'}, (err, result) => {
+        assert.equal(result.content, 'dummy');
         done(err);
       });
     });
@@ -120,8 +123,8 @@ describe('Parser', () => {
       fury.adapters[fury.adapters.length - 1].parse = ({source}, cb) =>
         cb(null, new minim.StringElement(source));
 
-      fury.parse({source: 'dummy'}, (err, api) => {
-        assert.equal(api.content, 'dummy');
+      fury.parse({source: 'dummy'}, (err, result) => {
+        assert.equal(result.content, 'dummy');
         done(err);
       });
     });
@@ -156,9 +159,30 @@ describe('Refract loader', () => {
 
   describe('shorthand', () => {
     let api;
+    let annotation;
 
     before(() => {
-      api = fury.load(refractedApi);
+      const result = fury.load(refractedApi);
+      api = result.first();
+      annotation = result.get(1);
+    });
+
+    context('parse result annotation', () => {
+      it('should exist', () => {
+        assert.ok(annotation);
+      });
+
+      it('should have a code', () => {
+        assert.equal(annotation.code, 6);
+      });
+
+      it('should have text content', () => {
+        assert.equal(annotation.toValue(), 'description');
+      });
+
+      it('should have a source map', () => {
+        assert.deepEqual(annotation.attributes.get('sourceMap').toValue(), [[0, 10]]);
+      });
     });
 
     it('should parse a refract shorthand API', () => {

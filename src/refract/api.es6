@@ -1,5 +1,6 @@
 /*
- * API-specific refract elements. General structure:
+ * API description-specific refract elements.
+ * General structure:
  *
  * + Category - API, resource group
  *   + Category
@@ -15,7 +16,6 @@
  *           + Asset
  *           + Message body
  *           + Message body schema
- *     + Data structure
  *   + Data structure
  */
 
@@ -329,7 +329,7 @@ export class Category extends ArrayElement {
   }
 }
 
-// Register the API and Resource element Elements.
+// Register the API description element Elements.
 registry
   .register('category', Category)
   .register('copy', Copy)
