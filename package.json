@@ -37,12 +37,14 @@
     "babel": "^5.2.9",
     "babel-eslint": "^3.1.5",
     "chai": "^2.3.0",
+    "cli-table": "^0.3.1",
     "coffee-script": "~1.9",
     "coveralls": "^2.11.2",
     "eslint": "^0.21.2",
     "glob": "^5.0.10",
     "istanbul": "^0.3.13",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "yargs": "^3.18.0"
   },
   "license": "MIT"
 }
