@@ -306,7 +306,7 @@
             "title": "findPetsByStatus"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -419,7 +419,7 @@
             "title": "findPetsByTags"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -557,7 +557,7 @@
             "title": "updatePetWithForm"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -646,7 +646,7 @@
             "title": "getPetById"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -773,7 +773,7 @@
             "title": "deletePet"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -862,7 +862,7 @@
             "title": "partialUpdate"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -1159,7 +1159,7 @@
             "title": "updateUser"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -1310,7 +1310,7 @@
             "title": "deleteUser"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -1422,7 +1422,7 @@
             "title": "getUserByName"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -1558,7 +1558,7 @@
             "title": "loginUser"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -1890,7 +1890,7 @@
             "title": "deleteOrder"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},
@@ -2002,7 +2002,7 @@
             "title": "getOrderById"
           },
           "attributes": {
-            "parameters": {
+            "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
               "attributes": {},

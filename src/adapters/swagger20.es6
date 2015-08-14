@@ -187,11 +187,11 @@ export function parse({ source }, done) {
 
       // For each uriParameter, create an hrefVariable
       if (uriParameters.length > 0) {
-        transition.parameters = new HrefVariables();
+        transition.hrefVariables = new HrefVariables();
 
         uriParameters
           .map(convertParameterToElement)
-          .forEach((member) => transition.parameters.content.push(member));
+          .forEach((member) => transition.hrefVariables.content.push(member));
       }
 
       // Currently, default responses are not supported in API Description format

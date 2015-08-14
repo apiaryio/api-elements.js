@@ -16,6 +16,7 @@
  *           + Asset
  *           + Message body
  *           + Message body schema
+ *   + Transition
  *   + Data structure
  */
 
@@ -194,7 +195,7 @@ export class Transition extends ArrayElement {
     super(...args);
 
     this.element = 'transition';
-    this._attributeElementKeys = ['parameters', 'attributes'];
+    this._attributeElementKeys = ['hrefVariables', 'attributes'];
   }
 
   get method() {
@@ -225,21 +226,28 @@ export class Transition extends ArrayElement {
     }
   }
 
-  get parameters() {
-    return this.attributes.get('parameters');
+  get hrefVariables() {
+    return this.attributes.get('hrefVariables');
   }
 
-  set parameters(value) {
-    this.attributes.set('parameters', value);
+  set hrefVariables(value) {
+    this.attributes.set('hrefVariables', value);
   }
 
-  // The key `attributes` is already taken, so `attr` is used instead.
-  get attr() {
-    return this.attributes.get('attributes');
+  get data() {
+    return this.attributes.get('data');
   }
 
-  set attr(value) {
-    this.attributes.set('attributes', value);
+  set data(value) {
+    this.attributes.set('data', value);
+  }
+
+  get contentTypes() {
+    return this.attributes.get('contentTypes');
+  }
+
+  set contentTypes(value) {
+    this.attributes.set('contentTypes', value);
   }
 
   get transactions() {
@@ -322,6 +330,10 @@ export class Category extends ArrayElement {
 
   get resources() {
     return this.findByElement('resource');
+  }
+
+  get transitions() {
+    return this.findByElement('transition');
   }
 
   get copy() {
