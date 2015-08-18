@@ -1,7 +1,7 @@
 {
   "element": "category",
   "meta": {
-    "class": [
+    "classes": [
       "api"
     ],
     "title": "Swagger Sample App",
@@ -125,7 +125,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -161,7 +161,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -197,7 +197,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -233,7 +233,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -363,7 +363,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -501,7 +501,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -705,7 +705,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -911,7 +911,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -932,7 +932,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -960,7 +960,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1061,7 +1061,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1118,7 +1118,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1208,7 +1208,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1244,7 +1244,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1280,7 +1280,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1479,7 +1479,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1640,7 +1640,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1756,7 +1756,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1813,7 +1813,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1849,7 +1849,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -2059,7 +2059,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },

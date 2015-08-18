@@ -124,7 +124,7 @@ class HttpMessagePayload extends ArrayElement {
     // Returns the *first* message body. Only one should be defined according
     // to the spec, but it's possible to include more.
     return this.filter((item) => {
-      return item.element === 'asset' && item.class.contains('messageBody');
+      return item.element === 'asset' && item.classes.contains('messageBody');
     }).first();
   }
 
@@ -132,7 +132,7 @@ class HttpMessagePayload extends ArrayElement {
     // Returns the *first* message body schema. Only one should be defined
     // according to the spec, but it's possible to include more.
     return this.filter((item) => {
-      return item.element === 'asset' && item.class.contains('messageBodySchema');
+      return item.element === 'asset' && item.classes.contains('messageBodySchema');
     }).first();
   }
 }
@@ -288,10 +288,37 @@ export class Resource extends ArrayElement {
   }
 }
 
-export class DataStructure extends ObjectElement {
+export class DataStructure extends BaseElement {
   constructor(...args) {
     super(...args);
     this.element = 'dataStructure';
+    if (this.content !== undefined) {
+      this.content = registry.toElement(this.content);
+    }
+  }
+
+  toRefract() {
+    const refract = super.toRefract();
+    refract.content = registry.toRefract(refract.content);
+    return refract;
+  }
+
+  toCompactRefract() {
+    const compactRefract = super.toCompactRefract();
+    compactRefract.content = registry.toCompactRefract(compactRefract.content);
+    return compactRefract;
+  }
+
+  fromRefract(doc) {
+    super.fromRefract(doc);
+    this.content = registry.fromRefract(doc.content);
+    return this;
+  }
+
+  fromCompactRefract(tuple) {
+    super.fromCompactRefract(tuple);
+    this.content = registry.fromCompactRefract(tuple[3]);
+    return this;
   }
 }
 

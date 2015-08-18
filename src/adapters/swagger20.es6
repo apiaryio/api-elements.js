@@ -79,7 +79,7 @@ function derefJsonSchema(jsonSchemaWithRefs) {
 function createAssetFromJsonSchema(jsonSchemaWithRefs) {
   let jsonSchema = derefJsonSchema(jsonSchemaWithRefs);
   let schemaAsset = new Asset(JSON.stringify(jsonSchema));
-  schemaAsset.class.push('messageBodySchema');
+  schemaAsset.classes.push('messageBodySchema');
   schemaAsset.attributes.set('contentType', 'application/schema+json');
 
   return schemaAsset;
@@ -112,7 +112,7 @@ export function parse({ source }, done) {
   let api = new Category();
 
   // Root API Element
-  api.class.push('api');
+  api.classes.push('api');
   api.meta.set('title', source.info.title);
   api.meta.set('description', source.info.description);
 

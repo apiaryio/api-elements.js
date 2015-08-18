@@ -7,7 +7,7 @@
           ["httpResponse", {}, {"statusCode": 200, "headers": ["httpHeaders", {}, {}, [
             ["string", {"name": "Content-Type"}, {}, "text/plain"]
           ]]}, [
-            ["asset", {"class": ["messageBody"]}, {}, "Hello, World!"]
+            ["asset", {"classes": ["messageBody"]}, {}, "Hello, World!"]
           ]]
         ]]
       ]]

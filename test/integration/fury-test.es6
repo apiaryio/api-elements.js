@@ -6,8 +6,8 @@ import minim from 'minim';
 
 const refractedApi = [
   'parseResult', {}, {}, [
-    ['category', {'class': ['api'], title: 'My API', description: 'An API description.'}, {}, [
-      ['category', {'class': ['resourceGroup'], title: 'My Group', description: 'This is a group of resources'}, {}, [
+    ['category', {'classes': ['api'], title: 'My API', description: 'An API description.'}, {}, [
+      ['category', {'classes': ['resourceGroup'], title: 'My Group', description: 'This is a group of resources'}, {}, [
         ['copy', {}, {contentType: 'text/plain'}, 'Extra text'],
         ['resource', {title: 'Frob', description: 'A frob does something.'}, {
           href: '/frobs/{id}',
@@ -18,7 +18,7 @@ const refractedApi = [
             }]
           ]]
           }, [
-          ['dataStructure', {}, {}, [
+          ['dataStructure', {}, {}, ['object', {}, {}, [
             ['member', {}, {'typeAttributes': ['required']}, {
               'key': ['string', {}, {}, 'id'],
               'value': ['string', {}, {}, null]
@@ -27,14 +27,14 @@ const refractedApi = [
               'key': ['string', {}, {}, 'tag'],
               'value': ['string', {}, {}, null]
             }]
-          ]],
+          ]]],
           ['transition', {}, {}, [
             ['httpTransaction', {title: 'Get a frob', description: 'Gets information about a single frob instance'}, {}, [
               ['httpRequest', {}, {method: 'GET'}, null],
               ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
                 ['string', {name: 'Content-Type'}, {}, 'application/json']
               ]]}, [
-                ['asset', {'class': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
+                ['asset', {'classes': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
               ]]
             ]]
           ]]
@@ -42,7 +42,7 @@ const refractedApi = [
       ]]
     ]
   ],
-  ['annotation', {'class': ['warning']}, {'code': 6, 'sourceMap': [[0, 10]]}, 'description']
+  ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [[0, 10]]}, 'description']
 ]];
 
 describe('Nodes.js require', () => {
@@ -141,7 +141,7 @@ describe('Parser', () => {
 describe('Refract loader', () => {
   describe('autodetect', () => {
     it('should support shorthand', () => {
-      let api = fury.load(['category', {'class': 'api'}, {}, []]);
+      let api = fury.load(['category', {'classes': 'api'}, {}, []]);
       assert(api);
     });
 
@@ -149,7 +149,7 @@ describe('Refract loader', () => {
       let api = fury.load({
         element: 'category',
         meta: {
-          'class': 'api'
+          'classes': 'api'
         },
         content: []
       });
