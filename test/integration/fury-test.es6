@@ -6,10 +6,11 @@ import minim from 'minim';
 
 const refractedApi = [
   'parseResult', {}, {}, [
-    ['category', {'classes': ['api'], title: 'My API', description: 'An API description.'}, {}, [
-      ['category', {'classes': ['resourceGroup'], title: 'My Group', description: 'This is a group of resources'}, {}, [
-        ['copy', {}, {contentType: 'text/plain'}, 'Extra text'],
-        ['resource', {title: 'Frob', description: 'A frob does something.'}, {
+    ['category', {'classes': ['api'], title: 'My API'}, {}, [
+      ['copy', {}, {}, 'An API description.'],
+      ['category', {'classes': ['resourceGroup'], title: 'My Group'}, {}, [
+        ['copy', {}, {contentType: 'text/plain'}, 'This is a group of resources'],
+        ['resource', {title: 'Frob'}, {
           href: '/frobs/{id}',
           hrefVariables: ['hrefVariables', {}, {}, [
             ['member', {}, {}, {
@@ -18,6 +19,7 @@ const refractedApi = [
             }]
           ]]
           }, [
+          ['copy', {}, {}, 'A frob does something.'],
           ['dataStructure', {}, {}, ['object', {}, {}, [
             ['member', {}, {'typeAttributes': ['required']}, {
               'key': ['string', {}, {}, 'id'],
@@ -29,7 +31,8 @@ const refractedApi = [
             }]
           ]]],
           ['transition', {}, {}, [
-            ['httpTransaction', {title: 'Get a frob', description: 'Gets information about a single frob instance'}, {}, [
+            ['httpTransaction', {title: 'Get a frob'}, {}, [
+              ['copy', {}, {}, 'Gets information about a single frob instance'],
               ['httpRequest', {}, {method: 'GET'}, null],
               ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
                 ['string', {name: 'Content-Type'}, {}, 'application/json']
@@ -200,7 +203,8 @@ describe('Refract loader', () => {
 
     it('should contain a single copy element', () => {
       assert.equal(api.resourceGroups.get(0).copy.length, 1);
-      assert.equal(api.resourceGroups.get(0).copy.get(0).content, 'Extra text');
+      assert.equal(api.resourceGroups.get(0).copy.get(0).content,
+                   'This is a group of resources');
     });
 
     it('should contain a single resource', () => {

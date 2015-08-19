@@ -79,6 +79,10 @@ FORMAT: 1A
 
 {{ transition.description }}
 
+{% for copy in transition|getCopy %}
+{{ copy.content }}
+{% endfor %}
+
 {% if transition.parameters.length %}
   {{ renderParameters(transition.parameters) }}
 {% endif %}
@@ -102,6 +106,10 @@ FORMAT: 1A
 ### {{ resource.title|default('Resource') }} [{{ resource.href }}]
 
 {{ resource.description }}
+
+{% for copy in resource|getCopy %}
+{{ copy.content }}
+{% endfor %}
 {% else %}
   {#
     We are using the shorthand, make sure to pass any href down to the

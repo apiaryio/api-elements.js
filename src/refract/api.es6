@@ -182,11 +182,11 @@ export class HttpTransaction extends ArrayElement {
   }
 
   get request() {
-    return this.findByElement('httpRequest').first();
+    return this.children((item) => item.element === 'httpRequest').first();
   }
 
   get response() {
-    return this.findByElement('httpResponse').first();
+    return this.children((item) => item.element === 'httpResponse').first();
   }
 }
 
@@ -251,7 +251,7 @@ export class Transition extends ArrayElement {
   }
 
   get transactions() {
-    return this.findByElement('httpTransaction');
+    return this.children((item) => item.element === 'httpTransaction');
   }
 }
 
@@ -280,11 +280,11 @@ export class Resource extends ArrayElement {
   }
 
   get transitions() {
-    return this.findByElement('transition');
+    return this.children((item) => item.element === 'transition');
   }
 
   get dataStructure() {
-    return this.findByElement('dataStructure').first();
+    return this.children((item) => item.element === 'dataStructure').first();
   }
 }
 
@@ -344,27 +344,27 @@ export class Category extends ArrayElement {
   }
 
   get resourceGroups() {
-    return this.findByClass('resourceGroup');
+    return this.children((item) => item.classes.contains('resourceGroup'));
   }
 
   get dataStructures() {
-    return this.findByClass('dataStructures');
+    return this.children((item) => item.classes.contains('dataStructures'));
   }
 
   get scenarios() {
-    return this.findByClass('scenario');
+    return this.children((item) => item.classes.contains('scenario'));
   }
 
   get resources() {
-    return this.findByElement('resource');
+    return this.children((item) => item.element === 'resource');
   }
 
   get transitions() {
-    return this.findByElement('transition');
+    return this.children((item) => item.element === 'transition');
   }
 
   get copy() {
-    return this.findByElement('copy');
+    return this.children((item) => item.element === 'copy');
   }
 }
 

@@ -1,8 +1,10 @@
 [
-  "category", {"classes": ["api"], "title": "My API", "description": "An API description."}, {}, [
-    ["category", {"classes": ["resourceGroup"], "title": "My Group", "description": "This is a group of resources"}, {}, [
+  "category", {"classes": ["api"], "title": "My API"}, {}, [
+    ["copy", {}, {}, "An API description."],
+    ["category", {"classes": ["resourceGroup"], "title": "My Group"}, {}, [
+      ["copy", {}, {}, "This is a group of resources"],
       ["copy", {}, {"contentType": "text/plain"}, "Extra text"],
-      ["resource", {"title": "Frob", "description": "A frob does something."}, {
+      ["resource", {"title": "Frob"}, {
         "href": "/frobs/{id}",
         "hrefVariables": ["hrefVariables", {}, {}, [
             ["member", {}, {"typeAttributes": ["required"]}, {
@@ -11,6 +13,7 @@
             }]
           ]]
         }, [
+        ["copy", {}, {}, "A frob does something."],
         ["dataStructure", {}, {}, ["object", {}, {}, [
           ["member", {}, {"typeAttributes": ["required"]}, {
             "key": ["string", {}, {}, "id"],
@@ -33,7 +36,8 @@
           }]
         ]]],
         ["transition", {}, {"relation": "Frob"}, [
-          ["httpTransaction", {"title": "Get a frob", "description": "Gets information about a single frob instance"}, {}, [
+          ["httpTransaction", {"title": "Get a frob"}, {}, [
+            ["copy", {}, {}, "Gets information about a single frob instance"],
             ["httpRequest", {}, {"method": "GET"}, null],
             ["httpResponse", {}, {"statusCode": 200, "headers": ["httpHeaders", {}, {}, [
               ["string", {"name": "Content-Type"}, {}, "application/json"],
@@ -44,7 +48,8 @@
             ]]
           ]]
         ]],
-        ["transition", {"title": "Restart a frob", "description": "Restart a frob instance"}, {"relation": "restart"}, [
+        ["transition", {"title": "Restart a frob"}, {"relation": "restart"}, [
+          ["copy", {}, {}, "Restart a frob instance"],
           ["httpTransaction", {}, {}, [
             ["httpRequest", {}, {"method": "POST"}, []],
             ["httpResponse", {}, {}, []]

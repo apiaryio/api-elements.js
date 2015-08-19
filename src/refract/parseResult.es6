@@ -19,11 +19,11 @@ export class ParseResult extends ArrayElement {
   }
 
   get api() {
-    return this.findByClass('api').first();
+    return this.children((item) => item.classes.contains('api')).first();
   }
 
   get annotations() {
-    return this.findByElement('annotation');
+    return this.children((item) => item.element === 'annotation');
   }
 }
 
