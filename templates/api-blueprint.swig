@@ -166,7 +166,7 @@ FORMAT: 1A
     {% if item.element === 'category' && item.classes.contains('resourceGroup') %}
       {{ renderGroup(item) }}
     {% endif %}
-    {% if item.element === 'category' && item.classes.contains('dataStructure') %}
+    {% if item.element === 'category' && item.classes.contains('dataStructures') %}
       {{ renderDataStructures(item) }}
     {% endif %}
     {% if item.element === 'resource' %}
