@@ -35,7 +35,10 @@ const refractedApi = [
               ['copy', {}, {}, 'Gets information about a single frob instance'],
               ['httpRequest', {}, {method: 'GET'}, null],
               ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
-                ['string', {name: 'Content-Type'}, {}, 'application/json']
+                ['member', {}, {}, {
+                  key: ['string', {}, {}, 'Content-Type'],
+                  value: ['string', {}, {}, 'application/json']
+                }]
               ]]}, [
                 ['asset', {'classes': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
               ]]
@@ -246,7 +249,7 @@ describe('Refract loader', () => {
       const response = resource.transitions.get(0).transactions.get(0).response;
 
       // Get the header element by index and read the value
-      assert.equal(response.headers.get(0).toValue(), 'application/json');
+      assert.equal(response.headers.get(0).value.toValue(), 'application/json');
 
       // Convenience to get a header by name
       assert.equal(response.header('content-type'), 'application/json');

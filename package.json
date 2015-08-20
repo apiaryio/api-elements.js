@@ -14,7 +14,7 @@
   "scripts": {
     "compile": "eslint --ext .js,.es6 src && babel src --optional runtime --out-dir lib && coffee -b -c -o lib/ src/",
     "precoverage": "npm run compile",
-    "coverage": "istanbul cover _mocha -- --compilers es6:babel/register,coffee:coffee-script/register -R spec --recursive",
+    "coverage": "istanbul cover _mocha -- --compilers es6:babel/register,coffee:coffee-script/register -R dot --recursive",
     "precoveralls": "npm run coverage",
     "coveralls": "coveralls <coverage/lcov.info",
     "pretest": "npm run compile",

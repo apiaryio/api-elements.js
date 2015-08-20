@@ -9,11 +9,11 @@ FORMAT: 1A
 {% if example|bodyOnly %}
         {{ example.messageBody.content|indent(8) }}
 {% else %}
-  {% if example.headers.exclude('Content-Type').length %}
+  {% if example.headers && example.headers.exclude('Content-Type').length %}
     + Headers
 
       {% for header in example.headers.exclude('Content-Type').content %}
-            {{ header.name }}: {{ header.content }}{% endfor %}
+            {{ header.key.toValue() }}: {{ header.value.toValue() }}{% endfor %}
 
   {% endif %}
   {% if example.dataStructure %}

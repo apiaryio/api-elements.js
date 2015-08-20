@@ -5,7 +5,10 @@
         ["httpTransaction", {}, {}, [
           ["httpRequest", {}, {"method": "GET", "href": "/message"}, null],
           ["httpResponse", {}, {"statusCode": 200, "headers": ["httpHeaders", {}, {}, [
-            ["string", {"name": "Content-Type"}, {}, "text/plain"]
+            ["member", {}, {}, {
+              "key": ["string", {}, {}, "Content-Type"],
+              "value": ["string", {}, {}, "text/plain"]
+            }]
           ]]}, [
             ["asset", {"classes": ["messageBody"]}, {}, "Hello, World!"]
           ]]

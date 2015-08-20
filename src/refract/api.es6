@@ -23,30 +23,37 @@
 import {
   ArrayElement, BaseElement, ObjectElement, StringElement, registry
 } from 'minim';
-import {filterBy} from './util';
 
-class HttpHeaders extends ArrayElement {
+export class HttpHeaders extends ArrayElement {
   constructor(...args) {
     super(...args);
     this.element = 'httpHeaders';
   }
 
-  exclude(name) {
-    return this.filter(item => {
-      let itemName = item.name;
+  toValue() {
+    return this.map(item => [item.key.toValue(), item.value.toValue()]);
+  }
 
-      if (!itemName) {
-        // This can't possibly match, so we include it in the results.
-        return true;
-      }
+  include(name) {
+    return this.filter(item => {
+      const key = item.key.toValue();
 
       // Note: this may not be a string, hence the duck-Element check below!
-      return !(itemName.toLowerCase) || itemName.toLowerCase() !== name.toLowerCase();
+      return !(key.toLowerCase) || key.toLowerCase() === name.toLowerCase();
+    });
+  }
+
+  exclude(name) {
+    return this.filter(item => {
+      const key = item.key.toValue();
+
+      // Note: this may not be a string, hence the duck-Element check below!
+      return !(key.toLowerCase) || key.toLowerCase() !== name.toLowerCase();
     });
   }
 }
 
-class HrefVariables extends ObjectElement {
+export class HrefVariables extends ObjectElement {
   constructor(...args) {
     super(...args);
     this.element = 'hrefVariables';
@@ -76,7 +83,7 @@ export class Asset extends BaseElement {
   }
 }
 
-class HttpMessagePayload extends ArrayElement {
+export class HttpMessagePayload extends ArrayElement {
   constructor(...args) {
     super(...args);
     this._attributeElementKeys = ['headers'];
@@ -95,22 +102,18 @@ class HttpMessagePayload extends ArrayElement {
     let header = null;
 
     if (headers) {
-      header = headers.content.filter(filterBy.bind(this, {
-        name,
-        ignoreCase: true
-      }))[0];
-
-      if (header) {
-        header = header.toValue();
-      }
+      header = headers.include(name).map(item => {
+        return item.value.toValue();
+      });
     }
 
     return header;
   }
 
   get contentType() {
-    if (this.header('Content-Type')) {
-      return this.header('Content-Type');
+    const header = this.header('Content-Type');
+    if (header) {
+      return header.join(', ');
     }
 
     return this.content && this.content.contentType;
@@ -195,11 +198,17 @@ export class Transition extends ArrayElement {
     super(...args);
 
     this.element = 'transition';
-    this._attributeElementKeys = ['hrefVariables', 'attributes'];
+    this._attributeElementKeys = ['hrefVariables', 'data'];
   }
 
   get method() {
-    return this.transactions.get(0).request.method;
+    const transaction = this.transactions.first();
+    if (transaction) {
+      const request = transaction.request;
+      if (request) {
+        return request.method;
+      }
+    }
   }
 
   get relation() {
@@ -297,15 +306,19 @@ export class DataStructure extends BaseElement {
     }
   }
 
+  toValue() {
+    return this.content && this.content.toValue();
+  }
+
   toRefract() {
     const refract = super.toRefract();
-    refract.content = registry.toRefract(refract.content);
+    refract.content = refract.content.toRefract();
     return refract;
   }
 
   toCompactRefract() {
     const compactRefract = super.toCompactRefract();
-    compactRefract.content = registry.toCompactRefract(compactRefract.content);
+    compactRefract[3] = compactRefract[3].toCompactRefract();
     return compactRefract;
   }
 
@@ -329,7 +342,7 @@ export class Copy extends StringElement {
   }
 
   get contentType() {
-    return this.attributes.contentType;
+    return this.attributes.getValue('contentType');
   }
 
   set contentType(value) {
@@ -353,6 +366,10 @@ export class Category extends ArrayElement {
 
   get scenarios() {
     return this.children((item) => item.classes.contains('scenario'));
+  }
+
+  get transitionGroups() {
+    return this.children((item) => item.classes.contains('transitions'));
   }
 
   get resources() {

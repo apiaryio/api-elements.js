@@ -40,8 +40,14 @@
             ["copy", {}, {}, "Gets information about a single frob instance"],
             ["httpRequest", {}, {"method": "GET"}, null],
             ["httpResponse", {}, {"statusCode": 200, "headers": ["httpHeaders", {}, {}, [
-              ["string", {"name": "Content-Type"}, {}, "application/json"],
-              ["string", {"name": "Authorization"}, {}, "Bearer abc123"]
+              ["member", {}, {}, {
+                "key": ["string", {}, {}, "Content-Type"],
+                "value": ["string", {}, {}, "application/json"]
+              }],
+              ["member", {}, {}, {
+                "key": ["string", {}, {}, "Authorization"],
+                "value": ["string", {}, {}, "Bearer abc123"]
+              }]
             ]]}, [
               ["asset", {"classes": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tags\": [\n    {\n      \"name\": \"foo\",\n      \"count\": 23\n    }\n  ]\n}\n"],
               ["asset", {"classes": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tags\": {      \"type\": \"array\"}}}"]
