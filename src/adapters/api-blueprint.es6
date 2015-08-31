@@ -77,11 +77,20 @@ function pretty(input) {
   return prettified;
 }
 
+/*
+ * Return all child elements with the element type of `copy` in a plain
+ * old js array.
+ */
+function getCopy(element) {
+  return element.children((item) => item.element === 'copy').content;
+}
+
 swig.setFilter('mson', mson);
 swig.setFilter('indent', indent);
 swig.setFilter('bodyOnly', bodyOnly);
 swig.setFilter('resourceShorthand', resourceShorthand);
 swig.setFilter('pretty', pretty);
+swig.setFilter('getCopy', getCopy);
 
 export const name = 'api-blueprint';
 export const mediaTypes = [

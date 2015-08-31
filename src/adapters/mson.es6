@@ -32,10 +32,13 @@ function indent(input, spaces, options={first: false}) {
  * Get type information for an element, such as the element name, whether
  * it is required, etc. Returns an array of strings.
  */
-function getTypeAttributes(element, attributes) {
+function getTypeAttributes(element, attributes, parent) {
   let typeAttributes = [];
 
-  if (element.element !== 'string' && element.element !== 'dataStructure') {
+  if (element.element !== 'string' && !!parent) {
+    // String is the default type. Any parentless type is probably a
+    // section (# Data Structures or + Attributes) so we don't print
+    // the type there either.
     typeAttributes.push(element.element);
   }
 
@@ -101,7 +104,7 @@ function handleContent(element, spaces, marker) {
  * Handle the description and any element content, including support
  * for both inline and long-form descriptions.
  */
-function handleDescription(description, element, spaces, marker) {
+function handleDescription(description, element, parent, spaces, marker) {
   const elementName = element.element;
   let str = '';
 
@@ -111,8 +114,8 @@ function handleDescription(description, element, spaces, marker) {
   // later during rendering.
   let useLongDescription = false;
   if (element.attributes &&
-      element.attributes.default !== undefined ||
-      element.attributes.sample !== undefined) {
+      (element.attributes.default !== undefined ||
+       element.attributes.sample !== undefined)) {
     useLongDescription = true;
   }
 
@@ -132,12 +135,14 @@ function handleDescription(description, element, spaces, marker) {
 
   // Handle special list items like default/sample here as they are part
   // of the description, before the content (sub-elements) are rendere.
-  const defaultValue = element.attributes.getValue('default');
+  const defaultValue = element.attributes &&
+                       element.attributes.getValue('default');
   if (defaultValue !== undefined) {
     str += `\n${marker} Default: ${defaultValue}\n`;
   }
 
-  const sampleValue = element.attributes.getValue('sample');
+  const sampleValue = element.attributes &&
+                      element.attributes.getValue('sample');
   if (sampleValue !== undefined) {
     str += `\n${marker} Sample: ${sampleValue}\n`;
   }
@@ -147,7 +152,9 @@ function handleDescription(description, element, spaces, marker) {
   if (element.content && element.content.length) {
     str += '\n';
 
-    if (elementName === 'dataStructure') {
+    if (!parent) {
+      // No parent implies a data structure or attribute definition, so
+      // buffer it with an extra space.
       str += '\n';
     }
 
@@ -199,13 +206,14 @@ function handle(name, element, {parent=null, spaces=4, marker='+',
   }
 
   // Then the type and attribute information (e.g. required)
-  let attributes = getTypeAttributes(element, attributesElement.attributes);
+  let attributes = getTypeAttributes(element, attributesElement.attributes,
+                                     parent);
   if (attributes.length) {
     str += ` (${attributes.join(', ')})`;
   }
 
   str += handleDescription(attributesElement.description,
-                           element, spaces, marker);
+                           element, parent, spaces, marker);
 
   // Return the entire block indented to the correct number of spaces.
   if (initialIndent) {

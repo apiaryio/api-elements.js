@@ -6,18 +6,22 @@ FORMAT: 1A
 
 
 {% macro renderExample(example) %}
+{% for copy in example|getCopy %}
+{{ copy.content }}
+{% endfor %}
+
 {% if example|bodyOnly %}
         {{ example.messageBody.content|indent(8) }}
 {% else %}
-  {% if example.headers.exclude('Content-Type').length %}
+  {% if example.headers && example.headers.exclude('Content-Type').length %}
     + Headers
 
       {% for header in example.headers.exclude('Content-Type').content %}
-            {{ header.name }}: {{ header.content }}{% endfor %}
+            {{ header.key.toValue() }}: {{ header.value.toValue() }}{% endfor %}
 
   {% endif %}
   {% if example.dataStructure %}
-    {{ example.dataStructure|mson|indent(4) }}
+    {{ example.dataStructure.content|mson|indent(4) }}
   {% endif %}
   {% if example.messageBody %}
     + Body
@@ -77,7 +81,9 @@ FORMAT: 1A
 #### {{ transition.method }}{% if href %} {{ href }}{% elseif transition.computedHref %} {{ transition.computedHref }}{% endif %}
 {% endif %}
 
-{{ transition.description }}
+{% for copy in transition|getCopy %}
+{{ copy.content }}
+{% endfor %}
 
 {% if transition.parameters.length %}
   {{ renderParameters(transition.parameters) }}
@@ -101,7 +107,9 @@ FORMAT: 1A
 {% set href = null %}
 ### {{ resource.title|default('Resource') }} [{{ resource.href }}]
 
-{{ resource.description }}
+{% for copy in resource|getCopy %}
+{{ copy.content }}
+{% endfor %}
 {% else %}
   {#
     We are using the shorthand, make sure to pass any href down to the
@@ -113,7 +121,7 @@ FORMAT: 1A
 {{ renderParameters(resource.hrefVariables) }}
 {% endif %}
 {% if resource.dataStructure %}
-{{ resource.dataStructure|mson }}
+{{ resource.dataStructure.content|mson }}
 {% endif %}
 {% for transition in resource.transitions.content %}
   {{ renderTransition(transition, href) }}
@@ -127,8 +135,6 @@ FORMAT: 1A
 {% macro renderGroup(group) %}
 ## Group {{ group.title }}
 
-{{ group.description }}
-
 {{ renderCategory(group) }}
 {% endmacro %}
 
@@ -140,7 +146,7 @@ FORMAT: 1A
 ## Data Structures
 
 {% for dataStructure in dataStructures.content %}
-{{ dataStructure|mson }}
+{{ dataStructure.content|mson }}
 {% endfor %}
 {% endmacro %}
 
@@ -155,10 +161,10 @@ FORMAT: 1A
     {% if item.element === 'copy' %}
 {{ item.content }}
     {% endif %}
-    {% if item.element === 'category' && item.class.contains('resourceGroup') %}
+    {% if item.element === 'category' && item.classes.contains('resourceGroup') %}
       {{ renderGroup(item) }}
     {% endif %}
-    {% if item.element === 'category' && item.class.contains('dataStructure') %}
+    {% if item.element === 'category' && item.classes.contains('dataStructures') %}
       {{ renderDataStructures(item) }}
     {% endif %}
     {% if item.element === 'resource' %}

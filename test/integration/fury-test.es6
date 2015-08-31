@@ -6,10 +6,11 @@ import minim from 'minim';
 
 const refractedApi = [
   'parseResult', {}, {}, [
-    ['category', {'class': ['api'], title: 'My API', description: 'An API description.'}, {}, [
-      ['category', {'class': ['resourceGroup'], title: 'My Group', description: 'This is a group of resources'}, {}, [
-        ['copy', {}, {contentType: 'text/plain'}, 'Extra text'],
-        ['resource', {title: 'Frob', description: 'A frob does something.'}, {
+    ['category', {'classes': ['api'], title: 'My API'}, {}, [
+      ['copy', {}, {}, 'An API description.'],
+      ['category', {'classes': ['resourceGroup'], title: 'My Group'}, {}, [
+        ['copy', {}, {contentType: 'text/plain'}, 'This is a group of resources'],
+        ['resource', {title: 'Frob'}, {
           href: '/frobs/{id}',
           hrefVariables: ['hrefVariables', {}, {}, [
             ['member', {}, {}, {
@@ -18,7 +19,8 @@ const refractedApi = [
             }]
           ]]
           }, [
-          ['dataStructure', {}, {}, [
+          ['copy', {}, {}, 'A frob does something.'],
+          ['dataStructure', {}, {}, ['object', {}, {}, [
             ['member', {}, {'typeAttributes': ['required']}, {
               'key': ['string', {}, {}, 'id'],
               'value': ['string', {}, {}, null]
@@ -27,14 +29,18 @@ const refractedApi = [
               'key': ['string', {}, {}, 'tag'],
               'value': ['string', {}, {}, null]
             }]
-          ]],
+          ]]],
           ['transition', {}, {}, [
-            ['httpTransaction', {title: 'Get a frob', description: 'Gets information about a single frob instance'}, {}, [
-              ['httpRequest', {}, {method: 'GET'}, null],
+            ['copy', {}, {}, 'Gets information about a single frob instance'],
+            ['httpTransaction', {title: 'Get a frob'}, {}, [
+              ['httpRequest', {}, {method: 'GET'}, []],
               ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
-                ['string', {name: 'Content-Type'}, {}, 'application/json']
+                ['member', {}, {}, {
+                  key: ['string', {}, {}, 'Content-Type'],
+                  value: ['string', {}, {}, 'application/json']
+                }]
               ]]}, [
-                ['asset', {'class': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
+                ['asset', {'classes': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
               ]]
             ]]
           ]]
@@ -42,7 +48,7 @@ const refractedApi = [
       ]]
     ]
   ],
-  ['annotation', {'class': ['warning']}, {'code': 6, 'sourceMap': [[0, 10]]}, 'description']
+  ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [[0, 10]]}, 'description']
 ]];
 
 describe('Nodes.js require', () => {
@@ -141,7 +147,7 @@ describe('Parser', () => {
 describe('Refract loader', () => {
   describe('autodetect', () => {
     it('should support shorthand', () => {
-      let api = fury.load(['category', {'class': 'api'}, {}, []]);
+      let api = fury.load(['category', {'classes': 'api'}, {}, []]);
       assert(api);
     });
 
@@ -149,7 +155,7 @@ describe('Refract loader', () => {
       let api = fury.load({
         element: 'category',
         meta: {
-          'class': 'api'
+          'classes': 'api'
         },
         content: []
       });
@@ -200,7 +206,8 @@ describe('Refract loader', () => {
 
     it('should contain a single copy element', () => {
       assert.equal(api.resourceGroups.get(0).copy.length, 1);
-      assert.equal(api.resourceGroups.get(0).copy.get(0).content, 'Extra text');
+      assert.equal(api.resourceGroups.get(0).copy.get(0).content,
+                   'This is a group of resources');
     });
 
     it('should contain a single resource', () => {
@@ -242,7 +249,7 @@ describe('Refract loader', () => {
       const response = resource.transitions.get(0).transactions.get(0).response;
 
       // Get the header element by index and read the value
-      assert.equal(response.headers.get(0).toValue(), 'application/json');
+      assert.equal(response.headers.get(0).value.toValue(), 'application/json');
 
       // Convenience to get a header by name
       assert.equal(response.header('content-type'), 'application/json');

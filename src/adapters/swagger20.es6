@@ -8,6 +8,7 @@ import {
 import '../refract/api';
 
 // Define API Description elements
+const Copy = registry.getElementClass('copy');
 const Category = registry.getElementClass('category');
 const Resource = registry.getElementClass('resource');
 const Transition = registry.getElementClass('transition');
@@ -79,7 +80,7 @@ function derefJsonSchema(jsonSchemaWithRefs) {
 function createAssetFromJsonSchema(jsonSchemaWithRefs) {
   let jsonSchema = derefJsonSchema(jsonSchemaWithRefs);
   let schemaAsset = new Asset(JSON.stringify(jsonSchema));
-  schemaAsset.class.push('messageBodySchema');
+  schemaAsset.classes.push('messageBodySchema');
   schemaAsset.attributes.set('contentType', 'application/schema+json');
 
   return schemaAsset;
@@ -112,9 +113,11 @@ export function parse({ source }, done) {
   let api = new Category();
 
   // Root API Element
-  api.class.push('api');
+  api.classes.push('api');
   api.meta.set('title', source.info.title);
-  api.meta.set('description', source.info.description);
+  if (source.info.description) {
+    api.content.push(new Copy(source.info.description));
+  }
 
   // Swagger has a paths object to loop through
   // The key is the href
@@ -177,10 +180,10 @@ export function parse({ source }, done) {
 
       // Prefer description over summary since description is more complete.
       // According to spec, summary SHOULD only be 120 characters
-      if (methodValue.description) {
-        transition.meta.set('description', methodValue.description);
-      } else if (methodValue.summary) {
-        transition.meta.set('description', methodValue.summary);
+      let transitionDescription = methodValue.description ?
+        methodValue.description : methodValue.summary;
+      if (transitionDescription) {
+        transition.push(new Copy(transitionDescription));
       }
 
       transition.meta.set('title', methodValue.operationId);

@@ -1,8 +1,10 @@
 [
-  "category", {"class": ["api"], "title": "My API", "description": "An API description."}, {}, [
-    ["category", {"class": ["resourceGroup"], "title": "My Group", "description": "This is a group of resources"}, {}, [
+  "category", {"classes": ["api"], "title": "My API"}, {}, [
+    ["copy", {}, {}, "An API description."],
+    ["category", {"classes": ["resourceGroup"], "title": "My Group"}, {}, [
+      ["copy", {}, {}, "This is a group of resources"],
       ["copy", {}, {"contentType": "text/plain"}, "Extra text"],
-      ["resource", {"title": "Frob", "description": "A frob does something."}, {
+      ["resource", {"title": "Frob"}, {
         "href": "/frobs/{id}",
         "hrefVariables": ["hrefVariables", {}, {}, [
             ["member", {}, {"typeAttributes": ["required"]}, {
@@ -11,7 +13,8 @@
             }]
           ]]
         }, [
-        ["dataStructure", {}, {}, [
+        ["copy", {}, {}, "A frob does something."],
+        ["dataStructure", {}, {}, ["object", {}, {}, [
           ["member", {}, {"typeAttributes": ["required"]}, {
             "key": ["string", {}, {}, "id"],
             "value": ["string", {}, {}, null]
@@ -31,20 +34,28 @@
                 ]]
             ]]
           }]
-        ]],
+        ]]],
         ["transition", {}, {"relation": "Frob"}, [
-          ["httpTransaction", {"title": "Get a frob", "description": "Gets information about a single frob instance"}, {}, [
-            ["httpRequest", {}, {"method": "GET"}, null],
+          ["copy", {}, {}, "Gets information about a single frob instance"],
+          ["httpTransaction", {"title": "Get a frob"}, {}, [
+            ["httpRequest", {}, {"method": "GET"}, []],
             ["httpResponse", {}, {"statusCode": 200, "headers": ["httpHeaders", {}, {}, [
-              ["string", {"name": "Content-Type"}, {}, "application/json"],
-              ["string", {"name": "Authorization"}, {}, "Bearer abc123"]
+              ["member", {}, {}, {
+                "key": ["string", {}, {}, "Content-Type"],
+                "value": ["string", {}, {}, "application/json"]
+              }],
+              ["member", {}, {}, {
+                "key": ["string", {}, {}, "Authorization"],
+                "value": ["string", {}, {}, "Bearer abc123"]
+              }]
             ]]}, [
-              ["asset", {"class": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tags\": [\n    {\n      \"name\": \"foo\",\n      \"count\": 23\n    }\n  ]\n}\n"],
-              ["asset", {"class": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tags\": {      \"type\": \"array\"}}}"]
+              ["asset", {"classes": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tags\": [\n    {\n      \"name\": \"foo\",\n      \"count\": 23\n    }\n  ]\n}\n"],
+              ["asset", {"classes": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tags\": {      \"type\": \"array\"}}}"]
             ]]
           ]]
         ]],
-        ["transition", {"title": "Restart a frob", "description": "Restart a frob instance"}, {"relation": "restart"}, [
+        ["transition", {"title": "Restart a frob"}, {"relation": "restart"}, [
+          ["copy", {}, {}, "Restart a frob instance"],
           ["httpTransaction", {}, {}, [
             ["httpRequest", {}, {"method": "POST"}, []],
             ["httpResponse", {}, {}, []]
@@ -52,13 +63,13 @@
         ]]
       ]]
     ]],
-    ["category", {"class": ["dataStructure"]}, {}, [
-      ["dataStructure", {"title": "User"}, {}, [
+    ["category", {"classes": ["dataStructures"]}, {}, [
+      ["dataStructure", {}, {}, ["object", {"title": "User"}, {}, [
         ["member", {}, {"typeAttributes": ["required"]}, {
           "key": ["string", {}, {}, "name"],
           "value": ["string", {}, {}, null]
         }]
-      ]]
+      ]]]
     ]]
   ]
 ]

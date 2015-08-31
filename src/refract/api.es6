@@ -23,30 +23,37 @@
 import {
   ArrayElement, BaseElement, ObjectElement, StringElement, registry
 } from 'minim';
-import {filterBy} from './util';
 
-class HttpHeaders extends ArrayElement {
+export class HttpHeaders extends ArrayElement {
   constructor(...args) {
     super(...args);
     this.element = 'httpHeaders';
   }
 
-  exclude(name) {
-    return this.filter(item => {
-      let itemName = item.name;
+  toValue() {
+    return this.map(item => [item.key.toValue(), item.value.toValue()]);
+  }
 
-      if (!itemName) {
-        // This can't possibly match, so we include it in the results.
-        return true;
-      }
+  include(name) {
+    return this.filter(item => {
+      const key = item.key.toValue();
 
       // Note: this may not be a string, hence the duck-Element check below!
-      return !(itemName.toLowerCase) || itemName.toLowerCase() !== name.toLowerCase();
+      return !(key.toLowerCase) || key.toLowerCase() === name.toLowerCase();
+    });
+  }
+
+  exclude(name) {
+    return this.filter(item => {
+      const key = item.key.toValue();
+
+      // Note: this may not be a string, hence the duck-Element check below!
+      return !(key.toLowerCase) || key.toLowerCase() !== name.toLowerCase();
     });
   }
 }
 
-class HrefVariables extends ObjectElement {
+export class HrefVariables extends ObjectElement {
   constructor(...args) {
     super(...args);
     this.element = 'hrefVariables';
@@ -76,7 +83,7 @@ export class Asset extends BaseElement {
   }
 }
 
-class HttpMessagePayload extends ArrayElement {
+export class HttpMessagePayload extends ArrayElement {
   constructor(...args) {
     super(...args);
     this._attributeElementKeys = ['headers'];
@@ -95,22 +102,18 @@ class HttpMessagePayload extends ArrayElement {
     let header = null;
 
     if (headers) {
-      header = headers.content.filter(filterBy.bind(this, {
-        name,
-        ignoreCase: true
-      }))[0];
-
-      if (header) {
-        header = header.toValue();
-      }
+      header = headers.include(name).map(item => {
+        return item.value.toValue();
+      });
     }
 
     return header;
   }
 
   get contentType() {
-    if (this.header('Content-Type')) {
-      return this.header('Content-Type');
+    const header = this.header('Content-Type');
+    if (header) {
+      return header.join(', ');
     }
 
     return this.content && this.content.contentType;
@@ -124,7 +127,7 @@ class HttpMessagePayload extends ArrayElement {
     // Returns the *first* message body. Only one should be defined according
     // to the spec, but it's possible to include more.
     return this.filter((item) => {
-      return item.element === 'asset' && item.class.contains('messageBody');
+      return item.element === 'asset' && item.classes.contains('messageBody');
     }).first();
   }
 
@@ -132,7 +135,7 @@ class HttpMessagePayload extends ArrayElement {
     // Returns the *first* message body schema. Only one should be defined
     // according to the spec, but it's possible to include more.
     return this.filter((item) => {
-      return item.element === 'asset' && item.class.contains('messageBodySchema');
+      return item.element === 'asset' && item.classes.contains('messageBodySchema');
     }).first();
   }
 }
@@ -182,11 +185,11 @@ export class HttpTransaction extends ArrayElement {
   }
 
   get request() {
-    return this.findByElement('httpRequest').first();
+    return this.children((item) => item.element === 'httpRequest').first();
   }
 
   get response() {
-    return this.findByElement('httpResponse').first();
+    return this.children((item) => item.element === 'httpResponse').first();
   }
 }
 
@@ -195,11 +198,17 @@ export class Transition extends ArrayElement {
     super(...args);
 
     this.element = 'transition';
-    this._attributeElementKeys = ['hrefVariables', 'attributes'];
+    this._attributeElementKeys = ['hrefVariables', 'data'];
   }
 
   get method() {
-    return this.transactions.get(0).request.method;
+    const transaction = this.transactions.first();
+    if (transaction) {
+      const request = transaction.request;
+      if (request) {
+        return request.method;
+      }
+    }
   }
 
   get relation() {
@@ -251,7 +260,7 @@ export class Transition extends ArrayElement {
   }
 
   get transactions() {
-    return this.findByElement('httpTransaction');
+    return this.children((item) => item.element === 'httpTransaction');
   }
 }
 
@@ -280,18 +289,49 @@ export class Resource extends ArrayElement {
   }
 
   get transitions() {
-    return this.findByElement('transition');
+    return this.children((item) => item.element === 'transition');
   }
 
   get dataStructure() {
-    return this.findByElement('dataStructure').first();
+    return this.children((item) => item.element === 'dataStructure').first();
   }
 }
 
-export class DataStructure extends ObjectElement {
+export class DataStructure extends BaseElement {
   constructor(...args) {
     super(...args);
     this.element = 'dataStructure';
+    if (this.content !== undefined) {
+      this.content = registry.toElement(this.content);
+    }
+  }
+
+  toValue() {
+    return this.content && this.content.toValue();
+  }
+
+  toRefract() {
+    const refract = super.toRefract();
+    refract.content = refract.content.toRefract();
+    return refract;
+  }
+
+  toCompactRefract() {
+    const compactRefract = super.toCompactRefract();
+    compactRefract[3] = compactRefract[3].toCompactRefract();
+    return compactRefract;
+  }
+
+  fromRefract(doc) {
+    super.fromRefract(doc);
+    this.content = registry.fromRefract(doc.content);
+    return this;
+  }
+
+  fromCompactRefract(tuple) {
+    super.fromCompactRefract(tuple);
+    this.content = registry.fromCompactRefract(tuple[3]);
+    return this;
   }
 }
 
@@ -302,7 +342,7 @@ export class Copy extends StringElement {
   }
 
   get contentType() {
-    return this.attributes.contentType;
+    return this.attributes.getValue('contentType');
   }
 
   set contentType(value) {
@@ -317,27 +357,31 @@ export class Category extends ArrayElement {
   }
 
   get resourceGroups() {
-    return this.findByClass('resourceGroup');
+    return this.children((item) => item.classes.contains('resourceGroup'));
   }
 
   get dataStructures() {
-    return this.findByClass('dataStructures');
+    return this.children((item) => item.classes.contains('dataStructures'));
   }
 
   get scenarios() {
-    return this.findByClass('scenario');
+    return this.children((item) => item.classes.contains('scenario'));
+  }
+
+  get transitionGroups() {
+    return this.children((item) => item.classes.contains('transitions'));
   }
 
   get resources() {
-    return this.findByElement('resource');
+    return this.children((item) => item.element === 'resource');
   }
 
   get transitions() {
-    return this.findByElement('transition');
+    return this.children((item) => item.element === 'transition');
   }
 
   get copy() {
-    return this.findByElement('copy');
+    return this.children((item) => item.element === 'copy');
   }
 }
 

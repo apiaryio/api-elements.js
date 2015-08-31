@@ -1,14 +1,19 @@
 {
   "element": "category",
   "meta": {
-    "class": [
+    "classes": [
       "api"
     ],
-    "title": "Swagger Sample App",
-    "description": "This is a sample server Petstore server.  You can find out more about Swagger \n    at <a href=\"http://swagger.wordnik.com\">http://swagger.wordnik.com</a> or on irc.freenode.net, #swagger.  For this sample,\n    you can use the api key \"special-key\" to test the authorization filters"
+    "title": "Swagger Sample App"
   },
   "attributes": {},
   "content": [
+    {
+      "element": "copy",
+      "meta": {},
+      "attributes": {},
+      "content": "This is a sample server Petstore server.  You can find out more about Swagger \n    at <a href=\"http://swagger.wordnik.com\">http://swagger.wordnik.com</a> or on irc.freenode.net, #swagger.  For this sample,\n    you can use the api key \"special-key\" to test the authorization filters"
+    },
     {
       "element": "resource",
       "meta": {
@@ -21,11 +26,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Empty responses",
             "title": "emptyResponses"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Empty responses"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -63,11 +73,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Only default response set",
             "title": "onlyDefaultResponse"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Only default response set"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -105,11 +120,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Update an existing pet",
             "title": "updatePet"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Update an existing pet"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -125,7 +145,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -161,7 +181,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -197,7 +217,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -233,7 +253,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -302,7 +322,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Finds Pets by status",
             "title": "findPetsByStatus"
           },
           "attributes": {
@@ -341,6 +360,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Finds Pets by status"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -363,7 +388,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -415,7 +440,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Finds Pets by tags",
             "title": "findPetsByTags"
           },
           "attributes": {
@@ -479,6 +503,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Finds Pets by tags"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -501,7 +531,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -553,7 +583,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Updates a pet in the store with form data",
             "title": "updatePetWithForm"
           },
           "attributes": {
@@ -591,6 +620,12 @@
             }
           },
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Updates a pet in the store with form data"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -642,7 +677,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Find pet by ID",
             "title": "getPetById"
           },
           "attributes": {
@@ -683,6 +717,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Find pet by ID"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -705,7 +745,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -769,7 +809,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Deletes a pet",
             "title": "deletePet"
           },
           "attributes": {
@@ -807,6 +846,12 @@
             }
           },
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Deletes a pet"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -858,7 +903,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "partial updates to a pet",
             "title": "partialUpdate"
           },
           "attributes": {
@@ -897,6 +941,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "partial updates to a pet"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -911,7 +961,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -932,7 +982,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -960,7 +1010,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -997,11 +1047,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "uploads an image",
             "title": "uploadFile"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "uploads an image"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -1041,11 +1096,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Creates list of users with given input array",
             "title": "createUsersWithArrayInput"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Creates list of users with given input array"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -1061,7 +1121,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1098,11 +1158,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Creates list of users with given list input",
             "title": "createUsersWithListInput"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Creates list of users with given list input"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -1118,7 +1183,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1155,7 +1220,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Updated user",
             "title": "updateUser"
           },
           "attributes": {
@@ -1194,6 +1258,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Updated user"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -1208,7 +1278,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1244,7 +1314,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1280,7 +1350,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1306,7 +1376,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Delete user",
             "title": "deleteUser"
           },
           "attributes": {
@@ -1345,6 +1414,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Delete user"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -1418,7 +1493,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Get user by user name",
             "title": "getUserByName"
           },
           "attributes": {
@@ -1457,6 +1531,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Get user by user name"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -1479,7 +1559,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1554,7 +1634,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Logs user into the system",
             "title": "loginUser"
           },
           "attributes": {
@@ -1618,6 +1697,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Logs user into the system"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -1640,7 +1725,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1692,11 +1777,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Logs out current logged in user session",
             "title": "logoutUser"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Logs out current logged in user session"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -1736,11 +1826,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Create user",
             "title": "createUser"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Create user"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -1756,7 +1851,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1793,11 +1888,16 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Place an order for a pet",
             "title": "placeOrder"
           },
           "attributes": {},
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Place an order for a pet"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -1813,7 +1913,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1849,7 +1949,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
@@ -1886,7 +1986,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Delete purchase order by ID",
             "title": "deleteOrder"
           },
           "attributes": {
@@ -1924,6 +2023,12 @@
             }
           },
           "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Delete purchase order by ID"
+            },
             {
               "element": "httpTransaction",
               "meta": {},
@@ -1998,7 +2103,6 @@
         {
           "element": "transition",
           "meta": {
-            "description": "Find purchase order by ID",
             "title": "getOrderById"
           },
           "attributes": {
@@ -2037,6 +2141,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Find purchase order by ID"
+            },
+            {
               "element": "httpTransaction",
               "meta": {},
               "attributes": {},
@@ -2059,7 +2169,7 @@
                     {
                       "element": "asset",
                       "meta": {
-                        "class": [
+                        "classes": [
                           "messageBodySchema"
                         ]
                       },
