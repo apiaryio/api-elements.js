@@ -6,6 +6,10 @@ FORMAT: 1A
 
 
 {% macro renderExample(example) %}
+{% for copy in example|getCopy %}
+{{ copy.content }}
+{% endfor %}
+
 {% if example|bodyOnly %}
         {{ example.messageBody.content|indent(8) }}
 {% else %}
@@ -77,8 +81,6 @@ FORMAT: 1A
 #### {{ transition.method }}{% if href %} {{ href }}{% elseif transition.computedHref %} {{ transition.computedHref }}{% endif %}
 {% endif %}
 
-{{ transition.description }}
-
 {% for copy in transition|getCopy %}
 {{ copy.content }}
 {% endfor %}
@@ -104,8 +106,6 @@ FORMAT: 1A
 {% if !resource|resourceShorthand %}
 {% set href = null %}
 ### {{ resource.title|default('Resource') }} [{{ resource.href }}]
-
-{{ resource.description }}
 
 {% for copy in resource|getCopy %}
 {{ copy.content }}
@@ -134,8 +134,6 @@ FORMAT: 1A
 
 {% macro renderGroup(group) %}
 ## Group {{ group.title }}
-
-{{ group.description }}
 
 {{ renderCategory(group) }}
 {% endmacro %}
