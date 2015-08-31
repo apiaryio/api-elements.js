@@ -31,10 +31,9 @@ const refractedApi = [
             }]
           ]]],
           ['transition', {}, {}, [
+            ['copy', {}, {}, 'Gets information about a single frob instance'],
             ['httpTransaction', {title: 'Get a frob'}, {}, [
-              ['httpRequest', {}, {method: 'GET'}, [
-                ['copy', {}, {}, 'Gets information about a single frob instance']
-              ]],
+              ['httpRequest', {}, {method: 'GET'}, []],
               ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
                 ['member', {}, {}, {
                   key: ['string', {}, {}, 'Content-Type'],
