@@ -25,8 +25,8 @@ import {
 } from 'minim';
 
 export class HttpHeaders extends ArrayElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'httpHeaders';
   }
 
@@ -54,15 +54,15 @@ export class HttpHeaders extends ArrayElement {
 }
 
 export class HrefVariables extends ObjectElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'hrefVariables';
   }
 }
 
 export class Asset extends BaseElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'asset';
   }
 
@@ -84,8 +84,8 @@ export class Asset extends BaseElement {
 }
 
 export class HttpMessagePayload extends ArrayElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this._attributeElementKeys = ['headers'];
   }
 
@@ -141,8 +141,8 @@ export class HttpMessagePayload extends ArrayElement {
 }
 
 export class HttpRequest extends HttpMessagePayload {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'httpRequest';
   }
 
@@ -164,8 +164,8 @@ export class HttpRequest extends HttpMessagePayload {
 }
 
 export class HttpResponse extends HttpMessagePayload {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'httpResponse';
   }
 
@@ -179,8 +179,8 @@ export class HttpResponse extends HttpMessagePayload {
 }
 
 export class HttpTransaction extends ArrayElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'httpTransaction';
   }
 
@@ -194,8 +194,8 @@ export class HttpTransaction extends ArrayElement {
 }
 
 export class Transition extends ArrayElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
 
     this.element = 'transition';
     this._attributeElementKeys = ['hrefVariables', 'data'];
@@ -265,8 +265,8 @@ export class Transition extends ArrayElement {
 }
 
 export class Resource extends ArrayElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
 
     this.element = 'resource';
     this._attributeElementKeys = ['hrefVariables'];
@@ -298,8 +298,8 @@ export class Resource extends ArrayElement {
 }
 
 export class DataStructure extends BaseElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'dataStructure';
     if (this.content !== undefined) {
       this.content = registry.toElement(this.content);
@@ -336,8 +336,8 @@ export class DataStructure extends BaseElement {
 }
 
 export class Copy extends StringElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'copy';
   }
 
@@ -351,8 +351,8 @@ export class Copy extends StringElement {
 }
 
 export class Category extends ArrayElement {
-  constructor(...args) {
-    super(...args);
+  constructor() {
+    super(...arguments);
     this.element = 'category';
   }
 

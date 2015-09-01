@@ -25,20 +25,14 @@ chai.use((_chai, utils) => {
       obj.classes.toValue()
     );
   });
-
-  /*
-   * Modifies the current object to be the value of the given attribute.
-   * Can be chained to assertions, e.g:
-   *
-   *    expect(item).attrValue('foo').to.equal('abc')
-   *
-   * This is useful if there is no shortcut property for the attribute or
-   * you want to test access through the `.attributes.getValue(...)` mechanism.
-   */
-  utils.addMethod(Assertion.prototype, 'attrValue', function attrValue(name) {
-    this._obj = this._obj.attributes.getValue(name);
-  });
 });
+
+/*
+ * Shortcut to get an attribute value from an element.
+ */
+function attrValue(element, name) {
+  return element.attributes.getValue(name);
+}
 
 describe('API description namespace', () => {
   context('category element', () => {
@@ -142,7 +136,7 @@ describe('API description namespace', () => {
 
     it('should set a content type', () => {
       copy.contentType = 'text/plain';
-      expect(copy).attrValue('contentType').to.equal('text/plain');
+      expect(attrValue(copy, 'contentType')).to.equal('text/plain');
     });
 
     it('should contain some text', () => {
@@ -236,7 +230,7 @@ describe('API description namespace', () => {
 
     it('should set an href', () => {
       resource.href = '/foo/{id}';
-      expect(resource).attrValue('href').to.equal('/foo/{id}');
+      expect(attrValue(resource, 'href')).to.equal('/foo/{id}');
     });
 
     it('should have hrefVariables', () => {
@@ -249,7 +243,7 @@ describe('API description namespace', () => {
       resource.hrefVariables = {
         id: '456'
       };
-      expect(resource).attrValue('hrefVariables').to.deep.equal({
+      expect(attrValue(resource, 'hrefVariables')).to.deep.equal({
         id: '456'
       });
     });
@@ -299,7 +293,7 @@ describe('API description namespace', () => {
 
     it('should set a relation', () => {
       transition.relation = 'delete';
-      expect(transition).attrValue('relation').to.equal('delete');
+      expect(attrValue(transition, 'relation')).to.equal('delete');
     });
 
     it('should have an href', () => {
@@ -308,7 +302,7 @@ describe('API description namespace', () => {
 
     it('should set an href', () => {
       transition.href = '/foo/{id}';
-      expect(transition).attrValue('href').to.equal('/foo/{id}');
+      expect(attrValue(transition, 'href')).to.equal('/foo/{id}');
     });
 
     it('should have a computed href', () => {
@@ -324,7 +318,7 @@ describe('API description namespace', () => {
 
     it('should set data', () => {
       transition.data = 'test';
-      expect(transition).attrValue('data').to.equal('test');
+      expect(attrValue(transition, 'data')).to.equal('test');
     });
 
     it('should have contentTypes', () => {
@@ -335,7 +329,7 @@ describe('API description namespace', () => {
 
     it('should set contentTypes', () => {
       transition.contentTypes = ['application/xml'];
-      expect(transition).attrValue('contentTypes').to.deep.equal(
+      expect(attrValue(transition, 'contentTypes')).to.deep.equal(
         ['application/xml']
       );
     });
@@ -396,7 +390,7 @@ describe('API description namespace', () => {
 
     it('should set a method', () => {
       request.method = 'POST';
-      expect(request).attrValue('method').to.equal('POST');
+      expect(attrValue(request, 'method')).to.equal('POST');
     });
 
     it('should have an href', () => {
@@ -405,7 +399,7 @@ describe('API description namespace', () => {
 
     it('should set an href', () => {
       request.href = '/bar';
-      expect(request).attrValue('href').to.equal('/bar');
+      expect(attrValue(request, 'href')).to.equal('/bar');
     });
 
     it('should inherit from HTTP message payload', () => {
@@ -434,7 +428,7 @@ describe('API description namespace', () => {
 
     it('should set a status code', () => {
       response.statusCode = 404;
-      expect(response).attrValue('statusCode').to.equal(404);
+      expect(attrValue(response, 'statusCode')).to.equal(404);
     });
 
     it('should inherit from HTTP message payload', () => {
@@ -443,6 +437,7 @@ describe('API description namespace', () => {
   });
 
   context('HTTP message payload', () => {
+    let asset;
     let payload;
 
     beforeEach(() => {
@@ -460,16 +455,30 @@ describe('API description namespace', () => {
           ]]
         }, [
           ['dataStructure', {}, {}, []],
-          ['asset', {classes: ['messageBody']}, {}, ''],
+          ['asset', {classes: ['messageBody']}, {
+            contentType: 'text/plain',
+            href: '/some/path'
+          }, ''],
           ['asset', {classes: ['messageBodySchema']}, {}, '']
         ]]
       );
+      asset = payload.messageBody;
     });
 
     it('should get headers', () => {
       expect(payload.headers.toValue()).to.deep.equal([
         ['Content-Type', 'application/json'],
         ['Cache', 'no-cache']
+      ]);
+    });
+
+    it('should exclude headers', () => {
+      const remaining = payload.headers.exclude('cache').map(
+        member => [member.key.toValue(), member.value.toValue()]
+      );
+
+      expect(remaining).to.deep.equal([
+        ['Content-Type', 'application/json']
       ]);
     });
 
@@ -493,6 +502,26 @@ describe('API description namespace', () => {
     it('should contain a message body schema', () => {
       expect(payload.messageBodySchema).to.be.an.instanceof(Asset);
       expect(payload.messageBodySchema).to.have.class('messageBodySchema');
+    });
+
+    describe('asset', () => {
+      it('should get a content type', () => {
+        expect(asset.contentType).to.equal('text/plain');
+      });
+
+      it('should set a content type', () => {
+        asset.contentType = 'application/json';
+        expect(attrValue(asset, 'contentType')).to.equal('application/json');
+      });
+
+      it('should get an href', () => {
+        expect(asset.href).to.equal('/some/path');
+      });
+
+      it('should set an href', () => {
+        asset.href = '/other/path';
+        expect(attrValue(asset, 'href')).to.equal('/other/path');
+      });
     });
   });
 });
