@@ -1,0 +1,35 @@
+{
+  "name": "minim-api-description",
+  "version": "0.1.0",
+  "description": "Minim API Description Namespace",
+  "main": "./lib/api-description.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/refractproject/minim-api-description.git"
+  },
+  "scripts": {
+    "compile": "eslint src && babel src --optional runtime --out-dir lib",
+    "precoverage": "npm run compile",
+    "coverage": "babel-node node_modules/.bin/isparta cover _mocha -- -R spec --recursive",
+    "precoveralls": "npm run coverage",
+    "coveralls": "coveralls <coverage/lcov.info",
+    "pretest": "npm run compile",
+    "test": "mocha --compilers js:babel/register -R spec --recursive",
+    "prepublish": "npm run compile"
+  },
+  "dependencies": {
+    "babel-runtime": "^5.5.6",
+    "minim": "^0.10.0"
+  },
+  "devDependencies": {
+    "babel": "^5.2.9",
+    "babel-eslint": "^3.1.5",
+    "chai": "^2.3.0",
+    "coveralls": "^2.11.2",
+    "eslint": "^0.21.2",
+    "isparta": "^3.0.4",
+    "mocha": "^2.2.5"
+  },
+  "author": "Apiary.io <support@apiary.io>",
+  "license": "MIT"
+}
