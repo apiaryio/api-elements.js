@@ -1,4 +1,4 @@
-# Refract API Description
+# Minim API Description Namespace
 
 This library provides an interface to the [Refract API Description namespace](https://github.com/refractproject/refract-spec/blob/master/namespaces/api-description-namespace.md).
 
@@ -14,7 +14,6 @@ It extends upon the base types as defined in [Minim](https://github.com/refractp
 * HttpTransaction
 * HttpRequest
 * HttpResponse
-* HttpMessagePayload
 * Asset
 * HrefVariables
 * HttpHeaders
@@ -22,24 +21,23 @@ It extends upon the base types as defined in [Minim](https://github.com/refractp
 ## Install
 
 ```sh
-npm install refract-api-description
+npm install minim-api-description
 ```
 
 ## Usage
 
 ```js
-import { registry } from 'minim';
-import { register, Category } from 'refract-api-description';
+import minim from 'minim';
+import apiDescription from 'minim-api-description';
 
-// Registry the API Description elements in any given registry
-// This example uses Minim's global registry
-// Note: this is required for converting to/from API Description elements
-register(registry);
+const namespace = minim.namespace()
+  .use(apiDescription);
 
 // Convert from Compact Refract
 let compactRefract = ['category', {'class': ['api'], title: 'My API'}, {}, []];
-let api = registry.fromCompactRefract(compactRefract);
+let api = namespace.fromCompactRefract(compactRefract);
 
 // Initialize elements directly
+const Category = namespace.getElementClass('category');
 let category = new Category();
 ```

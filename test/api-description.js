@@ -5,11 +5,23 @@
 
 import chai, {Assertion, expect} from 'chai';
 
-import {BaseElement} from 'minim';
-import {
-  Asset, Category, Copy, DataStructure, HttpMessagePayload, HttpRequest,
-  HttpResponse, HttpTransaction, Resource, Transition
-} from '../src/api-description';
+import minim from 'minim';
+import apiDescription from '../src/api-description';
+
+const namespace = minim.namespace().use(apiDescription);
+
+const Category = namespace.getElementClass('category');
+const Copy = namespace.getElementClass('copy');
+const Resource = namespace.getElementClass('resource');
+const Transition = namespace.getElementClass('transition');
+const HttpTransaction = namespace.getElementClass('httpTransaction');
+const HttpRequest = namespace.getElementClass('httpRequest');
+const HttpResponse = namespace.getElementClass('httpResponse');
+const Asset = namespace.getElementClass('asset');
+const DataStructure = namespace.getElementClass('dataStructure');
+
+// Hmm, this might not be the best way to do this... ideas?
+const HttpMessagePayload = Object.getPrototypeOf(HttpRequest);
 
 chai.use((_chai, utils) => {
   /*
@@ -47,8 +59,8 @@ describe('API description namespace', () => {
           ['category', {classes: ['transitions']}, {}, []],
           ['resource', {}, {}, []],
           ['transition', {}, {}, []],
-          ['copy', {}, {}, '']
-        ]
+          ['copy', {}, {}, ''],
+        ],
       ]);
     });
 
@@ -156,7 +168,7 @@ describe('API description namespace', () => {
     });
 
     it('should have element content', () => {
-      expect(struct.content).to.be.an.instanceof(BaseElement);
+      expect(struct.content).to.be.an.instanceof(namespace.BaseElement);
     });
 
     it('should get element content value', () => {
@@ -173,8 +185,8 @@ describe('API description namespace', () => {
           element: 'string',
           meta: {},
           attributes: {},
-          content: 'test'
-        }
+          content: 'test',
+        },
       });
     });
 
@@ -182,7 +194,7 @@ describe('API description namespace', () => {
       const refract = struct.toCompactRefract();
       expect(refract).to.deep.equal(
         ['dataStructure', {}, {},
-          ['string', {}, {}, 'test']
+          ['string', {}, {}, 'test'],
         ]
       );
     });
@@ -210,12 +222,12 @@ describe('API description namespace', () => {
           hrefVariables: ['hrefVariables', {}, {}, [
             ['member', {}, {}, {
               key: ['string', {}, {}, 'id'],
-              value: ['string', {}, {}, '123']
-            }]
-          ]]
+              value: ['string', {}, {}, '123'],
+            }],
+          ]],
         }, [
           ['transition', {}, {}, []],
-          ['dataStructure', {}, {}, []]
+          ['dataStructure', {}, {}, []],
         ]]
       );
     });
@@ -235,16 +247,16 @@ describe('API description namespace', () => {
 
     it('should have hrefVariables', () => {
       expect(resource.hrefVariables.toValue()).to.deep.equal({
-        id: '123'
+        id: '123',
       });
     });
 
     it('should set hrefVariables', () => {
       resource.hrefVariables = {
-        id: '456'
+        id: '456',
       };
       expect(attrValue(resource, 'hrefVariables')).to.deep.equal({
-        id: '456'
+        id: '456',
       });
     });
 
@@ -270,11 +282,11 @@ describe('API description namespace', () => {
           relation: 'action',
           href: '/resource',
           data: ['dataStructure', {}, {}, ['object', {}, {}, null]],
-          contentTypes: ['application/json']
+          contentTypes: ['application/json'],
         }, [
           ['httpTransaction', {}, {}, [
-            ['httpRequest', {}, {method: 'GET'}, []]
-          ]]
+            ['httpRequest', {}, {method: 'GET'}, []],
+          ]],
         ]]
       );
     });
@@ -350,7 +362,7 @@ describe('API description namespace', () => {
       transaction = (new HttpTransaction()).fromCompactRefract(
         ['httpTransaction', {}, {}, [
           ['httpRequest', {}, {}, []],
-          ['httpResponse', {}, {}, []]
+          ['httpResponse', {}, {}, []],
         ]]
       );
     });
@@ -375,7 +387,7 @@ describe('API description namespace', () => {
       request = (new HttpRequest()).fromCompactRefract(
         ['httpRequest', {}, {
           method: 'GET',
-          href: '/foo'
+          href: '/foo',
         }, []]
       );
     });
@@ -413,7 +425,7 @@ describe('API description namespace', () => {
     beforeEach(() => {
       response = (new HttpResponse()).fromCompactRefract(
         ['httpResponse', {}, {
-          statusCode: 200
+          statusCode: 200,
         }, []]
       );
     });
@@ -446,20 +458,20 @@ describe('API description namespace', () => {
           headers: ['httpHeaders', {}, {}, [
             ['member', {}, {}, {
               key: ['string', {}, {}, 'Content-Type'],
-              value: ['string', {}, {}, 'application/json']
+              value: ['string', {}, {}, 'application/json'],
             }],
             ['member', {}, {}, {
               key: ['string', {}, {}, 'Cache'],
-              value: ['string', {}, {}, 'no-cache']
-            }]
-          ]]
+              value: ['string', {}, {}, 'no-cache'],
+            }],
+          ]],
         }, [
           ['dataStructure', {}, {}, []],
           ['asset', {classes: ['messageBody']}, {
             contentType: 'text/plain',
-            href: '/some/path'
+            href: '/some/path',
           }, ''],
-          ['asset', {classes: ['messageBodySchema']}, {}, '']
+          ['asset', {classes: ['messageBodySchema']}, {}, ''],
         ]]
       );
       asset = payload.messageBody;
@@ -468,7 +480,7 @@ describe('API description namespace', () => {
     it('should get headers', () => {
       expect(payload.headers.toValue()).to.deep.equal([
         ['Content-Type', 'application/json'],
-        ['Cache', 'no-cache']
+        ['Cache', 'no-cache'],
       ]);
     });
 
@@ -478,7 +490,7 @@ describe('API description namespace', () => {
       );
 
       expect(remaining).to.deep.equal([
-        ['Content-Type', 'application/json']
+        ['Content-Type', 'application/json'],
       ]);
     });
 
