@@ -8,13 +8,11 @@
     "url": "https://github.com/refractproject/minim-api-description.git"
   },
   "scripts": {
-    "compile": "eslint src && babel src --optional runtime --out-dir lib",
-    "precoverage": "npm run compile",
+    "compile": "eslint src test && babel src --optional runtime --out-dir lib",
     "coverage": "babel-node node_modules/.bin/isparta cover _mocha -- -R spec --recursive",
     "precoveralls": "npm run coverage",
     "coveralls": "coveralls <coverage/lcov.info",
-    "pretest": "npm run compile",
-    "test": "mocha --compilers js:babel/register -R spec --recursive",
+    "test": "babel-node node_modules/.bin/_mocha -R spec --recursive && eslint src test",
     "prepublish": "npm run compile"
   },
   "dependencies": {
