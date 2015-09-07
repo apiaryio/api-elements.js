@@ -1,6 +1,6 @@
 {
   "name": "minim-api-description",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Minim API Description Namespace",
   "main": "./lib/api-description.js",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "babel-runtime": "^5.8.20",
-    "minim": "^0.10.0"
+    "minim": "^0.11.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
