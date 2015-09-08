@@ -32,7 +32,7 @@ $ npm install --save fury
 
 ### Refract Interface
 
-Fury.js offers an interface based on the [Refract Project](https://github.com/refractproject/refract-spec) element specification and makes use of the API, resource, and MSON namespaces. Adapters convert from formats such as API Blueprint into Refract elements and Fury.js exposes these with API-related convenience functionality. For example:
+Fury.js offers an interface based on the [Refract Project](https://github.com/refractproject/refract-spec) element specification and makes use of the API description and data structure namespaces. Adapters convert from formats such as API Blueprint into Refract elements and Fury.js exposes these with API-related convenience functionality. For example:
 
 ```js
 import fury from 'fury';
@@ -124,28 +124,32 @@ export function detect(source) {
   return source.match(/some-test/i) !== null;
 }
 
-export function parse({source, generateSourceMap}, done) {
-  // Here you convert the source into refract elements.
+export function parse({minim, generateSourceMap, source}, done) {
+  // Here you convert the source into refract elements. Use the `minim`
+  // variable to access refract element classes.
+  const Resource = minim.getElementByClass('resource');
   // ...
   done(null, elements);
 }
 
-export function serialize(api, done) {
+export function serialize({api, minim}, done) {
   // Here you convert `api` from javascript element objects to the serialized
   // source format.
   // ...
   done(null, outputString);
 }
+
+export default {name, mediaTypes, detect, parse, serialize};
 ```
 
 Now you can register your adapter with Fury.js:
 
 ```js
 import fury from 'fury';
-import * as myAdapter from './my-adapter';
+import myAdapter from './my-adapter';
 
 // Register my custom adapter
-fury.adapters.unshift(myAdapter);
+fury.use(myAdapter);
 
 // Now parse my custom input format!
 fury.parse({source: 'some-test\n...'}, function (err, api) {

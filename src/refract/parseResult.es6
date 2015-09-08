@@ -6,43 +6,44 @@
  *   + Annotation
  */
 
-import {
-  ArrayElement, StringElement, registry
-} from 'minim';
+export function namespace(options) {
+  const minim = options.base;
+  const ArrayElement = minim.getElementClass('array');
+  const StringElement = minim.getElementClass('string');
 
-import './api';
+  class ParseResult extends ArrayElement {
+    constructor(...args) {
+      super(...args);
+      this.element = 'parseResult';
+    }
 
-export class ParseResult extends ArrayElement {
-  constructor(...args) {
-    super(...args);
-    this.element = 'parseResult';
+    get api() {
+      return this.children((item) => item.classes.contains('api')).first();
+    }
+
+    get annotations() {
+      return this.children((item) => item.element === 'annotation');
+    }
   }
 
-  get api() {
-    return this.children((item) => item.classes.contains('api')).first();
+  class Annotation extends StringElement {
+    constructor(...args) {
+      super(...args);
+      this.element = 'annotation';
+    }
+
+    get code() {
+      return this.attributes.getValue('code');
+    }
+
+    set code(value) {
+      this.attributes.set('code', value);
+    }
   }
 
-  get annotations() {
-    return this.children((item) => item.element === 'annotation');
-  }
+  minim
+    .register('parseResult', ParseResult)
+    .register('annotation', Annotation);
 }
 
-export class Annotation extends StringElement {
-  constructor(...args) {
-    super(...args);
-    this.element = 'annotation';
-  }
-
-  get code() {
-    return this.attributes.getValue('code');
-  }
-
-  set code(value) {
-    this.attributes.set('code', value);
-  }
-}
-
-// Register the Parse Result element Elements.
-registry
-  .register('parseResult', ParseResult)
-  .register('annotation', Annotation);
+export default {namespace};

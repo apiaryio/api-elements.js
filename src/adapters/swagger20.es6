@@ -1,23 +1,6 @@
 import _ from 'underscore';
 import deref from 'json-schema-deref-sync';
 
-import {
-  registry, MemberElement, BooleanElement, NumberElement, StringElement,
-  ArrayElement
-} from 'minim';
-import '../refract/api';
-
-// Define API Description elements
-const Copy = registry.getElementClass('copy');
-const Category = registry.getElementClass('category');
-const Resource = registry.getElementClass('resource');
-const Transition = registry.getElementClass('transition');
-const HttpTransaction = registry.getElementClass('httpTransaction');
-const HttpRequest = registry.getElementClass('httpRequest');
-const HttpResponse = registry.getElementClass('httpResponse');
-const HrefVariables = registry.getElementClass('hrefVariables');
-const Asset = registry.getElementClass('asset');
-
 export const name = 'swagger20';
 
 // TODO: Figure out media type for Swagger 2.0
@@ -27,7 +10,13 @@ export function detect(source) {
   return source.swagger === '2.0';
 }
 
-function convertParameterToElement(parameter) {
+function convertParameterToElement(minim, parameter) {
+  const StringElement = minim.getElementClass('string');
+  const NumberElement = minim.getElementClass('number');
+  const BooleanElement = minim.getElementClass('boolean');
+  const ArrayElement = minim.getElementClass('array');
+  const MemberElement = minim.getElementClass('member');
+
   let memberValue;
 
   // Convert from Swagger types to Minim elements
@@ -77,7 +66,8 @@ function derefJsonSchema(jsonSchemaWithRefs) {
   return jsonSchema;
 }
 
-function createAssetFromJsonSchema(jsonSchemaWithRefs) {
+function createAssetFromJsonSchema(minim, jsonSchemaWithRefs) {
+  const Asset = minim.getElementClass('asset');
   let jsonSchema = derefJsonSchema(jsonSchemaWithRefs);
   let schemaAsset = new Asset(JSON.stringify(jsonSchema));
   schemaAsset.classes.push('messageBodySchema');
@@ -86,7 +76,10 @@ function createAssetFromJsonSchema(jsonSchemaWithRefs) {
   return schemaAsset;
 }
 
-function createTransaction(transition, method) {
+function createTransaction(minim, transition, method) {
+  const HttpTransaction = minim.getElementClass('httpTransaction');
+  const HttpRequest = minim.getElementClass('httpRequest');
+  const HttpResponse = minim.getElementClass('httpResponse');
   let transaction = new HttpTransaction();
   transaction.content = [new HttpRequest(), new HttpResponse()];
 
@@ -104,9 +97,18 @@ function createTransaction(transition, method) {
 /*
  * Parse Swagger 2.0 into Refract elements
  */
-export function parse({ source }, done) {
+export function parse({minim, source}, done) {
   // TODO: Will refactor this once API Description namespace is stable
   // Leaving as large block of code until then
+  const Copy = minim.getElementClass('copy');
+  const Category = minim.getElementClass('category');
+  const Resource = minim.getElementClass('resource');
+  const Transition = minim.getElementClass('transition');
+  const HrefVariables = minim.getElementClass('hrefVariables');
+
+  const paramToElement = convertParameterToElement.bind(
+    convertParameterToElement, minim);
+
   let basePath = source.basePath || '';
   let schemaDefinitions = _.pick(source, 'definitions') || {};
 
@@ -138,7 +140,7 @@ export function parse({ source }, done) {
 
       pathObjectParameters
         .filter((parameter) => parameter.in === 'query' || parameter.in === 'path')
-        .map(convertParameterToElement)
+        .map(paramToElement)
         .forEach((member) => resource.hrefVariables.content.push(member));
     }
 
@@ -195,7 +197,7 @@ export function parse({ source }, done) {
         transition.hrefVariables = new HrefVariables();
 
         uriParameters
-          .map(convertParameterToElement)
+          .map(paramToElement)
           .forEach((member) => transition.hrefVariables.content.push(member));
       }
 
@@ -203,26 +205,26 @@ export function parse({ source }, done) {
       let relevantResponses = _.omit(methodValue.responses, 'default');
 
       if (_.keys(relevantResponses).length === 0) {
-        createTransaction(transition, method);
+        createTransaction(minim, transition, method);
       }
 
       // Transactions are created for each response in the document
       _.each(relevantResponses, (responseValue, statusCode) => {
-        let transaction = createTransaction(transition, method);
+        let transaction = createTransaction(minim, transition, method);
         let request = transaction.request;
         let response = transaction.response;
 
         // Body parameters define request schemas
         _.each(bodyParameters, function(bodyParameter) {
           let jsonSchemaWithDefinitions = _.extend({}, bodyParameter.schema, schemaDefinitions);
-          let schemaAsset = createAssetFromJsonSchema(jsonSchemaWithDefinitions);
+          let schemaAsset = createAssetFromJsonSchema(minim, jsonSchemaWithDefinitions);
           request.content.push(schemaAsset);
         });
 
         // Responses can have schemas in Swagger
         if (responseValue.schema) {
           let jsonSchemaWithDefinitions = _.extend({}, responseValue.schema, schemaDefinitions);
-          let schemaAsset = createAssetFromJsonSchema(jsonSchemaWithDefinitions);
+          let schemaAsset = createAssetFromJsonSchema(minim, jsonSchemaWithDefinitions);
           response.content.push(schemaAsset);
         }
 
@@ -244,7 +246,7 @@ export function parse({ source }, done) {
 /*
  * Serialize an API into Swagger 2.0.
  */
-export function serialize({ api }, done) {
+export function serialize({api, minim}, done) {
   // TODO: Implement Swagger 2.0 serializer
   done(new Error('Not implemented yet!'));
 }

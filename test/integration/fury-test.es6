@@ -2,7 +2,6 @@ import {assert} from 'chai';
 import fury, {
   Fury, legacyBlueprintParser, legacyMarkdownRenderer
 } from '../../lib/fury';
-import minim from 'minim';
 
 const refractedApi = [
   'parseResult', {}, {}, [
@@ -126,8 +125,10 @@ describe('Parser', () => {
 
     it('should parse when returning element instances', (done) => {
       // Modify the parse method to return an element instance
-      fury.adapters[fury.adapters.length - 1].parse = ({source}, cb) =>
-        cb(null, new minim.StringElement(source));
+      fury.adapters[fury.adapters.length - 1].parse = ({minim, source}, cb) => {
+        const StringElement = minim.getElementClass('string');
+        cb(null, new StringElement(source));
+      };
 
       fury.parse({source: 'dummy'}, (err, result) => {
         assert.equal(result.content, 'dummy');
