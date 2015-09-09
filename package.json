@@ -8,10 +8,10 @@
     "url": "https://github.com/refractproject/minim-api-description.git"
   },
   "scripts": {
-    "precoveralls": "peasant cover",
-    "coveralls": "coveralls <coverage/lcov.info",
+    "coveralls": "npm run cover && coveralls <coverage/lcov.info",
     "test": "peasant test",
-    "prepublish": "peasant -s lint test build",
+    "ci": "peasant -s lint test build",
+    "prepublish": "npm run ci",
     "cover": "peasant cover",
     "peasant": "peasant",
     "lint": "peasant lint"
@@ -23,6 +23,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "coveralls": "^2.11.2",
+    "eslint": "^1.3.1",
     "eslint-config-airbnb": "0.0.8",
     "peasant": "^0.3.1"
   },
