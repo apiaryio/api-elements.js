@@ -1,6 +1,6 @@
 import minimModule from 'minim';
 import minimApiDescription from 'minim-api-description';
-import minimParseResult from './refract/parseResult';
+import minimParseResult from 'minim-parse-result';
 
 import * as apiBlueprintAdapter from './adapters/api-blueprint';
 import * as swagger20Adapter from './adapters/swagger20';

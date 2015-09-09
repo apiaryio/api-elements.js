@@ -28,6 +28,7 @@
     "json-schema-deref-sync": "^0.1.1",
     "minim": "^0.11.0",
     "minim-api-description": "^0.1.0",
+    "minim-parse-result": "^0.1.0",
     "robotskirt": "",
     "sanitizer": "",
     "swig": "^1.4.2",
