@@ -8,7 +8,7 @@
     "url": "https://github.com/refractproject/minim-api-description.git"
   },
   "scripts": {
-    "coveralls": "peasant cover && coveralls <coverage/lcov.info",
+    "coveralls": "npm run cover && coveralls <coverage/lcov.info",
     "test": "peasant test",
     "ci": "peasant -s lint test build",
     "prepublish": "npm run ci",
