@@ -71,7 +71,8 @@ class Fury {
       adapter = findAdapter(this.adapters, mediaType, 'parse');
     } else {
       for (let i = 0; i < this.adapters.length; i++) {
-        if (this.adapters[i].detect(source) && this.adapters[i].parse) {
+        const current = this.adapters[i];
+        if (current.detect && current.detect(source) && current.parse) {
           adapter = this.adapters[i];
           break;
         }
