@@ -5,8 +5,7 @@ import { assert } from 'chai';
 import * as swagger20Adapter from '../../../lib/adapters/swagger20';
 
 import minimModule from 'minim';
-import minimApiDescription from 'minim-api-description';
-import minimParseResult from '../../../lib/refract/parseResult';
+import minimParseResult from 'minim-parse-result';
 
 const base = path.join(__dirname, '../../fixtures/adapters/swagger20');
 
@@ -30,7 +29,6 @@ describe('Swagger Adapter', () => {
 
     before((done) => {
       const minim = minimModule.namespace()
-        .use(minimApiDescription)
         .use(minimParseResult);
 
       swagger20Adapter.parse({minim, source: swagger20Example}, (error, apiDescription) => {

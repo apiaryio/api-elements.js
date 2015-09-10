@@ -142,6 +142,22 @@ describe('Parser', () => {
         done(err);
       });
     });
+
+    it('should error on missing parser', (done) => {
+      fury.adapters[fury.adapters.length - 1].parse = undefined;
+      fury.parse({source: 'dummy'}, (err) => {
+        assert.instanceOf(err, Error);
+        done();
+      });
+    });
+
+    it('should error on missing serializer', (done) => {
+      fury.adapters[fury.adapters.length - 1].serialize = undefined;
+      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err) => {
+        assert.instanceOf(err, Error);
+        done();
+      });
+    });
   });
 });
 
