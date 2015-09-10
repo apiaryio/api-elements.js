@@ -38,6 +38,7 @@ class Fury {
    */
   use(adapter) {
     this.adapters.push(adapter);
+    return this;
   }
 
   /*
