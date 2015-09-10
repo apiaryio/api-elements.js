@@ -1,0 +1,88 @@
+FORMAT: 1A
+
+# My API
+
+An API description.
+
+## Group My Group
+
+This is a group of resources
+
+Extra text
+
+### Frob [/frobs/{id}]
+
+A frob does something.
+
++ Parameters
+
+    + id: 123 (required) - Unique identifier
+
++ Attributes
+
+    + id (required)
+    + tags (array)
+        + (object)
+            Describes a tag.
+
+            Each tag has a name and a number of times it was used.
+
+            + Properties
+                + name (required) - Tag name.
+                + count: 23 (number)
+                    I am some long content.
+
+                    - one
+                    - two
+
+                    + Default: 1
+
+#### GET
+
+Gets information about a single frob instance
+
++ Relation: Frob
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Authorization: Bearer abc123
+
+    + Body
+
+            {
+              "id": "1",
+              "tags": [
+                {
+                  "name": "foo",
+                  "count": 23
+                }
+              ]
+            }
+
+    + Schema
+
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "array"
+                }
+              }
+            }
+
+#### Restart a frob [POST]
+
+Restart a frob instance
+
++ Relation: restart
+
+## Data Structures
+
+### User
+
++ name (required)
