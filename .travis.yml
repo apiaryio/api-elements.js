@@ -1,0 +1,17 @@
+language: node_js
+sudo: false
+node_js:
+#- '4' Protagonist does not support this version yet
+#- '3' Protagonist does not support this version yet
+- '2'
+- '1'
+- '0.12'
+- '0.10'
+script:
+- npm run ci
+after_script:
+- npm run coveralls
+notifications:
+  email: false
+  slack:
+    secure: bUlFDXuxqBjOKweX0sO6RRKKHnwFFoqKxffv+O5Ivti8lFOKnFonLvyH6PBJms3+nqHi7gLGx6cs4mAesdaFIC5pROA7Qcod/KS8joqvpxZGIloZRhuVin8J8ly9C89lVIvgPpL9MqrvQf/212EnfEcjTTzQdbK62A35Ysygat0hQefIz99+FhO6sRW5fiyR8q5QcxQ1uwauHgP6W4xnbqxJ8sIIPi9DQhCErU6xUr2sPYPaIs0dnMKCQIJpCAFZou2MIr7aTzpw9Hn/orgamHR2yEntWp5nEZykJw5bW/UKj5Z9JkpgxL7NEj+sPhQkq0jpzrvJSRssxPVvXCJAE++ocConLtV0h1BV7qX2ftKYg5Gw6ZoqybYzReX9u7mzw68cRdWAzKqhhzYC/8rv/nSyyu2yC+AMZ+jnDSunlto6B4/8GDV06uu1c2UMC667fs9iZXiviy963X7mx1ZvMinNbJMqFuJ2Hwd3Hhnvx+Gd97DuXqdmNZCGYeAtB/cc+mZqsrorc+I9A57cbZIR+C2Qk8TLvM3lysznZ8rub4DwMu3UvEGXIEln83R1vjLQmYabDyFZUK5TSQrYgXpwo3Fe0tfnEb6z7pJIGXvEE45vcJKeKVQaGE2n3CW5BM99wtU8/HjIzqFIQ8YIP/34hZ+Hv/9LTJTKapGUZEK0KSQ=
