@@ -1,0 +1,75 @@
+[
+  "category", {"classes": ["api"], "title": "My API"}, {}, [
+    ["copy", {}, {}, "An API description."],
+    ["category", {"classes": ["resourceGroup"], "title": "My Group"}, {}, [
+      ["copy", {}, {}, "This is a group of resources"],
+      ["copy", {}, {"contentType": "text/plain"}, "Extra text"],
+      ["resource", {"title": "Frob"}, {
+        "href": "/frobs/{id}",
+        "hrefVariables": ["hrefVariables", {}, {}, [
+            ["member", {}, {"typeAttributes": ["required"]}, {
+              "key": ["string", {}, {}, "id"],
+              "value": ["string", {"description": "Unique identifier"}, {}, "123"]
+            }]
+          ]]
+        }, [
+        ["copy", {}, {}, "A frob does something."],
+        ["dataStructure", {}, {}, ["object", {}, {}, [
+          ["member", {}, {"typeAttributes": ["required"]}, {
+            "key": ["string", {}, {}, "id"],
+            "value": ["string", {}, {}, null]
+          }],
+          ["member", {}, {}, {
+            "key": ["string", {}, {}, "tags"],
+            "value": ["array", {}, {}, [
+                ["object", {"description": "Describes a tag.\n\nEach tag has a name and a number of times it was used."}, {}, [
+                  ["member", {"description": "Tag name."}, {"typeAttributes": ["required"]}, {
+                    "key": ["string", {}, {}, "name"],
+                    "value": ["string", {}, {}, null]
+                  }],
+                  ["member", {"description": "I am some long content.\n\n- one\n- two\n"}, {}, {
+                    "key": ["string", {}, {}, "count"],
+                    "value": ["number", {}, {"default": 1}, 23]
+                  }]
+                ]]
+            ]]
+          }]
+        ]]],
+        ["transition", {}, {"relation": "Frob"}, [
+          ["copy", {}, {}, "Gets information about a single frob instance"],
+          ["httpTransaction", {"title": "Get a frob"}, {}, [
+            ["httpRequest", {}, {"method": "GET"}, []],
+            ["httpResponse", {}, {"statusCode": 200, "headers": ["httpHeaders", {}, {}, [
+              ["member", {}, {}, {
+                "key": ["string", {}, {}, "Content-Type"],
+                "value": ["string", {}, {}, "application/json"]
+              }],
+              ["member", {}, {}, {
+                "key": ["string", {}, {}, "Authorization"],
+                "value": ["string", {}, {}, "Bearer abc123"]
+              }]
+            ]]}, [
+              ["asset", {"classes": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tags\": [\n    {\n      \"name\": \"foo\",\n      \"count\": 23\n    }\n  ]\n}\n"],
+              ["asset", {"classes": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tags\": {      \"type\": \"array\"}}}"]
+            ]]
+          ]]
+        ]],
+        ["transition", {"title": "Restart a frob"}, {"relation": "restart"}, [
+          ["copy", {}, {}, "Restart a frob instance"],
+          ["httpTransaction", {}, {}, [
+            ["httpRequest", {}, {"method": "POST"}, []],
+            ["httpResponse", {}, {}, []]
+          ]]
+        ]]
+      ]]
+    ]],
+    ["category", {"classes": ["dataStructures"]}, {}, [
+      ["dataStructure", {}, {}, ["object", {"title": "User"}, {}, [
+        ["member", {}, {"typeAttributes": ["required"]}, {
+          "key": ["string", {}, {}, "name"],
+          "value": ["string", {}, {}, null]
+        }]
+      ]]]
+    ]]
+  ]
+]
