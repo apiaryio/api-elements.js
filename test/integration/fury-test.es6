@@ -76,22 +76,6 @@ describe('Fury class', () => {
 });
 
 describe('Parser', () => {
-  it('should recognize API Blueprint', (done) => {
-    const source = 'FORMAT: 1A\n\n# My API\n';
-    fury.parse({source}, (err, result) => {
-      assert(result);
-      done(err);
-    });
-  });
-
-  it('should error on unknown input', (done) => {
-    const source = 'unknown';
-    fury.parse({source}, (err) => {
-      assert(err);
-      done();
-    });
-  });
-
   describe('custom adapters', () => {
     before(() => {
       const adapter = {

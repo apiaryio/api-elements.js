@@ -1,7 +1,6 @@
 import minimModule from 'minim';
 import minimParseResult from 'minim-parse-result';
 
-import * as apiBlueprintAdapter from './adapters/api-blueprint';
 import * as swagger20Adapter from './adapters/swagger20';
 
 // Legacy imports
@@ -28,8 +27,7 @@ function findAdapter(adapters, mediaType, method) {
 class Fury {
   constructor() {
     this.adapters = [
-      swagger20Adapter,
-      apiBlueprintAdapter
+      swagger20Adapter
     ];
   }
 
