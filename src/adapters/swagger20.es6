@@ -186,7 +186,9 @@ export function parse({ source }, done) {
         transition.push(new Copy(transitionDescription));
       }
 
-      transition.meta.set('title', methodValue.operationId);
+      if (methodValue.operationId) {
+        transition.meta.set('title', methodValue.operationId);
+      }
 
       // For each uriParameter, create an hrefVariable
       if (uriParameters.length > 0) {

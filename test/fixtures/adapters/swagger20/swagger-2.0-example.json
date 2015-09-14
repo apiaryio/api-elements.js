@@ -42,8 +42,7 @@
                     }
                 },
                 "description": "Only default response set",
-                "summary": "",
-                "operationId": "onlyDefaultResponse"
+                "summary": ""
             }
         },
         "/pet": {
