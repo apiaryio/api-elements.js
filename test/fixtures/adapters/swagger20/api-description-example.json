@@ -72,9 +72,7 @@
       "content": [
         {
           "element": "transition",
-          "meta": {
-            "title": "onlyDefaultResponse"
-          },
+          "meta": {},
           "attributes": {},
           "content": [
             {
