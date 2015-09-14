@@ -1,7 +1,7 @@
 {
   "name": "fury",
   "description": "API Description SDK",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "author": "Apiary.io <support@apiary.io>",
   "main": "./lib/fury",
   "repository": {
@@ -26,7 +26,7 @@
     "babel-runtime": "^5.5.6",
     "drafter": "^0.2.5",
     "json-schema-deref-sync": "^0.1.1",
-    "minim": "^0.10.0",
+    "minim": "~0.10.0",
     "robotskirt": "",
     "sanitizer": "",
     "swig": "^1.4.2",
