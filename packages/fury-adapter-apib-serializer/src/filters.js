@@ -42,8 +42,10 @@
      headers = payload.headers.exclude('Content-Type');
    }
 
-   return payload.messageBody && !(headers.length || payload.dataStructure ||
-                                   payload.messageBodySchema);
+   return payload.messageBody && !(
+     headers.length || payload.dataStructure || payload.messageBodySchema ||
+     payload.children(item => item.element === 'copy').length
+   );
  }
 
  /*
