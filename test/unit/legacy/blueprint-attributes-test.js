@@ -25,13 +25,9 @@ describe('Attributes for', function() {
   var parserWarnings = null;
 
   var resourceAttributes = undefined;
-  var resolvedResourceAttributes = undefined;
   var actionAttributes = undefined;
-  var resolvedActionAttributes = undefined;
   var requestAttributes = undefined;
-  var resolvedRequestAttributes = undefined;
   var responseAttributes = undefined;
-  var resolvedResponseAttributes = undefined;
 
   before(function(done) {
     bluperintParser.parse({code: source}, function(error, api, warnings) {
@@ -41,17 +37,13 @@ describe('Attributes for', function() {
 
       var tranistion = parsedAPI.sections[0].resources[0]
       resourceAttributes = tranistion.attributes;
-      resolvedResourceAttributes = tranistion.resolvedAttributes;
 
       tranistion = parsedAPI.sections[0].resources[1]
       actionAttributes = tranistion.actionAttributes;
-      resolvedActionAttributes = tranistion.resolvedActionAttributes;
 
       requestAttributes = tranistion.requests[0].attributes
-      resolvedRequestAttributes = tranistion.requests[0].resolvedAttributes
 
       responseAttributes = tranistion.responses[0].attributes
-      resolvedResponseAttributes = tranistion.responses[0].resolvedAttributes
 
       done();
     });
@@ -65,16 +57,6 @@ describe('Attributes for', function() {
     it('are of \'dataStructure\' type', function() {
       assert.equal(resourceAttributes.element, 'dataStructure');
     });
-
-    describe('are resolved', function() {
-      it('and defined', function() {
-        assert.isDefined(resolvedResourceAttributes);
-      });
-
-      it('and of \'resolvedDataStructure\' type', function() {
-        assert.equal(resolvedResourceAttributes.element, 'resolvedDataStructure');
-      });
-    });
   });
 
   describe('Action', function() {
@@ -84,16 +66,6 @@ describe('Attributes for', function() {
 
     it('are of \'dataStructure\' type', function() {
       assert.equal(actionAttributes.element, 'dataStructure');
-    });
-
-    describe('are resolved', function() {
-      it('and defined', function() {
-        assert.isDefined(resolvedActionAttributes);
-      });
-
-      it('and of \'dataStructure\' type', function() {
-        assert.equal(resolvedActionAttributes.element, 'resolvedDataStructure');
-      });
     });
   });
 
@@ -105,16 +77,6 @@ describe('Attributes for', function() {
     it('are of \'dataStructure\' type', function() {
       assert.equal(requestAttributes.element, 'dataStructure');
     });
-
-    describe('are resolved', function() {
-      it('and defined', function() {
-        assert.isDefined(resolvedRequestAttributes);
-      });
-
-      it('and of \'resolvedDataStructure\' type', function() {
-        assert.equal(resolvedRequestAttributes.element, 'resolvedDataStructure');
-      });
-    });
   });
 
   describe('Response', function() {
@@ -124,16 +86,6 @@ describe('Attributes for', function() {
 
     it('are of \'dataStructure\' type', function() {
       assert.equal(responseAttributes.element, 'dataStructure');
-    });
-
-    describe('are resolved', function() {
-      it('and defined', function() {
-        assert.isDefined(resolvedResponseAttributes);
-      });
-
-      it('and of \'resolvedDataStructure\' type', function() {
-        assert.equal(resolvedResponseAttributes.element, 'resolvedDataStructure');
-      });
     });
   });
 
