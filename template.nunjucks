@@ -7,7 +7,8 @@ FORMAT: 1A
 
 {% macro renderExample(example) %}
 {% for copy in example|getCopy %}
-{{ copy.content }}
+    {{ copy.content }}
+
 {% endfor %}
 
 {% if example|bodyOnly %}
@@ -85,8 +86,8 @@ FORMAT: 1A
 {{ copy.content }}
 {% endfor %}
 
-{% if transition.parameters.length %}
-  {{ renderParameters(transition.parameters) }}
+{% if transition.hrefVariables.length %}
+  {{ renderParameters(transition.hrefVariables) }}
 {% endif %}
 
 {% if transition.relation %}
