@@ -86,8 +86,8 @@ FORMAT: 1A
 {{ copy.content }}
 {% endfor %}
 
-{% if transition.parameters.length %}
-  {{ renderParameters(transition.parameters) }}
+{% if transition.hrefVariables.length %}
+  {{ renderParameters(transition.hrefVariables) }}
 {% endif %}
 
 {% if transition.relation %}
