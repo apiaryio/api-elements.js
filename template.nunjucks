@@ -7,7 +7,8 @@ FORMAT: 1A
 
 {% macro renderExample(example) %}
 {% for copy in example|getCopy %}
-{{ copy.content }}
+    {{ copy.content }}
+
 {% endfor %}
 
 {% if example|bodyOnly %}
