@@ -4,10 +4,11 @@
 
 import mson from './mson';
 import nunjucks from 'nunjucks';
+import path from 'path';
 
 import {indent, bodyOnly, resourceShorthand, pretty, getCopy} from './filters';
 
-const env = nunjucks.configure(__dirname, {
+const env = nunjucks.configure(path.dirname(__dirname), {
   autoescape: false,
 });
 
