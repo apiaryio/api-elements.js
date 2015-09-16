@@ -100,11 +100,14 @@ function createTransaction(minim, transition, method) {
 export function parse({minim, source}, done) {
   // TODO: Will refactor this once API Description namespace is stable
   // Leaving as large block of code until then
+  const Asset = minim.getElementClass('asset');
   const Copy = minim.getElementClass('copy');
   const Category = minim.getElementClass('category');
+  const HrefVariables = minim.getElementClass('hrefVariables');
+  const HttpHeaders = minim.getElementClass('httpHeaders');
+  const MemberElement = minim.getElementClass('member');
   const Resource = minim.getElementClass('resource');
   const Transition = minim.getElementClass('transition');
-  const HrefVariables = minim.getElementClass('hrefVariables');
 
   const paramToElement = convertParameterToElement.bind(
     convertParameterToElement, minim);
@@ -210,31 +213,65 @@ export function parse({minim, source}, done) {
 
       // Transactions are created for each response in the document
       _.each(relevantResponses, (responseValue, statusCode) => {
-        let transaction = createTransaction(minim, transition, method);
-        let request = transaction.request;
-        let response = transaction.response;
+        let examples = {
+          '': undefined
+        };
 
-        // Body parameters define request schemas
-        _.each(bodyParameters, function(bodyParameter) {
-          let jsonSchemaWithDefinitions = _.extend({}, bodyParameter.schema, schemaDefinitions);
-          let schemaAsset = createAssetFromJsonSchema(minim, jsonSchemaWithDefinitions);
-          request.content.push(schemaAsset);
-        });
-
-        // Responses can have schemas in Swagger
-        if (responseValue.schema) {
-          let jsonSchemaWithDefinitions = _.extend({}, responseValue.schema, schemaDefinitions);
-          let schemaAsset = createAssetFromJsonSchema(minim, jsonSchemaWithDefinitions);
-          response.content.push(schemaAsset);
+        if (responseValue.examples) {
+          examples = responseValue.examples;
         }
 
-        // TODO: Decide what to do with request hrefs
-        // If the URI is templated, we don't want to add it to the request
-        // if (uriParameters.length === 0) {
-        //   request.attributes.href = href;
-        // }
+        examples = _.omit(examples, 'schema');
 
-        response.attributes.set('statusCode', statusCode);
+        _.each(examples, (responseBody, contentType) => {
+          let transaction = createTransaction(minim, transition, method);
+          let request = transaction.request;
+          let response = transaction.response;
+
+          if (responseValue.description) {
+            response.content.push(new Copy(responseValue.description));
+          }
+
+          if (contentType) {
+            const headers = new HttpHeaders();
+
+            headers.push(new MemberElement(
+              'Content-Type', contentType
+            ));
+
+            response.headers = headers;
+          }
+
+          // Body parameters define request schemas
+          _.each(bodyParameters, (bodyParameter) => {
+            let jsonSchemaWithDefinitions = _.extend({}, bodyParameter.schema, schemaDefinitions);
+            let schemaAsset = createAssetFromJsonSchema(minim, jsonSchemaWithDefinitions);
+            request.content.push(schemaAsset);
+          });
+
+          // Responses can have bodies
+          if (responseBody !== undefined) {
+            const bodyAsset = new Asset(JSON.stringify(responseBody, null, 2));
+            bodyAsset.classes.push('messageBody');
+            response.content.push(bodyAsset);
+          }
+
+          // Responses can have schemas in Swagger
+          let schema = responseValue.schema || (responseValue.examples && responseValue.examples.schema);
+          if (schema) {
+            let jsonSchemaWithDefinitions = _.extend({}, schema, schemaDefinitions);
+            let schemaAsset = createAssetFromJsonSchema(minim, jsonSchemaWithDefinitions);
+            response.content.push(schemaAsset);
+          }
+
+          // TODO: Decide what to do with request hrefs
+          // If the URI is templated, we don't want to add it to the request
+          // if (uriParameters.length === 0) {
+          //   request.attributes.href = href;
+          // }
+
+          response.attributes.set('statusCode', statusCode);
+        });
       });
     });
   });
