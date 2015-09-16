@@ -10,7 +10,6 @@ import minimParseResult from 'minim-parse-result';
 const base = path.join(__dirname, '../../fixtures/adapters/swagger20');
 
 const swagger20ExampleFile = fs.readFileSync(path.join(base, 'swagger-2.0-example.json'), 'utf8');
-const swagger20Example = JSON.parse(swagger20ExampleFile);
 
 const apiDescriptionExampleFile = fs.readFileSync(path.join(base, 'api-description-example.json'), 'utf8');
 const apiDescriptionExample = JSON.parse(apiDescriptionExampleFile);
@@ -21,7 +20,7 @@ describe('Swagger Adapter', () => {
   });
 
   it('correct detects a Swagger 2.0 document', () => {
-    assert.isTrue(swagger20Adapter.detect(swagger20Example));
+    assert.isTrue(swagger20Adapter.detect(swagger20ExampleFile));
   });
 
   context('when parsing a Swagger 2.0 document', () => {
@@ -31,7 +30,7 @@ describe('Swagger Adapter', () => {
       const minim = minimModule.namespace()
         .use(minimParseResult);
 
-      swagger20Adapter.parse({minim, source: swagger20Example}, (error, apiDescription) => {
+      swagger20Adapter.parse({minim, source: swagger20ExampleFile}, (error, apiDescription) => {
         parsedDocument = apiDescription.toRefract();
         done(error);
       });

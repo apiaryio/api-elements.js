@@ -1,13 +1,17 @@
 import _ from 'underscore';
 import deref from 'json-schema-deref-sync';
+import yaml from 'js-yaml';
 
 export const name = 'swagger20';
 
 // TODO: Figure out media type for Swagger 2.0
-export const mediaTypes = ['application/swagger+json'];
+export const mediaTypes = [
+  'application/swagger+json',
+  'application/swagger+yaml'
+];
 
 export function detect(source) {
-  return source.swagger === '2.0';
+  return !!source.match(/"?swagger"?:\s*["']2\.0["']/g);
 }
 
 function convertParameterToElement(minim, parameter) {
@@ -112,21 +116,23 @@ export function parse({minim, source}, done) {
   const paramToElement = convertParameterToElement.bind(
     convertParameterToElement, minim);
 
-  let basePath = source.basePath || '';
-  let schemaDefinitions = _.pick(source, 'definitions') || {};
+  const swagger = yaml.safeLoad(source);
+
+  let basePath = swagger.basePath || '';
+  let schemaDefinitions = _.pick(swagger, 'definitions') || {};
 
   let api = new Category();
 
   // Root API Element
   api.classes.push('api');
-  api.meta.set('title', source.info.title);
-  if (source.info.description) {
-    api.content.push(new Copy(source.info.description));
+  api.meta.set('title', swagger.info.title);
+  if (swagger.info.description) {
+    api.content.push(new Copy(swagger.info.description));
   }
 
   // Swagger has a paths object to loop through
   // The key is the href
-  _.each(source.paths, (pathValue, href) => {
+  _.each(swagger.paths, (pathValue, href) => {
     let resource = new Resource();
     api.content.push(resource);
 
