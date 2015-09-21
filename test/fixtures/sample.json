@@ -58,7 +58,9 @@
           ["copy", {}, {}, "Restart a frob instance"],
           ["httpTransaction", {}, {}, [
             ["httpRequest", {}, {"method": "POST"}, []],
-            ["httpResponse", {}, {}, []]
+            ["httpResponse", {}, {"statusCode": 204}, [
+              ["copy", {}, {}, "There is no content."]
+            ]]
           ]]
         ]]
       ]]
