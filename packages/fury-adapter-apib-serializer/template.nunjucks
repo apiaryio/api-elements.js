@@ -24,10 +24,10 @@ FORMAT: 1A
   {% if example.dataStructure %}
     {{ example.dataStructure.content|mson|indent(4) }}
   {% endif %}
-  {% if example.messageBody %}
+  {% if example.messageBody or example|getCopy %}
     + Body
 
-            {{ example.messageBody.content|pretty|indent(12) }}
+            {{ example.messageBody.content|default('', true)|pretty|indent(12) }}
 
   {% endif %}
   {% if example.messageBodySchema %}
