@@ -2,7 +2,7 @@
 # Legacy Blueprint parsing interface
 #
 apiaryBlueprintParser = require 'apiary-blueprint-parser'
-Drafter = require 'drafter'
+protagonist = require 'protagonist'
 
 DefaultFuryEmitter = require '../fury-emitter'
 apiBlueprintAdapter = require './api-blueprint-adapter'
@@ -74,8 +74,7 @@ getLocalAst = ({code, blueprintId, sourcemap, emitter}, cb) ->
     # Parsing metric
     t = process.hrtime()
 
-    drafter = new Drafter options
-    drafter.make code, (err, result) ->
+    protagonist.parse code, {type: 'ast', exportSourcemap: true}, (err, result) ->
       # Parsing metric
       execTime = process.hrtime t
       execTime = execTime[0] + execTime[1]*10e-9 # ns to s

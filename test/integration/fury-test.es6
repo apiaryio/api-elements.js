@@ -2,7 +2,6 @@ import {assert} from 'chai';
 import fury, {
   Fury, legacyBlueprintParser, legacyMarkdownRenderer
 } from '../../lib/fury';
-import minim from 'minim';
 
 const refractedApi = [
   'parseResult', {}, {}, [
@@ -77,22 +76,6 @@ describe('Fury class', () => {
 });
 
 describe('Parser', () => {
-  it('should recognize API Blueprint', (done) => {
-    const source = 'FORMAT: 1A\n\n# My API\n';
-    fury.parse({source}, (err, result) => {
-      assert(result);
-      done(err);
-    });
-  });
-
-  it('should error on unknown input', (done) => {
-    const source = 'unknown';
-    fury.parse({source}, (err) => {
-      assert(err);
-      done();
-    });
-  });
-
   describe('custom adapters', () => {
     before(() => {
       const adapter = {
@@ -126,8 +109,10 @@ describe('Parser', () => {
 
     it('should parse when returning element instances', (done) => {
       // Modify the parse method to return an element instance
-      fury.adapters[fury.adapters.length - 1].parse = ({source}, cb) =>
-        cb(null, new minim.StringElement(source));
+      fury.adapters[fury.adapters.length - 1].parse = ({minim, source}, cb) => {
+        const StringElement = minim.getElementClass('string');
+        cb(null, new StringElement(source));
+      };
 
       fury.parse({source: 'dummy'}, (err, result) => {
         assert.equal(result.content, 'dummy');
@@ -139,6 +124,22 @@ describe('Parser', () => {
       fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, serialized) => {
         assert.equal(serialized, 'dummy');
         done(err);
+      });
+    });
+
+    it('should error on missing parser', (done) => {
+      fury.adapters[fury.adapters.length - 1].parse = undefined;
+      fury.parse({source: 'dummy'}, (err) => {
+        assert.instanceOf(err, Error);
+        done();
+      });
+    });
+
+    it('should error on missing serializer', (done) => {
+      fury.adapters[fury.adapters.length - 1].serialize = undefined;
+      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err) => {
+        assert.instanceOf(err, Error);
+        done();
       });
     });
   });

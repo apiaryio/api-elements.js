@@ -1,5 +1,6 @@
-import minim from 'minim';
-import * as apiBlueprintAdapter from './adapters/api-blueprint';
+import minimModule from 'minim';
+import minimParseResult from 'minim-parse-result';
+
 import * as swagger20Adapter from './adapters/swagger20';
 
 // Legacy imports
@@ -7,16 +8,17 @@ import legacyAPI from './legacy/blueprint';
 import legacyBlueprintParser from './legacy/blueprint-parser';
 import legacyMarkdownRenderer from './legacy/markdown';
 
-// Register Parse Result and API description primitives
-import './refract/parseResult';
+const minim = minimModule.namespace()
+  .use(minimParseResult);
 
 /*
- * Find an adapter by a given media type. If no adapter is found, then
+ * Find an adapter by a given media type and method name, which should be
+ * either `parse` or `serialize`. If no adapter is found, then
  * undefined is returned.
  */
-function findAdapter(adapters, mediaType) {
+function findAdapter(adapters, mediaType, method) {
   for (let i = 0; i < adapters.length; i++) {
-    if (adapters[i].mediaTypes.indexOf(mediaType) !== -1) {
+    if (adapters[i].mediaTypes.indexOf(mediaType) !== -1 && adapters[i][method]) {
       return adapters[i];
     }
   }
@@ -25,9 +27,16 @@ function findAdapter(adapters, mediaType) {
 class Fury {
   constructor() {
     this.adapters = [
-      swagger20Adapter,
-      apiBlueprintAdapter
+      swagger20Adapter
     ];
+  }
+
+  /*
+   * Register to use an adapter with this Fury instance.
+   */
+  use(adapter) {
+    this.adapters.push(adapter);
+    return this;
   }
 
   /*
@@ -39,9 +48,9 @@ class Fury {
     // Support both shorthand syntax and the long-form refract, attempting
     // to autodetect which we are getting.
     if (Array.isArray(elements)) {
-      api = minim.convertFromCompactRefract(elements);
+      api = minim.fromCompactRefract(elements);
     } else {
-      api = minim.convertFromRefract(elements);
+      api = minim.fromRefract(elements);
     }
 
     return api;
@@ -57,10 +66,11 @@ class Fury {
     let adapter;
 
     if (mediaType) {
-      adapter = findAdapter(this.adapters, mediaType);
+      adapter = findAdapter(this.adapters, mediaType, 'parse');
     } else {
       for (let i = 0; i < this.adapters.length; i++) {
-        if (this.adapters[i].detect(source)) {
+        const current = this.adapters[i];
+        if (current.detect && current.detect(source) && current.parse) {
           adapter = this.adapters[i];
           break;
         }
@@ -68,7 +78,7 @@ class Fury {
     }
 
     if (adapter) {
-      adapter.parse({source, generateSourceMap}, (err, elements) => {
+      adapter.parse({generateSourceMap, minim, source}, (err, elements) => {
         if (err) { return done(err); }
 
         if (elements instanceof minim.BaseElement) {
@@ -78,7 +88,7 @@ class Fury {
         }
       });
     } else {
-      done(new Error('Document did not match any registered adapter!'));
+      done(new Error('Document did not match any registered parser!'));
     }
   }
 
@@ -86,12 +96,12 @@ class Fury {
    * Serialize a parsed API into the given output format.
    */
   serialize({api, mediaType='text/vnd.apiblueprint'}, done) {
-    let adapter = findAdapter(this.adapters, mediaType);
+    let adapter = findAdapter(this.adapters, mediaType, 'serialize');
 
     if (adapter) {
-      adapter.serialize({api}, done);
+      adapter.serialize({api, minim}, done);
     } else {
-      done(new Error('Media type did not match any registered adapter!'));
+      done(new Error('Media type did not match any registered serializer!'));
     }
   }
 }
