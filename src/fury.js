@@ -1,11 +1,6 @@
 import minimModule from 'minim';
 import minimParseResult from 'minim-parse-result';
 
-// Legacy imports
-import legacyAPI from './legacy/blueprint';
-import legacyBlueprintParser from './legacy/blueprint-parser';
-import legacyMarkdownRenderer from './legacy/markdown';
-
 const minim = minimModule.namespace()
   .use(minimParseResult);
 
@@ -119,8 +114,5 @@ class Fury {
 const fury = new Fury();
 
 fury.Fury = Fury;
-fury.legacyAPI = legacyAPI;
-fury.legacyBlueprintParser = legacyBlueprintParser;
-fury.legacyMarkdownRenderer = legacyMarkdownRenderer;
 
 export default fury;

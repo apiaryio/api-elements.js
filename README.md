@@ -164,54 +164,21 @@ fury.parse({source: 'some-test\n...'}, function (err, api) {
 });
 ```
 
-### Legacy Interface
-
-This is the older "legacy" interface for API Blueprint and Apiary Blueprint parsing.
-
-#### API Blueprint Parsing
-
-```js
-var parser = require('fury').legacyBlueprintParser;
-var source = '# My API\n';
-
-parser.parse({ code: source }, function(error, api, warnings) {
-
-    console.log(api.name);
-});
-```
-#### Markdown Rendering
-
-The legacy interface also offers access to Markdown rendered as used internally
-by API and Apiary Blueprint parsers.
-
-```js
-var markdownRenderer = require('fury').legacyMarkdownRenderer;
-var source = '# My API\n';
-
-
-markdownRenderer.toHtml(source, {}, function(error, html) {
-
-    console.log(html);
-});
-```
-
 ## Development
 
 ### Building & Testing
-Parts of Fury.js are written in Coffeescript, so you must build the final library before it can be used. All of the build/test/etc commands are run through npm:
+Fury is written in ES6 and is transpiled before publishing. All of the build/test/etc commands are run through npm:
 
 ```sh
-# Build the library
-npm run compile
-
 # Run the unit and integration tests
 npm test
 
+# Lint the source code
+npm run lint
+
 # Generate a coverage report
-npm run coverage
+npm run cover
 
 # Open the HTML report
 open coverage/lcov-report/index.html
 ```
-
-[API Blueprint]: http://apiblueprint.org

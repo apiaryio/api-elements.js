@@ -12,40 +12,23 @@
     "node": ">= 0.10.x"
   },
   "scripts": {
-    "compile": "eslint --ext .js,.es6 src && babel src --optional runtime --out-dir lib && coffee -b -c -o lib/ src/",
-    "precoverage": "npm run compile",
-    "coverage": "istanbul cover _mocha -- --compilers es6:babel/register,coffee:coffee-script/register -R dot --recursive",
-    "precoveralls": "npm run coverage",
-    "coveralls": "coveralls <coverage/lcov.info",
-    "pretest": "npm run compile",
-    "test": "mocha --compilers es6:babel/register,coffee:coffee-script/register -R spec --recursive",
-    "prepublish": "npm run compile"
+    "coveralls": "npm run cover && coveralls <coverage/lcov.info",
+    "test": "peasant test",
+    "ci": "peasant -s lint test build",
+    "prepublish": "npm run ci",
+    "cover": "peasant cover",
+    "peasant": "peasant",
+    "lint": "peasant lint"
   },
   "dependencies": {
-    "apiary-blueprint-parser": "",
     "babel-runtime": "^5.5.6",
-    "js-yaml": "^3.4.2",
-    "json-schema-deref-sync": "^0.1.1",
     "minim": "^0.11.0",
-    "minim-parse-result": "^0.1.0",
-    "protagonist": "^1.0.0",
-    "robotskirt": "",
-    "sanitizer": "",
-    "underscore": ""
+    "minim-parse-result": "^0.1.0"
   },
   "devDependencies": {
-    "async": "~0.9.0",
-    "babel": "^5.2.9",
-    "babel-eslint": "^3.1.5",
     "chai": "^2.3.0",
-    "cli-table": "^0.3.1",
-    "coffee-script": "~1.9",
     "coveralls": "^2.11.2",
-    "eslint": "^0.21.2",
-    "glob": "^5.0.10",
-    "istanbul": "^0.3.13",
-    "mocha": "^2.2.5",
-    "yargs": "^3.18.0"
+    "peasant": "^0.5.2"
   },
   "license": "MIT"
 }
