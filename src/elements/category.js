@@ -5,6 +5,7 @@ export default function(namespace) {
     constructor() {
       super(...arguments);
       this.element = 'category';
+      this._attributeElementKeys = ['meta'];
     }
 
     get resourceGroups() {
