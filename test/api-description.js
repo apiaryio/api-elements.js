@@ -52,7 +52,12 @@ describe('API description namespace', () => {
 
     beforeEach(() => {
       category = (new Category()).fromCompactRefract([
-        'category', {}, {}, [
+        'category', {classes: ['api']}, {meta: ['array', {}, {}, [
+          ['member', {classes: ['user']}, {}, {
+            key: ['string', {}, {}, 'HOST'],
+            value: ['string', {}, {}, 'https://example.com'],
+          }]],
+        ]}, [
           ['category', {classes: ['resourceGroup']}, {}, []],
           ['category', {classes: ['dataStructures']}, {}, []],
           ['category', {classes: ['scenario']}, {}, []],
@@ -66,6 +71,12 @@ describe('API description namespace', () => {
 
     it('should have element name category', () => {
       expect(category.element).to.equal('category');
+    });
+
+    it('should have host metadata', () => {
+      const meta = category.attributes.get('meta').first();
+      expect(meta.key.toValue()).to.equal('HOST');
+      expect(meta.value.toValue()).to.equal('https://example.com');
     });
 
     it('should contain a resource group', () => {
