@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/refractproject/minim-parse-result.svg)](https://travis-ci.org/refractproject/minim-parse-result) [![Coverage Status](https://img.shields.io/coveralls/refractproject/minim-parse-result.svg)](https://coveralls.io/r/refractproject/minim-parse-result) [![NPM version](https://img.shields.io/npm/v/minim-parse-result.svg)](https://www.npmjs.org/package/minim-parse-result) [![License](https://img.shields.io/npm/l/minim-parse-result.svg)](https://www.npmjs.org/package/minim-parse-result)
 
-This library provides an interface to the [Refract Parse Result namespace](https://github.com/refractproject/refract-spec/blob/master/namespaces/parse-result.md).
+This library provides an interface to the [Refract Parse Result namespace](https://github.com/refractproject/refract-spec/blob/master/namespaces/parse-result-namespace.md).
 
 It extends upon the base types as defined in [Minim](https://github.com/refractproject/minim) and should be used with the [minim-api-description](https://github.com/refractproject/minim-api-description) package.
 
