@@ -10,21 +10,15 @@ API Description SDK
 > _Wardaddy: [Best job I ever had](http://www.imdb.com/title/tt2713180/quotes?item=qt2267083)._
 
 Fury provides uniform interface to API description formats such as
-[API Blueprint][].
+[API Blueprint][https://apiblueprint.org] and [Swagger](http://swagger.io/).
+
+Note: Fury requires *adapters* to support parsing and serializing. You will need to install at least one adapter along with Fury. You can [find Fury adapters](https://www.npmjs.com/search?q=fury-adapter) via npm.
 
 ## Usage
 
 ### Install
 
-Fury.js is available as npm module.
-
-Install globally:
-
-```sh
-$ npm install -g fury
-```
-
-or as a dependency:
+Fury.js is available as an npm module.
 
 ```sh
 $ npm install --save fury
@@ -36,10 +30,17 @@ Fury.js offers an interface based on the [Refract Project](https://github.com/re
 
 ```js
 import fury from 'fury';
-const source = '# My API\n...';
+import apibParser from 'fury-adapter-apib-parser';
 
-fury.parse({source}, function(err, api, warnings) {
-  console.log(api.title);
+// The input as a string
+const source = 'FORMAT: 1A\n# My API\n...';
+
+// Use the API Blueprint parser adapter
+fury.use(apibParser);
+
+// Parse the input and print 'My API'
+fury.parse({source}, function(err, result) {
+  console.log(result.api.title);
 });
 ```
 
@@ -80,7 +81,7 @@ It is also possible to do complex document-wide searching and filtering. For exa
  * PUT /frobs/{id}
  * DELETE /frobs/{id}
  */
-function filterFunc(item){
+function filterFunc(item) {
   if (item.element === 'httpRequest' && item.statusCode === 200) {
     return true;
   }
@@ -94,6 +95,12 @@ api.find(filterFunc).forEach(function (request) {
   console.log(`${request.method} ${request.href}`)
 });
 ```
+
+Reference:
+
+* [Minim](https://github.com/refractproject/minim)
+* [API description elements](https://github.com/refractproject/minim-api-description)
+* [Parse result elements](https://github.com/refractproject/minim-parse-result)
 
 #### Multiple Fury Instances
 
@@ -112,7 +119,7 @@ fury1.parse(...);
 
 Adapters convert from an input format such as API Blueprint into refract elements. This allows a single, consistent interface to be used to interact with multiple input API description formats. Writing your own adapter allows you to add support for new input formats.
 
-Adapters are made up of a name, a list of media types, and three public functions: `detect`, `parse`, and an optional `serialize`. A simple example might look like this:
+Adapters are made up of a name, a list of media types, and up to three optional public functions: `detect`, `parse`, and `serialize`. A simple example might look like this:
 
 ```js
 export const name = 'my-adapter';

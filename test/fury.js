@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 import fury, {
   Fury, legacyBlueprintParser, legacyMarkdownRenderer
-} from '../../lib/fury';
+} from '../src/fury';
 
 const refractedApi = [
   'parseResult', {}, {}, [
@@ -14,20 +14,20 @@ const refractedApi = [
           hrefVariables: ['hrefVariables', {}, {}, [
             ['member', {}, {}, {
               'key': ['string', {}, {}, 'id'],
-              'value': ['string', {}, {}, '']
-            }]
-          ]]
-          }, [
+              'value': ['string', {}, {}, ''],
+            }],
+          ]],
+        }, [
           ['copy', {}, {}, 'A frob does something.'],
           ['dataStructure', {}, {}, ['object', {}, {}, [
             ['member', {}, {'typeAttributes': ['required']}, {
               'key': ['string', {}, {}, 'id'],
-              'value': ['string', {}, {}, null]
+              'value': ['string', {}, {}, null],
             }],
             ['member', {}, {}, {
               'key': ['string', {}, {}, 'tag'],
-              'value': ['string', {}, {}, null]
-            }]
+              'value': ['string', {}, {}, null],
+            }],
           ]]],
           ['transition', {}, {}, [
             ['copy', {}, {}, 'Gets information about a single frob instance'],
@@ -36,23 +36,22 @@ const refractedApi = [
               ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
                 ['member', {}, {}, {
                   key: ['string', {}, {}, 'Content-Type'],
-                  value: ['string', {}, {}, 'application/json']
-                }]
+                  value: ['string', {}, {}, 'application/json'],
+                }],
               ]]}, [
-                ['asset', {'classes': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n']
-              ]]
-            ]]
-          ]]
-        ]]
-      ]]
-    ]
-  ],
-  ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [[0, 10]]}, 'description']
-]];
+                ['asset', {'classes': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n'],
+              ]],
+            ]],
+          ]],
+        ]],
+      ]],
+    ]],
+    ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [[0, 10]]}, 'description'],
+  ]];
 
 describe('Nodes.js require', () => {
   it('should work without needing to use `.default`', () => {
-    assert(require('../../lib/fury').parse);
+    assert(require('../src/fury').parse);
   });
 });
 
@@ -83,10 +82,10 @@ describe('Parser', () => {
         mediaTypes: ['text/vnd.passthrough'],
         detect: () => true,
         parse: ({source}, done) => done(null, ['string', {}, {}, source]),
-        serialize: ({api}, done) => done(null, api)
+        serialize: ({api}, done) => done(null, api),
       };
 
-      fury.adapters.push(adapter);
+      fury.use(adapter);
     });
 
     after(() => {
@@ -127,10 +126,58 @@ describe('Parser', () => {
       });
     });
 
+    it('should error on parser exception', (done) => {
+      const expected = new Error();
+      fury.adapters[fury.adapters.length - 1].parse = () => {
+        throw expected;
+      };
+
+      fury.parse({source: 'dummy'}, (err) => {
+        assert.equal(err, expected);
+        done();
+      });
+    });
+
+    it('should error on parser error', (done) => {
+      const expected = new Error();
+      fury.adapters[fury.adapters.length - 1].parse = (options, done2) => {
+        done2(expected);
+      };
+
+      fury.parse({source: 'dummy'}, (err) => {
+        assert.equal(err, expected);
+        done();
+      });
+    });
+
     it('should error on missing parser', (done) => {
       fury.adapters[fury.adapters.length - 1].parse = undefined;
       fury.parse({source: 'dummy'}, (err) => {
         assert.instanceOf(err, Error);
+        done();
+      });
+    });
+
+    it('should error on serializer exception', (done) => {
+      const expected = new Error();
+      fury.adapters[fury.adapters.length - 1].serialize = () => {
+        throw expected;
+      };
+
+      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err) => {
+        assert.equal(err, expected);
+        done();
+      });
+    });
+
+    it('should error on serializer error', (done) => {
+      const expected = new Error();
+      fury.adapters[fury.adapters.length - 1].serialize = (options, done2) => {
+        done2(expected);
+      };
+
+      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err) => {
+        assert.equal(err, expected);
         done();
       });
     });
@@ -148,17 +195,17 @@ describe('Parser', () => {
 describe('Refract loader', () => {
   describe('autodetect', () => {
     it('should support shorthand', () => {
-      let api = fury.load(['category', {'classes': 'api'}, {}, []]);
+      const api = fury.load(['category', {'classes': 'api'}, {}, []]);
       assert(api);
     });
 
     it('should support long-form', () => {
-      let api = fury.load({
+      const api = fury.load({
         element: 'category',
         meta: {
-          'classes': 'api'
+          'classes': 'api',
         },
-        content: []
+        content: [],
       });
       assert(api);
     });

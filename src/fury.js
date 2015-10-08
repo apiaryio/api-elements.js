@@ -1,8 +1,6 @@
 import minimModule from 'minim';
 import minimParseResult from 'minim-parse-result';
 
-import * as swagger20Adapter from './adapters/swagger20';
-
 // Legacy imports
 import legacyAPI from './legacy/blueprint';
 import legacyBlueprintParser from './legacy/blueprint-parser';
@@ -26,9 +24,7 @@ function findAdapter(adapters, mediaType, method) {
 
 class Fury {
   constructor() {
-    this.adapters = [
-      swagger20Adapter
-    ];
+    this.adapters = [];
   }
 
   /*
@@ -62,7 +58,7 @@ class Fury {
    * then uses the adapter to convert into refract elements and loads
    * these into objects.
    */
-  parse({source, mediaType, generateSourceMap=false}, done) {
+  parse({source, mediaType, generateSourceMap = false}, done) {
     let adapter;
 
     if (mediaType) {
@@ -78,15 +74,19 @@ class Fury {
     }
 
     if (adapter) {
-      adapter.parse({generateSourceMap, minim, source}, (err, elements) => {
-        if (err) { return done(err); }
+      try {
+        adapter.parse({generateSourceMap, minim, source}, (err, elements) => {
+          if (err) { return done(err); }
 
-        if (elements instanceof minim.BaseElement) {
-          done(null, elements);
-        } else {
-          done(null, this.load(elements));
-        }
-      });
+          if (elements instanceof minim.BaseElement) {
+            done(null, elements);
+          } else {
+            done(null, this.load(elements));
+          }
+        });
+      } catch (err) {
+        return done(err);
+      }
     } else {
       done(new Error('Document did not match any registered parser!'));
     }
@@ -95,11 +95,15 @@ class Fury {
   /*
    * Serialize a parsed API into the given output format.
    */
-  serialize({api, mediaType='text/vnd.apiblueprint'}, done) {
-    let adapter = findAdapter(this.adapters, mediaType, 'serialize');
+  serialize({api, mediaType = 'text/vnd.apiblueprint'}, done) {
+    const adapter = findAdapter(this.adapters, mediaType, 'serialize');
 
     if (adapter) {
-      adapter.serialize({api, minim}, done);
+      try {
+        adapter.serialize({api, minim}, done);
+      } catch (err) {
+        return done(err);
+      }
     } else {
       done(new Error('Media type did not match any registered serializer!'));
     }
