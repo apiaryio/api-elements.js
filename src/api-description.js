@@ -21,13 +21,16 @@
  */
 
 export function namespace(options) {
-  for (const name of [
-    'http-headers', 'href-variables', 'asset', 'http-message-payload',
-    'http-transaction', 'transition', 'resource', 'data-structure',
-    'copy', 'category',
-  ]) {
-    require(`./elements/${name}`)(options.base);
-  }
+  require('./elements/http-headers')(options.base);
+  require('./elements/href-variables')(options.base);
+  require('./elements/asset')(options.base);
+  require('./elements/http-message-payload')(options.base);
+  require('./elements/http-transaction')(options.base);
+  require('./elements/transition')(options.base);
+  require('./elements/resource')(options.base);
+  require('./elements/data-structure')(options.base);
+  require('./elements/copy')(options.base);
+  require('./elements/category')(options.base);
 }
 
 export default {namespace};
