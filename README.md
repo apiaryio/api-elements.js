@@ -10,7 +10,7 @@ API Description SDK
 > _Wardaddy: [Best job I ever had](http://www.imdb.com/title/tt2713180/quotes?item=qt2267083)._
 
 Fury provides uniform interface to API description formats such as
-[API Blueprint][https://apiblueprint.org] and [Swagger](http://swagger.io/).
+[API Blueprint](https://apiblueprint.org) and [Swagger](http://swagger.io/).
 
 Note: Fury requires *adapters* to support parsing and serializing. You will need to install at least one adapter along with Fury. You can [find Fury adapters](https://www.npmjs.com/search?q=fury-adapter) via npm.
 
