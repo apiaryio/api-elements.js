@@ -139,10 +139,6 @@ export function parse({minim, source}, done) {
     const resource = new Resource();
     api.content.push(resource);
 
-    // TODO: Better title and description for the resources
-    // For now, give a title of the HREF
-    resource.meta.set('title', 'Resource ' + href);
-
     const pathObjectParameters = pathValue.parameters || [];
 
     // TODO: Currently this only supports URI parameters for `path` and `query`.
@@ -192,16 +188,14 @@ export function parse({minim, source}, done) {
       const transition = new Transition();
       resource.content.push(transition);
 
-      // Prefer description over summary since description is more complete.
-      // According to spec, summary SHOULD only be 120 characters
-      const transitionDescription = methodValue.description ?
-        methodValue.description : methodValue.summary;
-      if (transitionDescription) {
-        transition.push(new Copy(transitionDescription));
+      transition.meta.set('title', methodValue.summary || methodValue.operationId || '');
+
+      if (methodValue.description) {
+        transition.push(new Copy(methodValue.description));
       }
 
       if (methodValue.operationId) {
-        transition.meta.set('title', methodValue.operationId);
+        transition.attributes.set('relation', methodValue.operationId);
       }
 
       // For each uriParameter, create an hrefVariable

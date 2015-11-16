@@ -21,9 +21,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /empty-responses"
-          },
+          "meta": {},
           "attributes": {
             "href": "/empty-responses"
           },
@@ -33,7 +31,9 @@
               "meta": {
                 "title": "emptyResponses"
               },
-              "attributes": {},
+              "attributes": {
+                "relation": "emptyResponses"
+              },
               "content": [
                 {
                   "element": "copy",
@@ -68,16 +68,16 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /only-default-response"
-          },
+          "meta": {},
           "attributes": {
             "href": "/only-default-response"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
+              "meta": {
+                "title": ""
+              },
               "attributes": {},
               "content": [
                 {
@@ -113,9 +113,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /pet"
-          },
+          "meta": {},
           "attributes": {
             "href": "/pet"
           },
@@ -125,7 +123,9 @@
               "meta": {
                 "title": "updatePet"
               },
-              "attributes": {},
+              "attributes": {
+                "relation": "updatePet"
+              },
               "content": [
                 {
                   "element": "copy",
@@ -311,9 +311,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /pet/findByStatus"
-          },
+          "meta": {},
           "attributes": {
             "hrefVariables": {
               "element": "hrefVariables",
@@ -353,9 +351,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "findPetsByStatus"
+                "title": "For tests: should be ignored."
               },
               "attributes": {
+                "relation": "findPetsByStatus",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -474,9 +473,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /pet/findByTags"
-          },
+          "meta": {},
           "attributes": {
             "href": "/api/pet/findByTags{?tags,unknown}"
           },
@@ -484,9 +481,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "findPetsByTags"
+                "title": "Finds Pets by tags"
               },
               "attributes": {
+                "relation": "findPetsByTags",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -546,12 +544,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Finds Pets by tags"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -630,9 +622,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /pet/{petId}"
-          },
+          "meta": {},
           "attributes": {
             "href": "/pet/{petId}"
           },
@@ -640,9 +630,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "updatePetWithForm"
+                "title": "Updates a pet in the store with form data"
               },
               "attributes": {
+                "relation": "updatePetWithForm",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -677,12 +668,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Updates a pet in the store with form data"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -748,9 +733,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "getPetById"
+                "title": "Find pet by ID"
               },
               "attributes": {
+                "relation": "getPetById",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -787,12 +773,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Find pet by ID"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -900,9 +880,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "deletePet"
+                "title": "Deletes a pet"
               },
               "attributes": {
+                "relation": "deletePet",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -937,12 +918,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Deletes a pet"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -1008,9 +983,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "partialUpdate"
+                "title": "partial updates to a pet"
               },
               "attributes": {
+                "relation": "partialUpdate",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -1045,12 +1021,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "partial updates to a pet"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -1155,9 +1125,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /pet/uploadImage"
-          },
+          "meta": {},
           "attributes": {
             "href": "/pet/uploadImage"
           },
@@ -1165,16 +1133,12 @@
             {
               "element": "transition",
               "meta": {
-                "title": "uploadFile"
+                "title": "uploads an image"
               },
-              "attributes": {},
+              "attributes": {
+                "relation": "uploadFile"
+              },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "uploads an image"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -1211,9 +1175,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /user/createWithArray"
-          },
+          "meta": {},
           "attributes": {
             "href": "/user/createWithArray"
           },
@@ -1221,16 +1183,12 @@
             {
               "element": "transition",
               "meta": {
-                "title": "createUsersWithArrayInput"
+                "title": "Creates list of users with given input array"
               },
-              "attributes": {},
+              "attributes": {
+                "relation": "createUsersWithArrayInput"
+              },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Creates list of users with given input array"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -1280,9 +1238,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /user/createWithList"
-          },
+          "meta": {},
           "attributes": {
             "href": "/user/createWithList"
           },
@@ -1290,16 +1246,12 @@
             {
               "element": "transition",
               "meta": {
-                "title": "createUsersWithListInput"
+                "title": "Creates list of users with given list input"
               },
-              "attributes": {},
+              "attributes": {
+                "relation": "createUsersWithListInput"
+              },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Creates list of users with given list input"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -1349,9 +1301,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /user/{username}"
-          },
+          "meta": {},
           "attributes": {
             "href": "/user/{username}"
           },
@@ -1359,9 +1309,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "updateUser"
+                "title": "Updated user"
               },
               "attributes": {
+                "relation": "updateUser",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -1397,12 +1348,6 @@
               },
               "content": [
                 {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Updated user"
-                },
-                {
                   "element": "httpTransaction",
                   "meta": {},
                   "attributes": {},
@@ -1536,9 +1481,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "deleteUser"
+                "title": "Delete user"
               },
               "attributes": {
+                "relation": "deleteUser",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -1574,12 +1520,6 @@
               },
               "content": [
                 {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Delete user"
-                },
-                {
                   "element": "httpTransaction",
                   "meta": {},
                   "attributes": {},
@@ -1674,9 +1614,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "getUserByName"
+                "title": "Get user by user name"
               },
               "attributes": {
+                "relation": "getUserByName",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -1711,12 +1652,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Get user by user name"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -1825,9 +1760,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /user/login"
-          },
+          "meta": {},
           "attributes": {
             "href": "/api/user/login{?username,password}"
           },
@@ -1835,9 +1768,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "loginUser"
+                "title": "Logs user into the system"
               },
               "attributes": {
+                "relation": "loginUser",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -1897,12 +1831,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Logs user into the system"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -1981,9 +1909,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /user/logout"
-          },
+          "meta": {},
           "attributes": {
             "href": "/user/logout"
           },
@@ -1991,16 +1917,12 @@
             {
               "element": "transition",
               "meta": {
-                "title": "logoutUser"
+                "title": "Logs out current logged in user session"
               },
-              "attributes": {},
+              "attributes": {
+                "relation": "logoutUser"
+              },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Logs out current logged in user session"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -2037,9 +1959,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /user"
-          },
+          "meta": {},
           "attributes": {
             "href": "/user"
           },
@@ -2047,16 +1967,12 @@
             {
               "element": "transition",
               "meta": {
-                "title": "createUser"
+                "title": "Create user"
               },
-              "attributes": {},
+              "attributes": {
+                "relation": "createUser"
+              },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Create user"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -2106,9 +2022,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /store/order"
-          },
+          "meta": {},
           "attributes": {
             "href": "/store/order"
           },
@@ -2116,16 +2030,12 @@
             {
               "element": "transition",
               "meta": {
-                "title": "placeOrder"
+                "title": "Place an order for a pet"
               },
-              "attributes": {},
+              "attributes": {
+                "relation": "placeOrder"
+              },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Place an order for a pet"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -2218,9 +2128,7 @@
         },
         {
           "element": "resource",
-          "meta": {
-            "title": "Resource /store/order/{orderId}"
-          },
+          "meta": {},
           "attributes": {
             "href": "/store/order/{orderId}"
           },
@@ -2228,9 +2136,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "deleteOrder"
+                "title": "Delete purchase order by ID"
               },
               "attributes": {
+                "relation": "deleteOrder",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -2265,12 +2174,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Delete purchase order by ID"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -2366,9 +2269,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "getOrderById"
+                "title": "Find purchase order by ID"
               },
               "attributes": {
+                "relation": "getOrderById",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -2403,12 +2307,6 @@
                 }
               },
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Find purchase order by ID"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
