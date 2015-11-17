@@ -177,7 +177,9 @@ export function parse({minim, source}, done) {
         const transition = new Transition();
         resource.content.push(transition);
 
-        transition.meta.set('title', methodValue.summary || methodValue.operationId || '');
+        if (methodValue.summary) {
+          transition.meta.set('title', methodValue.summary);
+        }
 
         if (methodValue.description) {
           transition.push(new Copy(methodValue.description));

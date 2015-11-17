@@ -28,9 +28,7 @@
           "content": [
             {
               "element": "transition",
-              "meta": {
-                "title": "emptyResponses"
-              },
+              "meta": {},
               "attributes": {
                 "relation": "emptyResponses"
               },
@@ -75,9 +73,7 @@
           "content": [
             {
               "element": "transition",
-              "meta": {
-                "title": ""
-              },
+              "meta": {},
               "attributes": {},
               "content": [
                 {
@@ -120,9 +116,7 @@
           "content": [
             {
               "element": "transition",
-              "meta": {
-                "title": "updatePet"
-              },
+              "meta": {},
               "attributes": {
                 "relation": "updatePet"
               },
