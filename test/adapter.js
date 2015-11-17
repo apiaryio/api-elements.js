@@ -1,5 +1,5 @@
 /*
- * Tests for API Blueprint adapter.
+ * Tests for Swagger adapter.
  */
 
 import adapter from '../src/adapter';

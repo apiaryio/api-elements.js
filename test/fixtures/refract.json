@@ -23,7 +23,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/empty-responses"
+            "href": "/api/empty-responses"
           },
           "content": [
             {
@@ -68,7 +68,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/only-default-response"
+            "href": "/api/only-default-response"
           },
           "content": [
             {
@@ -111,7 +111,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/pet"
+            "href": "/api/pet"
           },
           "content": [
             {
@@ -618,7 +618,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/pet/{petId}"
+            "href": "/api/pet/{petId}"
           },
           "content": [
             {
@@ -1121,7 +1121,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/pet/uploadImage"
+            "href": "/api/pet/uploadImage"
           },
           "content": [
             {
@@ -1171,7 +1171,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/user/createWithArray"
+            "href": "/api/user/createWithArray"
           },
           "content": [
             {
@@ -1234,7 +1234,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/user/createWithList"
+            "href": "/api/user/createWithList"
           },
           "content": [
             {
@@ -1297,7 +1297,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/user/{username}"
+            "href": "/api/user/{username}"
           },
           "content": [
             {
@@ -1905,7 +1905,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/user/logout"
+            "href": "/api/user/logout"
           },
           "content": [
             {
@@ -1955,7 +1955,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/user"
+            "href": "/api/user"
           },
           "content": [
             {
@@ -2018,7 +2018,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/store/order"
+            "href": "/api/store/order"
           },
           "content": [
             {
@@ -2124,7 +2124,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/store/order/{orderId}"
+            "href": "/api/store/order/{orderId}"
           },
           "content": [
             {
