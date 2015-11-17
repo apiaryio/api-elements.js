@@ -103,7 +103,7 @@ export function parse({minim, source}, done) {
   const paramToElement = convertParameterToElement.bind(
     convertParameterToElement, minim);
 
-  const loaded = yaml.safeLoad(source);
+  const loaded = _.isString(source) ? yaml.safeLoad(source) : source;
 
   $RefParser.dereference(loaded, function(err, swagger) {
     if (err) {
