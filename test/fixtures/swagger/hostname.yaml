@@ -1,0 +1,9 @@
+swagger: '2.0'
+host: api.example.com
+basePath: /v1
+schemes:
+- https
+paths:
+  '/test':
+    get:
+      summary: Get a test

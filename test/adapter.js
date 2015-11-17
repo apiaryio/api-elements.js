@@ -5,11 +5,10 @@
 import adapter from '../src/adapter';
 import fs from 'fs';
 import fury from 'fury';
+import glob from 'glob';
 import path from 'path';
 
 import {expect} from 'chai';
-
-const FIXTURES = path.join(__dirname, 'fixtures');
 
 fury.adapters = [adapter];
 
@@ -21,6 +20,10 @@ describe('Swagger 2.0 adapter', () => {
 
     it('detects YAML', () => {
       expect(adapter.detect('swagger: "2.0"')).to.be.true;
+    });
+
+    it('detects object', () => {
+      expect(adapter.detect({swagger: '2.0'})).to.be.true;
     });
 
     it('works with single quotes', () => {
@@ -36,9 +39,8 @@ describe('Swagger 2.0 adapter', () => {
     });
   });
 
-  context('can parse Swagger', () => {
-    const source = fs.readFileSync(path.join(FIXTURES, 'swagger.json'), 'utf8');
-    const refracted = require(path.join(FIXTURES, 'refract.json'));
+  context('can parse Swagger object', () => {
+    const source = {swagger: '2.0', info: {title: 'Test'}};
     let result;
 
     before((done) => {
@@ -64,9 +66,24 @@ describe('Swagger 2.0 adapter', () => {
       expect(filtered).to.have.length(1);
       expect(filtered[0]).to.be.an.object;
     });
+  });
 
-    it('equals expected refract', () => {
-      expect(result.toRefract()).to.deep.equal(refracted);
+  describe('can parse fixtures', () => {
+    const filenames = glob.sync('./test/fixtures/swagger/*.@(json|yaml)');
+    filenames.forEach((filename) => {
+      it(`Parses ${path.basename(filename, path.extname(filename))}`, (done) => {
+        const source = fs.readFileSync(filename, 'utf8');
+        const expected = require('./' + path.join('fixtures', 'refract', path.basename(filename, path.extname(filename)) + '.json'));
+
+        fury.parse({source}, (err, output) => {
+          if (err) {
+            return done(err);
+          }
+
+          expect(output.toRefract()).to.deep.equal(expected);
+          done();
+        });
+      });
     });
   });
 });

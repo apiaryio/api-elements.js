@@ -12,7 +12,14 @@ export const mediaTypes = [
 ];
 
 export function detect(source) {
-  return !!source.match(/"?swagger"?:\s*["']2\.0["']/g);
+  return !!(_.isString(source)
+    ? source.match(/"?swagger"?:\s*["']2\.0["']/g)
+    : source.swagger === '2.0');
+}
+
+// Test whether a key is a special Swagger extension.
+function isExtension(value, key) {
+  return key.indexOf('x-') === 0;
 }
 
 function convertParameterToElement(minim, parameter) {
@@ -43,7 +50,9 @@ function convertParameterToElement(minim, parameter) {
   const member = new MemberElement(parameter.name);
   member.content.value = memberValue;
 
-  member.description = parameter.description;
+  if (parameter.description) {
+    member.description = parameter.description;
+  }
 
   if (parameter.required) {
     member.attributes.set('typeAttributes', ['required']);
@@ -106,7 +115,7 @@ export function parse({minim, source}, done) {
 
   const loaded = _.isString(source) ? yaml.safeLoad(source) : source;
 
-  $RefParser.dereference(loaded, function(err, swagger) {
+  $RefParser.dereference(loaded, (err, swagger) => {
     if (err) {
       return done(err);
     }
@@ -118,14 +127,38 @@ export function parse({minim, source}, done) {
 
     // Root API Element
     api.classes.push('api');
-    api.meta.set('title', swagger.info.title);
-    if (swagger.info.description) {
-      api.content.push(new Copy(swagger.info.description));
+
+    if (swagger.info) {
+      if (swagger.info.title) {
+        api.meta.set('title', swagger.info.title);
+      }
+
+      if (swagger.info.description) {
+        api.content.push(new Copy(swagger.info.description));
+      }
+    }
+
+    if (swagger.host) {
+      let hostname = swagger.host;
+
+      if (swagger.schemes) {
+        if (swagger.schemes.length > 1) {
+          // TODO: Add warning about unused schemes!
+        }
+
+        hostname = `${swagger.schemes[0]}://${hostname}`;
+      }
+
+      api.attributes.set('meta', {});
+      const meta = api.attributes.get('meta');
+      const member = new MemberElement('HOST', hostname);
+      member.meta.set('classes', ['user']);
+      meta.content.push(member);
     }
 
     // Swagger has a paths object to loop through
     // The key is the href
-    _.each(swagger.paths, (pathValue, href) => {
+    _.each(_.omit(swagger.paths, isExtension), (pathValue, href) => {
       const resource = new Resource();
       api.content.push(resource);
 
@@ -144,7 +177,10 @@ export function parse({minim, source}, done) {
 
       // TODO: Handle parameters on a resource level
       // See https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#path-item-object
-      const relevantPaths = _.omit(pathValue, 'parameters', '$ref');
+      const relevantPaths = _.chain(pathValue)
+        .omit('parameters', '$ref')
+        .omit(isExtension)
+        .value();
 
       // Each path is an object with methods as properties
       _.each(relevantPaths, (methodValue, method) => {
@@ -192,7 +228,10 @@ export function parse({minim, source}, done) {
         }
 
         // Currently, default responses are not supported in API Description format
-        const relevantResponses = _.omit(methodValue.responses, 'default');
+        const relevantResponses = _.chain(methodValue.responses)
+          .omit('default')
+          .omit(isExtension)
+          .value();
 
         if (_.keys(relevantResponses).length === 0) {
           createTransaction(minim, transition, method);
@@ -219,12 +258,40 @@ export function parse({minim, source}, done) {
               response.content.push(new Copy(responseValue.description));
             }
 
-            if (contentType) {
-              const headers = new HttpHeaders();
+            const headers = new HttpHeaders();
 
+            if (contentType) {
               headers.push(new MemberElement(
                 'Content-Type', contentType
               ));
+
+              response.headers = headers;
+            }
+
+            if (responseValue.headers) {
+              for (const headerName in responseValue.headers) {
+                if (responseValue.headers.hasOwnProperty(headerName)) {
+                  const header = responseValue.headers[headerName];
+                  let value = '';
+
+                  // Choose the first available option
+                  if (header.enum) {
+                    value = header.enum[0];
+                  }
+
+                  if (header.default) {
+                    value = header.default;
+                  }
+
+                  const member = new MemberElement(headerName, value);
+
+                  if (header.description) {
+                    member.meta.set('description', header.description);
+                  }
+
+                  headers.push(member);
+                }
+              }
 
               response.headers = headers;
             }

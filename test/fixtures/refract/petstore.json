@@ -11,7 +11,38 @@
         ],
         "title": "Swagger Sample App"
       },
-      "attributes": {},
+      "attributes": {
+        "meta": {
+          "element": "object",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": [
+                  "user"
+                ]
+              },
+              "attributes": {},
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "http://petstore.swagger.wordnik.com"
+                }
+              }
+            }
+          ]
+        }
+      },
       "content": [
         {
           "element": "copy",
@@ -68,7 +99,6 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/api/parameters-nodup{?onlyonce}",
             "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
@@ -100,7 +130,8 @@
                   }
                 }
               ]
-            }
+            },
+            "href": "/api/parameters-nodup{?onlyonce}"
           },
           "content": [
             {
