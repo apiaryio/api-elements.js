@@ -4,11 +4,9 @@ export default function buildUriTemplate(basePath, href, pathObjectParameters = 
   if (queryParameters.length > 0 || pathObjectParameters.length > 0) {
     // Path object parameters apply to all nested resources (operations). Only
     // the ones marked as query parameters are relevant though
-    const pathObjectParameterNames = pathObjectParameters.filter(parameter => {
-      return parameter.in === 'query';
-    }).map(parameter => {
-      return parameter.name;
-    });
+    const pathObjectParameterNames = pathObjectParameters
+      .filter(parameter => parameter.in === 'query')
+      .map(parameter => parameter.name);
 
     const queryParameterNames = queryParameters.map(parameter => {
       return parameter.name;
