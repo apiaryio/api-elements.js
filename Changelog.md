@@ -1,5 +1,6 @@
 # Unreleased
 
+- Add module for building URI templates from path and operation parameters.
 - Allow input to be either a loaded object or JSON/YAML string.
 - Better JSON Schema reference handling via `json-schema-ref-parser` package.
 - Do not set resource titles.
