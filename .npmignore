@@ -5,3 +5,4 @@ circle.yml
 coverage
 .vagrant
 .npmignore
+.eslintcache

@@ -1,7 +1,5 @@
 import {assert} from 'chai';
-import fury, {
-  Fury, legacyBlueprintParser, legacyMarkdownRenderer
-} from '../src/fury';
+import fury, {Fury} from '../src/fury';
 
 const refractedApi = [
   'parseResult', {}, {}, [
@@ -301,93 +299,6 @@ describe('Refract loader', () => {
 
       // Convenience to get a header by name
       assert.equal(response.header('content-type'), 'application/json');
-    });
-  });
-});
-
-describe('Using legacy parser', () => {
-  let parserError = null;
-  let parsedAPI = null;
-  let parserWarnings = null;
-
-  describe('to parse API Blueprint', () => {
-    before(function(done) {
-      const blueprintSource = 'FORMAT: 1A\n' +
-                              '\n' +
-                              '# My API\n';
-
-      legacyBlueprintParser.parse({code: blueprintSource}, (error, api, warnings) => {
-        parserError = error;
-        parsedAPI = api;
-        parserWarnings = warnings;
-        done();
-      });
-    });
-
-    it('should succeed', () => {
-      assert.isNull(parserError);
-    });
-
-    it('API should be defined', () => {
-      assert.isDefined(parsedAPI);
-    });
-
-    it('API name should be "My API"', () => {
-      assert.equal(parsedAPI.name, 'My API');
-    });
-  });
-
-  describe('to parse Apiary Blueprint', () => {
-    before((done) => {
-      const blueprintSource = '\n--- Sample API v2 ---\n';
-
-      legacyBlueprintParser.parse({code: blueprintSource}, (error, api, warnings) => {
-        parserError = error;
-        parsedAPI = api;
-        parserWarnings = warnings;
-        done();
-      });
-    });
-
-    it('should succeed', () => {
-      assert.isNull(parserError);
-    });
-
-    it('API should be defined', () => {
-      assert.isDefined(parsedAPI);
-    });
-
-    it('API name should be "Sample API v2"', () => {
-      assert.equal(parsedAPI.name, 'Sample API v2');
-    });
-  });
-});
-
-describe('Using legacy Markdown renderer', () => {
-  describe('to render Markdown', () => {
-    let renderError = null;
-    let renderResult = null;
-
-    before((done) => {
-      const source = '# My API\n';
-
-      legacyMarkdownRenderer.toHtml(source, {}, (error, html) => {
-        renderError = error;
-        renderResult = html;
-        done();
-      });
-    });
-
-    it('should succeed', () => {
-      assert.isNull(renderError);
-    });
-
-    it('result should be defined', () => {
-      assert.isDefined(renderResult);
-    });
-
-    it('result should be rendered correctly', () => {
-      assert.equal(renderResult, '<h1>My API</h1>\n');
     });
   });
 });
