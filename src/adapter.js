@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import $RefParser from 'json-schema-ref-parser';
 import yaml from 'js-yaml';
+import buildUriTemplate from './uri-template';
 
 export const name = 'swagger';
 
@@ -163,16 +164,8 @@ export function parse({minim, source}, done) {
           return parameter.in === 'body';
         });
 
-        // Query parameters are added the HREF if they exist
-        if (queryParameters.length > 0) {
-          const queryParameterNames = queryParameters.map((parameter) => {
-            return parameter.name;
-          });
-
-          resource.attributes.set('href', basePath + href + '{?' + queryParameterNames.join(',') + '}');
-        } else {
-          resource.attributes.set('href', href);
-        }
+        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+        resource.attributes.set('href', hrefForResource);
 
         const transition = new Transition();
         resource.content.push(transition);
