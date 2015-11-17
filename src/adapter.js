@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import deref from 'json-schema-deref-sync';
+import $RefParser from 'json-schema-ref-parser';
 import yaml from 'js-yaml';
 
 export const name = 'swagger';
@@ -57,22 +57,8 @@ function convertParameterToElement(minim, parameter) {
   return member;
 }
 
-function derefJsonSchema(jsonSchemaWithRefs) {
-  let jsonSchema;
-
-  // In case there are errors with `deref`, which can happen with circular $refs
-  try {
-    jsonSchema = deref(jsonSchemaWithRefs);
-  } catch (error) {
-    jsonSchema = jsonSchemaWithRefs;
-  }
-
-  return jsonSchema;
-}
-
-function createAssetFromJsonSchema(minim, jsonSchemaWithRefs) {
+function createAssetFromJsonSchema(minim, jsonSchema) {
   const Asset = minim.getElementClass('asset');
-  const jsonSchema = derefJsonSchema(jsonSchemaWithRefs);
   const schemaAsset = new Asset(JSON.stringify(jsonSchema));
   schemaAsset.classes.push('messageBodySchema');
   schemaAsset.attributes.set('contentType', 'application/schema+json');
@@ -117,175 +103,173 @@ export function parse({minim, source}, done) {
   const paramToElement = convertParameterToElement.bind(
     convertParameterToElement, minim);
 
-  const swagger = yaml.safeLoad(source);
+  const loaded = _.isString(source) ? yaml.safeLoad(source) : source;
 
-  const basePath = swagger.basePath || '';
-  const schemaDefinitions = _.pick(swagger, 'definitions') || {};
+  $RefParser.dereference(loaded, function(err, swagger) {
+    if (err) {
+      return done(err);
+    }
+    const basePath = swagger.basePath || '';
 
-  const parseResult = new ParseResult();
-  const api = new Category();
-  parseResult.push(api);
+    const parseResult = new ParseResult();
+    const api = new Category();
+    parseResult.push(api);
 
-  // Root API Element
-  api.classes.push('api');
-  api.meta.set('title', swagger.info.title);
-  if (swagger.info.description) {
-    api.content.push(new Copy(swagger.info.description));
-  }
-
-  // Swagger has a paths object to loop through
-  // The key is the href
-  _.each(swagger.paths, (pathValue, href) => {
-    const resource = new Resource();
-    api.content.push(resource);
-
-    // TODO: Better title and description for the resources
-    // For now, give a title of the HREF
-    resource.meta.set('title', 'Resource ' + href);
-
-    const pathObjectParameters = pathValue.parameters || [];
-
-    // TODO: Currently this only supports URI parameters for `path` and `query`.
-    // It should add support for `body` parameters as well.
-    if (pathObjectParameters.length > 0) {
-      resource.hrefVariables = new HrefVariables();
-
-      pathObjectParameters
-        .filter((parameter) => parameter.in === 'query' || parameter.in === 'path')
-        .map(paramToElement)
-        .forEach((member) => resource.hrefVariables.content.push(member));
+    // Root API Element
+    api.classes.push('api');
+    api.meta.set('title', swagger.info.title);
+    if (swagger.info.description) {
+      api.content.push(new Copy(swagger.info.description));
     }
 
-    // TODO: Handle parameters on a resource level
-    // See https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#path-item-object
-    const relevantPaths = _.omit(pathValue, 'parameters', '$ref');
+    // Swagger has a paths object to loop through
+    // The key is the href
+    _.each(swagger.paths, (pathValue, href) => {
+      const resource = new Resource();
+      api.content.push(resource);
 
-    // Each path is an object with methods as properties
-    _.each(relevantPaths, (methodValue, method) => {
-      const methodValueParameters = methodValue.parameters || [];
+      const pathObjectParameters = pathValue.parameters || [];
 
-      const queryParameters = methodValueParameters.filter((parameter) => {
-        return parameter.in === 'query';
-      });
+      // TODO: Currently this only supports URI parameters for `path` and `query`.
+      // It should add support for `body` parameters as well.
+      if (pathObjectParameters.length > 0) {
+        resource.hrefVariables = new HrefVariables();
 
-      // URI parameters are for query and path variables
-      const uriParameters = methodValueParameters.filter((parameter) => {
-        return parameter.in === 'query' || parameter.in === 'path';
-      });
+        pathObjectParameters
+          .filter((parameter) => parameter.in === 'query' || parameter.in === 'path')
+          .map(paramToElement)
+          .forEach((member) => resource.hrefVariables.content.push(member));
+      }
 
-      // Body parameters are ones that define JSON Schema
-      const bodyParameters = methodValueParameters.filter((parameter) => {
-        return parameter.in === 'body';
-      });
+      // TODO: Handle parameters on a resource level
+      // See https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#path-item-object
+      const relevantPaths = _.omit(pathValue, 'parameters', '$ref');
 
-      // Query parameters are added the HREF if they exist
-      if (queryParameters.length > 0) {
-        const queryParameterNames = queryParameters.map((parameter) => {
-          return parameter.name;
+      // Each path is an object with methods as properties
+      _.each(relevantPaths, (methodValue, method) => {
+        const methodValueParameters = methodValue.parameters || [];
+
+        const queryParameters = methodValueParameters.filter((parameter) => {
+          return parameter.in === 'query';
         });
 
-        resource.attributes.set('href', basePath + href + '{?' + queryParameterNames.join(',') + '}');
-      } else {
-        resource.attributes.set('href', href);
-      }
+        // URI parameters are for query and path variables
+        const uriParameters = methodValueParameters.filter((parameter) => {
+          return parameter.in === 'query' || parameter.in === 'path';
+        });
 
-      const transition = new Transition();
-      resource.content.push(transition);
+        // Body parameters are ones that define JSON Schema
+        const bodyParameters = methodValueParameters.filter((parameter) => {
+          return parameter.in === 'body';
+        });
 
-      // Prefer description over summary since description is more complete.
-      // According to spec, summary SHOULD only be 120 characters
-      const transitionDescription = methodValue.description ?
-        methodValue.description : methodValue.summary;
-      if (transitionDescription) {
-        transition.push(new Copy(transitionDescription));
-      }
-
-      if (methodValue.operationId) {
-        transition.meta.set('title', methodValue.operationId);
-      }
-
-      // For each uriParameter, create an hrefVariable
-      if (uriParameters.length > 0) {
-        transition.hrefVariables = new HrefVariables();
-
-        uriParameters
-          .map(paramToElement)
-          .forEach((member) => transition.hrefVariables.content.push(member));
-      }
-
-      // Currently, default responses are not supported in API Description format
-      const relevantResponses = _.omit(methodValue.responses, 'default');
-
-      if (_.keys(relevantResponses).length === 0) {
-        createTransaction(minim, transition, method);
-      }
-
-      // Transactions are created for each response in the document
-      _.each(relevantResponses, (responseValue, statusCode) => {
-        let examples = {
-          '': undefined,
-        };
-
-        if (responseValue.examples) {
-          examples = responseValue.examples;
-        }
-
-        examples = _.omit(examples, 'schema');
-
-        _.each(examples, (responseBody, contentType) => {
-          const transaction = createTransaction(minim, transition, method);
-          const request = transaction.request;
-          const response = transaction.response;
-
-          if (responseValue.description) {
-            response.content.push(new Copy(responseValue.description));
-          }
-
-          if (contentType) {
-            const headers = new HttpHeaders();
-
-            headers.push(new MemberElement(
-              'Content-Type', contentType
-            ));
-
-            response.headers = headers;
-          }
-
-          // Body parameters define request schemas
-          _.each(bodyParameters, (bodyParameter) => {
-            const jsonSchemaWithDefinitions = _.extend({}, bodyParameter.schema, schemaDefinitions);
-            const schemaAsset = createAssetFromJsonSchema(minim, jsonSchemaWithDefinitions);
-            request.content.push(schemaAsset);
+        // Query parameters are added the HREF if they exist
+        if (queryParameters.length > 0) {
+          const queryParameterNames = queryParameters.map((parameter) => {
+            return parameter.name;
           });
 
-          // Responses can have bodies
-          if (responseBody !== undefined) {
-            const bodyAsset = new Asset(JSON.stringify(responseBody, null, 2));
-            bodyAsset.classes.push('messageBody');
-            response.content.push(bodyAsset);
+          resource.attributes.set('href', basePath + href + '{?' + queryParameterNames.join(',') + '}');
+        } else {
+          resource.attributes.set('href', href);
+        }
+
+        const transition = new Transition();
+        resource.content.push(transition);
+
+        if (methodValue.summary) {
+          transition.meta.set('title', methodValue.summary);
+        }
+
+        if (methodValue.description) {
+          transition.push(new Copy(methodValue.description));
+        }
+
+        if (methodValue.operationId) {
+          transition.attributes.set('relation', methodValue.operationId);
+        }
+
+        // For each uriParameter, create an hrefVariable
+        if (uriParameters.length > 0) {
+          transition.hrefVariables = new HrefVariables();
+
+          uriParameters
+            .map(paramToElement)
+            .forEach((member) => transition.hrefVariables.content.push(member));
+        }
+
+        // Currently, default responses are not supported in API Description format
+        const relevantResponses = _.omit(methodValue.responses, 'default');
+
+        if (_.keys(relevantResponses).length === 0) {
+          createTransaction(minim, transition, method);
+        }
+
+        // Transactions are created for each response in the document
+        _.each(relevantResponses, (responseValue, statusCode) => {
+          let examples = {
+            '': undefined,
+          };
+
+          if (responseValue.examples) {
+            examples = responseValue.examples;
           }
 
-          // Responses can have schemas in Swagger
-          const schema = responseValue.schema || (responseValue.examples && responseValue.examples.schema);
-          if (schema) {
-            const jsonSchemaWithDefinitions = _.extend({}, schema, schemaDefinitions);
-            const schemaAsset = createAssetFromJsonSchema(minim, jsonSchemaWithDefinitions);
-            response.content.push(schemaAsset);
-          }
+          examples = _.omit(examples, 'schema');
 
-          // TODO: Decide what to do with request hrefs
-          // If the URI is templated, we don't want to add it to the request
-          // if (uriParameters.length === 0) {
-          //   request.attributes.href = href;
-          // }
+          _.each(examples, (responseBody, contentType) => {
+            const transaction = createTransaction(minim, transition, method);
+            const request = transaction.request;
+            const response = transaction.response;
 
-          response.attributes.set('statusCode', statusCode);
+            if (responseValue.description) {
+              response.content.push(new Copy(responseValue.description));
+            }
+
+            if (contentType) {
+              const headers = new HttpHeaders();
+
+              headers.push(new MemberElement(
+                'Content-Type', contentType
+              ));
+
+              response.headers = headers;
+            }
+
+            // Body parameters define request schemas
+            _.each(bodyParameters, (bodyParameter) => {
+              const schemaAsset = createAssetFromJsonSchema(minim, bodyParameter.schema);
+              request.content.push(schemaAsset);
+            });
+
+            // Responses can have bodies
+            if (responseBody !== undefined) {
+              const bodyAsset = new Asset(JSON.stringify(responseBody, null, 2));
+              bodyAsset.classes.push('messageBody');
+              response.content.push(bodyAsset);
+            }
+
+            // Responses can have schemas in Swagger
+            const schema = responseValue.schema || (responseValue.examples && responseValue.examples.schema);
+            if (schema) {
+              const schemaAsset = createAssetFromJsonSchema(minim, schema);
+              response.content.push(schemaAsset);
+            }
+
+            // TODO: Decide what to do with request hrefs
+            // If the URI is templated, we don't want to add it to the request
+            // if (uriParameters.length === 0) {
+            //   request.attributes.href = href;
+            // }
+
+            response.attributes.set('statusCode', statusCode);
+          });
         });
       });
     });
-  });
 
-  done(null, parseResult);
+    done(null, parseResult);
+  });
 }
 
 export default {name, mediaTypes, detect, parse};
