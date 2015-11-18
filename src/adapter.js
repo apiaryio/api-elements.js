@@ -22,6 +22,43 @@ function isExtension(value, key) {
   return key.indexOf('x-') === 0;
 }
 
+// Test whether tags can be treated as resource groups, and if so it sets a
+// group name for each resource (used later to create groups).
+function useResourceGroups(api) {
+  const tags = [];
+
+  if (api.paths) {
+    _.each(api.paths, (path) => {
+      let tag = null;
+
+      if (path) {
+        _.each(path, (operation) => {
+          if (operation.tags && operation.tags.length) {
+            if (operation.tags.length > 1) {
+              // Too many tags... each resource can only be in one group!
+              return false;
+            }
+
+            if (tag === null) {
+              tag = operation.tags[0];
+            } else if (tag !== operation.tags[0]) {
+              // Non-matching tags... can't have a resource in multiple groups!
+              return false;
+            }
+          }
+        });
+      }
+
+      if (tag) {
+        path['x-group-name'] = tag;
+        tags.push(tag);
+      }
+    });
+  }
+
+  return tags.length > 0;
+}
+
 function convertParameterToElement(minim, parameter) {
   const StringElement = minim.getElementClass('string');
   const NumberElement = minim.getElementClass('number');
@@ -156,11 +193,39 @@ export function parse({minim, source}, done) {
       meta.content.push(member);
     }
 
+    const useGroups = useResourceGroups(swagger);
+    let group = api;
+
     // Swagger has a paths object to loop through
     // The key is the href
     _.each(_.omit(swagger.paths, isExtension), (pathValue, href) => {
       const resource = new Resource();
-      api.content.push(resource);
+
+      if (useGroups) {
+        const groupName = pathValue['x-group-name'];
+
+        if (groupName) {
+          group = api.find((el) => el.element === 'category' && el.classes.contains('resourceGroup') && el.title === groupName).first();
+
+          if (!group) {
+            group = new Category();
+            group.title = groupName;
+            group.classes.push('resourceGroup');
+
+            if (swagger.tags && swagger.tags.forEach) {
+              swagger.tags.forEach((tag) => {
+                if (tag.name === groupName && tag.description) {
+                  group.content.push(new Copy(tag.description));
+                }
+              });
+            }
+
+            api.content.push(group);
+          }
+        }
+      }
+
+      group.content.push(resource);
 
       const pathObjectParameters = pathValue.parameters || [];
 
