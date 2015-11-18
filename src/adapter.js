@@ -143,7 +143,7 @@ export function parse({minim, source}, done) {
 
       if (swagger.schemes) {
         if (swagger.schemes.length > 1) {
-          // TODO: Add warning about unused schemes!
+          // TODO: [Annotation] Add warning about unused schemes!
         }
 
         hostname = `${swagger.schemes[0]}://${hostname}`;
@@ -166,6 +166,7 @@ export function parse({minim, source}, done) {
 
       // TODO: Currently this only supports URI parameters for `path` and `query`.
       // It should add support for `body` parameters as well.
+      // TODO: [Annotation] Warn user that body parameters are not used if found
       if (pathObjectParameters.length > 0) {
         resource.hrefVariables = new HrefVariables();
 
@@ -228,6 +229,7 @@ export function parse({minim, source}, done) {
         }
 
         // Currently, default responses are not supported in API Description format
+        // TODO: [Annotation] Add warning about not showing the default!
         const relevantResponses = _.chain(methodValue.responses)
           .omit('default')
           .omit(isExtension)
