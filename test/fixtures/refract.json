@@ -68,6 +68,115 @@
           "element": "resource",
           "meta": {},
           "attributes": {
+            "href": "/api/parameters-nodup{?onlyonce}",
+            "hrefVariables": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {
+                    "description": "This parameter should be present in the href URI template only once"
+                  },
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "onlyonce"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {
+                "relation": "emptyResponses",
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "This parameter should be present in the href URI template only once"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "onlyonce"
+                        },
+                        "value": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": ""
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "content": [
+                {
+                  "element": "copy",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "Empty responses"
+                },
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "GET"
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {},
+                      "content": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
             "href": "/api/only-default-response"
           },
           "content": [

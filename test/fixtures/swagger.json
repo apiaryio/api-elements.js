@@ -34,6 +34,31 @@
                 "operationId": "emptyResponses"
             }
         },
+        "/parameters-nodup": {
+            "get": {
+                "description": "Empty responses",
+                "summary": "",
+                "operationId": "emptyResponses",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "description": "This parameter should be present in the href URI template only once",
+                        "name": "onlyonce",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            },
+            "parameters": [
+                {
+                    "in": "query",
+                    "description": "This parameter should be present in the href URI template only once",
+                    "name": "onlyonce",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
         "/only-default-response": {
             "get": {
                 "responses": {
