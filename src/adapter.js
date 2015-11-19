@@ -280,6 +280,15 @@ export function parse({minim, source}, done) {
           return parameter.in === 'body';
         });
 
+        // Form parameters are send as encoded form data in the body
+        const formParameters = methodValueParameters.filter((parameter) => {
+          return parameter.in === 'formData';
+        });
+
+        if (formParameters.length) {
+          // TODO: [Annotation] We ignore form data params!
+        }
+
         const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
         resource.attributes.set('href', hrefForResource);
 
