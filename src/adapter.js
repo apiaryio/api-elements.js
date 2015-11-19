@@ -12,7 +12,51 @@ export const mediaTypes = [
 ];
 
 export function detect(source) {
-  return !!source.match(/"?swagger"?:\s*["']2\.0["']/g);
+  return !!(_.isString(source)
+    ? source.match(/"?swagger"?:\s*["']2\.0["']/g)
+    : source.swagger === '2.0');
+}
+
+// Test whether a key is a special Swagger extension.
+function isExtension(value, key) {
+  return key.indexOf('x-') === 0;
+}
+
+// Test whether tags can be treated as resource groups, and if so it sets a
+// group name for each resource (used later to create groups).
+function useResourceGroups(api) {
+  const tags = [];
+
+  if (api.paths) {
+    _.each(api.paths, (path) => {
+      let tag = null;
+
+      if (path) {
+        _.each(path, (operation) => {
+          if (operation.tags && operation.tags.length) {
+            if (operation.tags.length > 1) {
+              // Too many tags... each resource can only be in one group!
+              return false;
+            }
+
+            if (tag === null) {
+              tag = operation.tags[0];
+            } else if (tag !== operation.tags[0]) {
+              // Non-matching tags... can't have a resource in multiple groups!
+              return false;
+            }
+          }
+        });
+      }
+
+      if (tag) {
+        path['x-group-name'] = tag;
+        tags.push(tag);
+      }
+    });
+  }
+
+  return tags.length > 0;
 }
 
 function convertParameterToElement(minim, parameter) {
@@ -43,7 +87,9 @@ function convertParameterToElement(minim, parameter) {
   const member = new MemberElement(parameter.name);
   member.content.value = memberValue;
 
-  member.description = parameter.description;
+  if (parameter.description) {
+    member.description = parameter.description;
+  }
 
   if (parameter.required) {
     member.attributes.set('typeAttributes', ['required']);
@@ -106,7 +152,7 @@ export function parse({minim, source}, done) {
 
   const loaded = _.isString(source) ? yaml.safeLoad(source) : source;
 
-  $RefParser.dereference(loaded, function(err, swagger) {
+  $RefParser.dereference(loaded, (err, swagger) => {
     if (err) {
       return done(err);
     }
@@ -118,21 +164,84 @@ export function parse({minim, source}, done) {
 
     // Root API Element
     api.classes.push('api');
-    api.meta.set('title', swagger.info.title);
-    if (swagger.info.description) {
-      api.content.push(new Copy(swagger.info.description));
+
+    if (swagger.info) {
+      if (swagger.info.title) {
+        api.meta.set('title', swagger.info.title);
+      }
+
+      if (swagger.info.description) {
+        api.content.push(new Copy(swagger.info.description));
+      }
     }
+
+    if (swagger.host) {
+      let hostname = swagger.host;
+
+      if (swagger.schemes) {
+        if (swagger.schemes.length > 1) {
+          // TODO: [Annotation] Add warning about unused schemes!
+        }
+
+        hostname = `${swagger.schemes[0]}://${hostname}`;
+      }
+
+      api.attributes.set('meta', {});
+      const meta = api.attributes.get('meta');
+      const member = new MemberElement('HOST', hostname);
+      member.meta.set('classes', ['user']);
+      meta.content.push(member);
+    }
+
+    if (swagger.securityDefinitions || swagger.security) {
+      // TODO: [Annotation] Warn about lost security info.
+    }
+
+    if (swagger.externalDocs) {
+      // TODO: [Annotation] Warn about unused external docs or put them into
+      //       the description copy?
+    }
+
+    const useGroups = useResourceGroups(swagger);
+    let group = api;
 
     // Swagger has a paths object to loop through
     // The key is the href
-    _.each(swagger.paths, (pathValue, href) => {
+    _.each(_.omit(swagger.paths, isExtension), (pathValue, href) => {
       const resource = new Resource();
-      api.content.push(resource);
+
+      if (useGroups) {
+        const groupName = pathValue['x-group-name'];
+
+        if (groupName) {
+          group = api.find((el) => el.element === 'category' && el.classes.contains('resourceGroup') && el.title === groupName).first();
+
+          if (!group) {
+            group = new Category();
+            group.title = groupName;
+            group.classes.push('resourceGroup');
+
+            if (swagger.tags && swagger.tags.forEach) {
+              swagger.tags.forEach((tag) => {
+                // TODO: Check for external docs here?
+                if (tag.name === groupName && tag.description) {
+                  group.content.push(new Copy(tag.description));
+                }
+              });
+            }
+
+            api.content.push(group);
+          }
+        }
+      }
+
+      group.content.push(resource);
 
       const pathObjectParameters = pathValue.parameters || [];
 
       // TODO: Currently this only supports URI parameters for `path` and `query`.
       // It should add support for `body` parameters as well.
+      // TODO: [Annotation] Warn user that body parameters are not used if found
       if (pathObjectParameters.length > 0) {
         resource.hrefVariables = new HrefVariables();
 
@@ -144,10 +253,17 @@ export function parse({minim, source}, done) {
 
       // TODO: Handle parameters on a resource level
       // See https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#path-item-object
-      const relevantPaths = _.omit(pathValue, 'parameters', '$ref');
+      const relevantPaths = _.chain(pathValue)
+        .omit('parameters', '$ref')
+        .omit(isExtension)
+        .value();
 
       // Each path is an object with methods as properties
       _.each(relevantPaths, (methodValue, method) => {
+        if (methodValue.externalDocs) {
+          // TODO: [Annotation] Warn about unused external docs.
+        }
+
         const methodValueParameters = methodValue.parameters || [];
 
         const queryParameters = methodValueParameters.filter((parameter) => {
@@ -163,6 +279,15 @@ export function parse({minim, source}, done) {
         const bodyParameters = methodValueParameters.filter((parameter) => {
           return parameter.in === 'body';
         });
+
+        // Form parameters are send as encoded form data in the body
+        const formParameters = methodValueParameters.filter((parameter) => {
+          return parameter.in === 'formData';
+        });
+
+        if (formParameters.length) {
+          // TODO: [Annotation] We ignore form data params!
+        }
 
         const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
         resource.attributes.set('href', hrefForResource);
@@ -192,10 +317,21 @@ export function parse({minim, source}, done) {
         }
 
         // Currently, default responses are not supported in API Description format
-        const relevantResponses = _.omit(methodValue.responses, 'default');
+        // TODO: [Annotation] Add warning about not showing the default!
+        const relevantResponses = _.chain(methodValue.responses)
+          .omit('default')
+          .omit(isExtension)
+          .value();
 
         if (_.keys(relevantResponses).length === 0) {
-          createTransaction(minim, transition, method);
+          if (bodyParameters.length) {
+            // Create an empty successful response so that the request/response
+            // pair gets properly generated. In the future we may want to
+            // refactor the code below as this is a little weird.
+            relevantResponses.null = {};
+          } else {
+            createTransaction(minim, transition, method);
+          }
         }
 
         // Transactions are created for each response in the document
@@ -219,12 +355,40 @@ export function parse({minim, source}, done) {
               response.content.push(new Copy(responseValue.description));
             }
 
-            if (contentType) {
-              const headers = new HttpHeaders();
+            const headers = new HttpHeaders();
 
+            if (contentType) {
               headers.push(new MemberElement(
                 'Content-Type', contentType
               ));
+
+              response.headers = headers;
+            }
+
+            if (responseValue.headers) {
+              for (const headerName in responseValue.headers) {
+                if (responseValue.headers.hasOwnProperty(headerName)) {
+                  const header = responseValue.headers[headerName];
+                  let value = '';
+
+                  // Choose the first available option
+                  if (header.enum) {
+                    value = header.enum[0];
+                  }
+
+                  if (header.default) {
+                    value = header.default;
+                  }
+
+                  const member = new MemberElement(headerName, value);
+
+                  if (header.description) {
+                    member.meta.set('description', header.description);
+                  }
+
+                  headers.push(member);
+                }
+              }
 
               response.headers = headers;
             }
@@ -255,7 +419,9 @@ export function parse({minim, source}, done) {
             //   request.attributes.href = href;
             // }
 
-            response.attributes.set('statusCode', statusCode);
+            if (statusCode !== 'null') {
+              response.attributes.set('statusCode', statusCode);
+            }
           });
         });
       });

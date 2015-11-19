@@ -1,6 +1,14 @@
-# Unreleased
+# 0.3.0 - 2015-11-18
 
+- Handle Swagger extensions (`x-*` fields).
+- Support tags as resource groups when possible.
+- Support hostname and basepath.
+- Support request parameters when no response is given.
+- Better support for HTTP headers.
 - Add module for building URI templates from path and operation parameters.
+
+# 0.2.0 - 2015-11-17
+
 - Allow input to be either a loaded object or JSON/YAML string.
 - Better JSON Schema reference handling via `json-schema-ref-parser` package.
 - Do not set resource titles.

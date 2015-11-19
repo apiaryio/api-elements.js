@@ -1,0 +1,18 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "Minimal JSON Example"
+      },
+      "attributes": {},
+      "content": []
+    }
+  ]
+}
