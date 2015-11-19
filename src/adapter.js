@@ -193,6 +193,15 @@ export function parse({minim, source}, done) {
       meta.content.push(member);
     }
 
+    if (swagger.securityDefinitions || swagger.security) {
+      // TODO: [Annotation] Warn about lost security info.
+    }
+
+    if (swagger.externalDocs) {
+      // TODO: [Annotation] Warn about unused external docs or put them into
+      //       the description copy?
+    }
+
     const useGroups = useResourceGroups(swagger);
     let group = api;
 
@@ -214,6 +223,7 @@ export function parse({minim, source}, done) {
 
             if (swagger.tags && swagger.tags.forEach) {
               swagger.tags.forEach((tag) => {
+                // TODO: Check for external docs here?
                 if (tag.name === groupName && tag.description) {
                   group.content.push(new Copy(tag.description));
                 }
@@ -250,6 +260,10 @@ export function parse({minim, source}, done) {
 
       // Each path is an object with methods as properties
       _.each(relevantPaths, (methodValue, method) => {
+        if (methodValue.externalDocs) {
+          // TODO: [Annotation] Warn about unused external docs.
+        }
+
         const methodValueParameters = methodValue.parameters || [];
 
         const queryParameters = methodValueParameters.filter((parameter) => {
