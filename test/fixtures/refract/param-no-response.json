@@ -53,9 +53,7 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {
-                        "statusCode": "200"
-                      },
+                      "attributes": {},
                       "content": []
                     }
                   ]

@@ -326,8 +326,9 @@ export function parse({minim, source}, done) {
         if (_.keys(relevantResponses).length === 0) {
           if (bodyParameters.length) {
             // Create an empty successful response so that the request/response
-            // pair gets properly generated.
-            relevantResponses[200] = {};
+            // pair gets properly generated. In the future we may want to
+            // refactor the code below as this is a little weird.
+            relevantResponses.null = {};
           } else {
             createTransaction(minim, transition, method);
           }
@@ -418,7 +419,9 @@ export function parse({minim, source}, done) {
             //   request.attributes.href = href;
             // }
 
-            response.attributes.set('statusCode', statusCode);
+            if (statusCode !== 'null') {
+              response.attributes.set('statusCode', statusCode);
+            }
           });
         });
       });
