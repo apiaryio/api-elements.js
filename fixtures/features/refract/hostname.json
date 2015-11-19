@@ -1,0 +1,88 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ]
+      },
+      "attributes": {
+        "meta": {
+          "element": "object",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": [
+                  "user"
+                ]
+              },
+              "attributes": {},
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "https://api.example.com"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
+            "href": "/v1/test"
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {
+                "title": "Get a test"
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "GET"
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {},
+                      "content": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

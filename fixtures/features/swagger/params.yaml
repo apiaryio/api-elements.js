@@ -1,0 +1,25 @@
+swagger: '2.0'
+paths:
+  '/test/{id}':
+    get:
+      parameters:
+        - name: id
+          in: path
+          description: Unique identifier
+          required: true
+          type: string
+        - name: arg
+          in: query
+          description: Query argument
+          type: string
+  '/test':
+    post:
+      parameters:
+        - name: title
+          in: body
+          description: Body argument
+          required: true
+          schema:
+            type: string
+      responses:
+        200: {}
