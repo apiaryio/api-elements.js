@@ -3,10 +3,8 @@
  */
 
 import adapter from '../src/adapter';
-import fs from 'fs';
 import fury from 'fury';
-import glob from 'glob';
-import path from 'path';
+import zoo from 'swagger-zoo';
 
 import {expect} from 'chai';
 
@@ -69,11 +67,10 @@ describe('Swagger 2.0 adapter', () => {
   });
 
   describe('can parse fixtures', () => {
-    const filenames = glob.sync('./test/fixtures/swagger/*.@(json|yaml)');
-    filenames.forEach((filename) => {
-      it(`Parses ${path.basename(filename, path.extname(filename))}`, (done) => {
-        const source = fs.readFileSync(filename, 'utf8');
-        const expected = require('./' + path.join('fixtures', 'refract', path.basename(filename, path.extname(filename)) + '.json'));
+    function handleSample(sample) {
+      it(`Parses ${sample.name}`, (done) => {
+        const source = sample.swagger;
+        const expected = sample.refract;
 
         fury.parse({source}, (err, output) => {
           if (err) {
@@ -84,6 +81,14 @@ describe('Swagger 2.0 adapter', () => {
           done();
         });
       });
+    }
+
+    describe('features', () => {
+      zoo.features().forEach(handleSample);
+    });
+
+    describe('real world examples', () => {
+      zoo.examples().forEach(handleSample);
     });
   });
 });

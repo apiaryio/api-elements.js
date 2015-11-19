@@ -1,7 +1,0 @@
-swagger: '2.0'
-paths:
-  '/test':
-    get:
-      produces:
-        - application/json
-        - application/xml
