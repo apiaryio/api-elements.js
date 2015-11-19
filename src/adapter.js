@@ -301,7 +301,13 @@ export function parse({minim, source}, done) {
           .value();
 
         if (_.keys(relevantResponses).length === 0) {
-          createTransaction(minim, transition, method);
+          if (bodyParameters.length) {
+            // Create an empty successful response so that the request/response
+            // pair gets properly generated.
+            relevantResponses[200] = {};
+          } else {
+            createTransaction(minim, transition, method);
+          }
         }
 
         // Transactions are created for each response in the document
