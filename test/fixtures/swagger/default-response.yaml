@@ -1,0 +1,10 @@
+swagger: '2.0'
+paths:
+  '/test':
+    get:
+      responses:
+        200: {}
+        default:
+          description: Default response
+          schema:
+            type: string
