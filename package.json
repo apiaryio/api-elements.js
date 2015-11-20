@@ -26,8 +26,8 @@
     "chai": "^3.2.0",
     "coveralls": "^2.11.2",
     "fury": "^1.0.0",
-    "peasant": "^0.5.2",
-    "swagger-zoo": "^1.0.0"
+    "glob": "^6.0.1",
+    "peasant": "^0.5.2"
   },
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT"

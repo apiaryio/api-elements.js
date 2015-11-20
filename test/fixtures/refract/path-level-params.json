@@ -1,0 +1,137 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ]
+      },
+      "attributes": {},
+      "content": [
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
+            "href": "/test/{id}{?search,arg}",
+            "hrefVariables": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {
+                    "description": "Unique identifier"
+                  },
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "id"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                },
+                {
+                  "element": "member",
+                  "meta": {
+                    "description": "Search query parameter"
+                  },
+                  "attributes": {},
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "search"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Query argument"
+                      },
+                      "attributes": {},
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "arg"
+                        },
+                        "value": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": ""
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "GET"
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {},
+                      "content": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

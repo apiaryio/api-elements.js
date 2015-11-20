@@ -1,0 +1,23 @@
+swagger: '2.0'
+tags:
+  - name: Group1
+    description: Group1 description
+paths:
+  '/test':
+    get:
+      tags:
+        - Group1
+    post:
+      tags:
+        - Group1
+  '/another-test':
+    get:
+      tags:
+        - Group2
+    delete:
+      tags:
+        - Group2
+  '/yet-another-test':
+    get:
+      tags:
+        - Group1

@@ -1,0 +1,11 @@
+swagger: '2.0'
+paths:
+  '/test':
+    post:
+      parameters:
+        - name: title
+          in: body
+          description: Body argument
+          required: true
+          schema:
+            type: string

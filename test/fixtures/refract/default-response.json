@@ -1,0 +1,57 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ]
+      },
+      "attributes": {},
+      "content": [
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
+            "href": "/test"
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "GET"
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {
+                        "statusCode": "200"
+                      },
+                      "content": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

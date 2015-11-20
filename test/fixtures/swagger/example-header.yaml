@@ -1,0 +1,19 @@
+swagger: '2.0'
+paths:
+  '/test':
+    get:
+      responses:
+        200:
+          headers:
+            Accepts:
+              description: Header description
+              type: string
+            X-Test1:
+              default: 100
+            X-Test2:
+              enum:
+                - abc
+                - 123
+          examples:
+            application/json:
+              status: ok
