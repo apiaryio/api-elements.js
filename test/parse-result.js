@@ -11,10 +11,11 @@ import minimParseResult from '../src/parse-result';
 const namespace = minim.namespace()
   .use(minimParseResult);
 
+const Annotation = namespace.getElementClass('annotation');
 const Category = namespace.getElementClass('category');
 const ParseResult = namespace.getElementClass('parseResult');
-const Annotation = namespace.getElementClass('annotation');
 const SourceMap = namespace.getElementClass('sourceMap');
+const StringElement = namespace.getElementClass('string');
 
 chai.use((_chai, utils) => {
   /*
@@ -128,6 +129,52 @@ describe('Parse result namespace', () => {
 
     it('should have element name sourceMap', () => {
       expect(sourceMap.element).to.equal('sourceMap');
+    });
+  });
+
+  context('source maps', () => {
+    let element;
+    let sourceMaps;
+
+    beforeEach(() => {
+      element = (new StringElement()).fromCompactRefract([
+        'string', {}, {
+          sourceMap: [
+            ['sourceMap', {}, {}, [[1, 2]]],
+          ],
+        }, [],
+      ]);
+      sourceMaps = element.attributes.get('sourceMap');
+    });
+
+    it('should contain a sourceMap attribute with one item', () => {
+      expect(sourceMaps).to.exist;
+      expect(sourceMaps).to.have.length(1);
+    });
+
+    it('should have the source map location', () => {
+      expect(sourceMaps.first().toValue()).to.deep.equal([[1, 2]]);
+    });
+
+    it('should serialize with a sourceMap attribute', () => {
+      const expected = {
+        element: 'string',
+        meta: {},
+        attributes: {
+          sourceMap: [
+            {
+              element: 'sourceMap',
+              meta: {},
+              attributes: {},
+              content: [
+                [1, 2],
+              ],
+            },
+          ],
+        },
+        content: [],
+      };
+      expect(element.toRefract()).to.deep.equal(expected);
     });
   });
 });

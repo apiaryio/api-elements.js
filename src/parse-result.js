@@ -14,6 +14,26 @@ export function namespace(options) {
   const ArrayElement = minim.getElementClass('array');
   const StringElement = minim.getElementClass('string');
 
+  // First, modify the base and all currently registered elements to include
+  // the new `sourceMap` attribute, which is an unrefracted array of
+  // refracted source map elements.
+  minim.BaseElement = class SourceMappedBase extends minim.BaseElement {
+    constructor() {
+      super(...arguments);
+      this._attributeElementArrayKeys.push('sourceMap');
+    }
+  };
+
+  Object.keys(minim.elementMap).forEach((key) => {
+    const ElementClass = minim.elementMap[key];
+    minim.elementMap[key] = class SourceMapped extends ElementClass {
+      constructor() {
+        super(...arguments);
+        this._attributeElementArrayKeys.push('sourceMap');
+      }
+    };
+  });
+
   class ParseResult extends ArrayElement {
     constructor() {
       super(...arguments);
