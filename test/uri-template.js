@@ -39,6 +39,26 @@ describe('URI Template Handler', () => {
       });
     });
 
+    context('when there are no query parameters but have one path object parameter', () => {
+      const basePath = '/api';
+      const href = '/pet/{id}';
+      const pathObjectParameters = [
+        {
+          in: 'path',
+          description: 'Pet\'s identifier',
+          name: 'id',
+          required: true,
+          type: 'number',
+        },
+      ];
+      const queryParameters = [];
+
+      it('returns the correct URI', () => {
+        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+        expect(hrefForResource).to.equal('/api/pet/{id}');
+      });
+    });
+
     context('when there are query parameters defined', () => {
       const basePath = '/api';
       const href = '/pet/findByTags';
