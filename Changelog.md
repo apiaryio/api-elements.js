@@ -1,4 +1,4 @@
-# unpublished
+# 0.3.1 - 2015-11-25
 
 - Fixes bug where URI templates appended empty query section.
 - Fixes additional slashes in URLs when basePath ends with `/`.
