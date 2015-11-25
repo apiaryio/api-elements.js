@@ -1,0 +1,9 @@
+swagger: '2.0'
+info:
+  title: Swagger with extra slashes
+basePath: '/api///'
+paths:
+  '/resource':
+    get:
+      200:
+        description: 'Success'
