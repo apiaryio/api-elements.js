@@ -156,8 +156,8 @@ export function parse({minim, source}, done) {
     if (err) {
       return done(err);
     }
-    const basePath = swagger.basePath || '';
 
+    const basePath = (swagger.basePath || '').replace(/[/]+$/, '');
     const parseResult = new ParseResult();
     const api = new Category();
     parseResult.push(api);
