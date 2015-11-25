@@ -1,3 +1,7 @@
+# unpublished
+
+- Fixes bug where URI templates appended empty query section.
+
 # 0.3.0 - 2015-11-18
 
 - Handle Swagger extensions (`x-*` fields).
