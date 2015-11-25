@@ -1,6 +1,6 @@
 {
   "name": "minim-parse-result",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Minim Parse Result Namespace",
   "main": "./lib/parse-result.js",
   "repository": {
@@ -23,7 +23,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "coveralls": "^2.11.2",
-    "minim": "^0.12.1",
+    "minim": "^0.12.2",
     "peasant": "^0.5.2"
   },
   "author": "Apiary.io <support@apiary.io>",
