@@ -68,6 +68,22 @@ describe('Swagger 2.0 adapter', () => {
     });
   });
 
+  context('source maps', () => {
+    it('can generate source maps', (done) => {
+      const source = fs.readFileSync('./test/fixtures/sourcemaps.yaml', 'utf8');
+      const expected = require('./fixtures/sourcemaps.json');
+
+      fury.parse({source, generateSourceMap: true}, (err, output) => {
+        if (err) {
+          return done(err);
+        }
+
+        expect(output.toRefract()).to.deep.equal(expected);
+        done();
+      });
+    });
+  });
+
   describe('can parse fixtures', () => {
     const filenames = glob.sync('./test/fixtures/swagger/*.@(json|yaml)');
     filenames.forEach((filename) => {
