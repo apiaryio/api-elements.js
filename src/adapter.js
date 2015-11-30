@@ -106,7 +106,7 @@ function getPosition(ast, path) {
           // This is an internal reference! First, we reset the node to the
           // root of the document, shift the ref item off the pieces stack
           // and then add the referenced path to the pieces.
-          let refPaths = subNode[1].value.substr(2).split('/');
+          const refPaths = subNode[1].value.substr(2).split('/');
           newNode = ast;
           Array.prototype.unshift.apply(pieces, refPaths.concat([piece]));
           break;
@@ -133,7 +133,7 @@ function makeSourceMap(SourceMap, ast, element, path) {
   const position = getPosition(ast, path);
   if (position) {
     element.attributes.set('sourceMap', [
-      new SourceMap([[position.start, position.end - position.start]])
+      new SourceMap([[position.start, position.end - position.start]]),
     ]);
   }
 }
@@ -355,7 +355,7 @@ export function parse({minim, source, generateSourceMap}, done) {
             if (generateSourceMap && ast) {
               setupSourceMap(member, `paths.${href}.parameters[${index}]`);
             }
-            resource.hrefVariables.content.push(member)
+            resource.hrefVariables.content.push(member);
           }
         });
       }
@@ -418,7 +418,7 @@ export function parse({minim, source, generateSourceMap}, done) {
         }
 
         if (methodValue.description) {
-          const description = new Copy(methodValue.description)
+          const description = new Copy(methodValue.description);
           transition.push(description);
 
           if (generateSourceMap && ast) {
