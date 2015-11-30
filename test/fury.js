@@ -44,7 +44,7 @@ const refractedApi = [
         ]],
       ]],
     ]],
-    ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [[0, 10]]}, 'description'],
+    ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [['sourceMap', {}, {}, [0, 10]]]}, 'description'],
   ]];
 
 describe('Nodes.js require', () => {
