@@ -1,3 +1,7 @@
+# 1.0.1 - 2015-11-30
+
+- Upgrade Minim to 0.12.3
+
 # 1.0.0 - 2015-11-17
 
 - Remove legacy interface. The only available interface is now the Refract interface. In order to use it, you must load adapter modules to handle particular formats.
