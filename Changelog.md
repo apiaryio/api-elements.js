@@ -1,4 +1,4 @@
-# Unreleased
+# 0.3.2 - 2015-11-30
 
 - Implement support for source maps.
 
