@@ -1,3 +1,7 @@
+# Unreleased
+
+- Implement support for source maps.
+
 # 0.3.1 - 2015-11-25
 
 - Fixes bug where URI templates appended empty query section.

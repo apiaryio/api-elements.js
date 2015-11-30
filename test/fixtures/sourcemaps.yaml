@@ -1,0 +1,30 @@
+swagger: '2.0'
+info:
+  title: Source Map Test
+  description: API description
+host: api.example.com
+paths:
+  '/test/{id}':
+    post:
+      summary: Test post
+      description: Test post description
+      parameters:
+        - name: id
+          in: path
+          description: Path argument
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/definitions/Response200'
+definitions:
+  Response200:
+    description: Successful response
+    headers:
+      'X-My-Header':
+        description: My custom header
+        type: string
+    examples:
+      application/json:
+        status: ok

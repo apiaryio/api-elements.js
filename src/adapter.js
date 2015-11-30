@@ -1,7 +1,8 @@
 import _ from 'underscore';
+import buildUriTemplate from './uri-template';
 import $RefParser from 'json-schema-ref-parser';
 import yaml from 'js-yaml';
-import buildUriTemplate from './uri-template';
+import yamlAst from 'yaml-js';
 
 export const name = 'swagger';
 
@@ -57,6 +58,84 @@ function useResourceGroups(api) {
   }
 
   return tags.length > 0;
+}
+
+// Look up a position in the original source based on a JSON path, for
+// example 'paths./test.get.responses.200'
+function getPosition(ast, path) {
+  const pieces = path.split('.');
+  let end;
+  let node = ast;
+  let piece = pieces.shift();
+  let start;
+
+  while (piece) {
+    let newNode = null;
+    let index = null;
+
+    // If a piece ends with an array index, then we need to make sure we fetch
+    // that specific item from the value array.
+    const match = piece.match(/(.*)\[([0-9])+\]$/);
+    if (match) {
+      piece = match[1];
+      index = parseInt(match[2], 10);
+    }
+
+    for (const subNode of node.value) {
+      if (subNode[0].value === piece) {
+        if (pieces.length) {
+          newNode = subNode[1];
+          if (index !== null) {
+            newNode = newNode.value[index];
+          }
+        } else {
+          // This is the last item!
+          if (index !== null) {
+            newNode = subNode[1].value[index];
+            start = newNode.start_mark.pointer;
+            end = newNode.end_mark.pointer;
+          } else {
+            newNode = subNode[0];
+            start = subNode[0].start_mark.pointer;
+            end = subNode[1].end_mark.pointer;
+          }
+        }
+        break;
+      } else if (subNode[0].value === '$ref') {
+        if (subNode[1].value.indexOf('#') === 0) {
+          // This is an internal reference! First, we reset the node to the
+          // root of the document, shift the ref item off the pieces stack
+          // and then add the referenced path to the pieces.
+          const refPaths = subNode[1].value.substr(2).split('/');
+          newNode = ast;
+          Array.prototype.unshift.apply(pieces, refPaths.concat([piece]));
+          break;
+        } else {
+          console.log(`External reference ${subNode[1].value} not supported for source maps!`);
+        }
+      }
+    }
+
+    if (newNode) {
+      node = newNode;
+    } else {
+      return null;
+    }
+
+    piece = pieces.shift();
+  }
+
+  return {start, end};
+}
+
+// Make a new source map for the given element
+function makeSourceMap(SourceMap, ast, element, path) {
+  const position = getPosition(ast, path);
+  if (position) {
+    element.attributes.set('sourceMap', [
+      new SourceMap([[position.start, position.end - position.start]]),
+    ]);
+  }
 }
 
 function convertParameterToElement(minim, parameter) {
@@ -134,7 +213,7 @@ function createTransaction(minim, transition, method) {
 /*
  * Parse Swagger 2.0 into Refract elements
  */
-export function parse({minim, source}, done) {
+export function parse({minim, source, generateSourceMap}, done) {
   // TODO: Will refactor this once API Description namespace is stable
   // Leaving as large block of code until then
   const Asset = minim.getElementClass('asset');
@@ -145,12 +224,20 @@ export function parse({minim, source}, done) {
   const MemberElement = minim.getElementClass('member');
   const ParseResult = minim.getElementClass('parseResult');
   const Resource = minim.getElementClass('resource');
+  const SourceMap = minim.getElementClass('sourceMap');
   const Transition = minim.getElementClass('transition');
 
   const paramToElement = convertParameterToElement.bind(
     convertParameterToElement, minim);
 
   const loaded = _.isString(source) ? yaml.safeLoad(source) : source;
+
+  let ast = null;
+  if (generateSourceMap && _.isString(source)) {
+    ast = yamlAst.compose(source);
+  }
+
+  const setupSourceMap = makeSourceMap.bind(makeSourceMap, SourceMap, ast);
 
   $RefParser.dereference(loaded, (err, swagger) => {
     if (err) {
@@ -168,10 +255,18 @@ export function parse({minim, source}, done) {
     if (swagger.info) {
       if (swagger.info.title) {
         api.meta.set('title', swagger.info.title);
+
+        if (generateSourceMap && ast) {
+          setupSourceMap(api.meta.get('title'), 'info.title');
+        }
       }
 
       if (swagger.info.description) {
         api.content.push(new Copy(swagger.info.description));
+
+        if (generateSourceMap && ast) {
+          setupSourceMap(api.content[api.content.length - 1], 'info.description');
+        }
       }
     }
 
@@ -190,6 +285,11 @@ export function parse({minim, source}, done) {
       const meta = api.attributes.get('meta');
       const member = new MemberElement('HOST', hostname);
       member.meta.set('classes', ['user']);
+
+      if (generateSourceMap && ast) {
+        setupSourceMap(member, 'host');
+      }
+
       meta.content.push(member);
     }
 
@@ -209,6 +309,10 @@ export function parse({minim, source}, done) {
     // The key is the href
     _.each(_.omit(swagger.paths, isExtension), (pathValue, href) => {
       const resource = new Resource();
+
+      if (generateSourceMap && ast) {
+        setupSourceMap(resource, `paths.${href}`);
+      }
 
       if (useGroups) {
         const groupName = pathValue['x-group-name'];
@@ -245,10 +349,15 @@ export function parse({minim, source}, done) {
       if (pathObjectParameters.length > 0) {
         resource.hrefVariables = new HrefVariables();
 
-        pathObjectParameters
-          .filter((parameter) => parameter.in === 'query' || parameter.in === 'path')
-          .map(paramToElement)
-          .forEach((member) => resource.hrefVariables.content.push(member));
+        pathObjectParameters.forEach((parameter, index) => {
+          if (parameter.in === 'query' || parameter.in === 'path') {
+            const member = paramToElement(parameter);
+            if (generateSourceMap && ast) {
+              setupSourceMap(member, `paths.${href}.parameters[${index}]`);
+            }
+            resource.hrefVariables.content.push(member);
+          }
+        });
       }
 
       // TODO: Handle parameters on a resource level
@@ -260,6 +369,13 @@ export function parse({minim, source}, done) {
 
       // Each path is an object with methods as properties
       _.each(relevantPaths, (methodValue, method) => {
+        const transition = new Transition();
+        resource.content.push(transition);
+
+        if (generateSourceMap && ast) {
+          setupSourceMap(transition, `paths.${href}.${method}`);
+        }
+
         if (methodValue.externalDocs) {
           // TODO: [Annotation] Warn about unused external docs.
         }
@@ -292,15 +408,22 @@ export function parse({minim, source}, done) {
         const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
         resource.attributes.set('href', hrefForResource);
 
-        const transition = new Transition();
-        resource.content.push(transition);
-
         if (methodValue.summary) {
           transition.meta.set('title', methodValue.summary);
+
+          if (generateSourceMap && ast) {
+            const title = transition.meta.get('title');
+            setupSourceMap(title, `paths.${href}.${method}.summary`);
+          }
         }
 
         if (methodValue.description) {
-          transition.push(new Copy(methodValue.description));
+          const description = new Copy(methodValue.description);
+          transition.push(description);
+
+          if (generateSourceMap && ast) {
+            setupSourceMap(description, `paths.${href}.${method}.description`);
+          }
         }
 
         if (methodValue.operationId) {
@@ -311,9 +434,14 @@ export function parse({minim, source}, done) {
         if (uriParameters.length > 0) {
           transition.hrefVariables = new HrefVariables();
 
-          uriParameters
-            .map(paramToElement)
-            .forEach((member) => transition.hrefVariables.content.push(member));
+          uriParameters.forEach((parameter) => {
+            const member = paramToElement(parameter);
+            if (generateSourceMap && ast) {
+              const index = methodValueParameters.indexOf(parameter);
+              setupSourceMap(member, `paths.${href}.${method}.parameters[${index}]`);
+            }
+            transition.hrefVariables.content.push(member);
+          });
         }
 
         // Currently, default responses are not supported in API Description format
@@ -351,8 +479,22 @@ export function parse({minim, source}, done) {
             const request = transaction.request;
             const response = transaction.response;
 
+            if (generateSourceMap && ast) {
+              setupSourceMap(transaction,
+                `paths.${href}.${method}.responses.${statusCode}`);
+              setupSourceMap(request, `paths.${href}.${method}`);
+
+              if (statusCode) {
+                setupSourceMap(response, `paths.${href}.${method}.responses.${statusCode}`);
+              }
+            }
+
             if (responseValue.description) {
-              response.content.push(new Copy(responseValue.description));
+              const description = new Copy(responseValue.description);
+              response.content.push(description);
+              if (generateSourceMap && ast) {
+                setupSourceMap(description, `paths.${href}.${method}.responses.${statusCode}.description`);
+              }
             }
 
             const headers = new HttpHeaders();
@@ -361,6 +503,10 @@ export function parse({minim, source}, done) {
               headers.push(new MemberElement(
                 'Content-Type', contentType
               ));
+
+              if (generateSourceMap && ast) {
+                setupSourceMap(headers.content[headers.content.length - 1], `paths.${href}.${method}.responses.${statusCode}.examples.${contentType}`);
+              }
 
               response.headers = headers;
             }
@@ -382,8 +528,16 @@ export function parse({minim, source}, done) {
 
                   const member = new MemberElement(headerName, value);
 
+                  if (generateSourceMap && ast) {
+                    setupSourceMap(member, `paths.${href}.${method}.responses.${statusCode}.headers.${headerName}`);
+                  }
+
                   if (header.description) {
                     member.meta.set('description', header.description);
+
+                    if (generateSourceMap && ast) {
+                      setupSourceMap(member.meta.get('description'), `paths.${href}.${method}.responses.${statusCode}.headers.${headerName}.description`);
+                    }
                   }
 
                   headers.push(member);
@@ -403,6 +557,9 @@ export function parse({minim, source}, done) {
             if (responseBody !== undefined) {
               const bodyAsset = new Asset(JSON.stringify(responseBody, null, 2));
               bodyAsset.classes.push('messageBody');
+              if (generateSourceMap && ast) {
+                setupSourceMap(bodyAsset, `paths.${href}.${method}.responses.${statusCode}.examples.${contentType}`);
+              }
               response.content.push(bodyAsset);
             }
 
