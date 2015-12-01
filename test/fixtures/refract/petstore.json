@@ -2602,6 +2602,131 @@
           ]
         }
       ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                26604,
+                796
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Authentication information is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                2202,
+                92
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                2972,
+                92
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                8327,
+                874
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Form data paremeters are not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                13914,
+                599
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Form data paremeters are not yet supported"
     }
   ]
 }

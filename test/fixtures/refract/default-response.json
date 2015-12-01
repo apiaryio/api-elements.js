@@ -52,6 +52,31 @@
           ]
         }
       ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                83,
+                92
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
     }
   ]
 }

@@ -1,0 +1,430 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ]
+      },
+      "attributes": {
+        "meta": {
+          "element": "object",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": [
+                  "user"
+                ]
+              },
+              "attributes": {
+                "sourceMap": [
+                  [
+                    [
+                      15,
+                      21
+                    ]
+                  ]
+                ]
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "https://api.example.com"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    124,
+                    280
+                  ]
+                ]
+              }
+            ],
+            "hrefVariables": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": []
+            },
+            "href": "/foo"
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        189,
+                        215
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            304,
+                            88
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "GET",
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                189,
+                                215
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                304,
+                                88
+                              ]
+                            ]
+                          }
+                        ],
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  [
+                                    [
+                                      341,
+                                      51
+                                    ]
+                                  ]
+                                ]
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "statusCode": "200"
+                      },
+                      "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBody"
+                            ]
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    341,
+                                    51
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "{\n  \"status\": \"ok\"\n}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                37,
+                24
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Only the first scheme will be used to create a hostname"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                61,
+                23
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Authentication information is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                85,
+                12
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Authentication information is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                98,
+                16
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "External documentation is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                154,
+                35
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Path-level body parameters are not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                262,
+                16
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "External documentation is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                200,
+                62
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Form data paremeters are not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                392,
+                11
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
+    }
+  ]
+}
