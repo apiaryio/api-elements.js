@@ -39,6 +39,13 @@ describe('Swagger 2.0 adapter', () => {
     });
   });
 
+  it('returns error for bad input', (done) => {
+    fury.parse({source: 'swagger: "2.0"\nbad: }'}, (err) => {
+      expect(err).to.exist;
+      done();
+    });
+  });
+
   context('can parse Swagger object', () => {
     const source = {swagger: '2.0', info: {title: 'Test'}};
     let result;
@@ -68,10 +75,24 @@ describe('Swagger 2.0 adapter', () => {
     });
   });
 
-  context('source maps', () => {
+  context('source maps & annotations', () => {
     it('can generate source maps', (done) => {
       const source = fs.readFileSync('./test/fixtures/sourcemaps.yaml', 'utf8');
       const expected = require('./fixtures/sourcemaps.json');
+
+      fury.parse({source, generateSourceMap: true}, (err, output) => {
+        if (err) {
+          return done(err);
+        }
+
+        expect(output.toRefract()).to.deep.equal(expected);
+        done();
+      });
+    });
+
+    it('can generate annotations', (done) => {
+      const source = fs.readFileSync('./test/fixtures/annotations.yaml', 'utf8');
+      const expected = require('./fixtures/annotations.json');
 
       fury.parse({source, generateSourceMap: true}, (err, output) => {
         if (err) {

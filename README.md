@@ -28,3 +28,20 @@ fury.parse({source: '... your Swagger 2.0 document ...'}, (err, result) => {
   console.log(result.api.title);
 });
 ```
+
+### Parser Codes
+
+The following codes are used by the parser when creating warning and error annotations.
+
+Warnings:
+
+Code | Description
+---: | -----------
+   2 | Source maps are unavailable due either to the input format or an issue parsing the input.
+   3 | Data is being lost in the conversion.
+
+Errors:
+
+Code | Description
+---: | -----------
+   1 | Error parsing input (e.g. malformed YAML).

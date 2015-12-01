@@ -1,0 +1,24 @@
+swagger: '2.0'
+host: api.example.com
+schemes:
+- https
+- http
+securityDefinitions: {}
+security: {}
+externalDocs: {}
+paths:
+  /foo:
+    parameters:
+      - name: theBody
+        in: body
+    get:
+      parameters:
+        - name: test
+          in: formData
+      externalDocs: {}
+      responses:
+        200:
+          examples:
+            application/json:
+              status: ok
+        default: {}

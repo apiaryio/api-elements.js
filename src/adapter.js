@@ -4,6 +4,24 @@ import $RefParser from 'json-schema-ref-parser';
 import yaml from 'js-yaml';
 import yamlAst from 'yaml-js';
 
+// These describe the type of annotations that are produced by this parser
+// and assigns a unique code to each one. Downstream applications can use this
+// code to group similar types of annotations together.
+const ANNOTATIONS = {
+  CANNOT_PARSE: {
+    type: 'error',
+    code: 1,
+  },
+  AST_UNAVAILABLE: {
+    type: 'warning',
+    code: 2,
+  },
+  DATA_LOST: {
+    type: 'warning',
+    code: 3,
+  },
+};
+
 export const name = 'swagger';
 
 // TODO: Figure out media type for Swagger 2.0
@@ -138,6 +156,23 @@ function makeSourceMap(SourceMap, ast, element, path) {
   }
 }
 
+// Make a new annotation for the given path and message
+function makeAnnotation(Annotation, SourceMap, ast, result, info, path, message) {
+  const annotation = new Annotation(message);
+  annotation.classes.push(info.type);
+  annotation.code = info.code;
+  result.content.push(annotation);
+
+  if (ast && path) {
+    const position = getPosition(ast, path);
+    if (position) {
+      annotation.attributes.set('sourceMap', [
+        new SourceMap([[position.start, position.end - position.start]]),
+      ]);
+    }
+  }
+}
+
 function convertParameterToElement(minim, parameter) {
   const StringElement = minim.getElementClass('string');
   const NumberElement = minim.getElementClass('number');
@@ -216,6 +251,7 @@ function createTransaction(minim, transition, method) {
 export function parse({minim, source, generateSourceMap}, done) {
   // TODO: Will refactor this once API Description namespace is stable
   // Leaving as large block of code until then
+  const Annotation = minim.getElementClass('annotation');
   const Asset = minim.getElementClass('asset');
   const Copy = minim.getElementClass('copy');
   const Category = minim.getElementClass('category');
@@ -230,22 +266,43 @@ export function parse({minim, source, generateSourceMap}, done) {
   const paramToElement = convertParameterToElement.bind(
     convertParameterToElement, minim);
 
-  const loaded = _.isString(source) ? yaml.safeLoad(source) : source;
+  const parseResult = new ParseResult();
 
-  let ast = null;
-  if (generateSourceMap && _.isString(source)) {
-    ast = yamlAst.compose(source);
+  let loaded;
+  try {
+    loaded = _.isString(source) ? yaml.safeLoad(source) : source;
+  } catch (err) {
+    makeAnnotation(Annotation, SourceMap, null, parseResult,
+      ANNOTATIONS.CANNOT_PARSE, null, 'Problem loading the input');
+    return done(null, parseResult);
   }
 
-  const setupSourceMap = makeSourceMap.bind(makeSourceMap, SourceMap, ast);
+  let ast = null;
+  if (_.isString(source)) {
+    // TODO: Could we lazy-load the AST here? Seems like a waste of time if
+    //       we load it but don't wind up using it.
+    try {
+      ast = yamlAst.compose(source);
+    } catch (err) {
+      makeAnnotation(Annotation, SourceMap, null, parseResult,
+        ANNOTATIONS.AST_UNAVAILABLE, null,
+        'Input AST could not be composed, so source maps will not be available');
+    }
+  } else {
+    makeAnnotation(Annotation, SourceMap, null, parseResult,
+      ANNOTATIONS.AST_UNAVAILABLE, null,
+      'Source maps are only available with string input');
+  }
 
   $RefParser.dereference(loaded, (err, swagger) => {
     if (err) {
-      return done(err);
+      return done(err, parseResult);
     }
 
     const basePath = (swagger.basePath || '').replace(/[/]+$/, '');
-    const parseResult = new ParseResult();
+    const setupSourceMap = makeSourceMap.bind(makeSourceMap, SourceMap, ast);
+    const setupAnnotation = makeAnnotation.bind(makeAnnotation, Annotation, SourceMap, ast, parseResult);
+
     const api = new Category();
     parseResult.push(api);
 
@@ -275,7 +332,8 @@ export function parse({minim, source, generateSourceMap}, done) {
 
       if (swagger.schemes) {
         if (swagger.schemes.length > 1) {
-          // TODO: [Annotation] Add warning about unused schemes!
+          setupAnnotation(ANNOTATIONS.DATA_LOST, 'schemes',
+            'Only the first scheme will be used to create a hostname');
         }
 
         hostname = `${swagger.schemes[0]}://${hostname}`;
@@ -293,13 +351,19 @@ export function parse({minim, source, generateSourceMap}, done) {
       meta.content.push(member);
     }
 
-    if (swagger.securityDefinitions || swagger.security) {
-      // TODO: [Annotation] Warn about lost security info.
+    if (swagger.securityDefinitions) {
+      setupAnnotation(ANNOTATIONS.DATA_LOST, 'securityDefinitions',
+        'Authentication information is not yet supported');
+    }
+
+    if (swagger.security) {
+      setupAnnotation(ANNOTATIONS.DATA_LOST, 'security',
+        'Authentication information is not yet supported');
     }
 
     if (swagger.externalDocs) {
-      // TODO: [Annotation] Warn about unused external docs or put them into
-      //       the description copy?
+      setupAnnotation(ANNOTATIONS.DATA_LOST, 'externalDocs',
+        'External documentation is not yet supported');
     }
 
     const useGroups = useResourceGroups(swagger);
@@ -345,7 +409,6 @@ export function parse({minim, source, generateSourceMap}, done) {
 
       // TODO: Currently this only supports URI parameters for `path` and `query`.
       // It should add support for `body` parameters as well.
-      // TODO: [Annotation] Warn user that body parameters are not used if found
       if (pathObjectParameters.length > 0) {
         resource.hrefVariables = new HrefVariables();
 
@@ -356,6 +419,10 @@ export function parse({minim, source, generateSourceMap}, done) {
               setupSourceMap(member, `paths.${href}.parameters[${index}]`);
             }
             resource.hrefVariables.content.push(member);
+          } else if (parameter.in === 'body') {
+            setupAnnotation(ANNOTATIONS.DATA_LOST,
+              `paths.${href}.parameters[${index}]`,
+              'Path-level body parameters are not yet supported');
           }
         });
       }
@@ -377,7 +444,9 @@ export function parse({minim, source, generateSourceMap}, done) {
         }
 
         if (methodValue.externalDocs) {
-          // TODO: [Annotation] Warn about unused external docs.
+          setupAnnotation(ANNOTATIONS.DATA_LOST,
+            `paths.${href}.${method}.externalDocs`,
+            'External documentation is not yet supported');
         }
 
         const methodValueParameters = methodValue.parameters || [];
@@ -402,7 +471,9 @@ export function parse({minim, source, generateSourceMap}, done) {
         });
 
         if (formParameters.length) {
-          // TODO: [Annotation] We ignore form data params!
+          setupAnnotation(ANNOTATIONS.DATA_LOST,
+            `paths.${href}.${method}.parameters`,
+            'Form data paremeters are not yet supported');
         }
 
         const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
@@ -445,11 +516,16 @@ export function parse({minim, source, generateSourceMap}, done) {
         }
 
         // Currently, default responses are not supported in API Description format
-        // TODO: [Annotation] Add warning about not showing the default!
         const relevantResponses = _.chain(methodValue.responses)
           .omit('default')
           .omit(isExtension)
           .value();
+
+        if (methodValue.responses && methodValue.responses.default) {
+          setupAnnotation(ANNOTATIONS.DATA_LOST,
+            `paths.${href}.${method}.responses.default`,
+            'Default response is not yet supported');
+        }
 
         if (_.keys(relevantResponses).length === 0) {
           if (bodyParameters.length) {
