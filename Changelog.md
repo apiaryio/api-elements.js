@@ -1,3 +1,7 @@
+# Unreleased
+
+- When a parser returns an error it is sometimes useful to inspect the parse result. This now gets passed back to the handler function and can be used to print more information, such as parser annotations, when an error occurs.
+
 # 1.0.2 - 2015-11-30
 
 - Upgrade Minim Parse Result to 0.2.1

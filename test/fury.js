@@ -139,13 +139,15 @@ describe('Parser', () => {
     });
 
     it('should error on parser error', (done) => {
-      const expected = new Error();
+      const expectedError = new Error();
+      const expectedElements = {};
       fury.adapters[fury.adapters.length - 1].parse = (options, done2) => {
-        done2(expected);
+        done2(expectedError, expectedElements);
       };
 
-      fury.parse({source: 'dummy'}, (err) => {
-        assert.equal(err, expected);
+      fury.parse({source: 'dummy'}, (err, elements) => {
+        assert.equal(err, expectedError);
+        assert.equal(elements, expectedElements);
         done();
       });
     });

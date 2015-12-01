@@ -71,7 +71,7 @@ class Fury {
     if (adapter) {
       try {
         adapter.parse({generateSourceMap, minim, source}, (err, elements) => {
-          if (err) { return done(err); }
+          if (err) { return done(err, elements); }
 
           if (elements instanceof minim.BaseElement) {
             done(null, elements);
