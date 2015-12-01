@@ -44,7 +44,9 @@ const refractedApi = [
         ]],
       ]],
     ]],
-    ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [['sourceMap', {}, {}, [0, 10]]]}, 'description'],
+    ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [
+      ['sourceMap', {}, {}, [[0, 10]]],
+    ]}, 'description'],
   ]];
 
 describe('Nodes.js require', () => {
@@ -137,13 +139,15 @@ describe('Parser', () => {
     });
 
     it('should error on parser error', (done) => {
-      const expected = new Error();
+      const expectedError = new Error();
+      const expectedElements = {};
       fury.adapters[fury.adapters.length - 1].parse = (options, done2) => {
-        done2(expected);
+        done2(expectedError, expectedElements);
       };
 
-      fury.parse({source: 'dummy'}, (err) => {
-        assert.equal(err, expected);
+      fury.parse({source: 'dummy'}, (err, elements) => {
+        assert.equal(err, expectedError);
+        assert.equal(elements, expectedElements);
         done();
       });
     });
@@ -233,7 +237,7 @@ describe('Refract loader', () => {
       });
 
       it('should have a source map', () => {
-        assert.deepEqual(annotation.attributes.get('sourceMap').toValue(), [[0, 10]]);
+        assert.deepEqual(annotation.attributes.get('sourceMap').first().toValue(), [[0, 10]]);
       });
     });
 

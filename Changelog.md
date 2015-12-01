@@ -1,3 +1,7 @@
+# Unreleased
+
+- When a parser returns an error it is sometimes useful to inspect the parse result. This now gets passed back to the handler function and can be used to print more information, such as parser annotations, when an error occurs.
+
 # 1.0.2 - 2015-11-30
 
 - Upgrade Minim Parse Result to 0.2.1
@@ -9,7 +13,6 @@
 # 1.0.0 - 2015-11-17
 
 - Remove legacy interface. The only available interface is now the Refract interface. In order to use it, you must load adapter modules to handle particular formats.
-- Use
 
 # 0.8.4 - 2015-07-30
 
