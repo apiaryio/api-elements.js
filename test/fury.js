@@ -44,7 +44,9 @@ const refractedApi = [
         ]],
       ]],
     ]],
-    ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [['sourceMap', {}, {}, [0, 10]]]}, 'description'],
+    ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [
+      ['sourceMap', {}, {}, [[0, 10]]],
+    ]}, 'description'],
   ]];
 
 describe('Nodes.js require', () => {
@@ -233,7 +235,7 @@ describe('Refract loader', () => {
       });
 
       it('should have a source map', () => {
-        assert.deepEqual(annotation.attributes.get('sourceMap').toValue(), [[0, 10]]);
+        assert.deepEqual(annotation.attributes.get('sourceMap').first().toValue(), [[0, 10]]);
       });
     });
 
