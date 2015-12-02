@@ -1,4 +1,4 @@
-# Unreleased
+# 0.4.0 - 2015-12-2
 
 - Implement support for parser annotations.
 
