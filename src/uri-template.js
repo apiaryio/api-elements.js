@@ -16,7 +16,13 @@ export default function buildUriTemplate(basePath, href, pathObjectParameters = 
     const parameterNames = _.unique([].concat(pathObjectParameterNames, queryParameterNames));
     const parameterNamesString = parameterNames.length ? `{?${parameterNames.join(',')}}` : '';
 
-    return `${basePath}${href}${parameterNamesString}`;
+    const full = `${basePath}${href}${parameterNamesString}`;
+
+    // Before returning, we replace instances of `-` with `%2d`, but only when
+    // they occur inside of a template variable.
+    return full.replace(/\{.*?\}/g, (match) => {
+      return match.replace('-', '%2d');
+    });
   }
 
   return basePath + href;
