@@ -1,7 +1,10 @@
+# Unreleased
+
+- Encode dashes (`-`) in URI template parameters.
+
 # 0.4.0 - 2015-12-2
 
 - Implement support for parser annotations.
-- Encode dashes (`-`) in URI template parameters.
 
 # 0.3.2 - 2015-11-30
 
