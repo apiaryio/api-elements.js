@@ -94,6 +94,25 @@ describe('URI Template Handler', () => {
       });
     });
 
+    context('when there are parameters with dashes', () => {
+      const basePath = '/my-api';
+      const href = '/pet/{unique-id}';
+      const queryParameters = [
+        {
+          in: 'query',
+          description: 'Tags to filter by',
+          name: 'tag-names',
+          required: true,
+          type: 'string',
+        },
+      ];
+
+      it('returns the correct URI', () => {
+        const hrefForResource = buildUriTemplate(basePath, href, [], queryParameters);
+        expect(hrefForResource).to.equal('/my-api/pet/{unique%2did}{?tag%2dnames}');
+      });
+    });
+
     context('when there is a conflict in parameter names', () => {
       const basePath = '/api';
       const href = '/pet/findByTags';
