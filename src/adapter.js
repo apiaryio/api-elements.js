@@ -11,14 +11,17 @@ const ANNOTATIONS = {
   CANNOT_PARSE: {
     type: 'error',
     code: 1,
+    relation: 'yaml-parser',
   },
   AST_UNAVAILABLE: {
     type: 'warning',
     code: 2,
+    relation: 'yaml-parser',
   },
   DATA_LOST: {
     type: 'warning',
     code: 3,
+    relation: 'refract-not-supported',
   },
 };
 
@@ -157,11 +160,17 @@ function makeSourceMap(SourceMap, ast, element, path) {
 }
 
 // Make a new annotation for the given path and message
-function makeAnnotation(Annotation, SourceMap, ast, result, info, path, message) {
+function makeAnnotation(Annotation, Link, SourceMap, ast, result, info, path, message) {
   const annotation = new Annotation(message);
   annotation.classes.push(info.type);
   annotation.code = info.code;
   result.content.push(annotation);
+
+  if (info.relation) {
+    const link = new Link();
+    link.relation = info.relation;
+    annotation.links.push(link);
+  }
 
   if (ast && path) {
     const position = getPosition(ast, path);
@@ -257,6 +266,7 @@ export function parse({minim, source, generateSourceMap}, done) {
   const Category = minim.getElementClass('category');
   const HrefVariables = minim.getElementClass('hrefVariables');
   const HttpHeaders = minim.getElementClass('httpHeaders');
+  const Link = minim.getElementClass('link');
   const MemberElement = minim.getElementClass('member');
   const ParseResult = minim.getElementClass('parseResult');
   const Resource = minim.getElementClass('resource');
@@ -272,7 +282,7 @@ export function parse({minim, source, generateSourceMap}, done) {
   try {
     loaded = _.isString(source) ? yaml.safeLoad(source) : source;
   } catch (err) {
-    makeAnnotation(Annotation, SourceMap, null, parseResult,
+    makeAnnotation(Annotation, Link, SourceMap, null, parseResult,
       ANNOTATIONS.CANNOT_PARSE, null, 'Problem loading the input');
     return done(null, parseResult);
   }
@@ -284,12 +294,12 @@ export function parse({minim, source, generateSourceMap}, done) {
     try {
       ast = yamlAst.compose(source);
     } catch (err) {
-      makeAnnotation(Annotation, SourceMap, null, parseResult,
+      makeAnnotation(Annotation, Link, SourceMap, null, parseResult,
         ANNOTATIONS.AST_UNAVAILABLE, null,
         'Input AST could not be composed, so source maps will not be available');
     }
   } else {
-    makeAnnotation(Annotation, SourceMap, null, parseResult,
+    makeAnnotation(Annotation, Link, SourceMap, null, parseResult,
       ANNOTATIONS.AST_UNAVAILABLE, null,
       'Source maps are only available with string input');
   }
@@ -301,7 +311,8 @@ export function parse({minim, source, generateSourceMap}, done) {
 
     const basePath = (swagger.basePath || '').replace(/[/]+$/, '');
     const setupSourceMap = makeSourceMap.bind(makeSourceMap, SourceMap, ast);
-    const setupAnnotation = makeAnnotation.bind(makeAnnotation, Annotation, SourceMap, ast, parseResult);
+    const setupAnnotation = makeAnnotation.bind(makeAnnotation, Annotation,
+      Link, SourceMap, ast, parseResult);
 
     const api = new Category();
     parseResult.push(api);

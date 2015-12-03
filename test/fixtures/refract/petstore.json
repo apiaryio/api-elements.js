@@ -2608,6 +2608,16 @@
       "meta": {
         "classes": [
           "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "refract-not-supported"
+            },
+            "content": []
+          }
         ]
       },
       "attributes": {
@@ -2633,6 +2643,16 @@
       "meta": {
         "classes": [
           "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "refract-not-supported"
+            },
+            "content": []
+          }
         ]
       },
       "attributes": {
@@ -2658,6 +2678,16 @@
       "meta": {
         "classes": [
           "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "refract-not-supported"
+            },
+            "content": []
+          }
         ]
       },
       "attributes": {
@@ -2683,6 +2713,16 @@
       "meta": {
         "classes": [
           "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "refract-not-supported"
+            },
+            "content": []
+          }
         ]
       },
       "attributes": {
@@ -2708,6 +2748,16 @@
       "meta": {
         "classes": [
           "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "refract-not-supported"
+            },
+            "content": []
+          }
         ]
       },
       "attributes": {
