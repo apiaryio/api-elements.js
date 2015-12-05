@@ -4,6 +4,88 @@
   "attributes": {},
   "content": [
     {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 4
+      },
+      "content": "Missing required property: title"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 4
+      },
+      "content": "Missing required property: version"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 4,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                85,
+                12
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Expected type array but found type object"
+    },
+    {
       "element": "category",
       "meta": {
         "classes": [
@@ -23,16 +105,7 @@
                   "user"
                 ]
               },
-              "attributes": {
-                "sourceMap": [
-                  [
-                    [
-                      15,
-                      21
-                    ]
-                  ]
-                ]
-              },
+              "attributes": {},
               "content": {
                 "key": {
                   "element": "string",
@@ -56,19 +129,6 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    124,
-                    280
-                  ]
-                ]
-              }
-            ],
             "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
@@ -81,59 +141,18 @@
             {
               "element": "transition",
               "meta": {},
-              "attributes": {
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        189,
-                        215
-                      ]
-                    ]
-                  }
-                ]
-              },
+              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            304,
-                            88
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                189,
-                                215
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -141,19 +160,6 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                304,
-                                88
-                              ]
-                            ]
-                          }
-                        ],
                         "headers": {
                           "element": "httpHeaders",
                           "meta": {},
@@ -162,16 +168,7 @@
                             {
                               "element": "member",
                               "meta": {},
-                              "attributes": {
-                                "sourceMap": [
-                                  [
-                                    [
-                                      341,
-                                      51
-                                    ]
-                                  ]
-                                ]
-                              },
+                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
@@ -199,21 +196,7 @@
                               "messageBody"
                             ]
                           },
-                          "attributes": {
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    341,
-                                    51
-                                  ]
-                                ]
-                              }
-                            ]
-                          },
+                          "attributes": {},
                           "content": "{\n  \"status\": \"ok\"\n}"
                         }
                       ]
@@ -237,7 +220,8 @@
             "element": "link",
             "meta": {},
             "attributes": {
-              "relation": "refract-not-supported"
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
             },
             "content": []
           }
@@ -272,7 +256,8 @@
             "element": "link",
             "meta": {},
             "attributes": {
-              "relation": "refract-not-supported"
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
             },
             "content": []
           }
@@ -307,7 +292,8 @@
             "element": "link",
             "meta": {},
             "attributes": {
-              "relation": "refract-not-supported"
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
             },
             "content": []
           }
@@ -342,7 +328,8 @@
             "element": "link",
             "meta": {},
             "attributes": {
-              "relation": "refract-not-supported"
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
             },
             "content": []
           }
@@ -377,7 +364,8 @@
             "element": "link",
             "meta": {},
             "attributes": {
-              "relation": "refract-not-supported"
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
             },
             "content": []
           }
@@ -412,7 +400,8 @@
             "element": "link",
             "meta": {},
             "attributes": {
-              "relation": "refract-not-supported"
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
             },
             "content": []
           }
@@ -447,7 +436,8 @@
             "element": "link",
             "meta": {},
             "attributes": {
-              "relation": "refract-not-supported"
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
             },
             "content": []
           }
@@ -469,7 +459,7 @@
           }
         ]
       },
-      "content": "Form data paremeters are not yet supported"
+      "content": "Form data parameters are not yet supported"
     },
     {
       "element": "annotation",
@@ -482,7 +472,8 @@
             "element": "link",
             "meta": {},
             "attributes": {
-              "relation": "refract-not-supported"
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
             },
             "content": []
           }
