@@ -1,5 +1,7 @@
 # Unreleased
 
+- Generate Swagger schema and spec validation annotations.
+- Implement support for link relations in parser annotations.
 - Encode dashes (`-`) in URI template parameters.
 
 # 0.4.0 - 2015-12-2

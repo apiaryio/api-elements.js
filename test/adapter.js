@@ -12,6 +12,35 @@ import {expect} from 'chai';
 
 fury.adapters = [adapter];
 
+function testFixture(description, filename, subDir = true, generateSourceMap = false) {
+  it(description, (done) => {
+    const source = fs.readFileSync(filename, 'utf8');
+    let base = 'fixtures';
+
+    if (subDir) {
+      base = path.join(base, 'refract');
+    }
+
+    const expectedName = './' + path.join(base, path.basename(filename, path.extname(filename)) + '.json');
+    let expected = require(expectedName);
+
+    fury.parse({source, generateSourceMap}, (err, output) => {
+      if (err) {
+        return done(err);
+      }
+
+      // Invoke with the env var GENERATE set to regenerate the fixtures.
+      if (process.env.GENERATE) {
+        expected = output.toRefract();
+        fs.writeFileSync(path.join(__dirname, expectedName), JSON.stringify(expected, null, 2), 'utf8');
+      }
+
+      expect(output.toRefract()).to.deep.equal(expected);
+      done();
+    });
+  });
+}
+
 describe('Swagger 2.0 adapter', () => {
   context('detection', () => {
     it('detects JSON', () => {
@@ -76,51 +105,14 @@ describe('Swagger 2.0 adapter', () => {
   });
 
   context('source maps & annotations', () => {
-    it('can generate source maps', (done) => {
-      const source = fs.readFileSync('./test/fixtures/sourcemaps.yaml', 'utf8');
-      const expected = require('./fixtures/sourcemaps.json');
-
-      fury.parse({source, generateSourceMap: true}, (err, output) => {
-        if (err) {
-          return done(err);
-        }
-
-        expect(output.toRefract()).to.deep.equal(expected);
-        done();
-      });
-    });
-
-    it('can generate annotations', (done) => {
-      const source = fs.readFileSync('./test/fixtures/annotations.yaml', 'utf8');
-      const expected = require('./fixtures/annotations.json');
-
-      fury.parse({source, generateSourceMap: true}, (err, output) => {
-        if (err) {
-          return done(err);
-        }
-
-        expect(output.toRefract()).to.deep.equal(expected);
-        done();
-      });
-    });
+    testFixture('can generate source maps', './test/fixtures/sourcemaps.yaml', false, true);
+    testFixture('can generate annotations', './test/fixtures/annotations.yaml', false);
   });
 
   describe('can parse fixtures', () => {
     const filenames = glob.sync('./test/fixtures/swagger/*.@(json|yaml)');
     filenames.forEach((filename) => {
-      it(`Parses ${path.basename(filename, path.extname(filename))}`, (done) => {
-        const source = fs.readFileSync(filename, 'utf8');
-        const expected = require('./' + path.join('fixtures', 'refract', path.basename(filename, path.extname(filename)) + '.json'));
-
-        fury.parse({source}, (err, output) => {
-          if (err) {
-            return done(err);
-          }
-
-          expect(output.toRefract()).to.deep.equal(expected);
-          done();
-        });
-      });
+      testFixture(`Parses ${path.basename(filename, path.extname(filename))}`, filename);
     });
   });
 });

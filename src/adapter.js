@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import buildUriTemplate from './uri-template';
-import $RefParser from 'json-schema-ref-parser';
+import SwaggerParser from 'swagger-parser';
 import yaml from 'js-yaml';
 import yamlAst from 'yaml-js';
 
@@ -11,14 +11,22 @@ const ANNOTATIONS = {
   CANNOT_PARSE: {
     type: 'error',
     code: 1,
+    fragment: 'yaml-parser',
   },
   AST_UNAVAILABLE: {
     type: 'warning',
     code: 2,
+    fragment: 'yaml-parser',
   },
   DATA_LOST: {
     type: 'warning',
     code: 3,
+    fragment: 'refract-not-supported',
+  },
+  VALIDATION_ERROR: {
+    type: 'warning',
+    code: 4,
+    fragment: 'swagger-validation',
   },
 };
 
@@ -81,7 +89,7 @@ function useResourceGroups(api) {
 // Look up a position in the original source based on a JSON path, for
 // example 'paths./test.get.responses.200'
 function getPosition(ast, path) {
-  const pieces = path.split('.');
+  const pieces = _.isArray(path) ? path.splice(0) : path.split('.');
   let end;
   let node = ast;
   let piece = pieces.shift();
@@ -100,7 +108,7 @@ function getPosition(ast, path) {
     }
 
     for (const subNode of node.value) {
-      if (subNode[0].value === piece) {
+      if (subNode[0] && subNode[0].value === piece) {
         if (pieces.length) {
           newNode = subNode[1];
           if (index !== null) {
@@ -119,7 +127,7 @@ function getPosition(ast, path) {
           }
         }
         break;
-      } else if (subNode[0].value === '$ref') {
+      } else if (subNode[0] && subNode[0].value === '$ref') {
         if (subNode[1].value.indexOf('#') === 0) {
           // This is an internal reference! First, we reset the node to the
           // root of the document, shift the ref item off the pieces stack
@@ -157,15 +165,22 @@ function makeSourceMap(SourceMap, ast, element, path) {
 }
 
 // Make a new annotation for the given path and message
-function makeAnnotation(Annotation, SourceMap, ast, result, info, path, message) {
+function makeAnnotation(Annotation, Link, SourceMap, ast, result, info, path, message) {
   const annotation = new Annotation(message);
   annotation.classes.push(info.type);
   annotation.code = info.code;
   result.content.push(annotation);
 
+  if (info.fragment) {
+    const link = new Link();
+    link.relation = 'origin';
+    link.href = `http://docs.apiary.io/validations/swagger#${info.fragment}`;
+    annotation.links.push(link);
+  }
+
   if (ast && path) {
     const position = getPosition(ast, path);
-    if (position) {
+    if (position && !isNaN(position.start) && !isNaN(position.end)) {
       annotation.attributes.set('sourceMap', [
         new SourceMap([[position.start, position.end - position.start]]),
       ]);
@@ -257,6 +272,7 @@ export function parse({minim, source, generateSourceMap}, done) {
   const Category = minim.getElementClass('category');
   const HrefVariables = minim.getElementClass('hrefVariables');
   const HttpHeaders = minim.getElementClass('httpHeaders');
+  const Link = minim.getElementClass('link');
   const MemberElement = minim.getElementClass('member');
   const ParseResult = minim.getElementClass('parseResult');
   const Resource = minim.getElementClass('resource');
@@ -266,13 +282,14 @@ export function parse({minim, source, generateSourceMap}, done) {
   const paramToElement = convertParameterToElement.bind(
     convertParameterToElement, minim);
 
+  const parser = new SwaggerParser();
   const parseResult = new ParseResult();
 
   let loaded;
   try {
     loaded = _.isString(source) ? yaml.safeLoad(source) : source;
   } catch (err) {
-    makeAnnotation(Annotation, SourceMap, null, parseResult,
+    makeAnnotation(Annotation, Link, SourceMap, null, parseResult,
       ANNOTATIONS.CANNOT_PARSE, null, 'Problem loading the input');
     return done(null, parseResult);
   }
@@ -284,24 +301,60 @@ export function parse({minim, source, generateSourceMap}, done) {
     try {
       ast = yamlAst.compose(source);
     } catch (err) {
-      makeAnnotation(Annotation, SourceMap, null, parseResult,
+      makeAnnotation(Annotation, Link, SourceMap, null, parseResult,
         ANNOTATIONS.AST_UNAVAILABLE, null,
         'Input AST could not be composed, so source maps will not be available');
     }
   } else {
-    makeAnnotation(Annotation, SourceMap, null, parseResult,
+    makeAnnotation(Annotation, Link, SourceMap, null, parseResult,
       ANNOTATIONS.AST_UNAVAILABLE, null,
       'Source maps are only available with string input');
   }
 
-  $RefParser.dereference(loaded, (err, swagger) => {
+  // Some sane defaults since these are sometimes left out completely
+  if (loaded.info === undefined) {
+    loaded.info = {};
+  }
+
+  if (loaded.paths === undefined) {
+    loaded.paths = {};
+  }
+
+  // Parse and validate the Swagger document!
+  parser.validate(loaded, (err) => {
+    const swagger = parser.api;
+
     if (err) {
-      return done(err, parseResult);
+      if (swagger === undefined) {
+        return done(err, parseResult);
+      }
+
+      // Non-fatal errors, so let us try and create annotations for them and
+      // continue with the parsing as best we can.
+      if (err.details) {
+        const queue = [err.details];
+        while (queue.length) {
+          for (const item of queue[0]) {
+            makeAnnotation(Annotation, Link, SourceMap, ast, parseResult,
+              ANNOTATIONS.VALIDATION_ERROR, item.path, item.message);
+
+            if (item.inner) {
+              // TODO: I am honestly not sure what the correct behavior is
+              // here. Some items will have within them a tree of other items,
+              // some of which might contain more info (but it's unclear).
+              // Do we treat them as their own error or do something else?
+              queue.push(item.inner);
+            }
+          }
+          queue.shift();
+        }
+      }
     }
 
     const basePath = (swagger.basePath || '').replace(/[/]+$/, '');
     const setupSourceMap = makeSourceMap.bind(makeSourceMap, SourceMap, ast);
-    const setupAnnotation = makeAnnotation.bind(makeAnnotation, Annotation, SourceMap, ast, parseResult);
+    const setupAnnotation = makeAnnotation.bind(makeAnnotation, Annotation,
+      Link, SourceMap, ast, parseResult);
 
     const api = new Category();
     parseResult.push(api);
@@ -473,7 +526,7 @@ export function parse({minim, source, generateSourceMap}, done) {
         if (formParameters.length) {
           setupAnnotation(ANNOTATIONS.DATA_LOST,
             `paths.${href}.${method}.parameters`,
-            'Form data paremeters are not yet supported');
+            'Form data parameters are not yet supported');
         }
 
         const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
