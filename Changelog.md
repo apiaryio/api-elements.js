@@ -1,5 +1,6 @@
 # Unreleased
 
+- Support `x-summary` and `x-description` in Path Item Objects
 - Generate Swagger schema and spec validation annotations.
 - Implement support for link relations in parser annotations.
 - Encode dashes (`-`) in URI template parameters.
