@@ -154,7 +154,39 @@
                       "attributes": {
                         "method": "GET"
                       },
-                      "content": []
+                      "content": [
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "object",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "test"
+                                  },
+                                  "value": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": ""
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     },
                     {
                       "element": "httpResponse",
@@ -424,42 +456,6 @@
         ]
       },
       "content": "External documentation is not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                200,
-                62
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Form data parameters are not yet supported"
     },
     {
       "element": "annotation",

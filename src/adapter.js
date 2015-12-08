@@ -270,10 +270,12 @@ export function parse({minim, source, generateSourceMap}, done) {
   const Asset = minim.getElementClass('asset');
   const Copy = minim.getElementClass('copy');
   const Category = minim.getElementClass('category');
+  const DataStructure = minim.getElementClass('dataStructure');
   const HrefVariables = minim.getElementClass('hrefVariables');
   const HttpHeaders = minim.getElementClass('httpHeaders');
   const Link = minim.getElementClass('link');
   const MemberElement = minim.getElementClass('member');
+  const ObjectElement = minim.getElementClass('object');
   const ParseResult = minim.getElementClass('parseResult');
   const Resource = minim.getElementClass('resource');
   const SourceMap = minim.getElementClass('sourceMap');
@@ -534,12 +536,6 @@ export function parse({minim, source, generateSourceMap}, done) {
           return parameter.in === 'formData';
         });
 
-        if (formParameters.length) {
-          setupAnnotation(ANNOTATIONS.DATA_LOST,
-            `paths.${href}.${method}.parameters`,
-            'Form data parameters are not yet supported');
-        }
-
         const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
         resource.attributes.set('href', hrefForResource);
 
@@ -692,6 +688,21 @@ export function parse({minim, source, generateSourceMap}, done) {
               const schemaAsset = createAssetFromJsonSchema(minim, bodyParameter.schema);
               request.content.push(schemaAsset);
             });
+
+            // Using form parameters instead of body? We will convert those to
+            // data structures.
+            if (formParameters.length) {
+              const dataStructure = new DataStructure();
+              // A form is essentially an object with key/value members
+              const dataObject = new ObjectElement();
+
+              _.each(formParameters, (param) => {
+                dataObject.content.push(paramToElement(param));
+              });
+
+              dataStructure.content = dataObject;
+              request.content.push(dataStructure);
+            }
 
             // Responses can have bodies
             if (responseBody !== undefined) {
