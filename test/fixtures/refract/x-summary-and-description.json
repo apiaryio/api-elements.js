@@ -66,6 +66,12 @@
           },
           "content": [
             {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Resource Description"
+            },
+            {
               "element": "transition",
               "meta": {},
               "attributes": {},
