@@ -1,0 +1,8 @@
+swagger: '2.0'
+paths:
+  '/test':
+    x-summary: Resource Title
+    x-description: Resource Description
+    get:
+      responses:
+        200: {}

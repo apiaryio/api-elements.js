@@ -431,6 +431,17 @@ export function parse({minim, source, generateSourceMap}, done) {
         setupSourceMap(resource, `paths.${href}`);
       }
 
+      // Provide users with a way to add a title to a resource in Swagger
+      if (pathValue['x-summary']) {
+        resource.title = pathValue['x-summary'];
+      }
+
+      // Provide users a way to add a description to a resource in Swagger
+      if (pathValue['x-description']) {
+        const resourceDescription = new Copy(pathValue['x-description']);
+        resource.push(resourceDescription);
+      }
+
       if (useGroups) {
         const groupName = pathValue['x-group-name'];
 
