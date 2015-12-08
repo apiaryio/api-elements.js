@@ -1,4 +1,4 @@
-# Unreleased
+# 0.5.0 - 2015-12-8
 
 - Generate Swagger schema and spec validation annotations.
 - Implement support for link relations in parser annotations.
