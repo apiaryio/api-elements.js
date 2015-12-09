@@ -695,7 +695,13 @@ export function parse({minim, source, generateSourceMap}, done) {
 
             // Responses can have bodies
             if (responseBody !== undefined) {
-              const bodyAsset = new Asset(JSON.stringify(responseBody, null, 2));
+              let formattedResponseBody = responseBody;
+
+              if (typeof(responseBody) === 'object') {
+                formattedResponseBody = JSON.stringify(responseBody, null, 2);
+              }
+
+              const bodyAsset = new Asset(formattedResponseBody);
               bodyAsset.classes.push('messageBody');
               if (generateSourceMap && ast) {
                 setupSourceMap(bodyAsset, `paths.${href}.${method}.responses.${statusCode}.examples.${contentType}`);
