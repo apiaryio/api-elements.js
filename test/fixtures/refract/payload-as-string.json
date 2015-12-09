@@ -156,7 +156,7 @@
                             ]
                           },
                           "attributes": {},
-                          "content": "\"{\\n  \\\"requestId\\\" : 123123213231,\\n  \\\"results\\\": [\\n    {\\n      \\\"id\\\": 12312323,\\n      \\\"type\\\": \\\"article\\\"\\n    }\\n  ]\\n}\""
+                          "content": "{\n  \"requestId\" : 123123213231,\n  \"results\": [\n    {\n      \"id\": 12312323,\n      \"type\": \"article\"\n    }\n  ]\n}"
                         }
                       ]
                     }
