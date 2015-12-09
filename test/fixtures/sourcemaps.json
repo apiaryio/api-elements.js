@@ -30,7 +30,7 @@
             "attributes": {},
             "content": [
               [
-                504,
+                695,
                 298
               ]
             ]
@@ -176,12 +176,108 @@
                 "content": [
                   [
                     108,
-                    381
+                    572
                   ]
                 ]
               }
             ],
-            "href": "/test/{id}"
+            "hrefVariables": {
+              "element": "hrefVariables",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {
+                    "description": "Path argument"
+                  },
+                  "attributes": {
+                    "sourceMap": [
+                      [
+                        [
+                          146,
+                          184
+                        ]
+                      ]
+                    ],
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "id"
+                    },
+                    "value": {
+                      "element": "array",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                146,
+                                184
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        275,
+                                        27
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "A string value"
+                            }
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    258,
+                                    72
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "href": "/test/{id}{?body}"
           },
           "content": [
             {
@@ -198,7 +294,7 @@
                         "attributes": {},
                         "content": [
                           [
-                            138,
+                            342,
                             18
                           ]
                         ]
@@ -216,8 +312,8 @@
                     "attributes": {},
                     "content": [
                       [
-                        126,
-                        363
+                        330,
+                        350
                       ]
                     ]
                   }
@@ -229,18 +325,13 @@
                   "content": [
                     {
                       "element": "member",
-                      "meta": {
-                        "description": "Path argument"
-                      },
+                      "meta": {},
                       "attributes": {
-                        "typeAttributes": [
-                          "required"
-                        ],
                         "sourceMap": [
                           [
                             [
-                              226,
-                              139
+                              430,
+                              62
                             ]
                           ]
                         ]
@@ -250,12 +341,26 @@
                           "element": "string",
                           "meta": {},
                           "attributes": {},
-                          "content": "id"
+                          "content": "body"
                         },
                         "value": {
                           "element": "string",
                           "meta": {},
-                          "attributes": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    430,
+                                    62
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
                           "content": ""
                         }
                       }
@@ -275,7 +380,7 @@
                         "attributes": {},
                         "content": [
                           [
-                            163,
+                            367,
                             34
                           ]
                         ]
@@ -295,7 +400,7 @@
                         "attributes": {},
                         "content": [
                           [
-                            384,
+                            575,
                             57
                           ]
                         ]
@@ -315,14 +420,69 @@
                             "attributes": {},
                             "content": [
                               [
-                                126,
-                                363
+                                330,
+                                350
                               ]
                             ]
                           }
                         ]
                       },
-                      "content": []
+                      "content": [
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "object",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {
+                                  "sourceMap": [
+                                    [
+                                      [
+                                        494,
+                                        62
+                                      ]
+                                    ]
+                                  ]
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "foo"
+                                  },
+                                  "value": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {
+                                      "sourceMap": [
+                                        {
+                                          "element": "sourceMap",
+                                          "meta": {},
+                                          "attributes": {},
+                                          "content": [
+                                            [
+                                              494,
+                                              62
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "content": ""
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     },
                     {
                       "element": "httpResponse",
@@ -335,7 +495,7 @@
                             "attributes": {},
                             "content": [
                               [
-                                384,
+                                575,
                                 57
                               ]
                             ]
@@ -353,7 +513,7 @@
                                 "sourceMap": [
                                   [
                                     [
-                                      765,
+                                      956,
                                       37
                                     ]
                                   ]
@@ -383,7 +543,7 @@
                                 "sourceMap": [
                                   [
                                     [
-                                      573,
+                                      764,
                                       78
                                     ]
                                   ]
@@ -420,7 +580,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    521,
+                                    712,
                                     32
                                   ]
                                 ]
@@ -444,7 +604,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    765,
+                                    956,
                                     37
                                   ]
                                 ]
@@ -469,7 +629,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    667,
+                                    858,
                                     98
                                   ]
                                 ]
@@ -493,7 +653,7 @@
                         "attributes": {},
                         "content": [
                           [
-                            441,
+                            632,
                             48
                           ]
                         ]
@@ -513,14 +673,69 @@
                             "attributes": {},
                             "content": [
                               [
-                                126,
-                                363
+                                330,
+                                350
                               ]
                             ]
                           }
                         ]
                       },
-                      "content": []
+                      "content": [
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "object",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {
+                                  "sourceMap": [
+                                    [
+                                      [
+                                        494,
+                                        62
+                                      ]
+                                    ]
+                                  ]
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "foo"
+                                  },
+                                  "value": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {
+                                      "sourceMap": [
+                                        {
+                                          "element": "sourceMap",
+                                          "meta": {},
+                                          "attributes": {},
+                                          "content": [
+                                            [
+                                              494,
+                                              62
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "content": ""
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     },
                     {
                       "element": "httpResponse",
@@ -533,7 +748,7 @@
                             "attributes": {},
                             "content": [
                               [
-                                441,
+                                632,
                                 48
                               ]
                             ]
@@ -558,7 +773,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    456,
+                                    647,
                                     33
                                   ]
                                 ]

@@ -738,7 +738,16 @@
                               "element": "array",
                               "meta": {},
                               "attributes": {},
-                              "content": []
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {
+                                    "default": "available"
+                                  },
+                                  "content": ""
+                                }
+                              ]
                             }
                           }
                         }
