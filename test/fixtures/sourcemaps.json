@@ -30,8 +30,8 @@
             "attributes": {},
             "content": [
               [
-                448,
-                200
+                504,
+                298
               ]
             ]
           }
@@ -176,7 +176,7 @@
                 "content": [
                   [
                     108,
-                    325
+                    381
                   ]
                 ]
               }
@@ -217,7 +217,7 @@
                     "content": [
                       [
                         126,
-                        307
+                        363
                       ]
                     ]
                   }
@@ -296,7 +296,7 @@
                         "content": [
                           [
                             384,
-                            49
+                            57
                           ]
                         ]
                       }
@@ -316,7 +316,7 @@
                             "content": [
                               [
                                 126,
-                                307
+                                363
                               ]
                             ]
                           }
@@ -336,7 +336,7 @@
                             "content": [
                               [
                                 384,
-                                49
+                                57
                               ]
                             ]
                           }
@@ -353,7 +353,7 @@
                                 "sourceMap": [
                                   [
                                     [
-                                      611,
+                                      765,
                                       37
                                     ]
                                   ]
@@ -383,7 +383,7 @@
                                 "sourceMap": [
                                   [
                                     [
-                                      517,
+                                      573,
                                       78
                                     ]
                                   ]
@@ -420,7 +420,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    465,
+                                    521,
                                     32
                                   ]
                                 ]
@@ -444,7 +444,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    611,
+                                    765,
                                     37
                                   ]
                                 ]
@@ -452,6 +452,120 @@
                             ]
                           },
                           "content": "{\n  \"status\": \"ok\"\n}"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBodySchema"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/schema+json",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    667,
+                                    98
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "{\"type\":\"object\",\"properties\":{\"status\":{\"type\":\"string\"}}}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            441,
+                            48
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "POST",
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                126,
+                                363
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                441,
+                                48
+                              ]
+                            ]
+                          }
+                        ],
+                        "statusCode": "400"
+                      },
+                      "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBodySchema"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/schema+json",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    456,
+                                    33
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "{\"type\":\"string\"}"
                         }
                       ]
                     }

@@ -18,6 +18,9 @@ paths:
       responses:
         200:
           $ref: '#/definitions/Response200'
+        400:
+          schema:
+            type: string
 definitions:
   Response200:
     description: Successful response
@@ -26,5 +29,10 @@ definitions:
         description: My custom header
         type: string
     examples:
+      schema:
+        type: object
+        properties:
+          status:
+            type: string
       application/json:
         status: ok

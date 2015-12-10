@@ -713,6 +713,15 @@ export function parse({minim, source, generateSourceMap}, done) {
             const schema = responseValue.schema || (responseValue.examples && responseValue.examples.schema);
             if (schema) {
               const schemaAsset = createAssetFromJsonSchema(minim, schema);
+              if (generateSourceMap && ast) {
+                let schemaPath = `paths.${href}.${method}.responses.${statusCode}`;
+                if (responseValue.examples && responseValue.examples.schema) {
+                  schemaPath += '.examples.schema';
+                } else {
+                  schemaPath += '.schema';
+                }
+                setupSourceMap(schemaAsset, schemaPath);
+              }
               response.content.push(schemaAsset);
             }
 
