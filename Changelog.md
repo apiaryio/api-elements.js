@@ -1,3 +1,7 @@
+# 0.5.1 - 2015-12-10
+
+- Do not encode JSON strings twice
+
 # 0.5.0 - 2015-12-8
 
 - Support `x-summary` and `x-description` in Path Item Objects
