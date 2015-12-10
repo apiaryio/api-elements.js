@@ -4,12 +4,120 @@
   "attributes": {},
   "content": [
     {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 4,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                177,
+                297
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Data does not match any schemas from 'oneOf'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 4,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                177,
+                297
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Missing required property: description"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 4,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                177,
+                297
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Missing required property: $ref"
+    },
+    {
       "element": "category",
       "meta": {
         "classes": [
           "api"
         ],
-        "title": "Not formated example"
+        "title": "Not formatted example"
       },
       "attributes": {
         "meta": {
@@ -36,7 +144,7 @@
                   "element": "string",
                   "meta": {},
                   "attributes": {},
-                  "content": "https://custom-instance.filter.ly"
+                  "content": "custom-instance.filter.ly"
                 }
               }
             }
@@ -48,54 +156,14 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/v1/example/{userId}"
+            "href": "/example/"
           },
           "content": [
             {
               "element": "transition",
               "meta": {},
-              "attributes": {
-                "relation": "find_relevance_by_user",
-                "hrefVariables": {
-                  "element": "hrefVariables",
-                  "meta": {},
-                  "attributes": {},
-                  "content": [
-                    {
-                      "element": "member",
-                      "meta": {
-                        "description": "Identification of the user"
-                      },
-                      "attributes": {
-                        "typeAttributes": [
-                          "required"
-                        ]
-                      },
-                      "content": {
-                        "key": {
-                          "element": "string",
-                          "meta": {},
-                          "attributes": {},
-                          "content": "userId"
-                        },
-                        "value": {
-                          "element": "number",
-                          "meta": {},
-                          "attributes": {},
-                          "content": null
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
+              "attributes": {},
               "content": [
-                {
-                  "element": "copy",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "Get relevant resources for a given user.\nThis API takes a static relevance configuration to be able to cache\nand return the results faster.\n"
-                },
                 {
                   "element": "httpTransaction",
                   "meta": {},
@@ -143,12 +211,6 @@
                       },
                       "content": [
                         {
-                          "element": "copy",
-                          "meta": {},
-                          "attributes": {},
-                          "content": "List of resources recommended for a particular user"
-                        },
-                        {
                           "element": "asset",
                           "meta": {
                             "classes": [
@@ -167,42 +229,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                1108,
-                38
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Default response is not yet supported"
     }
   ]
 }

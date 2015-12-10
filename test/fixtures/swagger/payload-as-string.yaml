@@ -1,36 +1,14 @@
 swagger: '2.0'
 info:
   version: 0.0.1
-  title: "Not formated example"
+  title: "Not formatted example"
   description: ""
-  contact:
-    name: API Support
-    email: support@filter.ly
 host: custom-instance.filter.ly
-basePath: /v1
-schemes:
-  - https
-consumes:
-  - application/json
-produces:
-  - application/json
 paths:
-  '/example/{userId}':
+  '/example/':
     get:
-      description: |
-        Get relevant resources for a given user.
-        This API takes a static relevance configuration to be able to cache
-        and return the results faster.
-      operationId: find_relevance_by_user
-      parameters:
-        - name: userId
-          in: path
-          description: Identification of the user
-          required: true
-          type: integer
       responses:
         '200':
-          description: List of resources recommended for a particular user
           examples:
             application/json: |-
               {
@@ -42,6 +20,3 @@ paths:
                   }
                 ]
               }
-
-        default:
-          description: Error
