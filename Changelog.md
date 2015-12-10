@@ -1,4 +1,4 @@
-# Unreleased
+# 0.5.2 - 2015-12-10
 
 - Add support for `formData` parameters, which get converted into request data structures.
 - Add source maps for `messageBodySchema` assets.
