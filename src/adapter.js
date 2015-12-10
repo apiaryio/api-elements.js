@@ -697,7 +697,7 @@ export function parse({minim, source, generateSourceMap}, done) {
             if (responseBody !== undefined) {
               let formattedResponseBody = responseBody;
 
-              if (typeof(responseBody) === 'object') {
+              if (typeof(responseBody) !== 'string') {
                 formattedResponseBody = JSON.stringify(responseBody, null, 2);
               }
 
