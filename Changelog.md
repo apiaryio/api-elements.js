@@ -1,10 +1,14 @@
+# Unreleased
+
+- Add source maps for `messageBodySchema` assets.
+
 # 0.5.1 - 2015-12-10
 
 - Do not encode JSON strings twice
+- Support `x-summary` and `x-description` in Path Item Objects
 
 # 0.5.0 - 2015-12-8
 
-- Support `x-summary` and `x-description` in Path Item Objects
 - Generate Swagger schema and spec validation annotations.
 - Implement support for link relations in parser annotations.
 - Encode dashes (`-`) in URI template parameters.
