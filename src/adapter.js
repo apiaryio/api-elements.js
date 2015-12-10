@@ -188,36 +188,78 @@ function makeAnnotation(Annotation, Link, SourceMap, ast, result, info, path, me
   }
 }
 
-function convertParameterToElement(minim, parameter) {
+function convertParameterToElement(minim, generateSourceMap, setupSourceMap, parameter, path, setAttributes = false) {
   const StringElement = minim.getElementClass('string');
   const NumberElement = minim.getElementClass('number');
   const BooleanElement = minim.getElementClass('boolean');
   const ArrayElement = minim.getElementClass('array');
-  const MemberElement = minim.getElementClass('member');
 
-  let memberValue;
+  let element;
 
   // Convert from Swagger types to Minim elements
   if (parameter.type === 'string') {
-    memberValue = new StringElement('');
+    element = new StringElement('');
   } else if (parameter.type === 'integer' || parameter.type === 'number') {
-    memberValue = new NumberElement();
+    element = new NumberElement();
   } else if (parameter.type === 'boolean') {
-    memberValue = new BooleanElement();
+    element = new BooleanElement();
   } else if (parameter.type === 'array') {
-    memberValue = new ArrayElement();
+    element = new ArrayElement();
+
+    if (parameter.items) {
+      element.content = [convertParameterToElement(minim, generateSourceMap,
+        setupSourceMap, parameter.items, `${path}.items`, true)];
+    }
   } else {
     // Default to a string in case we get a type we haven't seen
-    memberValue = new StringElement('');
+    element = new StringElement('');
   }
+
+  if (generateSourceMap) {
+    setupSourceMap(element, path);
+  }
+
+  if (setAttributes) {
+    if (parameter.description) {
+      element.description = parameter.description;
+
+      if (generateSourceMap) {
+        setupSourceMap(element.meta.get('description'), `${path}.description`);
+      }
+    }
+
+    if (parameter.required) {
+      element.attributes.set('typeAttributes', ['required']);
+    }
+
+    if (parameter.default !== undefined) {
+      element.attributes.set('default', parameter.default);
+    }
+  }
+
+  return element;
+}
+
+function convertParameterToMember(minim, generateSourceMap, setupSourceMap, parameter, path) {
+  const MemberElement = minim.getElementClass('member');
+  const memberValue = convertParameterToElement(minim, generateSourceMap,
+    setupSourceMap, parameter, path);
 
   // TODO: Update when Minim has better support for elements as values
   // should be: new MemberType(parameter.name, memberValue);
   const member = new MemberElement(parameter.name);
   member.content.value = memberValue;
 
+  if (generateSourceMap) {
+    setupSourceMap(member, path);
+  }
+
   if (parameter.description) {
     member.description = parameter.description;
+
+    if (generateSourceMap) {
+      setupSourceMap(member.meta.get('description'), `${path}.description`);
+    }
   }
 
   if (parameter.required) {
@@ -270,17 +312,16 @@ export function parse({minim, source, generateSourceMap}, done) {
   const Asset = minim.getElementClass('asset');
   const Copy = minim.getElementClass('copy');
   const Category = minim.getElementClass('category');
+  const DataStructure = minim.getElementClass('dataStructure');
   const HrefVariables = minim.getElementClass('hrefVariables');
   const HttpHeaders = minim.getElementClass('httpHeaders');
   const Link = minim.getElementClass('link');
   const MemberElement = minim.getElementClass('member');
+  const ObjectElement = minim.getElementClass('object');
   const ParseResult = minim.getElementClass('parseResult');
   const Resource = minim.getElementClass('resource');
   const SourceMap = minim.getElementClass('sourceMap');
   const Transition = minim.getElementClass('transition');
-
-  const paramToElement = convertParameterToElement.bind(
-    convertParameterToElement, minim);
 
   const parser = new SwaggerParser();
   const parseResult = new ParseResult();
@@ -355,6 +396,8 @@ export function parse({minim, source, generateSourceMap}, done) {
     const setupSourceMap = makeSourceMap.bind(makeSourceMap, SourceMap, ast);
     const setupAnnotation = makeAnnotation.bind(makeAnnotation, Annotation,
       Link, SourceMap, ast, parseResult);
+    const paramToElement = convertParameterToMember.bind(
+      convertParameterToElement, minim, generateSourceMap, setupSourceMap);
 
     const api = new Category();
     parseResult.push(api);
@@ -478,9 +521,10 @@ export function parse({minim, source, generateSourceMap}, done) {
 
         pathObjectParameters.forEach((parameter, index) => {
           if (parameter.in === 'query' || parameter.in === 'path') {
-            const member = paramToElement(parameter);
+            const paramPath = `paths.${href}.parameters[${index}]`;
+            const member = paramToElement(parameter, paramPath);
             if (generateSourceMap && ast) {
-              setupSourceMap(member, `paths.${href}.parameters[${index}]`);
+              setupSourceMap(member, paramPath);
             }
             resource.hrefVariables.content.push(member);
           } else if (parameter.in === 'body') {
@@ -534,12 +578,6 @@ export function parse({minim, source, generateSourceMap}, done) {
           return parameter.in === 'formData';
         });
 
-        if (formParameters.length) {
-          setupAnnotation(ANNOTATIONS.DATA_LOST,
-            `paths.${href}.${method}.parameters`,
-            'Form data parameters are not yet supported');
-        }
-
         const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
         resource.attributes.set('href', hrefForResource);
 
@@ -570,12 +608,13 @@ export function parse({minim, source, generateSourceMap}, done) {
           transition.hrefVariables = new HrefVariables();
 
           uriParameters.forEach((parameter) => {
-            const member = paramToElement(parameter);
+            let paramPath;
             if (generateSourceMap && ast) {
               const index = methodValueParameters.indexOf(parameter);
-              setupSourceMap(member, `paths.${href}.${method}.parameters[${index}]`);
+              paramPath = `paths.${href}.${method}.parameters[${index}]`;
             }
-            transition.hrefVariables.content.push(member);
+            transition.hrefVariables.content.push(
+              paramToElement(parameter, paramPath));
           });
         }
 
@@ -692,6 +731,26 @@ export function parse({minim, source, generateSourceMap}, done) {
               const schemaAsset = createAssetFromJsonSchema(minim, bodyParameter.schema);
               request.content.push(schemaAsset);
             });
+
+            // Using form parameters instead of body? We will convert those to
+            // data structures.
+            if (formParameters.length) {
+              const dataStructure = new DataStructure();
+              // A form is essentially an object with key/value members
+              const dataObject = new ObjectElement();
+
+              _.each(formParameters, (param) => {
+                let paramPath;
+                if (generateSourceMap && ast) {
+                  const index = methodValueParameters.indexOf(param);
+                  paramPath = `paths.${href}.${method}.parameters[${index}]`;
+                }
+                dataObject.content.push(paramToElement(param, paramPath));
+              });
+
+              dataStructure.content = dataObject;
+              request.content.push(dataStructure);
+            }
 
             // Responses can have bodies
             if (responseBody !== undefined) {

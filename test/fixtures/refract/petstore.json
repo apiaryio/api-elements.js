@@ -738,7 +738,16 @@
                               "element": "array",
                               "meta": {},
                               "attributes": {},
-                              "content": []
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {
+                                    "default": "available"
+                                  },
+                                  "content": ""
+                                }
+                              ]
                             }
                           }
                         }
@@ -1036,7 +1045,62 @@
                           "attributes": {
                             "method": "POST"
                           },
-                          "content": []
+                          "content": [
+                            {
+                              "element": "dataStructure",
+                              "meta": {},
+                              "attributes": {},
+                              "content": {
+                                "element": "object",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  {
+                                    "element": "member",
+                                    "meta": {
+                                      "description": "Updated name of the pet"
+                                    },
+                                    "attributes": {},
+                                    "content": {
+                                      "key": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "name"
+                                      },
+                                      "value": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": ""
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "element": "member",
+                                    "meta": {
+                                      "description": "Updated status of the pet"
+                                    },
+                                    "attributes": {},
+                                    "content": {
+                                      "key": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "status"
+                                      },
+                                      "value": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": ""
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
                         },
                         {
                           "element": "httpResponse",
@@ -1066,7 +1130,62 @@
                           "attributes": {
                             "method": "POST"
                           },
-                          "content": []
+                          "content": [
+                            {
+                              "element": "dataStructure",
+                              "meta": {},
+                              "attributes": {},
+                              "content": {
+                                "element": "object",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  {
+                                    "element": "member",
+                                    "meta": {
+                                      "description": "Updated name of the pet"
+                                    },
+                                    "attributes": {},
+                                    "content": {
+                                      "key": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "name"
+                                      },
+                                      "value": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": ""
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "element": "member",
+                                    "meta": {
+                                      "description": "Updated status of the pet"
+                                    },
+                                    "attributes": {},
+                                    "content": {
+                                      "key": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "status"
+                                      },
+                                      "value": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": ""
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
                         },
                         {
                           "element": "httpResponse",
@@ -1507,7 +1626,62 @@
                           "attributes": {
                             "method": "POST"
                           },
-                          "content": []
+                          "content": [
+                            {
+                              "element": "dataStructure",
+                              "meta": {},
+                              "attributes": {},
+                              "content": {
+                                "element": "object",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  {
+                                    "element": "member",
+                                    "meta": {
+                                      "description": "Additional data to pass to server"
+                                    },
+                                    "attributes": {},
+                                    "content": {
+                                      "key": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "additionalMetadata"
+                                      },
+                                      "value": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": ""
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "element": "member",
+                                    "meta": {
+                                      "description": "file to upload"
+                                    },
+                                    "attributes": {},
+                                    "content": {
+                                      "key": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "file"
+                                      },
+                                      "value": {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": ""
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
                         },
                         {
                           "element": "httpResponse",
@@ -2917,78 +3091,6 @@
         ]
       },
       "content": "Default response is not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                8327,
-                874
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Form data parameters are not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                13914,
-                599
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Form data parameters are not yet supported"
     }
   ]
 }

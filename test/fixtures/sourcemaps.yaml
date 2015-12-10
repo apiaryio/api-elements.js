@@ -5,16 +5,25 @@ info:
 host: api.example.com
 paths:
   '/test/{id}':
+    parameters:
+      - name: id
+        in: path
+        description: Path argument
+        required: true
+        type: array
+        items:
+          description: A string value
+          type: string
     post:
       summary: Test post
       description: Test post description
       parameters:
-        - name: id
-          in: path
-          description: Path argument
-          required: true
-          schema:
-            type: string
+        - name: body
+          in: query
+          type: string
+        - name: foo
+          in: formData
+          type: string
       responses:
         200:
           $ref: '#/definitions/Response200'
