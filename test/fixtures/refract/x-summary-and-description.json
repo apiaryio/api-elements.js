@@ -52,7 +52,9 @@
     {
       "element": "category",
       "meta": {
-        "classes": ["api"]
+        "classes": [
+          "api"
+        ]
       },
       "attributes": {},
       "content": [
