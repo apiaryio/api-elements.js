@@ -332,6 +332,13 @@ export function parse({minim, source, generateSourceMap}, done) {
   } catch (err) {
     makeAnnotation(Annotation, Link, SourceMap, null, parseResult,
       ANNOTATIONS.CANNOT_PARSE, null, 'Problem loading the input');
+
+    if (err.mark) {
+      parseResult.first().attributes.set('sourceMap', [
+        new SourceMap([[err.mark.position, 1]]),
+      ]);
+    }
+
     return done(null, parseResult);
   }
 

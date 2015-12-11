@@ -1,0 +1,4 @@
+swagger: '2.0'
+bad: }
+another: 1
+  also: bad

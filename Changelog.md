@@ -1,3 +1,7 @@
+# 0.5.3 - 2015-12-11
+
+- Add source maps for YAML parse error annotations, which were previously missing.
+
 # 0.5.2 - 2015-12-10
 
 - Add support for `formData` parameters, which get converted into request data structures.
