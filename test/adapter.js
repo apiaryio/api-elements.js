@@ -68,13 +68,6 @@ describe('Swagger 2.0 adapter', () => {
     });
   });
 
-  it('returns error for bad input', (done) => {
-    fury.parse({source: 'swagger: "2.0"\nbad: }'}, (err) => {
-      expect(err).to.exist;
-      done();
-    });
-  });
-
   context('can parse Swagger object', () => {
     const source = {swagger: '2.0', info: {title: 'Test'}};
     let result;
@@ -101,6 +94,25 @@ describe('Swagger 2.0 adapter', () => {
 
       expect(filtered).to.have.length(1);
       expect(filtered[0]).to.be.an.object;
+    });
+  });
+
+  context('cannot parse invalid Swagger YAML', () => {
+    const source = 'swagger: "2.0"\nbad: }';
+    let parseError;
+    let parseResult;
+
+    before((done) => {
+      fury.parse({source}, (err, result) => {
+        parseError = err;
+        parseResult = result;
+        done();
+      });
+    });
+
+    it('returns error for bad input yaml', () => {
+      expect(parseError).to.exist;
+      expect(parseResult).to.exist;
     });
   });
 
