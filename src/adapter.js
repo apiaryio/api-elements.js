@@ -331,7 +331,7 @@ export function parse({minim, source, generateSourceMap}, done) {
     loaded = _.isString(source) ? yaml.safeLoad(source) : source;
   } catch (err) {
     makeAnnotation(Annotation, Link, SourceMap, null, parseResult,
-      ANNOTATIONS.CANNOT_PARSE, null, 'Problem loading the input');
+      ANNOTATIONS.CANNOT_PARSE, null, (err.reason || 'Problem loading the input'));
 
     if (err.mark) {
       parseResult.first().attributes.set('sourceMap', [
@@ -339,7 +339,7 @@ export function parse({minim, source, generateSourceMap}, done) {
       ]);
     }
 
-    return done(null, parseResult);
+    return done(new Error(err.message), parseResult);
   }
 
   let ast = null;
