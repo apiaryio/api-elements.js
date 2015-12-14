@@ -22,7 +22,20 @@
         ]
       },
       "attributes": {
-        "code": 4
+        "code": 4,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                7245,
+                275
+              ]
+            ]
+          }
+        ]
       },
       "content": "Data does not match any schemas from 'oneOf'"
     },
@@ -45,7 +58,20 @@
         ]
       },
       "attributes": {
-        "code": 4
+        "code": 4,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                7245,
+                275
+              ]
+            ]
+          }
+        ]
       },
       "content": "Data does not match any schemas from 'oneOf'"
     },
@@ -68,7 +94,20 @@
         ]
       },
       "attributes": {
-        "code": 4
+        "code": 4,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                7245,
+                275
+              ]
+            ]
+          }
+        ]
       },
       "content": "Missing required property: $ref"
     },

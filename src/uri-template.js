@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 
 export default function buildUriTemplate(basePath, href, pathObjectParameters = [], queryParameters = []) {
   if (queryParameters.length > 0 || pathObjectParameters.length > 0) {

@@ -1,6 +1,16 @@
+# Unreleased
+
+- Code refactoring
+
+  - Parsing is now handled by a class to more easily share state between various methods. This lays the framework for more refactoring and code cleanup.
+  - The parser shared state tracks the path of the component currently being parsed, which makes it easier to split pieces of the parser into separate methods.
+  - YAML AST lookup paths are now arrays of strings rather than strings of period-separated components, which made escaping very difficult.
+  - Rather than guessing the YAML type, the AST lookup now checks and handles it accordingly. Paths like `'foo.bar.0.baz'` would fail previously and now work (but are passed as `['foo', 'bar', '0', 'baz']`).
+  - Underscore is now replaced with Lodash for consistency with other modules.
+
 # 0.6.0 - 2015-12-14
 
-- Invalid YAML now returns error
+  - Invalid YAML now returns error
 
 # 0.5.3 - 2015-12-11
 
