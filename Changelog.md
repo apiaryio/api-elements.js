@@ -1,3 +1,7 @@
+# 0.6.0 - 2015-12-14
+
+- Invalid YAML now returns error
+
 # 0.5.3 - 2015-12-11
 
 - Add source maps for YAML parse error annotations, which were previously missing.
