@@ -129,12 +129,6 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "hrefVariables": {
-              "element": "hrefVariables",
-              "meta": {},
-              "attributes": {},
-              "content": []
-            },
             "href": "/foo"
           },
           "content": [
