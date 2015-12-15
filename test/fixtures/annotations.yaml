@@ -11,10 +11,9 @@ paths:
     parameters:
       - name: theBody
         in: body
+      - name: theForm
+        in: formData
     get:
-      parameters:
-        - name: test
-          in: formData
       externalDocs: {}
       responses:
         200:
