@@ -435,12 +435,19 @@ export default class Parser {
 
   // Convert a Swagger response & status code into Refract transactions.
   handleSwaggerResponse(resource, transition, method, transitionParameters, responseValue, statusCode) {
-    let examples = {
-      '': undefined,
-    };
+    let examples;
 
     if (responseValue.examples) {
       examples = responseValue.examples;
+    } else {
+      // The only way to specify an HTTP method is by creating a transaction,
+      // and according to the Refract spec a transaction *MUST* have a request
+      // and response within it, so here we seed the examples to create a blank
+      // request/response within a new transaction. See:
+      // https://github.com/refractproject/refract-spec/blob/master/namespaces/api-description-namespace.md#http-transaction-element
+      examples = {
+        '': undefined,
+      };
     }
 
     examples = _.omit(examples, 'schema');
