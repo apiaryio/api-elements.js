@@ -129,12 +129,6 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "hrefVariables": {
-              "element": "hrefVariables",
-              "meta": {},
-              "attributes": {},
-              "content": []
-            },
             "href": "/foo"
           },
           "content": [
@@ -154,39 +148,7 @@
                       "attributes": {
                         "method": "GET"
                       },
-                      "content": [
-                        {
-                          "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
-                          "content": {
-                            "element": "object",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              {
-                                "element": "member",
-                                "meta": {},
-                                "attributes": {},
-                                "content": {
-                                  "key": {
-                                    "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
-                                    "content": "test"
-                                  },
-                                  "value": {
-                                    "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
-                                    "content": ""
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
+                      "content": []
                     },
                     {
                       "element": "httpResponse",
@@ -413,7 +375,7 @@
             "content": [
               [
                 154,
-                35
+                37
               ]
             ]
           }
@@ -448,7 +410,43 @@
             "attributes": {},
             "content": [
               [
-                262,
+                193,
+                39
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Path-level form data parameters are not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                243,
                 16
               ]
             ]
@@ -484,7 +482,7 @@
             "attributes": {},
             "content": [
               [
-                392,
+                373,
                 11
               ]
             ]

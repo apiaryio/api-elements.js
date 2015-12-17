@@ -113,10 +113,21 @@
                           "content": "arg"
                         },
                         "value": {
-                          "element": "string",
+                          "element": "array",
                           "meta": {},
                           "attributes": {},
-                          "content": ""
+                          "content": [
+                            {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "typeAttributes": [
+                                  "required"
+                                ]
+                              },
+                              "content": ""
+                            }
+                          ]
                         }
                       }
                     }

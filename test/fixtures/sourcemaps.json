@@ -168,19 +168,6 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    108,
-                    572
-                  ]
-                ]
-              }
-            ],
             "hrefVariables": {
               "element": "hrefVariables",
               "meta": {},
@@ -277,7 +264,20 @@
                 }
               ]
             },
-            "href": "/test/{id}{?body}"
+            "href": "/test/{id}{?body}",
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    108,
+                    572
+                  ]
+                ]
+              }
+            ]
           },
           "content": [
             {
@@ -305,19 +305,6 @@
                 }
               },
               "attributes": {
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        330,
-                        350
-                      ]
-                    ]
-                  }
-                ],
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -366,7 +353,20 @@
                       }
                     }
                   ]
-                }
+                },
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        330,
+                        350
+                      ]
+                    ]
+                  }
+                ]
               },
               "content": [
                 {
@@ -488,19 +488,6 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                575,
-                                57
-                              ]
-                            ]
-                          }
-                        ],
                         "headers": {
                           "element": "httpHeaders",
                           "meta": {},
@@ -566,7 +553,20 @@
                             }
                           ]
                         },
-                        "statusCode": "200"
+                        "statusCode": "200",
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                575,
+                                57
+                              ]
+                            ]
+                          }
+                        ]
                       },
                       "content": [
                         {
@@ -741,6 +741,7 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
+                        "statusCode": "400",
                         "sourceMap": [
                           {
                             "element": "sourceMap",
@@ -753,8 +754,7 @@
                               ]
                             ]
                           }
-                        ],
-                        "statusCode": "400"
+                        ]
                       },
                       "content": [
                         {

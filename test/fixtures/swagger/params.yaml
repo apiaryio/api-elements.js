@@ -11,7 +11,10 @@ paths:
         - name: arg
           in: query
           description: Query argument
-          type: string
+          type: array
+          items:
+            type: string
+            required: true
   '/test':
     post:
       parameters:
