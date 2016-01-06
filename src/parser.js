@@ -154,6 +154,11 @@ export default class Parser {
 
   // == Internal properties & functions ==
 
+  // Base path (URL) name for the API
+  get basePath() {
+    return (this.swagger.basePath || '').replace(/[/]+$/, '');
+  }
+
   // Lazy-loaded input AST is made available when we need it. If it can't be
   // loaded, then an annotation is generated with more information about why.
   get ast() {
@@ -315,6 +320,13 @@ export default class Parser {
         resource.hrefVariables = resourceHrefVariables;
       }
 
+      // Set the resource-wide URI template, which can further be overridden
+      // by individual transition URI templates. When creating a transition
+      // below, we *only* set the transition URI template if it differs from
+      // the one we've generated here.
+      const hrefForResource = buildUriTemplate(this.basePath, href, pathObjectParameters);
+      resource.attributes.set('href', hrefForResource);
+
       // TODO: It should add support for `body` and `formData` parameters as well.
       if (pathObjectParameters.length > 0) {
         pathObjectParameters.forEach((parameter, index) => {
@@ -365,13 +377,13 @@ export default class Parser {
         return parameter.in === 'query';
       });
 
-      const basePath = (this.swagger.basePath || '').replace(/[/]+$/, '');
-      const hrefForResource = buildUriTemplate(basePath, href, resourceParameters, queryParameters);
-      // TODO: This is probably a bug. Transitions can have their own `href` and
-      // we should use that instead of resetting the resource's href each time.
-      // The open question is do resources still get an href? Then we should
-      // only set it here on the transition if it is different.
-      resource.attributes.set('href', hrefForResource);
+      // Here we generate a URI template specific to this transition. If it
+      // is different from the resource URI template, then we set the
+      // transition's `href` attribute.
+      const hrefForTransition = buildUriTemplate(this.basePath, href, resourceParameters, queryParameters);
+      if (hrefForTransition !== resource.attributes.getValue('href')) {
+        transition.attributes.set('href', hrefForTransition);
+      }
 
       if (methodValue.summary) {
         this.withPath('summary', () => {

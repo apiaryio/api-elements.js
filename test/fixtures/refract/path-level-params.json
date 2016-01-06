@@ -115,13 +115,14 @@
                 }
               ]
             },
-            "href": "/test/{id}{?search,arg}"
+            "href": "/test/{id}{?search}"
           },
           "content": [
             {
               "element": "transition",
               "meta": {},
               "attributes": {
+                "href": "/test/{id}{?search,arg}",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},

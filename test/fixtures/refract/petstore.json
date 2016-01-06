@@ -880,7 +880,7 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/api/pet/findByTags{?tags,unknown}"
+                "href": "/api/pet/findByTags"
               },
               "content": [
                 {
@@ -889,6 +889,7 @@
                     "title": "Finds Pets by tags"
                   },
                   "attributes": {
+                    "href": "/api/pet/findByTags{?tags,unknown}",
                     "relation": "findPetsByTags",
                     "hrefVariables": {
                       "element": "hrefVariables",
@@ -2350,7 +2351,7 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/api/user/login{?username,password}"
+                "href": "/api/user/login"
               },
               "content": [
                 {
@@ -2359,6 +2360,7 @@
                     "title": "Logs user into the system"
                   },
                   "attributes": {
+                    "href": "/api/user/login{?username,password}",
                     "relation": "loginUser",
                     "hrefVariables": {
                       "element": "hrefVariables",
