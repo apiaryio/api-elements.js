@@ -62,13 +62,14 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/test/{id}{?arg}"
+            "href": "/test/{id}"
           },
           "content": [
             {
               "element": "transition",
               "meta": {},
               "attributes": {
+                "href": "/test/{id}{?arg}",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},

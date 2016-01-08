@@ -264,7 +264,7 @@
                 }
               ]
             },
-            "href": "/test/{id}{?body}",
+            "href": "/test/{id}",
             "sourceMap": [
               {
                 "element": "sourceMap",
@@ -305,6 +305,7 @@
                 }
               },
               "attributes": {
+                "href": "/test/{id}{?body}",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
