@@ -1,5 +1,6 @@
-# Unreleased
+# 0.6.1 - 2016-01-11
 
+- Fix handling of resource `href`, which could get overwritten while processing transitions and result in missing parameters in the URI template.
 - Code refactoring
 
   - Parsing is now handled by a class to more easily share state between various methods. This lays the framework for more refactoring and code cleanup.
