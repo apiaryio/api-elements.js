@@ -25,7 +25,7 @@ function testFixture(description, filename, subDir = true, generateSourceMap = f
     let expected = require(expectedName);
 
     fury.parse({source, generateSourceMap}, (err, output) => {
-      if (err) {
+      if (err && !output) {
         return done(err);
       }
 
