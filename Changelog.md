@@ -1,4 +1,4 @@
-# Unreleased
+# 0.6.2 - 2016-01-13
 
 - Bad JSON references (using `$ref`) are now returned as parse result
   annotations that include source maps which point to the `$ref` line, making
