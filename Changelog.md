@@ -1,3 +1,9 @@
+# Unreleased
+
+- Bad JSON references (using `$ref`) are now returned as parse result
+  annotations that include source maps which point to the `$ref` line, making
+  debugging easier.
+
 # 0.6.1 - 2016-01-11
 
 - Fix handling of resource `href`, which could get overwritten while processing transitions and result in missing parameters in the URI template.
