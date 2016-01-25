@@ -1,4 +1,7 @@
 swagger: '2.0'
+info:
+  title: Tags
+  version: '1.0'
 tags:
   - name: Group1
     description: Group1 description
@@ -7,17 +10,32 @@ paths:
     get:
       tags:
         - Group1
+      responses:
+        204:
+          description: Test response
     post:
       tags:
         - Group1
+      responses:
+        204:
+          description: Test response
   '/another-test':
     get:
       tags:
         - Group2
+      responses:
+        204:
+          description: Test response
     delete:
       tags:
         - Group2
+      responses:
+        204:
+          description: Test response
   '/yet-another-test':
     get:
       tags:
         - Group1
+      responses:
+        204:
+          description: Test response

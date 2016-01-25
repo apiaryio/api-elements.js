@@ -4,252 +4,6 @@
   "attributes": {},
   "content": [
     {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                7245,
-                275
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Data does not match any schemas from 'oneOf'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                7245,
-                275
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Data does not match any schemas from 'oneOf'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                7245,
-                275
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: $ref"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "Missing required property: schema"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "Data does not match any schemas from 'oneOf'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "No enum match for: unknown"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "No enum match for: unknown"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "No enum match for: unknown"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "No enum match for: unknown"
-    },
-    {
       "element": "category",
       "meta": {
         "classes": [
@@ -332,8 +86,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test description"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -441,8 +204,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test description"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -889,7 +661,7 @@
                     "title": "Finds Pets by tags"
                   },
                   "attributes": {
-                    "href": "/api/pet/findByTags{?tags,unknown}",
+                    "href": "/api/pet/findByTags{?tags}",
                     "relation": "findPetsByTags",
                     "hrefVariables": {
                       "element": "hrefVariables",
@@ -912,31 +684,6 @@
                               "meta": {},
                               "attributes": {},
                               "content": "tags"
-                            },
-                            "value": {
-                              "element": "string",
-                              "meta": {},
-                              "attributes": {},
-                              "content": ""
-                            }
-                          }
-                        },
-                        {
-                          "element": "member",
-                          "meta": {
-                            "description": "For tests. Unknown type of query parameter."
-                          },
-                          "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
-                          },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "meta": {},
-                              "attributes": {},
-                              "content": "unknown"
                             },
                             "value": {
                               "element": "string",
@@ -3052,7 +2799,7 @@
             "attributes": {},
             "content": [
               [
-                26604,
+                26716,
                 796
               ]
             ]
@@ -3088,7 +2835,7 @@
             "attributes": {},
             "content": [
               [
-                2202,
+                2520,
                 92
               ]
             ]
@@ -3124,7 +2871,7 @@
             "attributes": {},
             "content": [
               [
-                2972,
+                3290,
                 92
               ]
             ]

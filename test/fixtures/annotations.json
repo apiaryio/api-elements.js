@@ -4,93 +4,12 @@
   "attributes": {},
   "content": [
     {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "Missing required property: title"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "Missing required property: version"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                85,
-                12
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Expected type array but found type object"
-    },
-    {
       "element": "category",
       "meta": {
         "classes": [
           "api"
-        ]
+        ],
+        "title": "Title"
       },
       "attributes": {
         "meta": {
@@ -184,6 +103,12 @@
                       },
                       "content": [
                         {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test"
+                        },
+                        {
                           "element": "asset",
                           "meta": {
                             "classes": [
@@ -230,7 +155,7 @@
             "attributes": {},
             "content": [
               [
-                37,
+                75,
                 24
               ]
             ]
@@ -266,7 +191,7 @@
             "attributes": {},
             "content": [
               [
-                61,
+                99,
                 23
               ]
             ]
@@ -302,7 +227,7 @@
             "attributes": {},
             "content": [
               [
-                85,
+                123,
                 12
               ]
             ]
@@ -338,8 +263,8 @@
             "attributes": {},
             "content": [
               [
-                98,
-                16
+                136,
+                47
               ]
             ]
           }
@@ -374,8 +299,8 @@
             "attributes": {},
             "content": [
               [
-                154,
-                37
+                222,
+                54
               ]
             ]
           }
@@ -410,44 +335,8 @@
             "attributes": {},
             "content": [
               [
-                193,
-                39
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Path-level form data parameters are not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                243,
-                16
+                287,
+                59
               ]
             ]
           }
@@ -482,8 +371,8 @@
             "attributes": {},
             "content": [
               [
-                373,
-                11
+                481,
+                37
               ]
             ]
           }

@@ -9,6 +9,7 @@ paths:
     get:
       responses:
         '200':
+          description: Test description
           examples:
             application/json: |-
               {

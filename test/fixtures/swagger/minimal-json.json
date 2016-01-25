@@ -1,6 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Minimal Swagger Example"
+    "title": "Minimal Swagger Example",
+    "version": "1.0"
   }
 }

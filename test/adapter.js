@@ -69,7 +69,7 @@ describe('Swagger 2.0 adapter', () => {
   });
 
   context('can parse Swagger object', () => {
-    const source = {swagger: '2.0', info: {title: 'Test'}};
+    const source = {swagger: '2.0', info: {title: 'Test', version: '1.0'}};
     let result;
 
     before((done) => {

@@ -4,57 +4,12 @@
   "attributes": {},
   "content": [
     {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "Missing required property: title"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "Missing required property: version"
-    },
-    {
       "element": "category",
       "meta": {
         "classes": [
           "api"
-        ]
+        ],
+        "title": "Default Response"
       },
       "attributes": {},
       "content": [
@@ -89,7 +44,14 @@
                       "attributes": {
                         "statusCode": "200"
                       },
-                      "content": []
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "200 response"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -126,7 +88,7 @@
             "attributes": {},
             "content": [
               [
-                83,
+                165,
                 92
               ]
             ]

@@ -4,78 +4,6 @@
   "attributes": {},
   "content": [
     {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                103,
-                47
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: responses"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                15,
-                42
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: version"
-    },
-    {
       "element": "category",
       "meta": {
         "classes": [
@@ -113,8 +41,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "200"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Success"
+                        }
+                      ]
                     }
                   ]
                 }

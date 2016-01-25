@@ -39,10 +39,10 @@ Code | Description
 ---: | -----------
    2 | Source maps are unavailable due either to the input format or an issue parsing the input.
    3 | Data is being lost in the conversion.
-   4 | Swagger validation error.
 
 Errors:
 
 Code | Description
 ---: | -----------
    1 | Error parsing input (e.g. malformed YAML).
+   4 | Swagger validation error.

@@ -4,57 +4,12 @@
   "attributes": {},
   "content": [
     {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "Missing required property: title"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4
-      },
-      "content": "Missing required property: version"
-    },
-    {
       "element": "category",
       "meta": {
         "classes": [
           "api"
-        ]
+        ],
+        "title": "Path Level Parameters"
       },
       "attributes": {},
       "content": [
@@ -97,7 +52,11 @@
                   "meta": {
                     "description": "Search query parameter"
                   },
-                  "attributes": {},
+                  "attributes": {
+                    "typeAttributes": [
+                      "required"
+                    ]
+                  },
                   "content": {
                     "key": {
                       "element": "string",
@@ -133,7 +92,11 @@
                       "meta": {
                         "description": "Query argument"
                       },
-                      "attributes": {},
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
                       "content": {
                         "key": {
                           "element": "string",
@@ -169,8 +132,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test description"
+                        }
+                      ]
                     }
                   ]
                 }
