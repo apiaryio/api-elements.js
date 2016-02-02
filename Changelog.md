@@ -1,4 +1,4 @@
-# Master
+# 0.7.0 - 2016-02-02
 
 - Swagger documents that do not validate against the JSON Schema for Swagger
   will no longer be translated into Refract and instead expose errors for the
