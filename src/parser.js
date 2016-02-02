@@ -26,7 +26,7 @@ const ANNOTATIONS = {
     fragment: 'refract-not-supported',
   },
   VALIDATION_ERROR: {
-    type: 'warning',
+    type: 'error',
     code: 4,
     fragment: 'swagger-validation',
   },
@@ -123,27 +123,29 @@ export default class Parser {
             }
             queue.shift();
           }
-        } else {
-          // Maybe there is some information in the error itself? Let's check
-          // whether it is a messed up reference!
-          let location = null;
-          const matches = err.message.match(/\$ref pointer "(.*?)"/);
-
-          if (matches) {
-            location = [this.source.indexOf(matches[1]), matches[1].length];
-          }
-
-          const annotation = this.createAnnotation(ANNOTATIONS.VALIDATION_ERROR,
-            null, err.message);
-
-          if (location !== null) {
-            annotation.attributes.set('sourceMap', [
-              new SourceMap([location]),
-            ]);
-          }
 
           return done(new Error(err.message), this.result);
         }
+
+        // Maybe there is some information in the error itself? Let's check
+        // whether it is a messed up reference!
+        let location = null;
+        const matches = err.message.match(/\$ref pointer "(.*?)"/);
+
+        if (matches) {
+          location = [this.source.indexOf(matches[1]), matches[1].length];
+        }
+
+        const annotation = this.createAnnotation(ANNOTATIONS.VALIDATION_ERROR,
+            null, err.message);
+
+        if (location !== null) {
+          annotation.attributes.set('sourceMap', [
+            new SourceMap([location]),
+          ]);
+        }
+
+        return done(new Error(err.message), this.result);
       }
 
       // Root API Element

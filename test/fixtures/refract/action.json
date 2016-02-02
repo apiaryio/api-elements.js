@@ -4,258 +4,6 @@
   "attributes": {},
   "content": [
     {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                350,
-                35
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: responses"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                313,
-                37
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: responses"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                280,
-                33
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: responses"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                245,
-                35
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: responses"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                152,
-                93
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: responses"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                111,
-                41
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: responses"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                76,
-                35
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Missing required property: responses"
-    },
-    {
       "element": "category",
       "meta": {
         "classes": [
@@ -295,8 +43,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test response"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -325,8 +82,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test response"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -363,8 +129,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test response"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -393,8 +168,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test response"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -423,8 +207,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test response"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -453,8 +246,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test response"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -483,8 +285,17 @@
                     {
                       "element": "httpResponse",
                       "meta": {},
-                      "attributes": {},
-                      "content": []
+                      "attributes": {
+                        "statusCode": "204"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Test response"
+                        }
+                      ]
                     }
                   ]
                 }

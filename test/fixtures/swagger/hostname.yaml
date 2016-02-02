@@ -1,4 +1,7 @@
 swagger: '2.0'
+info:
+  title: hostname
+  version: '1.0'
 host: api.example.com
 basePath: /v1
 schemes:
@@ -7,3 +10,6 @@ paths:
   '/test':
     get:
       summary: Get a test
+      responses:
+        204:
+          description: Test description

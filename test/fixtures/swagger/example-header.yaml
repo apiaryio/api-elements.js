@@ -1,16 +1,22 @@
 swagger: '2.0'
+info:
+  title: Example Header
+  version: '1.0'
 paths:
   '/test':
     get:
       responses:
         200:
+          description: Test Description
           headers:
             Accepts:
               description: Header description
               type: string
             X-Test1:
+              type: number
               default: 100
             X-Test2:
+              type: string
               enum:
                 - abc
                 - 123

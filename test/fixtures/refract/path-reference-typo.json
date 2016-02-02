@@ -7,7 +7,7 @@
       "element": "annotation",
       "meta": {
         "classes": [
-          "warning"
+          "error"
         ],
         "links": [
           {
@@ -30,7 +30,7 @@
             "attributes": {},
             "content": [
               [
-                55,
+                107,
                 20
               ]
             ]

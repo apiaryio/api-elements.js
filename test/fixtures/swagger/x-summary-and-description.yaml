@@ -1,8 +1,12 @@
 swagger: '2.0'
+info:
+  title: 'X-Summary and X-Description'
+  version: '1.0'
 paths:
   '/test':
     x-summary: Resource Title
     x-description: Resource Description
     get:
       responses:
-        200: {}
+        200:
+          description: Test response

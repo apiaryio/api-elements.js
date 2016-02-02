@@ -31,7 +31,12 @@
             "get": {
                 "description": "Empty responses",
                 "summary": "",
-                "operationId": "emptyResponses"
+                "operationId": "emptyResponses",
+                "responses": {
+                    "204": {
+                        "description": "Test description"
+                    }
+                }
             }
         },
         "/parameters-nodup": {
@@ -47,7 +52,12 @@
                         "required": true,
                         "type": "string"
                     }
-                ]
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Test description"
+                    }
+                }
             },
             "parameters": [
                 {
@@ -207,13 +217,6 @@
                         "name": "tags",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "description": "For tests. Unknown type of query parameter.",
-                        "name": "unknown",
-                        "required": true,
-                        "type": "unknown"
                     }
                 ]
             }
@@ -394,6 +397,9 @@
                 "operationId": "uploadFile",
                 "tags": [
                     "pet"
+                ],
+                "consumes": [
+                    "multipart/form-data"
                 ],
                 "produces": [
                     "application/json",

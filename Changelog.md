@@ -1,3 +1,9 @@
+# Master
+
+- Swagger documents that do not validate against the JSON Schema for Swagger
+  will no longer be translated into Refract and instead expose errors for the
+  validation failures.
+
 # 0.6.2 - 2016-01-13
 
 - Bad JSON references (using `$ref`) are now returned as parse result
