@@ -1,3 +1,7 @@
+# 0.7.1 - 2016-02-15
+
+- Swagger's `operationId` is now correctly interpreted as transition element's `id` instead of `relation`.
+
 # 0.7.0 - 2016-02-02
 
 - Swagger documents that do not validate against the JSON Schema for Swagger
