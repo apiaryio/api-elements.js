@@ -101,11 +101,10 @@
             {
               "element": "transition",
               "meta": {
+                "id": "test",
                 "title": "Test get"
               },
-              "attributes": {
-                "relation": "test"
-              },
+              "attributes": {},
               "content": [
                 {
                   "element": "copy",
