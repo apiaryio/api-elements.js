@@ -424,7 +424,7 @@ export default class Parser {
 
       if (methodValue.operationId) {
         // TODO: Add a source map?
-        transition.attributes.set('relation', methodValue.operationId);
+        transition.meta.set('id', methodValue.operationId);
       }
 
       // For each uriParameter, create an hrefVariable
