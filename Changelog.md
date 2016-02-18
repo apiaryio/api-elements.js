@@ -1,3 +1,7 @@
+# 0.7.2 - 2016-02-18
+
+- Add an example for testing the module in the browser via TonicDev.
+
 # 0.7.1 - 2016-02-15
 
 - Swagger's `operationId` is now correctly interpreted as transition element's `id` instead of `relation`.

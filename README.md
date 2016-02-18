@@ -4,6 +4,8 @@
 
 This adapter provides support for parsing [Swagger 2.0](http://swagger.io/) in [Fury.js](https://github.com/apiaryio/fury.js). It does not yet provide a serializer.
 
+Try the [Fury adapter in your browser](https://tonicdev.com/npm/fury-adapter-swagger) to convert Swagger 2.0 documents into Refract elements.
+
 ## Install
 
 ```sh
