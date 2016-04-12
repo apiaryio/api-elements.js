@@ -1,3 +1,7 @@
+# Master
+
+- All exceptions thrown when converting swagger to refract will now be caught and returned as a proper error in parse result
+
 # 0.7.2 - 2016-02-18
 
 - Add an example for testing the module in the browser via TonicDev.
