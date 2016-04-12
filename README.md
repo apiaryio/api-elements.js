@@ -48,3 +48,4 @@ Code | Description
 ---: | -----------
    1 | Error parsing input (e.g. malformed YAML).
    4 | Swagger validation error.
+   5 | Swagger to Refract converter error (JS exception).

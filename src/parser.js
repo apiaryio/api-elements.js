@@ -30,6 +30,10 @@ const ANNOTATIONS = {
     code: 4,
     fragment: 'swagger-validation',
   },
+  UNCAUGHT_ERROR: {
+    type: 'error',
+    code: 5,
+  },
 };
 
 // Test whether a key is a special Swagger extension.
@@ -148,29 +152,36 @@ export default class Parser {
         return done(new Error(err.message), this.result);
       }
 
-      // Root API Element
-      this.api = new Category();
-      this.api.classes.push('api');
-      this.result.push(this.api);
+      try {
+        // Root API Element
+        this.api = new Category();
+        this.api.classes.push('api');
+        this.result.push(this.api);
 
-      // By default there are no groups, just the root API element
-      this.group = this.api;
+        // By default there are no groups, just the root API element
+        this.group = this.api;
 
-      this.handleSwaggerInfo();
-      this.handleSwaggerHost();
-      this.handleSwaggerAuth();
+        this.handleSwaggerInfo();
+        this.handleSwaggerHost();
+        this.handleSwaggerAuth();
 
-      if (swagger.externalDocs) {
-        this.createAnnotation(ANNOTATIONS.DATA_LOST, ['externalDocs'],
-          'External documentation is not yet supported');
+        if (swagger.externalDocs) {
+          this.createAnnotation(ANNOTATIONS.DATA_LOST, ['externalDocs'],
+            'External documentation is not yet supported');
+        }
+
+        // Swagger has a paths object to loop through that describes resources
+        _.each(_.omit(swagger.paths, isExtension), (pathValue, href) => {
+          this.handleSwaggerPath(pathValue, href);
+        });
+
+        return done(null, this.result);
+      } catch (exception) {
+        this.createAnnotation(ANNOTATIONS.UNCAUGHT_ERROR, null,
+          ('There was a problem converting the Swagger document, the document may be using unsupported features in the Swagger Beta'));
+
+        return done(exception, this.result);
       }
-
-      // Swagger has a paths object to loop through that describes resources
-      _.each(_.omit(swagger.paths, isExtension), (pathValue, href) => {
-        this.handleSwaggerPath(pathValue, href);
-      });
-
-      done(null, this.result);
     });
   }
 
