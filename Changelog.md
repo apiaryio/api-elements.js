@@ -1,4 +1,4 @@
-# Master
+# 0.7.3 - 2016-04-12
 
 - All exceptions thrown when converting swagger to refract will now be caught and returned as a proper error in parse result
 
