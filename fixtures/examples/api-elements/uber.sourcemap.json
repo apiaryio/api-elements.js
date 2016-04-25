@@ -1,0 +1,1863 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": {
+          "element": "string",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    104,
+                    15
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Uber API"
+        }
+      },
+      "attributes": {
+        "meta": {
+          "element": "object",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": [
+                  "user"
+                ]
+              },
+              "attributes": {
+                "sourceMap": [
+                  [
+                    [
+                      222,
+                      18
+                    ]
+                  ]
+                ]
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "https://api.uber.com"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "content": [
+        {
+          "element": "copy",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    122,
+                    52
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Move your app forward with the Uber API"
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Products",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/products",
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        392,
+                        985
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                418,
+                                22
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "Product Types"
+                    }
+                  },
+                  "attributes": {
+                    "href": "/v1/products{?latitude,longitude}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Latitude component of location."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  712,
+                                  171
+                                ]
+                              ]
+                            ],
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "latitude"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        712,
+                                        171
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Longitude component of location."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  885,
+                                  171
+                                ]
+                              ]
+                            ],
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "longitude"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        885,
+                                        171
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            407,
+                            970
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                447,
+                                236
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                1106,
+                                162
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    407,
+                                    970
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    1106,
+                                    162
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        1121,
+                                        33
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "An array of products"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json",
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        1165,
+                                        103
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "{\"type\":\"array\",\"items\":{\"properties\":{\"product_id\":{\"type\":\"string\",\"description\":\"Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.\"},\"description\":{\"type\":\"string\",\"description\":\"Description of product.\"},\"display_name\":{\"type\":\"string\",\"description\":\"Display name of product.\"},\"capacity\":{\"type\":\"string\",\"description\":\"Capacity of product. For example, 4 people.\"},\"image\":{\"type\":\"string\",\"description\":\"Image URL representing the product.\"}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Estimates",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/estimates/price",
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        1377,
+                        1732
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                1410,
+                                24
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "Price Estimates"
+                    }
+                  },
+                  "attributes": {
+                    "href": "/v1/estimates/price{?start_latitude,start_longitude,end_latitude,end_longitude}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Latitude component of start location."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  2031,
+                                  183
+                                ]
+                              ]
+                            ],
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "start_latitude"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2031,
+                                        183
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Longitude component of start location."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  2216,
+                                  185
+                                ]
+                              ]
+                            ],
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "start_longitude"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2216,
+                                        185
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Latitude component of end location."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  2403,
+                                  179
+                                ]
+                              ]
+                            ],
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "end_latitude"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2403,
+                                        179
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Longitude component of end location."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  2584,
+                                  179
+                                ]
+                              ]
+                            ],
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "end_longitude"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2584,
+                                        179
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            1399,
+                            1710
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                1441,
+                                561
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted string with the full price range and the localized currency symbol.<br><br>The response also includes low and high estimates, and the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations requiring currency conversion. When surge is active for a particular product, its surge_multiplier will be greater than 1, but the price estimate already factors in this multiplier."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                2814,
+                                186
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    1399,
+                                    1710
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2814,
+                                    186
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2829,
+                                        51
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "An array of price estimates by product"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json",
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2891,
+                                        109
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "{\"type\":\"array\",\"items\":{\"properties\":{\"product_id\":{\"type\":\"string\",\"description\":\"Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles\"},\"currency_code\":{\"type\":\"string\",\"description\":\"[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code.\"},\"display_name\":{\"type\":\"string\",\"description\":\"Display name of product.\"},\"estimate\":{\"type\":\"string\",\"description\":\"Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or \\\"Metered\\\" for TAXI.\"},\"low_estimate\":{\"type\":\"number\",\"description\":\"Lower bound of the estimated price.\"},\"high_estimate\":{\"type\":\"number\",\"description\":\"Upper bound of the estimated price.\"},\"surge_multiplier\":{\"type\":\"number\",\"description\":\"Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier.\"}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/estimates/time",
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        3109,
+                        1399
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                3141,
+                                23
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "Time Estimates"
+                    }
+                  },
+                  "attributes": {
+                    "href": "/v1/estimates/time{?start_latitude,start_longitude,customer_uuid,product_id}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Latitude component of start location."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  3454,
+                                  183
+                                ]
+                              ]
+                            ],
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "start_latitude"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        3454,
+                                        183
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Longitude component of start location."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  3639,
+                                  185
+                                ]
+                              ]
+                            ],
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "start_longitude"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        3639,
+                                        185
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Unique customer identifier to be used for experience customization."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  3826,
+                                  185
+                                ]
+                              ]
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "customer_uuid"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        3826,
+                                        185
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": ""
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Unique identifier representing a specific product for a given latitude & longitude."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  4013,
+                                  173
+                                ]
+                              ]
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "product_id"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        4013,
+                                        173
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": ""
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            3130,
+                            1378
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                3171,
+                                254
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                4237,
+                                162
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3130,
+                                    1378
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    4237,
+                                    162
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        4252,
+                                        33
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "An array of products"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json",
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        4296,
+                                        103
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "{\"type\":\"array\",\"items\":{\"properties\":{\"product_id\":{\"type\":\"string\",\"description\":\"Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.\"},\"description\":{\"type\":\"string\",\"description\":\"Description of product.\"},\"display_name\":{\"type\":\"string\",\"description\":\"Display name of product.\"},\"capacity\":{\"type\":\"string\",\"description\":\"Capacity of product. For example, 4 people.\"},\"image\":{\"type\":\"string\",\"description\":\"Image URL representing the product.\"}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "User",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/me",
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        4508,
+                        457
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                4528,
+                                21
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "User Profile"
+                    }
+                  },
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            4517,
+                            448
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                4556,
+                                120
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "The User Profile endpoint returns information about the Uber user that has authorized with the application."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                4729,
+                                127
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    4517,
+                                    448
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    4729,
+                                    127
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        4744,
+                                        43
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Profile information for a user"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json",
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        4798,
+                                        58
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "{\"properties\":{\"first_name\":{\"type\":\"string\",\"description\":\"First name of the Uber user.\"},\"last_name\":{\"type\":\"string\",\"description\":\"Last name of the Uber user.\"},\"email\":{\"type\":\"string\",\"description\":\"Email address of the Uber user\"},\"picture\":{\"type\":\"string\",\"description\":\"Image URL of the Uber user.\"},\"promo_code\":{\"type\":\"string\",\"description\":\"Promo code of the Uber user.\"}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/history",
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        4965,
+                        1181
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                4990,
+                                22
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "User Activity"
+                    }
+                  },
+                  "attributes": {
+                    "href": "/v1/history{?offset,limit}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Offset the list of returned results by this amount. Default is zero."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  5504,
+                                  181
+                                ]
+                              ]
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "offset"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        5504,
+                                        181
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Number of items to retrieve. Default is 5, maximum is 100."
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  5687,
+                                  168
+                                ]
+                              ]
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "limit"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        5687,
+                                        168
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": null
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            4979,
+                            1167
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                5019,
+                                456
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "The User Activity endpoint returns data about a user's lifetime activity with Uber. The response will include pickup locations and times, dropoff locations and times, the distance of past requests, and information about which products were requested.<br><br>The history array in the response will have a maximum length based on the limit parameter. The response value count may exceed limit, therefore subsequent API requests may be necessary."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                5901,
+                                138
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    4979,
+                                    1167
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    5901,
+                                    138
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        5916,
+                                        51
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "History information for the given user"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json",
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        5978,
+                                        61
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "{\"properties\":{\"offset\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"Position in pagination.\"},\"limit\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"Number of items to retrieve (100 max).\"},\"count\":{\"type\":\"integer\",\"format\":\"int32\",\"description\":\"Total number of items available.\"},\"history\":{\"type\":\"array\",\"properties\":{\"uuid\":{\"type\":\"string\",\"description\":\"Unique identifier for the activity\"}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                1268,
+                109
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                3000,
+                109
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                4399,
+                109
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                4856,
+                109
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                6039,
+                107
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Default response is not yet supported"
+    }
+  ]
+}

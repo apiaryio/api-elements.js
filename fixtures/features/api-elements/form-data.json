@@ -1,0 +1,188 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "Form Test"
+      },
+      "attributes": {},
+      "content": [
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
+            "href": "/test"
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "GET"
+                      },
+                      "content": [
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "object",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "id"
+                                  },
+                                  "value": {
+                                    "element": "number",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": null
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "bar"
+                                  },
+                                  "value": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": ""
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {
+                        "statusCode": "200"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "Success"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                101,
+                57
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Path-level form data parameters are not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                160,
+                56
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Path-level form data parameters are not yet supported"
+    }
+  ]
+}

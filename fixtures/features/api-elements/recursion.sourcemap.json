@@ -1,0 +1,293 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": {
+          "element": "string",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    66,
+                    17
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Sample API"
+        }
+      },
+      "attributes": {
+        "meta": {
+          "element": "object",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": [
+                  "user"
+                ]
+              },
+              "attributes": {
+                "sourceMap": [
+                  [
+                    [
+                      84,
+                      19
+                    ]
+                  ]
+                ]
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "https://example.com"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "content": [
+        {
+          "element": "copy",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    23,
+                    23
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Sample API"
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Recursion",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Lorem Ipsum"
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/recursive"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                262,
+                                23
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "Recursion test"
+                    }
+                  },
+                  "attributes": {
+                    "href": "/v1/recursive{?tag}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Test 1 2"
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              [
+                                [
+                                  404,
+                                  119
+                                ]
+                              ]
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "tag"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        404,
+                                        119
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": ""
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                292,
+                                84
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "This is a test to show that there are issues with recursion"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    219,
+                                    424
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        559,
+                                        20
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Success"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "error"
+        ]
+      },
+      "attributes": {
+        "code": 5
+      },
+      "content": "There was a problem converting the Swagger document, the document may be using unsupported features in the Swagger Beta"
+    }
+  ]
+}

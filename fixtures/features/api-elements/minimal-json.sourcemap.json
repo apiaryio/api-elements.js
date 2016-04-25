@@ -1,0 +1,37 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": {
+          "element": "string",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    38,
+                    34
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Minimal Swagger Example"
+        }
+      },
+      "attributes": {},
+      "content": []
+    }
+  ]
+}

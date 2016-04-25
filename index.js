@@ -6,6 +6,8 @@ function getFixtures(subpath) {
   var fixtures = [];
   var filenames = glob.sync(path.join(__dirname, 'fixtures', subpath, 'swagger', '*.@(yaml|json)'));
 
+  var apiElementsDir = path.join(__dirname, 'fixtures', subpath, 'api-elements');
+
   filenames.forEach(function (filename) {
     var name = path.basename(filename, path.extname(filename));
     var feature = {
@@ -20,12 +22,27 @@ function getFixtures(subpath) {
       }
     });
 
-    Object.defineProperty(feature, 'refract', {
+    Object.defineProperty(feature, 'apiElements', {
       get: function () {
-        var refract = path.join(__dirname, 'fixtures', subpath, 'refract', name + '.json');
-        return require(refract);
+        var apiElements = path.join(apiElementsDir, name + '.json');
+        return require(apiElements);
+      },
+      set: function (value) {
+        fs.writeFileSync(path.join(apiElementsDir, name + '.json'), JSON.stringify(value, null, 2), 'utf8');
+        return value;
       }
     });
+
+    Object.defineProperty(feature, 'apiElementsSourceMap', {
+      get: function () {
+        var apiElementsSourceMap = path.join(apiElementsDir, name + '.sourcemap.json');
+        return require(apiElementsSourceMap);
+      },
+      set: function (value) {
+        fs.writeFileSync(path.join(apiElementsDir, name + '.sourcemap.json'), JSON.stringify(value, null, 2), 'utf8');
+        return value;
+      }
+    })
 
     fixtures.push(feature);
   });

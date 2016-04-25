@@ -1,0 +1,3019 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "Instagram API"
+      },
+      "attributes": {
+        "meta": {
+          "element": "object",
+          "meta": {},
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": [
+                  "user"
+                ]
+              },
+              "attributes": {},
+              "content": {
+                "key": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "https://api.instagram.com"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "content": [
+        {
+          "element": "copy",
+          "meta": {},
+          "attributes": {},
+          "content": "The first version of the Instagram API is an exciting step forward towards\nmaking it easier for users to have open access to their data. We created it\nso that you can surface the amazing content Instagram users share every\nsecond, in fun and innovative ways.\n\nBuild something great!\n\nOnce you've\n[registered your client](http://instagram.com/developer/register/) it's easy\nto start requesting data from Instagram.\n\nAll endpoints are only accessible via https and are located at\n`api.instagram.com`. For instance: you can grab the most popular photos at\nthe moment by accessing the following URL with your client ID\n(replace CLIENT-ID with your own):\n```\n  https://api.instagram.com/v1/media/popular?client_id=CLIENT-ID\n```\nYou're best off using an access_token for the authenticated user for each\nendpoint, though many endpoints don't require it.\nIn some cases an access_token will give you more access to information, and\nin all cases, it means that you are operating under a per-access_token limit\nvs. the same limit for your single client_id.\n\n\n## Limits\nBe nice. If you're sending too many requests too quickly, we'll send back a\n`503` error code (server unavailable).\nYou are limited to 5000 requests per hour per `access_token` or `client_id`\noverall. Practically, this means you should (when possible) authenticate\nusers so that limits are well outside the reach of a given user.\n\n## Deleting Objects\nWe do our best to have all our URLs be\n[RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer).\nEvery endpoint (URL) may support one of four different http verbs. GET\nrequests fetch information about an object, POST requests create objects,\nPUT requests update objects, and finally DELETE requests will delete\nobjects.\n\nSince many old browsers don't support PUT or DELETE, we've made it easy to\nfake PUTs and DELETEs. All you have to do is do a POST with _method=PUT or\n_method=DELETE as a parameter and we will treat it as if you used PUT or\nDELETE respectively.\n\n## Structure\n\n### The Envelope\nEvery response is contained by an envelope. That is, each response has a\npredictable set of keys with which you can expect to interact:\n```json\n{\n    \"meta\": {\n        \"code\": 200\n    },\n    \"data\": {\n        ...\n    },\n    \"pagination\": {\n        \"next_url\": \"...\",\n        \"next_max_id\": \"13872296\"\n    }\n}\n```\n\n#### META\nThe meta key is used to communicate extra information about the response to\nthe developer. If all goes well, you'll only ever see a code key with value\n200. However, sometimes things go wrong, and in that case you might see a\nresponse like:\n```json\n{\n    \"meta\": {\n        \"error_type\": \"OAuthException\",\n        \"code\": 400,\n        \"error_message\": \"...\"\n    }\n}\n```\n\n#### DATA\nThe data key is the meat of the response. It may be a list or dictionary,\nbut either way this is where you'll find the data you requested.\n#### PAGINATION\nSometimes you just can't get enough. For this reason, we've provided a\nconvenient way to access more data in any request for sequential data.\nSimply call the url in the next_url parameter and we'll respond with the\nnext set of data.\n```json\n{\n    ...\n    \"pagination\": {\n        \"next_url\": \"https://api.instagram.com/v1/tags/puppy/media/recent?access_token=fb2e77d.47a0479900504cb3ab4a1f626d174d2d&max_id=13872296\",\n        \"next_max_id\": \"13872296\"\n    }\n}\n```\nOn views where pagination is present, we also support the \"count\" parameter.\nSimply set this to the number of items you'd like to receive. Note that the\ndefault values should be fine for most applications - but if you decide to\nincrease this number there is a maximum value defined on each endpoint.\n\n### JSONP\nIf you're writing an AJAX application, and you'd like to wrap our response\nwith a callback, all you have to do is specify a callback parameter with\nany API call:\n```\nhttps://api.instagram.com/v1/tags/coffee/media/recent?access_token=fb2e77d.47a0479900504cb3ab4a1f626d174d2d&callback=callbackFunction\n```\nWould respond with:\n```js\ncallbackFunction({\n    ...\n});\n```\n"
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Users",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The user identifier number"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "user-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/users/{user%2did}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get basic information about a user."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "The user object"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\"},\"username\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"profile_picture\":{\"type\":\"string\"},\"bio\":{\"type\":\"string\"},\"website\":{\"type\":\"string\"},\"counts\":{\"type\":\"object\",\"properties\":{\"media\":{\"type\":\"integer\"},\"follows\":{\"type\":\"integer\"},\"follwed_by\":{\"type\":\"integer\"}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/users/self/feed"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/users/self/feed{?count,max_id,min_id}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Count of media to return."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "count"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media earlier than this max_id.s"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "max_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media later than this min_id."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "min_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "See the authenticated user's feed."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"created_time\":{\"description\":\"Epoc time (ms)\",\"type\":\"integer\"},\"type\":{\"type\":\"string\"},\"filter\":{\"type\":\"string\"},\"tags\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}},\"id\":{\"type\":\"integer\"},\"user\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}},\"users_in_photo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}},\"location\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}},\"comments:\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}},\"likes\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}},\"images\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"thumbnail\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}},\"videos\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The user identifier number"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "user-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/users/{user%2did}/media/recent"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/users/{user%2did}/media/recent{?count,max_timestamp,min_timestamp,min_id,max_id}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Count of media to return."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "count"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media before this UNIX timestamp."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "max_timestamp"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media after this UNIX timestamp."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "min_timestamp"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media later than this min_id."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "min_id"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": ""
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media earlier than this max_id."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "max_id"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": ""
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "Get the most recent media published by a user. To get the most recent\nmedia published by the owner of the access token, you can use `self`\ninstead of the `user-id`.\n"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"created_time\":{\"description\":\"Epoc time (ms)\",\"type\":\"integer\"},\"type\":{\"type\":\"string\"},\"filter\":{\"type\":\"string\"},\"tags\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}},\"id\":{\"type\":\"integer\"},\"user\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}},\"users_in_photo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}},\"location\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}},\"comments:\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}},\"likes\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}},\"images\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"thumbnail\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}},\"videos\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/users/self/media/liked"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/users/self/media/liked{?count,max_like_id}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Count of media to return."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "count"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media liked before this id."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "max_like_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "See the list of media liked by the authenticated user.\nPrivate media is returned as long as the authenticated user\nhas permissionto view that media. Liked media lists are only\navailable for the currently authenticated user.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"created_time\":{\"description\":\"Epoc time (ms)\",\"type\":\"integer\"},\"type\":{\"type\":\"string\"},\"filter\":{\"type\":\"string\"},\"tags\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}},\"id\":{\"type\":\"integer\"},\"user\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}},\"users_in_photo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}},\"location\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}},\"comments:\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}},\"likes\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}},\"images\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"thumbnail\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}},\"videos\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/users/search"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/users/search{?q,count}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "A query string"
+                          },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "q"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": ""
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Number of users to return."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "count"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": ""
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Search for a user by name."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Relationships",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Relationships are expressed using the following terms:\n\n**outgoing_status**: Your relationship to the user. Can be \"follows\",\n  \"requested\", \"none\".\n**incoming_status**: A user's relationship to you. Can be \"followed_by\",\n  \"requested_by\", \"blocked_by_you\", \"none\".\n"
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The user identifier number"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "user-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/users/{user%2did}/follows"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get the list of users this user follows."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The user identifier number"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "user-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/users/{user%2did}/followed-by"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get the list of users this user is followed by."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/users/self/requested-by"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "List the users who have requested this user's permission to follow.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"properties\":{\"meta\":{\"properties\":{\"code\":{\"type\":\"integer\"}}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The user identifier number"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "user-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/users/{user%2did}/relationship"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Modify the relationship between the current user and thetarget user.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "POST"
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"string\",\"enum\":[\"follow\",\"unfollow\",\"block\",\"unblock\",\"approve\"]}"
+                            }
+                          ]
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Media",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "At this time, uploading via the API is not possible. We made a conscious\nchoice not to add this for the following reasons:\n\n* Instagram is about your life on the go – we hope to encourage photos\n  from within the app.\n* We want to fight spam & low quality photos. Once we allow uploading\n  from other sources, it's harder to control what comes into the Instagram\n  ecosystem. All this being said, we're working on ways to ensure users\n  have a consistent and high-quality experience on our platform.\n"
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The media ID"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "media-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/media/{media%2did}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get information about a media object.\nThe returned type key will allow you to differentiate between `image`\nand `video` media.\n\nNote: if you authenticate with an OAuth Token, you will receive the\n`user_has_liked` key which quickly tells you whether the current user\nhas liked this media item.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"created_time\":{\"description\":\"Epoc time (ms)\",\"type\":\"integer\"},\"type\":{\"type\":\"string\"},\"filter\":{\"type\":\"string\"},\"tags\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}},\"id\":{\"type\":\"integer\"},\"user\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}},\"users_in_photo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}},\"location\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}},\"comments:\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}},\"likes\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}},\"images\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"thumbnail\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}},\"videos\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The media shortcode"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "shortcode"
+                        },
+                        "value": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": ""
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/media1/{shortcode}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "This endpoint returns the same response as **GET** `/media/media-id`.\n\nA media object's shortcode can be found in its shortlink URL.\nAn example shortlink is `http://instagram.com/p/D/`\nIts corresponding shortcode is D.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"created_time\":{\"description\":\"Epoc time (ms)\",\"type\":\"integer\"},\"type\":{\"type\":\"string\"},\"filter\":{\"type\":\"string\"},\"tags\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}},\"id\":{\"type\":\"integer\"},\"user\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}},\"users_in_photo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}},\"location\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}},\"comments:\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}},\"likes\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}},\"images\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"thumbnail\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}},\"videos\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/media/search"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/media/search{?LAT,MIN_TIMESTAMP,LNG,MAX_TIMESTAMP,DISTANCE}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Latitude of the center search coordinate. If used, lng is required.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "LAT"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "A unix timestamp. All media returned will be taken later than\nthis timestamp.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "MIN_TIMESTAMP"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Longitude of the center search coordinate. If used, lat is required.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "LNG"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "A unix timestamp. All media returned will be taken earlier than this\ntimestamp.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "MAX_TIMESTAMP"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Default is 1km (distance=1000), max distance is 5km."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "DISTANCE"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {
+                                "default": 1000
+                              },
+                              "content": null
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Search for media in a given area. The default time span is set to 5\ndays. The time span must not exceed 7 days. Defaults time stamps cover\nthe last 5 days. Can return mix of image and video types.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"description\":\"List of all media with added `distance` property\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"allOf\":[{\"type\":\"object\",\"properties\":{\"created_time\":{\"description\":\"Epoc time (ms)\",\"type\":\"integer\"},\"type\":{\"type\":\"string\"},\"filter\":{\"type\":\"string\"},\"tags\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}},\"id\":{\"type\":\"integer\"},\"user\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}},\"users_in_photo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}},\"location\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}},\"comments:\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}},\"likes\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}},\"images\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"thumbnail\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}},\"videos\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}}}},{\"properties\":{\"distance\":{\"type\":\"number\"}}}]}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/media/popular"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get a list of what media is most popular at the moment.\nCan return mix of image and video types.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"created_time\":{\"description\":\"Epoc time (ms)\",\"type\":\"integer\"},\"type\":{\"type\":\"string\"},\"filter\":{\"type\":\"string\"},\"tags\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}},\"id\":{\"type\":\"integer\"},\"user\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}},\"users_in_photo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}},\"location\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}},\"comments:\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}},\"likes\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}},\"images\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"thumbnail\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}},\"videos\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Comments",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Media ID"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "media-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/media/{media%2did}/comments"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get a list of recent comments on a media object.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"properties\":{\"meta\":{\"properties\":{\"code\":{\"type\":\"number\"}}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Create a comment on a media object with the following rules:\n\n* The total length of the comment cannot exceed 300 characters.\n* The comment cannot contain more than 4 hashtags.\n* The comment cannot contain more than 1 URL.\n* The comment cannot consist of all capital letters.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "POST"
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"number\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"meta\":{\"properties\":{\"code\":{\"type\":\"number\"}}},\"data\":{\"type\":\"object\"}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Remove a comment either on the authenticated user's media object or\nauthored by the authenticated user.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "DELETE"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"meta\":{\"properties\":{\"code\":{\"type\":\"number\"}}},\"data\":{\"type\":\"object\"}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Likes",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Media ID"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "media-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/media/{media%2did}/likes"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get a list of users who have liked this media.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"properties\":{\"meta\":{\"properties\":{\"code\":{\"type\":\"number\"}}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"first_name\":{\"type\":\"string\"},\"last_name\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Set a like on this media by the currently authenticated user."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "POST"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"meta\":{\"properties\":{\"code\":{\"type\":\"number\"}}},\"data\":{\"type\":\"object\"}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Remove a like on this media by the currently authenticated user.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "DELETE"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"meta\":{\"properties\":{\"code\":{\"type\":\"number\"}}},\"data\":{\"type\":\"object\"}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Tags",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Tag name"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "tag-name"
+                        },
+                        "value": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": ""
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/tags/{tag%2dname}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get information about a tag object."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Tag name"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "tag-name"
+                        },
+                        "value": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": ""
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/tags/{tag%2dname}/media/recent"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get a list of recently tagged media. Use the `max_tag_id` and\n`min_tag_id` parameters in the pagination response to paginate through\nthese objects.\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/tags/search"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/tags/search{?q}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "A valid tag name without a leading #. (eg. snowy, nofilter)\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "q"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": ""
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"meta\":{\"properties\":{\"code\":{\"type\":\"integer\"}}},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Location",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Location ID"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "location-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/locations/{location%2did}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get information about a location."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Location ID"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "location-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/locations/{location%2did}/media/recent"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/locations/{location%2did}/media/recent{?max_timestamp,min_timestamp,min_id,max_id}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media before this UNIX timestamp."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "max_timestamp"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media after this UNIX timestamp."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "min_timestamp"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media later than this min_id."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "min_id"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": ""
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media earlier than this max_id."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "max_id"
+                            },
+                            "value": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": ""
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get a list of recent media objects from a given location."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"created_time\":{\"description\":\"Epoc time (ms)\",\"type\":\"integer\"},\"type\":{\"type\":\"string\"},\"filter\":{\"type\":\"string\"},\"tags\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"media_count\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}}}},\"id\":{\"type\":\"integer\"},\"user\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}},\"users_in_photo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}},\"location\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}},\"comments:\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created_time\":{\"type\":\"string\"},\"text\":{\"type\":\"string\"},\"from\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}}}},\"likes\":{\"type\":\"object\",\"properties\":{\"count\":{\"type\":\"integer\"},\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"description\":\"A shorter version of User for likes array\",\"properties\":{\"user_name\":{\"type\":\"string\"},\"full_name\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"profile_picture\":{\"type\":\"string\"}}}}}},\"images\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"thumbnail\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}},\"videos\":{\"properties\":{\"low_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}},\"standard_resolution\":{\"type\":\"object\",\"properties\":{\"width\":{\"type\":\"integer\"},\"height\":{\"type\":\"integer\"},\"url\":{\"type\":\"string\"}}}}}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/v1/locations/search"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/locations/search{?distance,facebook_places_id,foursquare_id,lat,lng,foursquare_v2_id}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Default is 1000m (distance=1000), max distance is 5000."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "distance"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Returns a location mapped off of a Facebook places id. If used, a\nFoursquare id and lat, lng are not required.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "facebook_places_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "returns a location mapped off of a foursquare v1 api location id.\nIf used, you are not required to use lat and lng. Note that this\nmethod is deprecated; you should use the new foursquare IDs with V2\nof their API.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "foursquare_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "atitude of the center search coordinate. If used, lng is required.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "lat"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "ongitude of the center search coordinate. If used, lat is required.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "lng"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Returns a location mapped off of a foursquare v2 api location id. If\nused, you are not required to use lat and lng.\n"
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "foursquare_v2_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Search for a location by geographic coordinate."
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"}}}}}}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Geolocation ID"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "geo-id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "meta": {},
+                          "attributes": {},
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                },
+                "href": "/v1/geographies/{geo%2did}/media/recent"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "href": "/v1/geographies/{geo%2did}/media/recent{?count,min_id}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Max number of media to return."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "count"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Return media before this `min_id`."
+                          },
+                          "attributes": {},
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "min_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Get recent media from a geography subscription that you created.\n**Note**: You can only access Geographies that were explicitly created\nby your OAuth client. Check the Geography Subscriptions section of the\n[real-time updates page](https://instagram.com/developer/realtime/).\nWhen you create a subscription to some geography\nthat you define, you will be returned a unique geo-id that can be used\nin this query. To backfill photos from the location covered by this\ngeography, use the [media search endpoint\n](https://instagram.com/developer/endpoints/media/).\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "OK"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                6696,
+                599
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Authentication information is not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                7295,
+                336
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Authentication information is not yet supported"
+    }
+  ]
+}
