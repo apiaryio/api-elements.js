@@ -26,23 +26,28 @@ for (const feature of zoo.features()) {
   // String of the swagger source
   console.log(feature.swagger);
 
-  // The refract is loaded as an object, so we stringify it
+  // The api-elements is loaded as an object, so we stringify it
   // here to print it out.
-  console.log(JSON.stringify(feature.refract, null, 2));
+  console.log(JSON.stringify(feature.apiElements, null, 2));
+
+  // The api-elements with source maps is also loaded similarly
+  console.log(JSON.stringify(feature.apiElementsSourceMap, null, 2));
 }
 
 // Examples are real-world API examples
 for (const example of zoo.examples()) {
   console.log(`Example: ${example.name}`);
   console.log(example.swagger);
-  console.log(JSON.stringify(example.refract, null, 2));
+  console.log(JSON.stringify(example.apiElements, null, 2));
+  console.log(JSON.stringify(example.apiElementsSourceMap, null, 2));
 }
 
 // Or, you can easily get all of the above together in one go
 for (const sample of zoo.samples()) {
   console.log(`Sample: ${sample.name}`);
   console.log(sample.swagger);
-  console.log(JSON.stringify(sample.refract, null, 2));
+  console.log(JSON.stringify(sample.apiElements, null, 2));
+  console.log(JSON.stringify(sample.apiElementsSourceMap, null, 2));
 }
 ```
 

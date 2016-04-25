@@ -1,0 +1,659 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": {
+          "element": "string",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    23,
+                    11
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Tags"
+        }
+      },
+      "attributes": {},
+      "content": [
+        {
+          "element": "category",
+          "meta": {
+            "title": "Group1",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "Group1 description"
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/test",
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        120,
+                        222
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            133,
+                            105
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                192,
+                                46
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    133,
+                                    105
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "204",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    192,
+                                    46
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        207,
+                                        26
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Test response"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            238,
+                            104
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                298,
+                                44
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "POST",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    238,
+                                    104
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "204",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    298,
+                                    44
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        313,
+                                        26
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Test response"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/yet-another-test",
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        574,
+                        126
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            599,
+                            101
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                658,
+                                42
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    599,
+                                    101
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "204",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    658,
+                                    42
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        673,
+                                        26
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Test response"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Group2",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/another-test",
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        342,
+                        232
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            363,
+                            105
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                422,
+                                46
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    363,
+                                    105
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "204",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    422,
+                                    46
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        437,
+                                        26
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Test response"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            468,
+                            106
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                530,
+                                44
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "DELETE",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    468,
+                                    106
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": "204",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    530,
+                                    44
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        545,
+                                        26
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Test response"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

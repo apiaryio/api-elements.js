@@ -1,0 +1,334 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": {
+          "element": "string",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    23,
+                    18
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Form Test"
+        }
+      },
+      "attributes": {},
+      "content": [
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
+            "href": "/test",
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    68,
+                    365
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        216,
+                        217
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            395,
+                            38
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "GET",
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                216,
+                                217
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "object",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {
+                                  "sourceMap": [
+                                    [
+                                      [
+                                        249,
+                                        63
+                                      ]
+                                    ]
+                                  ]
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "id"
+                                  },
+                                  "value": {
+                                    "element": "number",
+                                    "meta": {},
+                                    "attributes": {
+                                      "sourceMap": [
+                                        {
+                                          "element": "sourceMap",
+                                          "meta": {},
+                                          "attributes": {},
+                                          "content": [
+                                            [
+                                              249,
+                                              63
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "content": null
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {
+                                  "sourceMap": [
+                                    [
+                                      [
+                                        314,
+                                        62
+                                      ]
+                                    ]
+                                  ]
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "bar"
+                                  },
+                                  "value": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {
+                                      "sourceMap": [
+                                        {
+                                          "element": "sourceMap",
+                                          "meta": {},
+                                          "attributes": {},
+                                          "content": [
+                                            [
+                                              314,
+                                              62
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "content": ""
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {
+                        "statusCode": "200",
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                395,
+                                38
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    410,
+                                    22
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Success"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                101,
+                57
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Path-level form data parameters are not yet supported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                160,
+                56
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Path-level form data parameters are not yet supported"
+    }
+  ]
+}

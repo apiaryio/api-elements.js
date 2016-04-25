@@ -1,0 +1,25 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "Description Example"
+      },
+      "attributes": {},
+      "content": [
+        {
+          "element": "copy",
+          "meta": {},
+          "attributes": {},
+          "content": "API description"
+        }
+      ]
+    }
+  ]
+}

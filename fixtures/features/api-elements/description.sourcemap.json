@@ -1,0 +1,58 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": {
+          "element": "string",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    23,
+                    26
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Description Example"
+        }
+      },
+      "attributes": {},
+      "content": [
+        {
+          "element": "copy",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    52,
+                    28
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "API description"
+        }
+      ]
+    }
+  ]
+}
