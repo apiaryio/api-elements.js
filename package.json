@@ -22,13 +22,13 @@
     "js-yaml": "^3.4.2",
     "lodash": "^3.10.1",
     "swagger-parser": "^3.3.0",
+    "swagger-zoo": "^2.0.0",
     "yaml-js": "^0.1.3"
   },
   "devDependencies": {
     "chai": "^3.2.0",
     "coveralls": "^2.11.2",
     "fury": "^1.0.3",
-    "glob": "^6.0.1",
     "peasant": "^0.5.2"
   },
   "author": "Apiary.io <support@apiary.io>",
