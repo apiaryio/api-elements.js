@@ -3,26 +3,23 @@
  */
 
 import adapter from '../src/adapter';
-import fs from 'fs';
 import fury from 'fury';
-import glob from 'glob';
-import path from 'path';
+import swaggerZoo from 'swagger-zoo';
 
 import {expect} from 'chai';
 
 fury.adapters = [adapter];
 
-function testFixture(description, filename, subDir = true, generateSourceMap = false) {
+function testFixture(description, fixture, generateSourceMap = false) {
   it(description, (done) => {
-    const source = fs.readFileSync(filename, 'utf8');
-    let base = 'fixtures';
+    const source = fixture.swagger;
+    let expected;
 
-    if (subDir) {
-      base = path.join(base, 'refract');
+    if (generateSourceMap) {
+      expected = fixture.apiElementsSourceMap;
+    } else {
+      expected = fixture.apiElements;
     }
-
-    const expectedName = './' + path.join(base, path.basename(filename, path.extname(filename)) + '.json');
-    let expected = require(expectedName);
 
     fury.parse({source, generateSourceMap}, (err, output) => {
       if (err && !output) {
@@ -32,7 +29,12 @@ function testFixture(description, filename, subDir = true, generateSourceMap = f
       // Invoke with the env var GENERATE set to regenerate the fixtures.
       if (process.env.GENERATE) {
         expected = output.toRefract();
-        fs.writeFileSync(path.join(__dirname, expectedName), JSON.stringify(expected, null, 2), 'utf8');
+
+        if (generateSourceMap) {
+          fixture.apiElementsSourceMap = expected;
+        } else {
+          fixture.apiElements = expected;
+        }
       }
 
       expect(output.toRefract()).to.deep.equal(expected);
@@ -116,15 +118,11 @@ describe('Swagger 2.0 adapter', () => {
     });
   });
 
-  context('source maps & annotations', () => {
-    testFixture('can generate source maps', './test/fixtures/sourcemaps.yaml', false, true);
-    testFixture('can generate annotations', './test/fixtures/annotations.yaml', false);
-  });
-
   describe('can parse fixtures', () => {
-    const filenames = glob.sync('./test/fixtures/swagger/*.@(json|yaml)');
-    filenames.forEach((filename) => {
-      testFixture(`Parses ${path.basename(filename, path.extname(filename))}`, filename);
+    const fixtures = swaggerZoo.samples();
+    fixtures.forEach((fixture) => {
+      testFixture(`Parses ${fixture.name}`, fixture);
+      testFixture(`Parses ${fixture.name} with source maps`, fixture, true);
     });
   });
 });
