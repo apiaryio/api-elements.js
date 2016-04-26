@@ -295,12 +295,90 @@ export default class Parser {
 
   // Convert a Swagger auth object into Refract elements.
   handleSwaggerAuth() {
-    for (const attribute of ['securityDefinitions', 'security']) {
+    const {Member: MemberElement, Category, AuthScheme} = this.minim.elements;
+    let schemes = [];
+
+    if (this.swagger.securityDefinitions) {
+      for (const name in this.swagger.securityDefinitions) {
+
+        this.withPath('securityDefinitions', name, () => {
+          const item = this.swagger.securityDefinitions[name];
+          let element = new AuthScheme();
+
+          switch (item.type) {
+            case 'basic':
+              element.element = 'Basic Authentication Scheme';
+              break;
+
+            case 'apiKey':
+              element.element = 'Token Authentication Scheme';
+              let config;
+
+              if (item.in === 'query') {
+                config = 'queryParameterName';
+              } else if (item.in === 'header') {
+                config = 'httpHeaderName';
+              }
+
+              element.content.push(new MemberElement(config, item.name));
+              break;
+
+            case 'oauth2':
+              element.element = 'Oauth2 Scheme';
+              break;
+          }
+
+          element.id = name;
+          schemes.push(element);
+        });
+      }
+    }
+
+    if (schemes.length) {
+      let category = new Category();
+
+      category.meta.set('classes', ['authSchemes']);
+      category.content = schemes;
+
+      this.api.content.push(category)
+    }
+
+    for (const attribute of ['security']) {
       if (this.swagger[attribute]) {
         this.createAnnotation(annotations.DATA_LOST, [attribute],
           'Authentication information is not yet supported');
       }
     }
+  }
+
+  handleSwaggerTransitionAuth(methodValue) {
+    const {Member: MemberElement, AuthScheme} = this.minim.elements;
+    let schemes = [];
+
+    if (!methodValue.security) {
+      return schemes;
+    }
+
+    methodValue.security.forEach((item, index) => {
+      for (const name in item) {
+
+        this.withPath('security', index, name, () => {
+          let element = new AuthScheme();
+
+          // If value is not an empty array, then they are scopes
+          item[name].forEach((scope, index) => {
+            this.withPath(index, () => {
+              // element.content.push(new MemberElement());
+            });
+          });
+
+          element.element = name;
+          schemes.push(element);
+        });
+      }
+    });
+
+    return schemes;
   }
 
   // Convert a Swagger path into a Refract resource.
@@ -415,6 +493,8 @@ export default class Parser {
 
     resource.content.push(transition);
 
+    const schemes = this.handleSwaggerTransitionAuth(methodValue);
+
     this.withPath(method, () => {
       if (methodValue.externalDocs) {
         this.withPath('externalDocs', (path) => {
@@ -494,13 +574,13 @@ export default class Parser {
           // refactor the code below as this is a little weird.
           relevantResponses.null = {};
         } else {
-          this.createTransaction(transition, method);
+          this.createTransaction(transition, method, schemes);
         }
       }
 
       // Transactions are created for each response in the document
       _.each(relevantResponses, (responseValue, statusCode) => {
-        this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode);
+        this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode, schemes);
       });
 
       this.handleSwaggerVendorExtensions(transition, methodValue);
@@ -510,7 +590,7 @@ export default class Parser {
   }
 
   // Convert a Swagger response & status code into Refract transactions.
-  handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode) {
+  handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode, schemes) {
     let examples;
 
     if (responseValue.examples) {
@@ -529,7 +609,7 @@ export default class Parser {
     examples = _.omit(examples, 'schema');
 
     _.each(examples, (responseBody, contentType) => {
-      const transaction = this.createTransaction(transition, method);
+      const transaction = this.createTransaction(transition, method, schemes);
 
       this.handleSwaggerExampleRequest(transaction, methodValue, transitionParameters);
       this.handleSwaggerExampleResponse(transaction, methodValue, responseValue, statusCode, responseBody, contentType);
@@ -1039,7 +1119,7 @@ export default class Parser {
   }
 
   // Create a new Refract transition element with a blank request and response.
-  createTransaction(transition, method) {
+  createTransaction(transition, method, schemes) {
     const {HttpRequest, HttpResponse, HttpTransaction} = this.minim.elements;
     const transaction = new HttpTransaction();
     transaction.content = [new HttpRequest(), new HttpResponse()];
@@ -1054,6 +1134,10 @@ export default class Parser {
       if (this.generateSourceMap) {
         this.createSourceMap(transaction.request.attributes.get('method'), this.path);
       }
+    }
+
+    if (schemes.length) {
+      transaction.attributes.set('authSchemes', schemes);
     }
 
     return transaction;
