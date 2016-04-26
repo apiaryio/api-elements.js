@@ -8,19 +8,12 @@ securityDefinitions:
     in: query
     name: api_key
 paths:
-  /with-security:
+  /endpoint:
     get:
       security:
         - customApiKey: []
       responses:
         200:
           description: With Security
-          schema:
-            type: string
-  /no-security:
-    get:
-      responses:
-        200:
-          description: No security
           schema:
             type: string

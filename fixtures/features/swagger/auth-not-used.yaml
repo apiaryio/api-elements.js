@@ -6,7 +6,7 @@ securityDefinitions:
   customBasic:
     type: basic
 paths:
-  /no-security:
+  /endpoint:
     get:
       responses:
         200:

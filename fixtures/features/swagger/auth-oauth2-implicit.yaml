@@ -11,19 +11,14 @@ securityDefinitions:
       scope1: Test Scope 1
       scope2: Test Scope 2
 paths:
-  /with-security:
+  /endpoint:
     get:
       security:
-        - customOauth2: []
+        - customOauth2:
+          - scope1
+          - scope2
       responses:
         200:
           description: With Security
-          schema:
-            type: string
-  /no-security:
-    get:
-      responses:
-        200:
-          description: No security
           schema:
             type: string
