@@ -1,0 +1,24 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Swagger Basic Auth
+securityDefinitions:
+  customBasic:
+    type: basic
+paths:
+  /with-security:
+    get:
+      security:
+        - customBasic: []
+      responses:
+        200:
+          description: With Security
+          schema:
+            type: string
+  /no-security:
+    get:
+      responses:
+        200:
+          description: No security
+          schema:
+            type: string
