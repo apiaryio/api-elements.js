@@ -1,0 +1,31 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Swagger Oauth2 Application
+securityDefinitions:
+  customOauth2:
+    type: oauth2
+    flow: application
+    tokenUrl: "http://example.com/oauth/token"
+    scopes:
+      scope1: Test Scope 1
+      scope2: Test Scope 2
+paths:
+  /with-security:
+    get:
+      security:
+        - customOauth2:
+          - scope1
+          - scope2
+      responses:
+        200:
+          description: With Security
+          schema:
+            type: string
+  /no-security:
+    get:
+      responses:
+        200:
+          description: No security
+          schema:
+            type: string
