@@ -584,6 +584,7 @@ export default class Parser {
       if (responseValue.description) {
         const description = new Copy(responseValue.description);
         response.content.push(description);
+
         if (this.generateSourceMap) {
           this.createSourceMap(description, this.path.concat(['description']));
         }
@@ -639,8 +640,10 @@ export default class Parser {
 
         // Responses can have schemas in Swagger
         const schema = responseValue.schema || (responseValue.examples && responseValue.examples.schema);
+
         if (schema) {
           let args;
+
           if (responseValue.examples && responseValue.examples.schema) {
             args = [5, 'examples', 'schema'];
           } else {
@@ -661,6 +664,10 @@ export default class Parser {
 
         if (statusCode !== 'null') {
           response.attributes.set('statusCode', statusCode);
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(response.attributes.get('statusCode'), this.path.slice(0, -1));
+          }
         }
       });
 
