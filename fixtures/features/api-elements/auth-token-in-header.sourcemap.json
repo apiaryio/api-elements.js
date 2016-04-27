@@ -33,6 +33,28 @@
       "attributes": {},
       "content": [
         {
+          "element": "Token Authentication Scheme",
+          "meta": {
+            "id": "customApiKey"
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "member",
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "httpHeaderName"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "api_key"
+                }
+              }
+            }
+          ]
+        },
+        {
           "element": "resource",
           "meta": {},
           "attributes": {
@@ -75,6 +97,14 @@
                   "element": "httpTransaction",
                   "meta": {},
                   "attributes": {
+                    "authSchemes": [
+                      {
+                        "element": "customApiKey",
+                        "meta": {},
+                        "attributes": {},
+                        "content": []
+                      }
+                    ],
                     "sourceMap": [
                       {
                         "element": "sourceMap",
@@ -185,42 +215,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                78,
-                87
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     }
   ]
 }
