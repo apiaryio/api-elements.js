@@ -33,6 +33,46 @@
       "attributes": {},
       "content": [
         {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "authSchemes"
+            ]
+          },
+          "content": [
+            {
+              "element": "Basic Authentication Scheme",
+              "meta": {
+                "id": "customBasic"
+              },
+              "attributes": {},
+              "content": []
+            },
+            {
+              "element": "Token Authentication Scheme",
+              "meta": {
+                "id": "customApiKey"
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "content": "httpHeaderName"
+                    },
+                    "value": {
+                      "element": "string",
+                      "content": "api_key"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
           "element": "resource",
           "meta": {},
           "attributes": {
@@ -56,6 +96,20 @@
               "element": "transition",
               "meta": {},
               "attributes": {
+                "authSchemes": [
+                  {
+                    "element": "customBasic",
+                    "meta": {},
+                    "attributes": {},
+                    "content": []
+                  },
+                  {
+                    "element": "customApiKey",
+                    "meta": {},
+                    "attributes": {},
+                    "content": []
+                  }
+                ],
                 "sourceMap": [
                   {
                     "element": "sourceMap",
