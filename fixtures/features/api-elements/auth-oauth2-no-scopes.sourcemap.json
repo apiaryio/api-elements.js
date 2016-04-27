@@ -245,7 +245,7 @@
             "meta": {},
             "attributes": {
               "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#todo"
+              "href": "http://docs.apiary.io/validations/swagger#no-scopes-definition"
             },
             "content": []
           }
@@ -266,7 +266,7 @@
             "meta": {},
             "attributes": {
               "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#todo"
+              "href": "http://docs.apiary.io/validations/swagger#no-scopes-requirements"
             },
             "content": []
           }

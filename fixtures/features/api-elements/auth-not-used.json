@@ -103,7 +103,7 @@
             "meta": {},
             "attributes": {
               "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#todo"
+              "href": "http://docs.apiary.io/validations/swagger#auth-not-used"
             },
             "content": []
           }
