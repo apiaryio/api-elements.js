@@ -183,6 +183,27 @@
               ]
             }
           ]
+        },
+        {
+          "element": "annotation",
+          "meta": {
+            "classes": [
+              "warning"
+            ],
+            "links": [
+              {
+                "element": "link",
+                "meta": {},
+                "attributes": {
+                  "relation": "origin",
+                  "href": "http://docs.apiary.io/validations/swagger#todo"
+                },
+                "content": []
+              }
+            ]
+          },
+          "attributes": {},
+          "content": "Authentication scheme does not exist"
         }
       ]
     }
