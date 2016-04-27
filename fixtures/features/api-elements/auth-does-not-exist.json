@@ -70,6 +70,27 @@
               ]
             }
           ]
+        },
+        {
+          "element": "annotation",
+          "meta": {
+            "classes": [
+              "warning"
+            ],
+            "links": [
+              {
+                "element": "link",
+                "meta": {},
+                "attributes": {
+                  "relation": "origin",
+                  "href": "http://docs.apiary.io/validations/swagger#auth-does-not-exist"
+                },
+                "content": []
+              }
+            ]
+          },
+          "attributes": {},
+          "content": "Authentication scheme does not exist"
         }
       ]
     }
