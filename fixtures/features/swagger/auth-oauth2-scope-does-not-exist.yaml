@@ -15,7 +15,8 @@ paths:
     get:
       security:
         - customOauth2:
-          # This scope does not exist
+          - scope1
+          # This scope3 does not exist
           - scope3
       responses:
         200:
