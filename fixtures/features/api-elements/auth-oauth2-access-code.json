@@ -14,6 +14,94 @@
       "attributes": {},
       "content": [
         {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "authSchemes"
+            ]
+          },
+          "content": [
+            {
+              "element": "Oauth2 Scheme",
+              "meta": {
+                "id": "customOauth2"
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {},
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "grantType"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "authorization code"
+                    }
+                  }
+                },
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {},
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "scopes"
+                    },
+                    "value": {
+                      "element": "array",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "scope1"
+                        },
+                        {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "scope2"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "relation": "authorize",
+                    "href": "http://example.com/oauth/authorize"
+                  },
+                  "content": []
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "relation": "token",
+                    "href": "http://example.com/oauth/token"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "element": "resource",
           "meta": {},
           "attributes": {
@@ -28,7 +116,49 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {},
+                  "attributes": {
+                    "authSchemes": [
+                      {
+                        "element": "customOauth2",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          {
+                            "element": "member",
+                            "meta": {},
+                            "attributes": {},
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "meta": {},
+                                "attributes": {},
+                                "content": "scopes"
+                              },
+                              "value": {
+                                "element": "array",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scope1"
+                                  },
+                                  {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scope2"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
                   "content": [
                     {
                       "element": "httpRequest",
@@ -72,42 +202,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                76,
-                247
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     }
   ]
 }
