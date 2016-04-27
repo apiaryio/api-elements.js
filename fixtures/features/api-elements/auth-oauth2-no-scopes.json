@@ -14,6 +14,53 @@
       "attributes": {},
       "content": [
         {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "authSchemes"
+            ]
+          },
+          "content": [
+            {
+              "element": "Oauth2 Scheme",
+              "meta": {
+                "id": "customOauth2"
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {},
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "grantType"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "implicit"
+                    }
+                  }
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "relation": "authorize",
+                    "href": "http://example.com/oauth/authorize"
+                  },
+                  "content": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "element": "resource",
           "meta": {},
           "attributes": {
@@ -28,7 +75,16 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {},
+                  "attributes": {
+                    "authSchemes": [
+                      {
+                        "element": "customOauth2",
+                        "meta": {},
+                        "attributes": {},
+                        "content": []
+                      }
+                    ]
+                  },
                   "content": [
                     {
                       "element": "httpRequest",
@@ -85,29 +141,35 @@
             "meta": {},
             "attributes": {
               "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+              "href": "http://docs.apiary.io/validations/swagger#todo"
             },
             "content": []
           }
         ]
       },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
+      "attributes": {},
+      "content": "No scopes defined for Oauth2 scheme definition"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
           {
-            "element": "sourceMap",
+            "element": "link",
             "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                74,
-                132
-              ]
-            ]
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#todo"
+            },
+            "content": []
           }
         ]
       },
-      "content": "Authentication information is not yet supported"
+      "attributes": {},
+      "content": "No scopes defined as requirement"
     }
   ]
 }
