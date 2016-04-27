@@ -14,6 +14,24 @@
       "attributes": {},
       "content": [
         {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "authSchemes"
+            ]
+          },
+          "content": [
+            {
+              "element": "Basic Authentication Scheme",
+              "meta": {
+                "id": "customBasic"
+              },
+              "attributes": {},
+              "content": []
+            }
+          ]
+        },
+        {
           "element": "resource",
           "meta": {},
           "attributes": {
@@ -85,29 +103,14 @@
             "meta": {},
             "attributes": {
               "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+              "href": "http://docs.apiary.io/validations/swagger#todo"
             },
             "content": []
           }
         ]
       },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                71,
-                52
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
+      "attributes": {},
+      "content": "Authentication scheme not used"
     }
   ]
 }
