@@ -14,6 +14,24 @@
       "attributes": {},
       "content": [
         {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "authSchemes"
+            ]
+          },
+          "content": [
+            {
+              "element": "Basic Authentication Scheme",
+              "meta": {
+                "id": "customBasic"
+              },
+              "attributes": {},
+              "content": []
+            }
+          ]
+        },
+        {
           "element": "resource",
           "meta": {},
           "attributes": {
@@ -28,7 +46,16 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {},
+                  "attributes": {
+                    "authSchemes": [
+                      {
+                        "element": "customBasic",
+                        "meta": {},
+                        "attributes": {},
+                        "content": []
+                      }
+                    ]
+                  },
                   "content": [
                     {
                       "element": "httpRequest",
@@ -72,42 +99,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                68,
-                52
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     }
   ]
 }
