@@ -1,6 +1,6 @@
 {
   "name": "minim-api-description",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Minim API Description Namespace",
   "main": "./lib/api-description.js",
   "repository": {
