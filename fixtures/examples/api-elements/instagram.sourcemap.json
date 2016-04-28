@@ -283,7 +283,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        8381,
+                                        177
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -667,7 +686,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        9083,
+                                        218
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -1245,7 +1283,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        9447,
+                                        421
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -1561,7 +1618,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        10891,
+                                        221
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -1880,7 +1956,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        11752,
+                                        224
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -2148,7 +2243,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        12185,
+                                        199
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -2398,7 +2512,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        12604,
+                                        199
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -2570,7 +2703,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        12996,
+                                        305
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -2833,7 +2985,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        13929,
+                                        199
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -3101,7 +3272,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        14706,
+                                        92
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -3351,7 +3541,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        15339,
+                                        92
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -3872,7 +4081,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        16704,
+                                        450
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -4044,7 +4272,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        17366,
+                                        218
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -4306,7 +4553,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        17886,
+                                        301
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -4469,7 +4735,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        18864,
+                                        256
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -4619,7 +4904,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        19325,
+                                        255
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -4881,7 +5185,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        19874,
+                                        298
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -5031,7 +5354,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        20368,
+                                        256
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -5181,7 +5523,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        20779,
+                                        255
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -5443,7 +5804,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        21222,
+                                        90
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -5693,7 +6073,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        21651,
+                                        191
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -5921,7 +6320,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        22093,
+                                        322
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -6183,7 +6601,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        22696,
+                                        168
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -6713,7 +7150,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        23729,
+                                        218
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -7301,7 +7757,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        25445,
+                                        221
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -7695,7 +8170,26 @@
                           "element": "httpResponse",
                           "meta": {},
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        26786,
+                                        275
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "200"
+                            },
                             "sourceMap": [
                               {
                                 "element": "sourceMap",

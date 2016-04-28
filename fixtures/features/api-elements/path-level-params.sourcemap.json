@@ -343,7 +343,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "204",
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    530,
+                                    45
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "204"
+                        },
                         "sourceMap": [
                           {
                             "element": "sourceMap",

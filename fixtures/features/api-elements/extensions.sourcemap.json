@@ -172,7 +172,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "200",
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    345,
+                                    71
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "200"
+                        },
                         "sourceMap": [
                           {
                             "element": "sourceMap",

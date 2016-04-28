@@ -195,7 +195,26 @@
                             }
                           ]
                         },
-                        "statusCode": "200",
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    177,
+                                    337
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "200"
+                        },
                         "sourceMap": [
                           {
                             "element": "sourceMap",
