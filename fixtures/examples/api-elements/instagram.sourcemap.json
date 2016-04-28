@@ -31,45 +31,45 @@
         }
       },
       "attributes": {
-        "meta": {
-          "element": "object",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "meta": {
-                "classes": [
-                  "user"
-                ]
-              },
-              "attributes": {
-                "sourceMap": [
-                  [
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {
+              "sourceMap": [
+                {
+                  "element": "sourceMap",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
                     [
                       5053,
                       23
                     ]
                   ]
-                ]
-              },
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "HOST"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "https://api.instagram.com"
                 }
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "https://api.instagram.com"
               }
             }
-          ]
-        }
+          }
+        ]
       },
       "content": [
         {
@@ -114,16 +114,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "The user identifier number"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7689,
+                                    39
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "The user identifier number"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              8166,
-                              33
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                8166,
+                                33
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -361,16 +385,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Count of media to return."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        8737,
+                                        38
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Count of media to return."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  8695,
-                                  113
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    8695,
+                                    113
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -405,16 +453,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media earlier than this max_id.s"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        8853,
+                                        52
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media earlier than this max_id.s"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  8810,
-                                  128
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    8810,
+                                    128
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -449,16 +521,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media later than this min_id."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        8983,
+                                        49
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media later than this min_id."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  8940,
-                                  124
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    8940,
+                                    124
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -652,16 +748,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "The user identifier number"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7689,
+                                    39
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "The user identifier number"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              9356,
-                              33
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                9356,
+                                33
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -727,16 +847,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Count of media to return."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        9932,
+                                        38
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Count of media to return."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  9890,
-                                  113
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    9890,
+                                    113
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -771,16 +915,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media before this UNIX timestamp."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        10055,
+                                        53
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media before this UNIX timestamp."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  10005,
-                                  136
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    10005,
+                                    136
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -815,16 +983,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media after this UNIX timestamp."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        10193,
+                                        52
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media after this UNIX timestamp."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  10143,
-                                  135
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    10143,
+                                    135
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -859,16 +1051,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media later than this min_id."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        10323,
+                                        49
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media later than this min_id."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  10280,
-                                  124
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    10280,
+                                    124
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -903,16 +1119,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media earlier than this max_id."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        10449,
+                                        51
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media earlier than this max_id."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  10406,
-                                  121
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    10406,
+                                    121
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -1107,16 +1347,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Count of media to return."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        11176,
+                                        38
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Count of media to return."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  11134,
-                                  113
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    11134,
+                                    113
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -1151,16 +1415,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media liked before this id."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        11297,
+                                        47
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media liked before this id."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  11249,
-                                  123
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    11249,
+                                    123
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -1375,16 +1663,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "A query string"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        11536,
+                                        27
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "A query string"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  11498,
-                                  122
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    11498,
+                                    122
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -1422,16 +1734,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Number of users to return."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        11664,
+                                        39
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Number of users to return."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  11622,
-                                  111
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    11622,
+                                    111
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -1643,16 +1979,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "The user identifier number"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7689,
+                                    39
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "The user identifier number"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              12026,
-                              33
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                12026,
+                                33
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -1869,16 +2229,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "The user identifier number"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7689,
+                                    39
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "The user identifier number"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              12438,
-                              33
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                12438,
+                                33
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -2267,16 +2651,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "The user identifier number"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7689,
+                                    39
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "The user identifier number"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              13356,
-                              33
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                13356,
+                                33
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -2524,16 +2932,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "The media ID"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    14211,
+                                    25
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "The media ID"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              14171,
-                              115
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                14171,
+                                115
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -2750,16 +3182,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "The media shortcode"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    14927,
+                                    32
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "The media shortcode"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              14886,
-                              122
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                14886,
+                                122
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -2997,16 +3453,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Latitude of the center search coordinate. If used, lng is required.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        15774,
+                                        95
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Latitude of the center search coordinate. If used, lng is required.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  15754,
-                                  166
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    15754,
+                                    166
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -3041,16 +3521,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "A unix timestamp. All media returned will be taken later than\nthis timestamp.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        15952,
+                                        117
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "A unix timestamp. All media returned will be taken later than\nthis timestamp.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  15922,
-                                  199
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    15922,
+                                    199
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -3085,16 +3589,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Longitude of the center search coordinate. If used, lat is required.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        16143,
+                                        96
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Longitude of the center search coordinate. If used, lat is required.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  16123,
-                                  167
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    16123,
+                                    167
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -3129,16 +3657,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "A unix timestamp. All media returned will be taken earlier than this\ntimestamp.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        16322,
+                                        119
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "A unix timestamp. All media returned will be taken earlier than this\ntimestamp.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  16292,
-                                  201
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    16292,
+                                    201
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -3173,16 +3725,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Default is 1km (distance=1000), max distance is 5km."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        16520,
+                                        66
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Default is 1km (distance=1000), max distance is 5km."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  16495,
-                                  190
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    16495,
+                                    190
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -3561,16 +4137,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Media ID"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    17676,
+                                    21
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Media ID"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              17636,
-                              111
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                17636,
+                                111
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -4112,16 +4712,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Media ID"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    19669,
+                                    21
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Media ID"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              19629,
-                              111
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                19629,
+                                111
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -4650,16 +5274,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Tag name"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7813,
+                                    21
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Tag name"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              21076,
-                              34
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                21076,
+                                34
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -4876,16 +5524,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Tag name"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7813,
+                                    21
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Tag name"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              21367,
-                              34
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                21367,
+                                34
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -5123,16 +5795,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "A valid tag name without a leading #. (eg. snowy, nofilter)\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        21938,
+                                        87
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "A valid tag name without a leading #. (eg. snowy, nofilter)\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  21920,
-                                  154
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    21920,
+                                    154
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -5318,16 +6014,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Location ID"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    22491,
+                                    24
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Location ID"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              22465,
-                              117
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                22465,
+                                117
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -5544,16 +6264,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Location ID"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    22953,
+                                    24
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Location ID"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              22927,
-                              117
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                22927,
+                                117
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -5619,16 +6363,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media before this UNIX timestamp."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        23235,
+                                        53
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media before this UNIX timestamp."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  23185,
-                                  136
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    23185,
+                                    136
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -5663,16 +6431,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media after this UNIX timestamp."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        23373,
+                                        52
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media after this UNIX timestamp."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  23323,
-                                  135
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    23323,
+                                    135
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -5707,16 +6499,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media later than this min_id."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        23503,
+                                        49
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media later than this min_id."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  23460,
-                                  124
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    23460,
+                                    124
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -5751,16 +6567,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media earlier than this max_id."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        23629,
+                                        51
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media earlier than this max_id."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  23586,
-                                  124
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    23586,
+                                    124
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -5975,16 +6815,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Default is 1000m (distance=1000), max distance is 5000."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        24146,
+                                        68
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Default is 1000m (distance=1000), max distance is 5000."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  24101,
-                                  147
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    24101,
+                                    147
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -6019,16 +6883,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Returns a location mapped off of a Facebook places id. If used, a\nFoursquare id and lat, lng are not required.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        24305,
+                                        150
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Returns a location mapped off of a Facebook places id. If used, a\nFoursquare id and lat, lng are not required.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  24250,
-                                  238
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    24250,
+                                    238
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -6063,16 +6951,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "returns a location mapped off of a foursquare v1 api location id.\nIf used, you are not required to use lat and lng. Note that this\nmethod is deprecated; you should use the new foursquare IDs with V2\nof their API.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        24540,
+                                        276
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "returns a location mapped off of a foursquare v1 api location id.\nIf used, you are not required to use lat and lng. Note that this\nmethod is deprecated; you should use the new foursquare IDs with V2\nof their API.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  24490,
-                                  359
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    24490,
+                                    359
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -6107,16 +7019,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "atitude of the center search coordinate. If used, lng is required.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        24891,
+                                        94
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "atitude of the center search coordinate. If used, lng is required.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  24851,
-                                  166
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    24851,
+                                    166
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -6151,16 +7087,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "ongitude of the center search coordinate. If used, lat is required.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        25059,
+                                        95
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "ongitude of the center search coordinate. If used, lat is required.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  25019,
-                                  167
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    25019,
+                                    167
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -6195,16 +7155,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Returns a location mapped off of a foursquare v2 api location id. If\nused, you are not required to use lat and lng.\n"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        25241,
+                                        155
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Returns a location mapped off of a foursquare v2 api location id. If\nused, you are not required to use lat and lng.\n"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  25188,
-                                  238
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    25188,
+                                    238
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -6398,16 +7382,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Geolocation ID"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    25764,
+                                    27
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Geolocation ID"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              25726,
-                              115
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                25726,
+                                115
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -6473,16 +7481,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Max number of media to return."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        26568,
+                                        43
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Max number of media to return."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  26526,
-                                  118
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    26526,
+                                    118
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -6517,16 +7549,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Return media before this `min_id`."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        26689,
+                                        47
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Return media before this `min_id`."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  26646,
-                                  121
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    26646,
+                                    121
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {

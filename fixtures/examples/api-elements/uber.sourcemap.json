@@ -31,45 +31,45 @@
         }
       },
       "attributes": {
-        "meta": {
-          "element": "object",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "meta": {
-                "classes": [
-                  "user"
-                ]
-              },
-              "attributes": {
-                "sourceMap": [
-                  [
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {
+              "sourceMap": [
+                {
+                  "element": "sourceMap",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
                     [
                       222,
                       18
                     ]
                   ]
-                ]
-              },
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "HOST"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "https://api.uber.com"
                 }
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "https://api.uber.com"
               }
             }
-          ]
-        }
+          }
+        ]
       },
       "content": [
         {
@@ -156,16 +156,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Latitude component of location."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        757,
+                                        44
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Latitude component of location."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  712,
-                                  171
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    712,
+                                    171
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -203,16 +227,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Longitude component of location."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        931,
+                                        45
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Longitude component of location."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  885,
-                                  171
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    885,
+                                    171
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -463,16 +511,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Latitude component of start location."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2082,
+                                        50
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Latitude component of start location."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  2031,
-                                  183
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2031,
+                                    183
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -510,16 +582,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Longitude component of start location."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2268,
+                                        51
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Longitude component of start location."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  2216,
-                                  185
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2216,
+                                    185
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -557,16 +653,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Latitude component of end location."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2452,
+                                        48
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Latitude component of end location."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  2403,
-                                  179
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2403,
+                                    179
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -604,16 +724,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Longitude component of end location."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2634,
+                                        49
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Longitude component of end location."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  2584,
-                                  179
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2584,
+                                    179
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -852,16 +996,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Latitude component of start location."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        3505,
+                                        50
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Latitude component of start location."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  3454,
-                                  183
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3454,
+                                    183
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -899,16 +1067,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Longitude component of start location."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        3691,
+                                        51
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Longitude component of start location."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  3639,
-                                  185
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3639,
+                                    185
+                                  ]
                                 ]
-                              ]
+                              }
                             ],
                             "typeAttributes": [
                               "required"
@@ -946,16 +1138,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Unique customer identifier to be used for experience customization."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        3922,
+                                        80
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Unique customer identifier to be used for experience customization."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  3826,
-                                  185
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3826,
+                                    185
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -990,16 +1206,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Unique identifier representing a specific product for a given latitude & longitude."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        4083,
+                                        96
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Unique identifier representing a specific product for a given latitude & longitude."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  4013,
-                                  173
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    4013,
+                                    173
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -1440,16 +1680,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Offset the list of returned results by this amount. Default is zero."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        5595,
+                                        81
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Offset the list of returned results by this amount. Default is zero."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  5504,
-                                  181
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    5504,
+                                    181
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -1484,16 +1748,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Number of items to retrieve. Default is 5, maximum is 100."
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        5777,
+                                        71
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Number of items to retrieve. Default is 5, maximum is 100."
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  5687,
-                                  168
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    5687,
+                                    168
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {

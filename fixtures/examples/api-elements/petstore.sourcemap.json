@@ -31,45 +31,45 @@
         }
       },
       "attributes": {
-        "meta": {
-          "element": "object",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "meta": {
-                "classes": [
-                  "user"
-                ]
-              },
-              "attributes": {
-                "sourceMap": [
-                  [
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {
+              "sourceMap": [
+                {
+                  "element": "sourceMap",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
                     [
                       417,
                       25
                     ]
                   ]
-                ]
-              },
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "HOST"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "http://petstore.swagger.io"
                 }
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "http://petstore.swagger.io"
               }
             }
-          ]
-        }
+          }
+        ]
       },
       "content": [
         {
@@ -127,16 +127,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "tags to filter by"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2225,
+                                    30
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "tags to filter by"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              2184,
-                              202
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                2184,
+                                202
+                              ]
                             ]
-                          ]
+                          }
                         ]
                       },
                       "content": {
@@ -192,16 +216,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "maximum number of results to return"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2430,
+                                    48
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "maximum number of results to return"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              2388,
-                              171
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                2388,
+                                171
+                              ]
                             ]
-                          ]
+                          }
                         ]
                       },
                       "content": {
@@ -582,16 +630,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "ID of pet to fetch"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3594,
+                                    31
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "ID of pet to fetch"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              3556,
-                              149
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                3556,
+                                149
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -788,16 +860,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "ID of pet to delete"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    4108,
+                                    32
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "ID of pet to delete"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              4070,
-                              150
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                4070,
+                                150
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"

@@ -147,12 +147,17 @@
                               "meta": {},
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      310,
-                                      999
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        310,
+                                        999
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {
@@ -290,12 +295,17 @@
                               "meta": {},
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      1409,
-                                      999
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        1409,
+                                        999
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {
@@ -498,12 +508,17 @@
                               "meta": {},
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      2661,
-                                      1793
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        2661,
+                                        1793
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {
@@ -641,12 +656,17 @@
                               "meta": {},
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      4554,
-                                      1512
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        4554,
+                                        1512
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {

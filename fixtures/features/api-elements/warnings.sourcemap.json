@@ -31,45 +31,45 @@
         }
       },
       "attributes": {
-        "meta": {
-          "element": "object",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "meta": {
-                "classes": [
-                  "user"
-                ]
-              },
-              "attributes": {
-                "sourceMap": [
-                  [
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {
+              "sourceMap": [
+                {
+                  "element": "sourceMap",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
                     [
                       53,
                       21
                     ]
                   ]
-                ]
-              },
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "HOST"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "https://api.example.com"
                 }
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "https://api.example.com"
               }
             }
-          ]
-        }
+          }
+        ]
       },
       "content": [
         {
@@ -165,12 +165,17 @@
                               "meta": {},
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      430,
-                                      51
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        430,
+                                        51
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {

@@ -66,12 +66,17 @@
                       "meta": {},
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              194,
-                              108
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                194,
+                                108
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"

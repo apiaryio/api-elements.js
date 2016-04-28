@@ -124,12 +124,17 @@
                                 "meta": {},
                                 "attributes": {
                                   "sourceMap": [
-                                    [
-                                      [
-                                        249,
-                                        63
+                                    {
+                                      "element": "sourceMap",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": [
+                                        [
+                                          249,
+                                          63
+                                        ]
                                       ]
-                                    ]
+                                    }
                                   ]
                                 },
                                 "content": {
@@ -166,12 +171,17 @@
                                 "meta": {},
                                 "attributes": {
                                   "sourceMap": [
-                                    [
-                                      [
-                                        314,
-                                        62
+                                    {
+                                      "element": "sourceMap",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": [
+                                        [
+                                          314,
+                                          62
+                                        ]
                                       ]
-                                    ]
+                                    }
                                   ]
                                 },
                                 "content": {

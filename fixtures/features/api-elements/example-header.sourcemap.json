@@ -125,12 +125,17 @@
                               "meta": {},
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      491,
-                                      43
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        491,
+                                        43
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {
@@ -151,16 +156,40 @@
                             {
                               "element": "member",
                               "meta": {
-                                "description": "Header description"
+                                "description": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {
+                                    "sourceMap": [
+                                      {
+                                        "element": "sourceMap",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": [
+                                          [
+                                            213,
+                                            31
+                                          ]
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "content": "Header description"
+                                }
                               },
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      190,
-                                      94
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        190,
+                                        94
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {
@@ -183,12 +212,17 @@
                               "meta": {},
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      284,
-                                      75
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        284,
+                                        75
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {
@@ -211,12 +245,17 @@
                               "meta": {},
                               "attributes": {
                                 "sourceMap": [
-                                  [
-                                    [
-                                      359,
-                                      110
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        359,
+                                        110
+                                      ]
                                     ]
-                                  ]
+                                  }
                                 ]
                               },
                               "content": {

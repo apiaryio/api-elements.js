@@ -65,16 +65,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Unique identifier"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    156,
+                                    30
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Unique identifier"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              118,
-                              125
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                118,
+                                125
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -112,16 +136,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Query argument"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    285,
+                                    27
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Query argument"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              245,
-                              163
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                245,
+                                163
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
