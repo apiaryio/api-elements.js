@@ -49,76 +49,98 @@ function attrValue(element, name) {
 describe('API description namespace', () => {
   context('category element', () => {
     let category;
+    let refracted;
 
     beforeEach(() => {
-      category = (new Category()).fromRefract({
+      refracted = {
         element: 'category',
         meta: {
-          classes: ['api']
+          classes: ['api'],
         },
         attributes: {
           meta: [
             {
               element: 'member',
               meta: {
-                classes: ['user']
+                classes: ['user'],
               },
+              attributes: {},
               content: {
                 key: {
                   element: 'string',
-                  content: 'HOST'
+                  meta: {},
+                  attributes: {},
+                  content: 'HOST',
                 },
                 value: {
                   element: 'string',
-                  content: 'https://example.com'
-                }
-              }
-            }
-          ]
+                  meta: {},
+                  attributes: {},
+                  content: 'https://example.com',
+                },
+              },
+            },
+          ],
         },
         content: [
           {
             element: 'category',
             meta: {
-              classes: ['resourceGroup']
+              classes: ['resourceGroup'],
             },
-            content: []
+            attributes: {},
+            content: [],
           },
           {
             element: 'category',
             meta: {
-              classes: ['dataStructures']
+              classes: ['dataStructures'],
             },
-            content: []
+            attributes: {},
+            content: [],
           },
           {
             element: 'category',
             meta: {
-              classes: ['scenario']
+              classes: ['scenario'],
             },
-            content: []
+            attributes: {},
+            content: [],
           },
           {
             element: 'category',
             meta: {
-              classes: ['transitions']
+              classes: ['transitions'],
             },
-            content: []
+            attributes: {},
+            content: [],
           },
           {
             element: 'resource',
-            content: []
+            meta: {},
+            attributes: {},
+            content: [],
           },
           {
             element: 'transition',
-            content: []
+            meta: {},
+            attributes: {},
+            content: [],
           },
           {
             element: 'copy',
-            content: ''
-          }
-        ]
-      });
+            meta: {},
+            attributes: {},
+            content: '',
+          },
+        ],
+      };
+
+      category = (new Category()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(category.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name category', () => {
@@ -194,15 +216,23 @@ describe('API description namespace', () => {
 
   context('copy element', () => {
     let copy;
+    let refracted;
 
     beforeEach(() => {
-      copy = (new Copy()).fromRefract({
+      refracted = {
         element: 'copy',
+        meta: {},
         attributes: {
-          contentType: 'text/html'
+          contentType: 'text/html',
         },
-        content: 'I am some text'
-      });
+        content: 'I am some text',
+      };
+
+      copy = (new Copy()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(copy.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name copy', () => {
@@ -266,42 +296,67 @@ describe('API description namespace', () => {
 
   context('resource element', () => {
     let resource;
+    let refracted;
 
     beforeEach(() => {
-      resource = (new Resource()).fromRefract({
+      refracted = {
         element: 'resource',
+        meta: {},
         attributes: {
           href: '/resource/{id}',
           hrefVariables: {
             element: 'hrefVariables',
+            meta: {},
+            attributes: {},
             content: [
               {
                 element: 'member',
+                meta: {},
+                attributes: {},
                 content: {
                   key: {
                     element: 'string',
-                    content: 'id'
+                    meta: {},
+                    attributes: {},
+                    content: 'id',
                   },
                   value: {
                     element: 'string',
-                    content: '123'
-                  }
-                }
-              }
-            ]
-          }
+                    meta: {},
+                    attributes: {},
+                    content: '123',
+                  },
+                },
+              },
+            ],
+          },
         },
         content: [
           {
             element: 'transition',
-            content: []
+            meta: {},
+            attributes: {},
+            content: [],
           },
           {
             element: 'dataStructure',
-            content: []
-          }
-        ]
-      });
+            meta: {},
+            attributes: {},
+            content: {
+              element: 'object',
+              meta: {},
+              attributes: {},
+              content: [],
+            },
+          },
+        ],
+      };
+
+      resource = (new Resource()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(resource.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name resource', () => {
@@ -347,37 +402,52 @@ describe('API description namespace', () => {
 
   context('transition element', () => {
     let transition;
+    let refracted;
 
     beforeEach(() => {
-      transition = (new Transition()).fromRefract({
+      refracted = {
         element: 'transition',
+        meta: {},
         attributes: {
           relation: 'action',
           href: '/resource',
           data: {
             element: 'dataStructure',
+            meta: {},
+            attributes: {},
             content: {
               element: 'object',
-              content: null
-            }
+              meta: {},
+              attributes: {},
+              content: [],
+            },
           },
           contentTypes: ['application/json'],
         },
         content: [
           {
             element: 'httpTransaction',
+            meta: {},
+            attributes: {},
             content: [
               {
                 element: 'httpRequest',
+                meta: {},
                 attributes: {
-                  method: 'GET'
+                  method: 'GET',
                 },
-                content: []
-              }
-            ]
-          }
-        ]
-      });
+                content: [],
+              },
+            ],
+          },
+        ],
+      };
+
+      transition = (new Transition()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(transition.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name transition', () => {
@@ -446,21 +516,34 @@ describe('API description namespace', () => {
 
   context('HTTP transaction element', () => {
     let transaction;
+    let refracted;
 
     beforeEach(() => {
-      transaction = (new HttpTransaction()).fromRefract({
+      refracted = {
         element: 'httpTransaction',
+        meta: {},
+        attributes: {},
         content: [
           {
             element: 'httpRequest',
-            content: []
+            meta: {},
+            attributes: {},
+            content: [],
           },
           {
             element: 'httpResponse',
-            content: []
+            meta: {},
+            attributes: {},
+            content: [],
           },
-        ]
-      });
+        ],
+      };
+
+      transaction = (new HttpTransaction()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(transaction.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name httpTransaction', () => {
@@ -478,16 +561,24 @@ describe('API description namespace', () => {
 
   context('HTTP request element', () => {
     let request;
+    let refracted;
 
     beforeEach(() => {
-      request = (new HttpRequest()).fromRefract({
+      refracted = {
         element: 'httpRequest',
+        meta: {},
         attributes: {
           method: 'GET',
           href: '/foo',
         },
-        content: []
-      });
+        content: [],
+      };
+
+      request = (new HttpRequest()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(request.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name httpRequest', () => {
@@ -519,15 +610,23 @@ describe('API description namespace', () => {
 
   context('HTTP response element', () => {
     let response;
+    let refracted;
 
     beforeEach(() => {
-      response = (new HttpResponse()).fromRefract({
+      refracted = {
         element: 'httpResponse',
+        meta: {},
         attributes: {
           statusCode: 200,
         },
-        content: []
-      });
+        content: [],
+      };
+
+      response = (new HttpResponse()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(response.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name httpResponse', () => {
@@ -551,69 +650,99 @@ describe('API description namespace', () => {
   context('HTTP message payload', () => {
     let asset;
     let payload;
+    let refracted;
 
     beforeEach(() => {
-      payload = (new HttpMessagePayload()).fromRefract({
+      refracted = {
         element: 'httpResponse',
+        meta: {},
         attributes: {
           headers: {
             element: 'httpHeaders',
+            meta: {},
+            attributes: {},
             content: [
               {
                 element: 'member',
+                meta: {},
+                attributes: {},
                 content: {
                   key: {
                     element: 'string',
+                    meta: {},
+                    attributes: {},
                     content: 'Content-Type',
                   },
                   value: {
                     element: 'string',
-                    content: 'application/json'
-                  }
-                }
+                    meta: {},
+                    attributes: {},
+                    content: 'application/json',
+                  },
+                },
               },
               {
                 element: 'member',
+                meta: {},
+                attributes: {},
                 content: {
                   key: {
                     element: 'string',
+                    meta: {},
+                    attributes: {},
                     content: 'Cache',
                   },
                   value: {
                     element: 'string',
-                    content: 'no-cache'
-                  }
-                }
-              }
-            ]
-          }
+                    meta: {},
+                    attributes: {},
+                    content: 'no-cache',
+                  },
+                },
+              },
+            ],
+          },
         },
         content: [
           {
             element: 'dataStructure',
-            content: []
+            meta: {},
+            attributes: {},
+            content: {
+              element: 'object',
+              meta: {},
+              attributes: {},
+              content: [],
+            },
           },
           {
             element: 'asset',
             meta: {
-              classes: ['messageBody']
+              classes: ['messageBody'],
             },
             attributes: {
               contentType: 'text/plain',
               href: '/some/path',
             },
-            content: ''
+            content: '',
           },
           {
             element: 'asset',
             meta: {
-              classes: ['messageBodySchema']
+              classes: ['messageBodySchema'],
             },
-            content: ''
+            attributes: {},
+            content: '',
           },
-        ]
-      });
+        ],
+      };
+
+      payload = (new HttpMessagePayload()).fromRefract(refracted);
       asset = payload.messageBody;
+    });
+
+    it('should round-trip correctly', () => {
+      expect(payload.toRefract()).to.deep.equal(refracted);
     });
 
     it('should get headers', () => {
