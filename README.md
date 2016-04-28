@@ -81,10 +81,6 @@ import parseResult from 'minim-parse-result';
 const namespace = minim.namespace()
   .use(parseResult);
 
-// Convert from Compact Refract
-let compactRefract = ['parseResult', {}, {}, []];
-let api = namespace.fromCompactRefract(compactRefract);
-
 // Initialize elements directly
 const ParseResult = namespace.getElementClass('parseResult');
 let category = new ParseResult();
