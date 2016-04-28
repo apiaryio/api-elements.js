@@ -6,7 +6,6 @@ export default function(namespace) {
       super(...arguments);
 
       this.element = 'resource';
-      this._attributeElementKeys = ['hrefVariables'];
     }
 
     get href() {

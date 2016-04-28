@@ -18,21 +18,9 @@ export default function(namespace) {
       return refract;
     }
 
-    toCompactRefract() {
-      const compactRefract = super.toCompactRefract();
-      compactRefract[3] = compactRefract[3].toCompactRefract();
-      return compactRefract;
-    }
-
     fromRefract(doc) {
       super.fromRefract(doc);
       this.content = namespace.fromRefract(doc.content);
-      return this;
-    }
-
-    fromCompactRefract(tuple) {
-      super.fromCompactRefract(tuple);
-      this.content = namespace.fromCompactRefract(tuple[3]);
       return this;
     }
   }

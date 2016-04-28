@@ -51,22 +51,74 @@ describe('API description namespace', () => {
     let category;
 
     beforeEach(() => {
-      category = (new Category()).fromCompactRefract([
-        'category', {classes: ['api']}, {meta: ['array', {}, {}, [
-          ['member', {classes: ['user']}, {}, {
-            key: ['string', {}, {}, 'HOST'],
-            value: ['string', {}, {}, 'https://example.com'],
-          }]],
-        ]}, [
-          ['category', {classes: ['resourceGroup']}, {}, []],
-          ['category', {classes: ['dataStructures']}, {}, []],
-          ['category', {classes: ['scenario']}, {}, []],
-          ['category', {classes: ['transitions']}, {}, []],
-          ['resource', {}, {}, []],
-          ['transition', {}, {}, []],
-          ['copy', {}, {}, ''],
-        ],
-      ]);
+      category = (new Category()).fromRefract({
+        element: 'category',
+        meta: {
+          classes: ['api']
+        },
+        attributes: {
+          meta: [
+            {
+              element: 'member',
+              meta: {
+                classes: ['user']
+              },
+              content: {
+                key: {
+                  element: 'string',
+                  content: 'HOST'
+                },
+                value: {
+                  element: 'string',
+                  content: 'https://example.com'
+                }
+              }
+            }
+          ]
+        },
+        content: [
+          {
+            element: 'category',
+            meta: {
+              classes: ['resourceGroup']
+            },
+            content: []
+          },
+          {
+            element: 'category',
+            meta: {
+              classes: ['dataStructures']
+            },
+            content: []
+          },
+          {
+            element: 'category',
+            meta: {
+              classes: ['scenario']
+            },
+            content: []
+          },
+          {
+            element: 'category',
+            meta: {
+              classes: ['transitions']
+            },
+            content: []
+          },
+          {
+            element: 'resource',
+            content: []
+          },
+          {
+            element: 'transition',
+            content: []
+          },
+          {
+            element: 'copy',
+            content: ''
+          }
+        ]
+      });
     });
 
     it('should have element name category', () => {
@@ -144,9 +196,13 @@ describe('API description namespace', () => {
     let copy;
 
     beforeEach(() => {
-      copy = (new Copy()).fromCompactRefract(
-        ['copy', {}, {contentType: 'text/html'}, 'I am some text']
-      );
+      copy = (new Copy()).fromRefract({
+        element: 'copy',
+        attributes: {
+          contentType: 'text/html'
+        },
+        content: 'I am some text'
+      });
     });
 
     it('should have element name copy', () => {
@@ -201,25 +257,10 @@ describe('API description namespace', () => {
       });
     });
 
-    it('should serialize to compact refract', () => {
-      const refract = struct.toCompactRefract();
-      expect(refract).to.deep.equal(
-        ['dataStructure', {}, {},
-          ['string', {}, {}, 'test'],
-        ]
-      );
-    });
-
     it('should load from refract', () => {
       const refract = struct.toRefract();
       const loaded = (new DataStructure()).fromRefract(refract);
       expect(loaded.toRefract()).to.deep.equal(refract);
-    });
-
-    it('should load from compact refract', () => {
-      const refract = struct.toCompactRefract();
-      const loaded = (new DataStructure()).fromCompactRefract(refract);
-      expect(loaded.toCompactRefract()).to.deep.equal(refract);
     });
   });
 
@@ -227,20 +268,40 @@ describe('API description namespace', () => {
     let resource;
 
     beforeEach(() => {
-      resource = (new Resource()).fromCompactRefract(
-        ['resource', {}, {
+      resource = (new Resource()).fromRefract({
+        element: 'resource',
+        attributes: {
           href: '/resource/{id}',
-          hrefVariables: ['hrefVariables', {}, {}, [
-            ['member', {}, {}, {
-              key: ['string', {}, {}, 'id'],
-              value: ['string', {}, {}, '123'],
-            }],
-          ]],
-        }, [
-          ['transition', {}, {}, []],
-          ['dataStructure', {}, {}, []],
-        ]]
-      );
+          hrefVariables: {
+            element: 'hrefVariables',
+            content: [
+              {
+                element: 'member',
+                content: {
+                  key: {
+                    element: 'string',
+                    content: 'id'
+                  },
+                  value: {
+                    element: 'string',
+                    content: '123'
+                  }
+                }
+              }
+            ]
+          }
+        },
+        content: [
+          {
+            element: 'transition',
+            content: []
+          },
+          {
+            element: 'dataStructure',
+            content: []
+          }
+        ]
+      });
     });
 
     it('should have element name resource', () => {
@@ -288,18 +349,35 @@ describe('API description namespace', () => {
     let transition;
 
     beforeEach(() => {
-      transition = (new Transition()).fromCompactRefract(
-        ['transition', {}, {
+      transition = (new Transition()).fromRefract({
+        element: 'transition',
+        attributes: {
           relation: 'action',
           href: '/resource',
-          data: ['dataStructure', {}, {}, ['object', {}, {}, null]],
+          data: {
+            element: 'dataStructure',
+            content: {
+              element: 'object',
+              content: null
+            }
+          },
           contentTypes: ['application/json'],
-        }, [
-          ['httpTransaction', {}, {}, [
-            ['httpRequest', {}, {method: 'GET'}, []],
-          ]],
-        ]]
-      );
+        },
+        content: [
+          {
+            element: 'httpTransaction',
+            content: [
+              {
+                element: 'httpRequest',
+                attributes: {
+                  method: 'GET'
+                },
+                content: []
+              }
+            ]
+          }
+        ]
+      });
     });
 
     it('should have element name transition', () => {
@@ -370,12 +448,19 @@ describe('API description namespace', () => {
     let transaction;
 
     beforeEach(() => {
-      transaction = (new HttpTransaction()).fromCompactRefract(
-        ['httpTransaction', {}, {}, [
-          ['httpRequest', {}, {}, []],
-          ['httpResponse', {}, {}, []],
-        ]]
-      );
+      transaction = (new HttpTransaction()).fromRefract({
+        element: 'httpTransaction',
+        content: [
+          {
+            element: 'httpRequest',
+            content: []
+          },
+          {
+            element: 'httpResponse',
+            content: []
+          },
+        ]
+      });
     });
 
     it('should have element name httpTransaction', () => {
@@ -395,12 +480,14 @@ describe('API description namespace', () => {
     let request;
 
     beforeEach(() => {
-      request = (new HttpRequest()).fromCompactRefract(
-        ['httpRequest', {}, {
+      request = (new HttpRequest()).fromRefract({
+        element: 'httpRequest',
+        attributes: {
           method: 'GET',
           href: '/foo',
-        }, []]
-      );
+        },
+        content: []
+      });
     });
 
     it('should have element name httpRequest', () => {
@@ -434,11 +521,13 @@ describe('API description namespace', () => {
     let response;
 
     beforeEach(() => {
-      response = (new HttpResponse()).fromCompactRefract(
-        ['httpResponse', {}, {
+      response = (new HttpResponse()).fromRefract({
+        element: 'httpResponse',
+        attributes: {
           statusCode: 200,
-        }, []]
-      );
+        },
+        content: []
+      });
     });
 
     it('should have element name httpResponse', () => {
@@ -464,27 +553,66 @@ describe('API description namespace', () => {
     let payload;
 
     beforeEach(() => {
-      payload = (new HttpMessagePayload()).fromCompactRefract(
-        ['httpResponse', {}, {
-          headers: ['httpHeaders', {}, {}, [
-            ['member', {}, {}, {
-              key: ['string', {}, {}, 'Content-Type'],
-              value: ['string', {}, {}, 'application/json'],
-            }],
-            ['member', {}, {}, {
-              key: ['string', {}, {}, 'Cache'],
-              value: ['string', {}, {}, 'no-cache'],
-            }],
-          ]],
-        }, [
-          ['dataStructure', {}, {}, []],
-          ['asset', {classes: ['messageBody']}, {
-            contentType: 'text/plain',
-            href: '/some/path',
-          }, ''],
-          ['asset', {classes: ['messageBodySchema']}, {}, ''],
-        ]]
-      );
+      payload = (new HttpMessagePayload()).fromRefract({
+        element: 'httpResponse',
+        attributes: {
+          headers: {
+            element: 'httpHeaders',
+            content: [
+              {
+                element: 'member',
+                content: {
+                  key: {
+                    element: 'string',
+                    content: 'Content-Type',
+                  },
+                  value: {
+                    element: 'string',
+                    content: 'application/json'
+                  }
+                }
+              },
+              {
+                element: 'member',
+                content: {
+                  key: {
+                    element: 'string',
+                    content: 'Cache',
+                  },
+                  value: {
+                    element: 'string',
+                    content: 'no-cache'
+                  }
+                }
+              }
+            ]
+          }
+        },
+        content: [
+          {
+            element: 'dataStructure',
+            content: []
+          },
+          {
+            element: 'asset',
+            meta: {
+              classes: ['messageBody']
+            },
+            attributes: {
+              contentType: 'text/plain',
+              href: '/some/path',
+            },
+            content: ''
+          },
+          {
+            element: 'asset',
+            meta: {
+              classes: ['messageBodySchema']
+            },
+            content: ''
+          },
+        ]
+      });
       asset = payload.messageBody;
     });
 

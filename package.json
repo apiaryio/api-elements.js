@@ -22,7 +22,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "coveralls": "^2.11.2",
-    "minim": "^0.13.0",
+    "minim": "^0.14.0",
     "peasant": "^0.5.2"
   },
   "author": "Apiary.io <support@apiary.io>",

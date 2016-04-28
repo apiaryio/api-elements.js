@@ -6,7 +6,6 @@ export default function(namespace) {
       super(...arguments);
 
       this.element = 'transition';
-      this._attributeElementKeys = ['hrefVariables', 'data'];
     }
 
     get method() {
