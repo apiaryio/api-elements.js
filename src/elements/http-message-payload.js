@@ -4,7 +4,6 @@ export default function(namespace) {
   class HttpMessagePayload extends ArrayElement {
     constructor() {
       super(...arguments);
-      this._attributeElementKeys = ['headers'];
     }
 
     get headers() {

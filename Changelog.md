@@ -1,3 +1,7 @@
+# 0.1.4 - 2016-04-28
+
+- Upgrade minim peerDependency version to 0.14.0
+
 # 0.1.3 - 2016-01-14
 
 - Move minim to devDependency and update it to 0.13.0

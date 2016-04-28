@@ -21,10 +21,6 @@ import apiDescription from 'minim-api-description';
 const namespace = minim.namespace()
   .use(apiDescription);
 
-// Convert from Compact Refract
-let compactRefract = ['category', {'class': ['api'], title: 'My API'}, {}, []];
-let api = namespace.fromCompactRefract(compactRefract);
-
 // Initialize elements directly
 const Category = namespace.getElementClass('category');
 let category = new Category();
