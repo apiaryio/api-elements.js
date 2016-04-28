@@ -217,9 +217,7 @@ export default class Parser {
   }
 
   // This method lets you set the current parsing path and synchronously run
-  // a function (e.g. to create an element). If the function returns one or
-  // more elements then they will get a source map if one was requested. Once
-  // finished, the path is restored to its original value.
+  // a function (e.g. to create an element).
   withPath(...args) {
     let i;
 
@@ -227,17 +225,7 @@ export default class Parser {
       this.path.push(args[i]);
     }
 
-    let elements = args[args.length - 1].bind(this)(this.path);
-
-    if (elements && this.generateSourceMap) {
-      // You can return either an element or an array of elements.
-      if (!_.isArray(elements)) {
-        elements = [elements];
-      }
-      for (i of elements) {
-        this.createSourceMap(i, this.path);
-      }
-    }
+    args[args.length - 1].bind(this)(this.path);
 
     for (i = 0; i < args.length - 1; i++) {
       this.path.pop();
@@ -264,6 +252,11 @@ export default class Parser {
         if (this.swagger.info.title) {
           this.withPath('title', () => {
             this.api.meta.set('title', this.swagger.info.title);
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(this.api.meta.get('title'), this.path);
+            }
+
             return this.api.meta.get('title');
           });
         }
@@ -272,6 +265,11 @@ export default class Parser {
           this.withPath('description', () => {
             const description = new Copy(this.swagger.info.description);
             this.api.content.push(description);
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(description, this.path);
+            }
+
             return description;
           });
         }
@@ -296,11 +294,17 @@ export default class Parser {
           hostname = `${this.swagger.schemes[0]}://${hostname}`;
         }
 
-        this.api.attributes.set('meta', {});
-        const meta = this.api.attributes.get('meta');
+        const meta = [];
         const member = new MemberElement('HOST', hostname);
+
         member.meta.set('classes', ['user']);
-        meta.content.push(member);
+
+        if (this.generateSourceMap) {
+          this.createSourceMap(member, this.path);
+        }
+
+        meta.push(member);
+        this.api.attributes.set('meta', meta);
 
         return member;
       });
@@ -327,6 +331,11 @@ export default class Parser {
       if (pathValue['x-summary']) {
         this.withPath('x-summary', () => {
           resource.title = pathValue['x-summary'];
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(resource.meta.get('title'), this.path);
+          }
+
           return resource.meta.get('title');
         });
       }
@@ -336,6 +345,11 @@ export default class Parser {
         this.withPath('x-description', () => {
           const resourceDescription = new Copy(pathValue['x-description']);
           resource.push(resourceDescription);
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(resourceDescription, this.path);
+          }
+
           return resourceDescription;
         });
       }
@@ -421,6 +435,11 @@ export default class Parser {
       if (methodValue.summary) {
         this.withPath('summary', () => {
           transition.title = methodValue.summary;
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(transition.meta.get('title'), this.path);
+          }
+
           return transition.meta.get('title');
         });
       }
@@ -429,6 +448,11 @@ export default class Parser {
         this.withPath('description', () => {
           const description = new Copy(methodValue.description);
           transition.push(description);
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(description, this.path);
+          }
+
           return description;
         });
       }
@@ -575,6 +599,11 @@ export default class Parser {
           const contentHeader = new MemberElement(
             'Content-Type', contentType
           );
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(contentHeader, this.path);
+          }
+
           headers.push(contentHeader);
           response.headers = headers;
           return contentHeader;
@@ -597,6 +626,11 @@ export default class Parser {
 
             const bodyAsset = new Asset(formattedResponseBody);
             bodyAsset.classes.push('messageBody');
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(bodyAsset, this.path);
+            }
+
             response.content.push(bodyAsset);
 
             return bodyAsset;
@@ -615,6 +649,11 @@ export default class Parser {
 
           this.withSlicedPath.apply(this, args.concat([() => {
             const schemaAsset = this.createAssetFromJsonSchema(schema);
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(schemaAsset, this.path);
+            }
+
             response.content.push(schemaAsset);
             return schemaAsset;
           }]));
@@ -662,9 +701,18 @@ export default class Parser {
 
       const member = new MemberElement(headerName, value);
 
+      if (this.generateSourceMap) {
+        this.createSourceMap(member, this.path);
+      }
+
       if (header.description) {
         this.withPath('description', () => {
           member.meta.set('description', header.description);
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(member.meta.get('description'), this.path);
+          }
+
           return member.meta.get('description');
         });
       }
@@ -812,8 +860,7 @@ export default class Parser {
       member.description = parameter.description;
 
       if (this.generateSourceMap) {
-        this.createSourceMap(member.meta.get('description'),
-          path.concat(['description']));
+        this.createSourceMap(member.meta.get('description'), path.concat(['description']));
       }
     }
 
