@@ -14,11 +14,6 @@ export function namespace(options) {
   const ArrayElement = minim.getElementClass('array');
   const StringElement = minim.getElementClass('string');
 
-  // First, modify the default list of special attributes to include
-  // the new `sourceMap` attribute, which is an unrefracted array of
-  // refracted source map elements.
-  minim._attributeElementArrayKeys.push('sourceMap');
-
   class ParseResult extends ArrayElement {
     constructor() {
       super(...arguments);

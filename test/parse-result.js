@@ -43,15 +43,46 @@ function attrValue(element, name) {
 describe('Parse result namespace', () => {
   context('parse result element', () => {
     let parseResult;
+    let refracted;
 
     beforeEach(() => {
-      parseResult = (new ParseResult()).fromCompactRefract([
-        'parseResult', {}, {}, [
-          ['annotation', {classes: ['warning']}, {}, []],
-          ['annotation', {classes: ['error']}, {}, []],
-          ['category', {classes: ['api']}, {}, []],
+      refracted = {
+        element: 'parseResult',
+        meta: {},
+        attributes: {},
+        content: [
+          {
+            element: 'annotation',
+            meta: {
+              classes: ['warning'],
+            },
+            attributes: {},
+            content: [],
+          },
+          {
+            element: 'annotation',
+            meta: {
+              classes: ['error'],
+            },
+            attributes: {},
+            content: [],
+          },
+          {
+            element: 'category',
+            meta: {
+              classes: ['api'],
+            },
+            attributes: {},
+            content: [],
+          },
         ],
-      ]);
+      };
+
+      parseResult = (new ParseResult()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(parseResult.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name parseResult', () => {
@@ -93,11 +124,23 @@ describe('Parse result namespace', () => {
 
   context('annotation element', () => {
     let annotation;
+    let refracted;
 
     beforeEach(() => {
-      annotation = (new Annotation()).fromCompactRefract([
-        'annotation', {}, {code: 123}, 'Missing argument description',
-      ]);
+      refracted = {
+        element: 'annotation',
+        meta: {},
+        attributes: {
+          code: 123,
+        },
+        content: 'Missing argument description',
+      };
+
+      annotation = (new Annotation()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(annotation.toRefract()).to.deep.equal(refracted);
     });
 
     it('should have element name annotation', () => {
@@ -122,9 +165,12 @@ describe('Parse result namespace', () => {
     let sourceMap;
 
     beforeEach(() => {
-      sourceMap = (new SourceMap()).fromCompactRefract([
-        'sourceMap', {}, {}, [],
-      ]);
+      sourceMap = (new SourceMap()).fromRefract({
+        element: 'sourceMap',
+        meta: {},
+        attributes: {},
+        content: [],
+      });
     });
 
     it('should have element name sourceMap', () => {
@@ -135,16 +181,31 @@ describe('Parse result namespace', () => {
   context('source maps', () => {
     let element;
     let sourceMaps;
+    let refracted;
 
     beforeEach(() => {
-      element = (new StringElement()).fromCompactRefract([
-        'string', {}, {
+      refracted = {
+        element: 'string',
+        meta: {},
+        attributes: {
           sourceMap: [
-            ['sourceMap', {}, {}, [[1, 2]]],
+            {
+              element: 'sourceMap',
+              meta: {},
+              attributes: {},
+              content: [[1, 2]],
+            },
           ],
-        }, [],
-      ]);
+        },
+        content: [],
+      };
+
+      element = (new StringElement()).fromRefract(refracted);
       sourceMaps = element.attributes.get('sourceMap');
+    });
+
+    it('should round-trip correctly', () => {
+      expect(element.toRefract()).to.deep.equal(refracted);
     });
 
     it('should contain a sourceMap attribute with one item', () => {
@@ -166,9 +227,7 @@ describe('Parse result namespace', () => {
               element: 'sourceMap',
               meta: {},
               attributes: {},
-              content: [
-                [1, 2],
-              ],
+              content: [[1, 2]],
             },
           ],
         },
