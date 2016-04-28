@@ -1,3 +1,8 @@
+# 2.0.0 - 2016-04-28
+
+- Upgrade Minim to 0.14.0 and thus remove the short hand notation in fury
+- Upgrade Minim Parse Result to 0.2.2
+
 # 1.0.3 - 2015-12-03
 
 - Dependency update to support require support for the `links` element.
