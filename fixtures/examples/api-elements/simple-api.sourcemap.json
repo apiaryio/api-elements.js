@@ -36,20 +36,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    73,
-                    2337
-                  ]
-                ]
-              }
-            ]
+            "href": "/"
           },
           "content": [
             {
@@ -77,59 +64,18 @@
                 },
                 "id": "listVersionsv2"
               },
-              "attributes": {
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        80,
-                        2330
-                      ]
-                    ]
-                  }
-                ]
-              },
+              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            218,
-                            1099
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                80,
-                                2330
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -196,20 +142,7 @@
                             ]
                           },
                           "content": "200"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                218,
-                                1099
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {
@@ -263,40 +196,13 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            1317,
-                            1093
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                80,
-                                2330
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -363,20 +269,7 @@
                             ]
                           },
                           "content": "300"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                1317,
-                                1093
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {
@@ -435,20 +328,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/v2",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    2410,
-                    3656
-                  ]
-                ]
-              }
-            ]
+            "href": "/v2"
           },
           "content": [
             {
@@ -476,59 +356,18 @@
                 },
                 "id": "getVersionDetailsv2"
               },
-              "attributes": {
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        2419,
-                        3647
-                      ]
-                    ]
-                  }
-                ]
-              },
+              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            2569,
-                            1893
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                2419,
-                                3647
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -595,20 +434,7 @@
                             ]
                           },
                           "content": "200"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                2569,
-                                1893
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {
@@ -662,40 +488,13 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            4462,
-                            1604
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                2419,
-                                3647
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -762,20 +561,7 @@
                             ]
                           },
                           "content": "203"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                4462,
-                                1604
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {

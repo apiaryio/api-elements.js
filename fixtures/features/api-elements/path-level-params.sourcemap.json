@@ -185,20 +185,7 @@
                 }
               ]
             },
-            "href": "/test/{id}{?search}",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    78,
-                    497
-                  ]
-                ]
-              }
-            ]
+            "href": "/test/{id}{?search}"
           },
           "content": [
             {
@@ -283,59 +270,19 @@
                       }
                     }
                   ]
-                },
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        356,
-                        219
-                      ]
-                    ]
-                  }
-                ]
+                }
               },
               "content": [
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            530,
-                            45
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                356,
-                                219
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -362,20 +309,7 @@
                             ]
                           },
                           "content": "204"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                530,
-                                45
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {

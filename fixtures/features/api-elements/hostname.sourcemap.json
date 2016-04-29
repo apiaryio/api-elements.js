@@ -76,20 +76,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/v1/test",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    118,
-                    114
-                  ]
-                ]
-              }
-            ]
+            "href": "/v1/test"
           },
           "content": [
             {
@@ -116,59 +103,18 @@
                   "content": "Get a test"
                 }
               },
-              "attributes": {
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        131,
-                        101
-                      ]
-                    ]
-                  }
-                ]
-              },
+              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            187,
-                            45
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                131,
-                                101
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -195,20 +141,7 @@
                             ]
                           },
                           "content": "204"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                187,
-                                45
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {

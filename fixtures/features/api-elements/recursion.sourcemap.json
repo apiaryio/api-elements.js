@@ -247,20 +247,7 @@
                           "element": "httpRequest",
                           "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    219,
-                                    424
-                                  ]
-                                ]
-                              }
-                            ]
+                            "method": "GET"
                           },
                           "content": []
                         },

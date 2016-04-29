@@ -106,20 +106,7 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/products",
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        392,
-                        985
-                      ]
-                    ]
-                  }
-                ]
+                "href": "/v1/products"
               },
               "content": [
                 {
@@ -296,20 +283,7 @@
                           }
                         }
                       ]
-                    },
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            407,
-                            970
-                          ]
-                        ]
-                      }
-                    ]
+                    }
                   },
                   "content": [
                     {
@@ -335,40 +309,13 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                1106,
-                                162
-                              ]
-                            ]
-                          }
-                        ]
-                      },
+                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
                           "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    407,
-                                    970
-                                  ]
-                                ]
-                              }
-                            ]
+                            "method": "GET"
                           },
                           "content": []
                         },
@@ -395,20 +342,7 @@
                                 ]
                               },
                               "content": "200"
-                            },
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    1106,
-                                    162
-                                  ]
-                                ]
-                              }
-                            ]
+                            }
                           },
                           "content": [
                             {
@@ -480,20 +414,7 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/estimates/price",
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        1377,
-                        1732
-                      ]
-                    ]
-                  }
-                ]
+                "href": "/v1/estimates/price"
               },
               "content": [
                 {
@@ -812,20 +733,7 @@
                           }
                         }
                       ]
-                    },
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            1399,
-                            1710
-                          ]
-                        ]
-                      }
-                    ]
+                    }
                   },
                   "content": [
                     {
@@ -851,40 +759,13 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                2814,
-                                186
-                              ]
-                            ]
-                          }
-                        ]
-                      },
+                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
                           "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    1399,
-                                    1710
-                                  ]
-                                ]
-                              }
-                            ]
+                            "method": "GET"
                           },
                           "content": []
                         },
@@ -911,20 +792,7 @@
                                 ]
                               },
                               "content": "200"
-                            },
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    2814,
-                                    186
-                                  ]
-                                ]
-                              }
-                            ]
+                            }
                           },
                           "content": [
                             {
@@ -984,20 +852,7 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/estimates/time",
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        3109,
-                        1399
-                      ]
-                    ]
-                  }
-                ]
+                "href": "/v1/estimates/time"
               },
               "content": [
                 {
@@ -1310,20 +1165,7 @@
                           }
                         }
                       ]
-                    },
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            3130,
-                            1378
-                          ]
-                        ]
-                      }
-                    ]
+                    }
                   },
                   "content": [
                     {
@@ -1349,40 +1191,13 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                4237,
-                                162
-                              ]
-                            ]
-                          }
-                        ]
-                      },
+                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
                           "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    3130,
-                                    1378
-                                  ]
-                                ]
-                              }
-                            ]
+                            "method": "GET"
                           },
                           "content": []
                         },
@@ -1409,20 +1224,7 @@
                                 ]
                               },
                               "content": "200"
-                            },
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    4237,
-                                    162
-                                  ]
-                                ]
-                              }
-                            ]
+                            }
                           },
                           "content": [
                             {
@@ -1494,20 +1296,7 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/me",
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        4508,
-                        457
-                      ]
-                    ]
-                  }
-                ]
+                "href": "/v1/me"
               },
               "content": [
                 {
@@ -1534,21 +1323,7 @@
                       "content": "User Profile"
                     }
                   },
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            4517,
-                            448
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "copy",
@@ -1573,40 +1348,13 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                4729,
-                                127
-                              ]
-                            ]
-                          }
-                        ]
-                      },
+                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
                           "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    4517,
-                                    448
-                                  ]
-                                ]
-                              }
-                            ]
+                            "method": "GET"
                           },
                           "content": []
                         },
@@ -1633,20 +1381,7 @@
                                 ]
                               },
                               "content": "200"
-                            },
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    4729,
-                                    127
-                                  ]
-                                ]
-                              }
-                            ]
+                            }
                           },
                           "content": [
                             {
@@ -1706,20 +1441,7 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/history",
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        4965,
-                        1181
-                      ]
-                    ]
-                  }
-                ]
+                "href": "/v1/history"
               },
               "content": [
                 {
@@ -1890,20 +1612,7 @@
                           }
                         }
                       ]
-                    },
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            4979,
-                            1167
-                          ]
-                        ]
-                      }
-                    ]
+                    }
                   },
                   "content": [
                     {
@@ -1929,40 +1638,13 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                5901,
-                                138
-                              ]
-                            ]
-                          }
-                        ]
-                      },
+                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
                           "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    4979,
-                                    1167
-                                  ]
-                                ]
-                              }
-                            ]
+                            "method": "GET"
                           },
                           "content": []
                         },
@@ -1989,20 +1671,7 @@
                                 ]
                               },
                               "content": "200"
-                            },
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    5901,
-                                    138
-                                  ]
-                                ]
-                              }
-                            ]
+                            }
                           },
                           "content": [
                             {

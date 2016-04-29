@@ -96,20 +96,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/api/pets",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    547,
-                    2826
-                  ]
-                ]
-              }
-            ]
+            "href": "/api/pets"
           },
           "content": [
             {
@@ -282,20 +269,7 @@
                       }
                     }
                   ]
-                },
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        558,
-                        2281
-                      ]
-                    ]
-                  }
-                ]
+                }
               },
               "content": [
                 {
@@ -321,40 +295,13 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            2578,
-                            150
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                558,
-                                2281
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -381,20 +328,7 @@
                             ]
                           },
                           "content": "200"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                2578,
-                                150
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {
@@ -453,21 +387,7 @@
               "meta": {
                 "id": "addPet"
               },
-              "attributes": {
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        2839,
-                        534
-                      ]
-                    ]
-                  }
-                ]
-              },
+              "attributes": {},
               "content": [
                 {
                   "element": "copy",
@@ -492,40 +412,13 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            3159,
-                            105
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "POST",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                2839,
-                                534
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "POST"
                       },
                       "content": [
                         {
@@ -565,20 +458,7 @@
                             ]
                           },
                           "content": "200"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                3159,
-                                105
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {
@@ -638,20 +518,7 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/api/pets/{id}",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    3373,
-                    1021
-                  ]
-                ]
-              }
-            ]
+            "href": "/api/pets/{id}"
           },
           "content": [
             {
@@ -737,20 +604,7 @@
                       }
                     }
                   ]
-                },
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        3389,
-                        551
-                      ]
-                    ]
-                  }
-                ]
+                }
               },
               "content": [
                 {
@@ -776,40 +630,13 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            3724,
-                            105
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                3389,
-                                551
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "GET"
                       },
                       "content": []
                     },
@@ -836,20 +663,7 @@
                             ]
                           },
                           "content": "200"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                3724,
-                                105
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {
@@ -986,20 +800,7 @@
                       }
                     }
                   ]
-                },
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        3940,
-                        454
-                      ]
-                    ]
-                  }
-                ]
+                }
               },
               "content": [
                 {
@@ -1025,40 +826,13 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            4239,
-                            48
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "DELETE",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                3940,
-                                454
-                              ]
-                            ]
-                          }
-                        ]
+                        "method": "DELETE"
                       },
                       "content": []
                     },
@@ -1085,20 +859,7 @@
                             ]
                           },
                           "content": "204"
-                        },
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                4239,
-                                48
-                              ]
-                            ]
-                          }
-                        ]
+                        }
                       },
                       "content": [
                         {
