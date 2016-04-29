@@ -31,45 +31,45 @@
         }
       },
       "attributes": {
-        "meta": {
-          "element": "object",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "meta": {
-                "classes": [
-                  "user"
-                ]
-              },
-              "attributes": {
-                "sourceMap": [
-                  [
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {
+              "sourceMap": [
+                {
+                  "element": "sourceMap",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
                     [
                       84,
                       19
                     ]
                   ]
-                ]
-              },
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "HOST"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "https://example.com"
                 }
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "https://example.com"
               }
             }
-          ]
-        }
+          }
+        ]
       },
       "content": [
         {
@@ -112,7 +112,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/recursive"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            201,
+                            442
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/recursive"
+                }
               },
               "content": [
                 {
@@ -149,16 +168,40 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "Test 1 2"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        444,
+                                        23
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Test 1 2"
+                            }
                           },
                           "attributes": {
                             "sourceMap": [
-                              [
-                                [
-                                  404,
-                                  119
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    404,
+                                    119
+                                  ]
                                 ]
-                              ]
+                              }
                             ]
                           },
                           "content": {
@@ -223,20 +266,26 @@
                           "element": "httpRequest",
                           "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    219,
-                                    424
-                                  ]
+                            "method": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        219,
+                                        424
+                                      ]
+                                    ]
+                                  }
                                 ]
-                              }
-                            ]
+                              },
+                              "content": "GET"
+                            }
                           },
                           "content": []
                         },

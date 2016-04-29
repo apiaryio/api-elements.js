@@ -31,45 +31,45 @@
         }
       },
       "attributes": {
-        "meta": {
-          "element": "object",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "meta": {
-                "classes": [
-                  "user"
-                ]
-              },
-              "attributes": {
-                "sourceMap": [
-                  [
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {
+              "sourceMap": [
+                {
+                  "element": "sourceMap",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
                     [
                       417,
                       25
                     ]
                   ]
-                ]
-              },
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "HOST"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "http://petstore.swagger.io"
                 }
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "http://petstore.swagger.io"
               }
             }
-          ]
-        }
+          }
+        ]
       },
       "content": [
         {
@@ -96,20 +96,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/api/pets",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    547,
-                    2826
-                  ]
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        547,
+                        2826
+                      ]
+                    ]
+                  }
                 ]
-              }
-            ]
+              },
+              "content": "/api/pets"
+            }
           },
           "content": [
             {
@@ -127,16 +133,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "tags to filter by"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2225,
+                                    30
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "tags to filter by"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              2184,
-                              202
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                2184,
+                                202
+                              ]
                             ]
-                          ]
+                          }
                         ]
                       },
                       "content": {
@@ -192,16 +222,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "maximum number of results to return"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2430,
+                                    48
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "maximum number of results to return"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              2388,
-                              171
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                2388,
+                                171
+                              ]
                             ]
-                          ]
+                          }
                         ]
                       },
                       "content": {
@@ -234,20 +288,7 @@
                       }
                     }
                   ]
-                },
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        558,
-                        2281
-                      ]
-                    ]
-                  }
-                ]
+                }
               },
               "content": [
                 {
@@ -273,40 +314,32 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            2578,
-                            150
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                558,
-                                2281
-                              ]
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    558,
+                                    2281
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
@@ -314,20 +347,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "200",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                2578,
-                                150
-                              ]
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2578,
+                                    150
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -386,21 +425,7 @@
               "meta": {
                 "id": "addPet"
               },
-              "attributes": {
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        2839,
-                        534
-                      ]
-                    ]
-                  }
-                ]
-              },
+              "attributes": {},
               "content": [
                 {
                   "element": "copy",
@@ -425,40 +450,32 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            3159,
-                            105
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "POST",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                2839,
-                                534
-                              ]
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    2839,
+                                    534
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "POST"
+                        }
                       },
                       "content": [
                         {
@@ -469,7 +486,20 @@
                             ]
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": "application/schema+json",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3085,
+                                    55
+                                  ]
+                                ]
+                              }
+                            ]
                           },
                           "content": "{\"required\":[\"name\"],\"properties\":{\"name\":{\"type\":\"string\"},\"tag\":{\"type\":\"string\"}}}"
                         }
@@ -479,20 +509,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "200",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                3159,
-                                105
-                              ]
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3159,
+                                    105
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -552,20 +588,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/api/pets/{id}",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    3373,
-                    1021
-                  ]
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        3373,
+                        1021
+                      ]
+                    ]
+                  }
                 ]
-              }
-            ]
+              },
+              "content": "/api/pets/{id}"
+            }
           },
           "content": [
             {
@@ -582,16 +624,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "ID of pet to fetch"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3594,
+                                    31
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "ID of pet to fetch"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              3556,
-                              149
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                3556,
+                                149
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -627,20 +693,7 @@
                       }
                     }
                   ]
-                },
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        3389,
-                        551
-                      ]
-                    ]
-                  }
-                ]
+                }
               },
               "content": [
                 {
@@ -666,40 +719,32 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            3724,
-                            105
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                3389,
-                                551
-                              ]
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3389,
+                                    551
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
@@ -707,20 +752,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "200",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                3724,
-                                105
-                              ]
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3724,
+                                    105
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -788,16 +839,40 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "ID of pet to delete"
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    4108,
+                                    32
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "ID of pet to delete"
+                        }
                       },
                       "attributes": {
                         "sourceMap": [
-                          [
-                            [
-                              4070,
-                              150
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                4070,
+                                150
+                              ]
                             ]
-                          ]
+                          }
                         ],
                         "typeAttributes": [
                           "required"
@@ -833,20 +908,7 @@
                       }
                     }
                   ]
-                },
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        3940,
-                        454
-                      ]
-                    ]
-                  }
-                ]
+                }
               },
               "content": [
                 {
@@ -872,40 +934,32 @@
                 {
                   "element": "httpTransaction",
                   "meta": {},
-                  "attributes": {
-                    "sourceMap": [
-                      {
-                        "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            4239,
-                            48
-                          ]
-                        ]
-                      }
-                    ]
-                  },
+                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "DELETE",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                3940,
-                                454
-                              ]
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3940,
+                                    454
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "DELETE"
+                        }
                       },
                       "content": []
                     },
@@ -913,20 +967,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "204",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                4239,
-                                48
-                              ]
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    4239,
+                                    48
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "204"
+                        }
                       },
                       "content": [
                         {

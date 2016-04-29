@@ -12,36 +12,31 @@
         "title": "Not formatted example"
       },
       "attributes": {
-        "meta": {
-          "element": "object",
-          "meta": {},
-          "attributes": {},
-          "content": [
-            {
-              "element": "member",
-              "meta": {
-                "classes": [
-                  "user"
-                ]
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {},
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
               },
-              "attributes": {},
-              "content": {
-                "key": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "HOST"
-                },
-                "value": {
-                  "element": "string",
-                  "meta": {},
-                  "attributes": {},
-                  "content": "custom-instance.filter.ly"
-                }
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "custom-instance.filter.ly"
               }
             }
-          ]
-        }
+          }
+        ]
       },
       "content": [
         {
