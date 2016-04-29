@@ -217,9 +217,7 @@ export default class Parser {
   }
 
   // This method lets you set the current parsing path and synchronously run
-  // a function (e.g. to create an element). If the function returns one or
-  // more elements then they will get a source map if one was requested. Once
-  // finished, the path is restored to its original value.
+  // a function (e.g. to create an element).
   withPath(...args) {
     let i;
 
@@ -227,17 +225,7 @@ export default class Parser {
       this.path.push(args[i]);
     }
 
-    let elements = args[args.length - 1].bind(this)(this.path);
-
-    if (elements && this.generateSourceMap) {
-      // You can return either an element or an array of elements.
-      if (!_.isArray(elements)) {
-        elements = [elements];
-      }
-      for (i of elements) {
-        this.createSourceMap(i, this.path);
-      }
-    }
+    args[args.length - 1].bind(this)(this.path);
 
     for (i = 0; i < args.length - 1; i++) {
       this.path.pop();
@@ -263,7 +251,12 @@ export default class Parser {
       this.withPath('info', () => {
         if (this.swagger.info.title) {
           this.withPath('title', () => {
-            this.api.meta.set('title', this.swagger.info.title);
+            this.api.title = this.swagger.info.title;
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(this.api.meta.get('title'), this.path);
+            }
+
             return this.api.meta.get('title');
           });
         }
@@ -272,6 +265,11 @@ export default class Parser {
           this.withPath('description', () => {
             const description = new Copy(this.swagger.info.description);
             this.api.content.push(description);
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(description, this.path);
+            }
+
             return description;
           });
         }
@@ -296,11 +294,17 @@ export default class Parser {
           hostname = `${this.swagger.schemes[0]}://${hostname}`;
         }
 
-        this.api.attributes.set('meta', {});
-        const meta = this.api.attributes.get('meta');
+        const meta = [];
         const member = new MemberElement('HOST', hostname);
+
         member.meta.set('classes', ['user']);
-        meta.content.push(member);
+
+        if (this.generateSourceMap) {
+          this.createSourceMap(member, this.path);
+        }
+
+        meta.push(member);
+        this.api.attributes.set('meta', meta);
 
         return member;
       });
@@ -327,6 +331,11 @@ export default class Parser {
       if (pathValue['x-summary']) {
         this.withPath('x-summary', () => {
           resource.title = pathValue['x-summary'];
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(resource.meta.get('title'), this.path);
+          }
+
           return resource.meta.get('title');
         });
       }
@@ -336,6 +345,11 @@ export default class Parser {
         this.withPath('x-description', () => {
           const resourceDescription = new Copy(pathValue['x-description']);
           resource.push(resourceDescription);
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(resourceDescription, this.path);
+          }
+
           return resourceDescription;
         });
       }
@@ -357,8 +371,11 @@ export default class Parser {
       // by individual transition URI templates. When creating a transition
       // below, we *only* set the transition URI template if it differs from
       // the one we've generated here.
-      const hrefForResource = buildUriTemplate(this.basePath, href, pathObjectParameters);
-      resource.attributes.set('href', hrefForResource);
+      resource.href = buildUriTemplate(this.basePath, href, pathObjectParameters);
+
+      if (this.generateSourceMap) {
+        this.createSourceMap(resource.attributes.get('href'), this.path);
+      }
 
       // TODO: It should add support for `body` and `formData` parameters as well.
       if (pathObjectParameters.length > 0) {
@@ -414,13 +431,19 @@ export default class Parser {
       // is different from the resource URI template, then we set the
       // transition's `href` attribute.
       const hrefForTransition = buildUriTemplate(this.basePath, href, resourceParameters, queryParameters);
-      if (hrefForTransition !== resource.attributes.getValue('href')) {
-        transition.attributes.set('href', hrefForTransition);
+
+      if (hrefForTransition !== resource.href) {
+        transition.href = hrefForTransition;
       }
 
       if (methodValue.summary) {
         this.withPath('summary', () => {
           transition.title = methodValue.summary;
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(transition.meta.get('title'), this.path);
+          }
+
           return transition.meta.get('title');
         });
       }
@@ -429,13 +452,18 @@ export default class Parser {
         this.withPath('description', () => {
           const description = new Copy(methodValue.description);
           transition.push(description);
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(description, this.path);
+          }
+
           return description;
         });
       }
 
       if (methodValue.operationId) {
         // TODO: Add a source map?
-        transition.meta.set('id', methodValue.operationId);
+        transition.id = methodValue.operationId;
       }
 
       // For each uriParameter, create an hrefVariable
@@ -524,8 +552,13 @@ export default class Parser {
 
       // Body parameters define request schemas
       _.each(bodyParameters, (bodyParameter) => {
-        const schemaAsset = this.createAssetFromJsonSchema(
-          bodyParameter.schema);
+        const index = transitionParameters.indexOf(bodyParameter);
+        const schemaAsset = this.createAssetFromJsonSchema(bodyParameter.schema);
+
+        if (this.generateSourceMap) {
+          this.createSourceMap(schemaAsset, this.path.concat(['parameters', index, 'schema']));
+        }
+
         request.content.push(schemaAsset);
       });
 
@@ -560,6 +593,7 @@ export default class Parser {
       if (responseValue.description) {
         const description = new Copy(responseValue.description);
         response.content.push(description);
+
         if (this.generateSourceMap) {
           this.createSourceMap(description, this.path.concat(['description']));
         }
@@ -575,6 +609,11 @@ export default class Parser {
           const contentHeader = new MemberElement(
             'Content-Type', contentType
           );
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(contentHeader, this.path);
+          }
+
           headers.push(contentHeader);
           response.headers = headers;
           return contentHeader;
@@ -597,6 +636,11 @@ export default class Parser {
 
             const bodyAsset = new Asset(formattedResponseBody);
             bodyAsset.classes.push('messageBody');
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(bodyAsset, this.path);
+            }
+
             response.content.push(bodyAsset);
 
             return bodyAsset;
@@ -605,8 +649,10 @@ export default class Parser {
 
         // Responses can have schemas in Swagger
         const schema = responseValue.schema || (responseValue.examples && responseValue.examples.schema);
+
         if (schema) {
           let args;
+
           if (responseValue.examples && responseValue.examples.schema) {
             args = [5, 'examples', 'schema'];
           } else {
@@ -615,13 +661,22 @@ export default class Parser {
 
           this.withSlicedPath.apply(this, args.concat([() => {
             const schemaAsset = this.createAssetFromJsonSchema(schema);
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(schemaAsset, this.path);
+            }
+
             response.content.push(schemaAsset);
             return schemaAsset;
           }]));
         }
 
         if (statusCode !== 'null') {
-          response.attributes.set('statusCode', statusCode);
+          response.statusCode = statusCode;
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(response.attributes.get('statusCode'), this.path.slice(0, -1));
+          }
         }
       });
 
@@ -662,9 +717,18 @@ export default class Parser {
 
       const member = new MemberElement(headerName, value);
 
+      if (this.generateSourceMap) {
+        this.createSourceMap(member, this.path);
+      }
+
       if (header.description) {
         this.withPath('description', () => {
-          member.meta.set('description', header.description);
+          member.description = header.description;
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(member.meta.get('description'), this.path);
+          }
+
           return member.meta.get('description');
         });
       }
@@ -812,8 +876,7 @@ export default class Parser {
       member.description = parameter.description;
 
       if (this.generateSourceMap) {
-        this.createSourceMap(member.meta.get('description'),
-          path.concat(['description']));
+        this.createSourceMap(member.meta.get('description'), path.concat(['description']));
       }
     }
 
@@ -891,8 +954,9 @@ export default class Parser {
   createAssetFromJsonSchema(jsonSchema) {
     const Asset = this.minim.getElementClass('asset');
     const schemaAsset = new Asset(JSON.stringify(jsonSchema));
+
     schemaAsset.classes.push('messageBodySchema');
-    schemaAsset.attributes.set('contentType', 'application/schema+json');
+    schemaAsset.contentType = 'application/schema+json';
 
     return schemaAsset;
   }
@@ -908,7 +972,11 @@ export default class Parser {
     }
 
     if (method) {
-      transaction.request.attributes.set('method', method.toUpperCase());
+      transaction.request.method = method.toUpperCase();
+
+      if (this.generateSourceMap) {
+        this.createSourceMap(transaction.request.attributes.get('method'), this.path);
+      }
     }
 
     return transaction;

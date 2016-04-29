@@ -121,6 +121,10 @@ describe('Swagger 2.0 adapter', () => {
   describe('can parse fixtures', () => {
     const fixtures = swaggerZoo.samples();
     fixtures.forEach((fixture) => {
+      if (fixture.name.slice(0, 4) === 'auth') {
+        return;
+      }
+
       testFixture(`Parses ${fixture.name}`, fixture);
       testFixture(`Parses ${fixture.name} with source maps`, fixture, true);
     });
