@@ -429,7 +429,20 @@
                             ]
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": "application/schema+json",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    3085,
+                                    55
+                                  ]
+                                ]
+                              }
+                            ]
                           },
                           "content": "{\"required\":[\"name\"],\"properties\":{\"name\":{\"type\":\"string\"},\"tag\":{\"type\":\"string\"}}}"
                         }

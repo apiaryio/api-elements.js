@@ -315,7 +315,20 @@
                             ]
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": "application/schema+json",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    624,
+                                    39
+                                  ]
+                                ]
+                              }
+                            ]
                           },
                           "content": "{\"type\":\"string\"}"
                         }
