@@ -34,17 +34,7 @@ class Fury {
    * Load serialized refract elements into Javascript objects.
    */
   load(elements) {
-    let api;
-
-    // Support both shorthand syntax and the long-form refract, attempting
-    // to autodetect which we are getting.
-    if (Array.isArray(elements)) {
-      api = minim.fromCompactRefract(elements);
-    } else {
-      api = minim.fromRefract(elements);
-    }
-
-    return api;
+    return minim.fromRefract(elements);
   }
 
   /*

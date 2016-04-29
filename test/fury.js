@@ -1,53 +1,184 @@
 import {assert} from 'chai';
 import fury, {Fury} from '../src/fury';
 
-const refractedApi = [
-  'parseResult', {}, {}, [
-    ['category', {'classes': ['api'], title: 'My API'}, {}, [
-      ['copy', {}, {}, 'An API description.'],
-      ['category', {'classes': ['resourceGroup'], title: 'My Group'}, {}, [
-        ['copy', {}, {contentType: 'text/plain'}, 'This is a group of resources'],
-        ['resource', {title: 'Frob'}, {
-          href: '/frobs/{id}',
-          hrefVariables: ['hrefVariables', {}, {}, [
-            ['member', {}, {}, {
-              'key': ['string', {}, {}, 'id'],
-              'value': ['string', {}, {}, ''],
-            }],
-          ]],
-        }, [
-          ['copy', {}, {}, 'A frob does something.'],
-          ['dataStructure', {}, {}, ['object', {}, {}, [
-            ['member', {}, {'typeAttributes': ['required']}, {
-              'key': ['string', {}, {}, 'id'],
-              'value': ['string', {}, {}, null],
-            }],
-            ['member', {}, {}, {
-              'key': ['string', {}, {}, 'tag'],
-              'value': ['string', {}, {}, null],
-            }],
-          ]]],
-          ['transition', {}, {}, [
-            ['copy', {}, {}, 'Gets information about a single frob instance'],
-            ['httpTransaction', {title: 'Get a frob'}, {}, [
-              ['httpRequest', {}, {method: 'GET'}, []],
-              ['httpResponse', {}, {statusCode: 200, headers: ['httpHeaders', {}, {}, [
-                ['member', {}, {}, {
-                  key: ['string', {}, {}, 'Content-Type'],
-                  value: ['string', {}, {}, 'application/json'],
-                }],
-              ]]}, [
-                ['asset', {'classes': ['messageBody']}, {}, '{\n  "id": "1",\n  "tag": "foo"\n}\n'],
-              ]],
-            ]],
-          ]],
-        ]],
-      ]],
-    ]],
-    ['annotation', {'classes': ['warning']}, {'code': 6, 'sourceMap': [
-      ['sourceMap', {}, {}, [[0, 10]]],
-    ]}, 'description'],
-  ]];
+const refractedApi = {
+  element: 'parseResult',
+  content: [
+    {
+      element: 'category',
+      meta: {
+        classes: ['api'],
+        title: 'My API',
+      },
+      content: [
+        {
+          element: 'copy',
+          content: 'An API description.',
+        },
+        {
+          element: 'category',
+          meta: {
+            classes: ['resourceGroup'],
+            title: 'My Group',
+          },
+          content: [
+            {
+              element: 'copy',
+              attributes: {
+                contentType: 'text/plain',
+              },
+              content: 'This is a group of resources',
+            },
+            {
+              element: 'resource',
+              meta: {
+                title: 'Frob',
+              },
+              attributes: {
+                href: '/frobs/{id}',
+                hrefVariables: {
+                  element: 'hrefVariables',
+                  content: [
+                    {
+                      element: 'member',
+                      content: {
+                        key: {
+                          element: 'string',
+                          content: 'id',
+                        },
+                        value: {
+                          element: 'string',
+                          content: '',
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+              content: [
+                {
+                  element: 'copy',
+                  content: 'A frob does something.',
+                },
+                {
+                  element: 'dataStructure',
+                  content: {
+                    element: 'object',
+                    content: [
+                      {
+                        element: 'member',
+                        meta: {},
+                        attributes: {
+                          typeAttributes: ['required'],
+                        },
+                        content: {
+                          key: {
+                            element: 'string',
+                            content: 'id',
+                          },
+                          value: {
+                            element: 'string',
+                            content: null,
+                          },
+                        },
+                      },
+                      {
+                        element: 'member',
+                        content: {
+                          key: {
+                            element: 'string',
+                            content: 'tag',
+                          },
+                          value: {
+                            element: 'string',
+                            content: null,
+                          },
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  element: 'transition',
+                  content: [
+                    {
+                      element: 'copy',
+                      content: 'Gets information about a single frob instance',
+                    },
+                    {
+                      element: 'httpTransaction',
+                      meta: {
+                        title: 'Get a frob',
+                      },
+                      content: [
+                        {
+                          element: 'httpRequest',
+                          attributes: {
+                            method: 'GET',
+                          },
+                          content: [],
+                        },
+                        {
+                          element: 'httpResponse',
+                          attributes: {
+                            statusCode: 200,
+                            headers: {
+                              element: 'httpHeaders',
+                              content: [
+                                {
+                                  element: 'member',
+                                  content: {
+                                    key: {
+                                      element: 'string',
+                                      content: 'Content-Type',
+                                    },
+                                    value: {
+                                      element: 'string',
+                                      content: 'application/json',
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                          content: [
+                            {
+                              element: 'asset',
+                              meta: {
+                                classes: ['messageBody'],
+                              },
+                              content: '{\n  "id": "1",\n  "tag": "foo"\n}\n',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      element: 'annotation',
+      meta: {
+        classes: ['warning'],
+      },
+      attributes: {
+        code: 6,
+        sourceMap: [
+          {
+            element: 'sourceMap',
+            content: [[0, 10]],
+          },
+        ],
+      },
+      content: 'description',
+    },
+  ],
+};
 
 describe('Nodes.js require', () => {
   it('should work without needing to use `.default`', () => {
@@ -81,7 +212,7 @@ describe('Parser', () => {
         name: 'passthrough',
         mediaTypes: ['text/vnd.passthrough'],
         detect: () => true,
-        parse: ({source}, done) => done(null, ['string', {}, {}, source]),
+        parse: ({source}, done) => done(null, { element: 'string', content: source }),
         serialize: ({api}, done) => done(null, api),
       };
 
@@ -196,11 +327,6 @@ describe('Parser', () => {
 
 describe('Refract loader', () => {
   describe('autodetect', () => {
-    it('should support shorthand', () => {
-      const api = fury.load(['category', {'classes': 'api'}, {}, []]);
-      assert(api);
-    });
-
     it('should support long-form', () => {
       const api = fury.load({
         element: 'category',
@@ -213,7 +339,7 @@ describe('Refract loader', () => {
     });
   });
 
-  describe('shorthand', () => {
+  describe('when given a valid api', () => {
     let api;
     let annotation;
 
@@ -223,25 +349,23 @@ describe('Refract loader', () => {
       annotation = result.get(1);
     });
 
-    context('parse result annotation', () => {
-      it('should exist', () => {
-        assert.ok(annotation);
-      });
-
-      it('should have a code', () => {
-        assert.equal(annotation.code, 6);
-      });
-
-      it('should have text content', () => {
-        assert.equal(annotation.toValue(), 'description');
-      });
-
-      it('should have a source map', () => {
-        assert.deepEqual(annotation.attributes.get('sourceMap').first().toValue(), [[0, 10]]);
-      });
+    it('should contain parse result annotation', () => {
+      assert.ok(annotation);
     });
 
-    it('should parse a refract shorthand API', () => {
+    it('should contain annotation code', () => {
+      assert.equal(annotation.code, 6);
+    });
+
+    it('should contain annotation description', () => {
+      assert.equal(annotation.toValue(), 'description');
+    });
+
+    it('should contain annotation source map', () => {
+      assert.deepEqual(annotation.attributes.get('sourceMap').first().toValue(), [[0, 10]]);
+    });
+
+    it('should parse a refract API', () => {
       assert.ok(api);
     });
 
@@ -256,8 +380,7 @@ describe('Refract loader', () => {
 
     it('should contain a single copy element', () => {
       assert.equal(api.resourceGroups.get(0).copy.length, 1);
-      assert.equal(api.resourceGroups.get(0).copy.get(0).content,
-                   'This is a group of resources');
+      assert.equal(api.resourceGroups.get(0).copy.get(0).content, 'This is a group of resources');
     });
 
     it('should contain a single resource', () => {
@@ -275,18 +398,17 @@ describe('Refract loader', () => {
     });
 
     it('should contain a single transaction', () => {
-      assert.equal(api.resourceGroups.get(0).resources.get(0).transitions.get(0)
-                   .transactions.length, 1);
+      assert.equal(api.resourceGroups.get(0).resources.get(0).transitions.get(0).transactions.length, 1);
     });
 
-    it('Should contain a request', () => {
+    it('should contain a request', () => {
       const resource = api.resourceGroups.get(0).resources.get(0);
       const request = resource.transitions.get(0).transactions.get(0).request;
 
       assert(request);
     });
 
-    it('Should contain a response', () => {
+    it('should contain a response', () => {
       const resource = api.resourceGroups.get(0).resources.get(0);
       const response = resource.transitions.get(0).transactions.get(0).response;
 
