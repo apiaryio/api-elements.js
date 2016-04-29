@@ -968,6 +968,10 @@ export default class Parser {
 
     if (method) {
       transaction.request.attributes.set('method', method.toUpperCase());
+
+      if (this.generateSourceMap) {
+        this.createSourceMap(transaction.request.attributes.get('method'), this.path);
+      }
     }
 
     return transaction;
