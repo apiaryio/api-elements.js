@@ -251,7 +251,7 @@ export default class Parser {
       this.withPath('info', () => {
         if (this.swagger.info.title) {
           this.withPath('title', () => {
-            this.api.meta.set('title', this.swagger.info.title);
+            this.api.title = this.swagger.info.title;
 
             if (this.generateSourceMap) {
               this.createSourceMap(this.api.meta.get('title'), this.path);
@@ -371,8 +371,7 @@ export default class Parser {
       // by individual transition URI templates. When creating a transition
       // below, we *only* set the transition URI template if it differs from
       // the one we've generated here.
-      const hrefForResource = buildUriTemplate(this.basePath, href, pathObjectParameters);
-      resource.attributes.set('href', hrefForResource);
+      resource.href = buildUriTemplate(this.basePath, href, pathObjectParameters);
 
       if (this.generateSourceMap) {
         this.createSourceMap(resource.attributes.get('href'), this.path);
@@ -432,8 +431,9 @@ export default class Parser {
       // is different from the resource URI template, then we set the
       // transition's `href` attribute.
       const hrefForTransition = buildUriTemplate(this.basePath, href, resourceParameters, queryParameters);
-      if (hrefForTransition !== resource.attributes.getValue('href')) {
-        transition.attributes.set('href', hrefForTransition);
+
+      if (hrefForTransition !== resource.href) {
+        transition.href = hrefForTransition;
       }
 
       if (methodValue.summary) {
@@ -463,7 +463,7 @@ export default class Parser {
 
       if (methodValue.operationId) {
         // TODO: Add a source map?
-        transition.meta.set('id', methodValue.operationId);
+        transition.id = methodValue.operationId;
       }
 
       // For each uriParameter, create an hrefVariable
@@ -672,7 +672,7 @@ export default class Parser {
         }
 
         if (statusCode !== 'null') {
-          response.attributes.set('statusCode', statusCode);
+          response.statusCode = statusCode;
 
           if (this.generateSourceMap) {
             this.createSourceMap(response.attributes.get('statusCode'), this.path.slice(0, -1));
@@ -723,7 +723,7 @@ export default class Parser {
 
       if (header.description) {
         this.withPath('description', () => {
-          member.meta.set('description', header.description);
+          member.description = header.description;
 
           if (this.generateSourceMap) {
             this.createSourceMap(member.meta.get('description'), this.path);
@@ -954,8 +954,9 @@ export default class Parser {
   createAssetFromJsonSchema(jsonSchema) {
     const Asset = this.minim.getElementClass('asset');
     const schemaAsset = new Asset(JSON.stringify(jsonSchema));
+
     schemaAsset.classes.push('messageBodySchema');
-    schemaAsset.attributes.set('contentType', 'application/schema+json');
+    schemaAsset.contentType = 'application/schema+json';
 
     return schemaAsset;
   }
@@ -971,7 +972,7 @@ export default class Parser {
     }
 
     if (method) {
-      transaction.request.attributes.set('method', method.toUpperCase());
+      transaction.request.method = method.toUpperCase();
 
       if (this.generateSourceMap) {
         this.createSourceMap(transaction.request.attributes.get('method'), this.path);

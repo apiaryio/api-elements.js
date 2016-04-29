@@ -122,7 +122,7 @@ describe('Swagger 2.0 adapter', () => {
     const fixtures = swaggerZoo.samples();
     fixtures.forEach((fixture) => {
       if (fixture.name.slice(0, 4) === 'auth') {
-        return
+        return;
       }
 
       testFixture(`Parses ${fixture.name}`, fixture);
