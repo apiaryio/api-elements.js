@@ -548,8 +548,13 @@ export default class Parser {
 
       // Body parameters define request schemas
       _.each(bodyParameters, (bodyParameter) => {
-        const schemaAsset = this.createAssetFromJsonSchema(
-          bodyParameter.schema);
+        const index = transitionParameters.indexOf(bodyParameter);
+        const schemaAsset = this.createAssetFromJsonSchema(bodyParameter.schema);
+
+        if (this.generateSourceMap) {
+          this.createSourceMap(schemaAsset, this.path.concat(['parameters', index, 'schema']));
+        }
+
         request.content.push(schemaAsset);
       });
 
