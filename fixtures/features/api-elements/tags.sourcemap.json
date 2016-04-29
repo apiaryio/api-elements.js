@@ -52,7 +52,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/test"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            120,
+                            222
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/test"
+                }
               },
               "content": [
                 {
@@ -239,7 +258,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/yet-another-test"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            574,
+                            126
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/yet-another-test"
+                }
               },
               "content": [
                 {
@@ -349,7 +387,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/another-test"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            342,
+                            232
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/another-test"
+                }
               },
               "content": [
                 {

@@ -36,7 +36,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        73,
+                        2337
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/"
+            }
           },
           "content": [
             {
@@ -366,7 +385,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/v2"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        2410,
+                        3656
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/v2"
+            }
           },
           "content": [
             {

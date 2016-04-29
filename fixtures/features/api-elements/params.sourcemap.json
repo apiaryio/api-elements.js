@@ -36,7 +36,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/test/{id}"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        67,
+                        407
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/test/{id}"
+            }
           },
           "content": [
             {
@@ -306,7 +325,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/test"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        474,
+                        253
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/test"
+            }
           },
           "content": [
             {

@@ -185,7 +185,26 @@
                 }
               ]
             },
-            "href": "/test/{id}{?search}"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        78,
+                        497
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/test/{id}{?search}"
+            }
           },
           "content": [
             {

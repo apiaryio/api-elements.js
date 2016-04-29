@@ -106,7 +106,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/products"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            392,
+                            985
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/products"
+                }
               },
               "content": [
                 {
@@ -433,7 +452,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/estimates/price"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            1377,
+                            1732
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/estimates/price"
+                }
               },
               "content": [
                 {
@@ -890,7 +928,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/estimates/time"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            3109,
+                            1399
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/estimates/time"
+                }
               },
               "content": [
                 {
@@ -1353,7 +1410,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/me"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            4508,
+                            457
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/me"
+                }
               },
               "content": [
                 {
@@ -1517,7 +1593,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/history"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            4965,
+                            1181
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/history"
+                }
               },
               "content": [
                 {

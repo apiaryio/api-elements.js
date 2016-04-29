@@ -112,7 +112,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/recursive"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            201,
+                            442
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/recursive"
+                }
               },
               "content": [
                 {

@@ -96,7 +96,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/api/pets"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        547,
+                        2826
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/api/pets"
+            }
           },
           "content": [
             {
@@ -569,7 +588,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/api/pets/{id}"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        3373,
+                        1021
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/api/pets/{id}"
+            }
           },
           "content": [
             {

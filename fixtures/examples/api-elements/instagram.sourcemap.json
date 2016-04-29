@@ -184,7 +184,26 @@
                     }
                   ]
                 },
-                "href": "/v1/users/{user%2did}"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            8124,
+                            434
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/{user%2did}"
+                }
               },
               "content": [
                 {
@@ -327,7 +346,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/users/self/feed"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            8558,
+                            743
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/self/feed"
+                }
               },
               "content": [
                 {
@@ -761,7 +799,26 @@
                     }
                   ]
                 },
-                "href": "/v1/users/{user%2did}/media/recent"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            9301,
+                            1226
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/{user%2did}/media/recent"
+                }
               },
               "content": [
                 {
@@ -1233,7 +1290,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/users/self/media/liked"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            10527,
+                            845
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/self/media/liked"
+                }
               },
               "content": [
                 {
@@ -1521,7 +1597,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/users/search"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            11372,
+                            604
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/search"
+                }
               },
               "content": [
                 {
@@ -1908,7 +2003,26 @@
                     }
                   ]
                 },
-                "href": "/v1/users/{user%2did}/follows"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            11976,
+                            408
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/{user%2did}/follows"
+                }
               },
               "content": [
                 {
@@ -2129,7 +2243,26 @@
                     }
                   ]
                 },
-                "href": "/v1/users/{user%2did}/followed-by"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            12384,
+                            419
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/{user%2did}/followed-by"
+                }
               },
               "content": [
                 {
@@ -2272,7 +2405,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/users/self/requested-by"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            12803,
+                            498
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/self/requested-by"
+                }
               },
               "content": [
                 {
@@ -2493,7 +2645,26 @@
                     }
                   ]
                 },
-                "href": "/v1/users/{user%2did}/relationship"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            13301,
+                            827
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/users/{user%2did}/relationship"
+                }
               },
               "content": [
                 {
@@ -2758,7 +2929,26 @@
                     }
                   ]
                 },
-                "href": "/v1/media/{media%2did}"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            14128,
+                            670
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/media/{media%2did}"
+                }
               },
               "content": [
                 {
@@ -2979,7 +3169,26 @@
                     }
                   ]
                 },
-                "href": "/v1/media1/{shortcode}"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            14798,
+                            633
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/media1/{shortcode}"
+                }
               },
               "content": [
                 {
@@ -3122,7 +3331,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/media/search"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            15431,
+                            1723
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/media/search"
+                }
               },
               "content": [
                 {
@@ -3615,7 +3843,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/media/popular"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            17154,
+                            430
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/media/popular"
+                }
               },
               "content": [
                 {
@@ -3848,7 +4095,26 @@
                     }
                   ]
                 },
-                "href": "/v1/media/{media%2did}/comments"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            17584,
+                            1996
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/media/{media%2did}/comments"
+                }
               },
               "content": [
                 {
@@ -4375,7 +4641,26 @@
                     }
                   ]
                 },
-                "href": "/v1/media/{media%2did}/likes"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            19580,
+                            1454
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/media/{media%2did}/likes"
+                }
               },
               "content": [
                 {
@@ -4876,7 +5161,26 @@
                     }
                   ]
                 },
-                "href": "/v1/tags/{tag%2dname}"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            21034,
+                            278
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/tags/{tag%2dname}"
+                }
               },
               "content": [
                 {
@@ -5097,7 +5401,26 @@
                     }
                   ]
                 },
-                "href": "/v1/tags/{tag%2dname}/media/recent"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            21312,
+                            530
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/tags/{tag%2dname}/media/recent"
+                }
               },
               "content": [
                 {
@@ -5240,7 +5563,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/tags/search"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            21842,
+                            573
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/tags/search"
+                }
               },
               "content": [
                 {
@@ -5530,7 +5872,26 @@
                     }
                   ]
                 },
-                "href": "/v1/locations/{location%2did}"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            22415,
+                            449
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/locations/{location%2did}"
+                }
               },
               "content": [
                 {
@@ -5751,7 +6112,26 @@
                     }
                   ]
                 },
-                "href": "/v1/locations/{location%2did}/media/recent"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            22864,
+                            1083
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/locations/{location%2did}/media/recent"
+                }
               },
               "content": [
                 {
@@ -6175,7 +6555,26 @@
               "element": "resource",
               "meta": {},
               "attributes": {
-                "href": "/v1/locations/search"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            23947,
+                            1719
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/locations/search"
+                }
               },
               "content": [
                 {
@@ -6813,7 +7212,26 @@
                     }
                   ]
                 },
-                "href": "/v1/geographies/{geo%2did}/media/recent"
+                "href": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            25666,
+                            1395
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "/v1/geographies/{geo%2did}/media/recent"
+                }
               },
               "content": [
                 {

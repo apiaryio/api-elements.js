@@ -57,7 +57,26 @@
             }
           },
           "attributes": {
-            "href": "/test"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        86,
+                        155
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/test"
+            }
           },
           "content": [
             {

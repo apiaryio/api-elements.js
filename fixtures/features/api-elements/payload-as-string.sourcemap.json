@@ -76,7 +76,26 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/example/"
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        130,
+                        384
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/example/"
+            }
           },
           "content": [
             {
