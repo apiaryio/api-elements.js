@@ -225,7 +225,26 @@
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    85,
+                                    389
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
@@ -304,7 +323,26 @@
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "POST"
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    487,
+                                    240
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "POST"
+                        }
                       },
                       "content": [
                         {
