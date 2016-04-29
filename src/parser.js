@@ -374,6 +374,10 @@ export default class Parser {
       const hrefForResource = buildUriTemplate(this.basePath, href, pathObjectParameters);
       resource.attributes.set('href', hrefForResource);
 
+      if (this.generateSourceMap) {
+        this.createSourceMap(resource.attributes.get('href'), this.path);
+      }
+
       // TODO: It should add support for `body` and `formData` parameters as well.
       if (pathObjectParameters.length > 0) {
         pathObjectParameters.forEach((parameter, index) => {
