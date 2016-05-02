@@ -44,7 +44,8 @@
               "element": "Basic Authentication Scheme",
               "meta": {
                 "id": "customBasic",
-                "title": "Custom Basic Auth"
+                "title": "Custom Basic Auth",
+                "description": "Auth description"
               },
               "attributes": {},
               "content": []
