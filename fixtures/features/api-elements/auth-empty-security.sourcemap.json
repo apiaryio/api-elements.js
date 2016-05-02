@@ -1,0 +1,73 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": {
+          "element": "string",
+          "meta": {},
+          "attributes": {
+            "sourceMap": [
+              {
+                "element": "sourceMap",
+                "meta": {},
+                "attributes": {},
+                "content": [
+                  [
+                    23,
+                    23
+                  ]
+                ]
+              }
+            ]
+          },
+          "content": "Auth No Security"
+        }
+      },
+      "attributes": {},
+      "content": []
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                64,
+                23
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Authentication information is not yet supported"
+    }
+  ]
+}
