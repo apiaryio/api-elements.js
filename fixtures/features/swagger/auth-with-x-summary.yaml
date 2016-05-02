@@ -5,6 +5,7 @@ info:
 securityDefinitions:
   customBasic:
     x-summary: Custom Basic Auth
+    description: Auth description
     type: basic
 paths:
   /endpoint:
