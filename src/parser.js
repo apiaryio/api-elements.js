@@ -293,6 +293,71 @@ export default class Parser {
     }
   }
 
+  // Convert Oauth2 flow into Refract elements
+  oauthGrantType(element, flow) {
+    const {Member: MemberElement} = this.minim.elements;
+
+    if (flow === 'password') {
+      flow = 'resource owner password credentials';
+    } else if (flow === 'application') {
+      flow = 'client credentials';
+    } else if (flow === 'accessCode') {
+      flow = 'authorization code';
+    }
+
+    element.content.push(new MemberElement('grantType', flow));
+  }
+
+  // Convert OAuth2 scopes into Refract elements
+  oauthScopes(element, items) {
+    const {Member: MemberElement, Array: ArrayElement, String: StringElement} = this.minim.elements;
+    let scopes = new ArrayElement();
+    let descriptions = null;
+
+    if (_.isObject(items) && !_.isArray(items)) {
+      descriptions = Object.values(items);
+      items = Object.keys(items);
+    }
+
+    // If value is not an empty array, then they are scopes
+    items.forEach((item, index) => {
+      let scope = new StringElement(item);
+
+      if (descriptions) {
+        scope.description = descriptions[index];
+      }
+
+      scopes.content.push(scope);
+    });
+
+    if (scopes.length) {
+      element.content.push(new MemberElement('scopes', scopes));
+    }
+  }
+
+  // Conver OAuth2 transition information into Refract elements
+  oauthTransitions(element, item) {
+    const {Transition} = this.minim.elements;
+
+    if (item.authorizationUrl) {
+      const transition = new Transition();
+
+      transition.relation = 'authorize';
+      transition.href = item.authorizationUrl;
+
+      element.content.push(transition);
+    }
+
+    if (item.tokenUrl) {
+      const transition = new Transition();
+
+      transition.relation = 'token';
+      transition.href = item.tokenUrl;
+
+      element.content.push(transition);
+    }
+  }
+
   // Convert a Swagger auth object into Refract elements.
   handleSwaggerAuth() {
     const {Member: MemberElement, Category, AuthScheme} = this.minim.elements;
@@ -324,11 +389,30 @@ export default class Parser {
               break;
 
             case 'oauth2':
-              element.element = 'Oauth2 Scheme';
+              element.element = 'OAuth2 Scheme';
+
+              this.oauthGrantType(element, item.flow);
+
+              if (item.scopes) {
+                this.withPath('scopes', () => {
+                  this.oauthScopes(element, item.scopes);
+                });
+              }
+
+              this.oauthTransitions(element, item);
               break;
           }
 
           element.id = name;
+
+          if (item['x-summary']) {
+            element.title = item['x-summary'];
+          }
+
+          if (item.description) {
+            element.description = item.description;
+          }
+
           schemes.push(element);
         });
       }
@@ -352,7 +436,7 @@ export default class Parser {
   }
 
   handleSwaggerTransitionAuth(methodValue) {
-    const {Member: MemberElement, AuthScheme} = this.minim.elements;
+    const {AuthScheme} = this.minim.elements;
     let schemes = [];
 
     if (!methodValue.security) {
@@ -366,11 +450,7 @@ export default class Parser {
           let element = new AuthScheme();
 
           // If value is not an empty array, then they are scopes
-          item[name].forEach((scope, index) => {
-            this.withPath(index, () => {
-              // element.content.push(new MemberElement());
-            });
-          });
+          this.oauthScopes(element, item[name]);
 
           element.element = name;
           schemes.push(element);
