@@ -25,6 +25,7 @@ export function namespace(options) {
   require('./elements/href-variables')(options.base);
   require('./elements/asset')(options.base);
   require('./elements/http-message-payload')(options.base);
+  require('./elements/auth-scheme')(options.base);
   require('./elements/http-transaction')(options.base);
   require('./elements/transition')(options.base);
   require('./elements/resource')(options.base);

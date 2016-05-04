@@ -18,7 +18,9 @@ const HttpTransaction = namespace.getElementClass('httpTransaction');
 const HttpRequest = namespace.getElementClass('httpRequest');
 const HttpResponse = namespace.getElementClass('httpResponse');
 const Asset = namespace.getElementClass('asset');
+const AuthScheme = namespace.getElementClass('authScheme');
 const DataStructure = namespace.getElementClass('dataStructure');
+const MemberElement = namespace.getElementClass('member');
 
 // Hmm, this might not be the best way to do this... ideas?
 const HttpMessagePayload = Object.getPrototypeOf(HttpRequest);
@@ -116,6 +118,14 @@ describe('API description namespace', () => {
             content: [],
           },
           {
+            element: 'category',
+            meta: {
+              classes: ['authSchemes'],
+            },
+            attributes: {},
+            content: [],
+          },
+          {
             element: 'resource',
             meta: {},
             attributes: {},
@@ -189,6 +199,15 @@ describe('API description namespace', () => {
       });
     });
 
+    it('should contain an auth scheme group', () => {
+      const items = category.authSchemeGroups;
+      expect(items).to.have.length(1);
+      items.forEach((item) => {
+        expect(item).to.be.an.instanceof(Category);
+        expect(item).to.have.class('authSchemes');
+      });
+    });
+
     it('should contain a resource', () => {
       const items = category.resources;
       expect(items).to.have.length(1);
@@ -210,6 +229,105 @@ describe('API description namespace', () => {
       expect(items).to.have.length(1);
       items.forEach((item) => {
         expect(item).to.be.an.instanceof(Copy);
+      });
+    });
+  });
+
+  context('auth scheme group element', () => {
+    let category;
+    let refracted;
+
+    beforeEach(() => {
+      refracted = {
+        element: 'category',
+        meta: {
+          classes: ['authSchemes'],
+        },
+        attributes: {},
+        content: [
+          {
+            element: 'Basic Authentication Scheme',
+            meta: {
+              id: 'custom_basic',
+            },
+            attributes: {},
+            content: [],
+          },
+          {
+            element: 'Token Authentication Scheme',
+            meta: {
+              id: 'custom_api_key',
+            },
+            attributes: {},
+            content: [
+              {
+                element: 'member',
+                meta: {},
+                attributes: {},
+                content: {
+                  key: {
+                    element: 'string',
+                    meta: {},
+                    attributes: {},
+                    content: 'queryParameterName',
+                  },
+                  value: {
+                    element: 'string',
+                    meta: {},
+                    attributes: {},
+                    content: 'access_token',
+                  },
+                },
+              },
+            ],
+          },
+          {
+            element: 'OAuth2 Scheme',
+            meta: {
+              id: 'custom_oauth',
+            },
+            attributes: {},
+            content: [
+              {
+                element: 'member',
+                meta: {},
+                attributes: {},
+                content: {
+                  key: {
+                    element: 'string',
+                    meta: {},
+                    attributes: {},
+                    content: 'grantType',
+                  },
+                  value: {
+                    element: 'string',
+                    meta: {},
+                    attributes: {},
+                    content: 'implicit',
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      };
+
+      category = (new Category()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(category.toRefract()).to.deep.equal(refracted);
+    });
+
+    it('should have element name category', () => {
+      expect(category.element).to.equal('category');
+    });
+
+    it('should contain auth schemes', () => {
+      const items = category.authSchemes;
+      expect(items).to.have.length(3);
+      items.forEach((item) => {
+        expect(item).to.be.an.instanceof(AuthScheme);
       });
     });
   });
@@ -514,6 +632,73 @@ describe('API description namespace', () => {
     });
   });
 
+  context('Auth scheme element', () => {
+    let authScheme;
+    let refracted;
+
+    beforeEach(() => {
+      refracted = {
+        element: 'Token Auth Scheme',
+        meta: {
+          id: 'Custom Token Auth',
+        },
+        attributes: {},
+        content: [
+          {
+            element: 'member',
+            meta: {},
+            attributes: {},
+            content: {
+              key: {
+                element: 'string',
+                meta: {},
+                attributes: {},
+                content: 'queryParameterName',
+              },
+              value: {
+                element: 'string',
+                meta: {},
+                attributes: {},
+                content: 'token',
+              },
+            },
+          },
+          {
+            element: 'transition',
+            meta: {},
+            attributes: {
+              relation: 'authorize',
+              href: 'http://example.com/oauth/authorize',
+            },
+            content: [],
+          },
+        ],
+      };
+
+      authScheme = (new AuthScheme()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(authScheme.toRefract()).to.deep.equal(refracted);
+    });
+
+    it('should contain members', () => {
+      const members = authScheme.members;
+      expect(members).to.have.length(1);
+      members.forEach((item) => {
+        expect(item).to.be.an.instanceof(MemberElement);
+      });
+    });
+
+    it('should contain transitions', () => {
+      const transitions = authScheme.transitions;
+      expect(transitions).to.have.length(1);
+      transitions.forEach((item) => {
+        expect(item).to.be.an.instanceof(Transition);
+      });
+    });
+  });
+
   context('HTTP transaction element', () => {
     let transaction;
     let refracted;
@@ -522,7 +707,16 @@ describe('API description namespace', () => {
       refracted = {
         element: 'httpTransaction',
         meta: {},
-        attributes: {},
+        attributes: {
+          authSchemes: [
+            {
+              element: 'Custom Token Auth',
+              meta: {},
+              attributes: {},
+              content: [],
+            },
+          ],
+        },
         content: [
           {
             element: 'httpRequest',
@@ -556,6 +750,14 @@ describe('API description namespace', () => {
 
     it('should have a response', () => {
       expect(transaction.response).to.be.an.instanceof(HttpResponse);
+    });
+
+    it('should contain auth schemes', () => {
+      const schemes = transaction.authSchemes;
+      expect(schemes).to.have.length(1);
+      schemes.forEach((item) => {
+        expect(item).to.be.an.instanceof(AuthScheme);
+      });
     });
   });
 

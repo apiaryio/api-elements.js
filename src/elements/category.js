@@ -23,12 +23,21 @@ export default function(namespace) {
       return this.children((item) => item.classes.contains('transitions'));
     }
 
+    get authSchemeGroups() {
+      return this.children((item) => item.classes.contains('authSchemes'));
+    }
+
     get resources() {
       return this.children((item) => item.element === 'resource');
     }
 
     get transitions() {
       return this.children((item) => item.element === 'transition');
+    }
+
+    get authSchemes() {
+      const schemes = ['Basic Authentication Scheme', 'Token Authentication Scheme', 'OAuth2 Scheme'];
+      return this.children((item) => schemes.indexOf(item.element) !== -1);
     }
 
     get copy() {

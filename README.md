@@ -34,52 +34,70 @@ A grouping element to hold other elements.
 #### Properties
 
 ##### category.copy
-Get an array element of all child elements with the element name `copy`. This property is **ready-only**.
+Get an array element of all child elements with the element name `copy`. This property is **read-only**.
 
 ```js
 let copy = category.copy;
 ```
 
 ##### category.dataStructures
-Get an array element of all child elements with the element name `category` and a class name `dataStructures`. This property is **ready-only**.
+Get an array element of all child elements with the element name `category` and a class name `dataStructures`. This property is **read-only**.
 
 ```js
 let dataStructures = category.dataStructures;
 ```
 
 ##### category.resources
-Get an array element of all child elements with the element name `resource`. This property is **ready-only**.
+Get an array element of all child elements with the element name `resource`. This property is **read-only**.
 
 ```js
 let resources = category.resources;
 ```
 
 ##### category.resourceGroups
-Get an array element of all child elements with the element name `category` and a class name `resourceGroup`. This property is **ready-only**.
+Get an array element of all child elements with the element name `category` and a class name `resourceGroup`. This property is **read-only**.
 
 ```js
 let groups = category.resourceGroups;
 ```
 
 ##### category.scenarios
-Get an array element of all child elements with a class name `scenario`. This property is **ready-only**.
+Get an array element of all child elements with a class name `scenario`. This property is **read-only**.
 
 ```js
 let scenarios = category.scenarios;
 ```
 
 ##### category.transitions
-Get an array element of all child elements with the element name `transition`. This property is **ready-only**.
+Get an array element of all child elements with the element name `transition`. This property is **read-only**.
 
 ```js
 let transitions = category.transitions;
 ```
 
 ##### category.transitionGroups
-Get an array element of all child elements with the element name `category` and a class name `transitions`. This property is **ready-only**.
+Get an array element of all child elements with the element name `category` and a class name `transitions`. This property is **read-only**.
 
 ```js
 let groups = category.transitionGroups;
+```
+
+##### category.authSchemes
+Get an array element of all child element with element name equal to one of the names given below. This property is **read-only**.
+
+* Basic Authentication Scheme
+* Token Authentication Scheme
+* OAuth2 Scheme
+
+```js
+let schemes = category.authSchemes;
+```
+
+##### category.authSchemeGroups
+Get an array element of all child elements with the element name `category` and a class name `authSchemes`. This property is **read-only**.
+
+```js
+let groups = category.authSchemeGroups;
 ```
 
 ### Copy ([StringElement](https://github.com/refractproject/minim#stringelement))
@@ -100,6 +118,29 @@ console.log(copy.contentType);
 
 // Set the content-type
 copy.contentType = 'text/markdown';
+```
+
+### AuthScheme ([Array Element](https://github.com/refractproject/minim#arrayelement))
+This element describes an auth scheme.
+
+#### Properties
+
+##### scheme.transitions
+Get an array element of all child elements with the element name `transition`. This property is **read-only**.
+
+```js
+for (const transition of scheme.transitions) {
+  console.log(`Transition: ${transition.title}`);
+}
+```
+
+##### scheme.members
+Get an array element of all child elements with the element name `member`. This property is **read-only**.
+
+```js
+for (const member of scheme.members) {
+	console.log(`Member: ${member.key}`)
+}
 ```
 
 ### DataStructure ([ObjectElement](https://github.com/refractproject/minim#objectelement))
@@ -134,7 +175,7 @@ resource.hrefVariables = {
 ```
 
 ##### resource.transitions
-Get an array element of all child elements with the element name `transition`. This property is **ready-only**.
+Get an array element of all child elements with the element name `transition`. This property is **read-only**.
 
 ```js
 for (const transition of resource.transitions) {
@@ -143,7 +184,7 @@ for (const transition of resource.transitions) {
 ```
 
 ##### resource.dataStructure
-Get the first child element with the element name `dataStructure`. This property is **ready-only**.
+Get the first child element with the element name `dataStructure`. This property is **read-only**.
 
 ```js
 console.log(resource.dataStructure.keys());
@@ -257,6 +298,13 @@ The HTTP response component of this transaction. It returns an HttpResponse elem
 ```js
 // Get the HTTP response
 let response = transaction.response;
+```
+
+##### transaction.authSchemes
+It returns an array of elements derived from AuthScheme elements. This property is **read-only**.
+
+```js
+let schemes = transaction.authSchemes;
 ```
 
 ### HttpRequest ([ArrayElement](https://github.com/refractproject/minim#arrayelement))
