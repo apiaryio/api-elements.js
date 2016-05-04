@@ -1,3 +1,7 @@
+# 0.1.5 - 2016-05-04
+
+- Added support for authScheme related elements and attributes
+
 # 0.1.4 - 2016-04-28
 
 - Upgrade minim peerDependency version to 0.14.0

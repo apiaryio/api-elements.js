@@ -34,49 +34,49 @@ A grouping element to hold other elements.
 #### Properties
 
 ##### category.copy
-Get an array element of all child elements with the element name `copy`. This property is **ready-only**.
+Get an array element of all child elements with the element name `copy`. This property is **read-only**.
 
 ```js
 let copy = category.copy;
 ```
 
 ##### category.dataStructures
-Get an array element of all child elements with the element name `category` and a class name `dataStructures`. This property is **ready-only**.
+Get an array element of all child elements with the element name `category` and a class name `dataStructures`. This property is **read-only**.
 
 ```js
 let dataStructures = category.dataStructures;
 ```
 
 ##### category.resources
-Get an array element of all child elements with the element name `resource`. This property is **ready-only**.
+Get an array element of all child elements with the element name `resource`. This property is **read-only**.
 
 ```js
 let resources = category.resources;
 ```
 
 ##### category.resourceGroups
-Get an array element of all child elements with the element name `category` and a class name `resourceGroup`. This property is **ready-only**.
+Get an array element of all child elements with the element name `category` and a class name `resourceGroup`. This property is **read-only**.
 
 ```js
 let groups = category.resourceGroups;
 ```
 
 ##### category.scenarios
-Get an array element of all child elements with a class name `scenario`. This property is **ready-only**.
+Get an array element of all child elements with a class name `scenario`. This property is **read-only**.
 
 ```js
 let scenarios = category.scenarios;
 ```
 
 ##### category.transitions
-Get an array element of all child elements with the element name `transition`. This property is **ready-only**.
+Get an array element of all child elements with the element name `transition`. This property is **read-only**.
 
 ```js
 let transitions = category.transitions;
 ```
 
 ##### category.transitionGroups
-Get an array element of all child elements with the element name `category` and a class name `transitions`. This property is **ready-only**.
+Get an array element of all child elements with the element name `category` and a class name `transitions`. This property is **read-only**.
 
 ```js
 let groups = category.transitionGroups;
@@ -94,7 +94,7 @@ let schemes = category.authSchemes;
 ```
 
 ##### category.authSchemeGroupss
-Get an array element of all child elements with the element name `category` and a class name `authSchemes`. This property is **ready-only**.
+Get an array element of all child elements with the element name `category` and a class name `authSchemes`. This property is **read-only**.
 
 ```js
 let groups = category.authSchemeGroups;
@@ -126,7 +126,7 @@ This element describes an auth scheme.
 #### Properties
 
 ##### scheme.transitions
-Get an array element of all child elements with the element name `transition`. This property is **ready-only**.
+Get an array element of all child elements with the element name `transition`. This property is **read-only**.
 
 ```js
 for (const transition of scheme.transitions) {
@@ -175,7 +175,7 @@ resource.hrefVariables = {
 ```
 
 ##### resource.transitions
-Get an array element of all child elements with the element name `transition`. This property is **ready-only**.
+Get an array element of all child elements with the element name `transition`. This property is **read-only**.
 
 ```js
 for (const transition of resource.transitions) {
@@ -184,7 +184,7 @@ for (const transition of resource.transitions) {
 ```
 
 ##### resource.dataStructure
-Get the first child element with the element name `dataStructure`. This property is **ready-only**.
+Get the first child element with the element name `dataStructure`. This property is **read-only**.
 
 ```js
 console.log(resource.dataStructure.keys());
@@ -301,7 +301,7 @@ let response = transaction.response;
 ```
 
 ##### transaction.authSchemes
-It returns an array of elements derived from AuthScheme elements. This property is **ready-only**.
+It returns an array of elements derived from AuthScheme elements. This property is **read-only**.
 
 ```js
 let schemes = transaction.authSchemes;
