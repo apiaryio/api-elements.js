@@ -36,7 +36,7 @@ export default function(namespace) {
     }
 
     get authSchemes() {
-      const schemes = ['Basic Authentication Scheme', 'Token Authentication Scheme', 'Oauth2 Scheme'];
+      const schemes = ['Basic Authentication Scheme', 'Token Authentication Scheme', 'OAuth2 Scheme'];
       return this.children((item) => schemes.indexOf(item.element) !== -1);
     }
 

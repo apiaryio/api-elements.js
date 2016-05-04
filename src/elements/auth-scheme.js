@@ -19,5 +19,5 @@ export default function(namespace) {
   namespace.register('authScheme', AuthScheme);
   namespace.register('Basic Authentication Scheme', AuthScheme);
   namespace.register('Token Authentication Scheme', AuthScheme);
-  namespace.register('Oauth2 Scheme', AuthScheme);
+  namespace.register('OAuth2 Scheme', AuthScheme);
 }

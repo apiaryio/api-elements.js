@@ -282,7 +282,7 @@ describe('API description namespace', () => {
             ],
           },
           {
-            element: 'Oauth2 Scheme',
+            element: 'OAuth2 Scheme',
             meta: {
               id: 'custom_oauth',
             },

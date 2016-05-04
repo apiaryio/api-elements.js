@@ -87,13 +87,13 @@ Get an array element of all child element with element name equal to one of the 
 
 * Basic Authentication Scheme
 * Token Authentication Scheme
-* Oauth2 Scheme
+* OAuth2 Scheme
 
 ```js
 let schemes = category.authSchemes;
 ```
 
-##### category.authSchemeGroupss
+##### category.authSchemeGroups
 Get an array element of all child elements with the element name `category` and a class name `authSchemes`. This property is **read-only**.
 
 ```js
