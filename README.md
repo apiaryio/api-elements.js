@@ -82,6 +82,24 @@ Get an array element of all child elements with the element name `category` and 
 let groups = category.transitionGroups;
 ```
 
+##### category.authSchemes
+Get an array element of all child element with element name equal to one of the names given below. This property is **read-only**.
+
+* Basic Authentication Scheme
+* Token Authentication Scheme
+* Oauth2 Scheme
+
+```js
+let schemes = category.authSchemes;
+```
+
+##### category.authSchemeGroupss
+Get an array element of all child elements with the element name `category` and a class name `authSchemes`. This property is **ready-only**.
+
+```js
+let groups = category.authSchemeGroups;
+```
+
 ### Copy ([StringElement](https://github.com/refractproject/minim#stringelement))
 An element that contains copy text used to describe elements in the API Description namespace. The element's content contains the text:
 
@@ -100,6 +118,29 @@ console.log(copy.contentType);
 
 // Set the content-type
 copy.contentType = 'text/markdown';
+```
+
+### AuthScheme ([Array Element](https://github.com/refractproject/minim#arrayelement))
+This element describes an auth scheme.
+
+#### Properties
+
+##### scheme.transitions
+Get an array element of all child elements with the element name `transition`. This property is **ready-only**.
+
+```js
+for (const transition of scheme.transitions) {
+  console.log(`Transition: ${transition.title}`);
+}
+```
+
+##### scheme.members
+Get an array element of all child elements with the element name `member`. This property is **read-only**.
+
+```js
+for (const member of scheme.members) {
+	console.log(`Member: ${member.key}`)
+}
 ```
 
 ### DataStructure ([ObjectElement](https://github.com/refractproject/minim#objectelement))
@@ -257,6 +298,13 @@ The HTTP response component of this transaction. It returns an HttpResponse elem
 ```js
 // Get the HTTP response
 let response = transaction.response;
+```
+
+##### transaction.authSchemes
+It returns an array of elements derived from AuthScheme elements. This property is **ready-only**.
+
+```js
+let schemes = transaction.authSchemes;
 ```
 
 ### HttpRequest ([ArrayElement](https://github.com/refractproject/minim#arrayelement))
