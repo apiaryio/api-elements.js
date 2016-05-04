@@ -20,6 +20,7 @@
               "authSchemes"
             ]
           },
+          "attributes": {},
           "content": [
             {
               "element": "Token Authentication Scheme",
@@ -30,13 +31,19 @@
               "content": [
                 {
                   "element": "member",
+                  "meta": {},
+                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
+                      "meta": {},
+                      "attributes": {},
                       "content": "httpHeaderName"
                     },
                     "value": {
                       "element": "string",
+                      "meta": {},
+                      "attributes": {},
                       "content": "api_key"
                     }
                   }

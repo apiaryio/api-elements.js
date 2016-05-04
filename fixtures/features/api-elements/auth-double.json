@@ -20,6 +20,7 @@
               "authSchemes"
             ]
           },
+          "attributes": {},
           "content": [
             {
               "element": "Basic Authentication Scheme",
@@ -38,13 +39,19 @@
               "content": [
                 {
                   "element": "member",
+                  "meta": {},
+                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
+                      "meta": {},
+                      "attributes": {},
                       "content": "httpHeaderName"
                     },
                     "value": {
                       "element": "string",
+                      "meta": {},
+                      "attributes": {},
                       "content": "api_key"
                     }
                   }

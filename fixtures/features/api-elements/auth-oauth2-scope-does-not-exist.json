@@ -20,6 +20,7 @@
               "authSchemes"
             ]
           },
+          "attributes": {},
           "content": [
             {
               "element": "Oauth2 Scheme",
@@ -209,7 +210,6 @@
       "attributes": {},
       "content": "Oauth2 scope does not exist"
     },
-    ,
     {
       "element": "annotation",
       "meta": {

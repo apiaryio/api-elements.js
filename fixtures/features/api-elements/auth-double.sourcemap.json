@@ -39,6 +39,7 @@
               "authSchemes"
             ]
           },
+          "attributes": {},
           "content": [
             {
               "element": "Basic Authentication Scheme",
@@ -57,13 +58,19 @@
               "content": [
                 {
                   "element": "member",
+                  "meta": {},
+                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
+                      "meta": {},
+                      "attributes": {},
                       "content": "httpHeaderName"
                     },
                     "value": {
                       "element": "string",
+                      "meta": {},
+                      "attributes": {},
                       "content": "api_key"
                     }
                   }
@@ -76,40 +83,10 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/endpoint",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    195,
-                    199
-                  ]
-                ]
-              }
-            ]
-          },
-          "content": [
-            {
-              "element": "transition",
+            "href": {
+              "element": "string",
               "meta": {},
               "attributes": {
-                "authSchemes": [
-                  {
-                    "element": "customBasic",
-                    "meta": {},
-                    "attributes": {},
-                    "content": []
-                  },
-                  {
-                    "element": "customApiKey",
-                    "meta": {},
-                    "attributes": {},
-                    "content": []
-                  }
-                ],
                 "sourceMap": [
                   {
                     "element": "sourceMap",
@@ -117,29 +94,38 @@
                     "attributes": {},
                     "content": [
                       [
-                        210,
-                        184
+                        195,
+                        199
                       ]
                     ]
                   }
                 ]
               },
+              "content": "/endpoint"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
                   "meta": {},
                   "attributes": {
-                    "sourceMap": [
+                    "authSchemes": [
                       {
-                        "element": "sourceMap",
+                        "element": "customBasic",
                         "meta": {},
                         "attributes": {},
-                        "content": [
-                          [
-                            309,
-                            85
-                          ]
-                        ]
+                        "content": []
+                      },
+                      {
+                        "element": "customApiKey",
+                        "meta": {},
+                        "attributes": {},
+                        "content": []
                       }
                     ]
                   },
@@ -148,20 +134,26 @@
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                210,
-                                184
-                              ]
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    210,
+                                    184
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
@@ -169,20 +161,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "200",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                309,
-                                85
-                              ]
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    309,
+                                    85
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
