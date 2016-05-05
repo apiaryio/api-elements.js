@@ -293,6 +293,26 @@ export default class Parser {
     }
   }
 
+  // Conver api key name into Refract elements
+  apiKeyName(element, apiKey) {
+    const {Member: MemberElement} = this.minim.elements;
+    let config;
+
+    if (apiKey.in === 'query') {
+      config = 'queryParameterName';
+    } else if (apiKey.in === 'header') {
+      config = 'httpHeaderName';
+    }
+
+    let member = new MemberElement(config, apiKey.name);
+
+    if (this.generateSourceMap) {
+      this.createSourceMap(member, this.path.concat(['name']));
+    }
+
+    element.content.push(member);
+  }
+
   // Convert Oauth2 flow into Refract elements
   oauthGrantType(element, flow) {
     const {Member: MemberElement} = this.minim.elements;
@@ -305,7 +325,13 @@ export default class Parser {
       flow = 'authorization code';
     }
 
-    element.content.push(new MemberElement('grantType', flow));
+    let member = new MemberElement('grantType', flow);
+
+    if (this.generateSourceMap) {
+      this.createSourceMap(member, this.path.concat(['flow']));
+    }
+
+    element.content.push(member);
   }
 
   // Convert OAuth2 scopes into Refract elements
@@ -325,6 +351,15 @@ export default class Parser {
 
       if (descriptions) {
         scope.description = descriptions[index];
+
+        if (this.generateSourceMap) {
+          this.createSourceMap(scope.meta.get('description'), this.path.concat([item]));
+        }
+      }
+
+      if (this.generateSourceMap) {
+        let value = descriptions ? item : index;
+        this.createSourceMap(scope, this.path.concat([value]));
       }
 
       scopes.content.push(scope);
@@ -345,6 +380,11 @@ export default class Parser {
       transition.relation = 'authorize';
       transition.href = item.authorizationUrl;
 
+      if (this.generateSourceMap) {
+        this.createSourceMap(transition.attributes.get('href'), this.path.concat(['authorizationUrl']));
+        this.createSourceMap(transition.attributes.get('relation'), this.path.concat(['authorizationUrl']));
+      }
+
       element.content.push(transition);
     }
 
@@ -353,6 +393,11 @@ export default class Parser {
 
       transition.relation = 'token';
       transition.href = item.tokenUrl;
+
+      if (this.generateSourceMap) {
+        this.createSourceMap(transition.attributes.get('href'), this.path.concat(['tokenUrl']));
+        this.createSourceMap(transition.attributes.get('relation'), this.path.concat(['tokenUrl']));
+      }
 
       element.content.push(transition);
     }
@@ -377,20 +422,11 @@ export default class Parser {
 
             case 'apiKey':
               element.element = 'Token Authentication Scheme';
-              let config;
-
-              if (item.in === 'query') {
-                config = 'queryParameterName';
-              } else if (item.in === 'header') {
-                config = 'httpHeaderName';
-              }
-
-              element.content.push(new MemberElement(config, item.name));
+              this.apiKeyName(element, item);
               break;
 
             case 'oauth2':
               element.element = 'OAuth2 Scheme';
-
               this.oauthGrantType(element, item.flow);
 
               if (item.scopes) {
@@ -405,12 +441,24 @@ export default class Parser {
 
           element.id = name;
 
+          if (this.generateSourceMap) {
+            this.createSourceMap(element.meta.get('id'), this.path);
+          }
+
           if (item['x-summary']) {
             element.title = item['x-summary'];
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(element.meta.get('title'), this.path.concat(['x-summary']));
+            }
           }
 
           if (item.description) {
             element.description = item.description;
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(element.meta.get('description'), this.path.concat(['description']));
+            }
           }
 
           schemes.push(element);
@@ -451,6 +499,10 @@ export default class Parser {
 
           // If value is not an empty array, then they are scopes
           this.oauthScopes(element, item[name]);
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(element, this.path);
+          }
 
           element.element = name;
           schemes.push(element);
@@ -573,9 +625,9 @@ export default class Parser {
 
     resource.content.push(transition);
 
-    const schemes = this.handleSwaggerTransitionAuth(methodValue);
-
     this.withPath(method, () => {
+      const schemes = this.handleSwaggerTransitionAuth(methodValue);
+
       if (methodValue.externalDocs) {
         this.withPath('externalDocs', (path) => {
           this.createAnnotation(annotations.DATA_LOST, path,
