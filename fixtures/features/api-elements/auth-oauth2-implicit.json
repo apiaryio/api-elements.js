@@ -23,7 +23,7 @@
           "attributes": {},
           "content": [
             {
-              "element": "Oauth2 Scheme",
+              "element": "OAuth2 Scheme",
               "meta": {
                 "id": "customOauth2"
               },
@@ -66,13 +66,17 @@
                       "content": [
                         {
                           "element": "string",
-                          "meta": {},
+                          "meta": {
+                            "description": "Test Scope 1"
+                          },
                           "attributes": {},
                           "content": "scope1"
                         },
                         {
                           "element": "string",
-                          "meta": {},
+                          "meta": {
+                            "description": "Test Scope 2"
+                          },
                           "attributes": {},
                           "content": "scope2"
                         }
