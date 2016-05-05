@@ -20,9 +20,10 @@
               "authSchemes"
             ]
           },
+          "attributes": {},
           "content": [
             {
-              "element": "Oauth2 Scheme",
+              "element": "OAuth2 Scheme",
               "meta": {
                 "id": "customOauth2"
               },

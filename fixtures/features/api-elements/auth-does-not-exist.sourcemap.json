@@ -36,24 +36,8 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/endpoint",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    86,
-                    173
-                  ]
-                ]
-              }
-            ]
-          },
-          "content": [
-            {
-              "element": "transition",
+            "href": {
+              "element": "string",
               "meta": {},
               "attributes": {
                 "sourceMap": [
@@ -63,13 +47,21 @@
                     "attributes": {},
                     "content": [
                       [
-                        101,
-                        158
+                        86,
+                        173
                       ]
                     ]
                   }
                 ]
               },
+              "content": "/endpoint"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
@@ -94,20 +86,26 @@
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                101,
-                                158
-                              ]
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    101,
+                                    158
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
@@ -115,20 +113,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "200",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                174,
-                                85
-                              ]
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    174,
+                                    85
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {

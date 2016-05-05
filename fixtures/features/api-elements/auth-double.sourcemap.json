@@ -39,11 +39,31 @@
               "authSchemes"
             ]
           },
+          "attributes": {},
           "content": [
             {
               "element": "Basic Authentication Scheme",
               "meta": {
-                "id": "customBasic"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            91,
+                            31
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customBasic"
+                }
               },
               "attributes": {},
               "content": []
@@ -51,19 +71,58 @@
             {
               "element": "Token Authentication Scheme",
               "meta": {
-                "id": "customApiKey"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            122,
+                            64
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customApiKey"
+                }
               },
               "attributes": {},
               "content": [
                 {
                   "element": "member",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            172,
+                            13
+                          ]
+                        ]
+                      }
+                    ]
+                  },
                   "content": {
                     "key": {
                       "element": "string",
+                      "meta": {},
+                      "attributes": {},
                       "content": "httpHeaderName"
                     },
                     "value": {
                       "element": "string",
+                      "meta": {},
+                      "attributes": {},
                       "content": "api_key"
                     }
                   }
@@ -76,40 +135,10 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/endpoint",
-            "sourceMap": [
-              {
-                "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
-                "content": [
-                  [
-                    195,
-                    199
-                  ]
-                ]
-              }
-            ]
-          },
-          "content": [
-            {
-              "element": "transition",
+            "href": {
+              "element": "string",
               "meta": {},
               "attributes": {
-                "authSchemes": [
-                  {
-                    "element": "customBasic",
-                    "meta": {},
-                    "attributes": {},
-                    "content": []
-                  },
-                  {
-                    "element": "customApiKey",
-                    "meta": {},
-                    "attributes": {},
-                    "content": []
-                  }
-                ],
                 "sourceMap": [
                   {
                     "element": "sourceMap",
@@ -117,29 +146,66 @@
                     "attributes": {},
                     "content": [
                       [
-                        210,
-                        184
+                        195,
+                        199
                       ]
                     ]
                   }
                 ]
               },
+              "content": "/endpoint"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
                   "meta": {},
                   "attributes": {
-                    "sourceMap": [
+                    "authSchemes": [
                       {
-                        "element": "sourceMap",
+                        "element": "customBasic",
                         "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            309,
-                            85
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  241,
+                                  15
+                                ]
+                              ]
+                            }
                           ]
-                        ]
+                        },
+                        "content": []
+                      },
+                      {
+                        "element": "customApiKey",
+                        "meta": {},
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  267,
+                                  16
+                                ]
+                              ]
+                            }
+                          ]
+                        },
+                        "content": []
                       }
                     ]
                   },
@@ -148,20 +214,26 @@
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                210,
-                                184
-                              ]
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    210,
+                                    184
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
@@ -169,20 +241,26 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "200",
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                309,
-                                85
-                              ]
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    309,
+                                    85
+                                  ]
+                                ]
+                              }
                             ]
-                          }
-                        ]
+                          },
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -239,42 +317,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                68,
-                118
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     }
   ]
 }

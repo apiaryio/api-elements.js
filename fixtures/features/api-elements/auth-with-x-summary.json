@@ -20,6 +20,7 @@
               "authSchemes"
             ]
           },
+          "attributes": {},
           "content": [
             {
               "element": "Basic Authentication Scheme",
