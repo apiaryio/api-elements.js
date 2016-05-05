@@ -44,7 +44,26 @@
             {
               "element": "Basic Authentication Scheme",
               "meta": {
-                "id": "customBasic"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            94,
+                            29
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customBasic"
+                }
               },
               "attributes": {},
               "content": []

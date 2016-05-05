@@ -44,14 +44,47 @@
             {
               "element": "Token Authentication Scheme",
               "meta": {
-                "id": "customApiKey"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            101,
+                            64
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customApiKey"
+                }
               },
               "attributes": {},
               "content": [
                 {
                   "element": "member",
                   "meta": {},
-                  "attributes": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            151,
+                            13
+                          ]
+                        ]
+                      }
+                    ]
+                  },
                   "content": {
                     "key": {
                       "element": "string",
@@ -110,7 +143,21 @@
                       {
                         "element": "customApiKey",
                         "meta": {},
-                        "attributes": {},
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  220,
+                                  16
+                                ]
+                              ]
+                            }
+                          ]
+                        },
                         "content": []
                       }
                     ]

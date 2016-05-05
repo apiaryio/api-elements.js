@@ -44,14 +44,47 @@
             {
               "element": "OAuth2 Scheme",
               "meta": {
-                "id": "customOauth2"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            99,
+                            166
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customOauth2"
+                }
               },
               "attributes": {},
               "content": [
                 {
                   "element": "member",
                   "meta": {},
-                  "attributes": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            134,
+                            17
+                          ]
+                        ]
+                      }
+                    ]
+                  },
                   "content": {
                     "key": {
                       "element": "string",
@@ -86,17 +119,83 @@
                         {
                           "element": "string",
                           "meta": {
-                            "description": "Test Scope 1"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        217,
+                                        20
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Test Scope 1"
+                            }
                           },
-                          "attributes": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    217,
+                                    20
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
                           "content": "scope1"
                         },
                         {
                           "element": "string",
                           "meta": {
-                            "description": "Test Scope 2"
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        244,
+                                        20
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "Test Scope 2"
+                            }
                           },
-                          "attributes": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    244,
+                                    20
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
                           "content": "scope2"
                         }
                       ]
@@ -107,8 +206,46 @@
                   "element": "transition",
                   "meta": {},
                   "attributes": {
-                    "relation": "token",
-                    "href": "http://example.com/oauth/token"
+                    "relation": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                156,
+                                42
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "token"
+                    },
+                    "href": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                156,
+                                42
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "http://example.com/oauth/token"
+                    }
                   },
                   "content": []
                 }
@@ -155,7 +292,21 @@
                       {
                         "element": "customOauth2",
                         "meta": {},
-                        "attributes": {},
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  320,
+                                  58
+                                ]
+                              ]
+                            }
+                          ]
+                        },
                         "content": [
                           {
                             "element": "member",
@@ -176,13 +327,41 @@
                                   {
                                     "element": "string",
                                     "meta": {},
-                                    "attributes": {},
+                                    "attributes": {
+                                      "sourceMap": [
+                                        {
+                                          "element": "sourceMap",
+                                          "meta": {},
+                                          "attributes": {},
+                                          "content": [
+                                            [
+                                              346,
+                                              6
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
                                     "content": "scope1"
                                   },
                                   {
                                     "element": "string",
                                     "meta": {},
-                                    "attributes": {},
+                                    "attributes": {
+                                      "sourceMap": [
+                                        {
+                                          "element": "sourceMap",
+                                          "meta": {},
+                                          "attributes": {},
+                                          "content": [
+                                            [
+                                              365,
+                                              6
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
                                     "content": "scope2"
                                   }
                                 ]

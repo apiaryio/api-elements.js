@@ -44,9 +44,66 @@
             {
               "element": "Basic Authentication Scheme",
               "meta": {
-                "id": "customBasic",
-                "title": "Custom Basic Auth",
-                "description": "Auth description"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            100,
+                            96
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customBasic"
+                },
+                "title": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            117,
+                            28
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "Custom Basic Auth"
+                },
+                "description": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            150,
+                            29
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "Auth description"
+                }
               },
               "attributes": {},
               "content": []
@@ -92,7 +149,21 @@
                       {
                         "element": "customBasic",
                         "meta": {},
-                        "attributes": {},
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  251,
+                                  15
+                                ]
+                              ]
+                            }
+                          ]
+                        },
                         "content": []
                       }
                     ]

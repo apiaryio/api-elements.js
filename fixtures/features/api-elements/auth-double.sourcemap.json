@@ -44,7 +44,26 @@
             {
               "element": "Basic Authentication Scheme",
               "meta": {
-                "id": "customBasic"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            91,
+                            31
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customBasic"
+                }
               },
               "attributes": {},
               "content": []
@@ -52,14 +71,47 @@
             {
               "element": "Token Authentication Scheme",
               "meta": {
-                "id": "customApiKey"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            122,
+                            64
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customApiKey"
+                }
               },
               "attributes": {},
               "content": [
                 {
                   "element": "member",
                   "meta": {},
-                  "attributes": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            172,
+                            13
+                          ]
+                        ]
+                      }
+                    ]
+                  },
                   "content": {
                     "key": {
                       "element": "string",
@@ -118,13 +170,41 @@
                       {
                         "element": "customBasic",
                         "meta": {},
-                        "attributes": {},
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  241,
+                                  15
+                                ]
+                              ]
+                            }
+                          ]
+                        },
                         "content": []
                       },
                       {
                         "element": "customApiKey",
                         "meta": {},
-                        "attributes": {},
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  267,
+                                  16
+                                ]
+                              ]
+                            }
+                          ]
+                        },
                         "content": []
                       }
                     ]
@@ -237,42 +317,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                68,
-                118
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     }
   ]
 }

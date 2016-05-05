@@ -44,7 +44,26 @@
             {
               "element": "Basic Authentication Scheme",
               "meta": {
-                "id": "customBasic"
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            91,
+                            29
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "customBasic"
+                }
               },
               "attributes": {},
               "content": []
@@ -90,7 +109,21 @@
                       {
                         "element": "customBasic",
                         "meta": {},
-                        "attributes": {},
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  175,
+                                  15
+                                ]
+                              ]
+                            }
+                          ]
+                        },
                         "content": []
                       }
                     ]
