@@ -304,7 +304,7 @@ export default class Parser {
       config = 'httpHeaderName';
     }
 
-    let member = new MemberElement(config, apiKey.name);
+    const member = new MemberElement(config, apiKey.name);
 
     if (this.generateSourceMap) {
       this.createSourceMap(member, this.path.concat(['name']));
@@ -316,16 +316,17 @@ export default class Parser {
   // Convert Oauth2 flow into Refract elements
   oauthGrantType(element, flow) {
     const {Member: MemberElement} = this.minim.elements;
+    let grantType = flow;
 
     if (flow === 'password') {
-      flow = 'resource owner password credentials';
+      grantType = 'resource owner password credentials';
     } else if (flow === 'application') {
-      flow = 'client credentials';
+      grantType = 'client credentials';
     } else if (flow === 'accessCode') {
-      flow = 'authorization code';
+      grantType = 'authorization code';
     }
 
-    let member = new MemberElement('grantType', flow);
+    const member = new MemberElement('grantType', grantType);
 
     if (this.generateSourceMap) {
       this.createSourceMap(member, this.path.concat(['flow']));
@@ -337,28 +338,29 @@ export default class Parser {
   // Convert OAuth2 scopes into Refract elements
   oauthScopes(element, items) {
     const {Member: MemberElement, Array: ArrayElement, String: StringElement} = this.minim.elements;
-    let scopes = new ArrayElement();
+    const scopes = new ArrayElement();
     let descriptions = null;
+    let scopesList = items;
 
     if (_.isObject(items) && !_.isArray(items)) {
       descriptions = Object.values(items);
-      items = Object.keys(items);
+      scopesList = Object.keys(items);
     }
 
     // If value is not an empty array, then they are scopes
-    items.forEach((item, index) => {
-      let scope = new StringElement(item);
+    scopesList.forEach((scopeName, index) => {
+      const scope = new StringElement(scopeName);
 
       if (descriptions) {
         scope.description = descriptions[index];
 
         if (this.generateSourceMap) {
-          this.createSourceMap(scope.meta.get('description'), this.path.concat([item]));
+          this.createSourceMap(scope.meta.get('description'), this.path.concat([scopeName]));
         }
       }
 
       if (this.generateSourceMap) {
-        let value = descriptions ? item : index;
+        const value = descriptions ? scopeName : index;
         this.createSourceMap(scope, this.path.concat([value]));
       }
 
@@ -371,14 +373,14 @@ export default class Parser {
   }
 
   // Conver OAuth2 transition information into Refract elements
-  oauthTransitions(element, item) {
+  oauthTransitions(element, oauth) {
     const {Transition} = this.minim.elements;
 
-    if (item.authorizationUrl) {
+    if (oauth.authorizationUrl) {
       const transition = new Transition();
 
       transition.relation = 'authorize';
-      transition.href = item.authorizationUrl;
+      transition.href = oauth.authorizationUrl;
 
       if (this.generateSourceMap) {
         this.createSourceMap(transition.attributes.get('href'), this.path.concat(['authorizationUrl']));
@@ -388,11 +390,11 @@ export default class Parser {
       element.content.push(transition);
     }
 
-    if (item.tokenUrl) {
+    if (oauth.tokenUrl) {
       const transition = new Transition();
 
       transition.relation = 'token';
-      transition.href = item.tokenUrl;
+      transition.href = oauth.tokenUrl;
 
       if (this.generateSourceMap) {
         this.createSourceMap(transition.attributes.get('href'), this.path.concat(['tokenUrl']));
@@ -405,38 +407,40 @@ export default class Parser {
 
   // Convert a Swagger auth object into Refract elements.
   handleSwaggerAuth() {
-    const {Member: MemberElement, Category, AuthScheme} = this.minim.elements;
-    let schemes = [];
+    const {Category, AuthScheme} = this.minim.elements;
+    const schemes = [];
 
     if (this.swagger.securityDefinitions) {
-      for (const name in this.swagger.securityDefinitions) {
-
+      Object.keys(this.swagger.securityDefinitions).forEach((name) => {
         this.withPath('securityDefinitions', name, () => {
           const item = this.swagger.securityDefinitions[name];
-          let element = new AuthScheme();
+          const element = new AuthScheme();
 
           switch (item.type) {
-            case 'basic':
-              element.element = 'Basic Authentication Scheme';
-              break;
+          case 'basic':
+            element.element = 'Basic Authentication Scheme';
+            break;
 
-            case 'apiKey':
-              element.element = 'Token Authentication Scheme';
-              this.apiKeyName(element, item);
-              break;
+          case 'apiKey':
+            element.element = 'Token Authentication Scheme';
+            this.apiKeyName(element, item);
+            break;
 
-            case 'oauth2':
-              element.element = 'OAuth2 Scheme';
-              this.oauthGrantType(element, item.flow);
+          case 'oauth2':
+            element.element = 'OAuth2 Scheme';
+            this.oauthGrantType(element, item.flow);
 
-              if (item.scopes) {
-                this.withPath('scopes', () => {
-                  this.oauthScopes(element, item.scopes);
-                });
-              }
+            if (item.scopes) {
+              this.withPath('scopes', () => {
+                this.oauthScopes(element, item.scopes);
+              });
+            }
 
-              this.oauthTransitions(element, item);
-              break;
+            this.oauthTransitions(element, item);
+            break;
+
+          default:
+            break;
           }
 
           element.id = name;
@@ -463,16 +467,16 @@ export default class Parser {
 
           schemes.push(element);
         });
-      }
+      });
     }
 
     if (schemes.length) {
-      let category = new Category();
+      const category = new Category();
 
       category.meta.set('classes', ['authSchemes']);
       category.content = schemes;
 
-      this.api.content.push(category)
+      this.api.content.push(category);
     }
 
     for (const attribute of ['security']) {
@@ -485,17 +489,16 @@ export default class Parser {
 
   handleSwaggerTransitionAuth(methodValue) {
     const {AuthScheme} = this.minim.elements;
-    let schemes = [];
+    const schemes = [];
 
     if (!methodValue.security) {
       return schemes;
     }
 
     methodValue.security.forEach((item, index) => {
-      for (const name in item) {
-
+      Object.keys(item).forEach((name) => {
         this.withPath('security', index, name, () => {
-          let element = new AuthScheme();
+          const element = new AuthScheme();
 
           // If value is not an empty array, then they are scopes
           this.oauthScopes(element, item[name]);
@@ -507,7 +510,7 @@ export default class Parser {
           element.element = name;
           schemes.push(element);
         });
-      }
+      });
     });
 
     return schemes;

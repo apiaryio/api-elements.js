@@ -2,6 +2,7 @@
 
 ## Enhancements
 
+- Added authentication support.
 - Swagger vendor extensions are now exposes as API Element extensions.
 - Response and Request bodies are generated from Schema whenever applicable.
 - Accept and Content-type headers are generated based on produces and consumes keys whenever applicable.
