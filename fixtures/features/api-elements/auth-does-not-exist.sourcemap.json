@@ -67,17 +67,26 @@
                   "element": "httpTransaction",
                   "meta": {},
                   "attributes": {
-                    "sourceMap": [
+                    "authSchemes": [
                       {
-                        "element": "sourceMap",
+                        "element": "doesNotExist",
                         "meta": {},
-                        "attributes": {},
-                        "content": [
-                          [
-                            174,
-                            85
+                        "attributes": {
+                          "sourceMap": [
+                            {
+                              "element": "sourceMap",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                [
+                                  132,
+                                  16
+                                ]
+                              ]
+                            }
                           ]
-                        ]
+                        },
+                        "content": []
                       }
                     ]
                   },
@@ -187,27 +196,6 @@
               ]
             }
           ]
-        },
-        {
-          "element": "annotation",
-          "meta": {
-            "classes": [
-              "warning"
-            ],
-            "links": [
-              {
-                "element": "link",
-                "meta": {},
-                "attributes": {
-                  "relation": "origin",
-                  "href": "http://docs.apiary.io/validations/swagger#auth-does-not-exist"
-                },
-                "content": []
-              }
-            ]
-          },
-          "attributes": {},
-          "content": "Authentication scheme does not exist"
         }
       ]
     }
