@@ -95,6 +95,370 @@
         {
           "element": "category",
           "meta": {
+            "classes": [
+              "authSchemes"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "OAuth2 Scheme",
+              "meta": {
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            6719,
+                            517
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "oauth"
+                }
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            6747,
+                            14
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "grantType"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "implicit"
+                    }
+                  }
+                },
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {},
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "scopes"
+                    },
+                    "value": {
+                      "element": "array",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        6907,
+                                        137
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "to read any and all data related to a user (e.g. following/followed-by\n lists, photos, etc.) (granted by default)\n"
+                            }
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    6907,
+                                    137
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "basic"
+                        },
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        7050,
+                                        57
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "to create or delete comments on a user’s behalf"
+                            }
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7050,
+                                    57
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "comments"
+                        },
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        7114,
+                                        62
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "to follow and unfollow users on a user’s behalf"
+                            }
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7114,
+                                    62
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "relationships"
+                        },
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        7183,
+                                        50
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "to like and unlike items on a user’s behalf"
+                            }
+                          },
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    7183,
+                                    50
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "likes"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "relation": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                6766,
+                                122
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "authorize"
+                    },
+                    "href": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                6766,
+                                122
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": "https://instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token"
+                    }
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "Token Authentication Scheme",
+              "meta": {
+                "id": {
+                  "element": "string",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            7236,
+                            59
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": "key"
+                }
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {
+                    "sourceMap": [
+                      {
+                        "element": "sourceMap",
+                        "meta": {},
+                        "attributes": {},
+                        "content": [
+                          [
+                            7276,
+                            18
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "queryParameterName"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "access_token"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
             "title": "Users",
             "classes": [
               "resourceGroup"
@@ -234,7 +598,91 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      8230,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          },
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      8248,
+                                      31
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  8267,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2695,7 +3143,71 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      13555,
+                                      39
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  13574,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -4279,7 +4791,71 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      18587,
+                                      36
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  18608,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -4825,7 +5401,71 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      20313,
+                                      36
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  20334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -7493,42 +8133,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                6696,
-                599
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     },
     {
       "element": "annotation",

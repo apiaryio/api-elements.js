@@ -140,6 +140,12 @@
                                     "meta": {},
                                     "attributes": {},
                                     "content": "scope1"
+                                  },
+                                  {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scope3"
                                   }
                                 ]
                               }
@@ -192,48 +198,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#oauth2-scope-does-not-exist"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {},
-      "content": "Oauth2 scope does not exist"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#oauth2-scope-not-used"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {},
-      "content": "Oauth2 scope not used"
     }
   ]
 }
