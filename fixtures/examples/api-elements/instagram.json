@@ -48,6 +48,134 @@
         {
           "element": "category",
           "meta": {
+            "classes": [
+              "authSchemes"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "OAuth2 Scheme",
+              "meta": {
+                "id": "oauth"
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {},
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "grantType"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "implicit"
+                    }
+                  }
+                },
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {},
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "scopes"
+                    },
+                    "value": {
+                      "element": "array",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": "to read any and all data related to a user (e.g. following/followed-by\n lists, photos, etc.) (granted by default)\n"
+                          },
+                          "attributes": {},
+                          "content": "basic"
+                        },
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": "to create or delete comments on a user’s behalf"
+                          },
+                          "attributes": {},
+                          "content": "comments"
+                        },
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": "to follow and unfollow users on a user’s behalf"
+                          },
+                          "attributes": {},
+                          "content": "relationships"
+                        },
+                        {
+                          "element": "string",
+                          "meta": {
+                            "description": "to like and unlike items on a user’s behalf"
+                          },
+                          "attributes": {},
+                          "content": "likes"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "element": "transition",
+                  "meta": {},
+                  "attributes": {
+                    "relation": "authorize",
+                    "href": "https://instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token"
+                  },
+                  "content": []
+                }
+              ]
+            },
+            {
+              "element": "Token Authentication Scheme",
+              "meta": {
+                "id": "key"
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {},
+                  "attributes": {},
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "queryParameterName"
+                    },
+                    "value": {
+                      "element": "string",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "access_token"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
             "title": "Users",
             "classes": [
               "resourceGroup"
@@ -108,7 +236,49 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          },
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1052,7 +1222,43 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1682,7 +1888,43 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1913,7 +2155,43 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2937,42 +3215,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                6696,
-                599
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     },
     {
       "element": "annotation",
