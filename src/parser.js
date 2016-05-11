@@ -33,6 +33,7 @@ const ANNOTATIONS = {
   UNCAUGHT_ERROR: {
     type: 'error',
     code: 5,
+    fragment: 'uncaught-error'
   },
 };
 
@@ -178,7 +179,7 @@ export default class Parser {
         return done(null, this.result);
       } catch (exception) {
         this.createAnnotation(ANNOTATIONS.UNCAUGHT_ERROR, null,
-          ('There was a problem converting the Swagger document, the document may be using unsupported features in the Swagger Beta'));
+          ('There was a problem converting the Swagger document'));
 
         return done(exception, this.result);
       }
