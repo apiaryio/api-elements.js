@@ -554,13 +554,7 @@ export default class Parser {
       // Body parameters define request schemas
       _.each(bodyParameters, (bodyParameter) => {
         const index = transitionParameters.indexOf(bodyParameter);
-        const schemaAsset = this.createAssetFromJsonSchema(bodyParameter.schema);
-
-        if (this.generateSourceMap) {
-          this.createSourceMap(schemaAsset, this.path.concat(['parameters', index, 'schema']));
-        }
-
-        request.content.push(schemaAsset);
+        this.pushSchemaAsset(bodyParameter.schema, request);
       });
 
       // Using form parameters instead of body? We will convert those to
@@ -661,14 +655,7 @@ export default class Parser {
           }
 
           this.withSlicedPath.apply(this, args.concat([() => {
-            const schemaAsset = this.createAssetFromJsonSchema(schema);
-
-            if (this.generateSourceMap) {
-              this.createSourceMap(schemaAsset, this.path);
-            }
-
-            response.content.push(schemaAsset);
-            return schemaAsset;
+            this.pushSchemaAsset(schema, response);
           }]));
         }
 
@@ -951,15 +938,24 @@ export default class Parser {
     return hrefVariables.length ? hrefVariables : undefined;
   }
 
-  // Create a new Refract asset element containing JSON schema.
-  createAssetFromJsonSchema(jsonSchema) {
-    const Asset = this.minim.getElementClass('asset');
-    const schemaAsset = new Asset(JSON.stringify(jsonSchema));
+  // Create a Refract asset element containing JSON Schema and push into payload
+  pushSchemaAsset(schema, payload) {
+    try {
+      const Asset = this.minim.getElementClass('asset');
+      const schemaAsset = new Asset(JSON.stringify(schema));
 
-    schemaAsset.classes.push('messageBodySchema');
-    schemaAsset.contentType = 'application/schema+json';
+      schemaAsset.classes.push('messageBodySchema');
+      schemaAsset.contentType = 'application/schema+json';
 
-    return schemaAsset;
+      if (this.generateSourceMap) {
+        this.createSourceMap(schemaAsset, this.path);
+      }
+
+      payload.content.push(schemaAsset);
+    } catch (exception) {
+      this.createAnnotation(ANNOTATIONS.DATA_LOST, null,
+        ('Circular references in schema are not yet supported'));
+    }
   }
 
   // Create a new Refract transition element with a blank request and response.
