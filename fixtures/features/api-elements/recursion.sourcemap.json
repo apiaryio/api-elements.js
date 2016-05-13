@@ -368,7 +368,7 @@
       "attributes": {
         "code": 3
       },
-      "content": "Circular references in schema is not yet supported"
+      "content": "Circular references in schema are not yet supported"
     }
   ]
 }
