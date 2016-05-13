@@ -3,6 +3,8 @@
 - Fixed metadata not being an array of Member Elements
 - Added source maps to resource.href, httpRequest.method, httpResponse.statusCode
 - Removed several unneeded source maps
+- Circular schema references will now give a warning about not being supported yet
+- Added fragment to uncaught error
 
 # 0.7.3 - 2016-04-12
 

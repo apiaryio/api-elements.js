@@ -33,7 +33,7 @@ const ANNOTATIONS = {
   UNCAUGHT_ERROR: {
     type: 'error',
     code: 5,
-    fragment: 'uncaught-error'
+    fragment: 'uncaught-error',
   },
 };
 
@@ -553,7 +553,6 @@ export default class Parser {
 
       // Body parameters define request schemas
       _.each(bodyParameters, (bodyParameter) => {
-        const index = transitionParameters.indexOf(bodyParameter);
         this.pushSchemaAsset(bodyParameter.schema, request);
       });
 
