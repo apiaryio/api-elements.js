@@ -127,7 +127,9 @@
                         {
                           "element": "httpResponse",
                           "meta": {},
-                          "attributes": {},
+                          "attributes": {
+                            "statusCode": "200"
+                          },
                           "content": [
                             {
                               "element": "copy",
@@ -151,13 +153,24 @@
       "element": "annotation",
       "meta": {
         "classes": [
-          "error"
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+            },
+            "content": []
+          }
         ]
       },
       "attributes": {
-        "code": 5
+        "code": 3
       },
-      "content": "There was a problem converting the Swagger document, the document may be using unsupported features in the Swagger Beta"
+      "content": "Circular references in schema are not yet supported"
     }
   ]
 }
