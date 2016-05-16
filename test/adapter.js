@@ -119,9 +119,9 @@ describe('Swagger 2.0 adapter', () => {
   });
 
   describe('can parse fixtures', () => {
-    const fixtures = swaggerZoo.samples();
+    const fixtures = swaggerZoo.features();
     fixtures.forEach((fixture) => {
-      if (fixture.name.slice(0, 4) === 'auth') {
+      if (fixture.name.slice(0, 4) === 'auth' || fixture.name === 'warnings') {
         return;
       }
 
