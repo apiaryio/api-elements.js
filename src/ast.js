@@ -49,8 +49,10 @@ export default class Ast {
               Array.prototype.unshift.apply(pieces, refPaths.concat([piece]));
               break;
             } else {
+              /* eslint-disable no-console */
               // TODO: Communicate this in some other way?
               console.log(`External reference ${subNode[1].value} not supported for source maps!`);
+              /* eslint-enable no-console */
             }
           }
         }

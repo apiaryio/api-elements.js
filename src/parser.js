@@ -552,8 +552,8 @@ export default class Parser {
       });
 
       // Body parameters define request schemas
-      _.each(bodyParameters, (bodyParameter) => {
-        this.pushSchemaAsset(bodyParameter.schema, request);
+      _.each(bodyParameters, (bodyParameter, index) => {
+        this.pushSchemaAsset(bodyParameter.schema, request, this.path.concat(['parameters', index, 'schema']));
       });
 
       // Using form parameters instead of body? We will convert those to
@@ -654,7 +654,7 @@ export default class Parser {
           }
 
           this.withSlicedPath.apply(this, args.concat([() => {
-            this.pushSchemaAsset(schema, response);
+            this.pushSchemaAsset(schema, response, this.path);
           }]));
         }
 
@@ -938,7 +938,7 @@ export default class Parser {
   }
 
   // Create a Refract asset element containing JSON Schema and push into payload
-  pushSchemaAsset(schema, payload) {
+  pushSchemaAsset(schema, payload, path) {
     try {
       const Asset = this.minim.getElementClass('asset');
       const schemaAsset = new Asset(JSON.stringify(schema));
@@ -947,7 +947,7 @@ export default class Parser {
       schemaAsset.contentType = 'application/schema+json';
 
       if (this.generateSourceMap) {
-        this.createSourceMap(schemaAsset, this.path);
+        this.createSourceMap(schemaAsset, path);
       }
 
       payload.content.push(schemaAsset);
