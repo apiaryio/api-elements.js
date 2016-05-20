@@ -451,6 +451,12 @@ describe('API description namespace', () => {
         },
         content: [
           {
+            element: 'copy',
+            meta: {},
+            attributes: {},
+            content: 'copy of resource',
+          },
+          {
             element: 'transition',
             meta: {},
             attributes: {},
@@ -479,6 +485,14 @@ describe('API description namespace', () => {
 
     it('should have element name resource', () => {
       expect(resource.element).to.equal('resource');
+    });
+
+    it('should contain a copy element', () => {
+      const items = resource.copy;
+      expect(items).to.have.length(1);
+      items.forEach((item) => {
+        expect(item).to.be.an.instanceof(Copy);
+      });
     });
 
     it('should have an href', () => {
@@ -544,6 +558,12 @@ describe('API description namespace', () => {
         },
         content: [
           {
+            element: 'copy',
+            meta: {},
+            attributes: {},
+            content: 'copy of transition',
+          },
+          {
             element: 'httpTransaction',
             meta: {},
             attributes: {},
@@ -570,6 +590,14 @@ describe('API description namespace', () => {
 
     it('should have element name transition', () => {
       expect(transition.element).to.equal('transition');
+    });
+
+    it('should contain a copy element', () => {
+      const items = transition.copy;
+      expect(items).to.have.length(1);
+      items.forEach((item) => {
+        expect(item).to.be.an.instanceof(Copy);
+      });
     });
 
     it('should have a method', () => {
@@ -645,6 +673,12 @@ describe('API description namespace', () => {
         attributes: {},
         content: [
           {
+            element: 'copy',
+            meta: {},
+            attributes: {},
+            content: 'copy of auth scheme',
+          },
+          {
             element: 'member',
             meta: {},
             attributes: {},
@@ -680,6 +714,14 @@ describe('API description namespace', () => {
 
     it('should round-trip correctly', () => {
       expect(authScheme.toRefract()).to.deep.equal(refracted);
+    });
+
+    it('should contain a copy element', () => {
+      const items = authScheme.copy;
+      expect(items).to.have.length(1);
+      items.forEach((item) => {
+        expect(item).to.be.an.instanceof(Copy);
+      });
     });
 
     it('should contain members', () => {
@@ -773,7 +815,14 @@ describe('API description namespace', () => {
           method: 'GET',
           href: '/foo',
         },
-        content: [],
+        content: [
+          {
+            element: 'copy',
+            meta: {},
+            attributes: {},
+            content: 'copy of request',
+          },
+        ],
       };
 
       request = (new HttpRequest()).fromRefract(refracted);
@@ -785,6 +834,14 @@ describe('API description namespace', () => {
 
     it('should have element name httpRequest', () => {
       expect(request.element).to.equal('httpRequest');
+    });
+
+    it('should contain a copy element', () => {
+      const items = request.copy;
+      expect(items).to.have.length(1);
+      items.forEach((item) => {
+        expect(item).to.be.an.instanceof(Copy);
+      });
     });
 
     it('should have a method', () => {
@@ -821,7 +878,14 @@ describe('API description namespace', () => {
         attributes: {
           statusCode: 200,
         },
-        content: [],
+        content: [
+          {
+            element: 'copy',
+            meta: {},
+            attributes: {},
+            content: 'copy of response',
+          },
+        ],
       };
 
       response = (new HttpResponse()).fromRefract(refracted);
@@ -833,6 +897,14 @@ describe('API description namespace', () => {
 
     it('should have element name httpResponse', () => {
       expect(response.element).to.equal('httpResponse');
+    });
+
+    it('should contain a copy element', () => {
+      const items = response.copy;
+      expect(items).to.have.length(1);
+      items.forEach((item) => {
+        expect(item).to.be.an.instanceof(Copy);
+      });
     });
 
     it('should have a status code', () => {
