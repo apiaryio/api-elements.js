@@ -186,42 +186,6 @@
             "attributes": {},
             "content": [
               [
-                123,
-                12
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
                 136,
                 47
               ]

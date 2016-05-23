@@ -1,0 +1,38 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Swagger Global Auth
+securityDefinitions:
+  customApiKey:
+    type: apiKey
+    in: header
+    name: api_key
+  customBasic:
+    type: basic
+security:
+  - customApiKey: []
+paths:
+  /endpoint1:
+    get:
+      responses:
+        200:
+          description: With Global Security
+          schema:
+            type: string
+  /endpoint2:
+    get:
+      security: []
+      responses:
+        200:
+          description: With Overriden Empty Security
+          schema:
+            type: string
+  /endpoint3:
+    get:
+      security:
+        - customBasic: []
+      responses:
+        200:
+          description: With Overriden Different Security
+          schema:
+            type: string
