@@ -414,7 +414,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -618,7 +678,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -733,7 +853,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -852,7 +1032,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -966,7 +1206,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1062,7 +1362,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1126,7 +1486,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1385,7 +1805,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1481,7 +1961,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1661,7 +2201,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1725,7 +2325,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1833,7 +2493,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1992,7 +2712,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2100,7 +2880,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2246,7 +3086,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2354,7 +3254,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2450,7 +3410,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2538,7 +3558,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2646,7 +3726,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2835,7 +3975,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -3034,7 +4234,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -3181,7 +4441,67 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -3215,42 +4535,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                7295,
-                336
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     }
   ]
 }

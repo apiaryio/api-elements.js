@@ -1057,7 +1057,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1626,7 +1770,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -1933,7 +2221,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2243,7 +2675,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2501,7 +3077,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2741,7 +3461,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -2903,7 +3767,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -3491,7 +4499,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -3731,7 +4883,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -4243,7 +5539,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -4405,7 +5845,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -4657,7 +6241,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -5015,7 +6743,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -5267,7 +7139,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -5599,7 +7615,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -5851,7 +8011,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -6091,7 +8395,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -6310,7 +8758,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -6562,7 +9154,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -7083,7 +9819,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -7662,7 +10542,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -8047,7 +11071,151 @@
                     {
                       "element": "httpTransaction",
                       "meta": {},
-                      "attributes": {},
+                      "attributes": {
+                        "authSchemes": [
+                          {
+                            "element": "oauth",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7309,
+                                      68
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "scopes"
+                                  },
+                                  "value": {
+                                    "element": "array",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7322,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "basic"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7334,
+                                                  8
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "comments"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7349,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "relationships"
+                                      },
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  7369,
+                                                  5
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "likes"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "key",
+                            "meta": {},
+                            "attributes": {
+                              "sourceMap": [
+                                {
+                                  "element": "sourceMap",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": [
+                                    [
+                                      7379,
+                                      7
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            "content": []
+                          }
+                        ]
+                      },
                       "content": [
                         {
                           "element": "httpRequest",
@@ -8133,42 +11301,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                7295,
-                336
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Authentication information is not yet supported"
     }
   ]
 }
