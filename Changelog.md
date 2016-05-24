@@ -1,3 +1,7 @@
+# 0.1.6 - 2016-05-24
+
+- Added a `copy` getter to all array elements
+
 # 0.1.5 - 2016-05-04
 
 - Added support for authScheme related elements and attributes
