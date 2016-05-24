@@ -39,10 +39,6 @@ export default function(namespace) {
       const schemes = ['Basic Authentication Scheme', 'Token Authentication Scheme', 'OAuth2 Scheme'];
       return this.children((item) => schemes.indexOf(item.element) !== -1);
     }
-
-    get copy() {
-      return this.children((item) => item.element === 'copy');
-    }
   }
 
   namespace.register('category', Category);

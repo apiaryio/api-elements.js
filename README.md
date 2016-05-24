@@ -125,6 +125,13 @@ This element describes an auth scheme.
 
 #### Properties
 
+##### scheme.copy
+Get an array element of all child elements with the element name `copy`. This property is **read-only**.
+
+```js
+let copy = scheme.copy;
+```
+
 ##### scheme.transitions
 Get an array element of all child elements with the element name `transition`. This property is **read-only**.
 
@@ -149,6 +156,13 @@ This element describes a data structure.
 ### Resource ([ArrayElement](https://github.com/refractproject/minim#arrayelement))
 
 #### Properties
+
+##### resource.copy
+Get an array element of all child elements with the element name `copy`. This property is **read-only**.
+
+```js
+let copy = resource.copy;
+```
 
 ##### resource.href
 The URL template of this resource.
@@ -194,6 +208,13 @@ console.log(resource.dataStructure.keys());
 This element represents a resource transition.
 
 #### Properties
+
+##### transition.copy
+Get an array element of all child elements with the element name `copy`. This property is **read-only**.
+
+```js
+let copy = transition.copy;
+```
 
 ##### transition.method
 Get the HTTP method of the transition, if there is one, by finding the first HTTP request and inspecting its method. This property is **read-only**.
@@ -312,6 +333,13 @@ This element represents an HTTP request.
 
 #### Properties
 
+##### request.copy
+Get an array element of all child elements with the element name `copy`. This property is **read-only**.
+
+```js
+let copy = request.copy;
+```
+
 ##### request.method
 The HTTP method of this request, e.g. `GET` or `POST`.
 
@@ -390,6 +418,13 @@ let type = request.header('Content-Type')[0];
 This element represents an HTTP response.
 
 #### Properties
+
+##### response.copy
+Get an array element of all child elements with the element name `copy`. This property is **read-only**.
+
+```js
+let copy = response.copy;
+```
 
 ##### response.statusCode
 The HTTP status code, e.g. `200` or `404`.
