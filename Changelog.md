@@ -1,3 +1,7 @@
+# 2.1.0 - 2016-05-24
+
+- Elements returned from parse will always be an instance of minim elements
+
 # 2.0.0 - 2016-04-28
 
 - Upgrade Minim to 0.14.0 and thus remove the short hand notation in fury
