@@ -278,7 +278,7 @@ describe('Parser', () => {
 
       fury.parse({source: 'dummy'}, (err, elements) => {
         assert.equal(err, expectedError);
-        assert.equal(elements, expectedElements);
+        assert.deepEqual(elements, fury.load(expectedElements));
         done();
       });
     });
