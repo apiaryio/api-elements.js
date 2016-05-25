@@ -6,8 +6,6 @@ export default function(namespace) {
     return this.children((item) => item.element === 'copy');
   });
 
-  namespace.register('array', ArrayElement);
-
   class Copy extends StringElement {
     constructor() {
       super(...arguments);
