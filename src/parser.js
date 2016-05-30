@@ -504,8 +504,7 @@ export default class Parser {
       const request = transaction.request;
 
       this.handleSwaggerExampleRequest(transitionParameters, request);
-      this.handleSwaggerExampleResponse(transaction, responseValue, statusCode,
-        responseBody, contentType);
+      this.handleSwaggerExampleResponse(transaction, responseValue, statusCode, responseBody, contentType);
     });
   }
 
@@ -525,8 +524,12 @@ export default class Parser {
       });
 
       // Body parameters define request schemas
+      // There can only be 1 body parameter. So, no issues.
       _.each(bodyParameters, (bodyParameter, index) => {
-        this.pushSchemaAsset(bodyParameter.schema, request, this.path.concat(['parameters', index, 'schema']));
+        this.withPath('parameters', index, 'schema', () => {
+          generator.bodyFromSchema(bodyParameter.schema, request, this);
+          this.pushSchemaAsset(bodyParameter.schema, request, this.path);
+        });
       });
 
       // Using form parameters instead of body? We will convert those to
@@ -627,6 +630,7 @@ export default class Parser {
           }
 
           this.withSlicedPath.apply(this, args.concat([() => {
+            generator.bodyFromSchema(schema, response, this);
             this.pushSchemaAsset(schema, response, this.path);
           }]));
         }
@@ -915,6 +919,9 @@ export default class Parser {
 
   // Create a Refract asset element containing JSON Schema and push into payload
   pushSchemaAsset(schema, payload, path) {
+    schema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
+    schema = _.omit(schema, isExtension);
+
     try {
       const Asset = this.minim.getElementClass('asset');
       const schemaAsset = new Asset(JSON.stringify(schema));
