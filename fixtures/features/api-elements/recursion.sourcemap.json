@@ -366,7 +366,20 @@
         ]
       },
       "attributes": {
-        "code": 3
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                590,
+                53
+              ]
+            ]
+          }
+        ]
       },
       "content": "Circular references in schema are not yet supported"
     }
