@@ -395,9 +395,9 @@ export default class Parser {
         });
       }
 
-      const methodValueParameters = methodValue.parameters || [];
+      const transitionParameters = methodValue.parameters || [];
 
-      const queryParameters = methodValueParameters.filter((parameter) => {
+      const queryParameters = transitionParameters.filter((parameter) => {
         return parameter.in === 'query';
       });
 
@@ -441,7 +441,7 @@ export default class Parser {
       }
 
       // For each uriParameter, create an hrefVariable
-      const methodHrefVariables = this.createHrefVariables(methodValueParameters);
+      const methodHrefVariables = this.createHrefVariables(transitionParameters);
       if (methodHrefVariables) {
         transition.hrefVariables = methodHrefVariables;
       }
@@ -460,7 +460,7 @@ export default class Parser {
       }
 
       if (_.keys(relevantResponses).length === 0) {
-        if (methodValueParameters.filter((p) => p.in === 'body').length) {
+        if (transitionParameters.filter((p) => p.in === 'body').length) {
           // Create an empty successful response so that the request/response
           // pair gets properly generated. In the future we may want to
           // refactor the code below as this is a little weird.
@@ -472,8 +472,7 @@ export default class Parser {
 
       // Transactions are created for each response in the document
       _.each(relevantResponses, (responseValue, statusCode) => {
-        this.handleSwaggerResponse(resource, transition, method,
-          methodValueParameters, responseValue, statusCode);
+        this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode);
       });
 
       return transition;
@@ -481,7 +480,7 @@ export default class Parser {
   }
 
   // Convert a Swagger response & status code into Refract transactions.
-  handleSwaggerResponse(resource, transition, method, transitionParameters, responseValue, statusCode) {
+  handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode) {
     let examples;
 
     if (responseValue.examples) {
@@ -501,16 +500,16 @@ export default class Parser {
 
     _.each(examples, (responseBody, contentType) => {
       const transaction = this.createTransaction(transition, method);
-      const request = transaction.request;
 
-      this.handleSwaggerExampleRequest(transitionParameters, request);
-      this.handleSwaggerExampleResponse(transaction, responseValue, statusCode, responseBody, contentType);
+      this.handleSwaggerExampleRequest(transaction, methodValue, transitionParameters);
+      this.handleSwaggerExampleResponse(transaction, methodValue, responseValue, statusCode, responseBody, contentType);
     });
   }
 
   // Convert a Swagger example into a Refract request.
-  handleSwaggerExampleRequest(transitionParameters, request) {
+  handleSwaggerExampleRequest(transaction, methodValue, transitionParameters) {
     const {DataStructure, Object: ObjectElement} = this.minim.elements;
+    const request = transaction.request;
 
     this.withPath(() => {
       // Body parameters are ones that define JSON Schema
@@ -523,11 +522,17 @@ export default class Parser {
         return parameter.in === 'formData';
       });
 
+      // Check if application/json is in consumes
+      const consumes = methodValue.consumes || this.swagger.consumes || [];
+
       // Body parameters define request schemas
       // There can only be 1 body parameter. So, no issues.
       _.each(bodyParameters, (bodyParameter, index) => {
         this.withPath('parameters', index, 'schema', () => {
-          generator.bodyFromSchema(bodyParameter.schema, request, this);
+          if (consumes.indexOf('application/json') !== -1) {
+            generator.bodyFromSchema(bodyParameter.schema, request, this);
+          }
+
           this.pushSchemaAsset(bodyParameter.schema, request, this.path);
         });
       });
@@ -553,10 +558,8 @@ export default class Parser {
   }
 
   // Convert a Swagger example into a Refract response.
-  handleSwaggerExampleResponse(transaction, responseValue, statusCode, responseBody, contentType) {
-    const {
-      Asset, Copy, HttpHeaders, Member: MemberElement,
-    } = this.minim.elements;
+  handleSwaggerExampleResponse(transaction, methodValue, responseValue, statusCode, responseBody, contentType) {
+    const {Asset, Copy, HttpHeaders, Member: MemberElement} = this.minim.elements;
     const response = transaction.response;
 
     this.withPath('responses', statusCode, () => {
@@ -586,7 +589,6 @@ export default class Parser {
 
           headers.push(contentHeader);
           response.headers = headers;
-          return contentHeader;
         });
       }
 
@@ -612,8 +614,6 @@ export default class Parser {
             }
 
             response.content.push(bodyAsset);
-
-            return bodyAsset;
           });
         }
 
@@ -629,8 +629,13 @@ export default class Parser {
             args = [5, 'schema'];
           }
 
+          const produces = methodValue.produces || this.swagger.produces || [];
+
           this.withSlicedPath.apply(this, args.concat([() => {
-            generator.bodyFromSchema(schema, response, this);
+            if (produces.indexOf('application/json') !== -1 && responseBody === undefined) {
+              generator.bodyFromSchema(schema, response, this);
+            }
+
             this.pushSchemaAsset(schema, response, this.path);
           }]));
         }
@@ -644,7 +649,7 @@ export default class Parser {
         }
       });
 
-      return [transaction, response];
+      return response;
     });
   }
 
@@ -919,12 +924,12 @@ export default class Parser {
 
   // Create a Refract asset element containing JSON Schema and push into payload
   pushSchemaAsset(schema, payload, path) {
-    schema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
-    schema = _.omit(schema, isExtension);
+    let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
+    actualSchema = _.omit(actualSchema, isExtension);
 
     try {
       const Asset = this.minim.getElementClass('asset');
-      const schemaAsset = new Asset(JSON.stringify(schema));
+      const schemaAsset = new Asset(JSON.stringify(actualSchema));
 
       schemaAsset.classes.push('messageBodySchema');
       schemaAsset.contentType = 'application/schema+json';

@@ -2,7 +2,7 @@ import faker from 'json-schema-faker';
 import annotations from './annotations';
 
 faker.option({
-  useDefaultValue: true
+  useDefaultValue: true,
 });
 
 export function bodyFromSchema(schema, payload, parser) {
@@ -10,7 +10,7 @@ export function bodyFromSchema(schema, payload, parser) {
   let asset = null;
 
   try {
-    let body = schema.example || JSON.stringify(faker(schema), null, 2);
+    const body = schema.example || JSON.stringify(faker(schema), null, 2);
 
     asset = new Asset(body);
 
