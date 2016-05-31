@@ -47,8 +47,8 @@
                     "attributes": {},
                     "content": [
                       [
-                        73,
-                        188
+                        135,
+                        339
                       ]
                     ]
                   }
@@ -83,8 +83,200 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    86,
-                                    175
+                                    148,
+                                    326
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "POST"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBody"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/json"
+                          },
+                          "content": "Hello"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBodySchema"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/schema+json",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    285,
+                                    66
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "{\"type\":\"string\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    370,
+                                    104
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "200"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    385,
+                                    29
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Test description"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBody"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/json"
+                          },
+                          "content": "{\n  \"id\": 123,\n  \"name\": \"Item name\"\n}"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBodySchema"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/schema+json",
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    425,
+                                    49
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"enum\":[123],\"default\":456},\"name\":{\"type\":\"string\",\"default\":\"Item name\"}},\"required\":[\"id\",\"name\"]}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
+            "href": {
+              "element": "string",
+              "meta": {},
+              "attributes": {
+                "sourceMap": [
+                  {
+                    "element": "sourceMap",
+                    "meta": {},
+                    "attributes": {},
+                    "content": [
+                      [
+                        474,
+                        198
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "content": "/test-without-produces"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {},
+              "attributes": {},
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    504,
+                                    168
                                   ]
                                 ]
                               }
@@ -110,8 +302,8 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    159,
-                                    102
+                                    553,
+                                    119
                                   ]
                                 ]
                               }
@@ -132,14 +324,14 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    174,
-                                    29
+                                    568,
+                                    46
                                   ]
                                 ]
                               }
                             ]
                           },
-                          "content": "Test description"
+                          "content": "Test description without produces"
                         },
                         {
                           "element": "asset",
@@ -157,14 +349,14 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    214,
+                                    625,
                                     47
                                   ]
                                 ]
                               }
                             ]
                           },
-                          "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}"
+                          "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"enum\":[123],\"default\":456},\"name\":{\"type\":\"string\",\"default\":\"Item name\"}},\"required\":[\"id\",\"name\"]}"
                         }
                       ]
                     }
