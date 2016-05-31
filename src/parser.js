@@ -1,41 +1,14 @@
 // The main Swagger parsing component that outputs refract.
 
 import _ from 'lodash';
-import Ast from './ast';
-import buildUriTemplate from './uri-template';
-import SwaggerParser from 'swagger-parser';
 import yaml from 'js-yaml';
 
-// These describe the type of annotations that are produced by this parser
-// and assigns a unique code to each one. Downstream applications can use this
-// code to group similar types of annotations together.
-const ANNOTATIONS = {
-  CANNOT_PARSE: {
-    type: 'error',
-    code: 1,
-    fragment: 'yaml-parser',
-  },
-  AST_UNAVAILABLE: {
-    type: 'warning',
-    code: 2,
-    fragment: 'yaml-parser',
-  },
-  DATA_LOST: {
-    type: 'warning',
-    code: 3,
-    fragment: 'refract-not-supported',
-  },
-  VALIDATION_ERROR: {
-    type: 'error',
-    code: 4,
-    fragment: 'swagger-validation',
-  },
-  UNCAUGHT_ERROR: {
-    type: 'error',
-    code: 5,
-    fragment: 'uncaught-error',
-  },
-};
+import annotations from './annotations';
+import generator from './generator';
+import uriTemplate from './uri-template';
+import Ast from './ast';
+import SwaggerParser from 'swagger-parser';
+
 
 // Test whether a key is a special Swagger extension.
 function isExtension(value, key) {
@@ -77,7 +50,7 @@ export default class Parser {
     try {
       loaded = _.isString(this.source) ? yaml.safeLoad(this.source) : this.source;
     } catch (err) {
-      this.createAnnotation(ANNOTATIONS.CANNOT_PARSE, null,
+      this.createAnnotation(annotations.CANNOT_PARSE, null,
         (err.reason || 'Problem loading the input'));
 
       if (err.mark) {
@@ -115,7 +88,7 @@ export default class Parser {
           const queue = [err.details];
           while (queue.length) {
             for (const item of queue[0]) {
-              this.createAnnotation(ANNOTATIONS.VALIDATION_ERROR, item.path,
+              this.createAnnotation(annotations.VALIDATION_ERROR, item.path,
                 item.message);
 
               if (item.inner) {
@@ -141,7 +114,7 @@ export default class Parser {
           location = [this.source.indexOf(matches[1]), matches[1].length];
         }
 
-        const annotation = this.createAnnotation(ANNOTATIONS.VALIDATION_ERROR,
+        const annotation = this.createAnnotation(annotations.VALIDATION_ERROR,
             null, err.message);
 
         if (location !== null) {
@@ -167,7 +140,7 @@ export default class Parser {
         this.handleSwaggerAuth();
 
         if (swagger.externalDocs) {
-          this.createAnnotation(ANNOTATIONS.DATA_LOST, ['externalDocs'],
+          this.createAnnotation(annotations.DATA_LOST, ['externalDocs'],
             'External documentation is not yet supported');
         }
 
@@ -178,7 +151,7 @@ export default class Parser {
 
         return done(null, this.result);
       } catch (exception) {
-        this.createAnnotation(ANNOTATIONS.UNCAUGHT_ERROR, null,
+        this.createAnnotation(annotations.UNCAUGHT_ERROR, null,
           ('There was a problem converting the Swagger document'));
 
         return done(exception, this.result);
@@ -205,12 +178,12 @@ export default class Parser {
         this._ast = new Ast(this.source);
       } catch (err) {
         this._ast = null;
-        this.createAnnotation(ANNOTATIONS.AST_UNAVAILABLE, null,
+        this.createAnnotation(annotations.AST_UNAVAILABLE, null,
           'Input AST could not be composed, so source maps will not be available');
       }
     } else {
       this._ast = null;
-      this.createAnnotation(ANNOTATIONS.AST_UNAVAILABLE, null,
+      this.createAnnotation(annotations.AST_UNAVAILABLE, null,
         'Source maps are only available with string input');
     }
 
@@ -288,7 +261,7 @@ export default class Parser {
 
         if (this.swagger.schemes) {
           if (this.swagger.schemes.length > 1) {
-            this.createAnnotation(ANNOTATIONS.DATA_LOST, ['schemes'],
+            this.createAnnotation(annotations.DATA_LOST, ['schemes'],
               'Only the first scheme will be used to create a hostname');
           }
 
@@ -316,7 +289,7 @@ export default class Parser {
   handleSwaggerAuth() {
     for (const attribute of ['securityDefinitions', 'security']) {
       if (this.swagger[attribute]) {
-        this.createAnnotation(ANNOTATIONS.DATA_LOST, [attribute],
+        this.createAnnotation(annotations.DATA_LOST, [attribute],
           'Authentication information is not yet supported');
       }
     }
@@ -372,7 +345,7 @@ export default class Parser {
       // by individual transition URI templates. When creating a transition
       // below, we *only* set the transition URI template if it differs from
       // the one we've generated here.
-      resource.href = buildUriTemplate(this.basePath, href, pathObjectParameters);
+      resource.href = uriTemplate(this.basePath, href, pathObjectParameters);
 
       if (this.generateSourceMap) {
         this.createSourceMap(resource.attributes.get('href'), this.path);
@@ -383,10 +356,10 @@ export default class Parser {
         pathObjectParameters.forEach((parameter, index) => {
           this.withPath('parameters', index, (path) => {
             if (parameter.in === 'body') {
-              this.createAnnotation(ANNOTATIONS.DATA_LOST, path,
+              this.createAnnotation(annotations.DATA_LOST, path,
                 'Path-level body parameters are not yet supported');
             } else if (parameter.in === 'formData') {
-              this.createAnnotation(ANNOTATIONS.DATA_LOST, path,
+              this.createAnnotation(annotations.DATA_LOST, path,
                 'Path-level form data parameters are not yet supported');
             }
           });
@@ -417,21 +390,21 @@ export default class Parser {
     this.withPath(method, () => {
       if (methodValue.externalDocs) {
         this.withPath('externalDocs', (path) => {
-          this.createAnnotation(ANNOTATIONS.DATA_LOST, path,
+          this.createAnnotation(annotations.DATA_LOST, path,
           'External documentation is not yet supported');
         });
       }
 
-      const methodValueParameters = methodValue.parameters || [];
+      const transitionParameters = methodValue.parameters || [];
 
-      const queryParameters = methodValueParameters.filter((parameter) => {
+      const queryParameters = transitionParameters.filter((parameter) => {
         return parameter.in === 'query';
       });
 
       // Here we generate a URI template specific to this transition. If it
       // is different from the resource URI template, then we set the
       // transition's `href` attribute.
-      const hrefForTransition = buildUriTemplate(this.basePath, href, resourceParameters, queryParameters);
+      const hrefForTransition = uriTemplate(this.basePath, href, resourceParameters, queryParameters);
 
       if (hrefForTransition !== resource.href) {
         transition.href = hrefForTransition;
@@ -468,7 +441,7 @@ export default class Parser {
       }
 
       // For each uriParameter, create an hrefVariable
-      const methodHrefVariables = this.createHrefVariables(methodValueParameters);
+      const methodHrefVariables = this.createHrefVariables(transitionParameters);
       if (methodHrefVariables) {
         transition.hrefVariables = methodHrefVariables;
       }
@@ -481,13 +454,13 @@ export default class Parser {
 
       if (methodValue.responses && methodValue.responses.default) {
         this.withPath('responses', 'default', (path) => {
-          this.createAnnotation(ANNOTATIONS.DATA_LOST, path,
+          this.createAnnotation(annotations.DATA_LOST, path,
             'Default response is not yet supported');
         });
       }
 
       if (_.keys(relevantResponses).length === 0) {
-        if (methodValueParameters.filter((p) => p.in === 'body').length) {
+        if (transitionParameters.filter((p) => p.in === 'body').length) {
           // Create an empty successful response so that the request/response
           // pair gets properly generated. In the future we may want to
           // refactor the code below as this is a little weird.
@@ -499,8 +472,7 @@ export default class Parser {
 
       // Transactions are created for each response in the document
       _.each(relevantResponses, (responseValue, statusCode) => {
-        this.handleSwaggerResponse(resource, transition, method,
-          methodValueParameters, responseValue, statusCode);
+        this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode);
       });
 
       return transition;
@@ -508,7 +480,7 @@ export default class Parser {
   }
 
   // Convert a Swagger response & status code into Refract transactions.
-  handleSwaggerResponse(resource, transition, method, transitionParameters, responseValue, statusCode) {
+  handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode) {
     let examples;
 
     if (responseValue.examples) {
@@ -528,17 +500,16 @@ export default class Parser {
 
     _.each(examples, (responseBody, contentType) => {
       const transaction = this.createTransaction(transition, method);
-      const request = transaction.request;
 
-      this.handleSwaggerExampleRequest(transitionParameters, request);
-      this.handleSwaggerExampleResponse(transaction, responseValue, statusCode,
-        responseBody, contentType);
+      this.handleSwaggerExampleRequest(transaction, methodValue, transitionParameters);
+      this.handleSwaggerExampleResponse(transaction, methodValue, responseValue, statusCode, responseBody, contentType);
     });
   }
 
   // Convert a Swagger example into a Refract request.
-  handleSwaggerExampleRequest(transitionParameters, request) {
+  handleSwaggerExampleRequest(transaction, methodValue, transitionParameters) {
     const {DataStructure, Object: ObjectElement} = this.minim.elements;
+    const request = transaction.request;
 
     this.withPath(() => {
       // Body parameters are ones that define JSON Schema
@@ -551,9 +522,19 @@ export default class Parser {
         return parameter.in === 'formData';
       });
 
+      // Check if application/json is in consumes
+      const consumes = methodValue.consumes || this.swagger.consumes || [];
+
       // Body parameters define request schemas
+      // There can only be 1 body parameter. So, no issues.
       _.each(bodyParameters, (bodyParameter, index) => {
-        this.pushSchemaAsset(bodyParameter.schema, request, this.path.concat(['parameters', index, 'schema']));
+        this.withPath('parameters', index, 'schema', () => {
+          if (consumes.indexOf('application/json') !== -1) {
+            generator.bodyFromSchema(bodyParameter.schema, request, this);
+          }
+
+          this.pushSchemaAsset(bodyParameter.schema, request, this.path);
+        });
       });
 
       // Using form parameters instead of body? We will convert those to
@@ -577,10 +558,8 @@ export default class Parser {
   }
 
   // Convert a Swagger example into a Refract response.
-  handleSwaggerExampleResponse(transaction, responseValue, statusCode, responseBody, contentType) {
-    const {
-      Asset, Copy, HttpHeaders, Member: MemberElement,
-    } = this.minim.elements;
+  handleSwaggerExampleResponse(transaction, methodValue, responseValue, statusCode, responseBody, contentType) {
+    const {Asset, Copy, HttpHeaders, Member: MemberElement} = this.minim.elements;
     const response = transaction.response;
 
     this.withPath('responses', statusCode, () => {
@@ -610,7 +589,6 @@ export default class Parser {
 
           headers.push(contentHeader);
           response.headers = headers;
-          return contentHeader;
         });
       }
 
@@ -636,8 +614,6 @@ export default class Parser {
             }
 
             response.content.push(bodyAsset);
-
-            return bodyAsset;
           });
         }
 
@@ -653,7 +629,13 @@ export default class Parser {
             args = [5, 'schema'];
           }
 
+          const produces = methodValue.produces || this.swagger.produces || [];
+
           this.withSlicedPath.apply(this, args.concat([() => {
+            if (produces.indexOf('application/json') !== -1 && responseBody === undefined) {
+              generator.bodyFromSchema(schema, response, this);
+            }
+
             this.pushSchemaAsset(schema, response, this.path);
           }]));
         }
@@ -667,7 +649,7 @@ export default class Parser {
         }
       });
 
-      return [transaction, response];
+      return response;
     });
   }
 
@@ -896,15 +878,18 @@ export default class Parser {
   // Make a new annotation for the given path and message
   createAnnotation(info, path, message) {
     const {Annotation, Link} = this.minim.elements;
+
     const annotation = new Annotation(message);
     annotation.classes.push(info.type);
     annotation.code = info.code;
+
     this.result.content.push(annotation);
 
     if (info.fragment) {
       const link = new Link();
       link.relation = 'origin';
       link.href = `http://docs.apiary.io/validations/swagger#${info.fragment}`;
+
       annotation.links.push(link);
     }
 
@@ -939,9 +924,12 @@ export default class Parser {
 
   // Create a Refract asset element containing JSON Schema and push into payload
   pushSchemaAsset(schema, payload, path) {
+    let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
+    actualSchema = _.omit(actualSchema, isExtension);
+
     try {
       const Asset = this.minim.getElementClass('asset');
-      const schemaAsset = new Asset(JSON.stringify(schema));
+      const schemaAsset = new Asset(JSON.stringify(actualSchema));
 
       schemaAsset.classes.push('messageBodySchema');
       schemaAsset.contentType = 'application/schema+json';
@@ -952,7 +940,7 @@ export default class Parser {
 
       payload.content.push(schemaAsset);
     } catch (exception) {
-      this.createAnnotation(ANNOTATIONS.DATA_LOST, null,
+      this.createAnnotation(annotations.DATA_LOST, path,
         ('Circular references in schema are not yet supported'));
     }
   }
