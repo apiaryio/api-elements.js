@@ -6,6 +6,7 @@ import yaml from 'js-yaml';
 import annotations from './annotations';
 import generator from './generator';
 import uriTemplate from './uri-template';
+import link from './link';
 import Ast from './ast';
 import SwaggerParser from 'swagger-parser';
 
@@ -877,7 +878,7 @@ export default class Parser {
 
   // Make a new annotation for the given path and message
   createAnnotation(info, path, message) {
-    const {Annotation, Link} = this.minim.elements;
+    const {Annotation} = this.minim.elements;
 
     const annotation = new Annotation(message);
     annotation.classes.push(info.type);
@@ -886,11 +887,7 @@ export default class Parser {
     this.result.content.push(annotation);
 
     if (info.fragment) {
-      const link = new Link();
-      link.relation = 'origin';
-      link.href = `http://docs.apiary.io/validations/swagger#${info.fragment}`;
-
-      annotation.links.push(link);
+      link.origin(info.fragment, annotation, this);
     }
 
     if (path && this.ast) {
