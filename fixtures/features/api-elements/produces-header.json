@@ -42,7 +42,19 @@
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#produces-accept"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
                               "attributes": {},
                               "content": {
                                 "key": {

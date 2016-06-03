@@ -99,7 +99,19 @@
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
                               "attributes": {},
                               "content": {
                                 "key": {
@@ -118,7 +130,19 @@
                             },
                             {
                               "element": "member",
-                              "meta": {},
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#produces-accept"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
                               "attributes": {},
                               "content": {
                                 "key": {
@@ -144,6 +168,17 @@
                           "meta": {
                             "classes": [
                               "messageBody"
+                            ],
+                            "links": [
+                              {
+                                "element": "link",
+                                "meta": {},
+                                "attributes": {
+                                  "relation": "inferred",
+                                  "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                },
+                                "content": []
+                              }
                             ]
                           },
                           "attributes": {
@@ -189,7 +224,19 @@
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#produces-content-type"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
                               "attributes": {},
                               "content": {
                                 "key": {
@@ -255,6 +302,17 @@
                           "meta": {
                             "classes": [
                               "messageBody"
+                            ],
+                            "links": [
+                              {
+                                "element": "link",
+                                "meta": {},
+                                "attributes": {
+                                  "relation": "inferred",
+                                  "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                },
+                                "content": []
+                              }
                             ]
                           },
                           "attributes": {
@@ -362,7 +420,19 @@
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
                               "attributes": {},
                               "content": {
                                 "key": {
