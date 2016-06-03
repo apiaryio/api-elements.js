@@ -34,7 +34,33 @@
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET"
+                        "method": "GET",
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {},
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Accept"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        }
                       },
                       "content": []
                     },

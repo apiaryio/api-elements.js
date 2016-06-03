@@ -91,6 +91,51 @@
                             ]
                           },
                           "content": "POST"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {},
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {},
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Accept"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
                         }
                       },
                       "content": [
@@ -137,6 +182,32 @@
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {},
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        },
                         "statusCode": {
                           "element": "string",
                           "meta": {},
@@ -283,6 +354,32 @@
                             ]
                           },
                           "content": "GET"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {},
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
                         }
                       },
                       "content": []
