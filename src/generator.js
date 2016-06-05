@@ -1,5 +1,6 @@
 import faker from 'json-schema-faker';
 import annotations from './annotations';
+import link from './link';
 
 faker.option({
   useDefaultValue: true,
@@ -16,6 +17,8 @@ export function bodyFromSchema(schema, payload, parser) {
 
     asset.classes.push('messageBody');
     asset.contentType = 'application/json';
+
+    link.inferred('message-body-generation', asset, parser);
 
     payload.content.push(asset);
   } catch (exception) {

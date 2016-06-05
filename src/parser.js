@@ -6,9 +6,12 @@ import yaml from 'js-yaml';
 import annotations from './annotations';
 import generator from './generator';
 import uriTemplate from './uri-template';
+import link from './link';
+import headers from './headers';
 import Ast from './ast';
 import SwaggerParser from 'swagger-parser';
 
+const JSON_CONTENT_TYPE = 'application/json';
 
 // Test whether a key is a special Swagger extension.
 function isExtension(value, key) {
@@ -523,13 +526,25 @@ export default class Parser {
       });
 
       // Check if application/json is in consumes
-      const consumes = methodValue.consumes || this.swagger.consumes || [];
+      const inConsumes = (methodValue.consumes || this.swagger.consumes || []).indexOf(JSON_CONTENT_TYPE) !== -1;
+      const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
+
+      // Add content-type headers
+      if (inConsumes) {
+        headers.createHeaders(request, this);
+        headers.pushHeader('Content-Type', JSON_CONTENT_TYPE, request, this, 'consumes-content-type');
+      }
+
+      if (inProduces) {
+        headers.createHeaders(request, this);
+        headers.pushHeader('Accept', JSON_CONTENT_TYPE, request, this, 'produces-accept');
+      }
 
       // Body parameters define request schemas
       // There can only be 1 body parameter. So, no issues.
       _.each(bodyParameters, (bodyParameter, index) => {
         this.withPath('parameters', index, 'schema', () => {
-          if (consumes.indexOf('application/json') !== -1) {
+          if (inConsumes) {
             generator.bodyFromSchema(bodyParameter.schema, request, this);
           }
 
@@ -572,7 +587,7 @@ export default class Parser {
         }
       }
 
-      const headers = new HttpHeaders();
+      const httpHeaders = new HttpHeaders();
 
       if (contentType) {
         this.withPath('examples', contentType, () => {
@@ -587,13 +602,13 @@ export default class Parser {
             this.createSourceMap(contentHeader, this.path);
           }
 
-          headers.push(contentHeader);
-          response.headers = headers;
+          httpHeaders.push(contentHeader);
+          response.headers = httpHeaders;
         });
       }
 
       if (responseValue.headers) {
-        response.headers = this.updateHeaders(headers, responseValue.headers);
+        response.headers = this.updateHeaders(httpHeaders, responseValue.headers);
       }
 
       this.withPath('examples', () => {
@@ -629,11 +644,14 @@ export default class Parser {
             args = [5, 'schema'];
           }
 
-          const produces = methodValue.produces || this.swagger.produces || [];
+          const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
 
           this.withSlicedPath.apply(this, args.concat([() => {
-            if (produces.indexOf('application/json') !== -1 && responseBody === undefined) {
+            if (inProduces && responseBody === undefined) {
               generator.bodyFromSchema(schema, response, this);
+
+              headers.createHeaders(response, this);
+              headers.pushHeader('Content-Type', JSON_CONTENT_TYPE, response, this, 'produces-content-type');
             }
 
             this.pushSchemaAsset(schema, response, this.path);
@@ -655,10 +673,10 @@ export default class Parser {
 
   // Takes in an `httpHeaders` element and a list of Swagger headers. Adds
   // the Swagger headers to the element and then returns the modified element.
-  updateHeaders(element, headers) {
-    for (const headerName in headers) {
-      if (headers.hasOwnProperty(headerName)) {
-        this.createHeader(element, headers, headerName);
+  updateHeaders(element, httpHeaders) {
+    for (const headerName in httpHeaders) {
+      if (httpHeaders.hasOwnProperty(headerName)) {
+        this.createHeader(element, httpHeaders, headerName);
       }
     }
 
@@ -667,11 +685,11 @@ export default class Parser {
 
   // Creates an individual header on an element. This does *not* check for
   // duplicate header names.
-  createHeader(element, headers, headerName) {
+  createHeader(element, httpHeaders, headerName) {
     const {Member: MemberElement} = this.minim.elements;
 
     this.withPath('headers', headerName, () => {
-      const header = headers[headerName];
+      const header = httpHeaders[headerName];
       let value = '';
 
       // Choose the first available option
@@ -877,7 +895,7 @@ export default class Parser {
 
   // Make a new annotation for the given path and message
   createAnnotation(info, path, message) {
-    const {Annotation, Link} = this.minim.elements;
+    const {Annotation} = this.minim.elements;
 
     const annotation = new Annotation(message);
     annotation.classes.push(info.type);
@@ -886,11 +904,7 @@ export default class Parser {
     this.result.content.push(annotation);
 
     if (info.fragment) {
-      const link = new Link();
-      link.relation = 'origin';
-      link.href = `http://docs.apiary.io/validations/swagger#${info.fragment}`;
-
-      annotation.links.push(link);
+      link.origin(info.fragment, annotation, this);
     }
 
     if (path && this.ast) {
