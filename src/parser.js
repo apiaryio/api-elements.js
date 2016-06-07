@@ -842,10 +842,8 @@ export default class Parser {
       let e;
 
       if (parameter.enum) {
-        const defaultElement;
-
         e = new ArrayElement();
-        defaultElement = new Type();
+        const defaultElement = new Type();
         defaultElement.content = parameter.default;
 
         if (this.generateSourceMap) {
@@ -857,7 +855,7 @@ export default class Parser {
         e = new Type();
 
         if (parameter.type === 'array') {
-          let defaultElement = this.convertParameterToElement(parameter.items, (path || []).concat(['items']), true);
+          const defaultElement = this.convertParameterToElement(parameter.items, (path || []).concat(['items']), true);
           defaultElement.content = parameter.default;
 
           e.content.push(defaultElement);
