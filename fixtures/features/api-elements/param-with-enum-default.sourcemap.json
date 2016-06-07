@@ -48,13 +48,13 @@
                     "content": [
                       [
                         67,
-                        407
+                        442
                       ]
                     ]
                   }
                 ]
               },
-              "content": "/test/{id}"
+              "content": "/test"
             }
           },
           "content": [
@@ -62,7 +62,7 @@
               "element": "transition",
               "meta": {},
               "attributes": {
-                "href": "/test/{id}{?arg}",
+                "href": "/test{?arg,arg2}",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -82,78 +82,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    156,
-                                    30
-                                  ]
-                                ]
-                              }
-                            ]
-                          },
-                          "content": "Unique identifier"
-                        }
-                      },
-                      "attributes": {
-                        "sourceMap": [
-                          {
-                            "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
-                            "content": [
-                              [
-                                118,
-                                125
-                              ]
-                            ]
-                          }
-                        ],
-                        "typeAttributes": [
-                          "required"
-                        ]
-                      },
-                      "content": {
-                        "key": {
-                          "element": "string",
-                          "meta": {},
-                          "attributes": {},
-                          "content": "id"
-                        },
-                        "value": {
-                          "element": "string",
-                          "meta": {},
-                          "attributes": {
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    118,
-                                    125
-                                  ]
-                                ]
-                              }
-                            ]
-                          },
-                          "content": null
-                        }
-                      }
-                    },
-                    {
-                      "element": "member",
-                      "meta": {
-                        "description": {
-                          "element": "string",
-                          "meta": {},
-                          "attributes": {
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    285,
+                                    153,
                                     27
                                   ]
                                 ]
@@ -171,14 +100,11 @@
                             "attributes": {},
                             "content": [
                               [
-                                245,
-                                163
+                                113,
+                                168
                               ]
                             ]
                           }
-                        ],
-                        "typeAttributes": [
-                          "required"
                         ]
                       },
                       "content": {
@@ -189,9 +115,31 @@
                           "content": "arg"
                         },
                         "value": {
-                          "element": "array",
+                          "element": "enum",
                           "meta": {},
                           "attributes": {
+                            "default": [
+                              {
+                                "element": "string",
+                                "meta": {},
+                                "attributes": {
+                                  "sourceMap": [
+                                    {
+                                      "element": "sourceMap",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": [
+                                        [
+                                          214,
+                                          10
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "content": "A"
+                              }
+                            ],
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
@@ -199,8 +147,8 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    245,
-                                    163
+                                    113,
+                                    168
                                   ]
                                 ]
                               }
@@ -218,7 +166,138 @@
                                     "attributes": {},
                                     "content": [
                                       [
-                                        345,
+                                        255,
+                                        1
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "B"
+                            },
+                            {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        271,
+                                        1
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              },
+                              "content": "C"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    324,
+                                    29
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": "Query argument 2"
+                        }
+                      },
+                      "attributes": {
+                        "sourceMap": [
+                          {
+                            "element": "sourceMap",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              [
+                                283,
+                                162
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "arg2"
+                        },
+                        "value": {
+                          "element": "array",
+                          "meta": {},
+                          "attributes": {
+                            "default": [
+                              {
+                                "element": "string",
+                                "meta": {},
+                                "attributes": {
+                                  "sourceMap": [
+                                    {
+                                      "element": "sourceMap",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": [
+                                        [
+                                          386,
+                                          42
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "content": "A"
+                              }
+                            ],
+                            "sourceMap": [
+                              {
+                                "element": "sourceMap",
+                                "meta": {},
+                                "attributes": {},
+                                "content": [
+                                  [
+                                    283,
+                                    162
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {
+                                "sourceMap": [
+                                  {
+                                    "element": "sourceMap",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      [
+                                        386,
                                         42
                                       ]
                                     ]
@@ -255,8 +334,8 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    85,
-                                    389
+                                    80,
+                                    429
                                   ]
                                 ]
                               }
@@ -282,150 +361,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    427,
-                                    47
-                                  ]
-                                ]
-                              }
-                            ]
-                          },
-                          "content": "200"
-                        }
-                      },
-                      "content": [
-                        {
-                          "element": "copy",
-                          "meta": {},
-                          "attributes": {
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    442,
-                                    29
-                                  ]
-                                ]
-                              }
-                            ]
-                          },
-                          "content": "Test description"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "element": "resource",
-          "meta": {},
-          "attributes": {
-            "href": {
-              "element": "string",
-              "meta": {},
-              "attributes": {
-                "sourceMap": [
-                  {
-                    "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
-                    "content": [
-                      [
-                        474,
-                        253
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "content": "/test"
-            }
-          },
-          "content": [
-            {
-              "element": "transition",
-              "meta": {},
-              "attributes": {},
-              "content": [
-                {
-                  "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
-                  "content": [
-                    {
-                      "element": "httpRequest",
-                      "meta": {},
-                      "attributes": {
-                        "method": {
-                          "element": "string",
-                          "meta": {},
-                          "attributes": {
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    487,
-                                    240
-                                  ]
-                                ]
-                              }
-                            ]
-                          },
-                          "content": "POST"
-                        }
-                      },
-                      "content": [
-                        {
-                          "element": "asset",
-                          "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
-                          },
-                          "attributes": {
-                            "contentType": "application/schema+json",
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    624,
-                                    39
-                                  ]
-                                ]
-                              }
-                            ]
-                          },
-                          "content": "{\"type\":\"string\"}"
-                        }
-                      ]
-                    },
-                    {
-                      "element": "httpResponse",
-                      "meta": {},
-                      "attributes": {
-                        "statusCode": {
-                          "element": "string",
-                          "meta": {},
-                          "attributes": {
-                            "sourceMap": [
-                              {
-                                "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
-                                "content": [
-                                  [
-                                    682,
+                                    464,
                                     45
                                   ]
                                 ]
@@ -447,7 +383,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    697,
+                                    479,
                                     29
                                   ]
                                 ]
