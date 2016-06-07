@@ -51,7 +51,7 @@
                           "element": "string",
                           "meta": {},
                           "attributes": {},
-                          "content": ""
+                          "content": null
                         }
                       }
                     },
@@ -81,7 +81,7 @@
                               "element": "string",
                               "meta": {},
                               "attributes": {},
-                              "content": ""
+                              "content": null
                             }
                           ]
                         }

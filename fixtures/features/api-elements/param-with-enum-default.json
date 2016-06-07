@@ -9,7 +9,7 @@
         "classes": [
           "api"
         ],
-        "title": "Extensions"
+        "title": "Parameters"
       },
       "attributes": {},
       "content": [
@@ -17,13 +17,14 @@
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/test/{id}"
+            "href": "/test"
           },
           "content": [
             {
               "element": "transition",
               "meta": {},
               "attributes": {
+                "href": "/test{?arg,arg2}",
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "meta": {},
@@ -31,24 +32,71 @@
                   "content": [
                     {
                       "element": "member",
-                      "meta": {},
-                      "attributes": {
-                        "typeAttributes": [
-                          "required"
-                        ]
+                      "meta": {
+                        "description": "Query argument"
                       },
+                      "attributes": {},
                       "content": {
                         "key": {
                           "element": "string",
                           "meta": {},
                           "attributes": {},
-                          "content": "id"
+                          "content": "arg"
                         },
                         "value": {
+                          "element": "enum",
+                          "meta": {},
+                          "attributes": {
+                            "default": [
+                              "A"
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "B"
+                            },
+                            {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": "C"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Query argument 2"
+                      },
+                      "attributes": {},
+                      "content": {
+                        "key": {
                           "element": "string",
                           "meta": {},
                           "attributes": {},
-                          "content": null
+                          "content": "arg2"
+                        },
+                        "value": {
+                          "element": "array",
+                          "meta": {},
+                          "attributes": {
+                            "default": [
+                              "A"
+                            ]
+                          },
+                          "content": [
+                            {
+                              "element": "string",
+                              "meta": {},
+                              "attributes": {},
+                              "content": null
+                            }
+                          ]
                         }
                       }
                     }
@@ -80,7 +128,7 @@
                           "element": "copy",
                           "meta": {},
                           "attributes": {},
-                          "content": "Test Description"
+                          "content": "Test description"
                         }
                       ]
                     }

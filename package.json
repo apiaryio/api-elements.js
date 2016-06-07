@@ -1,6 +1,6 @@
 {
   "name": "swagger-zoo",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Swagger example files for testing",
   "main": "index.js",
   "scripts": {
