@@ -1,0 +1,247 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "Body Test"
+      },
+      "attributes": {
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {},
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "http://example.com"
+              }
+            }
+          }
+        ]
+      },
+      "content": [
+        {
+          "element": "copy",
+          "meta": {},
+          "attributes": {},
+          "content": "A test to see how bodies get parsed / created"
+        },
+        {
+          "element": "resource",
+          "meta": {},
+          "attributes": {
+            "href": "/resource"
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {
+                "id": "getResource"
+              },
+              "attributes": {},
+              "content": [
+                {
+                  "element": "copy",
+                  "meta": {},
+                  "attributes": {},
+                  "content": "Get a resource"
+                },
+                {
+                  "element": "httpTransaction",
+                  "meta": {},
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "meta": {},
+                      "attributes": {
+                        "method": "GET",
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#produces-accept"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Accept"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "meta": {},
+                      "attributes": {
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#produces-content-type"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "statusCode": "200"
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "meta": {},
+                          "attributes": {},
+                          "content": "response description"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBody"
+                            ],
+                            "links": [
+                              {
+                                "element": "link",
+                                "meta": {},
+                                "attributes": {
+                                  "relation": "inferred",
+                                  "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                },
+                                "content": []
+                              }
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/json"
+                          },
+                          "content": "{\n  \"id\": 123,\n  \"name\": \"Resource 1\"\n}"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBodySchema"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/schema+json"
+                          },
+                          "content": "{}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
