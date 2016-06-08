@@ -11,7 +11,11 @@ export function bodyFromSchema(schema, payload, parser) {
   let asset = null;
 
   try {
-    const body = schema.example || JSON.stringify(faker(schema), null, 2);
+    let body = schema.example || faker(schema);
+
+    if (typeof(body) !== 'string') {
+      body = JSON.stringify(body, null, 2);
+    }
 
     asset = new Asset(body);
 
