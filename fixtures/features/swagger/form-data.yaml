@@ -16,9 +16,15 @@ paths:
         - name: id
           in: formData
           type: number
+          enum:
+            - 1
+          required: true
         - name: bar
           in: formData
           type: string
+          enum:
+            - chocolate-bar
+          required: true
       responses:
         200:
           description: 'Success'

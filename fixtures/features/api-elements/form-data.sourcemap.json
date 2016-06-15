@@ -48,7 +48,7 @@
                     "content": [
                       [
                         68,
-                        365
+                        491
                       ]
                     ]
                   }
@@ -84,16 +84,77 @@
                                 "content": [
                                   [
                                     216,
-                                    217
+                                    343
                                   ]
                                 ]
                               }
                             ]
                           },
                           "content": "GET"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#form-data-content-type"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/x-www-form-urlencoded"
+                                }
+                              }
+                            }
+                          ]
                         }
                       },
                       "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBody"
+                            ],
+                            "links": [
+                              {
+                                "element": "link",
+                                "meta": {},
+                                "attributes": {
+                                  "relation": "inferred",
+                                  "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                },
+                                "content": []
+                              }
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/x-www-form-urlencoded"
+                          },
+                          "content": "id=1&bar=chocolate-bar"
+                        },
                         {
                           "element": "dataStructure",
                           "meta": {},
@@ -115,10 +176,13 @@
                                       "content": [
                                         [
                                           249,
-                                          63
+                                          120
                                         ]
                                       ]
                                     }
+                                  ],
+                                  "typeAttributes": [
+                                    "required"
                                   ]
                                 },
                                 "content": {
@@ -129,7 +193,7 @@
                                     "content": "id"
                                   },
                                   "value": {
-                                    "element": "number",
+                                    "element": "enum",
                                     "meta": {},
                                     "attributes": {
                                       "sourceMap": [
@@ -140,13 +204,20 @@
                                           "content": [
                                             [
                                               249,
-                                              63
+                                              120
                                             ]
                                           ]
                                         }
                                       ]
                                     },
-                                    "content": null
+                                    "content": [
+                                      {
+                                        "element": "number",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": 1
+                                      }
+                                    ]
                                   }
                                 }
                               },
@@ -161,11 +232,14 @@
                                       "attributes": {},
                                       "content": [
                                         [
-                                          314,
-                                          62
+                                          371,
+                                          131
                                         ]
                                       ]
                                     }
+                                  ],
+                                  "typeAttributes": [
+                                    "required"
                                   ]
                                 },
                                 "content": {
@@ -176,7 +250,7 @@
                                     "content": "bar"
                                   },
                                   "value": {
-                                    "element": "string",
+                                    "element": "enum",
                                     "meta": {},
                                     "attributes": {
                                       "sourceMap": [
@@ -186,14 +260,21 @@
                                           "attributes": {},
                                           "content": [
                                             [
-                                              314,
-                                              62
+                                              371,
+                                              131
                                             ]
                                           ]
                                         }
                                       ]
                                     },
-                                    "content": null
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "chocolate-bar"
+                                      }
+                                    ]
                                   }
                                 }
                               }
@@ -217,7 +298,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    395,
+                                    521,
                                     38
                                   ]
                                 ]
@@ -239,7 +320,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    410,
+                                    536,
                                     22
                                   ]
                                 ]
