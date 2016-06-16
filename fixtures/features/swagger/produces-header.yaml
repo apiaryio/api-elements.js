@@ -11,3 +11,14 @@ paths:
       responses:
         200:
           description: Test description
+  '/test-with-override':
+    get:
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Test description when overriding produce content type
+          headers:
+            content-type:
+              type: string
+              default: text/plain
