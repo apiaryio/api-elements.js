@@ -577,12 +577,17 @@ export default class Parser {
           // TODO: better source maps - this.path isn't very accurate
           if (param.type === 'array') {
             this.createAnnotation(annotations.DATA_LOST, this.path,
-              ('Arrays in form parameters are not yet fully supported'));
+              ('Arrays in form parameters are not fully supported yet'));
+            return;
+          }
+          if (param.type === 'file') {
+            this.createAnnotation(annotations.DATA_LOST, this.path,
+              ('Files in form parameters are not fully supported yet'));
             return;
           }
           if (param.allowEmptyValue) {
             this.createAnnotation(annotations.DATA_LOST, this.path,
-              ('The allowEmptyValue flag is not yet fully supported in form parameters'));
+              ('The allowEmptyValue flag is not fully supported yet'));
           }
 
           const paramSchema = _.clone(param);
