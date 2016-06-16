@@ -12,6 +12,7 @@ import Ast from './ast';
 import SwaggerParser from 'swagger-parser';
 
 const JSON_CONTENT_TYPE = 'application/json';
+const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
 
 // Test whether a key is a special Swagger extension.
 function isExtension(value, key) {
@@ -566,15 +567,49 @@ export default class Parser {
       });
 
       // Using form parameters instead of body? We will convert those to
-      // data structures.
+      // data structures and will generate form-urlencoded body.
       if (formParameters.length) {
+        headers.pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
+
+        // Generating body asset
+        const schema = {type: 'object', properties: {}, required: []};
+        _.each(formParameters, (param) => {
+          // TODO: better source maps - this.path isn't very accurate
+          if (param.type === 'array') {
+            this.createAnnotation(annotations.DATA_LOST, this.path,
+              ('Arrays in form parameters are not yet fully supported'));
+            return;
+          }
+          if (param.allowEmptyValue) {
+            this.createAnnotation(annotations.DATA_LOST, this.path,
+              ('The allowEmptyValue flag is not yet fully supported in form parameters'));
+          }
+
+          const paramSchema = _.clone(param);
+          delete paramSchema.name;
+          delete paramSchema.in;
+          delete paramSchema.format;
+          delete paramSchema.required;
+          delete paramSchema.collectionFormat;
+          delete paramSchema.allowEmptyValue; // allowEmptyValue is not supported yet
+          delete paramSchema.items; // arrays are not supported yet
+
+          schema.properties[param.name] = paramSchema;
+          if (param.required) {
+            schema.required.push(param.name);
+          }
+        });
+        generator.bodyFromSchema(schema, request, this, FORM_CONTENT_TYPE);
+
+        // Generating data structure
         const dataStructure = new DataStructure();
-        // A form is essentially an object with key/value members
-        const dataObject = new ObjectElement();
+        const dataObject = new ObjectElement(); // a form is essentially an object with key/value members
 
         _.each(formParameters, (param) => {
           const index = transitionParameters.indexOf(param);
-          dataObject.content.push(this.convertParameterToMember(param, this.path.slice(0, 3).concat(['parameters', index])));
+          const member = this.convertParameterToMember(param, this.path.slice(0, 3).concat(['parameters', index]));
+
+          dataObject.content.push(member);
         });
 
         dataStructure.content = dataObject;
