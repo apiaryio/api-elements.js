@@ -525,6 +525,11 @@ export default class Parser {
         return parameter.in === 'formData';
       });
 
+      // Header parameters
+      const headerParameters = transitionParameters.filter((parameter) => {
+        return parameter.in === 'header';
+      });
+
       // Check if application/json is in consumes
       const inConsumes = (methodValue.consumes || this.swagger.consumes || []).indexOf(JSON_CONTENT_TYPE) !== -1;
       const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
@@ -537,6 +542,12 @@ export default class Parser {
       if (inProduces) {
         headers.pushHeader('Accept', JSON_CONTENT_TYPE, request, this, 'produces-accept');
       }
+
+      _.each(headerParameters, (headerParameter, index) => {
+        this.withPath('parameters', index, () => {
+          headers.pushHeaderObject(headerParameter.name, headerParameter, request, this);
+        });
+      });
 
       // Body parameters define request schemas
       // There can only be 1 body parameter. So, no issues.
@@ -877,6 +888,7 @@ export default class Parser {
     if (this.ast) {
       const SourceMap = this.minim.getElementClass('sourceMap');
       const position = this.ast.getPosition(path);
+
       if (position && !isNaN(position.start) && !isNaN(position.end)) {
         element.attributes.set('sourceMap', [
           new SourceMap([[position.start, position.end - position.start]]),

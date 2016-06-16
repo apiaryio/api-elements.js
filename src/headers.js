@@ -1,4 +1,5 @@
 import link from './link';
+import annotations from './annotations';
 
 export function createHeaders(payload, parser) {
   const {HttpHeaders} = parser.minim.elements;
@@ -45,6 +46,13 @@ export function pushHeader(key, value, payload, parser, fragment) {
 
 export function pushHeaderObject(key, header, payload, parser) {
   let value = '';
+
+  if (header.type === 'array') {
+    parser.createAnnotation(annotations.DATA_LOST, parser.path,
+      'Headers of type array are not yet supported');
+
+    return;
+  }
 
   // Choose the first available option
   if (header.enum) {
