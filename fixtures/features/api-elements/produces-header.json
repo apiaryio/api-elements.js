@@ -209,19 +209,7 @@
                           "content": [
                             {
                               "element": "member",
-                              "meta": {
-                                "links": [
-                                  {
-                                    "element": "link",
-                                    "meta": {},
-                                    "attributes": {
-                                      "relation": "inferred",
-                                      "href": "http://docs.apiary.io/validations/swagger#produces-content-type"
-                                    },
-                                    "content": []
-                                  }
-                                ]
-                              },
+                              "meta": {},
                               "attributes": {},
                               "content": {
                                 "key": {
