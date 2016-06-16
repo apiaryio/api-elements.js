@@ -16,14 +16,13 @@ export function pushHeader(key, value, payload, parser, fragment) {
   createHeaders(payload, parser);
 
   const duplicate = payload.headers.find((member) => {
-    return member.key.content.toLowerCase() == key.toLowerCase();
+    return member.key.content.toLowerCase() === key.toLowerCase();
   });
 
   if (duplicate.length) {
     header = duplicate.first();
     header.value = value;
-  }
-  else {
+  } else {
     header = new MemberElement(key, value);
   }
 

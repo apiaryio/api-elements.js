@@ -543,21 +543,25 @@ export default class Parser {
         headers.pushHeader('Accept', JSON_CONTENT_TYPE, request, this, 'produces-accept');
       }
 
-      _.each(headerParameters, (headerParameter, index) => {
+      _.each(headerParameters, (param) => {
+        const index = transitionParameters.indexOf(param);
+
         this.withPath('parameters', index, () => {
-          headers.pushHeaderObject(headerParameter.name, headerParameter, request, this);
+          headers.pushHeaderObject(param.name, param, request, this);
         });
       });
 
       // Body parameters define request schemas
       // There can only be 1 body parameter. So, no issues.
-      _.each(bodyParameters, (bodyParameter, index) => {
+      _.each(bodyParameters, (param) => {
+        const index = transitionParameters.indexOf(param);
+
         this.withPath('parameters', index, 'schema', () => {
           if (inConsumes) {
-            generator.bodyFromSchema(bodyParameter.schema, request, this);
+            generator.bodyFromSchema(param.schema, request, this);
           }
 
-          this.pushSchemaAsset(bodyParameter.schema, request, this.path);
+          this.pushSchemaAsset(param.schema, request, this.path);
         });
       });
 
@@ -583,7 +587,7 @@ export default class Parser {
 
   // Convert a Swagger example into a Refract response.
   handleSwaggerExampleResponse(transaction, methodValue, responseValue, statusCode, responseBody, contentType) {
-    const {Asset, Copy, HttpHeaders, Member: MemberElement} = this.minim.elements;
+    const {Asset, Copy} = this.minim.elements;
     const response = transaction.response;
 
     this.withPath('responses', statusCode, () => {
@@ -603,7 +607,7 @@ export default class Parser {
       }
 
       const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
-      
+
       if (inProduces) {
         headers.pushHeader('Content-Type', JSON_CONTENT_TYPE, response, this, 'produces-content-type');
       }
@@ -672,9 +676,11 @@ export default class Parser {
   updateHeaders(payload, httpHeaders) {
     for (const headerName in httpHeaders) {
       if (httpHeaders.hasOwnProperty(headerName)) {
+        /* eslint-disable no-loop-func */
         this.withPath('headers', headerName, () => {
           headers.pushHeaderObject(headerName, httpHeaders[headerName], payload, this);
         });
+        /* eslint-enable no-loop-func */
       }
     }
   }
