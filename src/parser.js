@@ -525,30 +525,43 @@ export default class Parser {
         return parameter.in === 'formData';
       });
 
+      // Header parameters
+      const headerParameters = transitionParameters.filter((parameter) => {
+        return parameter.in === 'header';
+      });
+
       // Check if application/json is in consumes
       const inConsumes = (methodValue.consumes || this.swagger.consumes || []).indexOf(JSON_CONTENT_TYPE) !== -1;
       const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
 
       // Add content-type headers
       if (inConsumes) {
-        headers.createHeaders(request, this);
         headers.pushHeader('Content-Type', JSON_CONTENT_TYPE, request, this, 'consumes-content-type');
       }
 
       if (inProduces) {
-        headers.createHeaders(request, this);
         headers.pushHeader('Accept', JSON_CONTENT_TYPE, request, this, 'produces-accept');
       }
 
+      _.each(headerParameters, (param) => {
+        const index = transitionParameters.indexOf(param);
+
+        this.withPath('parameters', index, () => {
+          headers.pushHeaderObject(param.name, param, request, this);
+        });
+      });
+
       // Body parameters define request schemas
       // There can only be 1 body parameter. So, no issues.
-      _.each(bodyParameters, (bodyParameter, index) => {
+      _.each(bodyParameters, (param) => {
+        const index = transitionParameters.indexOf(param);
+
         this.withPath('parameters', index, 'schema', () => {
           if (inConsumes) {
-            generator.bodyFromSchema(bodyParameter.schema, request, this);
+            generator.bodyFromSchema(param.schema, request, this);
           }
 
-          this.pushSchemaAsset(bodyParameter.schema, request, this.path);
+          this.pushSchemaAsset(param.schema, request, this.path);
         });
       });
 
@@ -574,7 +587,7 @@ export default class Parser {
 
   // Convert a Swagger example into a Refract response.
   handleSwaggerExampleResponse(transaction, methodValue, responseValue, statusCode, responseBody, contentType) {
-    const {Asset, Copy, HttpHeaders, Member: MemberElement} = this.minim.elements;
+    const {Asset, Copy} = this.minim.elements;
     const response = transaction.response;
 
     this.withPath('responses', statusCode, () => {
@@ -587,28 +600,20 @@ export default class Parser {
         }
       }
 
-      const httpHeaders = new HttpHeaders();
-
       if (contentType) {
         this.withPath('examples', contentType, () => {
-          // Remember, httpHeaders is really an array, *not* an object. Hence
-          // we make the member element ourselves until some convenience is
-          // added there.
-          const contentHeader = new MemberElement(
-            'Content-Type', contentType
-          );
-
-          if (this.generateSourceMap) {
-            this.createSourceMap(contentHeader, this.path);
-          }
-
-          httpHeaders.push(contentHeader);
-          response.headers = httpHeaders;
+          headers.pushHeader('Content-Type', contentType, response, this);
         });
       }
 
+      const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
+
+      if (inProduces) {
+        headers.pushHeader('Content-Type', JSON_CONTENT_TYPE, response, this, 'produces-content-type');
+      }
+
       if (responseValue.headers) {
-        response.headers = this.updateHeaders(httpHeaders, responseValue.headers);
+        this.updateHeaders(response, responseValue.headers);
       }
 
       this.withPath('examples', () => {
@@ -644,14 +649,9 @@ export default class Parser {
             args = [5, 'schema'];
           }
 
-          const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
-
           this.withSlicedPath.apply(this, args.concat([() => {
             if (inProduces && responseBody === undefined) {
               generator.bodyFromSchema(schema, response, this);
-
-              headers.createHeaders(response, this);
-              headers.pushHeader('Content-Type', JSON_CONTENT_TYPE, response, this, 'produces-content-type');
             }
 
             this.pushSchemaAsset(schema, response, this.path);
@@ -671,59 +671,18 @@ export default class Parser {
     });
   }
 
-  // Takes in an `httpHeaders` element and a list of Swagger headers. Adds
-  // the Swagger headers to the element and then returns the modified element.
-  updateHeaders(element, httpHeaders) {
+  // Takes in an `payload` element and a list of Swagger headers. Adds
+  // the Swagger headers to the headers element in the payload
+  updateHeaders(payload, httpHeaders) {
     for (const headerName in httpHeaders) {
       if (httpHeaders.hasOwnProperty(headerName)) {
-        this.createHeader(element, httpHeaders, headerName);
+        /* eslint-disable no-loop-func */
+        this.withPath('headers', headerName, () => {
+          headers.pushHeaderObject(headerName, httpHeaders[headerName], payload, this);
+        });
+        /* eslint-enable no-loop-func */
       }
     }
-
-    return element;
-  }
-
-  // Creates an individual header on an element. This does *not* check for
-  // duplicate header names.
-  createHeader(element, httpHeaders, headerName) {
-    const {Member: MemberElement} = this.minim.elements;
-
-    this.withPath('headers', headerName, () => {
-      const header = httpHeaders[headerName];
-      let value = '';
-
-      // Choose the first available option
-      if (header.enum) {
-        // TODO: This may lose data if there are multiple enums.
-        value = header.enum[0];
-      }
-
-      if (header.default) {
-        value = header.default;
-      }
-
-      const member = new MemberElement(headerName, value);
-
-      if (this.generateSourceMap) {
-        this.createSourceMap(member, this.path);
-      }
-
-      if (header.description) {
-        this.withPath('description', () => {
-          member.description = header.description;
-
-          if (this.generateSourceMap) {
-            this.createSourceMap(member.meta.get('description'), this.path);
-          }
-
-          return member.meta.get('description');
-        });
-      }
-
-      element.push(member);
-
-      return member;
-    });
   }
 
   // Test whether tags can be treated as resource groups, and if so it sets a
@@ -935,6 +894,7 @@ export default class Parser {
     if (this.ast) {
       const SourceMap = this.minim.getElementClass('sourceMap');
       const position = this.ast.getPosition(path);
+
       if (position && !isNaN(position.start) && !isNaN(position.end)) {
         element.attributes.set('sourceMap', [
           new SourceMap([[position.start, position.end - position.start]]),
