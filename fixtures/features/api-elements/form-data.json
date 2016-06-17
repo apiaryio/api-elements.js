@@ -34,9 +34,70 @@
                       "element": "httpRequest",
                       "meta": {},
                       "attributes": {
-                        "method": "GET"
+                        "method": "GET",
+                        "headers": {
+                          "element": "httpHeaders",
+                          "meta": {},
+                          "attributes": {},
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": [
+                                  {
+                                    "element": "link",
+                                    "meta": {},
+                                    "attributes": {
+                                      "relation": "inferred",
+                                      "href": "http://docs.apiary.io/validations/swagger#form-data-content-type"
+                                    },
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "attributes": {},
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": "application/x-www-form-urlencoded"
+                                }
+                              }
+                            }
+                          ]
+                        }
                       },
                       "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBody"
+                            ],
+                            "links": [
+                              {
+                                "element": "link",
+                                "meta": {},
+                                "attributes": {
+                                  "relation": "inferred",
+                                  "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                },
+                                "content": []
+                              }
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/x-www-form-urlencoded"
+                          },
+                          "content": "id=1&bar=chocolate-bar"
+                        },
                         {
                           "element": "dataStructure",
                           "meta": {},
@@ -49,7 +110,11 @@
                               {
                                 "element": "member",
                                 "meta": {},
-                                "attributes": {},
+                                "attributes": {
+                                  "typeAttributes": [
+                                    "required"
+                                  ]
+                                },
                                 "content": {
                                   "key": {
                                     "element": "string",
@@ -58,17 +123,28 @@
                                     "content": "id"
                                   },
                                   "value": {
-                                    "element": "number",
+                                    "element": "enum",
                                     "meta": {},
                                     "attributes": {},
-                                    "content": null
+                                    "content": [
+                                      {
+                                        "element": "number",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": 1
+                                      }
+                                    ]
                                   }
                                 }
                               },
                               {
                                 "element": "member",
                                 "meta": {},
-                                "attributes": {},
+                                "attributes": {
+                                  "typeAttributes": [
+                                    "required"
+                                  ]
+                                },
                                 "content": {
                                   "key": {
                                     "element": "string",
@@ -77,10 +153,17 @@
                                     "content": "bar"
                                   },
                                   "value": {
-                                    "element": "string",
+                                    "element": "enum",
                                     "meta": {},
                                     "attributes": {},
-                                    "content": null
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "chocolate-bar"
+                                      }
+                                    ]
                                   }
                                 }
                               }
