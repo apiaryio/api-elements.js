@@ -85,6 +85,26 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "element": "extension",
+                  "meta": {
+                    "links": [
+                      {
+                        "element": "link",
+                        "meta": {},
+                        "attributes": {
+                          "relation": "profile",
+                          "href": "http://swagger.io/specification/#vendorExtensions"
+                        },
+                        "content": []
+                      }
+                    ]
+                  },
+                  "attributes": {},
+                  "content": {
+                    "x-transition-extension": true
+                  }
                 }
               ]
             },

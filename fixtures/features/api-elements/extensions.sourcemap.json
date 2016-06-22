@@ -48,7 +48,7 @@
                     "content": [
                       [
                         101,
-                        326
+                        339
                       ]
                     ]
                   }
@@ -78,7 +78,7 @@
                             "attributes": {},
                             "content": [
                               [
-                                205,
+                                218,
                                 108
                               ]
                             ]
@@ -106,7 +106,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    205,
+                                    218,
                                     108
                                   ]
                                 ]
@@ -142,7 +142,7 @@
                                 "content": [
                                   [
                                     150,
-                                    277
+                                    290
                                   ]
                                 ]
                               }
@@ -168,7 +168,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    356,
+                                    369,
                                     71
                                   ]
                                 ]
@@ -190,7 +190,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    397,
+                                    410,
                                     29
                                   ]
                                 ]
@@ -202,6 +202,26 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "element": "extension",
+                  "meta": {
+                    "links": [
+                      {
+                        "element": "link",
+                        "meta": {},
+                        "attributes": {
+                          "relation": "profile",
+                          "href": "http://swagger.io/specification/#vendorExtensions"
+                        },
+                        "content": []
+                      }
+                    ]
+                  },
+                  "attributes": {},
+                  "content": {
+                    "x-transition-extension": true
+                  }
                 }
               ]
             },

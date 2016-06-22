@@ -8,7 +8,7 @@ paths:
   '/test/{id}':
     x-resource-extension: true
     get:
-      x-ignored: true
+      x-transition-extension: true
       parameters:
         - name: id
           in: path
