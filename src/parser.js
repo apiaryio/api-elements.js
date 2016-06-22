@@ -251,6 +251,8 @@ export default class Parser {
             return description;
           });
         }
+
+        this.handleSwaggerVendorExtensions(this.api, this.swagger.info);
       });
     }
   }
