@@ -499,6 +499,8 @@ export default class Parser {
         this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode);
       });
 
+      this.handleSwaggerVendorExtensions(transition, methodValue);
+
       return transition;
     });
   }
