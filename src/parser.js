@@ -153,6 +153,8 @@ export default class Parser {
           this.handleSwaggerPath(pathValue, href);
         });
 
+        this.handleSwaggerVendorExtensions(this.api, swagger.paths);
+
         return done(null, this.result);
       } catch (exception) {
         this.createAnnotation(annotations.UNCAUGHT_ERROR, null,
