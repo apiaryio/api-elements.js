@@ -731,6 +731,9 @@ export default class Parser {
         }
       });
 
+
+      this.handleSwaggerVendorExtensions(response, responseValue);
+
       return response;
     });
   }
