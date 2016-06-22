@@ -6,7 +6,7 @@ x-ignored: true
 paths:
   x-ignored: true
   '/test/{id}':
-    x-ignored: true
+    x-resource-extension: true
     get:
       x-ignored: true
       parameters:

@@ -48,7 +48,7 @@
                     "content": [
                       [
                         101,
-                        315
+                        326
                       ]
                     ]
                   }
@@ -78,7 +78,7 @@
                             "attributes": {},
                             "content": [
                               [
-                                194,
+                                205,
                                 108
                               ]
                             ]
@@ -106,7 +106,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    194,
+                                    205,
                                     108
                                   ]
                                 ]
@@ -141,7 +141,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    139,
+                                    150,
                                     277
                                   ]
                                 ]
@@ -168,7 +168,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    345,
+                                    356,
                                     71
                                   ]
                                 ]
@@ -190,7 +190,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    386,
+                                    397,
                                     29
                                   ]
                                 ]
@@ -204,6 +204,26 @@
                   ]
                 }
               ]
+            },
+            {
+              "element": "extension",
+              "meta": {
+                "links": [
+                  {
+                    "element": "link",
+                    "meta": {},
+                    "attributes": {
+                      "relation": "profile",
+                      "href": "http://swagger.io/specification/#vendorExtensions"
+                    },
+                    "content": []
+                  }
+                ]
+              },
+              "attributes": {},
+              "content": {
+                "x-resource-extension": true
+              }
             }
           ]
         }
