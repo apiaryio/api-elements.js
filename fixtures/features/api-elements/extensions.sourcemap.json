@@ -33,6 +33,26 @@
       "attributes": {},
       "content": [
         {
+          "element": "extension",
+          "meta": {
+            "links": [
+              {
+                "element": "link",
+                "meta": {},
+                "attributes": {
+                  "relation": "profile",
+                  "href": "http://swagger.io/specification/#vendorExtensions"
+                },
+                "content": []
+              }
+            ]
+          },
+          "attributes": {},
+          "content": {
+            "x-info-extension": true
+          }
+        },
+        {
           "element": "resource",
           "meta": {},
           "attributes": {
@@ -47,7 +67,7 @@
                     "attributes": {},
                     "content": [
                       [
-                        101,
+                        126,
                         339
                       ]
                     ]
@@ -78,7 +98,7 @@
                             "attributes": {},
                             "content": [
                               [
-                                218,
+                                243,
                                 108
                               ]
                             ]
@@ -106,7 +126,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    218,
+                                    243,
                                     108
                                   ]
                                 ]
@@ -141,7 +161,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    150,
+                                    175,
                                     290
                                   ]
                                 ]
@@ -168,7 +188,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    369,
+                                    394,
                                     71
                                   ]
                                 ]
@@ -190,7 +210,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    410,
+                                    435,
                                     29
                                   ]
                                 ]
