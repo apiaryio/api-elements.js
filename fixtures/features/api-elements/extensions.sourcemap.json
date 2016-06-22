@@ -67,7 +67,7 @@
                     "attributes": {},
                     "content": [
                       [
-                        126,
+                        134,
                         350
                       ]
                     ]
@@ -98,7 +98,7 @@
                             "attributes": {},
                             "content": [
                               [
-                                243,
+                                251,
                                 108
                               ]
                             ]
@@ -126,7 +126,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    243,
+                                    251,
                                     108
                                   ]
                                 ]
@@ -161,7 +161,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    175,
+                                    183,
                                     301
                                   ]
                                 ]
@@ -188,7 +188,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    394,
+                                    402,
                                     82
                                   ]
                                 ]
@@ -210,7 +210,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    446,
+                                    454,
                                     29
                                   ]
                                 ]
@@ -286,6 +286,26 @@
               }
             }
           ]
+        },
+        {
+          "element": "extension",
+          "meta": {
+            "links": [
+              {
+                "element": "link",
+                "meta": {},
+                "attributes": {
+                  "relation": "profile",
+                  "href": "http://swagger.io/specification/#vendorExtensions"
+                },
+                "content": []
+              }
+            ]
+          },
+          "attributes": {},
+          "content": {
+            "x-paths-extension": true
+          }
         }
       ]
     }

@@ -5,7 +5,7 @@ info:
   x-info-extension: true
 x-ignored: true
 paths:
-  x-ignored: true
+  x-paths-extension: true
   '/test/{id}':
     x-resource-extension: true
     get:
