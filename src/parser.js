@@ -380,8 +380,28 @@ export default class Parser {
         this.handleSwaggerMethod(resource, href, pathObjectParameters, methodValue, method);
       });
 
+      this.handleSwaggerVendorExtensions(resource, pathValue);
+
       return resource;
     });
+  }
+
+  // Converts all unknown Swagger vendor extensions from an object into a API Element extension
+  handleSwaggerVendorExtensions(element, object) {
+    const extensions = _.chain(object)
+      .pick(isExtension)
+      .omit('x-description', 'x-summary', 'x-group-name')
+      .value();
+
+    if (Object.keys(extensions).length > 0) {
+      const {Link, Extension} = this.minim.elements;
+      const link = new Link();
+      link.relation = 'profile';
+      link.href = 'http://swagger.io/specification/#vendorExtensions';
+      const extension = new Extension(extensions);
+      extension.links = [link];
+      element.content.push(extension);
+    }
   }
 
   // Convert a Swagger method into a Refract transition.
