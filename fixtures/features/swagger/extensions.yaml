@@ -19,5 +19,5 @@ paths:
       responses:
         x-ignored: true
         200:
-          x-ignored: true
+          x-response-extension: true
           description: Test Description

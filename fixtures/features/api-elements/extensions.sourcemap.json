@@ -68,7 +68,7 @@
                     "content": [
                       [
                         126,
-                        339
+                        350
                       ]
                     ]
                   }
@@ -162,7 +162,7 @@
                                 "content": [
                                   [
                                     175,
-                                    290
+                                    301
                                   ]
                                 ]
                               }
@@ -189,7 +189,7 @@
                                 "content": [
                                   [
                                     394,
-                                    71
+                                    82
                                   ]
                                 ]
                               }
@@ -210,7 +210,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    435,
+                                    446,
                                     29
                                   ]
                                 ]
@@ -218,6 +218,26 @@
                             ]
                           },
                           "content": "Test Description"
+                        },
+                        {
+                          "element": "extension",
+                          "meta": {
+                            "links": [
+                              {
+                                "element": "link",
+                                "meta": {},
+                                "attributes": {
+                                  "relation": "profile",
+                                  "href": "http://swagger.io/specification/#vendorExtensions"
+                                },
+                                "content": []
+                              }
+                            ]
+                          },
+                          "attributes": {},
+                          "content": {
+                            "x-response-extension": true
+                          }
                         }
                       ]
                     }

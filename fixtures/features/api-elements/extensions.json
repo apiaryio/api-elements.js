@@ -101,6 +101,26 @@
                           "meta": {},
                           "attributes": {},
                           "content": "Test Description"
+                        },
+                        {
+                          "element": "extension",
+                          "meta": {
+                            "links": [
+                              {
+                                "element": "link",
+                                "meta": {},
+                                "attributes": {
+                                  "relation": "profile",
+                                  "href": "http://swagger.io/specification/#vendorExtensions"
+                                },
+                                "content": []
+                              }
+                            ]
+                          },
+                          "attributes": {},
+                          "content": {
+                            "x-response-extension": true
+                          }
                         }
                       ]
                     }
