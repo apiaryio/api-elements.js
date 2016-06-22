@@ -1,3 +1,7 @@
+# Master
+
+- Added an `extension` element
+
 # 0.1.6 - 2016-05-24
 
 - Added a `copy` getter to all array elements
