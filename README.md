@@ -537,3 +537,17 @@ Return a filtered array element of headers without the given case-insensitive na
 ```js
 let filtered = headers.exclude('Content-Type');
 ```
+
+### Extension (Element)
+
+This element represents the [API Elements extensions](http://api-elements.readthedocs.io/en/latest/element-definitions/#extending-api-elements) element.
+
+#### Properties
+
+##### profile
+
+Gets the extension elements profile href. This property is **read-only**.
+
+```js
+let profile = extension.profile;
+```

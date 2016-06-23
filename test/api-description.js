@@ -21,6 +21,7 @@ const Asset = namespace.getElementClass('asset');
 const AuthScheme = namespace.getElementClass('authScheme');
 const DataStructure = namespace.getElementClass('dataStructure');
 const MemberElement = namespace.getElementClass('member');
+const Extension = namespace.getElementClass('extension');
 
 // Hmm, this might not be the best way to do this... ideas?
 const HttpMessagePayload = Object.getPrototypeOf(HttpRequest);
@@ -1076,6 +1077,48 @@ describe('API description namespace', () => {
         asset.href = '/other/path';
         expect(attrValue(asset, 'href')).to.equal('/other/path');
       });
+    });
+  });
+
+  describe('extension element', () => {
+    let extension;
+    let refracted;
+
+    beforeEach(() => {
+      refracted = {
+        element: 'extension',
+        meta: {
+          links: [
+            {
+              element: 'link',
+              meta: {},
+              attributes: {
+                relation: 'profile',
+                href: 'https://example.com/extensions/info/',
+              },
+              content: undefined,
+            },
+          ],
+        },
+        attributes: {},
+        content: {
+          version: 1.0,
+        },
+      };
+
+      extension = (new Extension()).fromRefract(refracted);
+    });
+
+    it('should round-trip correctly', () => {
+      expect(extension.toRefract()).to.deep.equal(refracted);
+    });
+
+    it('should have element name extension', () => {
+      expect(extension.element).to.equal('extension');
+    });
+
+    it('should have a profile', () => {
+      expect(extension.profile).to.equal('https://example.com/extensions/info/');
     });
   });
 });

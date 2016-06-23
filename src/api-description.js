@@ -32,6 +32,7 @@ export function namespace(options) {
   require('./elements/data-structure')(options.base);
   require('./elements/copy')(options.base);
   require('./elements/category')(options.base);
+  require('./elements/extension')(options.base);
 }
 
 export default {namespace};
