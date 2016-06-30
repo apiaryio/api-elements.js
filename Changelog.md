@@ -3,14 +3,20 @@
 ## Enhancements
 
 - Swagger vendor extensions are now exposes as API Element extensions.
+- Response and Request bodies are generated from Schema whenever applicable.
+- Accept and Content-type headers are generated based on produces and consumes keys whenever applicable.
+- Sample values for non-body parameters are generated whenever applicable.
+- Header parameters are appended to request/response header collection.
+- Added `formData` support and appropirate request body generation.
 
 ## Bug Fixes
 
-- Fixed metadata not being an array of Member Elements
-- Added source maps to resource.href, httpRequest.method, httpResponse.statusCode
-- Removed several unneeded source maps
-- Circular schema references will now give a warning about not being supported yet
-- Added fragment to uncaught error
+- Fixed metadata not being an array of Member Elements.
+- Added source maps to resource.href, httpRequest.method, httpResponse.statusCode.
+- Removed several unneeded source maps.
+- Circular schema references will now give a warning about not being supported yet.
+- Added fragment to uncaught error.
+- Fixed bug with parameters sourcemaps when they are mixture of body and query parameters.
 
 # 0.7.3 - 2016-04-12
 
