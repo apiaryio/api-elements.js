@@ -399,11 +399,11 @@ export default class Parser {
 
     if (Object.keys(extensions).length > 0) {
       const {Link, Extension} = this.minim.elements;
-      const link = new Link();
-      link.relation = 'profile';
-      link.href = 'https://help.apiary.io/profiles/api-elements/vendor-extensions/';
+      const profileLink = new Link();
+      profileLink.relation = 'profile';
+      profileLink.href = 'https://help.apiary.io/profiles/api-elements/vendor-extensions/';
       const extension = new Extension(extensions);
-      extension.links = [link];
+      extension.links = [profileLink];
       element.content.push(extension);
     }
   }
