@@ -153,6 +153,8 @@ export default class Parser {
           this.handleSwaggerPath(pathValue, href);
         });
 
+        this.handleSwaggerVendorExtensions(this.api, swagger.paths);
+
         return done(null, this.result);
       } catch (exception) {
         this.createAnnotation(annotations.UNCAUGHT_ERROR, null,
@@ -251,6 +253,8 @@ export default class Parser {
             return description;
           });
         }
+
+        this.handleSwaggerVendorExtensions(this.api, this.swagger.info);
       });
     }
   }
@@ -380,8 +384,28 @@ export default class Parser {
         this.handleSwaggerMethod(resource, href, pathObjectParameters, methodValue, method);
       });
 
+      this.handleSwaggerVendorExtensions(resource, pathValue);
+
       return resource;
     });
+  }
+
+  // Converts all unknown Swagger vendor extensions from an object into a API Element extension
+  handleSwaggerVendorExtensions(element, object) {
+    const extensions = _.chain(object)
+      .pick(isExtension)
+      .omit('x-description', 'x-summary', 'x-group-name')
+      .value();
+
+    if (Object.keys(extensions).length > 0) {
+      const {Link, Extension} = this.minim.elements;
+      const profileLink = new Link();
+      profileLink.relation = 'profile';
+      profileLink.href = 'https://help.apiary.io/profiles/api-elements/vendor-extensions/';
+      const extension = new Extension(extensions);
+      extension.links = [profileLink];
+      element.content.push(extension);
+    }
   }
 
   // Convert a Swagger method into a Refract transition.
@@ -478,6 +502,8 @@ export default class Parser {
       _.each(relevantResponses, (responseValue, statusCode) => {
         this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode);
       });
+
+      this.handleSwaggerVendorExtensions(transition, methodValue);
 
       return transition;
     });
@@ -706,6 +732,9 @@ export default class Parser {
           }
         }
       });
+
+
+      this.handleSwaggerVendorExtensions(response, responseValue);
 
       return response;
     });

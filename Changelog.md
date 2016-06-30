@@ -1,5 +1,11 @@
 # Master
 
+## Enhancements
+
+- Swagger vendor extensions are now exposes as API Element extensions.
+
+## Bug Fixes
+
 - Fixed metadata not being an array of Member Elements
 - Added source maps to resource.href, httpRequest.method, httpResponse.statusCode
 - Removed several unneeded source maps

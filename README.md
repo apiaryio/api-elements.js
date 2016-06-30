@@ -49,3 +49,19 @@ Code | Description
    1 | Error parsing input (e.g. malformed YAML).
    4 | Swagger validation error.
    5 | Swagger to Refract converter error (JS exception).
+
+### Swagger Vendor Extensions
+
+Some Swagger Vendor extensions found in source Swagger documents are converted
+into the output API Element as extension elements.
+
+The following locations of vendor extensions are supported:
+
+- within the info object
+- within the paths object
+- within the path-item object
+- within the operation object
+- within the responses object
+
+These vendor extensions will be available as extensions using the relation
+[`https://help.apiary.io/profiles/api-elements/vendor-extensions/`](https://help.apiary.io/profiles/api-elements/vendor-extensions/).
