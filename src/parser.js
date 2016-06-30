@@ -401,7 +401,7 @@ export default class Parser {
       const {Link, Extension} = this.minim.elements;
       const link = new Link();
       link.relation = 'profile';
-      link.href = 'http://swagger.io/specification/#vendorExtensions';
+      link.href = 'https://help.apiary.io/profiles/api-elements/vendor-extensions/';
       const extension = new Extension(extensions);
       extension.links = [link];
       element.content.push(extension);
