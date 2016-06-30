@@ -41,7 +41,7 @@
                 "meta": {},
                 "attributes": {
                   "relation": "profile",
-                  "href": "http://swagger.io/specification/#vendorExtensions"
+                  "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                 },
                 "content": []
               }
@@ -228,7 +228,7 @@
                                 "meta": {},
                                 "attributes": {
                                   "relation": "profile",
-                                  "href": "http://swagger.io/specification/#vendorExtensions"
+                                  "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                                 },
                                 "content": []
                               }
@@ -252,7 +252,7 @@
                         "meta": {},
                         "attributes": {
                           "relation": "profile",
-                          "href": "http://swagger.io/specification/#vendorExtensions"
+                          "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                         },
                         "content": []
                       }
@@ -274,7 +274,7 @@
                     "meta": {},
                     "attributes": {
                       "relation": "profile",
-                      "href": "http://swagger.io/specification/#vendorExtensions"
+                      "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                     },
                     "content": []
                   }
@@ -296,7 +296,7 @@
                 "meta": {},
                 "attributes": {
                   "relation": "profile",
-                  "href": "http://swagger.io/specification/#vendorExtensions"
+                  "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                 },
                 "content": []
               }
