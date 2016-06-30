@@ -2,13 +2,14 @@ swagger: '2.0'
 info:
   title: Extensions
   version: '1.0'
+  x-info-extension: true
 x-ignored: true
 paths:
-  x-ignored: true
+  x-paths-extension: true
   '/test/{id}':
-    x-ignored: true
+    x-resource-extension: true
     get:
-      x-ignored: true
+      x-transition-extension: true
       parameters:
         - name: id
           in: path
@@ -18,5 +19,5 @@ paths:
       responses:
         x-ignored: true
         200:
-          x-ignored: true
+          x-response-extension: true
           description: Test Description
