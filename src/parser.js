@@ -14,6 +14,16 @@ import SwaggerParser from 'swagger-parser';
 const JSON_CONTENT_TYPE = 'application/json';
 const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
 
+// Provide a `nextTick` function that either is Node's nextTick or a fallback
+// for browsers
+function nextTick(cb) {
+  if (process && process.nextTick) {
+    process.nextTick(cb);
+  } else {
+    cb();
+  }
+}
+
 // Test whether a key is a special Swagger extension.
 function isExtension(value, key) {
   return key.indexOf('x-') === 0;
@@ -151,14 +161,33 @@ export default class Parser {
             'External documentation is not yet supported');
         }
 
+        const complete = () => {
+          this.handleSwaggerVendorExtensions(this.api, swagger.paths);
+          return done(null, this.result);
+        };
+
         // Swagger has a paths object to loop through that describes resources
-        _.each(_.omit(swagger.paths, isExtension), (pathValue, href) => {
-          this.handleSwaggerPath(pathValue, href);
+        // We will run each path on it's own tick since it may take some time
+        // and we want to ensure that other events in the event queue are not
+        // held up.
+        const paths = _.omit(swagger.paths, isExtension);
+        let pendingPaths = Object.keys(paths).length;
+
+        if (pendingPaths === 0) {
+          // If there are no paths, let's go ahead and call the callback.
+          return complete();
+        }
+
+        _.each(paths, (pathValue, href) => {
+          nextTick(() => {
+            this.handleSwaggerPath(pathValue, href);
+
+            if (--pendingPaths === 0) {
+              // Last path, let's call the completion callback.
+              complete();
+            }
+          });
         });
-
-        this.handleSwaggerVendorExtensions(this.api, swagger.paths);
-
-        return done(null, this.result);
       } catch (exception) {
         this.createAnnotation(annotations.UNCAUGHT_ERROR, null,
           ('There was a problem converting the Swagger document'));

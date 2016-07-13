@@ -1,3 +1,11 @@
+# Master
+
+## Enhancements
+
+- The adapter is more asynchronous and thus, gives other events in the event
+  loop the ability to run while we're parsing the Swagger document.
+
+
 # 0.8.0 - 2016-07-01
 
 ## Enhancements
