@@ -1,7 +1,7 @@
 // API Blueprint parser for Fury.js
 
 import deckardcain from 'deckardcain';
-import protagonist from 'protagonist';
+import drafter from 'drafter';
 
 export const name = 'api-blueprint';
 export const mediaTypes = [
@@ -21,7 +21,7 @@ export function parse({source, generateSourceMap}, done) {
     type: 'refract',
   };
 
-  protagonist.parse(source, options, done);
+  drafter.parse(source, options, done);
 }
 
 export default {name, mediaTypes, detect, parse};
