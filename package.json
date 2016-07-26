@@ -30,7 +30,7 @@
     "coveralls": "^2.11.2",
     "fury": "^2.x.x",
     "peasant": "^0.5.2",
-    "swagger-zoo": "2.1.6"
+    "swagger-zoo": "2.2.0"
   },
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT"

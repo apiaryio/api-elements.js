@@ -834,6 +834,13 @@ export default class Parser {
       _.each(bodyParameters, (param) => {
         const index = transitionParameters.indexOf(param);
 
+        if (param['x-example']) {
+          this.withPath('parameters', index, 'x-example', () => {
+            this.createAnnotation(annotations.VALIDATION_ERROR, this.path,
+              'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead');
+          });
+        }
+
         this.withPath('parameters', index, 'schema', () => {
           if (inConsumes) {
             generator.bodyFromSchema(param.schema, request, this);
@@ -849,39 +856,7 @@ export default class Parser {
         headers.pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
 
         // Generating body asset
-        const schema = {type: 'object', properties: {}, required: []};
-        _.each(formParameters, (param) => {
-          // TODO: better source maps - this.path isn't very accurate
-          if (param.type === 'array') {
-            this.createAnnotation(annotations.DATA_LOST, this.path,
-              ('Arrays in form parameters are not fully supported yet'));
-            return;
-          }
-          if (param.type === 'file') {
-            this.createAnnotation(annotations.DATA_LOST, this.path,
-              ('Files in form parameters are not fully supported yet'));
-            return;
-          }
-          if (param.allowEmptyValue) {
-            this.createAnnotation(annotations.DATA_LOST, this.path,
-              ('The allowEmptyValue flag is not fully supported yet'));
-          }
-
-          const paramSchema = _.clone(param);
-          delete paramSchema.name;
-          delete paramSchema.in;
-          delete paramSchema.format;
-          delete paramSchema.required;
-          delete paramSchema.collectionFormat;
-          delete paramSchema.allowEmptyValue; // allowEmptyValue is not supported yet
-          delete paramSchema.items; // arrays are not supported yet
-
-          schema.properties[param.name] = paramSchema;
-          if (param.required) {
-            schema.required.push(param.name);
-          }
-        });
-        generator.bodyFromSchema(schema, request, this, FORM_CONTENT_TYPE);
+        this.generateBodyFromFormParameters(transitionParameters, formParameters, request);
 
         // Generating data structure
         const dataStructure = new DataStructure();
@@ -889,9 +864,10 @@ export default class Parser {
 
         _.each(formParameters, (param) => {
           const index = transitionParameters.indexOf(param);
-          const member = this.convertParameterToMember(param, this.path.slice(0, 3).concat(['parameters', index]));
-
-          dataObject.content.push(member);
+          this.withPath('parameters', index, () => {
+            const member = this.convertParameterToMember(param, this.path);
+            dataObject.content.push(member);
+          });
         });
 
         dataStructure.content = dataObject;
@@ -900,6 +876,56 @@ export default class Parser {
 
       return request;
     });
+  }
+
+  // Generates body asset from formData parameters.
+  generateBodyFromFormParameters(transitionParameters, formParameters, request) {
+    // Preparing throwaway schema. Later we will feed the 'bodyFromSchema'
+    // with it.
+    const schema = {type: 'object', properties: {}, required: []};
+
+    _.each(formParameters, (param) => {
+      const index = transitionParameters.indexOf(param);
+      this.withPath('parameters', index, () => {
+        if (param.type === 'array') {
+          this.createAnnotation(annotations.DATA_LOST, this.path,
+            'Arrays in form parameters are not fully supported yet');
+          return;
+        }
+        if (param.type === 'file') {
+          this.createAnnotation(annotations.DATA_LOST, this.path,
+            'Files in form parameters are not fully supported yet');
+          return;
+        }
+        if (param.allowEmptyValue) {
+          this.createAnnotation(annotations.DATA_LOST, this.path,
+            'The allowEmptyValue flag is not fully supported yet');
+        }
+      });
+
+      const paramSchema = _.clone(param);
+
+      // If there's example value, we want to force the body generator
+      // to use it. This is done using 'enum' with a single value.
+      if (param['x-example'] !== undefined) {
+        paramSchema.enum = [param['x-example']];
+      }
+
+      delete paramSchema.name;
+      delete paramSchema.in;
+      delete paramSchema.format;
+      delete paramSchema.required;
+      delete paramSchema['x-example'];
+      delete paramSchema.collectionFormat;
+      delete paramSchema.allowEmptyValue; // allowEmptyValue is not supported yet
+      delete paramSchema.items; // arrays are not supported yet
+
+      schema.properties[param.name] = paramSchema;
+      if (param.required) {
+        schema.required.push(param.name);
+      }
+    });
+    generator.bodyFromSchema(schema, request, this, FORM_CONTENT_TYPE);
   }
 
   // Convert a Swagger example into a Refract response.
@@ -1113,6 +1139,10 @@ export default class Parser {
       });
     } else {
       element = new Type();
+
+      if (parameter['x-example'] !== undefined) {
+        element.content = parameter['x-example'];
+      }
     }
 
     // If there is a default, it is set on the member value instead of the member
