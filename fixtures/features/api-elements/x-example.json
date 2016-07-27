@@ -219,6 +219,11 @@
                                     "element": "enum",
                                     "meta": {},
                                     "attributes": {
+                                      "samples": [
+                                        [
+                                          "hello"
+                                        ]
+                                      ],
                                       "default": [
                                         "good morning"
                                       ]
