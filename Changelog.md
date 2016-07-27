@@ -1,3 +1,11 @@
+
+# 0.9.0 - 2016-07-27
+
+## Enhancements
+
+- Added support for parameter property called x-example, which allows to specify
+  example values also for non-body parameters.
+
 # 0.8.1 - 2016-07-16
 
 ## Enhancements
