@@ -59,7 +59,9 @@ export function pushHeaderObject(key, header, payload, parser) {
     value = header.enum[0];
   }
 
-  if (header.default) {
+  if (header['x-example']) {
+    value = header['x-example'];
+  } else if (header.default) {
     value = header.default;
   }
 
