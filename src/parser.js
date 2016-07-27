@@ -1137,6 +1137,23 @@ export default class Parser {
           element.content.push(e);
         });
       });
+
+      if (parameter['x-example'] !== undefined) {
+        const sampleElement = new Type();
+        sampleElement.content = parameter['x-example'];
+
+        if (this.generateSourceMap) {
+          this.createSourceMap(sampleElement, this.path.concat(['x-example']));
+        }
+
+        const samplesElement = new ArrayElement();
+        samplesElement.content.push(sampleElement);
+
+        const e = new ArrayElement();
+        e.content.push(samplesElement);
+
+        element.attributes.set('samples', e);
+      }
     } else {
       element = new Type();
 
