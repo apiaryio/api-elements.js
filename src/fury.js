@@ -10,11 +10,13 @@ import fury from 'fury';
 import swagger from 'fury-adapter-swagger';
 import apiBlueprintParser from 'fury-adapter-apib-parser';
 import apiBlueprintSerializer from 'fury-adapter-apib-serializer';
+import apiaryBlueprintParser from 'fury-adapter-apiary-blueprint-parser';
 import pkg from '../package.json';
 
 fury.use(swagger);
 fury.use(apiBlueprintParser);
 fury.use(apiBlueprintSerializer);
+fury.use(apiaryBlueprintParser);
 
 class FuryCLI {
   constructor(inputPath, outputPath, outputFormat, validate, generateSourceMap) {

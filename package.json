@@ -26,7 +26,8 @@
     "fury": "^2.1",
     "fury-adapter-swagger": "^0.9.1",
     "fury-adapter-apib-parser": "^0.3.0",
-    "fury-adapter-apib-serializer": "^0.1.2"
+    "fury-adapter-apib-serializer": "^0.1.2",
+    "fury-adapter-apiary-blueprint-parser": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",

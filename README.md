@@ -37,6 +37,7 @@ following formats:
 
 - API Blueprint
 - Swagger
+- *Legacy* Apiary Blueprint
 
 Fury will detect the API format you have used from the input document.
 
@@ -56,5 +57,14 @@ As an example, you can use Fury to convert a Swagger API Description into API
 Blueprint.
 
 ```shell
-$ fury --format text/vnd.apiblueprint swagger.json  apiary.apib
+$ fury --format text/vnd.apiblueprint swagger.json apiary.apib
+```
+
+### Converting a legacy Apiary Blueprint to API Blueprint
+
+Fury allows you to convert a *legacy* Apiary Blueprint to the API Blueprint
+format.
+
+```shell
+$ fury --format text/vnd.apiblueprint legacy.txt blueprint.apib
 ```
