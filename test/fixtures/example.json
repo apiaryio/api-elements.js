@@ -1,0 +1,349 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "Sample API v2"
+      },
+      "attributes": {
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {},
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "http://www.google.com/"
+              }
+            }
+          }
+        ]
+      },
+      "content": [
+        {
+          "element": "copy",
+          "meta": {},
+          "attributes": {},
+          "content": "Welcome to the our sample API documentation. All comments can be written in (support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax)"
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Shopping Cart Resources",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "copy",
+              "meta": {},
+              "attributes": {},
+              "content": "The following is a section of resources related to the shopping cart"
+            },
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/shopping-cart"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "GET"
+                  },
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "List products added into your shopping-cart. (comment block again in Markdown)"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "headers": null
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": 200,
+                            "headers": {
+                              "element": "httpHeaders",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {},
+                              "content": "{ \"items\": [\n  { \"url\": \"/shopping-cart/1\", \"product\":\"2ZY48XPZ\", \"quantity\": 1, \"name\": \"New socks\", \"price\": 1.25 }\n] }"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "POST"
+                  },
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "Save new products in your shopping cart"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {},
+                              "content": "{ \"product\":\"1AB23ORM\", \"quantity\": 2 }"
+                            }
+                          ]
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": 201,
+                            "headers": {
+                              "element": "httpHeaders",
+                              "meta": {},
+                              "attributes": {},
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "meta": {},
+                                  "attributes": {},
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {},
+                              "content": "{ \"status\": \"created\", \"url\": \"/shopping-cart/2\" }"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "title": "Payment Resources",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/payment"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "POST"
+                  },
+                  "attributes": {},
+                  "content": [
+                    {
+                      "element": "copy",
+                      "meta": {},
+                      "attributes": {},
+                      "content": "This resource allows you to submit payment information to process your *shopping cart* items"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "POST",
+                            "headers": null
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {},
+                              "content": "{ \"cc\": \"12345678900\", \"cvc\": \"123\", \"expiry\": \"0112\" }"
+                            }
+                          ]
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": 200,
+                            "headers": null
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {},
+                              "content": "{ \"receipt\": \"/payment/receipt/1\" }"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
