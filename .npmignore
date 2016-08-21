@@ -1,0 +1,4 @@
+src/
+.eslinecache
+coverage
+.git*
