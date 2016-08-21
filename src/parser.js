@@ -13,23 +13,32 @@ export default class Parser {
 
     this.result = new ParseResult();
 
-    const blueprint = ApiaryBlueprintParser.parse(this.source);
+    try {
+      this.blueprint = ApiaryBlueprintParser.parse(this.source);
+    } catch (err) {
+      const {Annotation} = this.minim.elements;
+      const annotation = new Annotation(err.message);
+      annotation.classes.push('error');
+      this.result.push(annotation);
+
+      return done(err, this.result);
+    }
 
     this.api = new Category();
     this.api.classes.push('api');
     this.result.push(this.api);
 
-    this.api.title = blueprint.name;
+    this.api.title = this.blueprint.name;
 
-    if (blueprint.location) {
+    if (this.blueprint.location) {
       const {Member: MemberElement} = this.minim.elements;
-      const member = new MemberElement('HOST', blueprint.location);
+      const member = new MemberElement('HOST', this.blueprint.location);
       member.meta.set('classes', ['user']);
       this.api.attributes.set('meta', [member]);
     }
 
-    if (blueprint.description) {
-      const description = new Copy(blueprint.description);
+    if (this.blueprint.description) {
+      const description = new Copy(this.blueprint.description);
       this.api.content.push(description);
     }
 

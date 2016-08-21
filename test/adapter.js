@@ -52,4 +52,53 @@ describe('Apiary Blueprint Parser Adapter', () => {
       expect(filtered[0]).to.be.an.object;
     });
   });
+
+  context('parsing an Apiary Blueprint containing a syntax error', () => {
+    const source = `--- Blueprint Name ---
+
+---
+Description
+---
+
+---
+Section 1
+Test Section 1
+---
+`;
+
+    const expectedAnnotation = {
+      element: 'annotation',
+      meta: {
+        classes: ['error'],
+      },
+      attributes: {},
+      content: 'Expected "COPY", "DELETE", "GET", "HEAD", "LOCK", "MKCOL", "MOVE", "OPTIONS", "PATCH", "POST", "PROPPATCH", "PUT" or "UNLOCK" but end of input found.',
+    };
+
+    let parseResult;
+    let parseError;
+
+    before((done) => {
+      fury.parse({source}, (err, output) => {
+        parseError = err;
+        parseResult = output;
+        done();
+      });
+    });
+
+    it('has a parseResult element', () => {
+      expect(parseResult).to.exist;
+      expect(parseResult.element).to.equal('parseResult');
+    });
+
+    it('has an annotation element', () => {
+      expect(parseResult.annotations).to.have.length(1);
+      const annotation = parseResult.annotations.first().toRefract();
+      expect(annotation).to.eql(expectedAnnotation);
+    });
+
+    it('has an error', () => {
+      expect(parseError).to.exist;
+    });
+  });
 });

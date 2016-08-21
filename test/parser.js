@@ -22,6 +22,7 @@ describe('Apiary Blueprint Parser', () => {
 
       fury.parse({source}, (err, output) => {
         if (err) {
+          expect(err).to.be.undefined();
           return done(err);
         }
 
