@@ -8,7 +8,7 @@ export default class Parser {
 
   parse(done) {
     const {
-      Category, Copy, ParseResult,
+      Annotation, Category, Copy, ParseResult,
     } = this.minim.elements;
 
     this.result = new ParseResult();
@@ -16,7 +16,6 @@ export default class Parser {
     try {
       this.blueprint = ApiaryBlueprintParser.parse(this.source);
     } catch (err) {
-      const {Annotation} = this.minim.elements;
       const annotation = new Annotation(err.message);
       annotation.classes.push('error');
       this.result.push(annotation);
@@ -45,7 +44,12 @@ export default class Parser {
       this.api.content.push(group);
     }
 
-    // TODO: Validators
+    // TODO: Add support for validators
+    if (this.blueprint.validations.length > 0) {
+      const annotation = new Annotation('The use of JSON Validations is not supported.');
+      annotation.classes.push('warning');
+      this.result.push(annotation);
+    }
 
     this.result.push(this.api);
     return done(null, this.result);
