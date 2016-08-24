@@ -20,6 +20,13 @@ export default class Parser {
       annotation.classes.push('error');
       this.result.push(annotation);
 
+      if (err.offset) {
+        const {SourceMap} = this.minim.elements;
+        annotation.attributes.set('sourceMap', [
+          new SourceMap([[err.offset, 1]]),
+        ]);
+      }
+
       return done(err, this.result);
     }
 

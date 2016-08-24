@@ -71,7 +71,18 @@ Test Section 1
       meta: {
         classes: ['error'],
       },
-      attributes: {},
+      attributes: {
+        sourceMap: [
+          {
+            element: 'sourceMap',
+            meta: {},
+            attributes: {},
+            content: [
+              [78, 1],
+            ],
+          },
+        ],
+      },
       content: 'Expected "COPY", "DELETE", "GET", "HEAD", "LOCK", "MKCOL", "MOVE", "OPTIONS", "PATCH", "POST", "PROPPATCH", "PUT" or "UNLOCK" but end of input found.',
     };
 
