@@ -44,13 +44,6 @@ export default class Parser {
       this.api.content.push(group);
     }
 
-    // TODO: Add support for validators
-    if (this.blueprint.validations.length > 0) {
-      const annotation = new Annotation('The use of JSON Validations is not supported.');
-      annotation.classes.push('warning');
-      this.result.push(annotation);
-    }
-
     this.result.push(this.api);
     return done(null, this.result);
   }
@@ -97,22 +90,24 @@ export default class Parser {
     const transition = new Transition();
     transition.title = resource.method;
 
+    const schema = this.retrieveSchema(resource.method, resource.url);
+
     if (resource.description) {
       transition.push(new Copy(resource.description));
     }
 
-    const request = this.handleRequest(resource, resource.request);
+    const request = this.handleRequest(resource, resource.request, schema.request);
     for (const response of resource.responses) {
       const transaction = new HttpTransaction();
       transaction.push(request);
-      transaction.push(this.handleResponse(response));
+      transaction.push(this.handleResponse(response, schema.response));
       transition.push(transaction);
     }
 
     return transition;
   }
 
-  handleRequest(resource, request) {
+  handleRequest(resource, request, schema) {
     const {Asset, HttpRequest} = this.minim.elements;
     const httpRequest = new HttpRequest();
     httpRequest.method = resource.method;
@@ -122,12 +117,16 @@ export default class Parser {
       const bodyAsset = new Asset(request.body);
       bodyAsset.classes.push('messageBody');
       httpRequest.push(bodyAsset);
+
+      if (schema) {
+        httpRequest.push(this.handleSchema(schema));
+      }
     }
 
     return httpRequest;
   }
 
-  handleResponse(response) {
+  handleResponse(response, schema) {
     const {Asset, HttpResponse} = this.minim.elements;
     const httpResponse = new HttpResponse();
     httpResponse.statusCode = response.status;
@@ -137,6 +136,10 @@ export default class Parser {
       const bodyAsset = new Asset(response.body);
       bodyAsset.classes.push('messageBody');
       httpResponse.push(bodyAsset);
+
+      if (schema) {
+        httpResponse.push(this.handleSchema(schema));
+      }
     }
 
     return httpResponse;
@@ -157,5 +160,45 @@ export default class Parser {
     }
 
     return httpHeaders;
+  }
+
+  // Create schema asset
+  handleSchema(body) {
+    const {Asset} = this.minim.elements;
+    const asset = new Asset(body);
+    asset.classes.push('messageBodySchema');
+    asset.contentType = 'application/schema+json';
+    return asset;
+  }
+
+  // Search for a schema by method and path in the blueprints validations
+  retrieveSchema(method, path) {
+    const schema = {request: null, response: null};
+
+    for (const validation of this.blueprint.validations) {
+      if (validation.method === method && validation.url === path) {
+        let validationSchema;
+
+        try {
+          validationSchema = JSON.parse(validation.body);
+        } catch (error) {
+          // Handle the invalid schema for schema.request
+        }
+
+        if (validationSchema && validationSchema.request) {
+          schema.request = JSON.stringify(validationSchema.request, null, 2);
+        }
+
+        if (validationSchema && validationSchema.response) {
+          schema.response = JSON.stringify(validationSchema.response, null, 2);
+        }
+
+        if (schema.request === null && schema.response === null) {
+          schema.request = validation.body;
+        }
+      }
+    }
+
+    return schema;
   }
 }
