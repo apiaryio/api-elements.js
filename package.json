@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apiary-blueprint-parser",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Parser for Fury.js for the deprecated Apiary Blueprint language",
   "repository": {
     "type": "git",
