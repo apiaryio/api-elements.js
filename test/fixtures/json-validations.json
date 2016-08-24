@@ -1,0 +1,28 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {},
+      "content": "The use of JSON Validations is not supported."
+    },
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "API"
+      },
+      "attributes": {},
+      "content": []
+    }
+  ]
+}

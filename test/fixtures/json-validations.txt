@@ -1,0 +1,5 @@
+--- API ---
+
+-- JSON Schema Validations --
+GET /one
+{ "type": "object" }
