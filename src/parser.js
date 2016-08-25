@@ -26,7 +26,7 @@ function nextTick(cb) {
 
 // Test whether a key is a special Swagger extension.
 function isExtension(value, key) {
-  return key.indexOf('x-') === 0;
+  return _.startsWith(key, 'x-');
 }
 
 // The parser holds state about the current parsing environment and converts
@@ -170,7 +170,7 @@ export default class Parser {
         // We will run each path on it's own tick since it may take some time
         // and we want to ensure that other events in the event queue are not
         // held up.
-        const paths = _.omit(swagger.paths, isExtension);
+        const paths = _.omitBy(swagger.paths, isExtension);
         let pendingPaths = Object.keys(paths).length;
 
         if (pendingPaths === 0) {
@@ -178,7 +178,7 @@ export default class Parser {
           return complete();
         }
 
-        _.each(paths, (pathValue, href) => {
+        _.forEach(paths, (pathValue, href) => {
           nextTick(() => {
             this.handleSwaggerPath(pathValue, href);
 
@@ -380,7 +380,7 @@ export default class Parser {
     }
 
     // If value is not an empty array, then they are scopes
-    _.each(scopesList, (scopeName, index) => {
+    _.forEach(scopesList, (scopeName, index) => {
       const scope = new StringElement(scopeName);
 
       if (descriptions) {
@@ -443,7 +443,7 @@ export default class Parser {
     const schemes = [];
 
     if (this.swagger.securityDefinitions) {
-      _.each(_.keys(this.swagger.securityDefinitions), (name) => {
+      _.keys(this.swagger.securityDefinitions).forEach((name) => {
         this.withPath('securityDefinitions', name, () => {
           const item = this.swagger.securityDefinitions[name];
           const element = new AuthScheme();
@@ -521,8 +521,8 @@ export default class Parser {
   handleSwaggerSecurity(security, schemes) {
     const {AuthScheme} = this.minim.elements;
 
-    _.each(security, (item, index) => {
-      _.each(_.keys(item), (name) => {
+    _.forEach(security, (item, index) => {
+      _.keys(item).forEach((name) => {
         this.withPath('security', index, name, () => {
           const element = new AuthScheme();
 
@@ -610,7 +610,7 @@ export default class Parser {
 
       // TODO: It should add support for `body` and `formData` parameters as well.
       if (pathObjectParameters.length > 0) {
-        _.each(pathObjectParameters, (parameter, index) => {
+        _.forEach(pathObjectParameters, (parameter, index) => {
           this.withPath('parameters', index, (path) => {
             if (parameter.in === 'body') {
               this.createAnnotation(annotations.DATA_LOST, path,
@@ -625,11 +625,11 @@ export default class Parser {
 
       const relevantMethods = _.chain(pathValue)
         .omit('parameters', '$ref')
-        .omit(isExtension)
+        .omitBy(isExtension)
         .value();
 
       // Each path is an object with methods as properties
-      _.each(relevantMethods, (methodValue, method) => {
+      _.forEach(relevantMethods, (methodValue, method) => {
         this.handleSwaggerMethod(resource, href, pathObjectParameters, methodValue, method);
       });
 
@@ -642,7 +642,7 @@ export default class Parser {
   // Converts all unknown Swagger vendor extensions from an object into a API Element extension
   handleSwaggerVendorExtensions(element, object) {
     const extensions = _.chain(object)
-      .pick(isExtension)
+      .pickBy(isExtension)
       .omit('x-description', 'x-summary', 'x-group-name')
       .value();
 
@@ -728,7 +728,7 @@ export default class Parser {
       // Currently, default responses are not supported in API Description format
       const relevantResponses = _.chain(methodValue.responses)
         .omit('default')
-        .omit(isExtension)
+        .omitBy(isExtension)
         .value();
 
       if (methodValue.responses && methodValue.responses.default) {
@@ -750,7 +750,7 @@ export default class Parser {
       }
 
       // Transactions are created for each response in the document
-      _.each(relevantResponses, (responseValue, statusCode) => {
+      _.forEach(relevantResponses, (responseValue, statusCode) => {
         this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode, schemes);
       });
 
@@ -779,7 +779,7 @@ export default class Parser {
 
     examples = _.omit(examples, 'schema');
 
-    _.each(examples, (responseBody, contentType) => {
+    _.forEach(examples, (responseBody, contentType) => {
       const transaction = this.createTransaction(transition, method, schemes);
 
       this.handleSwaggerExampleRequest(transaction, methodValue, transitionParameters);
@@ -821,7 +821,7 @@ export default class Parser {
         headers.pushHeader('Accept', JSON_CONTENT_TYPE, request, this, 'produces-accept');
       }
 
-      _.each(headerParameters, (param) => {
+      _.forEach(headerParameters, (param) => {
         const index = transitionParameters.indexOf(param);
 
         this.withPath('parameters', index, () => {
@@ -831,7 +831,7 @@ export default class Parser {
 
       // Body parameters define request schemas
       // There can only be 1 body parameter. So, no issues.
-      _.each(bodyParameters, (param) => {
+      _.forEach(bodyParameters, (param) => {
         const index = transitionParameters.indexOf(param);
 
         if (param['x-example']) {
@@ -862,7 +862,7 @@ export default class Parser {
         const dataStructure = new DataStructure();
         const dataObject = new ObjectElement(); // a form is essentially an object with key/value members
 
-        _.each(formParameters, (param) => {
+        _.forEach(formParameters, (param) => {
           const index = transitionParameters.indexOf(param);
           this.withPath('parameters', index, () => {
             const member = this.convertParameterToMember(param, this.path);
@@ -884,7 +884,7 @@ export default class Parser {
     // with it.
     const schema = {type: 'object', properties: {}, required: []};
 
-    _.each(formParameters, (param) => {
+    _.forEach(formParameters, (param) => {
       const index = transitionParameters.indexOf(param);
       this.withPath('parameters', index, () => {
         if (param.type === 'array') {
@@ -1037,11 +1037,11 @@ export default class Parser {
     const tags = [];
 
     if (this.swagger.paths) {
-      _.each(this.swagger.paths, (path) => {
+      _.forEach(this.swagger.paths, (path) => {
         let tag = null;
 
         if (path) {
-          _.each(path, (operation) => {
+          _.forEach(path, (operation) => {
             if (operation.tags && operation.tags.length) {
               if (operation.tags.length > 1) {
                 // Too many tags... each resource can only be in one group!
@@ -1084,7 +1084,7 @@ export default class Parser {
         this.group.classes.push('resourceGroup');
 
         if (this.swagger.tags && _.isArray(this.swagger.tags)) {
-          _.each(this.swagger.tags, (tag) => {
+          _.forEach(this.swagger.tags, (tag) => {
             // TODO: Check for external docs here?
             if (tag.name === name && tag.description) {
               this.group.content.push(new Copy(tag.description));
@@ -1125,7 +1125,7 @@ export default class Parser {
       element = new ArrayElement();
       element.element = 'enum';
 
-      _.each(parameter.enum, (value, index) => {
+      _.forEach(parameter.enum, (value, index) => {
         this.withPath('enum', index, () => {
           const e = new Type();
           e.content = value;
@@ -1297,7 +1297,7 @@ export default class Parser {
     const {HrefVariables} = this.minim.elements;
     const hrefVariables = new HrefVariables();
 
-    _.each(params, (parameter, index) => {
+    _.forEach(params, (parameter, index) => {
       this.withPath('parameters', index, () => {
         let member;
 
@@ -1316,7 +1316,7 @@ export default class Parser {
   // Create a Refract asset element containing JSON Schema and push into payload
   pushSchemaAsset(schema, payload, path) {
     let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
-    actualSchema = _.omit(actualSchema, isExtension);
+    actualSchema = _.omitBy(actualSchema, isExtension);
 
     try {
       const Asset = this.minim.getElementClass('asset');
