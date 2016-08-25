@@ -21,7 +21,7 @@
     "babel-runtime": "^5.8.20",
     "js-yaml": "^3.4.2",
     "json-schema-faker": "^0.3.3",
-    "lodash": "^3.10.1",
+    "lodash": "^4.15.0",
     "swagger-parser": "^3.3.0",
     "yaml-js": "^0.1.3"
   },

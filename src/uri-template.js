@@ -13,7 +13,7 @@ export default function buildUriTemplate(basePath, href, pathObjectParameters = 
     });
 
     // There can be duplicate parameter names, so we need the unique list
-    const parameterNames = _.unique([].concat(pathObjectParameterNames, queryParameterNames));
+    const parameterNames = _.uniq([].concat(pathObjectParameterNames, queryParameterNames));
     const parameterNamesString = parameterNames.length ? `{?${parameterNames.join(',')}}` : '';
 
     const full = `${basePath}${href}${parameterNamesString}`;
