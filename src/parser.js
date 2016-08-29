@@ -1041,7 +1041,9 @@ export default class Parser {
         let tag = null;
 
         if (path) {
-          _.forEach(path, (operation) => {
+          const operations = _.omitBy(path, isExtension);
+
+          _.forEach(operations, (operation) => {
             if (operation.tags && operation.tags.length) {
               if (operation.tags.length > 1) {
                 // Too many tags... each resource can only be in one group!

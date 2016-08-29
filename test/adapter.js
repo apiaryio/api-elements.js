@@ -2,6 +2,9 @@
  * Tests for Swagger adapter.
  */
 
+import fs from 'fs';
+import path from 'path';
+import glob from 'glob';
 import adapter from '../src/adapter';
 import fury from 'fury';
 import swaggerZoo from 'swagger-zoo';
@@ -124,5 +127,33 @@ describe('Swagger 2.0 adapter', () => {
       testFixture(`Parses ${fixture.name}`, fixture);
       testFixture(`Parses ${fixture.name} with source maps`, fixture, true);
     });
+  });
+
+  describe('can parse regression fixtures', () => {
+    const files = glob.sync(path.join(__dirname, 'fixtures', '*.yaml'));
+
+    /* eslint-disable no-loop-func,func-names */
+    for (const file of files) {
+      const name = path.basename(file, path.extname(file));
+
+      const swagger = fs.readFileSync(file, 'utf-8');
+      const apiElementsPath = path.join(__dirname, 'fixtures', `${name}.json`);
+
+      const options = {swagger};
+
+      Object.defineProperty(options, 'apiElements', {
+        get: function() {
+          return require(apiElementsPath);
+        },
+
+        set: function(value) {
+          fs.writeFileSync(apiElementsPath, JSON.stringify(value, null, 2));
+          return value;
+        },
+      });
+
+      testFixture(`Parses ${name}`, options);
+    }
+    /* eslint-enable no-loop-func,func-names */
   });
 });
