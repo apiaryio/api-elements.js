@@ -1,3 +1,20 @@
+# 0.9.3 - 2016-08-30
+
+## Bug Fixes
+
+- Added support to exclude extensions from operations
+
+# 0.9.2 - 2016-08-26
+
+## Enhancements
+
+- Upgraded lodash dependency from 3.x.x to 4.x.x
+
+# 0.9.1 - 2016-07-27
+
+## Enhancements
+
+- Added support for adding example values to parameters using `x-example`
 
 # 0.9.0 - 2016-07-27
 
@@ -12,7 +29,6 @@
 
 - The adapter is more asynchronous and thus, gives other events in the event
   loop the ability to run while we're parsing the Swagger document.
-
 
 # 0.8.0 - 2016-07-01
 
@@ -88,13 +104,13 @@
 - Do not encode JSON strings twice
 - Support `x-summary` and `x-description` in Path Item Objects
 
-# 0.5.0 - 2015-12-8
+# 0.5.0 - 2015-12-08
 
 - Generate Swagger schema and spec validation annotations.
 - Implement support for link relations in parser annotations.
 - Encode dashes (`-`) in URI template parameters.
 
-# 0.4.0 - 2015-12-2
+# 0.4.0 - 2015-12-02
 
 - Implement support for parser annotations.
 
