@@ -250,6 +250,19 @@ describe('Parser', () => {
       });
     });
 
+    it('should pass adapter options during parsing', (done) => {
+      fury.adapters[fury.adapters.length - 1].parse = ({minim, source, testOption = false}, cb) => {
+        const BooleanElement = minim.getElementClass('boolean');
+        return cb(null, new BooleanElement(testOption));
+      };
+
+      fury.parse({source: 'dummy', adapterOptions: {testOption: true}}, (err, result) => {
+        assert.isNull(err);
+        assert.isTrue(result.content);
+        done();
+      });
+    });
+
     it('should serialize through mediatype', (done) => {
       fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, serialized) => {
         assert.equal(serialized, 'dummy');

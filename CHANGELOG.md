@@ -1,3 +1,10 @@
+# Master
+
+## Enhancements
+
+- Fury will now allow you to pass down parser options down to the underlying
+  parse adapter using the `adapterOptions` parameter.
+
 # 2.1.0 - 2016-05-24
 
 - Elements returned from parse will always be an instance of minim elements
