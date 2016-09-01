@@ -1,0 +1,66 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "error"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 4
+      },
+      "content": "Additional properties not allowed: invalid"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#yaml-parser"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 2,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                94,
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "YAML Syntax Error: expected <block end>, but found <scalar>"
+    }
+  ]
+}

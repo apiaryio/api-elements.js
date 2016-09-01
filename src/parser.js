@@ -216,8 +216,23 @@ export default class Parser {
         this._ast = new Ast(this.source);
       } catch (err) {
         this._ast = null;
-        this.createAnnotation(annotations.AST_UNAVAILABLE, null,
-          'Input AST could not be composed, so source maps will not be available');
+
+        let message = 'YAML Syntax Error';
+        if (err.problem) {
+          message = `${message}: ${err.problem}`;
+        }
+
+        const annotation = this.createAnnotation(annotations.AST_UNAVAILABLE, null,
+          message);
+
+        if (err.problem_mark && err.problem_mark.pointer) {
+          const SourceMap = this.minim.getElementClass('sourceMap');
+          const position = err.problem_mark.pointer;
+
+          annotation.attributes.set('sourceMap', [
+            new SourceMap([[position, 1]]),
+          ]);
+        }
       }
     } else {
       this._ast = null;
