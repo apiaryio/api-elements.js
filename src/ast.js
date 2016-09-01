@@ -39,21 +39,6 @@ export default class Ast {
               end = subNode[1].end_mark.pointer;
             }
             break;
-          } else if (subNode[0] && subNode[0].value === '$ref') {
-            if (subNode[1].value.indexOf('#') === 0) {
-              // This is an internal reference! First, we reset the node to the
-              // root of the document, shift the ref item off the pieces stack
-              // and then add the referenced path to the pieces.
-              const refPaths = subNode[1].value.substr(2).split('/');
-              newNode = this.root;
-              Array.prototype.unshift.apply(pieces, refPaths.concat([piece]));
-              break;
-            } else {
-              /* eslint-disable no-console */
-              // TODO: Communicate this in some other way?
-              console.log(`External reference ${subNode[1].value} not supported for source maps!`);
-              /* eslint-enable no-console */
-            }
           }
         }
       } else if (node.tag === 'tag:yaml.org,2002:seq') {

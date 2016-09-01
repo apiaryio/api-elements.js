@@ -1,0 +1,43 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "error"
+        ],
+        "links": [
+          {
+            "element": "link",
+            "meta": {},
+            "attributes": {
+              "relation": "origin",
+              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
+            },
+            "content": []
+          }
+        ]
+      },
+      "attributes": {
+        "code": 4,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "meta": {},
+            "attributes": {},
+            "content": [
+              [
+                247,
+                0
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "Expected type string but found type null"
+    }
+  ]
+}

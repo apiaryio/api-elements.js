@@ -2,6 +2,8 @@
 
 ## Bug Fixes
 
+- Improves error reporting in some cases when references are involved.
+
 - Improves error reporting when the YAML document contains YAML syntax errors
   to include source maps and the YAML error.
 
