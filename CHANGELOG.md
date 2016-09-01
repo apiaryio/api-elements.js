@@ -1,3 +1,10 @@
+# Master
+
+## Bug Fixes
+
+- Improves error reporting when the YAML document contains YAML syntax errors
+  to include source maps and the YAML error.
+
 # 0.9.4 - 2016-08-30
 
 # 0.9.3 - 2016-08-30
