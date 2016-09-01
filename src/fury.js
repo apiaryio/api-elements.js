@@ -43,7 +43,7 @@ class Fury {
    * then uses the adapter to convert into refract elements and loads
    * these into objects.
    */
-  parse({source, mediaType, generateSourceMap = false}, done) {
+  parse({source, mediaType, generateSourceMap = false, adapterOptions}, done) {
     let adapter;
 
     if (mediaType) {
@@ -60,7 +60,13 @@ class Fury {
 
     if (adapter) {
       try {
-        adapter.parse({generateSourceMap, minim, source}, (err, elements) => {
+        let options = {generateSourceMap, minim, source};
+
+        if (adapterOptions) {
+          options = Object.assign(options, adapterOptions);
+        }
+
+        adapter.parse(options, (err, elements) => {
           if (!elements) {
             done(err);
           } else if (elements instanceof minim.BaseElement) {
