@@ -1,6 +1,8 @@
-# Master
+# 0.9.5 - 2016-09-01
 
 ## Bug Fixes
+
+- Improves error reporting in some cases when references are involved.
 
 - Improves error reporting when the YAML document contains YAML syntax errors
   to include source maps and the YAML error.
