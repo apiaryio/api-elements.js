@@ -411,6 +411,27 @@ describe('API description namespace', () => {
       const loaded = (new DataStructure()).fromRefract(refract);
       expect(loaded.toRefract()).to.deep.equal(refract);
     });
+
+    it('should support arrays as content', () => {
+      const refract = {
+        element: 'dataStructure',
+        meta: {},
+        attributes: {},
+        content: [
+          {
+            element: 'object',
+            meta: {
+              id: 'User',
+            },
+            attributes: {},
+            content: [],
+          },
+        ],
+      };
+
+      const element = namespace.fromRefract(refract);
+      expect(element.toRefract()).to.deep.equal(refract);
+    });
   });
 
   context('resource element', () => {

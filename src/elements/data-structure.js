@@ -14,13 +14,25 @@ export default function(namespace) {
 
     toRefract() {
       const refract = super.toRefract();
-      refract.content = refract.content.toRefract();
+
+      if (Array.isArray(this.content)) {
+        refract.content = this.content.map(item => item.toRefract());
+      } else {
+        refract.content = this.content.toRefract();
+      }
+
       return refract;
     }
 
     fromRefract(doc) {
       super.fromRefract(doc);
-      this.content = namespace.fromRefract(doc.content);
+
+      if (Array.isArray(doc.content)) {
+        this.content = doc.content.map(item => namespace.fromRefract(item));
+      } else {
+        this.content = namespace.fromRefract(doc.content);
+      }
+
       return this;
     }
   }

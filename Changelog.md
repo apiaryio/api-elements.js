@@ -1,3 +1,9 @@
+# Master
+
+## Bug Fixes
+
+- A data structure element may contain an array as it's content.
+
 # 0.1.7 - 2016-06-30
 
 - Added an `extension` element
