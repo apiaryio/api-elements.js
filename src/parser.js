@@ -1,3 +1,4 @@
+import url from 'url';
 import ApiaryBlueprintParser from 'apiary-blueprint-parser';
 
 export default class Parser {
@@ -55,6 +56,20 @@ export default class Parser {
     return done(null, this.result);
   }
 
+  // Parses a URL from the Apiary Blueprint AST
+  // Depending on the contents of the blueprint location it may need removing paths
+  parseURL(path) {
+    if (this.blueprint.location) {
+      const host = url.parse(this.blueprint.location);
+
+      if (host.path && host.path !== '/' && path.startsWith(host.path)) {
+        return path.slice(host.path.length);
+      }
+    }
+
+    return path;
+  }
+
   handleSection(section) {
     // A "resource" in Apiary blueprint isn't the same as a "resource" in API
     // Elements. It maps closer to an "action".
@@ -74,13 +89,13 @@ export default class Parser {
       // We will use the first "resource" (actually "action") for the name.
 
       const resource = new Resource();
-      resource.href = section.resources[0].url;
+      resource.href = this.parseURL(section.resources[0].url);
 
       for (const action of section.resources) {
         const transition = this.handleResource(action);
 
-        if (action.url !== section.resources[0].url) {
-          transition.href = action.url;
+        if (action.url !== resource.href) {
+          transition.href = this.parseURL(action.url);
         }
 
         resource.push(transition);

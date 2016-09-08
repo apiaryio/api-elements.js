@@ -1,0 +1,9 @@
+HOST: https://example.com/test
+
+--- API ---
+--
+Having a path in the HOST should not result in the transaction including the path.
+--
+
+GET /message
+< 204
