@@ -1,0 +1,102 @@
+{
+  "element": "parseResult",
+  "meta": {},
+  "attributes": {},
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "API"
+      },
+      "attributes": {
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "attributes": {},
+            "content": {
+              "key": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "meta": {},
+                "attributes": {},
+                "content": "https://example.com/test/"
+              }
+            }
+          }
+        ]
+      },
+      "content": [
+        {
+          "element": "category",
+          "meta": {
+            "title": "Having a path in the HOST should not result in the transaction including the path.",
+            "classes": [
+              "resourceGroup"
+            ]
+          },
+          "attributes": {},
+          "content": [
+            {
+              "element": "resource",
+              "meta": {},
+              "attributes": {
+                "href": "/message"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "GET"
+                  },
+                  "attributes": {
+                    "href": "/message"
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "meta": {},
+                      "attributes": {},
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "meta": {},
+                          "attributes": {
+                            "method": "GET",
+                            "headers": null
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "meta": {},
+                          "attributes": {
+                            "statusCode": 204,
+                            "headers": null
+                          },
+                          "content": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
