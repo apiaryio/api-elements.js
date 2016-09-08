@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1
+
+### Bug Fixes
+
+* Fixes a bug where a path included in the HOST metadata may be duplicated in
+  each href.
+
+
 ## 1.1.0
 
 ### Enhancements
