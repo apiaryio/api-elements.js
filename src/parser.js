@@ -63,7 +63,13 @@ export default class Parser {
       const host = url.parse(this.blueprint.location);
 
       if (host.path && host.path !== '/' && path.startsWith(host.path)) {
-        return path.slice(host.path.length);
+        const newPath = path.slice(host.path.length);
+
+        if (!newPath.startsWith('/')) {
+          return '/' + newPath;
+        }
+
+        return newPath;
       }
     }
 

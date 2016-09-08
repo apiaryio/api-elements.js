@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.2
+
+### Bug Fixes
+
+* Fixes a bug where the leading slash on a path may be stripped if there is a
+  leading slash on a path in the HOST metadata.
+
+
 ## 1.1.1
 
 ### Bug Fixes
