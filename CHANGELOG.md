@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.3
+
+### Bug Fixes
+
+* Fixes a bug where having HOST metadata with a path would cause JSON Schema
+  Validations to not be converted to the API Elements result.
+
+
 ## 1.1.2
 
 ### Bug Fixes

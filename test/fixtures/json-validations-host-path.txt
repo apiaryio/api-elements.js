@@ -1,0 +1,16 @@
+HOST: https://example.com/path/
+
+--- API ---
+
+--
+Example Resources
+--
+
+GET /response-schema
+< 200
+< Content-Type: application/json
+{ "name": "Kyle" }
+
+-- JSON Schema Validations --
+GET /response-schema
+{ "response": {"type": "object"} }

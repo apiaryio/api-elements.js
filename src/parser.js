@@ -118,7 +118,7 @@ export default class Parser {
     const transition = new Transition();
     transition.title = resource.method;
 
-    const schema = this.retrieveSchema(resource.method, resource.url);
+    const schema = this.retrieveSchema(resource.method, this.parseURL(resource.url));
 
     if (resource.description) {
       transition.push(new Copy(resource.description));
