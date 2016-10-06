@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Swagger 2.0 parser for Fury.js",
   "main": "./lib/adapter.js",
   "tonicExampleFilename": "tonic-example.js",
