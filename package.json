@@ -31,6 +31,8 @@
     "coveralls": "^2.11.2",
     "fury": "^2.x.x",
     "peasant": "^0.5.2",
+    "minim": "^0.14.2",
+    "minim-parse-result": "^0.2.2",
     "swagger-zoo": "2.2.1"
   },
   "author": "Apiary.io <support@apiary.io>",
