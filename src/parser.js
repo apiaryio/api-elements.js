@@ -1143,16 +1143,14 @@ export default class Parser {
       element.element = 'enum';
 
       _.forEach(parameter.enum, (value, index) => {
-        this.withPath('enum', index, () => {
-          const e = new Type();
-          e.content = value;
+        const e = new Type();
+        e.content = value;
 
-          if (this.generateSourceMap) {
-            this.createSourceMap(e, this.path);
-          }
+        if (this.generateSourceMap) {
+          this.createSourceMap(e, path.concat('enum', index));
+        }
 
-          element.content.push(e);
-        });
+        element.content.push(e);
       });
 
       if (parameter['x-example'] !== undefined) {
@@ -1160,7 +1158,7 @@ export default class Parser {
         sampleElement.content = parameter['x-example'];
 
         if (this.generateSourceMap) {
-          this.createSourceMap(sampleElement, this.path.concat(['x-example']));
+          this.createSourceMap(sampleElement, path.concat(['x-example']));
         }
 
         const samplesElement = new ArrayElement();
@@ -1190,7 +1188,7 @@ export default class Parser {
         defaultElement.content = parameter.default;
 
         if (this.generateSourceMap) {
-          this.createSourceMap(defaultElement, this.path.concat(['default']));
+          this.createSourceMap(defaultElement, path.concat(['default']));
         }
 
         e.content.push(defaultElement);
@@ -1206,7 +1204,7 @@ export default class Parser {
           e.content = parameter.default;
 
           if (this.generateSourceMap) {
-            this.createSourceMap(e, this.path.concat(['default']));
+            this.createSourceMap(e, path.concat(['default']));
           }
         }
       }
