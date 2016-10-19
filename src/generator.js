@@ -7,6 +7,8 @@ import link from './link';
 
 faker.option({
   useDefaultValue: true,
+  maxItems: 5,
+  maxLength: 256,
 });
 
 export function bodyFromSchema(schema, payload, parser, contentType = 'application/json') {
