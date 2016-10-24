@@ -1,4 +1,4 @@
-# Master
+# 2.3.0 - 2016-10-24
 
 ## Enhancements
 
