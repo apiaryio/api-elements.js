@@ -90,7 +90,12 @@ export default class Parser {
 
     // Next, we dereference and validate the loaded Swagger object. Any schema
     // violations get converted into annotations with source maps.
-    swaggerParser.validate(loaded, (err) => {
+    const swaggerOptions = {
+      '$refs': {
+        external: false,
+      },
+    };
+    swaggerParser.validate(loaded, swaggerOptions, (err) => {
       const swagger = swaggerParser.api;
       this.swagger = swaggerParser.api;
 

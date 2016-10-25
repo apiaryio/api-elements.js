@@ -1,3 +1,9 @@
+# 0.9.7 - 2016-10-25
+
+## Bug Fixes
+
+- Prevents dereferencing external assets such as local files.
+
 # 0.9.5 - 2016-09-01
 
 ## Bug Fixes
