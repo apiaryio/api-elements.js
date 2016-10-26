@@ -139,6 +139,15 @@ export function parse({minim, generateSourceMap, source}, done) {
   done(null, elements);
 }
 
+export function validate({minim, source}, done) {
+  // Here you validate the source and return a parse result for any warnings or
+  // errors.
+  //
+  // NOTE: Implementing `validate` is optional, Fury will fallback to using
+  // `parse` to find warnings or errors.
+  done(null, null);
+}
+
 export function serialize({api, minim}, done) {
   // Here you convert `api` from javascript element objects to the serialized
   // source format.

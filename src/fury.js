@@ -37,6 +37,54 @@ class Fury {
     return minim.fromRefract(elements);
   }
 
+  findAdapter(source, mediaType, method) {
+    let adapter;
+
+    if (mediaType) {
+      adapter = findAdapter(this.adapters, mediaType, method);
+    } else {
+      for (let i = 0; i < this.adapters.length; i++) {
+        const current = this.adapters[i];
+        if (current.detect && current.detect(source) && current[method]) {
+          adapter = this.adapters[i];
+          break;
+        }
+      }
+    }
+
+    return adapter;
+  }
+
+  validate({source, mediaType, adapterOptions}, done) {
+    const adapter = this.findAdapter(source, mediaType, 'validate');
+
+    if (!adapter) {
+      return this.parse({source, mediaType, adapterOptions}, (err, result) => {
+        if (result && result.annotations.length > 0) {
+          const {ParseResult} = minim.elements;
+          const parseResult = new ParseResult(result.annotations);
+          done(err, parseResult);
+        } else {
+          done(err, null);
+        }
+      });
+    }
+
+    let options = {minim, source};
+
+    if (adapterOptions) {
+      options = Object.assign(options, adapterOptions);
+    }
+
+    adapter.validate(options, (err, elements) => {
+      if (!elements || elements instanceof minim.BaseElement) {
+        done(err, elements);
+      } else {
+        done(err, this.load(elements));
+      }
+    });
+  }
+
   /*
    * Parse an input document into Javascript objects. This method uses
    * the registered adapters to automatically detect the input format,
@@ -44,42 +92,30 @@ class Fury {
    * these into objects.
    */
   parse({source, mediaType, generateSourceMap = false, adapterOptions}, done) {
-    let adapter;
+    const adapter = this.findAdapter(source, mediaType, 'parse');
 
-    if (mediaType) {
-      adapter = findAdapter(this.adapters, mediaType, 'parse');
-    } else {
-      for (let i = 0; i < this.adapters.length; i++) {
-        const current = this.adapters[i];
-        if (current.detect && current.detect(source) && current.parse) {
-          adapter = this.adapters[i];
-          break;
-        }
-      }
+    if (!adapter) {
+      return done(new Error('Document did not match any registered parsers!'));
     }
 
-    if (adapter) {
-      try {
-        let options = {generateSourceMap, minim, source};
+    try {
+      let options = {generateSourceMap, minim, source};
 
-        if (adapterOptions) {
-          options = Object.assign(options, adapterOptions);
-        }
-
-        adapter.parse(options, (err, elements) => {
-          if (!elements) {
-            done(err);
-          } else if (elements instanceof minim.BaseElement) {
-            done(err, elements);
-          } else {
-            done(err, this.load(elements));
-          }
-        });
-      } catch (err) {
-        return done(err);
+      if (adapterOptions) {
+        options = Object.assign(options, adapterOptions);
       }
-    } else {
-      done(new Error('Document did not match any registered parser!'));
+
+      adapter.parse(options, (err, elements) => {
+        if (!elements) {
+          done(err);
+        } else if (elements instanceof minim.BaseElement) {
+          done(err, elements);
+        } else {
+          done(err, this.load(elements));
+        }
+      });
+    } catch (err) {
+      return done(err);
     }
   }
 

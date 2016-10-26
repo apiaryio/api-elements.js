@@ -1,3 +1,9 @@
+# 2.3.0 - 2016-10-24
+
+## Enhancements
+
+- Fury will now allow you to `validate` an API Description.
+
 # 2.2.0 - 2016-09-01
 
 ## Enhancements
