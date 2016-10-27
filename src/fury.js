@@ -124,6 +124,7 @@ if (require.main === module) {
     .option('-f, --format [format]', 'output format', 'application/vnd.refract.parse-result+json')
     .option('-l, --validate', 'validate input only')
     .option('-s, --sourcemap', 'Export sourcemaps into API Elements parse result')
+    .option('--adapter [adapter]', 'Load a fury adapter')
     .arguments('<input> [output]')
     .action((inputArgument, outputArgument) => {
       input = inputArgument;
@@ -135,6 +136,10 @@ if (require.main === module) {
   if (input === undefined) {
     console.error('Input not given.');
     process.exit(3);
+  }
+
+  if (commander.adapter) {
+    fury.use(require(commander.adapter));
   }
 
   const furyCLI = new FuryCLI(input, output, commander.format,
