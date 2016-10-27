@@ -15,10 +15,11 @@ export function detect(source) {
 /*
  * Parse an API Blueprint into refract elements.
  */
-export function parse({source, generateSourceMap}, done) {
+export function parse({source, generateSourceMap, requireBlueprintName}, done) {
   const options = {
     exportSourcemap: !!generateSourceMap,
     type: 'refract',
+    requireBlueprintName,
   };
 
   drafter.parse(source, options, done);
