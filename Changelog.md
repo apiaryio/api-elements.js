@@ -1,3 +1,10 @@
+# 0.4.0 - 2016-10-27
+
+## Enhancement
+
+- Adds support for the `requireBlueprintName` option during parsing. This
+  option will validate that the blueprint has a name.
+
 # 0.3.0 - 2016-07-19
 
 ### Enhancement

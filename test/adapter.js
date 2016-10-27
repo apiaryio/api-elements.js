@@ -48,4 +48,14 @@ describe('API Blueprint parser adapter', () => {
       expect(filtered[0]).to.be.an.object;
     });
   });
+
+  it('can parse an API Blueprint with require blueprint name', (done) => {
+    const source = '# GET /\n+ Response 204\n';
+
+    adapter.parse({source, requireBlueprintName: true}, (err, output) => {
+      expect(err).not.to.be.null;
+      expect(output.content[0].element).to.equal('annotation');
+      done();
+    });
+  });
 });
