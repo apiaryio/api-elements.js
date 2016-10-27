@@ -27,6 +27,7 @@ $ fury --help
     -f, --format [format]  output format
     -l, --validate         validate input only
     -s, --sourcemap        Export sourcemaps into API Elements parse result
+    --adapter [adapter]    Load a fury adapter
 ```
 
 #### Input Formats
