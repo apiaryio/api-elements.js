@@ -1,3 +1,9 @@
+# 0.5.0 - 2016-10-31
+
+## Enhancement
+
+- Adds support for API Blueprint validation.
+
 # 0.4.0 - 2016-10-27
 
 ## Enhancement
