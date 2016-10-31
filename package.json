@@ -19,7 +19,7 @@
   "dependencies": {
     "babel-runtime": "^5.8.20",
     "deckardcain": "^0.1.6",
-    "drafter": "^1.0.0"
+    "drafter": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
