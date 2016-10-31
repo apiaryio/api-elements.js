@@ -1,3 +1,11 @@
+# 0.9.8 - 2016-10-31
+
+## Bug Fixes
+
+- Prevents constructing large arrays and strings when generating a request or
+  response body from a JSON Schema where there is a large
+  `minItems`, `maxItems`, `minLength` or `maxLength`.
+
 # 0.9.7 - 2016-10-25
 
 ## Bug Fixes
