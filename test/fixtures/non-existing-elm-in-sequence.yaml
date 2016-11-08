@@ -1,0 +1,23 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Test non-existing element in yaml sequence
+host: petstore.swagger.io
+definitions:
+  Company:
+    allOf:
+      - $ref: '#/definitions/User'
+      - required:
+        - id
+        -
+      - properties:
+          id:
+            type: string
+
+  User:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+
