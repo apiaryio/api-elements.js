@@ -13,9 +13,6 @@ paths:
           required: true
           schema:
             type: object
-            properties:
-              name:
-                type: string
       responses:
         200:
           description: 'My Response'

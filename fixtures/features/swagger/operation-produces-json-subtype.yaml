@@ -12,6 +12,3 @@ paths:
           description: 'My Response'
           schema:
             type: object
-            properties:
-              name:
-                type: string

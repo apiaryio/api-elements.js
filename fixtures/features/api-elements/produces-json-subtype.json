@@ -160,7 +160,7 @@
                           "attributes": {
                             "contentType": "application/schema+json"
                           },
-                          "content": "{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"}}}"
+                          "content": "{\"type\":\"object\"}"
                         }
                       ]
                     }

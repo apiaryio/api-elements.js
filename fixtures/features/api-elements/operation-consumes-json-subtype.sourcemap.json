@@ -48,7 +48,7 @@
                     "content": [
                       [
                         83,
-                        331
+                        258
                       ]
                     ]
                   }
@@ -84,7 +84,7 @@
                                 "content": [
                                   [
                                     96,
-                                    318
+                                    245
                                   ]
                                 ]
                               }
@@ -172,13 +172,13 @@
                                 "content": [
                                   [
                                     241,
-                                    112
+                                    39
                                   ]
                                 ]
                               }
                             ]
                           },
-                          "content": "{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"}}}"
+                          "content": "{\"type\":\"object\"}"
                         }
                       ]
                     },
@@ -197,7 +197,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    372,
+                                    299,
                                     42
                                   ]
                                 ]
@@ -219,7 +219,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    387,
+                                    314,
                                     26
                                   ]
                                 ]

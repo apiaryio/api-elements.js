@@ -48,7 +48,7 @@
                     "content": [
                       [
                         83,
-                        248
+                        175
                       ]
                     ]
                   }
@@ -84,7 +84,7 @@
                                 "content": [
                                   [
                                     96,
-                                    235
+                                    162
                                   ]
                                 ]
                               }
@@ -187,7 +187,7 @@
                                 "content": [
                                   [
                                     173,
-                                    158
+                                    85
                                   ]
                                 ]
                               }
@@ -238,7 +238,7 @@
                           "attributes": {
                             "contentType": "application/hal+json"
                           },
-                          "content": "{\n  \"name\": \"dolore pariatur nulla do\"\n}"
+                          "content": "{}"
                         },
                         {
                           "element": "asset",
@@ -257,13 +257,13 @@
                                 "content": [
                                   [
                                     225,
-                                    106
+                                    33
                                   ]
                                 ]
                               }
                             ]
                           },
-                          "content": "{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"}}}"
+                          "content": "{\"type\":\"object\"}"
                         }
                       ]
                     }
