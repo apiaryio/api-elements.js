@@ -1,0 +1,17 @@
+swagger: '2.0'
+info:
+  title: Produces JSON with subtype
+  version: '1.0'
+produces:
+  - application/hal+json
+paths:
+  '/test':
+    get:
+      responses:
+        200:
+          description: 'My Response'
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
