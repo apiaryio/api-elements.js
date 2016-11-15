@@ -2,6 +2,7 @@
 
 import _ from 'lodash';
 import yaml from 'js-yaml';
+import typer from 'media-typer';
 
 import annotations from './annotations';
 import generator from './generator';
@@ -11,7 +12,6 @@ import headers from './headers';
 import Ast from './ast';
 import SwaggerParser from 'swagger-parser';
 
-const JSON_CONTENT_TYPE = 'application/json';
 const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
 
 // Provide a `nextTick` function that either is Node's nextTick or a fallback
@@ -27,6 +27,11 @@ function nextTick(cb) {
 // Test whether a key is a special Swagger extension.
 function isExtension(value, key) {
   return _.startsWith(key, 'x-');
+}
+
+function isJsonContentType(contentType) {
+  const type = typer.parse(contentType);
+  return type.suffix === 'json' || type.subtype === 'json';
 }
 
 // The parser holds state about the current parsing environment and converts
@@ -828,17 +833,20 @@ export default class Parser {
         return parameter.in === 'header';
       });
 
-      // Check if application/json is in consumes
-      const inConsumes = (methodValue.consumes || this.swagger.consumes || []).indexOf(JSON_CONTENT_TYPE) !== -1;
-      const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
+      // Check if json is in consumes
+      const consumes = methodValue.consumes || this.swagger.consumes || [];
+      const produces = methodValue.produces || this.swagger.produces || [];
+
+      const jsonConsumesContentType = _.find(consumes, isJsonContentType);
+      const jsonProducesContentType = _.find(produces, isJsonContentType);
 
       // Add content-type headers
-      if (inConsumes) {
-        headers.pushHeader('Content-Type', JSON_CONTENT_TYPE, request, this, 'consumes-content-type');
+      if (jsonConsumesContentType) {
+        headers.pushHeader('Content-Type', jsonConsumesContentType, request, this, 'consumes-content-type');
       }
 
-      if (inProduces) {
-        headers.pushHeader('Accept', JSON_CONTENT_TYPE, request, this, 'produces-accept');
+      if (jsonProducesContentType) {
+        headers.pushHeader('Accept', jsonProducesContentType, request, this, 'produces-accept');
       }
 
       _.forEach(headerParameters, (param) => {
@@ -862,8 +870,8 @@ export default class Parser {
         }
 
         this.withPath('parameters', index, 'schema', () => {
-          if (inConsumes) {
-            generator.bodyFromSchema(param.schema, request, this);
+          if (jsonConsumesContentType) {
+            generator.bodyFromSchema(param.schema, request, this, jsonConsumesContentType);
           }
 
           this.pushSchemaAsset(param.schema, request, this.path);
@@ -969,10 +977,11 @@ export default class Parser {
         });
       }
 
-      const inProduces = (methodValue.produces || this.swagger.produces || []).indexOf(JSON_CONTENT_TYPE) !== -1;
+      const produces = methodValue.produces || this.swagger.produces || [];
+      const jsonProducesContentType = _.find(produces, isJsonContentType);
 
-      if (inProduces) {
-        headers.pushHeader('Content-Type', JSON_CONTENT_TYPE, response, this, 'produces-content-type');
+      if (jsonProducesContentType) {
+        headers.pushHeader('Content-Type', jsonProducesContentType, response, this, 'produces-content-type');
       }
 
       if (responseValue.headers) {
@@ -1013,8 +1022,8 @@ export default class Parser {
           }
 
           this.withSlicedPath.apply(this, args.concat([() => {
-            if (inProduces && responseBody === undefined) {
-              generator.bodyFromSchema(schema, response, this);
+            if (jsonProducesContentType !== undefined && responseBody === undefined) {
+              generator.bodyFromSchema(schema, response, this, jsonProducesContentType);
             }
 
             this.pushSchemaAsset(schema, response, this.path);
