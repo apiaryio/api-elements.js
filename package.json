@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "Swagger 2.0 parser for Fury.js",
   "main": "./lib/adapter.js",
   "tonicExampleFilename": "tonic-example.js",
@@ -23,7 +23,8 @@
     "json-schema-faker": "^0.3.7",
     "lodash": "^4.15.0",
     "swagger-parser": "^3.3.0",
-    "yaml-js": "^0.1.3"
+    "yaml-js": "^0.1.3",
+    "media-typer": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
@@ -33,7 +34,7 @@
     "peasant": "^0.5.2",
     "minim": "^0.14.2",
     "minim-parse-result": "^0.2.2",
-    "swagger-zoo": "2.2.1"
+    "swagger-zoo": "2.2.3"
   },
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT"
