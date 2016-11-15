@@ -1,3 +1,11 @@
+# 0.9.9 - 2016-11-15
+
+## Bug Fixes
+
+- Generates JSON examples for JSON subtypes such as `application/hal+json`.
+
+- Fixes a crash during sourcemap construction for some specific documents
+
 # 0.9.8 - 2016-10-31
 
 ## Bug Fixes
