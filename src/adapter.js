@@ -6,6 +6,7 @@ import drafter from 'drafter';
 export const name = 'api-blueprint';
 export const mediaTypes = [
   'text/vnd.apiblueprint',
+  'text/vnd.apiblueprint+markdown',
 ];
 
 export function detect(source) {
