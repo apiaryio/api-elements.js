@@ -1,3 +1,9 @@
+# 0.6.0 - 2016-11-16
+
+## Enhancement
+
+- Adds support for `markdown` suffix in apiblueprint content type;
+
 # 0.5.0 - 2016-10-31
 
 ## Enhancement
