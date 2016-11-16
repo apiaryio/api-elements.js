@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apib-parser",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "API Blueprint parser for Fury.js",
   "main": "./lib/adapter.js",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "babel-runtime": "^5.8.20",
-    "deckardcain": "^0.1.6",
+    "deckardcain": "^0.3.2",
     "drafter": "^1.2.0"
   },
   "devDependencies": {
