@@ -1,3 +1,9 @@
+# 0.9.10 - 2016-11-24
+
+## Bug Fixes
+
+- Circular references in examples will now give a warning about not  being supported yet.
+
 # 0.9.9 - 2016-11-15
 
 ## Bug Fixes

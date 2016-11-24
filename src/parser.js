@@ -993,19 +993,27 @@ export default class Parser {
         if (responseBody !== undefined) {
           this.withPath(contentType, () => {
             let formattedResponseBody = responseBody;
+            let serialized = true;
 
             if (typeof(responseBody) !== 'string') {
-              formattedResponseBody = JSON.stringify(responseBody, null, 2);
+              try {
+                formattedResponseBody = JSON.stringify(responseBody, null, 2);
+              } catch (exception) {
+                this.createAnnotation(annotations.DATA_LOST,  this.path, 'Circular references in examples are not yet supported.');
+                serialized = false;
+              }
             }
 
-            const bodyAsset = new Asset(formattedResponseBody);
-            bodyAsset.classes.push('messageBody');
+            if (serialized) {
+              const bodyAsset = new Asset(formattedResponseBody);
+              bodyAsset.classes.push('messageBody');
 
-            if (this.generateSourceMap) {
-              this.createSourceMap(bodyAsset, this.path);
+              if (this.generateSourceMap) {
+                this.createSourceMap(bodyAsset, this.path);
+              }
+
+              response.content.push(bodyAsset);
             }
-
-            response.content.push(bodyAsset);
           });
         }
 
