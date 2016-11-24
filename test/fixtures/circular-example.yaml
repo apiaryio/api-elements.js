@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Test circular reference in example
+host: petstore.swagger.io
+paths:
+  /:
+    get:
+      responses:
+        200:
+          description: Get company info
+          examples:
+            application/json:
+              example:
+                $ref: '#/definitions/Company'
+
+definitions:
+  Company:
+    properties:
+      id:
+        type: string
+      user:
+        type: object
+        properties:
+          data:
+            $ref: '#/definitions/User'
+
+  User:
+    properties:
+      name:
+        type: string
+      company:
+        properties:
+          data:
+            $ref: '#/definitions/Company'
+
