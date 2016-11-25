@@ -30,8 +30,16 @@ function isExtension(value, key) {
 }
 
 function isJsonContentType(contentType) {
-  const type = typer.parse(contentType);
-  return type.suffix === 'json' || type.subtype === 'json';
+  try {
+    const type = typer.parse(contentType);
+    return type.suffix === 'json' || type.subtype === 'json';
+  } catch (e) {
+    if (e instanceof TypeError && e.message === 'invalid media type') {
+      return false;
+    }
+
+    throw e;
+  }
 }
 
 // The parser holds state about the current parsing environment and converts
