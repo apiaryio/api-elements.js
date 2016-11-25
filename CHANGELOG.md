@@ -1,3 +1,9 @@
+# 0.9.11 - 2016-11-25
+
+## Bug Fixes
+
+- Fixes crashes on bad media types.
+
 # 0.9.10 - 2016-11-24
 
 ## Bug Fixes
