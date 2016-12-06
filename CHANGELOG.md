@@ -1,3 +1,10 @@
+# Master
+
+## Bug Fixes
+
+- Prevent a crash on invalid media types, such as `application/json;
+  invalid-component` and produce warnings for invalid media types.
+
 # 0.9.11 - 2016-11-25
 
 ## Bug Fixes
