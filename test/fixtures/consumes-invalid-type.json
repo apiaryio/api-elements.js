@@ -9,41 +9,15 @@
         "classes": [
           "api"
         ],
-        "title": "Test bad media type"
+        "title": "Consumes JSON with invalid content type"
       },
-      "attributes": {
-        "meta": [
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "attributes": {},
-            "content": {
-              "key": {
-                "element": "string",
-                "meta": {},
-                "attributes": {},
-                "content": "HOST"
-              },
-              "value": {
-                "element": "string",
-                "meta": {},
-                "attributes": {},
-                "content": "petstore.swagger.io"
-              }
-            }
-          }
-        ]
-      },
+      "attributes": {},
       "content": [
         {
           "element": "resource",
           "meta": {},
           "attributes": {
-            "href": "/"
+            "href": "/test"
           },
           "content": [
             {
@@ -62,20 +36,33 @@
                       "attributes": {
                         "method": "GET"
                       },
-                      "content": []
+                      "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBodySchema"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/schema+json"
+                          },
+                          "content": "{\"type\":\"object\"}"
+                        }
+                      ]
                     },
                     {
                       "element": "httpResponse",
                       "meta": {},
                       "attributes": {
-                        "statusCode": "204"
+                        "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
                           "meta": {},
                           "attributes": {},
-                          "content": "Get company info"
+                          "content": "My Response"
                         }
                       ]
                     }
@@ -114,14 +101,14 @@
             "attributes": {},
             "content": [
               [
-                107,
-                9
+                101,
+                29
               ]
             ]
           }
         ]
       },
-      "content": "Invalid content type 'form-data', invalid media type"
+      "content": "Invalid content type 'application/hal+json; invalid', invalid parameter format"
     }
   ]
 }

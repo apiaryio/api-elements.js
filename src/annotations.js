@@ -27,4 +27,9 @@ export default {
     code: 5,
     fragment: 'uncaught-error',
   },
+  VALIDATION_WARNING: {
+    type: 'warning',
+    code: 6,
+    fragment: 'swagger-validation',
+  },
 };

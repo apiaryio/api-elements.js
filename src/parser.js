@@ -34,11 +34,7 @@ function isJsonContentType(contentType) {
     const type = typer.parse(contentType);
     return type.suffix === 'json' || type.subtype === 'json';
   } catch (e) {
-    if (e instanceof TypeError && e.message === 'invalid media type') {
-      return false;
-    }
-
-    throw e;
+    return false;
   }
 }
 
@@ -178,6 +174,9 @@ export default class Parser {
           this.createAnnotation(annotations.DATA_LOST, ['externalDocs'],
             'External documentation is not yet supported');
         }
+
+        this.validateProduces(this.swagger.produces);
+        this.validateConsumes(this.swagger.consumes);
 
         const complete = () => {
           this.handleSwaggerVendorExtensions(this.api, swagger.paths);
@@ -699,6 +698,9 @@ export default class Parser {
 
     this.withPath(method, () => {
       const schemes = this.handleSwaggerTransitionAuth(methodValue);
+
+      this.validateProduces(methodValue.produces);
+      this.validateConsumes(methodValue.consumes);
 
       if (methodValue.externalDocs) {
         this.withPath('externalDocs', (path) => {
@@ -1404,5 +1406,35 @@ export default class Parser {
     }
 
     return transaction;
+  }
+
+  validateProduces(produces) {
+    if (produces) {
+      this.withPath('produces', () => {
+        this.validateContentTypes(produces);
+      });
+    }
+  }
+
+  validateConsumes(consumes) {
+    if (consumes) {
+      this.withPath('consumes', () => {
+        this.validateContentTypes(consumes);
+      });
+    }
+  }
+
+  validateContentTypes(contentTypes) {
+    contentTypes.forEach((contentType) => {
+      try {
+        typer.parse(contentType);
+      } catch (e) {
+        const index = contentTypes.indexOf(contentType);
+        this.withPath(index, () => {
+          this.createAnnotation(annotations.VALIDATION_WARNING, this.path,
+            `Invalid content type '${contentType}', ${e.message}`);
+        });
+      }
+    });
   }
 }
