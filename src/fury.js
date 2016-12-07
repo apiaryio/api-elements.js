@@ -106,9 +106,7 @@ class Fury {
       }
 
       adapter.parse(options, (err, elements) => {
-        if (!elements) {
-          done(err);
-        } else if (elements instanceof minim.BaseElement) {
+        if (!elements || elements instanceof minim.BaseElement) {
           done(err, elements);
         } else {
           done(err, this.load(elements));
