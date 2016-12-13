@@ -1,0 +1,20 @@
+swagger: '2.0'
+info:
+  title: Parameters
+  version: '1.0'
+paths:
+  /:
+    get:
+      parameters:
+        - name: arg
+          in: query
+          description: Query argument
+          type: array
+          items:
+            type: string
+          default: A
+      responses:
+        200:
+          description: Response
+          schema:
+            type: string

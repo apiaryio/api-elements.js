@@ -2,6 +2,8 @@
 
 ## Bug Fixes
 
+- Improve handling of default in parameters.
+
 - Prevent a crash on invalid media types, such as `application/json;
   invalid-component` and produce warnings for invalid media types.
 

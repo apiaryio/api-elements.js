@@ -104,6 +104,7 @@ export default class Parser {
         external: false,
       },
     };
+
     swaggerParser.validate(loaded, swaggerOptions, (err) => {
       const swagger = swaggerParser.api;
       this.swagger = swaggerParser.api;
@@ -1212,36 +1213,26 @@ export default class Parser {
     // If there is a default, it is set on the member value instead of the member
     // element itself because the default value applies to the value.
     if (parameter.default) {
-      let e;
-
-      if (parameter.enum) {
-        e = new ArrayElement();
-        const defaultElement = new Type();
-        defaultElement.content = parameter.default;
+      if (parameter.type === 'array' && !Array.isArray(parameter.default)) {
+        this.createAnnotation(annotations.VALIDATION_WARNING, path.concat(['default']),
+          ('Value of default should be an array'));
+      } else {
+        let e;
+        const defaultElement = this.minim.toElement(parameter.default);
 
         if (this.generateSourceMap) {
           this.createSourceMap(defaultElement, path.concat(['default']));
         }
 
-        e.content.push(defaultElement);
-      } else {
-        e = new Type();
-
-        if (parameter.type === 'array') {
-          const defaultElement = this.convertParameterToElement(parameter.items, (path || []).concat(['items']), true);
-          defaultElement.content = parameter.default;
-
+        if (parameter.enum) {
+          e = new ArrayElement();
           e.content.push(defaultElement);
         } else {
-          e.content = parameter.default;
-
-          if (this.generateSourceMap) {
-            this.createSourceMap(e, path.concat(['default']));
-          }
+          e = defaultElement;
         }
-      }
 
-      element.attributes.set('default', e);
+        element.attributes.set('default', e);
+      }
     }
 
     if (parameter.type === 'array' && parameter.items) {
