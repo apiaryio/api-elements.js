@@ -20,7 +20,7 @@ paths:
           type: array
           items:
             type: string
-          default: A
+          default: [A]
       responses:
         200:
           description: Test description
