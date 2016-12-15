@@ -21,19 +21,20 @@ describe('API Blueprint serializer adapter', () => {
     it(`serializes ${path.basename(file)}`, (done) => {
       let serializedRefract;
       let expectedBlueprint;
-      let refract;
+      let api;
 
       try {
         serializedRefract = require(file);
         expectedBlueprint = fs.readFileSync(apib, 'utf-8');
-        refract = fury.load(serializedRefract);
+        const parseResult = fury.load(serializedRefract);
+        api = parseResult.api;
       } catch (loadErr) {
         return done(loadErr);
       }
 
-      adapter.serialize({api: refract}, (serializeErr, serialized) => {
+      adapter.serialize({api}, (serializeErr, serialized) => {
         if (serializeErr) { return done(serializeErr); }
-        expect(expectedBlueprint.trim()).to.deep.equal(serialized.trim());
+        expect(serialized.trim()).to.deep.equal(expectedBlueprint.trim());
         done();
       });
     });
