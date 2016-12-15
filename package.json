@@ -23,7 +23,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "coveralls": "^2.11.2",
-    "fury": "^1.0.3",
+    "fury": "^2.3.0",
     "glob": "^5.0.14",
     "peasant": "^0.5.2"
   },

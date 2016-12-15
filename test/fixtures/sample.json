@@ -1,77 +1,376 @@
-[
-  "category", {"classes": ["api"], "title": "My API"}, {}, [
-    ["copy", {}, {}, "An API description."],
-    ["category", {"classes": ["resourceGroup"], "title": "My Group"}, {}, [
-      ["copy", {}, {}, "This is a group of resources"],
-      ["copy", {}, {"contentType": "text/plain"}, "Extra text"],
-      ["resource", {"title": "Frob"}, {
-        "href": "/frobs/{id}",
-        "hrefVariables": ["hrefVariables", {}, {}, [
-            ["member", {}, {"typeAttributes": ["required"]}, {
-              "key": ["string", {}, {}, "id"],
-              "value": ["string", {"description": "Unique identifier"}, {}, "123"]
-            }]
-          ]]
-        }, [
-        ["copy", {}, {}, "A frob does something."],
-        ["dataStructure", {}, {}, ["object", {}, {}, [
-          ["member", {}, {"typeAttributes": ["required"]}, {
-            "key": ["string", {}, {}, "id"],
-            "value": ["string", {}, {}, null]
-          }],
-          ["member", {}, {}, {
-            "key": ["string", {}, {}, "tags"],
-            "value": ["array", {}, {}, [
-                ["object", {"description": "Describes a tag.\n\nEach tag has a name and a number of times it was used."}, {}, [
-                  ["member", {"description": "Tag name."}, {"typeAttributes": ["required"]}, {
-                    "key": ["string", {}, {}, "name"],
-                    "value": ["string", {}, {}, null]
-                  }],
-                  ["member", {"description": "I am some long content.\n\n- one\n- two\n"}, {}, {
-                    "key": ["string", {}, {}, "count"],
-                    "value": ["number", {}, {"default": 1}, 23]
-                  }]
-                ]]
-            ]]
-          }]
-        ]]],
-        ["transition", {}, {"relation": "Frob"}, [
-          ["copy", {}, {}, "Gets information about a single frob instance"],
-          ["httpTransaction", {"title": "Get a frob"}, {}, [
-            ["httpRequest", {}, {"method": "GET"}, []],
-            ["httpResponse", {}, {"statusCode": 200, "headers": ["httpHeaders", {}, {}, [
-              ["member", {}, {}, {
-                "key": ["string", {}, {}, "Content-Type"],
-                "value": ["string", {}, {}, "application/json"]
-              }],
-              ["member", {}, {}, {
-                "key": ["string", {}, {}, "Authorization"],
-                "value": ["string", {}, {}, "Bearer abc123"]
-              }]
-            ]]}, [
-              ["asset", {"classes": ["messageBody"]}, {}, "{\n  \"id\": \"1\",\n  \"tags\": [\n    {\n      \"name\": \"foo\",\n      \"count\": 23\n    }\n  ]\n}\n"],
-              ["asset", {"classes": ["messageBodySchema"]}, {}, "{\"type\": \"object\",  \"properties\": {\"id\": {\"type\": \"string\"},\"tags\": {      \"type\": \"array\"}}}"]
-            ]]
-          ]]
-        ]],
-        ["transition", {"title": "Restart a frob"}, {"relation": "restart"}, [
-          ["copy", {}, {}, "Restart a frob instance"],
-          ["httpTransaction", {}, {}, [
-            ["httpRequest", {}, {"method": "POST"}, []],
-            ["httpResponse", {}, {"statusCode": 204}, [
-              ["copy", {}, {}, "There is no content."]
-            ]]
-          ]]
-        ]]
-      ]]
-    ]],
-    ["category", {"classes": ["dataStructures"]}, {}, [
-      ["dataStructure", {}, {}, ["object", {"title": "User"}, {}, [
-        ["member", {}, {"typeAttributes": ["required"]}, {
-          "key": ["string", {}, {}, "name"],
-          "value": ["string", {}, {}, null]
-        }]
-      ]]]
-    ]]
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "My API"
+      },
+      "attributes": {
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "FORMAT"
+              },
+              "value": {
+                "element": "string",
+                "content": "1A"
+              }
+            }
+          }
+        ]
+      },
+      "content": [
+        {
+          "element": "copy",
+          "content": "An API description."
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "resourceGroup"
+            ],
+            "title": "My Group"
+          },
+          "content": [
+            {
+              "element": "copy",
+              "content": "This is a group of resources\n\nExtra text"
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Frob"
+              },
+              "attributes": {
+                "href": "/frobs/{id}",
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Unique identifier"
+                      },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "id"
+                        },
+                        "value": {
+                          "element": "string",
+                          "content": "123"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "content": [
+                {
+                  "element": "copy",
+                  "content": "A frob does something."
+                },
+                {
+                  "element": "dataStructure",
+                  "content": [
+                    {
+                      "element": "object",
+                      "meta": {
+                        "id": "Frob"
+                      },
+                      "content": [
+                        {
+                          "element": "member",
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "id"
+                            },
+                            "value": {
+                              "element": "string"
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "tags"
+                            },
+                            "value": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "object",
+                                  "content": [
+                                    {
+                                      "element": "member",
+                                      "meta": {
+                                        "description": "Tag name."
+                                      },
+                                      "attributes": {
+                                        "typeAttributes": [
+                                          "required"
+                                        ]
+                                      },
+                                      "content": {
+                                        "key": {
+                                          "element": "string",
+                                          "content": "name"
+                                        },
+                                        "value": {
+                                          "element": "string"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "element": "member",
+                                      "meta": {
+                                        "description": "I am some long content.\n\n- one\n\n- two"
+                                      },
+                                      "content": {
+                                        "key": {
+                                          "element": "string",
+                                          "content": "count"
+                                        },
+                                        "value": {
+                                          "element": "number",
+                                          "attributes": {
+                                            "default": 1
+                                          },
+                                          "content": 23
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": ""
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Gets information about a single frob instance"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "GET"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                },
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer abc123"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"id\": \"1\",\n  \"tags\": [\n    {\n      \"name\": \"foo\",\n      \"count\": 23\n    }\n  ]\n}\n"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBodySchema"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/schema+json"
+                              },
+                              "content": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"tags\": {\n      \"type\": \"array\"\n    }\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Restart a frob"
+                  },
+                  "attributes": {
+                    "relation": "restart"
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Restart a frob instance"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "204"
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "content": "There is no content."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "dataStructures"
+            ]
+          },
+          "content": [
+            {
+              "element": "dataStructure",
+              "content": [
+                {
+                  "element": "object",
+                  "meta": {
+                    "id": "User"
+                  },
+                  "content": [
+                    {
+                      "element": "member",
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "name"
+                        },
+                        "value": {
+                          "element": "string"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": [
+          "warning"
+        ]
+      },
+      "attributes": {
+        "code": 3,
+        "sourceMap": [
+          {
+            "element": "sourceMap",
+            "content": [
+              [
+                681,
+                15
+              ]
+            ]
+          }
+        ]
+      },
+      "content": "relation identifier contains illegal characters (only lower case letters, numbers, '-' and '.' allowed)"
+    }
   ]
-]
+}
+
