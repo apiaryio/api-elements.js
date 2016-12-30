@@ -20,7 +20,7 @@
   "dependencies": {
     "babel-runtime": "^5.8.20",
     "js-yaml": "^3.4.2",
-    "json-schema-faker": "^0.3.7",
+    "json-schema-faker": "^0.4.0",
     "lodash": "^4.15.0",
     "swagger-parser": "^3.3.0",
     "yaml-js": "^0.1.3",
