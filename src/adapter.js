@@ -27,7 +27,6 @@ export function validate({source, requireBlueprintName}, done) {
 export function parse({source, generateSourceMap, requireBlueprintName}, done) {
   const options = {
     exportSourcemap: !!generateSourceMap,
-    type: 'refract',
     requireBlueprintName,
   };
 
