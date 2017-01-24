@@ -265,16 +265,19 @@ export default class Parser {
   // a function (e.g. to create an element).
   withPath(...args) {
     let i;
+    const originalPath = _.clone(this.path);
 
     for (i = 0; i < args.length - 1; i++) {
-      this.path.push(args[i]);
+      if (args[i] === '..') {
+        this.path.pop();
+      } else {
+        this.path.push(args[i]);
+      }
     }
 
     args[args.length - 1].bind(this)(this.path);
 
-    for (i = 0; i < args.length - 1; i++) {
-      this.path.pop();
-    }
+    this.path = originalPath;
   }
 
   // This is like `withPath` above, but slices the path before calling by
@@ -787,7 +790,7 @@ export default class Parser {
 
       // Transactions are created for each response in the document
       _.forEach(relevantResponses, (responseValue, statusCode) => {
-        this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode, schemes);
+        this.handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode, schemes, resourceParameters);
       });
 
       this.handleSwaggerVendorExtensions(transition, methodValue);
@@ -797,7 +800,7 @@ export default class Parser {
   }
 
   // Convert a Swagger response & status code into Refract transactions.
-  handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode, schemes) {
+  handleSwaggerResponse(transition, method, methodValue, transitionParameters, responseValue, statusCode, schemes, resourceParameters) {
     let examples;
 
     if (responseValue.examples) {
@@ -818,13 +821,13 @@ export default class Parser {
     _.forEach(examples, (responseBody, contentType) => {
       const transaction = this.createTransaction(transition, method, schemes);
 
-      this.handleSwaggerExampleRequest(transaction, methodValue, transitionParameters);
+      this.handleSwaggerExampleRequest(transaction, methodValue, transitionParameters, resourceParameters);
       this.handleSwaggerExampleResponse(transaction, methodValue, responseValue, statusCode, responseBody, contentType);
     });
   }
 
   // Convert a Swagger example into a Refract request.
-  handleSwaggerExampleRequest(transaction, methodValue, transitionParameters) {
+  handleSwaggerExampleRequest(transaction, methodValue, transitionParameters, resourceParameters) {
     const {DataStructure, Object: ObjectElement} = this.minim.elements;
     const request = transaction.request;
 
@@ -841,6 +844,10 @@ export default class Parser {
 
       // Header parameters
       const headerParameters = transitionParameters.filter((parameter) => {
+        return parameter.in === 'header';
+      });
+
+      const resourceHeaderParameters = resourceParameters.filter((parameter) => {
         return parameter.in === 'header';
       });
 
@@ -866,6 +873,15 @@ export default class Parser {
         this.withPath('parameters', index, () => {
           headers.pushHeaderObject(param.name, param, request, this);
         });
+      });
+
+      _.forEach(resourceHeaderParameters, (param) => {
+        if (!request.header(param.name)) {
+          const index = resourceParameters.indexOf(param);
+          this.withPath('..', 'parameters', index, () => {
+            headers.pushHeaderObject(param.name, param, request, this);
+          });
+        }
       });
 
       // Body parameters define request schemas
@@ -1429,3 +1445,4 @@ export default class Parser {
     });
   }
 }
+
