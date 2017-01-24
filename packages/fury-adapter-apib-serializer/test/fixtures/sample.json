@@ -181,6 +181,9 @@
                   "meta": {
                     "title": ""
                   },
+                  "attributes": {
+                    "relation": "self"
+                  },
                   "content": [
                     {
                       "element": "copy",
@@ -347,29 +350,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "content": [
-              [
-                534,
-                15
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "relation identifier contains illegal characters (only lower case letters, numbers, '-' and '.' allowed)"
     }
   ]
 }
