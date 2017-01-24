@@ -1,3 +1,15 @@
+# 0.2.0 - 2017-01-24
+
+## Enhancements
+
+- Adds support for Fury ~> 2.3.
+
+## Bug Fixes
+
+- Fixes handling of parameter descriptions.
+- Fixes handling of MSON data structures and MSON attributes.
+
+
 # 0.1.2 - 2015-09-21
 
 - Fix handling of request/responses with empty bodies but including a description. These must make use of an empty body via `+ Body` or the description is considered the body content.
