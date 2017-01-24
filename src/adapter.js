@@ -12,7 +12,8 @@ const env = nunjucks.configure(path.dirname(__dirname), {
   autoescape: false,
 });
 
-env.addFilter('mson', mson);
+env.addFilter('mson', mson.renderAttributes);
+env.addFilter('dataStructure', mson.renderDataStructure);
 env.addFilter('indent', indent);
 env.addFilter('bodyOnly', bodyOnly);
 env.addFilter('resourceShorthand', resourceShorthand);

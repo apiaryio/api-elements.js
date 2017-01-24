@@ -49,7 +49,7 @@ FORMAT: 1A
 
   {% for item in hrefVariables.content %}
     {% set typeAttributes = item.attributes.get('typeAttributes') %}
-    + {{ item.key.toValue() }}{% if item.value.toValue() %}: {{ item.value.toValue() }}{% endif %}{% if typeAttributes %} ({{ typeAttributes.toValue() }}){% endif %}{% if item.value.description %} - {{ item.value.description }}{% endif %}{% endfor %}
+    + {{ item.key.toValue() }}{% if item.value.toValue() %}: {{ item.value.toValue() }}{% endif %}{% if typeAttributes %} ({{ typeAttributes.toValue() }}){% endif %}{% if item.description %} - {{ item.description }}{% endif %}{% endfor %}
 
 {% endmacro %}
 
@@ -126,7 +126,7 @@ FORMAT: 1A
 {{ renderParameters(resource.hrefVariables) }}
 {% endif %}
 {% if resource.dataStructure %}
-{{ resource.dataStructure.content|mson }}
+{{ resource.dataStructure|mson }}
 {% endif %}
 {% for transition in resource.transitions.content %}
   {{ renderTransition(transition, href) }}
@@ -151,7 +151,7 @@ FORMAT: 1A
 ## Data Structures
 
 {% for dataStructure in dataStructures.content %}
-{{ dataStructure.content|mson }}
+{{ dataStructure|dataStructure }}
 {% endfor %}
 {% endmacro %}
 
