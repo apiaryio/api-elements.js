@@ -126,7 +126,7 @@ FORMAT: 1A
 {{ renderParameters(resource.hrefVariables) }}
 {% endif %}
 {% if resource.dataStructure %}
-{{ resource.dataStructure.content|mson }}
+{{ resource.dataStructure|mson }}
 {% endif %}
 {% for transition in resource.transitions.content %}
   {{ renderTransition(transition, href) }}
@@ -151,7 +151,7 @@ FORMAT: 1A
 ## Data Structures
 
 {% for dataStructure in dataStructures.content %}
-{{ dataStructure.content|mson }}
+{{ dataStructure|dataStructure }}
 {% endfor %}
 {% endmacro %}
 
