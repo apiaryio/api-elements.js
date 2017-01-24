@@ -42,14 +42,18 @@ function makeParameter(aName, aIn, aValue) {
     required: true,
   };
 
-  if (aValue !== null) {
-    parameter['x-example'] = aValue;
-  }
 
   if (aIn === 'body') {
-    parameter.schema = { type: 'string' };
+    if (aValue !== undefined) {
+      parameter.schema = aValue;
+    } else {
+      parameter.schema = { type: 'string' };
+    }
   } else {
     parameter.type = 'string';
+    if (aValue !== undefined) {
+      parameter['x-example'] = aValue;
+    }
   }
 
   return parameter;
@@ -207,16 +211,18 @@ describe('Inherit Path Parameters', () => {
     });
   });
 
-  context.skip('Body Parameter', () => {
+  context('Body Parameter', () => {
     it('on Path', (done) => {
       const source = makeSource('/');
       source.paths['/'].parameters.push(makeParameter('test', 'body'));
-        // console.log(JSON.stringify(source, null, 2));
 
       doParse(source, done, (result) => {
         expect(result.transaction.request.messageBodySchema.content).to.equal(
             JSON.stringify(source.paths['/'].parameters[0].schema)
         );
+
+	// ensure there is no warning about unsupported "Path-level Body Parameter")
+        expect(result.result.annotations.toValue()).to.be.empty;
       });
     });
 
@@ -228,6 +234,46 @@ describe('Inherit Path Parameters', () => {
         expect(result.transaction.request.messageBodySchema.content).to.equal(
             JSON.stringify(source.paths['/'].get.parameters[0].schema)
         );
+      });
+    });
+
+    it('on Path and Operation', (done) => {
+      const source = makeSource('/');
+      source.paths['/'].parameters.push(makeParameter('test', 'body'));
+      source.paths['/'].get.parameters.push(makeParameter('foo', 'body'));
+
+      doParse(source, (err) => {
+        expect(err.message).to.equal('Validation failed. /paths//get has 2 body parameters. Only one is allowed.');
+        done();
+      },
+      () => {});
+    });
+
+    it('on Path and Operation is same Parameter', (done) => {
+      const source = makeSource('/');
+      source.paths['/'].parameters.push(makeParameter('test', 'body', { type: 'string' }));
+      source.paths['/'].get.parameters.push(makeParameter('test', 'body', { type: 'number'}));
+
+      doParse(source, done, (result) => {
+        expect(result.transaction.request.messageBodySchema.content).to.equal(
+            JSON.stringify(source.paths['/'].get.parameters[0].schema)
+        );
+      });
+    });
+  });
+
+  context.skip('FormData Parameter', () => {
+    it('on Path', (done) => {
+      const source = makeSource('/');
+      source.paths['/'].parameters.push(makeParameter('test', 'body'));
+
+      doParse(source, done, (result) => {
+        expect(result.transaction.request.messageBodySchema.content).to.equal(
+            JSON.stringify(source.paths['/'].parameters[0].schema)
+        );
+
+	// ensure there is no warning about unsupported "Path-level Body Parameter")
+        expect(result.result.annotations.toValue()).to.be.empty;
       });
     });
   });

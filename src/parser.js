@@ -648,10 +648,7 @@ export default class Parser {
       if (pathObjectParameters.length > 0) {
         _.forEach(pathObjectParameters, (parameter, index) => {
           this.withPath('parameters', index, (path) => {
-            if (parameter.in === 'body') {
-              this.createAnnotation(annotations.DATA_LOST, path,
-                'Path-level body parameters are not yet supported');
-            } else if (parameter.in === 'formData') {
+            if (parameter.in === 'formData') {
               this.createAnnotation(annotations.DATA_LOST, path,
                 'Path-level form data parameters are not yet supported');
             }
@@ -837,6 +834,10 @@ export default class Parser {
         return parameter.in === 'body';
       });
 
+      const resourceBodyParameters = resourceParameters.filter((parameter) => {
+        return parameter.in === 'body';
+      });
+
       // Form parameters are send as encoded form data in the body
       const formParameters = transitionParameters.filter((parameter) => {
         return parameter.in === 'formData';
@@ -897,6 +898,25 @@ export default class Parser {
         }
 
         this.withPath('parameters', index, 'schema', () => {
+          if (jsonConsumesContentType) {
+            generator.bodyFromSchema(param.schema, request, this, jsonConsumesContentType);
+          }
+
+          this.pushSchemaAsset(param.schema, request, this.path);
+        });
+      });
+
+      _.forEach(resourceBodyParameters, (param) => {
+        const index = resourceBodyParameters.indexOf(param);
+
+        if (param['x-example']) {
+          this.withPath('parameters', index, 'x-example', () => {
+            this.createAnnotation(annotations.VALIDATION_ERROR, this.path,
+              'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead');
+          });
+        }
+
+        this.withPath('..', 'parameters', index, 'schema', () => {
           if (jsonConsumesContentType) {
             generator.bodyFromSchema(param.schema, request, this, jsonConsumesContentType);
           }
