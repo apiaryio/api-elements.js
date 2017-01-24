@@ -174,7 +174,7 @@ function handle(name, element, {parent = null, spaces = 4, marker = '+',
   }
 
   // Next, comes the optional example value
-  if (typeof element.content !== 'object') {
+  if (element.content && typeof element.content !== 'object') {
     if (parent && parent.element !== 'array') {
       str += ':';
     }
@@ -202,13 +202,23 @@ function handle(name, element, {parent = null, spaces = 4, marker = '+',
 /*
  * Render out a piece of MSON from refract element instances.
  */
-export default function render(mson) {
-  // Render *either* ### Title or + Attributes as the base element to support
-  // both a data structures section and resource / payload attributes.
-  const title = mson.title;
+export function renderDataStructure(dataStructure) {
+  const mson = dataStructure.content[0];
+  const title = mson.id;
 
-  return handle(title || 'Attributes', mson, {
-    initialMarker: title ? '###' : '+',
-    initialIndent: title ? false : true,
+  return handle(title, mson, {
+    initialMarker: '###',
+    initialIndent: false,
   });
 }
+
+export function renderAttributes(dataStructure) {
+  const mson = dataStructure.content[0];
+
+  return handle('Attributes', mson, {
+    initialMarker: '+',
+    initialIndent: true,
+  });
+}
+
+export default {renderDataStructure, renderAttributes};
