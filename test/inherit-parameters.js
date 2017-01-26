@@ -26,6 +26,7 @@ function doParse(source, done, expectations) {
       resource: resources.get(0),
       transition: resources.get(0).transitions.get(0),
       transaction: resources.get(0).transitions.get(0).transactions.get(0),
+      request: resources.get(0).transitions.get(0).transactions.get(0).request,
     };
 
     expectations(result);
@@ -52,17 +53,22 @@ function makeParameter(aName, aIn, aValue) {
   } else {
     parameter.type = 'string';
     if (aValue !== undefined) {
-      parameter['x-example'] = aValue;
+      if (aIn === 'formData') {
+        parameter.enum = [ aValue ];
+      } else {
+        parameter['x-example'] = aValue;
+      }
     }
   }
 
   return parameter;
 }
 
-function makeSource(aPath) {
+function makeSource(aPath, aOperation) {
+  const operation = aOperation || 'get';
   const path = {
     parameters: [],
-    get: {
+    [operation]: {
       parameters: [],
       responses: {
         200: {
@@ -173,7 +179,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'header'));
 
       doParse(source, done, (result) => {
-        expect(result.transaction.request.header('test')).to.exist;
+        expect(result.request.header('test')).to.exist;
       });
     });
 
@@ -182,9 +188,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'header'));
 
       doParse(source, done, (result) => {
-        // console.log(JSON.stringify(source, null, 2));
-        // console.log(JSON.stringify(result.result.toRefract(), null, 2));
-        expect(result.transaction.request.header('test')).to.exist;
+        expect(result.request.header('test')).to.exist;
       });
     });
 
@@ -194,8 +198,8 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('foo', 'header'));
 
       doParse(source, done, (result) => {
-        expect(result.transaction.request.header('test')).to.exist;
-        expect(result.transaction.request.header('foo')).to.exist;
+        expect(result.request.header('test')).to.exist;
+        expect(result.request.header('foo')).to.exist;
       });
     });
 
@@ -205,8 +209,8 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'header', 'bar'));
 
       doParse(source, done, (result) => {
-        expect(result.transaction.request.header('test')).to.exist;
-        expect(result.transaction.request.header('test')).to.deep.equal(['bar']);
+        expect(result.request.header('test')).to.exist;
+        expect(result.request.header('test')).to.deep.equal(['bar']);
       });
     });
   });
@@ -217,7 +221,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'body'));
 
       doParse(source, done, (result) => {
-        expect(result.transaction.request.messageBodySchema.content).to.equal(
+        expect(result.request.messageBodySchema.content).to.equal(
             JSON.stringify(source.paths['/'].parameters[0].schema)
         );
 
@@ -231,7 +235,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'body'));
 
       doParse(source, done, (result) => {
-        expect(result.transaction.request.messageBodySchema.content).to.equal(
+        expect(result.request.messageBodySchema.content).to.equal(
             JSON.stringify(source.paths['/'].get.parameters[0].schema)
         );
       });
@@ -255,24 +259,54 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'body', { type: 'number'}));
 
       doParse(source, done, (result) => {
-        expect(result.transaction.request.messageBodySchema.content).to.equal(
+        expect(result.request.messageBodySchema.content).to.equal(
             JSON.stringify(source.paths['/'].get.parameters[0].schema)
         );
       });
     });
   });
 
-  context.skip('FormData Parameter', () => {
+  context('FormData Parameter with Get', () => {
     it('on Path', (done) => {
       const source = makeSource('/');
-      source.paths['/'].parameters.push(makeParameter('test', 'body'));
+      source.paths['/'].parameters.push(makeParameter('test', 'formData'));
 
       doParse(source, done, (result) => {
-        expect(result.transaction.request.messageBodySchema.content).to.equal(
-            JSON.stringify(source.paths['/'].parameters[0].schema)
-        );
+        expect(result.request.dataStructure.toValue()).to.deep.equal({test: null});
 
-	// ensure there is no warning about unsupported "Path-level Body Parameter")
+	// ensure there is no warning about unsupported "Path-level formData Parameter")
+        expect(result.result.annotations.toValue()).to.be.empty;
+      });
+    });
+
+    it('on Operation', (done) => {
+      const source = makeSource('/');
+      source.paths['/'].get.parameters.push(makeParameter('test', 'formData'));
+
+      doParse(source, done, (result) => {
+        expect(result.request.dataStructure.toValue()).to.deep.equal({test: null});
+      });
+    });
+
+    it('on Path and Operation', (done) => {
+      const source = makeSource('/');
+      source.paths['/'].parameters.push(makeParameter('test', 'formData'));
+      source.paths['/'].get.parameters.push(makeParameter('foo', 'formData'));
+
+      doParse(source, done, (result) => {
+        expect(result.request.dataStructure.toValue()).to.deep.equal({foo: null, test: null});
+      });
+    });
+
+    it('on Path and Operation is same Parameter', (done) => {
+      const source = makeSource('/');
+      source.paths['/'].parameters.push(makeParameter('test', 'formData', 'body'));
+      source.paths['/'].get.parameters.push(makeParameter('test', 'formData', 'op'));
+
+      doParse(source, done, (result) => {
+        expect(result.request.dataStructure.toValue()).to.deep.equal({test: ['op']});
+
+	// ensure there is no warning about unsupported "Path-level formData Parameter")
         expect(result.result.annotations.toValue()).to.be.empty;
       });
     });

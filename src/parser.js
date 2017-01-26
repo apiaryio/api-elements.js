@@ -644,18 +644,6 @@ export default class Parser {
         this.createSourceMap(resource.attributes.get('href'), this.path);
       }
 
-      // TODO: It should add support for `body` and `formData` parameters as well.
-      if (pathObjectParameters.length > 0) {
-        _.forEach(pathObjectParameters, (parameter, index) => {
-          this.withPath('parameters', index, (path) => {
-            if (parameter.in === 'formData') {
-              this.createAnnotation(annotations.DATA_LOST, path,
-                'Path-level form data parameters are not yet supported');
-            }
-          });
-        });
-      }
-
       const relevantMethods = _.chain(pathValue)
         .omit('parameters', '$ref')
         .omitBy(isExtension)
@@ -843,6 +831,10 @@ export default class Parser {
         return parameter.in === 'formData';
       });
 
+      const resourceFormParameters = resourceParameters.filter((parameter) => {
+        return parameter.in === 'formData';
+      });
+
       // Header parameters
       const headerParameters = transitionParameters.filter((parameter) => {
         return parameter.in === 'header';
@@ -924,14 +916,18 @@ export default class Parser {
           this.pushSchemaAsset(param.schema, request, this.path);
         });
       });
+      //
 
       // Using form parameters instead of body? We will convert those to
       // data structures and will generate form-urlencoded body.
-      if (formParameters.length) {
+      if (formParameters.length || resourceFormParameters.length) {
         headers.pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
 
         // Generating body asset
-        this.generateBodyFromFormParameters(transitionParameters, formParameters, request);
+        const schema = {type: 'object', properties: {}, required: []};
+        this.generateBodyFromFormParameters(transitionParameters, formParameters, schema);
+        this.generateBodyFromFormParameters(resourceParameters, resourceFormParameters, schema);
+        generator.bodyFromSchema(schema, request, this, FORM_CONTENT_TYPE);
 
         // Generating data structure
         const dataStructure = new DataStructure();
@@ -940,6 +936,21 @@ export default class Parser {
         _.forEach(formParameters, (param) => {
           const index = transitionParameters.indexOf(param);
           this.withPath('parameters', index, () => {
+            this.formDataParameterCheck(param);
+            const member = this.convertParameterToMember(param, this.path);
+            dataObject.content.push(member);
+          });
+        });
+
+        const paramNames = _.map(formParameters, 'name');
+
+        _.forEach(resourceFormParameters, (param) => {
+          if (_.includes(paramNames, param.name)) {
+            return;
+          }
+          const index = resourceParameters.indexOf(param);
+          this.withPath('..', 'parameters', index, () => {
+            this.formDataParameterCheck(param);
             const member = this.convertParameterToMember(param, this.path);
             dataObject.content.push(member);
           });
@@ -954,29 +965,15 @@ export default class Parser {
   }
 
   // Generates body asset from formData parameters.
-  generateBodyFromFormParameters(transitionParameters, formParameters, request) {
+  generateBodyFromFormParameters(transitionParameters, formParameters, schema) {
     // Preparing throwaway schema. Later we will feed the 'bodyFromSchema'
     // with it.
-    const schema = {type: 'object', properties: {}, required: []};
-
     _.forEach(formParameters, (param) => {
-      const index = transitionParameters.indexOf(param);
-      this.withPath('parameters', index, () => {
-        if (param.type === 'array') {
-          this.createAnnotation(annotations.DATA_LOST, this.path,
-            'Arrays in form parameters are not fully supported yet');
-          return;
-        }
-        if (param.type === 'file') {
-          this.createAnnotation(annotations.DATA_LOST, this.path,
-            'Files in form parameters are not fully supported yet');
-          return;
-        }
-        if (param.allowEmptyValue) {
-          this.createAnnotation(annotations.DATA_LOST, this.path,
-            'The allowEmptyValue flag is not fully supported yet');
-        }
-      });
+      // skip parameter which already exists in schema
+      // this will avoid generate schema from param inherited from Path
+      if (_.has(schema.properties, param.name)) {
+        return;
+      }
 
       const paramSchema = _.clone(param);
 
@@ -1000,7 +997,23 @@ export default class Parser {
         schema.required.push(param.name);
       }
     });
-    generator.bodyFromSchema(schema, request, this, FORM_CONTENT_TYPE);
+  }
+
+  formDataParameterCheck(param) {
+    if (param.type === 'array') {
+      this.createAnnotation(annotations.DATA_LOST, this.path,
+          'Arrays in form parameters are not fully supported yet');
+      return;
+    }
+    if (param.type === 'file') {
+      this.createAnnotation(annotations.DATA_LOST, this.path,
+          'Files in form parameters are not fully supported yet');
+      return;
+    }
+    if (param.allowEmptyValue) {
+      this.createAnnotation(annotations.DATA_LOST, this.path,
+          'The allowEmptyValue flag is not fully supported yet');
+    }
   }
 
   // Convert a Swagger example into a Refract response.
