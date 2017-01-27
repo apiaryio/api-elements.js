@@ -1,6 +1,6 @@
 {
   "name": "fury-cli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Command line tool interface for Fury.js",
   "bin": {
     "fury": "lib/fury.js"
@@ -26,7 +26,7 @@
     "fury": "^2.1",
     "fury-adapter-swagger": "^0.9.1",
     "fury-adapter-apib-parser": "^0.3.0",
-    "fury-adapter-apib-serializer": "^0.1.2",
+    "fury-adapter-apib-serializer": "^0.2.0",
     "fury-adapter-apiary-blueprint-parser": "^1.0.0"
   },
   "devDependencies": {
