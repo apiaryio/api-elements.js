@@ -62,7 +62,20 @@
                       "attributes": {
                         "method": "GET"
                       },
-                      "content": []
+                      "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": [
+                              "messageBodySchema"
+                            ]
+                          },
+                          "attributes": {
+                            "contentType": "application/schema+json"
+                          },
+                          "content": "{}"
+                        }
+                      ]
                     },
                     {
                       "element": "httpResponse",
@@ -194,42 +207,6 @@
         ]
       },
       "content": "External documentation is not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                222,
-                54
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Path-level body parameters are not yet supported"
     },
     {
       "element": "annotation",

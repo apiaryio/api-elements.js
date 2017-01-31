@@ -11,6 +11,9 @@ paths:
       - name: foo
         in: formData
         type: string
+        enum:
+          - bar
+        required: true
     get:
       parameters:
         - name: id

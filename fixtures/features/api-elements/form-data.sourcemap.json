@@ -48,7 +48,7 @@
                     "content": [
                       [
                         68,
-                        491
+                        544
                       ]
                     ]
                   }
@@ -83,7 +83,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    216,
+                                    269,
                                     343
                                   ]
                                 ]
@@ -153,7 +153,7 @@
                           "attributes": {
                             "contentType": "application/x-www-form-urlencoded"
                           },
-                          "content": "id=1&bar=chocolate-bar"
+                          "content": "id=1&bar=chocolate-bar&foo=bar"
                         },
                         {
                           "element": "dataStructure",
@@ -175,7 +175,7 @@
                                       "attributes": {},
                                       "content": [
                                         [
-                                          249,
+                                          302,
                                           120
                                         ]
                                       ]
@@ -203,7 +203,7 @@
                                           "attributes": {},
                                           "content": [
                                             [
-                                              249,
+                                              302,
                                               120
                                             ]
                                           ]
@@ -222,7 +222,7 @@
                                               "attributes": {},
                                               "content": [
                                                 [
-                                                  334,
+                                                  387,
                                                   1
                                                 ]
                                               ]
@@ -246,7 +246,7 @@
                                       "attributes": {},
                                       "content": [
                                         [
-                                          371,
+                                          424,
                                           131
                                         ]
                                       ]
@@ -274,7 +274,7 @@
                                           "attributes": {},
                                           "content": [
                                             [
-                                              371,
+                                              424,
                                               131
                                             ]
                                           ]
@@ -293,7 +293,7 @@
                                               "attributes": {},
                                               "content": [
                                                 [
-                                                  457,
+                                                  510,
                                                   13
                                                 ]
                                               ]
@@ -301,6 +301,77 @@
                                           ]
                                         },
                                         "content": "chocolate-bar"
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {
+                                  "sourceMap": [
+                                    {
+                                      "element": "sourceMap",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": [
+                                        [
+                                          160,
+                                          109
+                                        ]
+                                      ]
+                                    }
+                                  ],
+                                  "typeAttributes": [
+                                    "required"
+                                  ]
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "foo"
+                                  },
+                                  "value": {
+                                    "element": "enum",
+                                    "meta": {},
+                                    "attributes": {
+                                      "sourceMap": [
+                                        {
+                                          "element": "sourceMap",
+                                          "meta": {},
+                                          "attributes": {},
+                                          "content": [
+                                            [
+                                              160,
+                                              109
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  238,
+                                                  3
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "bar"
                                       }
                                     ]
                                   }
@@ -326,7 +397,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    521,
+                                    574,
                                     38
                                   ]
                                 ]
@@ -348,7 +419,7 @@
                                 "attributes": {},
                                 "content": [
                                   [
-                                    536,
+                                    589,
                                     22
                                   ]
                                 ]
@@ -366,78 +437,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                101,
-                57
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Path-level form data parameters are not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                160,
-                56
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Path-level form data parameters are not yet supported"
     }
   ]
 }

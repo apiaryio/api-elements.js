@@ -96,7 +96,7 @@
                           "attributes": {
                             "contentType": "application/x-www-form-urlencoded"
                           },
-                          "content": "id=1&bar=chocolate-bar"
+                          "content": "id=1&bar=chocolate-bar&foo=bar"
                         },
                         {
                           "element": "dataStructure",
@@ -166,6 +166,36 @@
                                     ]
                                   }
                                 }
+                              },
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {
+                                  "typeAttributes": [
+                                    "required"
+                                  ]
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "foo"
+                                  },
+                                  "value": {
+                                    "element": "enum",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": "bar"
+                                      }
+                                    ]
+                                  }
+                                }
                               }
                             ]
                           }
@@ -194,78 +224,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                101,
-                57
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Path-level form data parameters are not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "meta": {},
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
-            "content": [
-              [
-                160,
-                56
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "Path-level form data parameters are not yet supported"
     }
   ]
 }
