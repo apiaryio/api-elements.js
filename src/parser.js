@@ -270,6 +270,8 @@ export default class Parser {
     for (i = 0; i < args.length - 1; i++) {
       if (args[i] === '..') {
         this.path.pop();
+      } else if (args[i] === '.') {
+        // do nothing
       } else {
         this.path.push(args[i]);
       }
@@ -813,37 +815,9 @@ export default class Parser {
 
   // Convert a Swagger example into a Refract request.
   handleSwaggerExampleRequest(transaction, methodValue, transitionParameters, resourceParameters) {
-    const {DataStructure, Object: ObjectElement} = this.minim.elements;
     const request = transaction.request;
 
     this.withPath(() => {
-      // Body parameters are ones that define JSON Schema
-      const bodyParameters = transitionParameters.filter((parameter) => {
-        return parameter.in === 'body';
-      });
-
-      const resourceBodyParameters = resourceParameters.filter((parameter) => {
-        return parameter.in === 'body';
-      });
-
-      // Form parameters are send as encoded form data in the body
-      const formParameters = transitionParameters.filter((parameter) => {
-        return parameter.in === 'formData';
-      });
-
-      const resourceFormParameters = resourceParameters.filter((parameter) => {
-        return parameter.in === 'formData';
-      });
-
-      // Header parameters
-      const headerParameters = transitionParameters.filter((parameter) => {
-        return parameter.in === 'header';
-      });
-
-      const resourceHeaderParameters = resourceParameters.filter((parameter) => {
-        return parameter.in === 'header';
-      });
-
       // Check if json is in consumes
       const consumes = methodValue.consumes || this.swagger.consumes || [];
       const produces = methodValue.produces || this.swagger.produces || [];
@@ -860,143 +834,117 @@ export default class Parser {
         headers.pushHeader('Accept', jsonProducesContentType, request, this, 'produces-accept');
       }
 
-      _.forEach(headerParameters, (param) => {
-        const index = transitionParameters.indexOf(param);
+      const formParams = new Array;
+      const formParamsSchema = {type: 'object', properties: {}, required: []};
 
-        this.withPath('parameters', index, () => {
-          headers.pushHeaderObject(param.name, param, request, this);
-        });
-      });
+      const parametersGenerator = {};
 
-      _.forEach(resourceHeaderParameters, (param) => {
-        if (!request.header(param.name)) {
-          const index = resourceParameters.indexOf(param);
-          this.withPath('..', 'parameters', index, () => {
-            headers.pushHeaderObject(param.name, param, request, this);
-          });
-        }
-      });
+      _.forEach([
+          [ resourceParameters, '..' ],
+          [ transitionParameters, '.' ],
+      ], (parameters) => {
+        _.forEach(parameters[0], (param, index) => {
+          switch (param.in) {
+          case 'header' :
+            _.set(parametersGenerator, [param.in, param.name], _.bind(this.withPath, this, parameters[1], 'parameters', index, () => {
+              headers.pushHeaderObject(param.name, param, request, this);
+            }));
+            break;
 
-      // Body parameters define request schemas
-      // There can only be 1 body parameter. So, no issues.
-      _.forEach(bodyParameters, (param) => {
-        const index = transitionParameters.indexOf(param);
+          case 'body' :
+            _.set(parametersGenerator, [param.in, param.name], _.bind(this.withPath, this, parameters[1], 'parameters', index, () => {
+              if (param['x-example']) {
+                this.withPath('x-example', () => {
+                  this.createAnnotation(annotations.VALIDATION_ERROR, this.path,
+                      'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead');
+                });
+              }
 
-        if (param['x-example']) {
-          this.withPath('parameters', index, 'x-example', () => {
-            this.createAnnotation(annotations.VALIDATION_ERROR, this.path,
-              'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead');
-          });
-        }
+              this.withPath('schema', () => {
+                if (jsonConsumesContentType) {
+                  generator.bodyFromSchema(param.schema, request, this, jsonConsumesContentType);
+                }
 
-        this.withPath('parameters', index, 'schema', () => {
-          if (jsonConsumesContentType) {
-            generator.bodyFromSchema(param.schema, request, this, jsonConsumesContentType);
+                this.pushSchemaAsset(param.schema, request, this.path);
+              });
+            }));
+            break;
+
+          case 'formData' :
+            _.set(parametersGenerator, [param.in, param.name], _.bind(this.withPath, this, parameters[1], 'parameters', index, () => {
+              this.formDataParameterCheck(param);
+              this.generateBodyFromFormParameter(param, formParamsSchema);
+              const member = this.convertParameterToMember(param, this.path);
+              formParams.push(member);
+            }));
+            break;
+          default :
           }
-
-          this.pushSchemaAsset(param.schema, request, this.path);
         });
       });
 
-      _.forEach(resourceBodyParameters, (param) => {
-        const index = resourceBodyParameters.indexOf(param);
-
-        if (param['x-example']) {
-          this.withPath('parameters', index, 'x-example', () => {
-            this.createAnnotation(annotations.VALIDATION_ERROR, this.path,
-              'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead');
-          });
-        }
-
-        this.withPath('..', 'parameters', index, 'schema', () => {
-          if (jsonConsumesContentType) {
-            generator.bodyFromSchema(param.schema, request, this, jsonConsumesContentType);
-          }
-
-          this.pushSchemaAsset(param.schema, request, this.path);
+      _.forEach(parametersGenerator, (paramType) => {
+        _.forEach(paramType, (invoke) => {
+          invoke();
         });
       });
-      //
+
+      this.generateFormParameters(formParams, formParamsSchema, request);
 
       // Using form parameters instead of body? We will convert those to
       // data structures and will generate form-urlencoded body.
-      if (formParameters.length || resourceFormParameters.length) {
-        headers.pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
-
-        // Generating body asset
-        const schema = {type: 'object', properties: {}, required: []};
-        this.generateBodyFromFormParameters(transitionParameters, formParameters, schema);
-        this.generateBodyFromFormParameters(resourceParameters, resourceFormParameters, schema);
-        generator.bodyFromSchema(schema, request, this, FORM_CONTENT_TYPE);
-
-        // Generating data structure
-        const dataStructure = new DataStructure();
-        const dataObject = new ObjectElement(); // a form is essentially an object with key/value members
-
-        _.forEach(formParameters, (param) => {
-          const index = transitionParameters.indexOf(param);
-          this.withPath('parameters', index, () => {
-            this.formDataParameterCheck(param);
-            const member = this.convertParameterToMember(param, this.path);
-            dataObject.content.push(member);
-          });
-        });
-
-        const paramNames = _.map(formParameters, 'name');
-
-        _.forEach(resourceFormParameters, (param) => {
-          if (_.includes(paramNames, param.name)) {
-            return;
-          }
-          const index = resourceParameters.indexOf(param);
-          this.withPath('..', 'parameters', index, () => {
-            this.formDataParameterCheck(param);
-            const member = this.convertParameterToMember(param, this.path);
-            dataObject.content.push(member);
-          });
-        });
-
-        dataStructure.content = dataObject;
-        request.content.push(dataStructure);
-      }
-
       return request;
     });
   }
 
+  generateFormParameters(parameters, schema, request) {
+    if (_.isEmpty(parameters)) {
+      return;
+    }
+
+    const {DataStructure, Object: ObjectElement} = this.minim.elements;
+
+    headers.pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
+
+    generator.bodyFromSchema(schema, request, this, FORM_CONTENT_TYPE);
+
+    // Generating data structure
+    const dataStructure = new DataStructure();
+    const dataObject = new ObjectElement(); // a form is essentially an object with key/value members
+
+    _.forEach(parameters, (param) => {
+      dataObject.content.push(param);
+    });
+
+    dataStructure.content = dataObject;
+    request.content.push(dataStructure);
+  }
+
   // Generates body asset from formData parameters.
-  generateBodyFromFormParameters(transitionParameters, formParameters, schema) {
+  generateBodyFromFormParameter(param, schema) {
     // Preparing throwaway schema. Later we will feed the 'bodyFromSchema'
     // with it.
-    _.forEach(formParameters, (param) => {
-      // skip parameter which already exists in schema
-      // this will avoid generate schema from param inherited from Path
-      if (_.has(schema.properties, param.name)) {
-        return;
-      }
+    const paramSchema = _.clone(param);
 
-      const paramSchema = _.clone(param);
+    // If there's example value, we want to force the body generator
+    // to use it. This is done using 'enum' with a single value.
+    if (param['x-example'] !== undefined) {
+      paramSchema.enum = [param['x-example']];
+    }
 
-      // If there's example value, we want to force the body generator
-      // to use it. This is done using 'enum' with a single value.
-      if (param['x-example'] !== undefined) {
-        paramSchema.enum = [param['x-example']];
-      }
+    delete paramSchema.name;
+    delete paramSchema.in;
+    delete paramSchema.format;
+    delete paramSchema.required;
+    delete paramSchema['x-example'];
+    delete paramSchema.collectionFormat;
+    delete paramSchema.allowEmptyValue; // allowEmptyValue is not supported yet
+    delete paramSchema.items; // arrays are not supported yet
 
-      delete paramSchema.name;
-      delete paramSchema.in;
-      delete paramSchema.format;
-      delete paramSchema.required;
-      delete paramSchema['x-example'];
-      delete paramSchema.collectionFormat;
-      delete paramSchema.allowEmptyValue; // allowEmptyValue is not supported yet
-      delete paramSchema.items; // arrays are not supported yet
-
-      schema.properties[param.name] = paramSchema;
-      if (param.required) {
-        schema.required.push(param.name);
-      }
-    });
+    schema.properties[param.name] = paramSchema;
+    if (param.required) {
+      schema.required.push(param.name);
+    }
   }
 
   formDataParameterCheck(param) {

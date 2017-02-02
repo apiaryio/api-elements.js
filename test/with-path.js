@@ -54,5 +54,17 @@ describe('Test parser.withPath() ', () => {
         expect(_path).to.deep.equal(['root']);
       });
     });
+
+    it('should work with `.` path', () => {
+      parser.withPath('.', (_path) => {
+        expect(_path).to.deep.equal(path);
+      });
+    });
+
+    it('should work with `.` path and aditional segment', () => {
+      parser.withPath('.', 'schema', (_path) => {
+        expect(_path).to.deep.equal(_.concat(path, 'schema'));
+      });
+    });
   });
 });
