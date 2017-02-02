@@ -96,7 +96,7 @@
                           "attributes": {
                             "contentType": "application/x-www-form-urlencoded"
                           },
-                          "content": "id=1&bar=chocolate-bar&foo=bar"
+                          "content": "id=1&foo=bar&bar=chocolate-bar"
                         },
                         {
                           "element": "dataStructure",
@@ -150,7 +150,7 @@
                                     "element": "string",
                                     "meta": {},
                                     "attributes": {},
-                                    "content": "bar"
+                                    "content": "foo"
                                   },
                                   "value": {
                                     "element": "enum",
@@ -161,7 +161,7 @@
                                         "element": "string",
                                         "meta": {},
                                         "attributes": {},
-                                        "content": "chocolate-bar"
+                                        "content": "bar"
                                       }
                                     ]
                                   }
@@ -180,7 +180,7 @@
                                     "element": "string",
                                     "meta": {},
                                     "attributes": {},
-                                    "content": "foo"
+                                    "content": "bar"
                                   },
                                   "value": {
                                     "element": "enum",
@@ -191,7 +191,7 @@
                                         "element": "string",
                                         "meta": {},
                                         "attributes": {},
-                                        "content": "bar"
+                                        "content": "chocolate-bar"
                                       }
                                     ]
                                   }

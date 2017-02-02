@@ -153,7 +153,7 @@
                           "attributes": {
                             "contentType": "application/x-www-form-urlencoded"
                           },
-                          "content": "id=1&bar=chocolate-bar&foo=bar"
+                          "content": "id=1&foo=bar&bar=chocolate-bar"
                         },
                         {
                           "element": "dataStructure",
@@ -246,77 +246,6 @@
                                       "attributes": {},
                                       "content": [
                                         [
-                                          424,
-                                          131
-                                        ]
-                                      ]
-                                    }
-                                  ],
-                                  "typeAttributes": [
-                                    "required"
-                                  ]
-                                },
-                                "content": {
-                                  "key": {
-                                    "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
-                                    "content": "bar"
-                                  },
-                                  "value": {
-                                    "element": "enum",
-                                    "meta": {},
-                                    "attributes": {
-                                      "sourceMap": [
-                                        {
-                                          "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
-                                          "content": [
-                                            [
-                                              424,
-                                              131
-                                            ]
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    "content": [
-                                      {
-                                        "element": "string",
-                                        "meta": {},
-                                        "attributes": {
-                                          "sourceMap": [
-                                            {
-                                              "element": "sourceMap",
-                                              "meta": {},
-                                              "attributes": {},
-                                              "content": [
-                                                [
-                                                  510,
-                                                  13
-                                                ]
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        "content": "chocolate-bar"
-                                      }
-                                    ]
-                                  }
-                                }
-                              },
-                              {
-                                "element": "member",
-                                "meta": {},
-                                "attributes": {
-                                  "sourceMap": [
-                                    {
-                                      "element": "sourceMap",
-                                      "meta": {},
-                                      "attributes": {},
-                                      "content": [
-                                        [
                                           160,
                                           109
                                         ]
@@ -372,6 +301,77 @@
                                           ]
                                         },
                                         "content": "bar"
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {
+                                  "sourceMap": [
+                                    {
+                                      "element": "sourceMap",
+                                      "meta": {},
+                                      "attributes": {},
+                                      "content": [
+                                        [
+                                          424,
+                                          131
+                                        ]
+                                      ]
+                                    }
+                                  ],
+                                  "typeAttributes": [
+                                    "required"
+                                  ]
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "bar"
+                                  },
+                                  "value": {
+                                    "element": "enum",
+                                    "meta": {},
+                                    "attributes": {
+                                      "sourceMap": [
+                                        {
+                                          "element": "sourceMap",
+                                          "meta": {},
+                                          "attributes": {},
+                                          "content": [
+                                            [
+                                              424,
+                                              131
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "meta": {},
+                                        "attributes": {
+                                          "sourceMap": [
+                                            {
+                                              "element": "sourceMap",
+                                              "meta": {},
+                                              "attributes": {},
+                                              "content": [
+                                                [
+                                                  510,
+                                                  13
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        "content": "chocolate-bar"
                                       }
                                     ]
                                   }
