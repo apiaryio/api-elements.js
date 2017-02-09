@@ -1,3 +1,9 @@
+# 0.9.13 - 2017-02-07
+
+## Bug Fixes
+
+- Handle inheritance for Path level Parameters
+
 # 0.9.12 - 2016-12-13
 
 ## Bug Fixes
