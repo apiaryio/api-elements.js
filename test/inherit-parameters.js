@@ -129,6 +129,17 @@ describe('Inherit Path Parameters', () => {
         expect(result.transition.href).to.be.equal('/{?test,foo}');
       });
     });
+
+    it('on Path and Operation same parameter', (done) => {
+      const source = makeSource('/');
+      source.paths['/'].parameters.push(makeParameter('test', 'query'));
+      source.paths['/'].get.parameters.push(makeParameter('test', 'query'));
+
+      doParse(source, done, (result) => {
+        expect(result.resource.href).to.be.equal('/{?test}');
+        expect(result.transition.href).to.not.exist;
+      });
+    });
   });
 
   context('Path Parameter', () => {
