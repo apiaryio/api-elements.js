@@ -1,14 +1,14 @@
-export default function(namespace) {
+export default function (namespace) {
   class Extension extends namespace.BaseElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'extension';
     }
 
     get profile() {
       return this.links
-        .filter((link) => link.relation === 'profile')
-        .map((link) => link.href)
+        .filter(link => link.relation === 'profile')
+        .map(link => link.href)
         .shift();
     }
   }

@@ -1,9 +1,9 @@
-export default function(namespace) {
+export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
 
   class Resource extends ArrayElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
 
       this.element = 'resource';
     }
@@ -25,11 +25,11 @@ export default function(namespace) {
     }
 
     get transitions() {
-      return this.children((item) => item.element === 'transition');
+      return this.children(item => item.element === 'transition');
     }
 
     get dataStructure() {
-      return this.children((item) => item.element === 'dataStructure').first();
+      return this.children(item => item.element === 'dataStructure').first();
     }
   }
 

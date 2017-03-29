@@ -8,7 +8,9 @@ node_js:
 script:
 - npm run ci
 after_script:
-- npm run coveralls
+- npm install -g codeclimate-test-reporter
+- npm run cover
+- codeclimate-test-reporter < lcov.info
 notifications:
   email: false
   slack:

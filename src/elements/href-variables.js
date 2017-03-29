@@ -1,9 +1,9 @@
-export default function(namespace) {
+export default function (namespace) {
   const ObjectElement = namespace.getElementClass('object');
 
   class HrefVariables extends ObjectElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'hrefVariables';
     }
   }
