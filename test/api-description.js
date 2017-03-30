@@ -567,6 +567,32 @@ describe('API description namespace', () => {
         attributes: {
           relation: 'action',
           href: '/resource',
+          hrefVariables: {
+            element: 'hrefVariables',
+            meta: {},
+            attributes: {},
+            content: [
+              {
+                element: 'member',
+                meta: {},
+                attributes: {},
+                content: {
+                  key: {
+                    element: 'string',
+                    meta: {},
+                    attributes: {},
+                    content: 'id',
+                  },
+                  value: {
+                    element: 'string',
+                    meta: {},
+                    attributes: {},
+                    content: '123',
+                  },
+                },
+              },
+            ],
+          },
           data: {
             element: 'dataStructure',
             meta: {},
@@ -651,6 +677,21 @@ describe('API description namespace', () => {
       transition.href = undefined;
       transition.transactions.first().request.attributes.set('href', '/foo');
       expect(transition.computedHref).to.equal('/foo');
+    });
+
+    it('should have hrefVariables', () => {
+      expect(transition.hrefVariables.toValue()).to.deep.equal({
+        id: '123',
+      });
+    });
+
+    it('should set hrefVariables', () => {
+      transition.hrefVariables = {
+        id: '456',
+      };
+      expect(attrValue(transition, 'hrefVariables')).to.deep.equal({
+        id: '456',
+      });
     });
 
     it('should have data', () => {
@@ -1066,6 +1107,16 @@ describe('API description namespace', () => {
 
     it('should get content-type from header', () => {
       expect(payload.contentType).to.equal('application/json');
+    });
+
+    it('should set headers', () => {
+      payload.headers = {
+        'Content-Length': 100,
+      };
+
+      expect(attrValue(payload, 'headers')).to.deep.equal({
+        'Content-Length': 100,
+      });
     });
 
     it('should contain a data structure', () => {
