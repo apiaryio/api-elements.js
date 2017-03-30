@@ -1,6 +1,6 @@
 {
   "name": "minim-api-description",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "Minim API Description Namespace",
   "main": "./lib/api-description.js",
   "repository": {
@@ -8,7 +8,6 @@
     "url": "https://github.com/refractproject/minim-api-description.git"
   },
   "scripts": {
-    "coveralls": "npm run cover && coveralls <coverage/lcov.info",
     "test": "peasant test",
     "ci": "peasant -s lint test build",
     "prepublish": "npm run ci",
@@ -17,13 +16,12 @@
     "lint": "peasant lint"
   },
   "dependencies": {
-    "babel-runtime": "^5.8.20"
+    "babel-runtime": "^6.23.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "coveralls": "^2.11.2",
     "minim": "^0.14.0",
-    "peasant": "^0.5.2"
+    "peasant": "^1.0.0"
   },
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT"

@@ -1,9 +1,9 @@
-export default function(namespace) {
+export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
 
   class HttpHeaders extends ArrayElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'httpHeaders';
     }
 
@@ -12,7 +12,7 @@ export default function(namespace) {
     }
 
     include(name) {
-      return this.filter(item => {
+      return this.filter((item) => {
         const key = item.key.toValue();
 
         // Note: this may not be a string, hence the duck-Element check below!
@@ -21,7 +21,7 @@ export default function(namespace) {
     }
 
     exclude(name) {
-      return this.filter(item => {
+      return this.filter((item) => {
         const key = item.key.toValue();
 
         // Note: this may not be a string, hence the duck-Element check below!

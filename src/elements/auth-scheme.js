@@ -1,18 +1,18 @@
-export default function(namespace) {
+export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
 
   class AuthScheme extends ArrayElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'authScheme';
     }
 
     get transitions() {
-      return this.children((item) => item.element === 'transition');
+      return this.children(item => item.element === 'transition');
     }
 
     get members() {
-      return this.children((item) => item.element === 'member');
+      return this.children(item => item.element === 'member');
     }
   }
 

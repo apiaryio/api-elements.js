@@ -3,7 +3,7 @@
  * convenience properties and methods.
  */
 
-import chai, {Assertion, expect} from 'chai';
+import chai, { Assertion, expect } from 'chai';
 
 import minim from 'minim';
 import apiDescription from '../src/api-description';
@@ -31,13 +31,15 @@ chai.use((_chai, utils) => {
    * Asserts that an element has a certain class.
    */
   utils.addMethod(Assertion.prototype, 'class', function hasClass(name) {
+    // eslint-disable-next-line no-underscore-dangle
     const obj = this._obj;
+
     this.assert(
       obj.classes.contains(name),
       'Expected class list #{act} to contain #{exp}',
       'Expected class list #{act} to not contain #{exp}',
       name,
-      obj.classes.toValue()
+      obj.classes.toValue(),
     );
   });
 });
@@ -662,14 +664,14 @@ describe('API description namespace', () => {
 
     it('should have contentTypes', () => {
       expect(transition.contentTypes.toValue()).to.deep.equal(
-        ['application/json']
+        ['application/json'],
       );
     });
 
     it('should set contentTypes', () => {
       transition.contentTypes = ['application/xml'];
       expect(attrValue(transition, 'contentTypes')).to.deep.equal(
-        ['application/xml']
+        ['application/xml'],
       );
     });
 
@@ -1050,7 +1052,7 @@ describe('API description namespace', () => {
 
     it('should exclude headers', () => {
       const remaining = payload.headers.exclude('cache').map(
-        member => [member.key.toValue(), member.value.toValue()]
+        member => [member.key.toValue(), member.value.toValue()],
       );
 
       expect(remaining).to.deep.equal([

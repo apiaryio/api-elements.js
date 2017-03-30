@@ -20,19 +20,32 @@
  *   + Data structure
  */
 
+import httpHeaders from './elements/http-headers';
+import hrefVariables from './elements/href-variables';
+import asset from './elements/asset';
+import httpMessagePayload from './elements/http-message-payload';
+import authScheme from './elements/auth-scheme';
+import httpTransaction from './elements/http-transaction';
+import transition from './elements/transition';
+import resource from './elements/resource';
+import dataStructure from './elements/data-structure';
+import copy from './elements/copy';
+import category from './elements/category';
+import extension from './elements/extension';
+
 export function namespace(options) {
-  require('./elements/http-headers')(options.base);
-  require('./elements/href-variables')(options.base);
-  require('./elements/asset')(options.base);
-  require('./elements/http-message-payload')(options.base);
-  require('./elements/auth-scheme')(options.base);
-  require('./elements/http-transaction')(options.base);
-  require('./elements/transition')(options.base);
-  require('./elements/resource')(options.base);
-  require('./elements/data-structure')(options.base);
-  require('./elements/copy')(options.base);
-  require('./elements/category')(options.base);
-  require('./elements/extension')(options.base);
+  httpHeaders(options.base);
+  hrefVariables(options.base);
+  asset(options.base);
+  httpMessagePayload(options.base);
+  authScheme(options.base);
+  httpTransaction(options.base);
+  transition(options.base);
+  resource(options.base);
+  dataStructure(options.base);
+  copy(options.base);
+  category(options.base);
+  extension(options.base);
 }
 
-export default {namespace};
+export default { namespace };

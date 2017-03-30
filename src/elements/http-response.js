@@ -1,7 +1,7 @@
-export default function(namespace, HttpMessagePayload) {
+export default function (namespace, HttpMessagePayload) {
   class HttpResponse extends HttpMessagePayload {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'httpResponse';
     }
 

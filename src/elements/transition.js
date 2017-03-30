@@ -1,21 +1,25 @@
-export default function(namespace) {
+export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
 
   class Transition extends ArrayElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
 
       this.element = 'transition';
     }
 
     get method() {
       const transaction = this.transactions.first();
+
       if (transaction) {
         const request = transaction.request;
+
         if (request) {
           return request.method;
         }
       }
+
+      return undefined;
     }
 
     get relation() {
@@ -67,7 +71,7 @@ export default function(namespace) {
     }
 
     get transactions() {
-      return this.children((item) => item.element === 'httpTransaction');
+      return this.children(item => item.element === 'httpTransaction');
     }
   }
 

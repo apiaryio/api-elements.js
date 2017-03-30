@@ -1,14 +1,16 @@
-export default function(namespace) {
+export default function (namespace) {
   const StringElement = namespace.getElementClass('string');
   const ArrayElement = namespace.getElementClass('array');
 
-  ArrayElement.prototype.__defineGetter__('copy', function() {
-    return this.children((item) => item.element === 'copy');
+  Object.defineProperty(ArrayElement.prototype, 'copy', {
+    get() {
+      return this.children(item => item.element === 'copy');
+    },
   });
 
   class Copy extends StringElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'copy';
     }
 
