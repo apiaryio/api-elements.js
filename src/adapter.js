@@ -16,4 +16,4 @@ export function parse(options, done) {
   parser.parse(done);
 }
 
-export default {name, mediaTypes, detect, parse};
+export default { name, mediaTypes, detect, parse };

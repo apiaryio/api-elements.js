@@ -2,7 +2,7 @@ import url from 'url';
 import ApiaryBlueprintParser from 'apiary-blueprint-parser';
 
 export default class Parser {
-  constructor({minim, source}) {
+  constructor({ minim, source }) {
     this.minim = minim;
     this.source = source;
   }
@@ -22,7 +22,7 @@ export default class Parser {
       this.result.push(annotation);
 
       if (err.offset) {
-        const {SourceMap} = this.minim.elements;
+        const { SourceMap } = this.minim.elements;
         annotation.attributes.set('sourceMap', [
           new SourceMap([[err.offset, 1]]),
         ]);
@@ -36,7 +36,7 @@ export default class Parser {
     this.api.title = this.blueprint.name;
 
     if (this.blueprint.location) {
-      const {Member: MemberElement} = this.minim.elements;
+      const { Member: MemberElement } = this.minim.elements;
       const member = new MemberElement('HOST', this.blueprint.location);
       member.meta.set('classes', ['user']);
       this.api.attributes.set('meta', [member]);
@@ -47,10 +47,10 @@ export default class Parser {
       this.api.push(description);
     }
 
-    for (const section of this.blueprint.sections) {
+    this.blueprint.sections.forEach((section) => {
       const group = this.handleSection(section);
       this.api.content.push(group);
-    }
+    });
 
     this.result.push(this.api);
     return done(null, this.result);
@@ -66,7 +66,7 @@ export default class Parser {
         const newPath = path.slice(host.path.length);
 
         if (!newPath.startsWith('/')) {
-          return '/' + newPath;
+          return `/${newPath}`;
         }
 
         return newPath;
@@ -80,7 +80,7 @@ export default class Parser {
     // A "resource" in Apiary blueprint isn't the same as a "resource" in API
     // Elements. It maps closer to an "action".
 
-    const {Copy, Category, Resource} = this.minim.elements;
+    const { Copy, Category, Resource } = this.minim.elements;
 
     const group = new Category();
     group.title = section.name;
@@ -97,7 +97,7 @@ export default class Parser {
       const resource = new Resource();
       resource.href = this.parseURL(section.resources[0].url);
 
-      for (const action of section.resources) {
+      section.resources.forEach((action) => {
         const transition = this.handleResource(action);
 
         if (action.url !== resource.href) {
@@ -105,7 +105,7 @@ export default class Parser {
         }
 
         resource.push(transition);
-      }
+      });
 
       group.push(resource);
     }
@@ -114,7 +114,7 @@ export default class Parser {
   }
 
   handleResource(resource) {
-    const {Copy, Transition, HttpTransaction} = this.minim.elements;
+    const { Copy, Transition, HttpTransaction } = this.minim.elements;
     const transition = new Transition();
     transition.title = resource.method;
 
@@ -125,18 +125,19 @@ export default class Parser {
     }
 
     const request = this.handleRequest(resource, resource.request, schema.request);
-    for (const response of resource.responses) {
+
+    resource.responses.forEach((response) => {
       const transaction = new HttpTransaction();
       transaction.push(request);
       transaction.push(this.handleResponse(response, schema.response));
       transition.push(transaction);
-    }
+    });
 
     return transition;
   }
 
   handleRequest(resource, request, schema) {
-    const {Asset, HttpRequest} = this.minim.elements;
+    const { Asset, HttpRequest } = this.minim.elements;
     const httpRequest = new HttpRequest();
     httpRequest.method = resource.method;
     httpRequest.headers = this.handleHeaders(request.headers);
@@ -155,8 +156,9 @@ export default class Parser {
   }
 
   handleResponse(response, schema) {
-    const {Asset, HttpResponse} = this.minim.elements;
+    const { Asset, HttpResponse } = this.minim.elements;
     const httpResponse = new HttpResponse();
+
     httpResponse.statusCode = response.status;
     httpResponse.headers = this.handleHeaders(response.headers);
 
@@ -178,21 +180,21 @@ export default class Parser {
       return null;
     }
 
-    const {HttpHeaders} = this.minim.elements;
-    const {Member: MemberElement} = this.minim.elements;
+    const { HttpHeaders } = this.minim.elements;
+    const { Member: MemberElement } = this.minim.elements;
 
     const httpHeaders = new HttpHeaders();
 
-    for (const header of Object.keys(headers)) {
+    Object.keys(headers).forEach((header) => {
       httpHeaders.push(new MemberElement(header, headers[header]));
-    }
+    });
 
     return httpHeaders;
   }
 
   // Create schema asset
   handleSchema(body) {
-    const {Asset} = this.minim.elements;
+    const { Asset } = this.minim.elements;
     const asset = new Asset(body);
     asset.classes.push('messageBodySchema');
     asset.contentType = 'application/schema+json';
@@ -201,9 +203,9 @@ export default class Parser {
 
   // Search for a schema by method and path in the blueprints validations
   retrieveSchema(method, path) {
-    const schema = {request: null, response: null};
+    const schema = { request: null, response: null };
 
-    for (const validation of this.blueprint.validations) {
+    this.blueprint.validations.forEach((validation) => {
       if (validation.method === method && validation.url === path) {
         let validationSchema;
 
@@ -225,7 +227,7 @@ export default class Parser {
           schema.request = validation.body;
         }
       }
-    }
+    });
 
     return schema;
   }

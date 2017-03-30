@@ -1,7 +1,7 @@
-import {expect} from 'chai';
-
-import adapter from '../src/adapter';
+/* eslint-disable no-unused-expressions */
+import { expect } from 'chai';
 import fury from 'fury';
+import adapter, { detect, mediaTypes } from '../src/adapter';
 
 fury.adapters = [adapter];
 
@@ -9,18 +9,18 @@ describe('Apiary Blueprint Parser Adapter', () => {
   context('detection', () => {
     it('detects an Apiary Blueprint', () => {
       const blueprint = '--- Sample Title ---';
-      expect(adapter.detect(blueprint)).to.be.true;
+      expect(detect(blueprint)).to.be.true;
     });
 
     it('does not detect other data', () => {
       const blueprint = '# Sample Title';
-      expect(adapter.detect(blueprint)).to.be.false;
+      expect(detect(blueprint)).to.be.false;
     });
   });
 
   context('media types', () => {
     it('returns the text/vnd.legacyblueprint media type', () => {
-      expect(adapter.mediaTypes).to.eql(['text/vnd.legacyblueprint']);
+      expect(mediaTypes).to.eql(['text/vnd.legacyblueprint']);
     });
   });
 
@@ -29,13 +29,13 @@ describe('Apiary Blueprint Parser Adapter', () => {
     let result;
 
     before((done) => {
-      fury.parse({source}, (err, output) => {
+      fury.parse({ source }, (err, output) => {
         if (err) {
           return done(err);
         }
 
         result = output;
-        done();
+        return done();
       });
     });
 
@@ -44,9 +44,7 @@ describe('Apiary Blueprint Parser Adapter', () => {
     });
 
     it('has API category inside parse result', () => {
-      const filtered = result.filter(item =>
-        item.element === 'category' && item.classes.contains('api')
-      );
+      const filtered = result.filter(item => item.element === 'category' && item.classes.contains('api'));
 
       expect(filtered).to.have.length(1);
       expect(filtered[0]).to.be.an.object;
@@ -90,7 +88,7 @@ Test Section 1
     let parseError;
 
     before((done) => {
-      fury.parse({source}, (err, output) => {
+      fury.parse({ source }, (err, output) => {
         parseError = err;
         parseResult = output;
         done();
