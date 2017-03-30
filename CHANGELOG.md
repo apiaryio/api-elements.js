@@ -1,3 +1,8 @@
+# 0.3.0 - 2017-03-30
+
+- Upgrade babel-runtime dependency to v6
+- Drop support for node 0.12 and 0.10
+
 # 0.2.0 - 2017-01-24
 
 ## Enhancements
@@ -8,7 +13,6 @@
 
 - Fixes handling of parameter descriptions.
 - Fixes handling of MSON data structures and MSON attributes.
-
 
 # 0.1.2 - 2015-09-21
 

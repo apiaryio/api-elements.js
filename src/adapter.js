@@ -2,18 +2,18 @@
  * API Blueprint serializer for Fury.js
  */
 
-import mson from './mson';
 import nunjucks from 'nunjucks';
 import path from 'path';
+import { renderAttributes, renderDataStructure } from './mson';
 
-import {indent, bodyOnly, resourceShorthand, pretty, getCopy} from './filters';
+import { indent, bodyOnly, resourceShorthand, pretty, getCopy } from './filters';
 
 const env = nunjucks.configure(path.dirname(__dirname), {
   autoescape: false,
 });
 
-env.addFilter('mson', mson.renderAttributes);
-env.addFilter('dataStructure', mson.renderDataStructure);
+env.addFilter('mson', renderAttributes);
+env.addFilter('dataStructure', renderDataStructure);
 env.addFilter('indent', indent);
 env.addFilter('bodyOnly', bodyOnly);
 env.addFilter('resourceShorthand', resourceShorthand);
@@ -28,15 +28,15 @@ export const mediaTypes = [
 /*
  * Serialize an API into API Blueprint.
  */
-export function serialize({api}, done) {
-  nunjucks.render('template.nunjucks', {api}, (err, apib) => {
+export function serialize({ api }, done) {
+  nunjucks.render('template.nunjucks', { api }, (err, apib) => {
     if (err) {
       return done(err);
     }
 
     // Attempt to filter out extra spacing
-    done(null, apib.replace(/\n\s*\n\s*\n/g, '\n\n'));
+    return done(null, apib.replace(/\n\s*\n\s*\n/g, '\n\n'));
   });
 }
 
-export default {name, mediaTypes, serialize};
+export default { name, mediaTypes, serialize };
