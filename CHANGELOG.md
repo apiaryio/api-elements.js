@@ -1,3 +1,8 @@
+# 0.7.0 - 2017-03-30
+
+- Upgraded babel-runtime dependency to v6
+- Drop support for node 0.12 and 0.10
+
 # 0.6.1 - 2017-01-03
 
 # 0.6.0 - 2016-11-16

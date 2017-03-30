@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apib-parser",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "API Blueprint parser for Fury.js",
   "main": "./lib/adapter.js",
   "repository": {
@@ -8,7 +8,6 @@
     "url": "https://github.com/apiaryio/fury-adapter-apib-parser.git"
   },
   "scripts": {
-    "coveralls": "npm run cover && coveralls <coverage/lcov.info",
     "test": "peasant test",
     "ci": "peasant -s lint test build",
     "prepublish": "npm run ci",
@@ -17,14 +16,16 @@
     "lint": "peasant lint"
   },
   "dependencies": {
-    "babel-runtime": "^5.8.20",
+    "babel-runtime": "^6.23.0",
     "deckardcain": "^0.3.2",
     "drafter": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "coveralls": "^2.11.2",
-    "peasant": "^0.5.2"
+    "peasant": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=4"
   },
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT"

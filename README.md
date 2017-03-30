@@ -1,6 +1,9 @@
 # Fury API Blueprint Parser
 
-[![Build Status](https://img.shields.io/travis/apiaryio/fury-adapter-apib-parser.svg)](https://travis-ci.org/apiaryio/fury-adapter-apib-parser) [![Coverage Status](https://img.shields.io/coveralls/apiaryio/fury-adapter-apib-parser.svg)](https://coveralls.io/r/apiaryio/fury-adapter-apib-parser) [![NPM version](https://img.shields.io/npm/v/fury-adapter-apib-parser.svg)](https://www.npmjs.org/package/fury-adapter-apib-parser) [![License](https://img.shields.io/npm/l/fury-adapter-apib-parser.svg)](https://www.npmjs.org/package/fury-adapter-apib-parser)
+[![Build Status](https://img.shields.io/travis/apiaryio/fury-adapter-apib-parser.svg)](https://travis-ci.org/apiaryio/fury-adapter-apib-parser)
+[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/apiaryio/fury-adapter-apib-parser.svg)](https://codeclimate.com/github/apiaryio/fury-adapter-apib-parser/coverage)
+[![NPM version](https://img.shields.io/npm/v/fury-adapter-apib-parser.svg)](https://www.npmjs.org/package/fury-adapter-apib-parser)
+[![License](https://img.shields.io/npm/l/fury-adapter-apib-parser.svg)](https://www.npmjs.org/package/fury-adapter-apib-parser)
 
 This adapter provides support for parsing [API Blueprint](https://apiblueprint.org/) in [Fury.js](https://github.com/apiaryio/fury.js) using the Node API Blueprint parser [Drafter NPM](https://github.com/apiaryio/drafter-npm).
 

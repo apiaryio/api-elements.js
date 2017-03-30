@@ -1,11 +1,12 @@
-import {expect} from 'chai';
-import adapter from '../src/adapter';
+/* eslint-disable no-unused-expressions */
+import { expect } from 'chai';
+import { validate } from '../src/adapter';
 
 describe('API Blueprint validation', () => {
   it('can validate an API Blueprint', (done) => {
     const source = '# API Name\n';
 
-    adapter.validate({source}, (err, parseResult) => {
+    validate({ source }, (err, parseResult) => {
       expect(err).to.be.null;
       expect(parseResult).to.be.null;
 
@@ -16,7 +17,7 @@ describe('API Blueprint validation', () => {
   it('can validate an API Blueprint with a warning', (done) => {
     const source = '# GET /\n';
 
-    adapter.validate({source}, (err, parseResult) => {
+    validate({ source }, (err, parseResult) => {
       expect(err).to.be.null;
       expect(parseResult).to.deep.equal({
         element: 'parseResult',
@@ -54,7 +55,7 @@ describe('API Blueprint validation', () => {
   it('can validate an API Blueprint with an error', (done) => {
     const source = '# Data Structures\n# A (A)\n';
 
-    adapter.validate({source}, (err, parseResult) => {
+    validate({ source }, (err, parseResult) => {
       expect(err).to.be.null;
       expect(parseResult).to.deep.equal({
         element: 'parseResult',
