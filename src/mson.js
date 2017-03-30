@@ -2,7 +2,7 @@
  * Renders refract elements into MSON.
  */
 
-import {indent} from './filters';
+import { indent } from './filters';
 
 /*
  * Get type information for an element, such as the element name, whether
@@ -40,7 +40,7 @@ function handleContent(element, spaces, marker) {
     return [renderedContent, objectLike];
   }
 
-  for (const item of element.content) {
+  element.content.forEach((item) => {
     // Note: the `initialIndent` option above works because we specifically
     //       do *not* pass it down the rabbit hole here.
     if (item.element === 'member') {
@@ -71,7 +71,7 @@ function handleContent(element, spaces, marker) {
       });
       /* eslint-enable no-use-before-define */
     }
-  }
+  });
 
   return [renderedContent, objectLike];
 }
@@ -150,7 +150,7 @@ function handleDescription(description, element, parent, spaces, marker) {
         str += `\n${marker} Items\n`;
       }
 
-      str += indent(renderedContent, spaces, {first: true});
+      str += indent(renderedContent, spaces, { first: true });
     }
   }
 
@@ -162,10 +162,10 @@ function handleDescription(description, element, parent, spaces, marker) {
  * will call itself recursively to handle child elements for objects and
  * arrays.
  */
-function handle(name, element, {parent = null, spaces = 4, marker = '+',
-                                initialMarker = '+',
-                                initialIndent = true,
-                                attributesElement = element}) {
+function handle(name, element, { parent = null, spaces = 4, marker = '+',
+                                 initialMarker = '+',
+                                 initialIndent = true,
+                                 attributesElement = element }) {
   let str = initialMarker;
 
   // Start with the item name if it has one.
@@ -178,6 +178,7 @@ function handle(name, element, {parent = null, spaces = 4, marker = '+',
     if (parent && parent.element !== 'array') {
       str += ':';
     }
+
     str += ` ${element.content}`;
   }
 
@@ -196,7 +197,7 @@ function handle(name, element, {parent = null, spaces = 4, marker = '+',
     str = indent(str, spaces);
   }
 
-  return str + '\n';
+  return `${str}\n`;
 }
 
 /*
@@ -221,4 +222,4 @@ export function renderAttributes(dataStructure) {
   });
 }
 
-export default {renderDataStructure, renderAttributes};
+export default { renderDataStructure, renderAttributes };

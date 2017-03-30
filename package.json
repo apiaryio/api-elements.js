@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apib-serializer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "API Blueprint serializer for Fury.js",
   "main": "./lib/adapter.js",
   "repository": {
@@ -8,7 +8,6 @@
     "url": "https://github.com/apiaryio/fury-adapter-apib-serializer.git"
   },
   "scripts": {
-    "coveralls": "npm run cover && coveralls <coverage/lcov.info",
     "test": "peasant test",
     "ci": "peasant -s lint test build",
     "prepublish": "npm run ci",
@@ -17,15 +16,17 @@
     "lint": "peasant lint"
   },
   "dependencies": {
-    "babel-runtime": "^5.8.20",
+    "babel-runtime": "^6.23.0",
     "nunjucks": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "coveralls": "^2.11.2",
-    "fury": "^2.3.0",
-    "glob": "^5.0.14",
-    "peasant": "^0.5.2"
+    "fury": "2.x.x",
+    "glob": "^7.1.1",
+    "peasant": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=4"
   },
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT"
