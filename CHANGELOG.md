@@ -1,5 +1,10 @@
 # Changelog
 
+# 2.0.0 - 2017-03-30
+
+- Upgrade babel-runtime dependency to v6
+- Drop support for node 0.12 and 0.10
+
 ## 1.1.3
 
 ### Bug Fixes
