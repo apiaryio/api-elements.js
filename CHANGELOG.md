@@ -1,3 +1,7 @@
+# 0.2.0 2017-03-30
+
+- Updated babel-runtime dependency to v6
+
 # 0.1.8 2016-09-02
 
 ## Bug Fixes

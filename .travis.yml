@@ -3,14 +3,12 @@ sudo: false
 node_js:
 - '6'
 - '4'
-- '0.12'
-- '0.10'
 script:
 - npm run ci
 after_script:
 - npm install -g codeclimate-test-reporter
 - npm run cover
-- codeclimate-test-reporter < lcov.info
+- codeclimate-test-reporter < coverage/lcov.info
 notifications:
   email: false
   slack:

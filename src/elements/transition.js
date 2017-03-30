@@ -19,7 +19,7 @@ export default function (namespace) {
         }
       }
 
-      return '';
+      return undefined;
     }
 
     get relation() {
