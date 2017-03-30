@@ -6,18 +6,18 @@
   * Indent a piece of multiline text by a number of spaces.
   * Setting `first` to `true` will also indent the first line.
   */
- export function indent(input, spaces, options = {first: false}) {
+ export function indent(input, spaces, options = { first: false }) {
    let pre = '';
    let lines = [];
 
-   for (let _ = 0; _ < spaces; _++) {
+   for (let i = 0; i < spaces; i += 1) {
      pre += ' ';
    }
 
-   for (const line of input.split('\n')) {
+   input.split('\n').forEach((line) => {
      // Only indent non-blank lines!
      lines.push(line ? pre + line : line);
-   }
+   });
 
    lines = lines.join('\n').trim();
 
@@ -82,5 +82,5 @@
   * old js array.
   */
  export function getCopy(element) {
-   return element.children((item) => item.element === 'copy').content;
+   return element.children(item => item.element === 'copy').content;
  }
