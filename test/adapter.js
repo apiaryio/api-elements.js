@@ -1,22 +1,23 @@
+/* eslint-disable no-unused-expressions */
 /*
  * Tests for API Blueprint adapter.
  */
 
-import {expect} from 'chai';
-import adapter from '../src/adapter';
+import { expect } from 'chai';
+import { parse, detect } from '../src/adapter';
 
 describe('API Blueprint parser adapter', () => {
   context('detection', () => {
     it('detects FORMAT: 1A', () => {
-      expect(adapter.detect('FORMAT: 1A\n# My API')).to.be.true;
+      expect(detect('FORMAT: 1A\n# My API')).to.be.true;
     });
 
     it('works with unicode BOM', () => {
-      expect(adapter.detect('\uFEFFFORMAT: 1A\n')).to.be.true;
+      expect(detect('\uFEFFFORMAT: 1A\n')).to.be.true;
     });
 
     it('ignores other data', () => {
-      expect(adapter.detect('{"title": "Not APIB!"}')).to.be.false;
+      expect(detect('{"title": "Not APIB!"}')).to.be.false;
     });
   });
 
@@ -25,13 +26,13 @@ describe('API Blueprint parser adapter', () => {
 
     before((done) => {
       const source = 'FORMAT: 1A\n# My API\n## Foo [/foo]\n';
-      adapter.parse({source}, (err, output) => {
+      parse({ source }, (err, output) => {
         if (err) {
           return done(err);
         }
 
         result = output;
-        done();
+        return done();
       });
     });
 
@@ -40,9 +41,7 @@ describe('API Blueprint parser adapter', () => {
     });
 
     it('has API category inside parse result', () => {
-      const filtered = result.content.filter(item =>
-        item.element === 'category' && item.meta.classes.indexOf('api') !== -1
-      );
+      const filtered = result.content.filter(item => item.element === 'category' && item.meta.classes.indexOf('api') !== -1);
 
       expect(filtered).to.have.length(1);
       expect(filtered[0]).to.be.an.object;
@@ -52,7 +51,7 @@ describe('API Blueprint parser adapter', () => {
   it('can parse an API Blueprint with require blueprint name', (done) => {
     const source = '# GET /\n+ Response 204\n';
 
-    adapter.parse({source, requireBlueprintName: true}, (err, output) => {
+    parse({ source, requireBlueprintName: true }, (err, output) => {
       expect(err).not.to.be.null;
       expect(output.content[0].element).to.equal('annotation');
       done();

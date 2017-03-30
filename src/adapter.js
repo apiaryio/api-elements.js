@@ -13,7 +13,7 @@ export function detect(source) {
   return mediaTypes.indexOf(deckardcain.identify(source)) !== -1;
 }
 
-export function validate({source, requireBlueprintName}, done) {
+export function validate({ source, requireBlueprintName }, done) {
   const options = {
     requireBlueprintName,
   };
@@ -24,7 +24,7 @@ export function validate({source, requireBlueprintName}, done) {
 /*
  * Parse an API Blueprint into refract elements.
  */
-export function parse({source, generateSourceMap, requireBlueprintName}, done) {
+export function parse({ source, generateSourceMap, requireBlueprintName }, done) {
   const options = {
     exportSourcemap: !!generateSourceMap,
     requireBlueprintName,
@@ -33,4 +33,4 @@ export function parse({source, generateSourceMap, requireBlueprintName}, done) {
   drafter.parse(source, options, done);
 }
 
-export default {name, mediaTypes, detect, validate, parse};
+export default { name, mediaTypes, detect, validate, parse };
