@@ -15,8 +15,8 @@ export function namespace(options) {
   const StringElement = minim.getElementClass('string');
 
   class ParseResult extends ArrayElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'parseResult';
     }
 
@@ -42,8 +42,8 @@ export function namespace(options) {
   }
 
   class Annotation extends StringElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'annotation';
     }
 
@@ -57,8 +57,8 @@ export function namespace(options) {
   }
 
   class SourceMap extends minim.BaseElement {
-    constructor() {
-      super(...arguments);
+    constructor(...args) {
+      super(...args);
       this.element = 'sourceMap';
     }
   }
@@ -70,4 +70,4 @@ export function namespace(options) {
     .register('sourceMap', SourceMap);
 }
 
-export default {namespace};
+export default { namespace };
