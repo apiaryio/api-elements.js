@@ -3,7 +3,7 @@
  * convenience properties and methods.
  */
 
-import chai, {Assertion, expect} from 'chai';
+import chai, { Assertion, expect } from 'chai';
 
 import minim from 'minim';
 import minimParseResult from '../src/parse-result';
@@ -22,13 +22,15 @@ chai.use((_chai, utils) => {
    * Asserts that an element has a certain class.
    */
   utils.addMethod(Assertion.prototype, 'class', function hasClass(name) {
+    // eslint-disable-next-line no-underscore-dangle
     const obj = this._obj;
+
     this.assert(
       obj.classes.contains(name),
       'Expected class list #{act} to contain #{exp}',
       'Expected class list #{act} to not contain #{exp}',
       name,
-      obj.classes.toValue()
+      obj.classes.toValue(),
     );
   });
 });
@@ -209,6 +211,7 @@ describe('Parse result namespace', () => {
     });
 
     it('should contain a sourceMap attribute with one item', () => {
+      // eslint-disable-next-line no-unused-expressions
       expect(sourceMaps).to.exist;
       expect(sourceMaps).to.have.length(1);
     });
@@ -233,6 +236,7 @@ describe('Parse result namespace', () => {
         },
         content: [],
       };
+
       expect(element.toRefract()).to.deep.equal(expected);
     });
   });

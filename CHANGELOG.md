@@ -1,3 +1,9 @@
+# 0.3.0 - 2017-03-30
+
+- Upgrade babel-runtime dependency to v6
+- Upgrade minim-api-description dependency to 0.2.0
+- Drop support for node 0.12 and 0.10
+
 # 0.2.2 - 2016-04-28
 
 - Upgrade minim peerDependency to 0.14.0
