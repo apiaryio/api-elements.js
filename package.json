@@ -24,7 +24,7 @@
     "chai": "^3.2.0",
     "fury": "2.x.x",
     "glob": "^7.1.1",
-    "peasant": "^1.0.0"
+    "peasant": "^1.1.0"
   },
   "engines": {
     "node": ">=4"
