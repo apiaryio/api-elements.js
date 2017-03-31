@@ -1,5 +1,5 @@
 export function baseLink(element, parser, options = {}) {
-  const {Link} = parser.minim.elements;
+  const { Link } = parser.minim.elements;
 
   const link = new Link();
   link.relation = options.relation || 'origin';
@@ -10,15 +10,15 @@ export function baseLink(element, parser, options = {}) {
 
 export function origin(fragment, element, parser) {
   baseLink(element, parser, {
-    fragment: fragment,
+    fragment,
   });
 }
 
 export function inferred(fragment, element, parser) {
   baseLink(element, parser, {
     relation: 'inferred',
-    fragment: fragment,
+    fragment,
   });
 }
 
-export default {origin, inferred};
+export default { origin, inferred };

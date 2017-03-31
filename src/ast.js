@@ -29,6 +29,7 @@ export default class Ast {
 
       if (node.tag === 'tag:yaml.org,2002:map') {
         // This is a may / object with key:value pairs.
+        // eslint-disable-next-line no-restricted-syntax
         for (const subNode of node.value) {
           if (subNode[0] && subNode[0].value === piece) {
             newNode = subNode[1];
@@ -68,12 +69,12 @@ export default class Ast {
       } else {
         // We have no other node so return whatever we have.
         // Better than nothing init?
-        return { start: start, end: end };
+        return { start, end };
       }
 
       piece = pieces.shift();
     }
 
-    return {start, end};
+    return { start, end };
   }
 }

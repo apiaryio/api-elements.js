@@ -1,23 +1,24 @@
-import link from './link';
+import { inferred } from './link';
 import annotations from './annotations';
 
 export function createHeaders(payload, parser) {
-  const {HttpHeaders} = parser.minim.elements;
+  const { HttpHeaders } = parser.minim.elements;
 
   const headers = new HttpHeaders();
 
+  // eslint-disable-next-line no-param-reassign
   payload.headers = payload.headers || headers;
 }
 
 export function pushHeader(key, value, payload, parser, fragment) {
-  const {Member: MemberElement} = parser.minim.elements;
+  const { Member: MemberElement } = parser.minim.elements;
   let header;
 
   createHeaders(payload, parser);
 
-  const duplicate = payload.headers.find((member) => {
-    return member.key.content.toLowerCase() === key.toLowerCase();
-  });
+  const duplicate = payload.headers.find(member =>
+    member.key.content.toLowerCase() === key.toLowerCase(),
+  );
 
   if (duplicate.length) {
     header = duplicate.first();
@@ -27,8 +28,9 @@ export function pushHeader(key, value, payload, parser, fragment) {
   }
 
   if (fragment) {
-    link.inferred(fragment, header, parser);
+    inferred(fragment, header, parser);
   } else {
+    // eslint-disable-next-line no-underscore-dangle
     header._meta = parser.minim.toElement({});
   }
 
@@ -76,4 +78,4 @@ export function pushHeaderObject(key, header, payload, parser) {
   }
 }
 
-export default {pushHeader, pushHeaderObject};
+export default { pushHeader, pushHeaderObject };

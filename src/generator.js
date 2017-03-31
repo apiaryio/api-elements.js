@@ -1,9 +1,8 @@
-
+import _ from 'lodash';
 import querystring from 'querystring';
-
 import faker from 'json-schema-faker';
 import annotations from './annotations';
-import link from './link';
+import { inferred } from './link';
 
 faker.option({
   useDefaultValue: true,
@@ -12,13 +11,13 @@ faker.option({
 });
 
 export function bodyFromSchema(schema, payload, parser, contentType = 'application/json') {
-  const {Asset} = parser.minim.elements;
+  const { Asset } = parser.minim.elements;
   let asset = null;
 
   try {
     let body = schema.example || faker(schema);
 
-    if (typeof(body) !== 'string') {
+    if (typeof body !== 'string') {
       if (contentType.indexOf('x-www-form-urlencoded') !== -1) {
         // Form data
         // TODO: check for arrays etc.
@@ -34,7 +33,7 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
     asset.classes.push('messageBody');
     asset.contentType = contentType;
 
-    link.inferred('message-body-generation', asset, parser);
+    inferred('message-body-generation', asset, parser);
 
     payload.content.push(asset);
   } catch (exception) {
@@ -45,4 +44,35 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
   return asset;
 }
 
-export default {bodyFromSchema};
+// Generates body asset from formData parameters.
+export function bodyFromFormParameter(param, schema) {
+  // Preparing throwaway schema. Later we will feed the 'bodyFromSchema'
+  // with it.
+  const paramSchema = _.clone(param);
+  const retSchema = _.clone(schema);
+
+  // If there's example value, we want to force the body generator
+  // to use it. This is done using 'enum' with a single value.
+  if (param['x-example'] !== undefined) {
+    paramSchema.enum = [param['x-example']];
+  }
+
+  delete paramSchema.name;
+  delete paramSchema.in;
+  delete paramSchema.format;
+  delete paramSchema.required;
+  delete paramSchema['x-example'];
+  delete paramSchema.collectionFormat;
+  delete paramSchema.allowEmptyValue; // allowEmptyValue is not supported yet
+  delete paramSchema.items; // arrays are not supported yet
+
+  retSchema.properties[param.name] = paramSchema;
+
+  if (param.required) {
+    retSchema.required.push(param.name);
+  }
+
+  return retSchema;
+}
+
+export default { bodyFromSchema, bodyFromFormParameter };
