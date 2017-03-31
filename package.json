@@ -21,7 +21,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "minim": "^0.14.0",
-    "peasant": "^1.0.0"
+    "peasant": "^1.1.0"
   },
   "engines": {
     "node": ">=4"
