@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.9.13",
+  "version": "0.10.0",
   "description": "Swagger 2.0 parser for Fury.js",
   "main": "./lib/adapter.js",
   "tonicExampleFilename": "tonic-example.js",
@@ -9,7 +9,6 @@
     "url": "https://github.com/apiaryio/fury-adapter-swagger.git"
   },
   "scripts": {
-    "coveralls": "npm run cover && coveralls <coverage/lcov.info",
     "test": "peasant test",
     "ci": "peasant -s lint test build",
     "prepublish": "npm run ci",
@@ -18,7 +17,7 @@
     "lint": "peasant lint"
   },
   "dependencies": {
-    "babel-runtime": "^5.8.20",
+    "babel-runtime": "^6.23.0",
     "js-yaml": "^3.4.2",
     "json-schema-faker": "^0.4.0",
     "lodash": "^4.15.0",
@@ -28,13 +27,15 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "glob": "^6.0.1",
-    "coveralls": "^2.11.2",
-    "fury": "^2.x.x",
-    "peasant": "^0.5.2",
+    "glob": "^7.1.1",
+    "fury": "2.x.x",
+    "peasant": "^1.1.0",
     "minim": "^0.14.2",
-    "minim-parse-result": "^0.2.2",
+    "minim-parse-result": "^0.3.0",
     "swagger-zoo": "2.2.6"
+  },
+  "engines": {
+    "node": ">=4"
   },
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT"

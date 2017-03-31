@@ -1,7 +1,6 @@
 import _ from 'lodash';
+import { expect } from 'chai';
 import Parser from '../src/parser';
-
-import {expect} from 'chai';
 
 describe('Test parser.withPath() ', () => {
   let parser;
@@ -39,7 +38,7 @@ describe('Test parser.withPath() ', () => {
 
     it('double dot and segment should switch to sibling path', () => {
       parser.withPath('..', 'put', (_path) => {
-        expect(_path).to.deep.equal(['paths', '/', 'put' ]);
+        expect(_path).to.deep.equal(['paths', '/', 'put']);
       });
     });
 

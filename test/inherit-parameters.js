@@ -1,16 +1,16 @@
+/* eslint-disable no-unused-expressions */
 /*
  * Tests for Swagger adapter.
  */
 
-import adapter from '../src/adapter';
 import fury from 'fury';
-
-import {expect} from 'chai';
+import { expect } from 'chai';
+import adapter from '../src/adapter';
 
 fury.adapters = [adapter];
 
 function doParse(source, done, expectations) {
-  fury.parse({source}, (err, output) => {
+  fury.parse({ source }, (err, output) => {
     if (err) {
       return done(err);
     }
@@ -31,7 +31,7 @@ function doParse(source, done, expectations) {
 
     expectations(result);
 
-    done();
+    return done();
   });
 }
 
@@ -52,9 +52,10 @@ function makeParameter(aName, aIn, aValue) {
     }
   } else {
     parameter.type = 'string';
+
     if (aValue !== undefined) {
       if (aIn === 'formData') {
-        parameter.enum = [ aValue ];
+        parameter.enum = [aValue];
       } else {
         parameter['x-example'] = aValue;
       }
@@ -232,12 +233,11 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'body'));
 
       doParse(source, done, (result) => {
-        expect(result.request.messageBodySchema.content).to.equal(
-            JSON.stringify(source.paths['/'].parameters[0].schema)
-        );
+        const schema = JSON.stringify(source.paths['/'].parameters[0].schema);
 
-	// ensure there is no warning about unsupported "Path-level Body Parameter")
+        // ensure there is no warning about unsupported "Path-level Body Parameter")
         expect(result.result.annotations.toValue()).to.be.empty;
+        expect(result.request.messageBodySchema.content).to.equal(schema);
       });
     });
 
@@ -246,9 +246,9 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'body'));
 
       doParse(source, done, (result) => {
-        expect(result.request.messageBodySchema.content).to.equal(
-            JSON.stringify(source.paths['/'].get.parameters[0].schema)
-        );
+        const schema = JSON.stringify(source.paths['/'].get.parameters[0].schema);
+
+        expect(result.request.messageBodySchema.content).to.equal(schema);
       });
     });
 
@@ -267,11 +267,11 @@ describe('Inherit Path Parameters', () => {
     it('on Path and Operation is same Parameter', (done) => {
       const source = makeSource('/');
       source.paths['/'].parameters.push(makeParameter('test', 'body', { type: 'string' }));
-      source.paths['/'].get.parameters.push(makeParameter('test', 'body', { type: 'number'}));
+      source.paths['/'].get.parameters.push(makeParameter('test', 'body', { type: 'number' }));
 
       doParse(source, done, (result) => {
         expect(result.request.messageBodySchema.content).to.equal(
-            JSON.stringify(source.paths['/'].get.parameters[0].schema)
+          JSON.stringify(source.paths['/'].get.parameters[0].schema),
         );
       });
     });
@@ -283,9 +283,9 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'formData'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({test: null});
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: null });
 
-	// ensure there is no warning about unsupported "Path-level formData Parameter")
+        // ensure there is no warning about unsupported "Path-level formData Parameter")
         expect(result.result.annotations.toValue()).to.be.empty;
       });
     });
@@ -295,7 +295,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'formData'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({test: null});
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: null });
       });
     });
 
@@ -305,7 +305,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('foo', 'formData'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({foo: null, test: null});
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ foo: null, test: null });
       });
     });
 
@@ -315,9 +315,9 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'formData', 'op'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({test: ['op']});
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: ['op'] });
 
-	// ensure there is no warning about unsupported "Path-level formData Parameter")
+        // ensure there is no warning about unsupported "Path-level formData Parameter")
         expect(result.result.annotations.toValue()).to.be.empty;
       });
     });

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import minimModule from 'minim';
 import minimParseResult from 'minim-parse-result';
 import Parser from '../src/parser';
@@ -9,7 +9,7 @@ const minim = minimModule.namespace()
 describe('Parameter to Member converter', () => {
   context('when I use it with parameter', () => {
     const parser = new Parser({
-      minim: minim,
+      minim,
       source: 'swagger: "2.0"\ninfo:\n  title: API\n  version: v2',
       generateSourceMap: true,
     });
@@ -34,13 +34,13 @@ describe('Parameter to Member converter', () => {
       return { start: 0, end: 10 };
     };
 
-    before(done => {
-      parser.parse(err => {
+    before((done) => {
+      parser.parse((err) => {
         if (err) done(err);
 
         parser.path = ['path1'];
 
-        parser._ast = {
+        parser.internalAST = {
           getPosition,
         };
 

@@ -1,22 +1,22 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 import minimModule from 'minim';
 import minimParseResult from 'minim-parse-result';
 
-import {bodyFromSchema} from '../src/generator';
+import { bodyFromSchema } from '../src/generator';
 
 const minim = minimModule.namespace()
   .use(minimParseResult);
 
 describe('bodyFromSchema', () => {
-  const parser = {minim};
+  const parser = { minim };
 
   it('can generate a JSON body', () => {
     const schema = {
       type: 'array',
     };
 
-    const payload = {content: []};
+    const payload = { content: [] };
     const asset = bodyFromSchema(schema, payload, parser, 'application/json');
     const body = JSON.parse(asset.content);
 
@@ -30,7 +30,7 @@ describe('bodyFromSchema', () => {
       maxLength: 2000,
     };
 
-    const payload = {content: []};
+    const payload = { content: [] };
     const asset = bodyFromSchema(schema, payload, parser, 'application/json');
 
     expect(asset.content).to.be.a('string');
@@ -47,7 +47,7 @@ describe('bodyFromSchema', () => {
       maxItems: 20,
     };
 
-    const payload = {content: []};
+    const payload = { content: [] };
     const asset = bodyFromSchema(schema, payload, parser, 'application/json');
     const body = JSON.parse(asset.content);
 

@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-loop-func */
+/* eslint-disable global-require */
+/* eslint-disable import/no-dynamic-require */
 /*
  * Tests for Swagger adapter.
  */
@@ -5,11 +9,10 @@
 import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
-import adapter from '../src/adapter';
 import fury from 'fury';
 import swaggerZoo from 'swagger-zoo';
-
-import {expect} from 'chai';
+import { expect } from 'chai';
+import adapter, { detect } from '../src/adapter';
 
 fury.adapters = [adapter];
 
@@ -24,7 +27,7 @@ function testFixture(description, fixture, generateSourceMap = false) {
       expected = fixture.apiElements;
     }
 
-    fury.parse({source, generateSourceMap}, (err, output) => {
+    fury.parse({ source, generateSourceMap }, (err, output) => {
       if (err && !output) {
         return done(err);
       }
@@ -34,14 +37,16 @@ function testFixture(description, fixture, generateSourceMap = false) {
         expected = output.toRefract();
 
         if (generateSourceMap) {
+          // eslint-disable-next-line no-param-reassign
           fixture.apiElementsSourceMap = expected;
         } else {
+          // eslint-disable-next-line no-param-reassign
           fixture.apiElements = expected;
         }
       }
 
       expect(output.toRefract()).to.deep.equal(expected);
-      done();
+      return done();
     });
   });
 }
@@ -49,42 +54,42 @@ function testFixture(description, fixture, generateSourceMap = false) {
 describe('Swagger 2.0 adapter', () => {
   context('detection', () => {
     it('detects JSON', () => {
-      expect(adapter.detect('"swagger": "2.0"')).to.be.true;
+      expect(detect('"swagger": "2.0"')).to.be.true;
     });
 
     it('detects YAML', () => {
-      expect(adapter.detect('swagger: "2.0"')).to.be.true;
+      expect(detect('swagger: "2.0"')).to.be.true;
     });
 
     it('detects object', () => {
-      expect(adapter.detect({swagger: '2.0'})).to.be.true;
+      expect(detect({ swagger: '2.0' })).to.be.true;
     });
 
     it('works with single quotes', () => {
-      expect(adapter.detect('swagger: \'2.0\'')).to.be.true;
+      expect(detect('swagger: \'2.0\'')).to.be.true;
     });
 
     it('works with extra spacing', () => {
-      expect(adapter.detect('swagger:  \t "2.0"')).to.be.true;
+      expect(detect('swagger:  \t "2.0"')).to.be.true;
     });
 
     it('ignores other data', () => {
-      expect(adapter.detect('{"title": "Not Swagger!"}')).to.be.false;
+      expect(detect('{"title": "Not Swagger!"}')).to.be.false;
     });
   });
 
   context('can parse Swagger object', () => {
-    const source = {swagger: '2.0', info: {title: 'Test', version: '1.0'}};
+    const source = { swagger: '2.0', info: { title: 'Test', version: '1.0' } };
     let result;
 
     before((done) => {
-      fury.parse({source}, (err, output) => {
+      fury.parse({ source }, (err, output) => {
         if (err) {
           return done(err);
         }
 
         result = output;
-        done();
+        return done();
       });
     });
 
@@ -94,7 +99,7 @@ describe('Swagger 2.0 adapter', () => {
 
     it('has API category inside parse result', () => {
       const filtered = result.filter(item =>
-        item.element === 'category' && item.classes.contains('api')
+        item.element === 'category' && item.classes.contains('api'),
       );
 
       expect(filtered).to.have.length(1);
@@ -108,7 +113,7 @@ describe('Swagger 2.0 adapter', () => {
     let parseResult;
 
     before((done) => {
-      fury.parse({source}, (err, result) => {
+      fury.parse({ source }, (err, result) => {
         parseError = err;
         parseResult = result;
         done();
@@ -132,28 +137,26 @@ describe('Swagger 2.0 adapter', () => {
   describe('can parse regression fixtures', () => {
     const files = glob.sync(path.join(__dirname, 'fixtures', '*.yaml'));
 
-    /* eslint-disable no-loop-func,func-names */
-    for (const file of files) {
+    files.forEach((file) => {
       const name = path.basename(file, path.extname(file));
 
       const swagger = fs.readFileSync(file, 'utf-8');
       const apiElementsPath = path.join(__dirname, 'fixtures', `${name}.json`);
 
-      const options = {swagger};
+      const options = { swagger };
 
       Object.defineProperty(options, 'apiElements', {
-        get: function() {
+        get() {
           return require(apiElementsPath);
         },
 
-        set: function(value) {
+        set(value) {
           fs.writeFileSync(apiElementsPath, JSON.stringify(value, null, 2));
           return value;
         },
       });
 
       testFixture(`Parses ${name}`, options);
-    }
-    /* eslint-enable no-loop-func,func-names */
+    });
   });
 });

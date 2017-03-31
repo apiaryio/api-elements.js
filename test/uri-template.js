@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 import buildUriTemplate from '../src/uri-template';
 
@@ -7,7 +7,7 @@ describe('URI Template Handler', () => {
     context('when the path object parameters are not query parameters', () => {
       const basePath = '/api';
       const href = '/pet/findByTags';
-      const pathObjectParameters = [
+      const pathObjectParams = [
         {
           in: 'path',
           description: 'Path parameter from path object',
@@ -16,7 +16,7 @@ describe('URI Template Handler', () => {
           type: 'string',
         },
       ];
-      const queryParameters = [
+      const queryParams = [
         {
           in: 'query',
           description: 'Tags to filter by',
@@ -34,7 +34,7 @@ describe('URI Template Handler', () => {
       ];
 
       it('returns the correct URI', () => {
-        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParams, queryParams);
         expect(hrefForResource).to.equal('/api/pet/findByTags{?tags,unknown}');
       });
     });
@@ -42,7 +42,7 @@ describe('URI Template Handler', () => {
     context('when there are no query parameters but have one path object parameter', () => {
       const basePath = '/api';
       const href = '/pet/{id}';
-      const pathObjectParameters = [
+      const pathObjectParams = [
         {
           in: 'path',
           description: 'Pet\'s identifier',
@@ -51,10 +51,10 @@ describe('URI Template Handler', () => {
           type: 'number',
         },
       ];
-      const queryParameters = [];
+      const queryParams = [];
 
       it('returns the correct URI', () => {
-        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParams, queryParams);
         expect(hrefForResource).to.equal('/api/pet/{id}');
       });
     });
@@ -62,7 +62,7 @@ describe('URI Template Handler', () => {
     context('when there are query parameters defined', () => {
       const basePath = '/api';
       const href = '/pet/findByTags';
-      const pathObjectParameters = [
+      const pathObjectParams = [
         {
           in: 'query',
           description: 'Query parameter from path object',
@@ -71,7 +71,7 @@ describe('URI Template Handler', () => {
           type: 'string',
         },
       ];
-      const queryParameters = [
+      const queryParams = [
         {
           in: 'query',
           description: 'Tags to filter by',
@@ -89,7 +89,7 @@ describe('URI Template Handler', () => {
       ];
 
       it('returns the correct URI', () => {
-        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParams, queryParams);
         expect(hrefForResource).to.equal('/api/pet/findByTags{?fromPath,tags,unknown}');
       });
     });
@@ -97,7 +97,7 @@ describe('URI Template Handler', () => {
     context('when there are parameters with dashes', () => {
       const basePath = '/my-api';
       const href = '/pet/{unique-id}';
-      const queryParameters = [
+      const queryParams = [
         {
           in: 'query',
           description: 'Tags to filter by',
@@ -108,7 +108,7 @@ describe('URI Template Handler', () => {
       ];
 
       it('returns the correct URI', () => {
-        const hrefForResource = buildUriTemplate(basePath, href, [], queryParameters);
+        const hrefForResource = buildUriTemplate(basePath, href, [], queryParams);
         expect(hrefForResource).to.equal('/my-api/pet/{unique%2did}{?tag%2dnames}');
       });
     });
@@ -116,7 +116,7 @@ describe('URI Template Handler', () => {
     context('when there is a conflict in parameter names', () => {
       const basePath = '/api';
       const href = '/pet/findByTags';
-      const pathObjectParameters = [
+      const pathObjectParams = [
         {
           in: 'query',
           description: 'Tags to filter by',
@@ -125,7 +125,7 @@ describe('URI Template Handler', () => {
           type: 'string',
         },
       ];
-      const queryParameters = [
+      const queryParams = [
         {
           in: 'query',
           description: 'Tags to filter by',
@@ -136,7 +136,7 @@ describe('URI Template Handler', () => {
       ];
 
       it('only adds one to the query parameters', () => {
-        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParams, queryParams);
         expect(hrefForResource).to.equal('/api/pet/findByTags{?tags}');
       });
     });
@@ -144,7 +144,7 @@ describe('URI Template Handler', () => {
     context('when there are no query parameters defined', () => {
       const basePath = '/api';
       const href = '/pet/findByTags';
-      const pathObjectParameters = [
+      const pathObjectParams = [
         {
           in: 'query',
           description: 'Query parameter from path object',
@@ -153,10 +153,10 @@ describe('URI Template Handler', () => {
           type: 'string',
         },
       ];
-      const queryParameters = [];
+      const queryParams = [];
 
       it('returns the correct URI', () => {
-        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+        const hrefForResource = buildUriTemplate(basePath, href, pathObjectParams, queryParams);
         expect(hrefForResource).to.equal('/api/pet/findByTags{?fromPath}');
       });
     });
@@ -165,8 +165,8 @@ describe('URI Template Handler', () => {
   context('when there are query parameters but no path object parameters', () => {
     const basePath = '/api';
     const href = '/pet/findByTags';
-    const pathObjectParameters = [];
-    const queryParameters = [
+    const pathObjectParams = [];
+    const queryParams = [
       {
         in: 'query',
         description: 'Tags to filter by',
@@ -184,7 +184,7 @@ describe('URI Template Handler', () => {
     ];
 
     it('returns the correct URI', () => {
-      const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+      const hrefForResource = buildUriTemplate(basePath, href, pathObjectParams, queryParams);
       expect(hrefForResource).to.equal('/api/pet/findByTags{?tags,unknown}');
     });
   });
@@ -192,11 +192,11 @@ describe('URI Template Handler', () => {
   context('when there are no query or path object parameters', () => {
     const basePath = '/api';
     const href = '/pet/findByTags';
-    const pathObjectParameters = [];
-    const queryParameters = [];
+    const pathObjectParams = [];
+    const queryParams = [];
 
     it('returns the correct URI', () => {
-      const hrefForResource = buildUriTemplate(basePath, href, pathObjectParameters, queryParameters);
+      const hrefForResource = buildUriTemplate(basePath, href, pathObjectParams, queryParams);
       expect(hrefForResource).to.equal('/api/pet/findByTags');
     });
   });
