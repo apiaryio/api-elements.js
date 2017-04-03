@@ -150,7 +150,7 @@ describe('Parse result namespace', () => {
     });
 
     it('should get a code', () => {
-      expect(annotation.code).to.equal(123);
+      expect(annotation.code.toValue()).to.equal(123);
     });
 
     it('should set a code', () => {

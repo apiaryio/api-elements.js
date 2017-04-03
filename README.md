@@ -54,11 +54,11 @@ console.log(`Warning: ${annotation.getValue()}`);
 #### Properties
 
 ##### annotation.code
-An optional warning, error, or other numerical code. This is a shortcut for accessing the element's `code` attribute value.
+An optional warning, error, or other numerical code. This is a shortcut for accessing the element's `code` attribute.
 
 ```js
 // Show the code
-console.log(annotation.code);
+console.log(annotation.code.toValue());
 
 // Set the code
 annotation.code = 123;

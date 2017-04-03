@@ -48,7 +48,7 @@ export function namespace(options) {
     }
 
     get code() {
-      return this.attributes.getValue('code');
+      return this.attributes.get('code');
     }
 
     set code(value) {
