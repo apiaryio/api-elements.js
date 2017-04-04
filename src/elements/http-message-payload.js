@@ -18,7 +18,7 @@ export default function (namespace) {
       let header = null;
 
       if (headers) {
-        header = headers.include(name).map(item => item.value.toValue());
+        header = headers.include(name).map(item => item.value);
       }
 
       return header;
@@ -26,8 +26,9 @@ export default function (namespace) {
 
     get contentType() {
       const header = this.header('Content-Type');
+
       if (header) {
-        return header.join(', ');
+        return header[0];
       }
 
       return this.content && this.content.contentType;

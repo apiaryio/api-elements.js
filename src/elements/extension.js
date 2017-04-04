@@ -7,7 +7,7 @@ export default function (namespace) {
 
     get profile() {
       return this.links
-        .filter(link => link.relation === 'profile')
+        .filter(link => link.relation.toValue() === 'profile')
         .map(link => link.href)
         .shift();
     }

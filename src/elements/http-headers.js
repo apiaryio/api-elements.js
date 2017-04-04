@@ -8,7 +8,10 @@ export default function (namespace) {
     }
 
     toValue() {
-      return this.map(item => [item.key.toValue(), item.value.toValue()]);
+      // eslint-disable-next-line arrow-body-style
+      return this.map((item) => {
+        return { key: item.key.toValue(), value: item.value.toValue() };
+      });
     }
 
     include(name) {
