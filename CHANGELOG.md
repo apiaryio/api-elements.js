@@ -1,3 +1,7 @@
+# 0.4.0 - 2017-04-03
+
+- Annotation.code now returns a Number Element
+
 # 0.3.0 - 2017-03-30
 
 - Upgrade babel-runtime dependency to v6
