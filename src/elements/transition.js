@@ -23,7 +23,7 @@ export default function (namespace) {
     }
 
     get relation() {
-      return this.attributes.getValue('relation');
+      return this.attributes.get('relation');
     }
 
     set relation(value) {
@@ -31,7 +31,7 @@ export default function (namespace) {
     }
 
     get href() {
-      return this.attributes.getValue('href');
+      return this.attributes.get('href');
     }
 
     set href(value) {

@@ -15,7 +15,7 @@ export default function (namespace) {
     }
 
     get contentType() {
-      return this.attributes.getValue('contentType');
+      return this.attributes.get('contentType');
     }
 
     set contentType(value) {

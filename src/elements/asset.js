@@ -6,7 +6,7 @@ export default function (namespace) {
     }
 
     get contentType() {
-      return this.attributes.getValue('contentType');
+      return this.attributes.get('contentType');
     }
 
     set contentType(value) {
@@ -14,7 +14,7 @@ export default function (namespace) {
     }
 
     get href() {
-      return this.attributes.getValue('href');
+      return this.attributes.get('href');
     }
 
     set href(value) {

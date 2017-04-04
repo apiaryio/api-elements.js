@@ -6,7 +6,7 @@ export default function (namespace, HttpMessagePayload) {
     }
 
     get method() {
-      return this.attributes.getValue('method');
+      return this.attributes.get('method');
     }
 
     set method(value) {
@@ -14,7 +14,7 @@ export default function (namespace, HttpMessagePayload) {
     }
 
     get href() {
-      return this.attributes.getValue('href');
+      return this.attributes.get('href');
     }
 
     set href(value) {

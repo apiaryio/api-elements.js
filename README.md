@@ -117,7 +117,7 @@ The optional content-type of the element's content.
 
 ```js
 // Get the content-type
-console.log(copy.contentType);
+console.log(copy.contentType.toValue());
 
 // Set the content-type
 copy.contentType = 'text/markdown';
@@ -172,7 +172,7 @@ The URL template of this resource.
 
 ```js
 // Get the href
-console.log(`URL: ${resource.href}`);
+console.log(`URL: ${resource.href.toValue()}`);
 
 // Set the href
 resource.href = '/foo/{id}';
@@ -196,7 +196,7 @@ Get an array element of all child elements with the element name `transition`. T
 
 ```js
 for (const transition of resource.transitions) {
-  console.log(`Transition: ${transition.title}`);
+  console.log(`Transition: ${transition.title.toValue()}`);
 }
 ```
 
@@ -223,7 +223,7 @@ let copy = transition.copy;
 Get the HTTP method of the transition, if there is one, by finding the first HTTP request and inspecting its method. This property is **read-only**.
 
 ```js
-let method = transition.method;
+let method = transition.method.toValue();
 ```
 
 ##### transition.relation
@@ -231,7 +231,7 @@ Defines a relationship to another resource or transition. Useful for hypermedia.
 
 ```js
 // Get the relation
-console.log(`Relation: ${transition.relation}`);
+console.log(`Relation: ${transition.relation.toValue()}`);
 
 // Set the relation
 transition.relation = '...';
@@ -242,7 +242,7 @@ Overrides the resources URL template with one specific to this transition.
 
 ```js
 // Get the herf
-console.log(`URL: ${transition.href}`);
+console.log(`URL: ${transition.href.toValue()}`);
 
 // Set the href
 transition.href = '/foo/{id}';
@@ -252,7 +252,7 @@ transition.href = '/foo/{id}';
 Gets either the transition's `href` or the first transaction's request's `href` if it exists, otherwise returns `null`. This property is **read-only**.
 
 ```js
-console.log(`URL: ${transition.computedHref}`);
+console.log(`URL: ${transition.computedHref.toValue()}`);
 ```
 
 ##### transition.hrefVariables
@@ -348,7 +348,7 @@ The HTTP method of this request, e.g. `GET` or `POST`.
 
 ```js
 // Get the HTTP method
-console.log(`HTTP method: ${request.method}`);
+console.log(`HTTP method: ${request.method.toValue()}`);
 
 // Set the HTTP method
 request.method = 'PUT';
@@ -359,7 +359,7 @@ Overrides the resources URL template with one specific to this request.
 
 ```js
 // Get the herf
-console.log(`URL: ${request.href}`);
+console.log(`URL: ${request.href.toValue()}`);
 
 // Set the href
 request.href = '/foo/{id}';
@@ -414,7 +414,7 @@ Get a case-insensitive header by name. This returns a **list of strings**, becau
 
 ```js
 // Get the content type header
-let type = request.header('Content-Type')[0];
+let type = request.header('Content-Type')[0].toValue();
 ```
 
 ### HttpResponse ([ArrayElement](https://github.com/refractproject/minim#arrayelement))
@@ -434,7 +434,7 @@ The HTTP status code, e.g. `200` or `404`.
 
 ```js
 // Get the status code
-console.log(`Code: ${response.statusCode}`);
+console.log(`Code: ${response.statusCode.toValue()}`);
 
 // Set the status code
 response.statusCode = 400;
@@ -456,7 +456,7 @@ The computed content type of this response, either from a `Content-Type` header 
 
 ```js
 // Get the content type
-console.log(`${response.contentType}`);
+console.log(`${response.contentType.toValue()}`);
 ```
 
 ##### response.dataStructure
@@ -502,7 +502,7 @@ The content type of this asset, e.g. `application/json`.
 
 ```js
 // Get the content type
-console.log(`Type: ${asset.contentType}`);
+console.log(`Type: ${asset.contentType.toValue()}`);
 
 // Set the content type
 asset.contentType = 'application/yaml';
@@ -513,7 +513,7 @@ A link to this asset.
 
 ```js
 // Get the link
-console.log(`Location: ${asset.href}`);
+console.log(`Location: ${asset.href.toValue()}`);
 
 // Set the link
 asset.href = '/path/to/asset'
@@ -552,5 +552,5 @@ This element represents the [API Elements extensions](http://api-elements.readth
 Gets the extension elements profile href. This property is **read-only**.
 
 ```js
-let profile = extension.profile;
+let profile = extension.profile.toValue();
 ```

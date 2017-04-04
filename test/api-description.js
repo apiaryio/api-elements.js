@@ -361,7 +361,7 @@ describe('API description namespace', () => {
     });
 
     it('should have a content type', () => {
-      expect(copy.contentType).to.equal('text/html');
+      expect(copy.contentType.toValue()).to.equal('text/html');
     });
 
     it('should set a content type', () => {
@@ -520,7 +520,7 @@ describe('API description namespace', () => {
     });
 
     it('should have an href', () => {
-      expect(resource.href).to.equal('/resource/{id}');
+      expect(resource.href.toValue()).to.equal('/resource/{id}');
     });
 
     it('should set an href', () => {
@@ -651,11 +651,11 @@ describe('API description namespace', () => {
     });
 
     it('should have a method', () => {
-      expect(transition.method).to.equal('GET');
+      expect(transition.method.toValue()).to.equal('GET');
     });
 
     it('should have a relation', () => {
-      expect(transition.relation).to.equal('action');
+      expect(transition.relation.toValue()).to.equal('action');
     });
 
     it('should set a relation', () => {
@@ -664,7 +664,7 @@ describe('API description namespace', () => {
     });
 
     it('should have an href', () => {
-      expect(transition.href).to.equal('/resource');
+      expect(transition.href.toValue()).to.equal('/resource');
     });
 
     it('should set an href', () => {
@@ -673,10 +673,10 @@ describe('API description namespace', () => {
     });
 
     it('should have a computed href', () => {
-      expect(transition.computedHref).to.equal('/resource');
+      expect(transition.computedHref.toValue()).to.equal('/resource');
       transition.href = undefined;
       transition.transactions.first().request.attributes.set('href', '/foo');
-      expect(transition.computedHref).to.equal('/foo');
+      expect(transition.computedHref.toValue()).to.equal('/foo');
     });
 
     it('should have hrefVariables', () => {
@@ -910,7 +910,7 @@ describe('API description namespace', () => {
     });
 
     it('should have a method', () => {
-      expect(request.method).to.equal('GET');
+      expect(request.method.toValue()).to.equal('GET');
     });
 
     it('should set a method', () => {
@@ -919,7 +919,7 @@ describe('API description namespace', () => {
     });
 
     it('should have an href', () => {
-      expect(request.href).to.equal('/foo');
+      expect(request.href.toValue()).to.equal('/foo');
     });
 
     it('should set an href', () => {
@@ -973,7 +973,7 @@ describe('API description namespace', () => {
     });
 
     it('should have a status code', () => {
-      expect(response.statusCode).to.equal(200);
+      expect(response.statusCode.toValue()).to.equal(200);
     });
 
     it('should set a status code', () => {
@@ -1086,8 +1086,14 @@ describe('API description namespace', () => {
 
     it('should get headers', () => {
       expect(payload.headers.toValue()).to.deep.equal([
-        ['Content-Type', 'application/json'],
-        ['Cache', 'no-cache'],
+        {
+          key: 'Content-Type',
+          value: 'application/json',
+        },
+        {
+          key: 'Cache',
+          value: 'no-cache',
+        },
       ]);
     });
 
@@ -1102,11 +1108,13 @@ describe('API description namespace', () => {
     });
 
     it('should get a header by name', () => {
-      expect(payload.header('Cache')).to.deep.equal(['no-cache']);
+      const header = payload.header('Cache').map(item => item.toValue());
+
+      expect(header).to.deep.equal(['no-cache']);
     });
 
     it('should get content-type from header', () => {
-      expect(payload.contentType).to.equal('application/json');
+      expect(payload.contentType.toValue()).to.equal('application/json');
     });
 
     it('should set headers', () => {
@@ -1135,7 +1143,7 @@ describe('API description namespace', () => {
 
     describe('asset', () => {
       it('should get a content type', () => {
-        expect(asset.contentType).to.equal('text/plain');
+        expect(asset.contentType.toValue()).to.equal('text/plain');
       });
 
       it('should set a content type', () => {
@@ -1144,7 +1152,7 @@ describe('API description namespace', () => {
       });
 
       it('should get an href', () => {
-        expect(asset.href).to.equal('/some/path');
+        expect(asset.href.toValue()).to.equal('/some/path');
       });
 
       it('should set an href', () => {
@@ -1192,7 +1200,7 @@ describe('API description namespace', () => {
     });
 
     it('should have a profile', () => {
-      expect(extension.profile).to.equal('https://example.com/extensions/info/');
+      expect(extension.profile.toValue()).to.equal('https://example.com/extensions/info/');
     });
   });
 });

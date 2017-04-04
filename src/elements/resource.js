@@ -9,7 +9,7 @@ export default function (namespace) {
     }
 
     get href() {
-      return this.attributes.getValue('href');
+      return this.attributes.get('href');
     }
 
     set href(value) {

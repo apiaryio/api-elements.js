@@ -6,7 +6,7 @@ export default function (namespace, HttpMessagePayload) {
     }
 
     get statusCode() {
-      return this.attributes.getValue('statusCode');
+      return this.attributes.get('statusCode');
     }
 
     set statusCode(value) {
