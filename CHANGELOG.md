@@ -1,9 +1,13 @@
-# 0.2.0 2017-03-30
+# 0.3.0 - 2017-04-04
+
+- Make sure all convenience functions return an element
+
+# 0.2.0 - 2017-03-30
 
 - Updated babel-runtime dependency to v6
 - Dropped support for node 0.12 and 0.10
 
-# 0.1.8 2016-09-02
+# 0.1.8 - 2016-09-02
 
 ## Bug Fixes
 
