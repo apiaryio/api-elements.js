@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
-import {isatty} from 'tty';
+import { isatty } from 'tty';
 import yaml from 'js-yaml';
 import commander from 'commander';
-import {highlight} from 'cardinal';
+import { highlight } from 'cardinal';
 import theme from 'cardinal/themes/tomorrow-night';
 import fury from 'fury';
 import swagger from 'fury-adapter-swagger';
@@ -59,6 +59,7 @@ class FuryCLI {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   validateResult(result) {
     process.stdout.write('\n');
 
@@ -89,7 +90,7 @@ class FuryCLI {
       this.write(output);
       this.validateResult(result);
     } else {
-      fury.serialize({api: result.api, mediaType: this.outputFormat}, (err, content) => {
+      fury.serialize({ api: result.api, mediaType: this.outputFormat }, (err, content) => {
         if (err) {
           console.error(err);
           process.exit(2);
@@ -105,7 +106,7 @@ class FuryCLI {
     if (this.outputPath) {
       fs.writeFileSync(this.outputPath, output);
     } else if (isatty(process.stdout.fd) && json) {
-      const highlighted = highlight(output, {json: true, theme: theme});
+      const highlighted = highlight(output, { json: true, theme });
       process.stdout.write(highlighted);
     } else {
       process.stdout.write(output);
@@ -139,6 +140,8 @@ if (require.main === module) {
   }
 
   if (commander.adapter) {
+    /* eslint-disable global-require */
+    // eslint-disable-next-line import/no-dynamic-require
     fury.use(require(commander.adapter));
   }
 
