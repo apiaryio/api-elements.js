@@ -1,9 +1,9 @@
 # Fury.js
 
-[![Circle CI](https://circleci.com/gh/apiaryio/fury.js.svg?style=svg)](https://circleci.com/gh/apiaryio/fury.js)
-[![Coverage Status](https://coveralls.io/repos/apiaryio/fury.js/badge.svg)](https://coveralls.io/r/apiaryio/fury.js)
-[![Dependency Status](https://david-dm.org/apiaryio/fury.js.svg)](https://david-dm.org/apiaryio/fury.js)
-[![devDependency Status](https://david-dm.org/apiaryio/fury.js/dev-status.svg)](https://david-dm.org/apiaryio/fury.js#info=devDependencies)
+[![Build Status](https://img.shields.io/travis/apiaryio/fury.js.svg)](https://travis-ci.org/apiaryio/fury.js)
+[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/apiaryio/fury.js.svg)](https://codeclimate.com/github/apiaryio/fury.js/coverage)
+[![NPM version](https://img.shields.io/npm/v/fury.svg)](https://www.npmjs.org/package/fury)
+[![License](https://img.shields.io/npm/l/fury.svg)](https://www.npmjs.org/package/fury)
 
 API Description SDK
 

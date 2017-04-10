@@ -1,5 +1,6 @@
-import {assert} from 'chai';
-import fury, {Fury} from '../src/fury';
+/* eslint-disable global-require */
+import { assert } from 'chai';
+import fury, { Fury } from '../src/fury';
 
 const refractedApi = {
   element: 'parseResult',
@@ -212,8 +213,8 @@ describe('Parser', () => {
         name: 'passthrough',
         mediaTypes: ['text/vnd.passthrough'],
         detect: () => true,
-        parse: ({source}, done) => done(null, { element: 'string', content: source }),
-        serialize: ({api}, done) => done(null, api),
+        parse: ({ source }, done) => done(null, { element: 'string', content: source }),
+        serialize: ({ api }, done) => done(null, api),
       };
 
       fury.use(adapter);
@@ -224,14 +225,14 @@ describe('Parser', () => {
     });
 
     it('should parse through mediatype', (done) => {
-      fury.parse({source: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, result) => {
+      fury.parse({ source: 'dummy', mediaType: 'text/vnd.passthrough' }, (err, result) => {
         assert.equal(result.content, 'dummy');
         done(err);
       });
     });
 
     it('should parse through autodetect', (done) => {
-      fury.parse({source: 'dummy'}, (err, result) => {
+      fury.parse({ source: 'dummy' }, (err, result) => {
         assert.equal(result.content, 'dummy');
         done(err);
       });
@@ -239,24 +240,26 @@ describe('Parser', () => {
 
     it('should parse when returning element instances', (done) => {
       // Modify the parse method to return an element instance
-      fury.adapters[fury.adapters.length - 1].parse = ({minim, source}, cb) => {
+      fury.adapters[fury.adapters.length - 1].parse = ({ minim, source }, cb) => {
         const StringElement = minim.getElementClass('string');
         cb(null, new StringElement(source));
       };
 
-      fury.parse({source: 'dummy'}, (err, result) => {
+      fury.parse({ source: 'dummy' }, (err, result) => {
         assert.equal(result.content, 'dummy');
         done(err);
       });
     });
 
     it('should pass adapter options during parsing', (done) => {
-      fury.adapters[fury.adapters.length - 1].parse = ({minim, source, testOption = false}, cb) => {
+      const length = fury.adapters.length;
+
+      fury.adapters[length - 1].parse = ({ minim, source, testOption = false }, cb) => {
         const BooleanElement = minim.getElementClass('boolean');
         return cb(null, new BooleanElement(testOption));
       };
 
-      fury.parse({source: 'dummy', adapterOptions: {testOption: true}}, (err, result) => {
+      fury.parse({ source: 'dummy', adapterOptions: { testOption: true } }, (err, result) => {
         assert.isNull(err);
         assert.isTrue(result.content);
         done();
@@ -264,7 +267,7 @@ describe('Parser', () => {
     });
 
     it('should serialize through mediatype', (done) => {
-      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, serialized) => {
+      fury.serialize({ api: 'dummy', mediaType: 'text/vnd.passthrough' }, (err, serialized) => {
         assert.equal(serialized, 'dummy');
         done(err);
       });
@@ -276,7 +279,7 @@ describe('Parser', () => {
         throw expected;
       };
 
-      fury.parse({source: 'dummy'}, (err) => {
+      fury.parse({ source: 'dummy' }, (err) => {
         assert.equal(err, expected);
         done();
       });
@@ -289,7 +292,7 @@ describe('Parser', () => {
         done2(expectedError, expectedElements);
       };
 
-      fury.parse({source: 'dummy'}, (err, elements) => {
+      fury.parse({ source: 'dummy' }, (err, elements) => {
         assert.equal(err, expectedError);
         assert.deepEqual(elements, fury.load(expectedElements));
         done();
@@ -298,7 +301,7 @@ describe('Parser', () => {
 
     it('should error on missing parser', (done) => {
       fury.adapters[fury.adapters.length - 1].parse = undefined;
-      fury.parse({source: 'dummy'}, (err) => {
+      fury.parse({ source: 'dummy' }, (err) => {
         assert.instanceOf(err, Error);
         done();
       });
@@ -310,7 +313,7 @@ describe('Parser', () => {
         throw expected;
       };
 
-      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err) => {
+      fury.serialize({ api: 'dummy', mediaType: 'text/vnd.passthrough' }, (err) => {
         assert.equal(err, expected);
         done();
       });
@@ -322,7 +325,7 @@ describe('Parser', () => {
         done2(expected);
       };
 
-      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err) => {
+      fury.serialize({ api: 'dummy', mediaType: 'text/vnd.passthrough' }, (err) => {
         assert.equal(err, expected);
         done();
       });
@@ -330,7 +333,7 @@ describe('Parser', () => {
 
     it('should error on missing serializer', (done) => {
       fury.adapters[fury.adapters.length - 1].serialize = undefined;
-      fury.serialize({api: 'dummy', mediaType: 'text/vnd.passthrough'}, (err) => {
+      fury.serialize({ api: 'dummy', mediaType: 'text/vnd.passthrough' }, (err) => {
         assert.instanceOf(err, Error);
         done();
       });
@@ -344,7 +347,7 @@ describe('Refract loader', () => {
       const api = fury.load({
         element: 'category',
         meta: {
-          'classes': 'api',
+          classes: 'api',
         },
         content: [],
       });
@@ -367,7 +370,7 @@ describe('Refract loader', () => {
     });
 
     it('should contain annotation code', () => {
-      assert.equal(annotation.code, 6);
+      assert.equal(annotation.code.toValue(), 6);
     });
 
     it('should contain annotation description', () => {
@@ -383,12 +386,12 @@ describe('Refract loader', () => {
     });
 
     it('should contain a title', () => {
-      assert.equal(api.title, 'My API');
+      assert.equal(api.title.toValue(), 'My API');
     });
 
     it('should contain a single resource group', () => {
       assert.equal(api.resourceGroups.length, 1);
-      assert.equal(api.resourceGroups.get(0).title, 'My Group');
+      assert.equal(api.resourceGroups.get(0).title.toValue(), 'My Group');
     });
 
     it('should contain a single copy element', () => {
@@ -411,7 +414,8 @@ describe('Refract loader', () => {
     });
 
     it('should contain a single transaction', () => {
-      assert.equal(api.resourceGroups.get(0).resources.get(0).transitions.get(0).transactions.length, 1);
+      const resource = api.resourceGroups.get(0).resources.get(0);
+      assert.equal(resource.transitions.get(0).transactions.length, 1);
     });
 
     it('should contain a request', () => {
@@ -426,7 +430,7 @@ describe('Refract loader', () => {
       const response = resource.transitions.get(0).transactions.get(0).response;
 
       assert(response);
-      assert.equal(response.statusCode, 200);
+      assert.equal(response.statusCode.toValue(), 200);
     });
 
     it('should set content-type header in the response', () => {
@@ -437,7 +441,7 @@ describe('Refract loader', () => {
       assert.equal(response.headers.get(0).value.toValue(), 'application/json');
 
       // Convenience to get a header by name
-      assert.equal(response.header('content-type'), 'application/json');
+      assert.equal(response.header('content-type')[0].toValue(), 'application/json');
     });
   });
 });

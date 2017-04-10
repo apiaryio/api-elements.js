@@ -10,11 +10,13 @@ const minim = minimModule.namespace()
  * undefined is returned.
  */
 function findAdapter(adapters, mediaType, method) {
-  for (let i = 0; i < adapters.length; i++) {
+  for (let i = 0; i < adapters.length; i += 1) {
     if (adapters[i].mediaTypes.indexOf(mediaType) !== -1 && adapters[i][method]) {
       return adapters[i];
     }
   }
+
+  return null;
 }
 
 class Fury {
@@ -33,6 +35,7 @@ class Fury {
   /*
    * Load serialized refract elements into Javascript objects.
    */
+  // eslint-disable-next-line class-methods-use-this
   load(elements) {
     return minim.fromRefract(elements);
   }
@@ -43,8 +46,9 @@ class Fury {
     if (mediaType) {
       adapter = findAdapter(this.adapters, mediaType, method);
     } else {
-      for (let i = 0; i < this.adapters.length; i++) {
+      for (let i = 0; i < this.adapters.length; i += 1) {
         const current = this.adapters[i];
+
         if (current.detect && current.detect(source) && current[method]) {
           adapter = this.adapters[i];
           break;
@@ -55,13 +59,13 @@ class Fury {
     return adapter;
   }
 
-  validate({source, mediaType, adapterOptions}, done) {
+  validate({ source, mediaType, adapterOptions }, done) {
     const adapter = this.findAdapter(source, mediaType, 'validate');
 
     if (!adapter) {
-      return this.parse({source, mediaType, adapterOptions}, (err, result) => {
+      return this.parse({ source, mediaType, adapterOptions }, (err, result) => {
         if (result && result.annotations.length > 0) {
-          const {ParseResult} = minim.elements;
+          const { ParseResult } = minim.elements;
           const parseResult = new ParseResult(result.annotations);
           done(err, parseResult);
         } else {
@@ -70,13 +74,13 @@ class Fury {
       });
     }
 
-    let options = {minim, source};
+    let options = { minim, source };
 
     if (adapterOptions) {
       options = Object.assign(options, adapterOptions);
     }
 
-    adapter.validate(options, (err, elements) => {
+    return adapter.validate(options, (err, elements) => {
       if (!elements || elements instanceof minim.BaseElement) {
         done(err, elements);
       } else {
@@ -91,7 +95,7 @@ class Fury {
    * then uses the adapter to convert into refract elements and loads
    * these into objects.
    */
-  parse({source, mediaType, generateSourceMap = false, adapterOptions}, done) {
+  parse({ source, mediaType, generateSourceMap = false, adapterOptions }, done) {
     const adapter = this.findAdapter(source, mediaType, 'parse');
 
     if (!adapter) {
@@ -99,13 +103,13 @@ class Fury {
     }
 
     try {
-      let options = {generateSourceMap, minim, source};
+      let options = { generateSourceMap, minim, source };
 
       if (adapterOptions) {
         options = Object.assign(options, adapterOptions);
       }
 
-      adapter.parse(options, (err, elements) => {
+      return adapter.parse(options, (err, elements) => {
         if (!elements || elements instanceof minim.BaseElement) {
           done(err, elements);
         } else {
@@ -120,17 +124,17 @@ class Fury {
   /*
    * Serialize a parsed API into the given output format.
    */
-  serialize({api, mediaType = 'text/vnd.apiblueprint'}, done) {
+  serialize({ api, mediaType = 'text/vnd.apiblueprint' }, done) {
     const adapter = findAdapter(this.adapters, mediaType, 'serialize');
 
     if (adapter) {
       try {
-        adapter.serialize({api, minim}, done);
+        return adapter.serialize({ api, minim }, done);
       } catch (err) {
         return done(err);
       }
     } else {
-      done(new Error('Media type did not match any registered serializer!'));
+      return done(new Error('Media type did not match any registered serializer!'));
     }
   }
 }

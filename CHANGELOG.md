@@ -1,3 +1,10 @@
+# 3.0.0-beta.0 - 2017-04-10
+
+- Upgrade babel-runtime dependency to v6
+- Drop support for node 0.10 and 0.12
+- Upgraded minim to 0.15.0
+- Upgraded minim-parse-result to 0.4.0
+
 # 2.3.0 - 2016-10-24
 
 ## Enhancements
