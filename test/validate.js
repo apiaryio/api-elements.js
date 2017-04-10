@@ -1,5 +1,7 @@
-import {expect} from 'chai';
-import {Fury} from '../src/fury';
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-empty-pattern */
+import { expect } from 'chai';
+import { Fury } from '../src/fury';
 
 describe('Validation', () => {
   context('with a validate adapter', () => {
@@ -21,7 +23,7 @@ describe('Validation', () => {
     });
 
     it('should validate through mediatype', (done) => {
-      fury.validate({source: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, res) => {
+      fury.validate({ source: 'dummy', mediaType: 'text/vnd.passthrough' }, (err, res) => {
         expect(err).to.be.null;
         expect(res).to.be.null;
         done();
@@ -31,7 +33,7 @@ describe('Validation', () => {
     it('should validate through autodetect', (done) => {
       shouldDetect = true;
 
-      fury.validate({source: 'dummy'}, (err, res) => {
+      fury.validate({ source: 'dummy' }, (err, res) => {
         expect(err).to.be.null;
         expect(res).to.be.null;
         done();
@@ -39,7 +41,7 @@ describe('Validation', () => {
     });
 
     it('should error when validating with no matching validator', (done) => {
-      fury.validate({source: 'dummy'}, (err, res) => {
+      fury.validate({ source: 'dummy' }, (err, res) => {
         expect(err).not.to.be.null;
         expect(res).to.be.null;
         done();
@@ -49,28 +51,28 @@ describe('Validation', () => {
     it('should convert an object parse result into minim elements', (done) => {
       shouldDetect = true;
       result = {
-        'element': 'parseResult',
-        'content': [
+        element: 'parseResult',
+        content: [
           {
-            'element': 'annotation',
-            'meta': {'classes': ['warning']},
-            'content': 'a wild warning appeared',
+            element: 'annotation',
+            meta: { classes: ['warning'] },
+            content: 'a wild warning appeared',
           },
         ],
       };
 
-      fury.validate({source: 'dummy'}, (err, res) => {
+      fury.validate({ source: 'dummy' }, (err, res) => {
         expect(err).to.be.null;
         expect(res.toRefract()).to.deep.equal({
-          'element': 'parseResult',
-          'meta': {},
-          'attributes': {},
-          'content': [
+          element: 'parseResult',
+          meta: {},
+          attributes: {},
+          content: [
             {
-              'element': 'annotation',
-              'meta': {'classes': ['warning']},
-              'attributes': {},
-              'content': 'a wild warning appeared',
+              element: 'annotation',
+              meta: { classes: ['warning'] },
+              attributes: {},
+              content: 'a wild warning appeared',
             },
           ],
         });
@@ -80,12 +82,12 @@ describe('Validation', () => {
 
     it('should pass adapter options during validation', (done) => {
       shouldDetect = true;
-      fury.adapters[0].validate = ({minim, source, testOption = false}, cb) => {
+      fury.adapters[0].validate = ({ minim, source, testOption = false }, cb) => {
         const BooleanElement = minim.getElementClass('boolean');
         return cb(null, new BooleanElement(testOption));
       };
 
-      fury.validate({source: 'dummy', adapterOptions: {testOption: true}}, (err, res) => {
+      fury.validate({ source: 'dummy', adapterOptions: { testOption: true } }, (err, res) => {
         expect(err).to.be.null;
         expect(res.content).to.be.true;
         done();
@@ -110,17 +112,17 @@ describe('Validation', () => {
 
     it('should validate when there are no annotations', (done) => {
       result = {
-        'element': 'parseResult',
-        'content': [
+        element: 'parseResult',
+        content: [
           {
-            'element': 'category',
-            'meta': {'classes': ['api']},
-            'content': [],
+            element: 'category',
+            meta: { classes: ['api'] },
+            content: [],
           },
         ],
       };
 
-      fury.validate({source: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, res) => {
+      fury.validate({ source: 'dummy', mediaType: 'text/vnd.passthrough' }, (err, res) => {
         expect(err).to.be.null;
         expect(res).to.be.null;
         done();
@@ -129,33 +131,33 @@ describe('Validation', () => {
 
     it('should validate when there are annotations', (done) => {
       result = {
-        'element': 'parseResult',
-        'content': [
+        element: 'parseResult',
+        content: [
           {
-            'element': 'category',
-            'meta': {'classes': ['api']},
-            'content': [],
+            element: 'category',
+            meta: { classes: ['api'] },
+            content: [],
           },
           {
-            'element': 'annotation',
-            'meta': {'classes': ['warning']},
-            'content': 'a wild warning appeared',
+            element: 'annotation',
+            meta: { classes: ['warning'] },
+            content: 'a wild warning appeared',
           },
         ],
       };
 
-      fury.validate({source: 'dummy', mediaType: 'text/vnd.passthrough'}, (err, res) => {
+      fury.validate({ source: 'dummy', mediaType: 'text/vnd.passthrough' }, (err, res) => {
         expect(err).to.be.null;
         expect(res.toRefract()).to.deep.equal({
-          'element': 'parseResult',
-          'meta': {},
-          'attributes': {},
-          'content': [
+          element: 'parseResult',
+          meta: {},
+          attributes: {},
+          content: [
             {
-              'element': 'annotation',
-              'meta': {'classes': ['warning']},
-              'attributes': {},
-              'content': 'a wild warning appeared',
+              element: 'annotation',
+              meta: { classes: ['warning'] },
+              attributes: {},
+              content: 'a wild warning appeared',
             },
           ],
         });
