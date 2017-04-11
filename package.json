@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Swagger 2.0 parser for Fury.js",
   "main": "./lib/adapter.js",
   "tonicExampleFilename": "tonic-example.js",
@@ -28,10 +28,10 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "glob": "^7.1.1",
-    "fury": "2.x.x",
+    "fury": "3.0.0-beta.0",
     "peasant": "^1.1.0",
-    "minim": "^0.14.2",
-    "minim-parse-result": "^0.3.0",
+    "minim": "^0.15.0",
+    "minim-parse-result": "^0.4.0",
     "swagger-zoo": "2.2.6"
   },
   "engines": {

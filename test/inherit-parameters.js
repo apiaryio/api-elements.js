@@ -105,8 +105,8 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'query'));
 
       doParse(source, done, (result) => {
-        expect(result.resource.href).to.be.equal('/');
-        expect(result.transition.href).to.be.equal('/{?test}');
+        expect(result.resource.href.toValue()).to.be.equal('/');
+        expect(result.transition.href.toValue()).to.be.equal('/{?test}');
       });
     });
 
@@ -115,7 +115,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'query'));
 
       doParse(source, done, (result) => {
-        expect(result.resource.href).to.be.equal('/{?test}');
+        expect(result.resource.href.toValue()).to.be.equal('/{?test}');
         expect(result.transition.href).to.not.exist;
       });
     });
@@ -126,8 +126,8 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('foo', 'query'));
 
       doParse(source, done, (result) => {
-        expect(result.resource.href).to.be.equal('/{?test}');
-        expect(result.transition.href).to.be.equal('/{?test,foo}');
+        expect(result.resource.href.toValue()).to.be.equal('/{?test}');
+        expect(result.transition.href.toValue()).to.be.equal('/{?test,foo}');
       });
     });
 
@@ -137,7 +137,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'query'));
 
       doParse(source, done, (result) => {
-        expect(result.resource.href).to.be.equal('/{?test}');
+        expect(result.resource.href.toValue()).to.be.equal('/{?test}');
         expect(result.transition.href).to.not.exist;
       });
     });
@@ -149,7 +149,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/{test}'].parameters.push(makeParameter('test', 'path'));
 
       doParse(source, done, (result) => {
-        expect(result.resource.href).to.be.equal('/{test}');
+        expect(result.resource.href.toValue()).to.be.equal('/{test}');
         expect(result.resource.hrefVariables.keys()).to.deep.equal(['test']);
 
         expect(result.transition.href).to.not.exist;
@@ -162,7 +162,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/{test}'].get.parameters.push(makeParameter('test', 'path'));
 
       doParse(source, done, (result) => {
-        expect(result.resource.href).to.be.equal('/{test}');
+        expect(result.resource.href.toValue()).to.be.equal('/{test}');
         expect(result.resource.hrefVariables).to.not.exist;
 
         expect(result.transition.href).to.not.exist;
@@ -176,7 +176,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/{test}'].get.parameters.push(makeParameter('test', 'path'));
 
       doParse(source, done, (result) => {
-        expect(result.resource.href).to.be.equal('/{test}');
+        expect(result.resource.href.toValue()).to.be.equal('/{test}');
         expect(result.transition.href).to.not.exist;
 
         expect(result.resource.hrefVariables.keys()).to.deep.equal(['test']);
@@ -222,7 +222,7 @@ describe('Inherit Path Parameters', () => {
 
       doParse(source, done, (result) => {
         expect(result.request.header('test')).to.exist;
-        expect(result.request.header('test')).to.deep.equal(['bar']);
+        expect(result.request.header('test')[0].toValue()).to.deep.equal('bar');
       });
     });
   });

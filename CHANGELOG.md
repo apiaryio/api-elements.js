@@ -1,3 +1,9 @@
+# 0.11.0 - 2017-04-11
+
+- Update fury to 3.0.0-beta.0
+- Update minim to 0.15.0
+- Update minim-parse-result to 0.4.0
+
 # 0.10.0 - 2017-03-30
 
 - Upgraded babel-runtime dependency to v6
