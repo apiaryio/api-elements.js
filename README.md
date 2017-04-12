@@ -149,7 +149,7 @@ Get an array element of all child elements with the element name `member`. This 
 
 ```js
 for (const member of scheme.members) {
-	console.log(`Member: ${member.key}`)
+  console.log(`Member: ${member.key}`)
 }
 ```
 
