@@ -68,11 +68,11 @@ class FuryCLI {
     }
 
     result.warnings.forEach((annotation) => {
-      process.stderr.write(`warning(${annotation.code}): ${annotation.content}\n`);
+      process.stderr.write(`warning: (${annotation.code.content})  ${annotation.content}\n`);
     });
 
     result.errors.forEach((annotation) => {
-      process.stderr.write(`error(${annotation.code}): ${annotation.content}\n`);
+      process.stderr.write(`error: (${annotation.code.content})  ${annotation.content}\n`);
     });
 
     if (result.errors.length > 0) {
