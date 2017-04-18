@@ -1,3 +1,7 @@
+# Master
+
+- Added a convenience function for getting source maps called `sourceMapValue`
+
 # 0.4.0 - 2017-04-03
 
 - Annotation.code now returns a Number Element

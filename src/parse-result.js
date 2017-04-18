@@ -11,8 +11,9 @@ import apiDescription from 'minim-api-description';
 
 export function namespace(options) {
   const minim = options.base;
-  const ArrayElement = minim.getElementClass('array');
+  const BaseElement = minim.BaseElement;
   const StringElement = minim.getElementClass('string');
+  const ArrayElement = minim.getElementClass('array');
 
   class ParseResult extends ArrayElement {
     constructor(...args) {
@@ -62,6 +63,18 @@ export function namespace(options) {
       this.element = 'sourceMap';
     }
   }
+
+  Object.defineProperty(BaseElement.prototype, 'sourceMapValue', {
+    get() {
+      const sourceMap = this.attributes.get('sourceMap');
+
+      if (sourceMap) {
+        return sourceMap.first().toValue();
+      }
+
+      return [];
+    },
+  });
 
   minim
     .use(apiDescription)

@@ -199,7 +199,7 @@ describe('Parse result namespace', () => {
             },
           ],
         },
-        content: [],
+        content: '',
       };
 
       element = (new StringElement()).fromRefract(refracted);
@@ -220,6 +220,10 @@ describe('Parse result namespace', () => {
       expect(sourceMaps.first().toValue()).to.deep.equal([[1, 2]]);
     });
 
+    it('should have a convenience method for retrieving source map', () => {
+      expect(element.sourceMapValue).to.deep.equal([[1, 2]]);
+    });
+
     it('should serialize with a sourceMap attribute', () => {
       const expected = {
         element: 'string',
@@ -234,10 +238,30 @@ describe('Parse result namespace', () => {
             },
           ],
         },
-        content: [],
+        content: '',
       };
 
       expect(element.toRefract()).to.deep.equal(expected);
+    });
+  });
+
+  context('source map convenience function', () => {
+    let element;
+    let refracted;
+
+    beforeEach(() => {
+      refracted = {
+        element: 'string',
+        meta: {},
+        attributes: {},
+        content: '',
+      };
+
+      element = (new StringElement()).fromRefract(refracted);
+    });
+
+    it('should have a convenience method for retrieving source map', () => {
+      expect(element.sourceMapValue).to.deep.equal([]);
     });
   });
 });

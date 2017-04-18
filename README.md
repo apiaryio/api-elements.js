@@ -69,6 +69,14 @@ An element which maps a component of the parse result to the input via a given l
 
 The content of the source map is an array of locations.
 
+#### Convenience function
+You can use a convenience function to retrieve the sourceMap from any element.
+
+```js
+// Print [[1, 2]]
+console.log(element.sourceMapValue);
+```
+
 ## Install
 
 ```sh
