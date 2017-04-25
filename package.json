@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Swagger 2.0 parser for Fury.js",
   "main": "./lib/adapter.js",
   "tonicExampleFilename": "tonic-example.js",
@@ -22,7 +22,7 @@
     "json-schema-faker": "^0.4.0",
     "lodash": "^4.15.0",
     "swagger-parser": "^3.3.0",
-    "yaml-js": "^0.1.3",
+    "yaml-js": "^0.1.5",
     "media-typer": "^0.3.0"
   },
   "devDependencies": {
