@@ -1,3 +1,11 @@
+# 0.11.11 - 2017-04-25
+
+## Bug Fixes
+
+- Updated yaml-js dependency to 0.1.5. This resolves problems with determining
+  source maps for Swagger documents that include multi-byte unicode characters
+  such as emoji.
+
 # 0.11.0 - 2017-04-11
 
 - Update fury to 3.0.0-beta.0
