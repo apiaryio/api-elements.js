@@ -153,7 +153,7 @@ for (const member of scheme.members) {
 }
 ```
 
-### DataStructure ([ObjectElement](https://github.com/refractproject/minim#objectelement))
+### [DataStructure](http://api-elements.readthedocs.io/en/latest/element-definitions/#data-structure-base-api-element) (Element)
 This element describes a data structure.
 
 ### Resource ([ArrayElement](https://github.com/refractproject/minim#arrayelement))

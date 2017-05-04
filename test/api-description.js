@@ -374,27 +374,68 @@ describe('API description namespace', () => {
     });
   });
 
-  context('data structure element', () => {
-    let struct;
+  context('data structure element of number', () => {
+    let number;
 
     beforeEach(() => {
-      struct = new DataStructure('test');
+      number = new DataStructure(3);
     });
 
     it('should have element name dataStructure', () => {
-      expect(struct.element).to.equal('dataStructure');
+      expect(number.element).to.equal('dataStructure');
     });
 
     it('should have element content', () => {
-      expect(struct.content).to.be.an.instanceof(namespace.BaseElement);
+      expect(number.content).to.be.an.instanceof(namespace.BaseElement);
     });
 
     it('should get element content value', () => {
-      expect(struct.toValue()).to.equal('test');
+      expect(number.toValue()).to.equal(3);
     });
 
     it('should serialize to refract', () => {
-      const refract = struct.toRefract();
+      const refract = number.toRefract();
+      expect(refract).to.deep.equal({
+        element: 'dataStructure',
+        meta: {},
+        attributes: {},
+        content: {
+          element: 'number',
+          meta: {},
+          attributes: {},
+          content: 3,
+        },
+      });
+    });
+
+    it('should load from refract', () => {
+      const refract = number.toRefract();
+      const loaded = (new DataStructure()).fromRefract(refract);
+      expect(loaded.toRefract()).to.deep.equal(refract);
+    });
+  });
+
+  context('data structure element of string', () => {
+    let string;
+
+    beforeEach(() => {
+      string = new DataStructure('test');
+    });
+
+    it('should have element name dataStructure', () => {
+      expect(string.element).to.equal('dataStructure');
+    });
+
+    it('should have element content', () => {
+      expect(string.content).to.be.an.instanceof(namespace.BaseElement);
+    });
+
+    it('should get element content value', () => {
+      expect(string.toValue()).to.equal('test');
+    });
+
+    it('should serialize to refract', () => {
+      const refract = string.toRefract();
       expect(refract).to.deep.equal({
         element: 'dataStructure',
         meta: {},
@@ -409,30 +450,259 @@ describe('API description namespace', () => {
     });
 
     it('should load from refract', () => {
-      const refract = struct.toRefract();
+      const refract = string.toRefract();
       const loaded = (new DataStructure()).fromRefract(refract);
       expect(loaded.toRefract()).to.deep.equal(refract);
     });
+  });
 
-    it('should support arrays as content', () => {
-      const refract = {
+  context('data structure element of boolean', () => {
+    let boolean;
+
+    beforeEach(() => {
+      boolean = new DataStructure(true);
+    });
+
+    it('should have element name dataStructure', () => {
+      expect(boolean.element).to.equal('dataStructure');
+    });
+
+    it('should have element content', () => {
+      expect(boolean.content).to.be.an.instanceof(namespace.BaseElement);
+    });
+
+    it('should get element content value', () => {
+      expect(boolean.toValue()).to.equal(true);
+    });
+
+    it('should serialize to refract', () => {
+      const refract = boolean.toRefract();
+      expect(refract).to.deep.equal({
         element: 'dataStructure',
         meta: {},
         attributes: {},
-        content: [
-          {
-            element: 'object',
-            meta: {
-              id: 'User',
+        content: {
+          element: 'boolean',
+          meta: {},
+          attributes: {},
+          content: true,
+        },
+      });
+    });
+
+    it('should load from refract', () => {
+      const refract = boolean.toRefract();
+      const loaded = (new DataStructure()).fromRefract(refract);
+      expect(loaded.toRefract()).to.deep.equal(refract);
+    });
+  });
+
+  context('data structure element of array', () => {
+    let array;
+
+    beforeEach(() => {
+      array = new DataStructure(['a', 1]);
+    });
+
+    it('should have element name dataStructure', () => {
+      expect(array.element).to.equal('dataStructure');
+    });
+
+    it('should have element content', () => {
+      expect(array.content).to.be.an.instanceof(namespace.BaseElement);
+    });
+
+    it('should get element content value', () => {
+      expect(array.toValue()).to.deep.equal(['a', 1]);
+    });
+
+    it('should serialize to refract', () => {
+      const refract = array.toRefract();
+      expect(refract).to.deep.equal({
+        element: 'dataStructure',
+        meta: {},
+        attributes: {},
+        content: {
+          element: 'array',
+          meta: {},
+          attributes: {},
+          content: [
+            {
+              element: 'string',
+              meta: {},
+              attributes: {},
+              content: 'a',
             },
-            attributes: {},
-            content: [],
-          },
-        ],
+            {
+              element: 'number',
+              meta: {},
+              attributes: {},
+              content: 1,
+            },
+          ],
+        },
+      });
+    });
+
+    it('should load from refract', () => {
+      const refract = array.toRefract();
+      const loaded = (new DataStructure()).fromRefract(refract);
+      expect(loaded.toRefract()).to.deep.equal(refract);
+    });
+  });
+
+  context('data structure element of object', () => {
+    let object;
+
+    beforeEach(() => {
+      object = new DataStructure({ a: 'a', b: 1, c: [2] });
+    });
+
+    it('should have element name dataStructure', () => {
+      expect(object.element).to.equal('dataStructure');
+    });
+
+    it('should have element content', () => {
+      expect(object.content).to.be.an.instanceof(namespace.BaseElement);
+    });
+
+    it('should get element content value', () => {
+      expect(object.toValue()).to.deep.equal({ a: 'a', b: 1, c: [2] });
+    });
+
+    it('should serialize to refract', () => {
+      const refract = object.toRefract();
+      expect(refract).to.deep.equal({
+        element: 'dataStructure',
+        meta: {},
+        attributes: {},
+        content: {
+          element: 'object',
+          meta: {},
+          attributes: {},
+          content: [
+            {
+              element: 'member',
+              meta: {},
+              attributes: {},
+              content: {
+                key: {
+                  element: 'string',
+                  meta: {},
+                  attributes: {},
+                  content: 'a',
+                },
+                value: {
+                  element: 'string',
+                  meta: {},
+                  attributes: {},
+                  content: 'a',
+                },
+              },
+            },
+            {
+              element: 'member',
+              meta: {},
+              attributes: {},
+              content: {
+                key: {
+                  element: 'string',
+                  meta: {},
+                  attributes: {},
+                  content: 'b',
+                },
+                value: {
+                  element: 'number',
+                  meta: {},
+                  attributes: {},
+                  content: 1,
+                },
+              },
+            },
+            {
+              element: 'member',
+              meta: {},
+              attributes: {},
+              content: {
+                key: {
+                  element: 'string',
+                  meta: {},
+                  attributes: {},
+                  content: 'c',
+                },
+                value: {
+                  element: 'array',
+                  meta: {},
+                  attributes: {},
+                  content: [
+                    {
+                      element: 'number',
+                      meta: {},
+                      attributes: {},
+                      content: 2,
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      });
+    });
+
+    it('should load from refract', () => {
+      const refract = object.toRefract();
+      const loaded = (new DataStructure()).fromRefract(refract);
+      expect(loaded.toRefract()).to.deep.equal(refract);
+    });
+  });
+
+  context('dataStructure with reference', () => {
+    let refracted;
+    let data;
+
+    beforeEach(() => {
+      refracted = {
+        element: 'dataStructure',
+        meta: {},
+        attributes: {},
+        content: {
+          element: 'object',
+          meta: {},
+          attributes: {},
+          content: [
+            {
+              element: 'member',
+              meta: {},
+              attributes: {},
+              content: {
+                key: {
+                  element: 'string',
+                  meta: {},
+                  attributes: {},
+                  content: 'data',
+                },
+                value: {
+                  element: 'Session',
+                  meta: {},
+                  attributes: {},
+                  content: undefined,
+                },
+              },
+            },
+          ],
+        },
       };
 
-      const element = namespace.fromRefract(refract);
-      expect(element.toRefract()).to.deep.equal(refract);
+      data = (new DataStructure()).fromRefract(refracted);
+    });
+
+    it('should load from refract', () => {
+      expect(data.toRefract()).to.deep.equal(refracted);
+    });
+
+    it('should give the correct value', () => {
+      expect(data.toValue()).to.deep.equal({ data: undefined });
     });
   });
 
