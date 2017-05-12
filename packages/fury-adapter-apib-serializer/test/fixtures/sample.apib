@@ -22,6 +22,7 @@ A frob does something.
 + Attributes
 
     + id (required)
+    + Include User
     + tags (array)
         + (object)
             + name (required) - Tag name.
@@ -71,11 +72,15 @@ Gets information about a single frob instance
               }
             }
 
-#### Restart a frob [POST]
+#### Restart a frob [POST /frobs]
 
 Restart a frob instance
 
 + Relation: restart
+
++ Request Create (application/json)
+
+        {}
 
 + Response 204
 
@@ -88,3 +93,11 @@ Restart a frob instance
 ### User
 
 + name (required)
+    + Sample: pavan
++ address (object)
+    Long description
+
+    - Hello
+
+    + Properties
+        + country
