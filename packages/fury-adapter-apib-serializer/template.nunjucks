@@ -1,5 +1,5 @@
 FORMAT: 1A
-{% if api.meta.HOST %}HOST: {{ api.meta.HOST }}{% endif %}
+{% set host = api.metadata('HOST') %}{% if host and host.toValue() %}HOST: {{ host.toValue() }}{% endif %}
 
 
 

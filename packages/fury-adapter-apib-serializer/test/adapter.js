@@ -10,6 +10,7 @@ import fury from 'fury';
 import glob from 'glob';
 import path from 'path';
 import { serialize } from '../src/adapter';
+import { indent } from '../src/filters';
 
 const base = path.join(__dirname, 'fixtures');
 
@@ -43,5 +44,13 @@ describe('API Blueprint serializer adapter', () => {
         return done();
       });
     });
+  });
+});
+
+describe('Indent filter', () => {
+  const lines = indent('1\n2', 2, { first: true });
+
+  it('indents the first line', () => {
+    expect(lines).to.equal('  1\n  2');
   });
 });
