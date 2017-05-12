@@ -1,3 +1,7 @@
+# 0.5.0 - 2017-05-12
+
+- `sourceMapValue` will return undefined instead of empty array
+
 # 0.4.1 - 2017-05-10
 
 - Added a convenience function for getting source maps called `sourceMapValue`
