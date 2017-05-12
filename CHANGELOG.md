@@ -1,3 +1,7 @@
+# 0.3.1 - 2017-05-12
+
+- Adds support for Fury@3 and includes multiple fixes
+
 # 0.3.0 - 2017-03-30
 
 - Upgrade babel-runtime dependency to v6

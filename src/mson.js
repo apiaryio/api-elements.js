@@ -64,7 +64,7 @@ function handleContent(element, spaces, marker) {
       // This is an array type or something similar.
       objectLike = false;
       /* eslint-disable no-use-before-define */
-      renderedContent += handle(item.title, item, {
+      renderedContent += handle(item.title.toValue(), item, {
         parent: element,
         spaces,
         marker,
@@ -96,16 +96,16 @@ function handleDescription(description, element, parent, spaces, marker) {
   }
 
   // Finally, an optional description
-  if (description) {
-    if (description.indexOf('\n') !== -1) {
+  if (description && description.toValue()) {
+    if (description.toValue().indexOf('\n') !== -1) {
       // Multiline description, so we can't use the short form!
       useLongDescription = true;
     }
 
     if (useLongDescription) {
-      str += `\n${description}`;
+      str += `\n${description.toValue()}`;
     } else {
-      str += ` - ${description}`;
+      str += ` - ${description.toValue()}`;
     }
   }
 
@@ -118,7 +118,7 @@ function handleDescription(description, element, parent, spaces, marker) {
   }
 
   const sampleValue = element.attributes &&
-                      element.attributes.getValue('sample');
+                      element.attributes.getValue('samples');
   if (sampleValue !== undefined) {
     str += `\n${marker} Sample: ${sampleValue}\n`;
   }
@@ -207,7 +207,7 @@ export function renderDataStructure(dataStructure) {
   const mson = dataStructure.content[0];
   const title = mson.id;
 
-  return handle(title, mson, {
+  return handle(title.toValue(), mson, {
     initialMarker: '###',
     initialIndent: false,
   });

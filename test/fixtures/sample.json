@@ -28,6 +28,24 @@
                 "content": "1A"
               }
             }
+          },
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "content": "https://example.com"
+              }
+            }
           }
         ]
       },
@@ -112,6 +130,13 @@
                             "value": {
                               "element": "string"
                             }
+                          }
+                        },
+                        {
+                          "element": "ref",
+                          "content": {
+                            "href": "User",
+                            "path": "content"
                           }
                         },
                         {
@@ -272,7 +297,8 @@
                     "title": "Restart a frob"
                   },
                   "attributes": {
-                    "relation": "restart"
+                    "relation": "restart",
+                    "href": "/frobs"
                   },
                   "content": [
                     {
@@ -284,10 +310,44 @@
                       "content": [
                         {
                           "element": "httpRequest",
-                          "attributes": {
-                            "method": "POST"
+                          "meta": {
+                            "title": "Create"
                           },
-                          "content": []
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{}\n"
+                            }
+                          ]
                         },
                         {
                           "element": "httpResponse",
@@ -339,7 +399,41 @@
                           "content": "name"
                         },
                         "value": {
-                          "element": "string"
+                          "element": "string",
+                          "attributes": {
+                            "samples": [
+                              "pavan"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Long description\n\n- Hello"
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "address"
+                        },
+                        "value": {
+                          "element": "object",
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "country"
+                                },
+                                "value": {
+                                  "element": "string"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     }
