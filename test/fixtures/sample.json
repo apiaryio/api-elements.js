@@ -28,6 +28,24 @@
                 "content": "1A"
               }
             }
+          },
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "content": "https://example.com"
+              }
+            }
           }
         ]
       },
