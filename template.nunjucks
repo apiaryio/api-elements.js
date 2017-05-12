@@ -49,7 +49,7 @@ FORMAT: 1A
 
   {% for item in hrefVariables.content %}
     {% set typeAttributes = item.attributes.get('typeAttributes') %}
-    + {{ item.key.toValue() }}{% if item.value.toValue() %}: {{ item.value.toValue() }}{% endif %}{% if typeAttributes %} ({{ typeAttributes.toValue() }}){% endif %}{% if item.description %} - {{ item.description }}{% endif %}{% endfor %}
+    + {{ item.key.toValue() }}{% if item.value.toValue() %}: {{ item.value.toValue() }}{% endif %}{% if typeAttributes %} ({{ typeAttributes.toValue() }}){% endif %}{% if item.description and item.description.toValue() %} - {{ item.description.toValue() }}{% endif %}{% endfor %}
 
 {% endmacro %}
 
@@ -65,8 +65,8 @@ FORMAT: 1A
 + Request{% if request.contentType %} ({{ request.contentType }}){% endif %}
 {{ renderExample(request) }}
 {% endif %}
-{% if response and response.statusCode %}
-+ Response {{ response.statusCode }}{% if response.contentType %} ({{ response.contentType }}){% endif %}
+{% if response and response.statusCode and response.statusCode.toValue() %}
++ Response {{ response.statusCode.toValue() }}{% if response.contentType and response.contentType.toValue() %} ({{ response.contentType.toValue() }}){% endif %}
 {{ renderExample(response) }}
 {% endif %}
 {% endmacro %}
@@ -76,10 +76,10 @@ FORMAT: 1A
 
 
 {% macro renderTransition(transition, href) %}
-{% if transition.title %}
-#### {{ transition.title }} [{{ transition.method }}{% if href %} {{ href }}{% elif transition.computedHref %} {{ transition.computedHref }}{% endif %}]
+{% if transition.title and transition.title.toValue() %}
+#### {{ transition.title.toValue() }} [{{ transition.method.toValue() }}{% if href %} {{ href }}{% elif transition.computedHref %} {{ transition.computedHref }}{% endif %}]
 {% else %}
-#### {{ transition.method }}{% if href %} {{ href }}{% elif transition.computedHref %} {{ transition.computedHref }}{% endif %}
+#### {{ transition.method.toValue() }}{% if href %} {{ href }}{% elif transition.computedHref %} {{ transition.computedHref }}{% endif %}
 {% endif %}
 
 {% for copy in transition|getCopy %}
@@ -90,8 +90,8 @@ FORMAT: 1A
   {{ renderParameters(transition.hrefVariables) }}
 {% endif %}
 
-{% if transition.relation %}
-+ Relation: {{ transition.relation }}
+{% if transition.relation and transition.relation.toValue() %}
++ Relation: {{ transition.relation.toValue() }}
 {% endif %}
 
 {% for transaction in transition.transactions.content %}
@@ -106,10 +106,10 @@ FORMAT: 1A
 {% macro renderResource(resource) %}
 {% if not resource|resourceShorthand %}
 {% set href = null %}
-{% if resource.title %}
-### {{ resource.title }} [{{ resource.href }}]
+{% if resource.title and resource.title.toValue() %}
+### {{ resource.title.toValue() }} [{{ resource.href.toValue() }}]
 {% else %}
-### {{ resource.href }}
+### {{ resource.href.toValue() }}
 {% endif %}
 
 {% for copy in resource|getCopy %}
@@ -120,7 +120,7 @@ FORMAT: 1A
     We are using the shorthand, make sure to pass any href down to the
     transition layer.
   #}
-  {% set href = resource.href %}
+  {% set href = resource.href.toValue() %}
 {% endif %}
 {% if resource.hrefVariables.length %}
 {{ renderParameters(resource.hrefVariables) }}
@@ -138,7 +138,7 @@ FORMAT: 1A
 
 
 {% macro renderGroup(group) %}
-## Group {{ group.title }}
+## Group {{ group.title.toValue() }}
 
 {{ renderCategory(group) }}
 {% endmacro %}
@@ -183,8 +183,8 @@ FORMAT: 1A
 
 
 
-# {{ api.title|default('API Documentation', true) }}
+# {{ api.title.toValue()|default('API Documentation', true) }}
 
-{{ api.description }}
+{{ api.description.toValue() }}
 
 {{ renderCategory(api) }}
