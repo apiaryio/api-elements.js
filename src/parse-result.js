@@ -72,7 +72,7 @@ export function namespace(options) {
         return sourceMap.first().toValue();
       }
 
-      return [];
+      return undefined;
     },
   });
 

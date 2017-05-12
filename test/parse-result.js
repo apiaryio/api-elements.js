@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /*
  * Tests for parse result namespace elements, including all their
  * convenience properties and methods.
@@ -261,7 +262,7 @@ describe('Parse result namespace', () => {
     });
 
     it('should have a convenience method for retrieving source map', () => {
-      expect(element.sourceMapValue).to.deep.equal([]);
+      expect(element.sourceMapValue).to.be.undefined;
     });
   });
 });
