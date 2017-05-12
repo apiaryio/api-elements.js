@@ -7,7 +7,7 @@ FORMAT: 1A
 
 {% macro renderExample(example) %}
 {% for copy in example|getCopy %}
-    {{ copy.content }}
+    {{ copy.toValue() }}
 
 {% endfor %}
 
@@ -61,8 +61,8 @@ FORMAT: 1A
 {% macro renderTransaction(transaction) %}
 {% set request = transaction.request %}
 {% set response = transaction.response %}
-{% if request and (request.contentType or request.headers or request.dataStructure or request.messageBody or request.messageBodySchema) %}
-+ Request{% if request.contentType %} ({{ request.contentType }}){% endif %}
+{% if request and ((request.title and request.title.toValue()) or request.contentType or request.headers or request.dataStructure or request.messageBody or request.messageBodySchema) %}
++ Request{% if request.title and request.title.toValue() %} {{request.title.toValue()}}{% endif %}{% if request.contentType and request.contentType.toValue() %} ({{ request.contentType.toValue() }}){% endif %}
 {{ renderExample(request) }}
 {% endif %}
 {% if response and response.statusCode and response.statusCode.toValue() %}
@@ -77,13 +77,13 @@ FORMAT: 1A
 
 {% macro renderTransition(transition, href) %}
 {% if transition.title and transition.title.toValue() %}
-#### {{ transition.title.toValue() }} [{{ transition.method.toValue() }}{% if href %} {{ href }}{% elif transition.computedHref %} {{ transition.computedHref }}{% endif %}]
+#### {{ transition.title.toValue() }} [{{ transition.method.toValue() }}{% if href %} {{ href }}{% elif transition.computedHref and transition.computedHref.toValue() %} {{ transition.computedHref.toValue() }}{% endif %}]
 {% else %}
-#### {{ transition.method.toValue() }}{% if href %} {{ href }}{% elif transition.computedHref %} {{ transition.computedHref }}{% endif %}
+#### {{ transition.method.toValue() }}{% if href %} {{ href }}{% elif transition.computedHref and transition.computedHref.toValue() %} {{ transition.computedHref.toValue() }}{% endif %}
 {% endif %}
 
 {% for copy in transition|getCopy %}
-{{ copy.content }}
+{{ copy.toValue() }}
 {% endfor %}
 
 {% if transition.hrefVariables.length %}
@@ -113,7 +113,7 @@ FORMAT: 1A
 {% endif %}
 
 {% for copy in resource|getCopy %}
-{{ copy.content }}
+{{ copy.toValue() }}
 {% endfor %}
 {% else %}
   {#

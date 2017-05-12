@@ -118,7 +118,7 @@ function handleDescription(description, element, parent, spaces, marker) {
   }
 
   const sampleValue = element.attributes &&
-                      element.attributes.getValue('sample');
+                      element.attributes.getValue('samples');
   if (sampleValue !== undefined) {
     str += `\n${marker} Sample: ${sampleValue}\n`;
   }
