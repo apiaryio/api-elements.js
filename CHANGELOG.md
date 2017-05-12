@@ -1,3 +1,8 @@
+# 3.0.0-beta.1 - 2017-05-12
+
+- Update minim to 0.16.0
+- Update minim-parse-result to 0.5.0
+
 # 3.0.0-beta.0 - 2017-04-10
 
 - Upgrade babel-runtime dependency to v6
