@@ -1,3 +1,7 @@
+# 0.3.1 - 2017-05-12
+
+- Added API metadata convenience function
+
 # 0.3.0 - 2017-04-04
 
 - Make sure all convenience functions return an element

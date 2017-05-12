@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /*
  * Tests for API description namespace elements, including all their
  * convenience properties and methods.
@@ -160,15 +161,26 @@ describe('API description namespace', () => {
       expect(category.element).to.equal('category');
     });
 
-    it('should have host metadata', () => {
+    it('should have host API metadata', () => {
       const meta = category.attributes.get('meta').first();
       expect(meta.key.toValue()).to.equal('HOST');
       expect(meta.value.toValue()).to.equal('https://example.com');
     });
 
+    it('should get host API metadata', () => {
+      const host = category.metadata('HOST');
+      expect(host.toValue()).to.equal('https://example.com');
+    });
+
+    it('should not get API metadata which doesn\'t exist', () => {
+      const random = category.metadata('random');
+      expect(random).to.be.undefined;
+    });
+
     it('should contain a resource group', () => {
       const items = category.resourceGroups;
       expect(items).to.have.length(1);
+
       items.forEach((item) => {
         expect(item).to.be.an.instanceof(Category);
         expect(item).to.have.class('resourceGroup');
@@ -332,6 +344,10 @@ describe('API description namespace', () => {
       items.forEach((item) => {
         expect(item).to.be.an.instanceof(AuthScheme);
       });
+    });
+
+    it('shouldn\'t have API metadata', () => {
+      expect(category.metadata('random')).to.be.undefined;
     });
   });
 
