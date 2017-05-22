@@ -17,28 +17,28 @@ An element that holds information about the result of parsing an input.
 #### Properties
 
 ##### parseResult.annotations
-Get an array element of all child elements with the element name `annotation`. This property is **ready-only**.
+Get an array element of all child elements with the element name `annotation`. This property is **read-only**.
 
 ```js
 let annotations = parseResult.annotations;
 ```
 
 ##### parseResult.api
-Get the first child element with an element name of `category` and a class name of `api`. This property is **ready-only**.
+Get the first child element with an element name of `category` and a class name of `api`. This property is **read-only**.
 
 ```js
 let api = parseResult.api;
 ```
 
 ##### parseResult.errors
-Get an array element of all child elements with the element name `annotation` and class name `error`. This property is **ready-only**.
+Get an array element of all child elements with the element name `annotation` and class name `error`. This property is **read-only**.
 
 ```js
 let errors = parseResult.errors;
 ```
 
 ##### parseResult.warnings
-Get an array element of all child elements with the element name `annotation` and class name `warning`. This property is **ready-only**.
+Get an array element of all child elements with the element name `annotation` and class name `warning`. This property is **read-only**.
 
 ```js
 let warnings = parseResult.warnings;
