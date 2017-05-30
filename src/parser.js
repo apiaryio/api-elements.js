@@ -10,6 +10,7 @@ import uriTemplate from './uri-template';
 import { origin } from './link';
 import { pushHeader, pushHeaderObject } from './headers';
 import Ast from './ast';
+import DataStructureGenerator from './schema';
 
 const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
 
@@ -1345,6 +1346,7 @@ export default class Parser {
   pushSchemaAsset(schema, payload, path) {
     let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
     actualSchema = _.omitBy(actualSchema, isExtension);
+    let handledSchema = false;
 
     try {
       const Asset = this.minim.getElementClass('asset');
@@ -1358,9 +1360,21 @@ export default class Parser {
       }
 
       payload.content.push(schemaAsset);
+      handledSchema = true;
     } catch (exception) {
       this.createAnnotation(annotations.DATA_LOST, path,
         ('Circular references in schema are not yet supported'));
+    }
+
+    if (handledSchema) {
+      try {
+        const generator = new DataStructureGenerator(this.minim);
+        const dataStructure = generator.generateDataStructure(schema);
+        payload.content.push(dataStructure);
+      } catch (exception) {
+        console.log('Failed to generate dataStructure from schema');
+        console.error(exception);
+      }
     }
   }
 
