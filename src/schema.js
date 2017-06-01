@@ -39,7 +39,10 @@ export default class DataStructureGenerator {
     // TODO oneOf
     // TODO not
 
-    if (schema.type === 'string') {
+    if (schema.enum) {
+      element = new ArrayElement(schema.enum);
+      element.element = 'enum';
+    } else if (schema.type === 'string') {
       element = new StringElement();
       // TODO pattern
       // TODO maxLength
