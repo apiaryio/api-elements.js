@@ -1,3 +1,9 @@
+# 0.12.0-beta.1
+
+## Enhancements
+
+- Data Structure elements are now generated from JSON Schema found in examples.
+
 # 0.11.1 - 2017-04-25
 
 ## Bug Fixes
