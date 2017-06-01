@@ -118,6 +118,17 @@
                             "contentType": "application/schema+json"
                           },
                           "content": "{\"type\":\"string\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "string",
+                            "meta": {},
+                            "attributes": {},
+                            "content": null
+                          }
                         }
                       ]
                     }
@@ -176,6 +187,17 @@
                             "contentType": "application/schema+json"
                           },
                           "content": "{\"type\":\"string\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "string",
+                            "meta": {},
+                            "attributes": {},
+                            "content": null
+                          }
                         }
                       ]
                     }
@@ -243,6 +265,17 @@
                             "contentType": "application/schema+json"
                           },
                           "content": "{\"type\":\"string\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "string",
+                            "meta": {},
+                            "attributes": {},
+                            "content": null
+                          }
                         }
                       ]
                     }
