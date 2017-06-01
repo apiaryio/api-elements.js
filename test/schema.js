@@ -128,7 +128,7 @@ describe('JSON Schema to Data Structure', () => {
         type: 'string',
         description: 'A simple string',
         minLength: 2,
-        maxLength: 10
+        maxLength: 10,
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -140,7 +140,7 @@ describe('JSON Schema to Data Structure', () => {
           'A simple string\n' +
           '\n' +
           '- Length of string must be less than, or equal to 10\n' +
-          '- Length of string must be greater than, or equal to 2'
+          '- Length of string must be greater than, or equal to 2',
         );
     });
   });
@@ -277,7 +277,7 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(NumberElement);
       expect(dataStructure.content.description.toValue())
-        .to.equal('- Number must less than, or equal to 10');
+        .to.equal('- Number must be less than, or equal to 10');
     });
 
     it('produces number element with description of minimum', () => {
@@ -291,7 +291,7 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(NumberElement);
       expect(dataStructure.content.description.toValue())
-        .to.equal('- Number must more than, or equal to 1');
+        .to.equal('- Number must be more than, or equal to 1');
     });
 
     it('produces number element with description of exclusiveMaximum', () => {

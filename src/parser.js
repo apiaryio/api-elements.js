@@ -1372,8 +1372,6 @@ export default class Parser {
         const dataStructure = generator.generateDataStructure(schema);
         payload.content.push(dataStructure);
       } catch (exception) {
-        console.log('Failed to generate dataStructure from schema');
-        console.error(exception);
       }
     }
   }
