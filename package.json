@@ -32,7 +32,7 @@
     "peasant": "^1.1.0",
     "minim": "^0.15.0",
     "minim-parse-result": "^0.4.0",
-    "swagger-zoo": "2.2.6"
+    "swagger-zoo": "2.3.0"
   },
   "engines": {
     "node": ">=4"
