@@ -32,6 +32,8 @@ export default class DataStructureGenerator {
       Null: NullElement,
     } = this.minim.elements;
 
+    const validationDescriptions = [];
+
     let element;
 
     // TODO allOf
@@ -44,18 +46,42 @@ export default class DataStructureGenerator {
       element.element = 'enum';
     } else if (schema.type === 'string') {
       element = new StringElement();
-      // TODO pattern
-      // TODO maxLength
-      // TODO minLength
+
+      if (schema.pattern) {
+        validationDescriptions.push(`Matches regex pattern: \`${schema.pattern}\``);
+      }
+
+      if (schema.maxLength) {
+        validationDescriptions.push(`Length of string must be less than, or equal to ${schema.maxLength}`);
+      }
+
+      if (schema.minLength) {
+        validationDescriptions.push(`Length of string must be greater than, or equal to ${schema.minLength}`);
+      }
     } else if (schema.type === 'boolean') {
       element = new BooleanElement();
     } else if (schema.type === 'number') {
       element = new NumberElement();
-      // TODO multipleOf
-      // TODO maximum
-      // TODO exclusiveMaximum
-      // TODO minimum
-      // TODO exclusiveMinimum
+
+      if (schema.multipleOf) {
+        validationDescriptions.push(`Number must be a multiple of ${schema.multipleOf}`);
+      }
+
+      if (schema.maximum) {
+        validationDescriptions.push(`Number must less than, or equal to ${schema.maximum}`);
+      }
+
+      if (schema.minimum) {
+        validationDescriptions.push(`Number must more than, or equal to ${schema.minimum}`);
+      }
+
+      if (schema.exclusiveMaximum) {
+        validationDescriptions.push(`Number must be less than ${schema.exclusiveMaximum}`);
+      }
+
+      if (schema.exclusiveMinimum) {
+        validationDescriptions.push(`Number must be more than ${schema.exclusiveMinimum}`);
+      }
     } else if (schema.type === 'null') {
       element = new NullElement();
     } else if (schema.type === 'object') {
@@ -74,7 +100,14 @@ export default class DataStructureGenerator {
         });
       }
 
-      // TODO maxProperties
+      if (schema.maxProperties) {
+        validationDescriptions.push(`Object must have less than, or equal to ${schema.maxProperties} properties`);
+      }
+
+      if (schema.minProperties) {
+        validationDescriptions.push(`Object must have more than, or equal to ${schema.minProperties} properties`);
+      }
+
       // TODO minProperties
       // TODO patternProperties
       // TODO additionalProperties
@@ -91,13 +124,26 @@ export default class DataStructureGenerator {
         }
       }
 
+      if (schema.maxItems) {
+        validationDescriptions.push(`Array length must be less than, or equal to ${schema.maxItems}`);
+      }
+
+      if (schema.minItems) {
+        validationDescriptions.push(`Array length must be more than, or equal to ${schema.minItems}`);
+      }
+
+      if (schema.uniqueItems) {
+        validationDescriptions.push('Array contents must be unique');
+      }
+
       // TODO additionalItems
-      // TODO maxItems
-      // TODO minItems
-      // TODO uniqueItems
       // TODO contains
     } else if (_.isArray(schema.type)) {
       // TODO: Support multiple `type`
+    }
+
+    if (schema.format) {
+      validationDescriptions.push(`Value must be of format '${schema.format}'`);
     }
 
     if (element) {
@@ -117,6 +163,18 @@ export default class DataStructureGenerator {
       if (schema.examples && (schema.type === 'string' || schema.type === 'boolean' || schema.type == 'number')) {
         // TODO examples for array/object or multiple types
         element.attributes.set('samples', schema.examples);
+      }
+
+      if (validationDescriptions.length > 0) {
+        let description = validationDescriptions
+          .map((description) => { return '- ' + description})
+          .join('\n');
+
+        if (element.description && element.description.toValue()) {
+          description = element.description.toValue() + '\n\n' + description;
+        }
+
+        element.description = new StringElement(description);
       }
     }
 

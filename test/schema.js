@@ -80,6 +80,69 @@ describe('JSON Schema to Data Structure', () => {
       expect(samples).to.be.instanceof(ArrayElement);
       expect(samples.toValue()).to.be.deep.equal(['doe']);
     });
+
+    it('produces string element with description describing pattern', () => {
+      const schema = {
+        type: 'string',
+        pattern: '^hi',
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(StringElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Matches regex pattern: `^hi`');
+    });
+
+    it('produces string element with description maxLength', () => {
+      const schema = {
+        type: 'string',
+        maxLength: 15,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(StringElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Length of string must be less than, or equal to 15');
+    });
+
+    it('produces string element with description minLength', () => {
+      const schema = {
+        type: 'string',
+        minLength: 2,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(StringElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Length of string must be greater than, or equal to 2');
+    });
+
+    it('produces string element with description providing all validations', () => {
+      const schema = {
+        type: 'string',
+        description: 'A simple string',
+        minLength: 2,
+        maxLength: 10
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(StringElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal(
+          'A simple string\n' +
+          '\n' +
+          '- Length of string must be less than, or equal to 10\n' +
+          '- Length of string must be greater than, or equal to 2'
+        );
+    });
   });
 
   context('boolean schema', () => {
@@ -188,6 +251,76 @@ describe('JSON Schema to Data Structure', () => {
       expect(samples).to.be.instanceof(ArrayElement);
       expect(samples.toValue()).to.deep.equal([1, 2, 3]);
     });
+
+    it('produces number element with description of multipleOf', () => {
+      const schema = {
+        type: 'number',
+        multipleOf: 2,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(NumberElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Number must be a multiple of 2');
+    });
+
+    it('produces number element with description of maximum', () => {
+      const schema = {
+        type: 'number',
+        maximum: 10,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(NumberElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Number must less than, or equal to 10');
+    });
+
+    it('produces number element with description of minimum', () => {
+      const schema = {
+        type: 'number',
+        minimum: 1,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(NumberElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Number must more than, or equal to 1');
+    });
+
+    it('produces number element with description of exclusiveMaximum', () => {
+      const schema = {
+        type: 'number',
+        exclusiveMaximum: 10,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(NumberElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Number must be less than 10');
+    });
+
+    it('produces number element with description of exclusiveMinimum', () => {
+      const schema = {
+        type: 'number',
+        exclusiveMinimum: 1,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(NumberElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Number must be more than 1');
+    });
   });
 
   context('object schema', () => {
@@ -243,6 +376,34 @@ describe('JSON Schema to Data Structure', () => {
       const member = dataStructure.content.content[0];
       expect(member.attributes.typeAttributes.toValue()).to.deep.equal(['required']);
     });
+
+    it('produces object element with description of maxProperties', () => {
+      const schema = {
+        type: 'object',
+        maxProperties: 5,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Object must have less than, or equal to 5 properties');
+    });
+
+    it('produces object element with description of minProperties', () => {
+      const schema = {
+        type: 'object',
+        minProperties: 2,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Object must have more than, or equal to 2 properties');
+    });
   });
 
   context('array schema', () => {
@@ -292,6 +453,62 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.content.get(0).element).to.equal('number');
       expect(dataStructure.content.get(1).element).to.equal('string');
     });
+
+    it('produces array element with description of maxItems', () => {
+      const schema = {
+        type: 'array',
+        maxItems: 10,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ArrayElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Array length must be less than, or equal to 10');
+    });
+
+    it('produces array element with description of minItems', () => {
+      const schema = {
+        type: 'array',
+        minItems: 1,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ArrayElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Array length must be more than, or equal to 1');
+    });
+
+    it('produces array element with description of minItems', () => {
+      const schema = {
+        type: 'array',
+        minItems: 1,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ArrayElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Array length must be more than, or equal to 1');
+    });
+
+    it('produces array element with description of uniqueItems', () => {
+      const schema = {
+        type: 'array',
+        uniqueItems: true,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ArrayElement);
+      expect(dataStructure.content.description.toValue())
+        .to.equal('- Array contents must be unique');
+    });
   });
 
   it('exposes the schema title', () => {
@@ -335,5 +552,19 @@ describe('JSON Schema to Data Structure', () => {
     expect(dataStructure.content.get(1)).to.be.instanceof(NumberElement);
     expect(dataStructure.content.getValue(1)).to.equal(2);
     expect(dataStructure.content.get(2)).to.be.instanceof(NullElement);
+  });
+
+  it('produces description containing the schema format', () => {
+    const schema = {
+      type: 'string',
+      format: 'email',
+    };
+
+    const dataStructure = schemaToDataStructure(schema);
+
+    expect(dataStructure.element).to.equal('dataStructure');
+    expect(dataStructure.content).to.be.instanceof(StringElement);
+    expect(dataStructure.content.description.toValue())
+      .to.equal("- Value must be of format 'email'");
   });
 });
