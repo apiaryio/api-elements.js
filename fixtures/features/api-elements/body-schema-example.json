@@ -232,17 +232,6 @@
                             "contentType": "application/schema+json"
                           },
                           "content": "{}"
-                        },
-                        {
-                          "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
-                          "content": {
-                            "element": "null",
-                            "meta": {},
-                            "attributes": {},
-                            "content": null
-                          }
                         }
                       ]
                     }
