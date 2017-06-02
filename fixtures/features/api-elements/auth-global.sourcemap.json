@@ -287,6 +287,17 @@
                             ]
                           },
                           "content": "{\"type\":\"string\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "string",
+                            "meta": {},
+                            "attributes": {},
+                            "content": null
+                          }
                         }
                       ]
                     }
@@ -429,6 +440,17 @@
                             ]
                           },
                           "content": "{\"type\":\"string\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "string",
+                            "meta": {},
+                            "attributes": {},
+                            "content": null
+                          }
                         }
                       ]
                     }
@@ -594,6 +616,17 @@
                             ]
                           },
                           "content": "{\"type\":\"string\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "string",
+                            "meta": {},
+                            "attributes": {},
+                            "content": null
+                          }
                         }
                       ]
                     }

@@ -210,6 +210,17 @@
                             ]
                           },
                           "content": "{\"type\":\"string\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "string",
+                            "meta": {},
+                            "attributes": {},
+                            "content": null
+                          }
                         }
                       ]
                     },
@@ -344,6 +355,67 @@
                             ]
                           },
                           "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"enum\":[123],\"default\":456},\"name\":{\"type\":\"string\",\"default\":\"Item name\"}},\"required\":[\"id\",\"name\"]}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "object",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "id"
+                                  },
+                                  "value": {
+                                    "element": "enum",
+                                    "meta": {},
+                                    "attributes": {
+                                      "default": 456
+                                    },
+                                    "content": [
+                                      {
+                                        "element": "number",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": 123
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "name"
+                                  },
+                                  "value": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {
+                                      "default": "Item name"
+                                    },
+                                    "content": null
+                                  }
+                                }
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
@@ -524,6 +596,67 @@
                             ]
                           },
                           "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"enum\":[123],\"default\":456},\"name\":{\"type\":\"string\",\"default\":\"Item name\"}},\"required\":[\"id\",\"name\"]}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "object",
+                            "meta": {},
+                            "attributes": {},
+                            "content": [
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "id"
+                                  },
+                                  "value": {
+                                    "element": "enum",
+                                    "meta": {},
+                                    "attributes": {
+                                      "default": 456
+                                    },
+                                    "content": [
+                                      {
+                                        "element": "number",
+                                        "meta": {},
+                                        "attributes": {},
+                                        "content": 123
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "meta": {},
+                                "attributes": {},
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {},
+                                    "content": "name"
+                                  },
+                                  "value": {
+                                    "element": "string",
+                                    "meta": {},
+                                    "attributes": {
+                                      "default": "Item name"
+                                    },
+                                    "content": null
+                                  }
+                                }
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
