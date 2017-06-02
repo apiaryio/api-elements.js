@@ -16,8 +16,13 @@ export default class DataStructureGenerator {
 
   // Generates a data structure element representing the given schema
   generateDataStructure(schema) {
-    const { DataStructure } = this.minim.elements;
     const element = this.generateElement(schema);
+
+    if (!element) {
+      return null;
+    }
+
+    const { DataStructure } = this.minim.elements;
     const dataStructure = new DataStructure(element);
     return dataStructure;
   }

@@ -567,4 +567,12 @@ describe('JSON Schema to Data Structure', () => {
     expect(dataStructure.content.description.toValue())
       .to.equal("- Value must be of format 'email'");
   });
+
+  it('returns null when there is no type in the given JSON schema', () => {
+    const schema = {};
+
+    const dataStructure = schemaToDataStructure(schema);
+
+    expect(dataStructure).to.be.null;
+  });
 });

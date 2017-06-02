@@ -1370,7 +1370,9 @@ export default class Parser {
       try {
         const generator = new DataStructureGenerator(this.minim);
         const dataStructure = generator.generateDataStructure(schema);
-        payload.content.push(dataStructure);
+        if (dataStructure) {
+          payload.content.push(dataStructure);
+        }
       } catch (exception) {
       }
     }
