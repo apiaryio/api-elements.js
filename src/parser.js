@@ -1374,6 +1374,7 @@ export default class Parser {
           payload.content.push(dataStructure);
         }
       } catch (exception) {
+        // TODO: Expose errors once feature is more-complete
       }
     }
   }
