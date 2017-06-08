@@ -62,6 +62,17 @@
                             "contentType": "application/schema+json"
                           },
                           "content": "{\"type\":\"object\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "meta": {},
+                          "attributes": {},
+                          "content": {
+                            "element": "object",
+                            "meta": {},
+                            "attributes": {},
+                            "content": []
+                          }
                         }
                       ]
                     }
