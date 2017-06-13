@@ -509,6 +509,19 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.content.description.toValue())
         .to.equal('- Array contents must be unique');
     });
+
+    it('produces empty array element with empty items', () => {
+      const schema = {
+        type: 'array',
+        items: {},
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ArrayElement);
+      expect(dataStructure.content.content.length).to.be.equal(0);
+    });
   });
 
   it('exposes the schema title', () => {
