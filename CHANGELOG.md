@@ -1,3 +1,10 @@
+# 0.12.0-beta.2
+
+## Bug Fixes
+
+- Data Structure generation from JSON Schema handles array items which
+  contain empty values.
+
 # 0.12.0-beta.1
 
 ## Enhancements
