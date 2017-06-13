@@ -87,10 +87,16 @@ export default class DataStructureGenerator {
     if (schema.items) {
       if (_.isArray(schema.items)) {
         schema.items.forEach((item) => {
-          element.push(this.generateElement(item));
+          const itemElement = this.generateElement(item);
+          if (itemElement) {
+            element.push(itemElement);
+          }
         });
       } else {
-        element.push(this.generateElement(schema.items));
+        const itemElement = this.generateElement(schema.items);
+        if (itemElement) {
+          element.push(itemElement);
+        }
       }
     }
 
