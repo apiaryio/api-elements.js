@@ -1,3 +1,8 @@
+# Master
+
+- Adds support for `csv` and `multi` parameter collectionFormat for query
+  parameters.
+
 # 0.12.0-beta.2
 
 ## Bug Fixes

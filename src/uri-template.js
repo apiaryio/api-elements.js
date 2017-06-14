@@ -5,7 +5,13 @@ export default function buildUriTemplate(basePath, href, pathObjectParams = [], 
     .concat(queryParams)
     .filter(parameter => parameter.in === 'query')
     .uniqBy(parameter => parameter.name)
-    .map(parameter => parameter.name)
+    .map((parameter) => {
+      if (parameter.collectionFormat === 'multi') {
+        return `${parameter.name}*`;
+      }
+
+      return parameter.name;
+    })
     .value();
 
   if (parameterNames.length > 0) {
