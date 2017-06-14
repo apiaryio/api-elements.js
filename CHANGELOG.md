@@ -1,3 +1,10 @@
+# Master
+
+## Bug Fixes
+
+- Parameters which define both an example (`x-example`) and `items` schema will
+  now use the `x-example` value as the example.
+
 # 0.12.0-beta.2
 
 ## Bug Fixes
