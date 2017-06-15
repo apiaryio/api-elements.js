@@ -1194,11 +1194,13 @@ export default class Parser {
         element.attributes.set('samples', e);
       }
     } else {
-      element = new Type();
+      let example;
 
       if (parameter['x-example'] !== undefined) {
-        element.content = parameter['x-example'];
+        example = parameter['x-example'];
       }
+
+      element = new Type(example);
     }
 
     // If there is a default, it is set on the member value instead of the member
@@ -1226,7 +1228,7 @@ export default class Parser {
       }
     }
 
-    if (parameter.type === 'array' && parameter.items) {
+    if (parameter.type === 'array' && parameter.items && !parameter['x-example']) {
       element.content = [this.convertParameterToElement(parameter.items, (path || []).concat(['items']), true)];
     }
 
