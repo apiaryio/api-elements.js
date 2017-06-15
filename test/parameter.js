@@ -70,4 +70,49 @@ describe('Parameter to Member converter', () => {
       });
     });
   });
+
+  it('can convert a parameter to a member with x-example', () => {
+    const parser = new Parser({ minim, source: '' });
+    const parameter = {
+      in: 'query',
+      name: 'tags',
+      type: 'string',
+      'x-example': 'hello',
+    };
+    const member = parser.convertParameterToMember(parameter);
+
+    expect(member.value).to.be.instanceof(minim.elements.String);
+    expect(member.value.toValue()).to.equal('hello');
+  });
+
+  it('can convert a parameter to a member with array x-example', () => {
+    const parser = new Parser({ minim, source: '' });
+    const parameter = {
+      in: 'query',
+      name: 'tags',
+      type: 'array',
+      'x-example': ['one', 'two'],
+    };
+    const member = parser.convertParameterToMember(parameter);
+
+    expect(member.value).to.be.instanceof(minim.elements.Array);
+    expect(member.value.toValue()).to.deep.equal(['one', 'two']);
+  });
+
+  it('can convert a parameter to a member with array x-example and items', () => {
+    const parser = new Parser({ minim, source: '' });
+    const parameter = {
+      in: 'query',
+      name: 'tags',
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+      'x-example': ['one', 'two'],
+    };
+    const member = parser.convertParameterToMember(parameter);
+
+    expect(member.value).to.be.instanceof(minim.elements.Array);
+    expect(member.value.toValue()).to.deep.equal(['one', 'two']);
+  });
 });
