@@ -1,26 +1,29 @@
 import _ from 'lodash';
 
+function escapeUriTemplateVariable(variable) {
+  return encodeURIComponent(variable)
+    .replace(/[-.!~*'()]/g, c => `%${c.charCodeAt(0).toString(16)}`);
+}
+
 export default function buildUriTemplate(basePath, href, pathObjectParams = [], queryParams = []) {
   const parameterNames = _.chain(pathObjectParams)
     .concat(queryParams)
     .filter(parameter => parameter.in === 'query')
     .uniqBy(parameter => parameter.name)
     .map((parameter) => {
+      const name = escapeUriTemplateVariable(parameter.name);
+
       if (parameter.collectionFormat === 'multi') {
-        return `${parameter.name}*`;
+        return `${name}*`;
       }
 
-      return parameter.name;
+      return name;
     })
     .value();
 
   if (parameterNames.length > 0) {
     const queryString = parameterNames.join(',');
-    const full = `${basePath}${href}{?${queryString}}`;
-
-    // Before returning, we replace instances of `-` with `%2d`, but only when
-    // they occur inside of a template variable.
-    return full.replace(/\{.*?\}/g, match => match.replace('-', '%2d'));
+    return `${basePath}${href}{?${queryString}}`;
   }
 
   return basePath + href;

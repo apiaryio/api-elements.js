@@ -8,6 +8,8 @@
 - Parameters which define both an example (`x-example`) and `items` schema will
   now use the `x-example` value as the example.
 
+- URI Template variables are now correctly escaped.
+
 # 0.12.0-beta.2
 
 ## Bug Fixes
