@@ -94,14 +94,14 @@ describe('URI Template Handler', () => {
       });
     });
 
-    context('when there are parameters with dashes', () => {
+    context('when there are parameters with reserved characters', () => {
       const basePath = '/my-api';
-      const href = '/pet/{unique-id}';
+      const href = '/pet/{unique%2did}';
       const queryParams = [
         {
           in: 'query',
           description: 'Tags to filter by',
-          name: 'tag-names',
+          name: 'tag-names[]',
           required: true,
           type: 'string',
         },
@@ -109,7 +109,7 @@ describe('URI Template Handler', () => {
 
       it('returns the correct URI', () => {
         const hrefForResource = buildUriTemplate(basePath, href, [], queryParams);
-        expect(hrefForResource).to.equal('/my-api/pet/{unique%2did}{?tag%2dnames}');
+        expect(hrefForResource).to.equal('/my-api/pet/{unique%2did}{?tag%2dnames%5B%5D}');
       });
     });
 
