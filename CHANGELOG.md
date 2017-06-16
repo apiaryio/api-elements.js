@@ -2,6 +2,9 @@
 
 ## Bug Fixes
 
+- Adds support for `csv` and `multi` parameter collectionFormat for query
+  parameters.
+
 - Parameters which define both an example (`x-example`) and `items` schema will
   now use the `x-example` value as the example.
 

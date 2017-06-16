@@ -200,4 +200,41 @@ describe('URI Template Handler', () => {
       expect(hrefForResource).to.equal('/api/pet/findByTags');
     });
   });
+
+  describe('array parameters with collectionFormat', () => {
+    it('returns a template with default format', () => {
+      const parameter = {
+        in: 'query',
+        name: 'tags',
+        type: 'array',
+      };
+
+      const hrefForResource = buildUriTemplate('', '/example', [parameter]);
+      expect(hrefForResource).to.equal('/example{?tags}');
+    });
+
+    it('returns a template with csv format', () => {
+      const parameter = {
+        in: 'query',
+        name: 'tags',
+        type: 'array',
+        collectionFormat: 'csv',
+      };
+
+      const hrefForResource = buildUriTemplate('', '/example', [parameter]);
+      expect(hrefForResource).to.equal('/example{?tags}');
+    });
+
+    it('returns an exploded template with multi format', () => {
+      const parameter = {
+        in: 'query',
+        name: 'tags',
+        type: 'array',
+        collectionFormat: 'multi',
+      };
+
+      const hrefForResource = buildUriTemplate('', '/example', [parameter]);
+      expect(hrefForResource).to.equal('/example{?tags*}');
+    });
+  });
 });

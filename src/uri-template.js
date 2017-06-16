@@ -1,20 +1,22 @@
 import _ from 'lodash';
 
 export default function buildUriTemplate(basePath, href, pathObjectParams = [], queryParams = []) {
-  if (queryParams.length > 0 || pathObjectParams.length > 0) {
-    // Path object parameters apply to all nested resources (operations). Only
-    // the ones marked as query parameters are relevant though
-    const pathObjectParamNames = pathObjectParams
-      .filter(parameter => parameter.in === 'query')
-      .map(parameter => parameter.name);
+  const parameterNames = _.chain(pathObjectParams)
+    .concat(queryParams)
+    .filter(parameter => parameter.in === 'query')
+    .uniqBy(parameter => parameter.name)
+    .map((parameter) => {
+      if (parameter.collectionFormat === 'multi') {
+        return `${parameter.name}*`;
+      }
 
-    const queryParamNames = queryParams.map(parameter => parameter.name);
+      return parameter.name;
+    })
+    .value();
 
-    // There can be duplicate parameter names, so we need the unique list
-    const paramNames = _.uniq([].concat(pathObjectParamNames, queryParamNames));
-    const paramNamesString = paramNames.length ? `{?${paramNames.join(',')}}` : '';
-
-    const full = `${basePath}${href}${paramNamesString}`;
+  if (parameterNames.length > 0) {
+    const queryString = parameterNames.join(',');
+    const full = `${basePath}${href}{?${queryString}}`;
 
     // Before returning, we replace instances of `-` with `%2d`, but only when
     // they occur inside of a template variable.
