@@ -1,5 +1,5 @@
 export default function (namespace) {
-  class Asset extends namespace.BaseElement {
+  class Asset extends namespace.Element {
     constructor(...args) {
       super(...args);
       this.element = 'asset';

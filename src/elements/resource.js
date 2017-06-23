@@ -25,11 +25,11 @@ export default function (namespace) {
     }
 
     get transitions() {
-      return this.children(item => item.element === 'transition');
+      return this.children.filter(item => item.element === 'transition');
     }
 
     get dataStructure() {
-      return this.children(item => item.element === 'dataStructure').first();
+      return this.children.filter(item => item.element === 'dataStructure').first();
     }
   }
 

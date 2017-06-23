@@ -8,11 +8,11 @@ export default function (namespace) {
     }
 
     get transitions() {
-      return this.children(item => item.element === 'transition');
+      return this.children.filter(item => item.element === 'transition');
     }
 
     get members() {
-      return this.children(item => item.element === 'member');
+      return this.children.filter(item => item.element === 'member');
     }
   }
 

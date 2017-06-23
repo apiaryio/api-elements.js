@@ -71,7 +71,7 @@ export default function (namespace) {
     }
 
     get transactions() {
-      return this.children(item => item.element === 'httpTransaction');
+      return this.children.filter(item => item.element === 'httpTransaction');
     }
   }
 

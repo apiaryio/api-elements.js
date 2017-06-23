@@ -9,15 +9,25 @@ export default function (namespace) {
     }
 
     get request() {
-      return this.children(item => item.element === 'httpRequest').first();
+      return this.children.filter(item => item.element === 'httpRequest').first();
     }
 
     get response() {
-      return this.children(item => item.element === 'httpResponse').first();
+      return this.children.filter(item => item.element === 'httpResponse').first();
     }
 
     get authSchemes() {
-      return namespace.toElement(this.attributes.get('authSchemes').map(item => (new AuthScheme()).fromRefract(item)));
+      return this.attributes.get('authSchemes')
+        .map((element) => {
+          if (element instanceof AuthScheme) {
+            return element;
+          }
+
+          const authScheme = new AuthScheme([], element.meta, element.attributes);
+          authScheme.element = element.element;
+          authScheme.content = element.content;
+          return authScheme;
+        });
     }
   }
 

@@ -4,7 +4,7 @@ export default function (namespace) {
 
   Object.defineProperty(ArrayElement.prototype, 'copy', {
     get() {
-      return this.children(item => item.element === 'copy');
+      return this.children.filter(item => item.element === 'copy');
     },
   });
 

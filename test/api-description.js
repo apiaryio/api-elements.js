@@ -22,7 +22,6 @@ const Asset = namespace.getElementClass('asset');
 const AuthScheme = namespace.getElementClass('authScheme');
 const DataStructure = namespace.getElementClass('dataStructure');
 const MemberElement = namespace.getElementClass('member');
-const Extension = namespace.getElementClass('extension');
 
 // Hmm, this might not be the best way to do this... ideas?
 const HttpMessagePayload = Object.getPrototypeOf(HttpRequest);
@@ -70,18 +69,13 @@ describe('API description namespace', () => {
               meta: {
                 classes: ['user'],
               },
-              attributes: {},
               content: {
                 key: {
                   element: 'string',
-                  meta: {},
-                  attributes: {},
                   content: 'HOST',
                 },
                 value: {
                   element: 'string',
-                  meta: {},
-                  attributes: {},
                   content: 'https://example.com',
                 },
               },
@@ -94,7 +88,6 @@ describe('API description namespace', () => {
             meta: {
               classes: ['resourceGroup'],
             },
-            attributes: {},
             content: [],
           },
           {
@@ -102,7 +95,6 @@ describe('API description namespace', () => {
             meta: {
               classes: ['dataStructures'],
             },
-            attributes: {},
             content: [],
           },
           {
@@ -110,7 +102,6 @@ describe('API description namespace', () => {
             meta: {
               classes: ['scenario'],
             },
-            attributes: {},
             content: [],
           },
           {
@@ -118,7 +109,6 @@ describe('API description namespace', () => {
             meta: {
               classes: ['transitions'],
             },
-            attributes: {},
             content: [],
           },
           {
@@ -126,35 +116,28 @@ describe('API description namespace', () => {
             meta: {
               classes: ['authSchemes'],
             },
-            attributes: {},
             content: [],
           },
           {
             element: 'resource',
-            meta: {},
-            attributes: {},
             content: [],
           },
           {
             element: 'transition',
-            meta: {},
-            attributes: {},
             content: [],
           },
           {
             element: 'copy',
-            meta: {},
-            attributes: {},
             content: '',
           },
         ],
       };
 
-      category = (new Category()).fromRefract(refracted);
+      category = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(category.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(category)).to.deep.equal(refracted);
     });
 
     it('should have element name category', () => {
@@ -258,14 +241,12 @@ describe('API description namespace', () => {
         meta: {
           classes: ['authSchemes'],
         },
-        attributes: {},
         content: [
           {
             element: 'Basic Authentication Scheme',
             meta: {
               id: 'custom_basic',
             },
-            attributes: {},
             content: [],
           },
           {
@@ -273,23 +254,16 @@ describe('API description namespace', () => {
             meta: {
               id: 'custom_api_key',
             },
-            attributes: {},
             content: [
               {
                 element: 'member',
-                meta: {},
-                attributes: {},
                 content: {
                   key: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'queryParameterName',
                   },
                   value: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'access_token',
                   },
                 },
@@ -301,23 +275,16 @@ describe('API description namespace', () => {
             meta: {
               id: 'custom_oauth',
             },
-            attributes: {},
             content: [
               {
                 element: 'member',
-                meta: {},
-                attributes: {},
                 content: {
                   key: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'grantType',
                   },
                   value: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'implicit',
                   },
                 },
@@ -327,11 +294,11 @@ describe('API description namespace', () => {
         ],
       };
 
-      category = (new Category()).fromRefract(refracted);
+      category = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(category.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(category)).to.deep.equal(refracted);
     });
 
     it('should have element name category', () => {
@@ -358,18 +325,17 @@ describe('API description namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'copy',
-        meta: {},
         attributes: {
           contentType: 'text/html',
         },
         content: 'I am some text',
       };
 
-      copy = (new Copy()).fromRefract(refracted);
+      copy = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(copy.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(copy)).to.deep.equal(refracted);
     });
 
     it('should have element name copy', () => {
@@ -402,7 +368,7 @@ describe('API description namespace', () => {
     });
 
     it('should have element content', () => {
-      expect(number.content).to.be.an.instanceof(namespace.BaseElement);
+      expect(number.content).to.be.an.instanceof(namespace.Element);
     });
 
     it('should get element content value', () => {
@@ -410,24 +376,20 @@ describe('API description namespace', () => {
     });
 
     it('should serialize to refract', () => {
-      const refract = number.toRefract();
+      const refract = namespace.toRefract(number);
       expect(refract).to.deep.equal({
         element: 'dataStructure',
-        meta: {},
-        attributes: {},
         content: {
           element: 'number',
-          meta: {},
-          attributes: {},
           content: 3,
         },
       });
     });
 
     it('should load from refract', () => {
-      const refract = number.toRefract();
-      const loaded = (new DataStructure()).fromRefract(refract);
-      expect(loaded.toRefract()).to.deep.equal(refract);
+      const refract = namespace.toRefract(number);
+      const loaded = namespace.fromRefract(refract);
+      expect(namespace.toRefract(loaded)).to.deep.equal(refract);
     });
   });
 
@@ -443,7 +405,7 @@ describe('API description namespace', () => {
     });
 
     it('should have element content', () => {
-      expect(string.content).to.be.an.instanceof(namespace.BaseElement);
+      expect(string.content).to.be.an.instanceof(namespace.Element);
     });
 
     it('should get element content value', () => {
@@ -451,24 +413,20 @@ describe('API description namespace', () => {
     });
 
     it('should serialize to refract', () => {
-      const refract = string.toRefract();
+      const refract = namespace.toRefract(string);
       expect(refract).to.deep.equal({
         element: 'dataStructure',
-        meta: {},
-        attributes: {},
         content: {
           element: 'string',
-          meta: {},
-          attributes: {},
           content: 'test',
         },
       });
     });
 
     it('should load from refract', () => {
-      const refract = string.toRefract();
-      const loaded = (new DataStructure()).fromRefract(refract);
-      expect(loaded.toRefract()).to.deep.equal(refract);
+      const refract = namespace.toRefract(string);
+      const loaded = namespace.fromRefract(refract);
+      expect(namespace.toRefract(loaded)).to.deep.equal(refract);
     });
   });
 
@@ -484,7 +442,7 @@ describe('API description namespace', () => {
     });
 
     it('should have element content', () => {
-      expect(boolean.content).to.be.an.instanceof(namespace.BaseElement);
+      expect(boolean.content).to.be.an.instanceof(namespace.Element);
     });
 
     it('should get element content value', () => {
@@ -492,24 +450,20 @@ describe('API description namespace', () => {
     });
 
     it('should serialize to refract', () => {
-      const refract = boolean.toRefract();
+      const refract = namespace.toRefract(boolean);
       expect(refract).to.deep.equal({
         element: 'dataStructure',
-        meta: {},
-        attributes: {},
         content: {
           element: 'boolean',
-          meta: {},
-          attributes: {},
           content: true,
         },
       });
     });
 
     it('should load from refract', () => {
-      const refract = boolean.toRefract();
-      const loaded = (new DataStructure()).fromRefract(refract);
-      expect(loaded.toRefract()).to.deep.equal(refract);
+      const refract = namespace.toRefract(boolean);
+      const loaded = namespace.fromRefract(refract);
+      expect(namespace.toRefract(loaded)).to.deep.equal(refract);
     });
   });
 
@@ -525,7 +479,7 @@ describe('API description namespace', () => {
     });
 
     it('should have element content', () => {
-      expect(array.content).to.be.an.instanceof(namespace.BaseElement);
+      expect(array.content).to.be.an.instanceof(namespace.Element);
     });
 
     it('should get element content value', () => {
@@ -533,26 +487,18 @@ describe('API description namespace', () => {
     });
 
     it('should serialize to refract', () => {
-      const refract = array.toRefract();
+      const refract = namespace.toRefract(array);
       expect(refract).to.deep.equal({
         element: 'dataStructure',
-        meta: {},
-        attributes: {},
         content: {
           element: 'array',
-          meta: {},
-          attributes: {},
           content: [
             {
               element: 'string',
-              meta: {},
-              attributes: {},
               content: 'a',
             },
             {
               element: 'number',
-              meta: {},
-              attributes: {},
               content: 1,
             },
           ],
@@ -561,9 +507,9 @@ describe('API description namespace', () => {
     });
 
     it('should load from refract', () => {
-      const refract = array.toRefract();
-      const loaded = (new DataStructure()).fromRefract(refract);
-      expect(loaded.toRefract()).to.deep.equal(refract);
+      const refract = namespace.toRefract(array);
+      const loaded = namespace.fromRefract(refract);
+      expect(namespace.toRefract(loaded)).to.deep.equal(refract);
     });
   });
 
@@ -579,7 +525,7 @@ describe('API description namespace', () => {
     });
 
     it('should have element content', () => {
-      expect(object.content).to.be.an.instanceof(namespace.BaseElement);
+      expect(object.content).to.be.an.instanceof(namespace.Element);
     });
 
     it('should get element content value', () => {
@@ -587,74 +533,50 @@ describe('API description namespace', () => {
     });
 
     it('should serialize to refract', () => {
-      const refract = object.toRefract();
+      const refract = namespace.toRefract(object);
       expect(refract).to.deep.equal({
         element: 'dataStructure',
-        meta: {},
-        attributes: {},
         content: {
           element: 'object',
-          meta: {},
-          attributes: {},
           content: [
             {
               element: 'member',
-              meta: {},
-              attributes: {},
               content: {
                 key: {
                   element: 'string',
-                  meta: {},
-                  attributes: {},
                   content: 'a',
                 },
                 value: {
                   element: 'string',
-                  meta: {},
-                  attributes: {},
                   content: 'a',
                 },
               },
             },
             {
               element: 'member',
-              meta: {},
-              attributes: {},
               content: {
                 key: {
                   element: 'string',
-                  meta: {},
-                  attributes: {},
                   content: 'b',
                 },
                 value: {
                   element: 'number',
-                  meta: {},
-                  attributes: {},
                   content: 1,
                 },
               },
             },
             {
               element: 'member',
-              meta: {},
-              attributes: {},
               content: {
                 key: {
                   element: 'string',
-                  meta: {},
-                  attributes: {},
                   content: 'c',
                 },
                 value: {
                   element: 'array',
-                  meta: {},
-                  attributes: {},
                   content: [
                     {
                       element: 'number',
-                      meta: {},
-                      attributes: {},
                       content: 2,
                     },
                   ],
@@ -667,9 +589,9 @@ describe('API description namespace', () => {
     });
 
     it('should load from refract', () => {
-      const refract = object.toRefract();
-      const loaded = (new DataStructure()).fromRefract(refract);
-      expect(loaded.toRefract()).to.deep.equal(refract);
+      const refract = namespace.toRefract(object);
+      const loaded = namespace.fromRefract(refract);
+      expect(namespace.toRefract(loaded)).to.deep.equal(refract);
     });
   });
 
@@ -680,28 +602,18 @@ describe('API description namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'dataStructure',
-        meta: {},
-        attributes: {},
         content: {
           element: 'object',
-          meta: {},
-          attributes: {},
           content: [
             {
               element: 'member',
-              meta: {},
-              attributes: {},
               content: {
                 key: {
                   element: 'string',
-                  meta: {},
-                  attributes: {},
                   content: 'data',
                 },
                 value: {
                   element: 'Session',
-                  meta: {},
-                  attributes: {},
                   content: undefined,
                 },
               },
@@ -710,11 +622,11 @@ describe('API description namespace', () => {
         },
       };
 
-      data = (new DataStructure()).fromRefract(refracted);
+      data = namespace.fromRefract(refracted);
     });
 
     it('should load from refract', () => {
-      expect(data.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(data)).to.deep.equal(refracted);
     });
 
     it('should give the correct value', () => {
@@ -729,29 +641,20 @@ describe('API description namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'resource',
-        meta: {},
         attributes: {
           href: '/resource/{id}',
           hrefVariables: {
             element: 'hrefVariables',
-            meta: {},
-            attributes: {},
             content: [
               {
                 element: 'member',
-                meta: {},
-                attributes: {},
                 content: {
                   key: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'id',
                   },
                   value: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: '123',
                   },
                 },
@@ -762,35 +665,27 @@ describe('API description namespace', () => {
         content: [
           {
             element: 'copy',
-            meta: {},
-            attributes: {},
             content: 'copy of resource',
           },
           {
             element: 'transition',
-            meta: {},
-            attributes: {},
             content: [],
           },
           {
             element: 'dataStructure',
-            meta: {},
-            attributes: {},
             content: {
               element: 'object',
-              meta: {},
-              attributes: {},
               content: [],
             },
           },
         ],
       };
 
-      resource = (new Resource()).fromRefract(refracted);
+      resource = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(resource.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(resource)).to.deep.equal(refracted);
     });
 
     it('should have element name resource', () => {
@@ -849,30 +744,21 @@ describe('API description namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'transition',
-        meta: {},
         attributes: {
           relation: 'action',
           href: '/resource',
           hrefVariables: {
             element: 'hrefVariables',
-            meta: {},
-            attributes: {},
             content: [
               {
                 element: 'member',
-                meta: {},
-                attributes: {},
                 content: {
                   key: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'id',
                   },
                   value: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: '123',
                   },
                 },
@@ -881,12 +767,8 @@ describe('API description namespace', () => {
           },
           data: {
             element: 'dataStructure',
-            meta: {},
-            attributes: {},
             content: {
               element: 'object',
-              meta: {},
-              attributes: {},
               content: [],
             },
           },
@@ -895,18 +777,13 @@ describe('API description namespace', () => {
         content: [
           {
             element: 'copy',
-            meta: {},
-            attributes: {},
             content: 'copy of transition',
           },
           {
             element: 'httpTransaction',
-            meta: {},
-            attributes: {},
             content: [
               {
                 element: 'httpRequest',
-                meta: {},
                 attributes: {
                   method: 'GET',
                 },
@@ -917,11 +794,11 @@ describe('API description namespace', () => {
         ],
       };
 
-      transition = (new Transition()).fromRefract(refracted);
+      transition = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(transition.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(transition)).to.deep.equal(refracted);
     });
 
     it('should have element name transition', () => {
@@ -1021,36 +898,26 @@ describe('API description namespace', () => {
         meta: {
           id: 'Custom Token Auth',
         },
-        attributes: {},
         content: [
           {
             element: 'copy',
-            meta: {},
-            attributes: {},
             content: 'copy of auth scheme',
           },
           {
             element: 'member',
-            meta: {},
-            attributes: {},
             content: {
               key: {
                 element: 'string',
-                meta: {},
-                attributes: {},
                 content: 'queryParameterName',
               },
               value: {
                 element: 'string',
-                meta: {},
-                attributes: {},
                 content: 'token',
               },
             },
           },
           {
             element: 'transition',
-            meta: {},
             attributes: {
               relation: 'authorize',
               href: 'http://example.com/oauth/authorize',
@@ -1060,11 +927,14 @@ describe('API description namespace', () => {
         ],
       };
 
-      authScheme = (new AuthScheme()).fromRefract(refracted);
+      const element = namespace.fromRefract(refracted);
+      authScheme = new AuthScheme([], element.meta, element.attributes);
+      authScheme.element = element.element;
+      authScheme.content = element.content;
     });
 
     it('should round-trip correctly', () => {
-      expect(authScheme.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(authScheme)).to.deep.equal(refracted);
     });
 
     it('should contain a copy element', () => {
@@ -1099,13 +969,10 @@ describe('API description namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'httpTransaction',
-        meta: {},
         attributes: {
           authSchemes: [
             {
               element: 'Custom Token Auth',
-              meta: {},
-              attributes: {},
               content: [],
             },
           ],
@@ -1113,24 +980,20 @@ describe('API description namespace', () => {
         content: [
           {
             element: 'httpRequest',
-            meta: {},
-            attributes: {},
             content: [],
           },
           {
             element: 'httpResponse',
-            meta: {},
-            attributes: {},
             content: [],
           },
         ],
       };
 
-      transaction = (new HttpTransaction()).fromRefract(refracted);
+      transaction = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(transaction.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(transaction)).to.deep.equal(refracted);
     });
 
     it('should have element name httpTransaction', () => {
@@ -1161,7 +1024,6 @@ describe('API description namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'httpRequest',
-        meta: {},
         attributes: {
           method: 'GET',
           href: '/foo',
@@ -1169,18 +1031,16 @@ describe('API description namespace', () => {
         content: [
           {
             element: 'copy',
-            meta: {},
-            attributes: {},
             content: 'copy of request',
           },
         ],
       };
 
-      request = (new HttpRequest()).fromRefract(refracted);
+      request = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(request.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(request)).to.deep.equal(refracted);
     });
 
     it('should have element name httpRequest', () => {
@@ -1225,25 +1085,22 @@ describe('API description namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'httpResponse',
-        meta: {},
         attributes: {
           statusCode: 200,
         },
         content: [
           {
             element: 'copy',
-            meta: {},
-            attributes: {},
             content: 'copy of response',
           },
         ],
       };
 
-      response = (new HttpResponse()).fromRefract(refracted);
+      response = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(response.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(response)).to.deep.equal(refracted);
     });
 
     it('should have element name httpResponse', () => {
@@ -1280,47 +1137,32 @@ describe('API description namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'httpResponse',
-        meta: {},
         attributes: {
           headers: {
             element: 'httpHeaders',
-            meta: {},
-            attributes: {},
             content: [
               {
                 element: 'member',
-                meta: {},
-                attributes: {},
                 content: {
                   key: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'Content-Type',
                   },
                   value: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'application/json',
                   },
                 },
               },
               {
                 element: 'member',
-                meta: {},
-                attributes: {},
                 content: {
                   key: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'Cache',
                   },
                   value: {
                     element: 'string',
-                    meta: {},
-                    attributes: {},
                     content: 'no-cache',
                   },
                 },
@@ -1331,12 +1173,8 @@ describe('API description namespace', () => {
         content: [
           {
             element: 'dataStructure',
-            meta: {},
-            attributes: {},
             content: {
               element: 'object',
-              meta: {},
-              attributes: {},
               content: [],
             },
           },
@@ -1356,18 +1194,17 @@ describe('API description namespace', () => {
             meta: {
               classes: ['messageBodySchema'],
             },
-            attributes: {},
             content: '',
           },
         ],
       };
 
-      payload = (new HttpMessagePayload()).fromRefract(refracted);
+      payload = namespace.fromRefract(refracted);
       asset = payload.messageBody;
     });
 
     it('should round-trip correctly', () => {
-      expect(payload.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(payload)).to.deep.equal(refracted);
     });
 
     it('should get headers', () => {
@@ -1459,7 +1296,6 @@ describe('API description namespace', () => {
           links: [
             {
               element: 'link',
-              meta: {},
               attributes: {
                 relation: 'profile',
                 href: 'https://example.com/extensions/info/',
@@ -1468,17 +1304,16 @@ describe('API description namespace', () => {
             },
           ],
         },
-        attributes: {},
         content: {
           version: 1.0,
         },
       };
 
-      extension = (new Extension()).fromRefract(refracted);
+      extension = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(extension.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(extension)).to.deep.equal(refracted);
     });
 
     it('should have element name extension', () => {
