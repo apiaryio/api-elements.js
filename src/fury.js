@@ -21,6 +21,7 @@ function findAdapter(adapters, mediaType, method) {
 
 class Fury {
   constructor() {
+    this.minim = minim;
     this.adapters = [];
   }
 
@@ -37,7 +38,7 @@ class Fury {
    */
   // eslint-disable-next-line class-methods-use-this
   load(elements) {
-    return minim.fromRefract(elements);
+    return this.minim.fromRefract(elements);
   }
 
   findAdapter(source, mediaType, method) {
@@ -65,7 +66,7 @@ class Fury {
     if (!adapter) {
       return this.parse({ source, mediaType, adapterOptions }, (err, result) => {
         if (result && result.annotations.length > 0) {
-          const { ParseResult } = minim.elements;
+          const { ParseResult } = this.minim.elements;
           const parseResult = new ParseResult(result.annotations);
           done(err, parseResult);
         } else {
@@ -74,14 +75,14 @@ class Fury {
       });
     }
 
-    let options = { minim, source };
+    let options = { minim: this.minim, source };
 
     if (adapterOptions) {
       options = Object.assign(options, adapterOptions);
     }
 
     return adapter.validate(options, (err, elements) => {
-      if (!elements || elements instanceof minim.BaseElement) {
+      if (!elements || elements instanceof this.minim.Element) {
         done(err, elements);
       } else {
         done(err, this.load(elements));
@@ -103,14 +104,14 @@ class Fury {
     }
 
     try {
-      let options = { generateSourceMap, minim, source };
+      let options = { generateSourceMap, minim: this.minim, source };
 
       if (adapterOptions) {
         options = Object.assign(options, adapterOptions);
       }
 
       return adapter.parse(options, (err, elements) => {
-        if (!elements || elements instanceof minim.BaseElement) {
+        if (!elements || elements instanceof this.minim.Element) {
           done(err, elements);
         } else {
           done(err, this.load(elements));
@@ -129,7 +130,7 @@ class Fury {
 
     if (adapter) {
       try {
-        return adapter.serialize({ api, minim }, done);
+        return adapter.serialize({ api, minim: this.minim }, done);
       } catch (err) {
         return done(err);
       }
