@@ -14,9 +14,6 @@ const namespace = minim.namespace()
 
 const Annotation = namespace.getElementClass('annotation');
 const Category = namespace.getElementClass('category');
-const ParseResult = namespace.getElementClass('parseResult');
-const SourceMap = namespace.getElementClass('sourceMap');
-const StringElement = namespace.getElementClass('string');
 
 chai.use((_chai, utils) => {
   /*
@@ -51,15 +48,12 @@ describe('Parse result namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'parseResult',
-        meta: {},
-        attributes: {},
         content: [
           {
             element: 'annotation',
             meta: {
               classes: ['warning'],
             },
-            attributes: {},
             content: [],
           },
           {
@@ -67,7 +61,6 @@ describe('Parse result namespace', () => {
             meta: {
               classes: ['error'],
             },
-            attributes: {},
             content: [],
           },
           {
@@ -75,17 +68,16 @@ describe('Parse result namespace', () => {
             meta: {
               classes: ['api'],
             },
-            attributes: {},
             content: [],
           },
         ],
       };
 
-      parseResult = (new ParseResult()).fromRefract(refracted);
+      parseResult = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(parseResult.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(parseResult)).to.deep.equal(refracted);
     });
 
     it('should have element name parseResult', () => {
@@ -132,18 +124,17 @@ describe('Parse result namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'annotation',
-        meta: {},
         attributes: {
           code: 123,
         },
         content: 'Missing argument description',
       };
 
-      annotation = (new Annotation()).fromRefract(refracted);
+      annotation = namespace.fromRefract(refracted);
     });
 
     it('should round-trip correctly', () => {
-      expect(annotation.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(annotation)).to.deep.equal(refracted);
     });
 
     it('should have element name annotation', () => {
@@ -168,10 +159,8 @@ describe('Parse result namespace', () => {
     let sourceMap;
 
     beforeEach(() => {
-      sourceMap = (new SourceMap()).fromRefract({
+      sourceMap = namespace.fromRefract({
         element: 'sourceMap',
-        meta: {},
-        attributes: {},
         content: [],
       });
     });
@@ -189,13 +178,10 @@ describe('Parse result namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'string',
-        meta: {},
         attributes: {
           sourceMap: [
             {
               element: 'sourceMap',
-              meta: {},
-              attributes: {},
               content: [[1, 2]],
             },
           ],
@@ -203,12 +189,12 @@ describe('Parse result namespace', () => {
         content: '',
       };
 
-      element = (new StringElement()).fromRefract(refracted);
+      element = namespace.fromRefract(refracted);
       sourceMaps = element.attributes.get('sourceMap');
     });
 
     it('should round-trip correctly', () => {
-      expect(element.toRefract()).to.deep.equal(refracted);
+      expect(namespace.toRefract(element)).to.deep.equal(refracted);
     });
 
     it('should contain a sourceMap attribute with one item', () => {
@@ -228,13 +214,10 @@ describe('Parse result namespace', () => {
     it('should serialize with a sourceMap attribute', () => {
       const expected = {
         element: 'string',
-        meta: {},
         attributes: {
           sourceMap: [
             {
               element: 'sourceMap',
-              meta: {},
-              attributes: {},
               content: [[1, 2]],
             },
           ],
@@ -242,7 +225,7 @@ describe('Parse result namespace', () => {
         content: '',
       };
 
-      expect(element.toRefract()).to.deep.equal(expected);
+      expect(namespace.toRefract(element)).to.deep.equal(expected);
     });
   });
 
@@ -253,12 +236,10 @@ describe('Parse result namespace', () => {
     beforeEach(() => {
       refracted = {
         element: 'string',
-        meta: {},
-        attributes: {},
         content: '',
       };
 
-      element = (new StringElement()).fromRefract(refracted);
+      element = namespace.fromRefract(refracted);
     });
 
     it('should have a convenience method for retrieving source map', () => {
