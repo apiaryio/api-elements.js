@@ -1,6 +1,6 @@
 {
   "name": "minim-parse-result",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Minim Parse Result Namespace",
   "main": "./lib/parse-result.js",
   "repository": {
