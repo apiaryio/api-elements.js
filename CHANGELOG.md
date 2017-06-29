@@ -1,4 +1,4 @@
-# Master
+# 0.12.0-beta.3
 
 - Updates to fury 3.0.0-beta.2.
 
