@@ -1,6 +1,5 @@
 export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
-  const AuthScheme = namespace.getElementClass('authScheme');
 
   class HttpTransaction extends ArrayElement {
     constructor(...args) {
@@ -17,17 +16,7 @@ export default function (namespace) {
     }
 
     get authSchemes() {
-      return this.attributes.get('authSchemes')
-        .map((element) => {
-          if (element instanceof AuthScheme) {
-            return element;
-          }
-
-          const authScheme = new AuthScheme([], element.meta, element.attributes);
-          authScheme.element = element.element;
-          authScheme.content = element.content;
-          return authScheme;
-        });
+      return this.attributes.get('authSchemes');
     }
   }
 

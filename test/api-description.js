@@ -972,7 +972,7 @@ describe('API description namespace', () => {
         attributes: {
           authSchemes: [
             {
-              element: 'Custom Token Auth',
+              element: 'Token Authentication Scheme',
               content: [],
             },
           ],
