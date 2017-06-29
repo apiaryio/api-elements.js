@@ -71,17 +71,19 @@ export function namespace(options) {
     }
   }
 
-  Object.defineProperty(Element.prototype, 'sourceMapValue', {
-    get() {
-      const sourceMap = this.attributes.get('sourceMap');
+  if (!Object.getOwnPropertyNames(Element.prototype).includes('sourceMapValue')) {
+    Object.defineProperty(Element.prototype, 'sourceMapValue', {
+      get() {
+        const sourceMap = this.attributes.get('sourceMap');
 
-      if (sourceMap) {
-        return sourceMap.first().toValue();
-      }
+        if (sourceMap) {
+          return sourceMap.first().toValue();
+        }
 
-      return undefined;
-    },
-  });
+        return undefined;
+      },
+    });
+  }
 
   minim
     .use(apiDescription)
