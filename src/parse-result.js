@@ -11,7 +11,7 @@ import apiDescription from 'minim-api-description';
 
 export function namespace(options) {
   const minim = options.base;
-  const BaseElement = minim.BaseElement;
+  const Element = minim.Element;
   const StringElement = minim.getElementClass('string');
   const ArrayElement = minim.getElementClass('array');
 
@@ -22,21 +22,21 @@ export function namespace(options) {
     }
 
     get api() {
-      return this.children(item => item.classes.contains('api')).first();
+      return this.children.filter(item => item.classes.contains('api')).first();
     }
 
     get annotations() {
-      return this.children(item => item.element === 'annotation');
+      return this.children.filter(item => item.element === 'annotation');
     }
 
     get warnings() {
-      return this.children(
+      return this.children.filter(
         item => item.element === 'annotation' &&
         item.classes.contains('warning'));
     }
 
     get errors() {
-      return this.children(
+      return this.children.filter(
         item => item.element === 'annotation' &&
         item.classes.contains('error'));
     }
@@ -57,14 +57,21 @@ export function namespace(options) {
     }
   }
 
-  class SourceMap extends minim.BaseElement {
+  class SourceMap extends minim.Element {
     constructor(...args) {
       super(...args);
       this.element = 'sourceMap';
     }
+
+    // Override toValue because until Refract 1.0
+    // sourceMap is special element that contains array of array
+    // TODO Remove in next minor release
+    toValue() {
+      return this.content.map(value => value.map(element => element.toValue()));
+    }
   }
 
-  Object.defineProperty(BaseElement.prototype, 'sourceMapValue', {
+  Object.defineProperty(Element.prototype, 'sourceMapValue', {
     get() {
       const sourceMap = this.attributes.get('sourceMap');
 

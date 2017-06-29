@@ -1,3 +1,7 @@
+# 0.6.0 - 2017-06-29
+
+- Updated to support minim 0.17.1.
+
 # 0.5.0 - 2017-05-12
 
 - `sourceMapValue` will return undefined instead of empty array

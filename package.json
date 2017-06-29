@@ -1,6 +1,6 @@
 {
   "name": "minim-parse-result",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Minim Parse Result Namespace",
   "main": "./lib/parse-result.js",
   "repository": {
@@ -17,11 +17,11 @@
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
-    "minim-api-description": "^0.3.1"
+    "minim-api-description": "^0.4.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "minim": "^0.16.0",
+    "minim": "^0.17.1",
     "peasant": "^1.1.0"
   },
   "engines": {
