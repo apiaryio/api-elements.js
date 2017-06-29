@@ -1,6 +1,6 @@
 {
   "name": "minim-api-description",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Minim API Description Namespace",
   "main": "./lib/api-description.js",
   "repository": {
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "minim": "^0.16.0",
+    "minim": "^0.17.1",
     "peasant": "^1.1.0"
   },
   "engines": {

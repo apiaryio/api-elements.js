@@ -8,36 +8,36 @@ export default function (namespace) {
     }
 
     get resourceGroups() {
-      return this.children(item => item.classes.contains('resourceGroup'));
+      return this.children.filter(item => item.classes.contains('resourceGroup'));
     }
 
     get dataStructures() {
-      return this.children(item => item.classes.contains('dataStructures'));
+      return this.children.filter(item => item.classes.contains('dataStructures'));
     }
 
     get scenarios() {
-      return this.children(item => item.classes.contains('scenario'));
+      return this.children.filter(item => item.classes.contains('scenario'));
     }
 
     get transitionGroups() {
-      return this.children(item => item.classes.contains('transitions'));
+      return this.children.filter(item => item.classes.contains('transitions'));
     }
 
     get authSchemeGroups() {
-      return this.children(item => item.classes.contains('authSchemes'));
+      return this.children.filter(item => item.classes.contains('authSchemes'));
     }
 
     get resources() {
-      return this.children(item => item.element === 'resource');
+      return this.children.filter(item => item.element === 'resource');
     }
 
     get transitions() {
-      return this.children(item => item.element === 'transition');
+      return this.children.filter(item => item.element === 'transition');
     }
 
     get authSchemes() {
       const schemes = ['Basic Authentication Scheme', 'Token Authentication Scheme', 'OAuth2 Scheme'];
-      return this.children(item => schemes.indexOf(item.element) !== -1);
+      return this.children.filter(item => schemes.indexOf(item.element) !== -1);
     }
 
     metadata(value) {
@@ -47,7 +47,7 @@ export default function (namespace) {
         return undefined;
       }
 
-      const result = metadata.children(item => item.key.toValue() === value);
+      const result = metadata.children.filter(item => item.key.toValue() === value);
 
       if (!result.length) {
         return undefined;

@@ -1,5 +1,5 @@
 export default function (namespace) {
-  class Extension extends namespace.BaseElement {
+  class Extension extends namespace.Element {
     constructor(...args) {
       super(...args);
       this.element = 'extension';
