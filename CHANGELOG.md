@@ -1,4 +1,4 @@
-# Master
+# 0.6.1 - 2017-06-29
 
 - We don't try to re-define `sourceMapValue` on an Element when
   `sourceMapValue` already exists. Such as when you create multiple namespaces
