@@ -57,7 +57,7 @@ export function namespace(options) {
     }
   }
 
-  class SourceMap extends minim.Element {
+  class SourceMap extends minim.elements.Array {
     constructor(...args) {
       super(...args);
       this.element = 'sourceMap';
