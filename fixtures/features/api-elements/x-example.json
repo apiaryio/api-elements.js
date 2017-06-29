@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,20 +9,15 @@
         ],
         "title": "Form Test"
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "hrefVariables": {
               "element": "hrefVariables",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
-                  "meta": {},
                   "attributes": {
                     "typeAttributes": [
                       "required"
@@ -33,32 +26,23 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "param"
                     },
                     "value": {
                       "element": "number",
-                      "meta": {},
-                      "attributes": {},
                       "content": 42
                     }
                   }
                 },
                 {
                   "element": "member",
-                  "meta": {},
-                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "order"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "default": "desc"
                       },
@@ -73,39 +57,26 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET",
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "user-agent"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Examplebot/4.2 (+http://www.example.com/bot.html)"
                                 }
                               }
@@ -116,7 +87,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#form-data-content-type"
@@ -125,18 +95,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/x-www-form-urlencoded"
                                 }
                               }
@@ -154,7 +119,6 @@
                             "links": [
                               {
                                 "element": "link",
-                                "meta": {},
                                 "attributes": {
                                   "relation": "inferred",
                                   "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
@@ -170,16 +134,11 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "object",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               {
                                 "element": "member",
-                                "meta": {},
                                 "attributes": {
                                   "typeAttributes": [
                                     "required"
@@ -188,21 +147,16 @@
                                 "content": {
                                   "key": {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "id"
                                   },
                                   "value": {
                                     "element": "boolean",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": false
                                   }
                                 }
                               },
                               {
                                 "element": "member",
-                                "meta": {},
                                 "attributes": {
                                   "typeAttributes": [
                                     "required"
@@ -211,13 +165,10 @@
                                 "content": {
                                   "key": {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "greeting"
                                   },
                                   "value": {
                                     "element": "enum",
-                                    "meta": {},
                                     "attributes": {
                                       "samples": [
                                         [
@@ -231,20 +182,14 @@
                                     "content": [
                                       {
                                         "element": "string",
-                                        "meta": {},
-                                        "attributes": {},
                                         "content": "hi"
                                       },
                                       {
                                         "element": "string",
-                                        "meta": {},
-                                        "attributes": {},
                                         "content": "good morning"
                                       },
                                       {
                                         "element": "string",
-                                        "meta": {},
-                                        "attributes": {},
                                         "content": "hello"
                                       }
                                     ]
@@ -258,15 +203,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Success"
                         }
                       ]

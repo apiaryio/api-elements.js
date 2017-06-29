@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,41 +9,32 @@
         ],
         "title": "Parameters"
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/test"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
               "attributes": {
                 "href": "/test{?arg,arg2}",
                 "hrefVariables": {
                   "element": "hrefVariables",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "member",
                       "meta": {
                         "description": "Query argument"
                       },
-                      "attributes": {},
                       "content": {
                         "key": {
                           "element": "string",
-                          "meta": {},
-                          "attributes": {},
                           "content": "arg"
                         },
                         "value": {
                           "element": "enum",
-                          "meta": {},
                           "attributes": {
                             "default": [
                               "A"
@@ -54,14 +43,10 @@
                           "content": [
                             {
                               "element": "string",
-                              "meta": {},
-                              "attributes": {},
                               "content": "B"
                             },
                             {
                               "element": "string",
-                              "meta": {},
-                              "attributes": {},
                               "content": "C"
                             }
                           ]
@@ -73,17 +58,13 @@
                       "meta": {
                         "description": "Query argument 2"
                       },
-                      "attributes": {},
                       "content": {
                         "key": {
                           "element": "string",
-                          "meta": {},
-                          "attributes": {},
                           "content": "arg2"
                         },
                         "value": {
                           "element": "array",
-                          "meta": {},
                           "attributes": {
                             "default": [
                               "A"
@@ -92,8 +73,6 @@
                           "content": [
                             {
                               "element": "string",
-                              "meta": {},
-                              "attributes": {},
                               "content": null
                             }
                           ]
@@ -106,12 +85,9 @@
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -119,15 +95,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test description"
                         }
                       ]

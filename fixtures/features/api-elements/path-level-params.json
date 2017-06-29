@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,16 +9,12 @@
         ],
         "title": "Path Level Parameters"
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "hrefVariables": {
               "element": "hrefVariables",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
@@ -35,14 +29,10 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "id"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": null
                     }
                   }
@@ -60,14 +50,10 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "search"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": null
                     }
                   }
@@ -79,13 +65,10 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
               "attributes": {
                 "href": "/test/{id}{?search,arg}",
                 "hrefVariables": {
                   "element": "hrefVariables",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "member",
@@ -100,14 +83,10 @@
                       "content": {
                         "key": {
                           "element": "string",
-                          "meta": {},
-                          "attributes": {},
                           "content": "arg"
                         },
                         "value": {
                           "element": "string",
-                          "meta": {},
-                          "attributes": {},
                           "content": null
                         }
                       }
@@ -118,12 +97,9 @@
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -131,15 +107,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "204"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test description"
                         }
                       ]

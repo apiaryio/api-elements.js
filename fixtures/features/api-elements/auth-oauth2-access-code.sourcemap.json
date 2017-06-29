@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,13 +9,10 @@
         ],
         "title": {
           "element": "string",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     42,
@@ -30,7 +25,6 @@
           "content": "Swagger Oauth2 Access Code"
         }
       },
-      "attributes": {},
       "content": [
         {
           "element": "category",
@@ -39,20 +33,16 @@
               "authSchemes"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "OAuth2 Scheme",
               "meta": {
                 "id": {
                   "element": "string",
-                  "meta": {},
                   "attributes": {
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             99,
@@ -65,17 +55,13 @@
                   "content": "customOauth2"
                 }
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
-                  "meta": {},
                   "attributes": {
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             134,
@@ -88,46 +74,33 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "grantType"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "authorization code"
                     }
                   }
                 },
                 {
                   "element": "member",
-                  "meta": {},
-                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "scopes"
                     },
                     "value": {
                       "element": "array",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "string",
                           "meta": {
                             "description": {
                               "element": "string",
-                              "meta": {},
                               "attributes": {
                                 "sourceMap": [
                                   {
                                     "element": "sourceMap",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": [
                                       [
                                         275,
@@ -144,8 +117,6 @@
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     275,
@@ -162,13 +133,10 @@
                           "meta": {
                             "description": {
                               "element": "string",
-                              "meta": {},
                               "attributes": {
                                 "sourceMap": [
                                   {
                                     "element": "sourceMap",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": [
                                       [
                                         302,
@@ -185,8 +153,6 @@
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     302,
@@ -204,17 +170,13 @@
                 },
                 {
                   "element": "transition",
-                  "meta": {},
                   "attributes": {
                     "relation": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 155,
@@ -228,13 +190,10 @@
                     },
                     "href": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 155,
@@ -251,17 +210,13 @@
                 },
                 {
                   "element": "transition",
-                  "meta": {},
                   "attributes": {
                     "relation": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 214,
@@ -275,13 +230,10 @@
                     },
                     "href": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 214,
@@ -302,17 +254,13 @@
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": {
               "element": "string",
-              "meta": {},
               "attributes": {
                 "sourceMap": [
                   {
                     "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
                     "content": [
                       [
                         332,
@@ -328,23 +276,17 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
                   "attributes": {
                     "authSchemes": [
                       {
                         "element": "customOauth2",
-                        "meta": {},
                         "attributes": {
                           "sourceMap": [
                             {
                               "element": "sourceMap",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 [
                                   378,
@@ -357,29 +299,20 @@
                         "content": [
                           {
                             "element": "member",
-                            "meta": {},
-                            "attributes": {},
                             "content": {
                               "key": {
                                 "element": "string",
-                                "meta": {},
-                                "attributes": {},
                                 "content": "scopes"
                               },
                               "value": {
                                 "element": "array",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   {
                                     "element": "string",
-                                    "meta": {},
                                     "attributes": {
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               404,
@@ -393,13 +326,10 @@
                                   },
                                   {
                                     "element": "string",
-                                    "meta": {},
                                     "attributes": {
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               423,
@@ -422,17 +352,13 @@
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     347,
@@ -449,17 +375,13 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     455,
@@ -475,13 +397,10 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     470,
@@ -505,8 +424,6 @@
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     507,
@@ -520,12 +437,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }

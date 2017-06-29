@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,7 +9,6 @@
         ],
         "title": "Swagger Token Auth in Header"
       },
-      "attributes": {},
       "content": [
         {
           "element": "category",
@@ -20,30 +17,22 @@
               "authSchemes"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "Token Authentication Scheme",
               "meta": {
                 "id": "customApiKey"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
-                  "meta": {},
-                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "httpHeaderName"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "api_key"
                     }
                   }
@@ -54,25 +43,19 @@
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/endpoint"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
                   "attributes": {
                     "authSchemes": [
                       {
                         "element": "customApiKey",
-                        "meta": {},
-                        "attributes": {},
                         "content": []
                       }
                     ]
@@ -80,7 +63,6 @@
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -88,15 +70,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "With Security"
                         },
                         {
@@ -113,12 +92,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }

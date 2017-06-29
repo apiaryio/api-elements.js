@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,7 +9,6 @@
         ],
         "title": "Tags"
       },
-      "attributes": {},
       "content": [
         {
           "element": "category",
@@ -21,34 +18,25 @@
               "resourceGroup"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "copy",
-              "meta": {},
-              "attributes": {},
               "content": "Group1 description"
             },
             {
               "element": "resource",
-              "meta": {},
               "attributes": {
                 "href": "/test"
               },
               "content": [
                 {
                   "element": "transition",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
                             "method": "GET"
                           },
@@ -56,15 +44,12 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
                             "statusCode": "204"
                           },
                           "content": [
                             {
                               "element": "copy",
-                              "meta": {},
-                              "attributes": {},
                               "content": "Test response"
                             }
                           ]
@@ -75,17 +60,12 @@
                 },
                 {
                   "element": "transition",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
                             "method": "POST"
                           },
@@ -93,15 +73,12 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
                             "statusCode": "204"
                           },
                           "content": [
                             {
                               "element": "copy",
-                              "meta": {},
-                              "attributes": {},
                               "content": "Test response"
                             }
                           ]
@@ -114,24 +91,18 @@
             },
             {
               "element": "resource",
-              "meta": {},
               "attributes": {
                 "href": "/yet-another-test"
               },
               "content": [
                 {
                   "element": "transition",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
                             "method": "GET"
                           },
@@ -139,15 +110,12 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
                             "statusCode": "204"
                           },
                           "content": [
                             {
                               "element": "copy",
-                              "meta": {},
-                              "attributes": {},
                               "content": "Test response"
                             }
                           ]
@@ -168,28 +136,21 @@
               "resourceGroup"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "resource",
-              "meta": {},
               "attributes": {
                 "href": "/another-test"
               },
               "content": [
                 {
                   "element": "transition",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
                             "method": "GET"
                           },
@@ -197,15 +158,12 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
                             "statusCode": "204"
                           },
                           "content": [
                             {
                               "element": "copy",
-                              "meta": {},
-                              "attributes": {},
                               "content": "Test response"
                             }
                           ]
@@ -216,17 +174,12 @@
                 },
                 {
                   "element": "transition",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
                             "method": "DELETE"
                           },
@@ -234,15 +187,12 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
                             "statusCode": "204"
                           },
                           "content": [
                             {
                               "element": "copy",
-                              "meta": {},
-                              "attributes": {},
                               "content": "Test response"
                             }
                           ]
