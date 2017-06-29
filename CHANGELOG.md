@@ -1,4 +1,4 @@
-# 0.4.0
+# 0.4.0 - 2017-06-29
 
 - Updated to support minim 0.17.1.
 
