@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "annotation",
@@ -12,7 +10,6 @@
         "links": [
           {
             "element": "link",
-            "meta": {},
             "attributes": {
               "relation": "origin",
               "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
@@ -26,8 +23,6 @@
         "sourceMap": [
           {
             "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
             "content": [
               [
                 247,

@@ -34,7 +34,7 @@ function testFixture(description, fixture, generateSourceMap = false) {
 
       // Invoke with the env var GENERATE set to regenerate the fixtures.
       if (process.env.GENERATE) {
-        expected = output.toRefract();
+        expected = fury.minim.toRefract(output);
 
         if (generateSourceMap) {
           // eslint-disable-next-line no-param-reassign
@@ -45,7 +45,7 @@ function testFixture(description, fixture, generateSourceMap = false) {
         }
       }
 
-      expect(output.toRefract()).to.deep.equal(expected);
+      expect(fury.minim.toRefract(output)).to.deep.equal(expected);
       return done();
     });
   });

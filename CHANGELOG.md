@@ -1,5 +1,7 @@
 # Master
 
+- Updates to fury 3.0.0-beta.2.
+
 ## Bug Fixes
 
 - Adds support for `csv` and `multi` parameter collectionFormat for query
