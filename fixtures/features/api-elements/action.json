@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,11 +9,9 @@
         ],
         "title": "Action"
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/test"
           },
@@ -25,16 +21,12 @@
               "meta": {
                 "title": "Test head"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "HEAD"
                       },
@@ -42,15 +34,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "204"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test response"
                         }
                       ]
@@ -64,16 +53,12 @@
               "meta": {
                 "title": "Test options"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "OPTIONS"
                       },
@@ -81,15 +66,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "204"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test response"
                         }
                       ]
@@ -104,22 +86,16 @@
                 "title": "Test get",
                 "id": "test"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "copy",
-                  "meta": {},
-                  "attributes": {},
                   "content": "Test description"
                 },
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -127,15 +103,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "204"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test response"
                         }
                       ]
@@ -149,16 +122,12 @@
               "meta": {
                 "title": "Test post"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "POST"
                       },
@@ -166,15 +135,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "204"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test response"
                         }
                       ]
@@ -188,16 +154,12 @@
               "meta": {
                 "title": "Test put"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "PUT"
                       },
@@ -205,15 +167,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "204"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test response"
                         }
                       ]
@@ -227,16 +186,12 @@
               "meta": {
                 "title": "Test patch"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "PATCH"
                       },
@@ -244,15 +199,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "204"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test response"
                         }
                       ]
@@ -266,16 +218,12 @@
               "meta": {
                 "title": "Test delete"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "DELETE"
                       },
@@ -283,15 +231,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "204"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test response"
                         }
                       ]

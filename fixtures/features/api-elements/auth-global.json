@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,7 +9,6 @@
         ],
         "title": "Swagger Global Auth"
       },
-      "attributes": {},
       "content": [
         {
           "element": "category",
@@ -20,30 +17,22 @@
               "authSchemes"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "Token Authentication Scheme",
               "meta": {
                 "id": "customApiKey"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
-                  "meta": {},
-                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "httpHeaderName"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "api_key"
                     }
                   }
@@ -55,32 +44,25 @@
               "meta": {
                 "id": "customBasic"
               },
-              "attributes": {},
               "content": []
             }
           ]
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/endpoint1"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
                   "attributes": {
                     "authSchemes": [
                       {
                         "element": "customApiKey",
-                        "meta": {},
-                        "attributes": {},
                         "content": []
                       }
                     ]
@@ -88,7 +70,6 @@
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -96,15 +77,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "With Global Security"
                         },
                         {
@@ -121,12 +99,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }
@@ -140,24 +114,18 @@
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/endpoint2"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -165,15 +133,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "With Overriden Empty Security"
                         },
                         {
@@ -190,12 +155,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }
@@ -209,25 +170,19 @@
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/endpoint3"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
                   "attributes": {
                     "authSchemes": [
                       {
                         "element": "customBasic",
-                        "meta": {},
-                        "attributes": {},
                         "content": []
                       }
                     ]
@@ -235,7 +190,6 @@
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -243,15 +197,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "With Overriden Different Security"
                         },
                         {
@@ -268,12 +219,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }

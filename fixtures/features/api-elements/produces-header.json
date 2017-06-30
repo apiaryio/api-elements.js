@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,34 +9,25 @@
         ],
         "title": "Produces Header"
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/test"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET",
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
@@ -46,7 +35,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#produces-accept"
@@ -55,18 +43,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Accept"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/json"
                                 }
                               }
@@ -78,12 +61,9 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
@@ -91,7 +71,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#produces-content-type"
@@ -100,18 +79,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/json"
                                 }
                               }
@@ -123,8 +97,6 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test description"
                         }
                       ]
@@ -137,30 +109,22 @@
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/test-with-override"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET",
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
@@ -168,7 +132,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#produces-accept"
@@ -177,18 +140,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Accept"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/json"
                                 }
                               }
@@ -200,28 +158,19 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "text/plain"
                                 }
                               }
@@ -233,8 +182,6 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test description when overriding produce content type"
                         }
                       ]

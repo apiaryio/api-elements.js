@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -20,18 +18,13 @@
                 "user"
               ]
             },
-            "attributes": {},
             "content": {
               "key": {
                 "element": "string",
-                "meta": {},
-                "attributes": {},
                 "content": "HOST"
               },
               "value": {
                 "element": "string",
-                "meta": {},
-                "attributes": {},
                 "content": "custom-instance.filter.ly"
               }
             }
@@ -41,24 +34,18 @@
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/example/"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -66,28 +53,19 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/json"
                                 }
                               }
@@ -99,8 +77,6 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test description"
                         },
                         {
@@ -110,7 +86,6 @@
                               "messageBody"
                             ]
                           },
-                          "attributes": {},
                           "content": "{\n  \"requestId\" : 123123213231,\n  \"results\": [\n    {\n      \"id\": 12312323,\n      \"type\": \"article\"\n    }\n  ]\n}"
                         }
                       ]

@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,7 +9,6 @@
         ],
         "title": "Swagger Oauth2 Access Code"
       },
-      "attributes": {},
       "content": [
         {
           "element": "category",
@@ -20,56 +17,41 @@
               "authSchemes"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "OAuth2 Scheme",
               "meta": {
                 "id": "customOauth2"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
-                  "meta": {},
-                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "grantType"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "authorization code"
                     }
                   }
                 },
                 {
                   "element": "member",
-                  "meta": {},
-                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "scopes"
                     },
                     "value": {
                       "element": "array",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "string",
                           "meta": {
                             "description": "Test Scope 1"
                           },
-                          "attributes": {},
                           "content": "scope1"
                         },
                         {
@@ -77,7 +59,6 @@
                           "meta": {
                             "description": "Test Scope 2"
                           },
-                          "attributes": {},
                           "content": "scope2"
                         }
                       ]
@@ -86,7 +67,6 @@
                 },
                 {
                   "element": "transition",
-                  "meta": {},
                   "attributes": {
                     "relation": "authorize",
                     "href": "http://example.com/oauth/authorize"
@@ -95,7 +75,6 @@
                 },
                 {
                   "element": "transition",
-                  "meta": {},
                   "attributes": {
                     "relation": "token",
                     "href": "http://example.com/oauth/token"
@@ -108,52 +87,36 @@
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/endpoint"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
                   "attributes": {
                     "authSchemes": [
                       {
                         "element": "customOauth2",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           {
                             "element": "member",
-                            "meta": {},
-                            "attributes": {},
                             "content": {
                               "key": {
                                 "element": "string",
-                                "meta": {},
-                                "attributes": {},
                                 "content": "scopes"
                               },
                               "value": {
                                 "element": "array",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "scope1"
                                   },
                                   {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "scope2"
                                   }
                                 ]
@@ -167,7 +130,6 @@
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -175,15 +137,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "With Security"
                         },
                         {
@@ -200,12 +159,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }

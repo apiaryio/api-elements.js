@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,28 +9,21 @@
         ],
         "title": "Parameters"
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/test"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "POST"
                       },
@@ -51,12 +42,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }
@@ -64,15 +51,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Test description"
                         }
                       ]
@@ -94,7 +78,6 @@
         "links": [
           {
             "element": "link",
-            "meta": {},
             "attributes": {
               "relation": "origin",
               "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
@@ -108,8 +91,6 @@
         "sourceMap": [
           {
             "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
             "content": [
               [
                 260,

@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,13 +9,10 @@
         ],
         "title": {
           "element": "string",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     42,
@@ -30,7 +25,6 @@
           "content": "Swagger Basic Auth"
         }
       },
-      "attributes": {},
       "content": [
         {
           "element": "category",
@@ -39,20 +33,16 @@
               "authSchemes"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "Basic Authentication Scheme",
               "meta": {
                 "id": {
                   "element": "string",
-                  "meta": {},
                   "attributes": {
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             91,
@@ -65,24 +55,19 @@
                   "content": "customBasic"
                 }
               },
-              "attributes": {},
               "content": []
             }
           ]
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": {
               "element": "string",
-              "meta": {},
               "attributes": {
                 "sourceMap": [
                   {
                     "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
                     "content": [
                       [
                         129,
@@ -98,23 +83,17 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
                   "attributes": {
                     "authSchemes": [
                       {
                         "element": "customBasic",
-                        "meta": {},
                         "attributes": {
                           "sourceMap": [
                             {
                               "element": "sourceMap",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 [
                                   175,
@@ -131,17 +110,13 @@
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     144,
@@ -158,17 +133,13 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     216,
@@ -184,13 +155,10 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     231,
@@ -214,8 +182,6 @@
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     268,
@@ -229,12 +195,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }

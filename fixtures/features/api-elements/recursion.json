@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -20,18 +18,13 @@
                 "user"
               ]
             },
-            "attributes": {},
             "content": {
               "key": {
                 "element": "string",
-                "meta": {},
-                "attributes": {},
                 "content": "HOST"
               },
               "value": {
                 "element": "string",
-                "meta": {},
-                "attributes": {},
                 "content": "https://example.com"
               }
             }
@@ -41,8 +34,6 @@
       "content": [
         {
           "element": "copy",
-          "meta": {},
-          "attributes": {},
           "content": "Sample API"
         },
         {
@@ -53,17 +44,13 @@
               "resourceGroup"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "copy",
-              "meta": {},
-              "attributes": {},
               "content": "Lorem Ipsum"
             },
             {
               "element": "resource",
-              "meta": {},
               "attributes": {
                 "href": "/v1/recursive"
               },
@@ -77,26 +64,19 @@
                     "href": "/v1/recursive{?tag}",
                     "hrefVariables": {
                       "element": "hrefVariables",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "member",
                           "meta": {
                             "description": "Test 1 2"
                           },
-                          "attributes": {},
                           "content": {
                             "key": {
                               "element": "string",
-                              "meta": {},
-                              "attributes": {},
                               "content": "tag"
                             },
                             "value": {
                               "element": "string",
-                              "meta": {},
-                              "attributes": {},
                               "content": null
                             }
                           }
@@ -107,18 +87,13 @@
                   "content": [
                     {
                       "element": "copy",
-                      "meta": {},
-                      "attributes": {},
                       "content": "This is a test to show that there are issues with recursion"
                     },
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
                             "method": "GET"
                           },
@@ -126,15 +101,12 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
                             "statusCode": "200"
                           },
                           "content": [
                             {
                               "element": "copy",
-                              "meta": {},
-                              "attributes": {},
                               "content": "Success"
                             }
                           ]
@@ -158,7 +130,6 @@
         "links": [
           {
             "element": "link",
-            "meta": {},
             "attributes": {
               "relation": "origin",
               "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
@@ -172,8 +143,6 @@
         "sourceMap": [
           {
             "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
             "content": [
               [
                 590,

@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,13 +9,10 @@
         ],
         "title": {
           "element": "string",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     23,
@@ -30,7 +25,6 @@
           "content": "Extensions"
         }
       },
-      "attributes": {},
       "content": [
         {
           "element": "extension",
@@ -38,7 +32,6 @@
             "links": [
               {
                 "element": "link",
-                "meta": {},
                 "attributes": {
                   "relation": "profile",
                   "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
@@ -47,24 +40,19 @@
               }
             ]
           },
-          "attributes": {},
           "content": {
             "x-info-extension": true
           }
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": {
               "element": "string",
-              "meta": {},
               "attributes": {
                 "sourceMap": [
                   {
                     "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
                     "content": [
                       [
                         134,
@@ -80,22 +68,16 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
               "attributes": {
                 "hrefVariables": {
                   "element": "hrefVariables",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "member",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 251,
@@ -111,19 +93,14 @@
                       "content": {
                         "key": {
                           "element": "string",
-                          "meta": {},
-                          "attributes": {},
                           "content": "id"
                         },
                         "value": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     251,
@@ -143,22 +120,16 @@
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     183,
@@ -175,17 +146,13 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     402,
@@ -201,13 +168,10 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     454,
@@ -225,7 +189,6 @@
                             "links": [
                               {
                                 "element": "link",
-                                "meta": {},
                                 "attributes": {
                                   "relation": "profile",
                                   "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
@@ -234,7 +197,6 @@
                               }
                             ]
                           },
-                          "attributes": {},
                           "content": {
                             "x-response-extension": true
                           }
@@ -249,7 +211,6 @@
                     "links": [
                       {
                         "element": "link",
-                        "meta": {},
                         "attributes": {
                           "relation": "profile",
                           "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
@@ -258,7 +219,6 @@
                       }
                     ]
                   },
-                  "attributes": {},
                   "content": {
                     "x-transition-extension": true
                   }
@@ -271,7 +231,6 @@
                 "links": [
                   {
                     "element": "link",
-                    "meta": {},
                     "attributes": {
                       "relation": "profile",
                       "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
@@ -280,7 +239,6 @@
                   }
                 ]
               },
-              "attributes": {},
               "content": {
                 "x-resource-extension": true
               }
@@ -293,7 +251,6 @@
             "links": [
               {
                 "element": "link",
-                "meta": {},
                 "attributes": {
                   "relation": "profile",
                   "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
@@ -302,7 +259,6 @@
               }
             ]
           },
-          "attributes": {},
           "content": {
             "x-paths-extension": true
           }

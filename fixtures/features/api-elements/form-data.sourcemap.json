@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,13 +9,10 @@
         ],
         "title": {
           "element": "string",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     23,
@@ -30,21 +25,16 @@
           "content": "Form Test"
         }
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": {
               "element": "string",
-              "meta": {},
               "attributes": {
                 "sourceMap": [
                   {
                     "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
                     "content": [
                       [
                         68,
@@ -60,27 +50,19 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     269,
@@ -94,8 +76,6 @@
                         },
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
@@ -103,7 +83,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#form-data-content-type"
@@ -112,18 +91,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/x-www-form-urlencoded"
                                 }
                               }
@@ -141,7 +115,6 @@
                             "links": [
                               {
                                 "element": "link",
-                                "meta": {},
                                 "attributes": {
                                   "relation": "inferred",
                                   "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
@@ -157,22 +130,15 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "object",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               {
                                 "element": "member",
-                                "meta": {},
                                 "attributes": {
                                   "sourceMap": [
                                     {
                                       "element": "sourceMap",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": [
                                         [
                                           302,
@@ -188,19 +154,14 @@
                                 "content": {
                                   "key": {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "id"
                                   },
                                   "value": {
                                     "element": "enum",
-                                    "meta": {},
                                     "attributes": {
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               302,
@@ -213,13 +174,10 @@
                                     "content": [
                                       {
                                         "element": "number",
-                                        "meta": {},
                                         "attributes": {
                                           "sourceMap": [
                                             {
                                               "element": "sourceMap",
-                                              "meta": {},
-                                              "attributes": {},
                                               "content": [
                                                 [
                                                   387,
@@ -237,13 +195,10 @@
                               },
                               {
                                 "element": "member",
-                                "meta": {},
                                 "attributes": {
                                   "sourceMap": [
                                     {
                                       "element": "sourceMap",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": [
                                         [
                                           160,
@@ -259,19 +214,14 @@
                                 "content": {
                                   "key": {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "foo"
                                   },
                                   "value": {
                                     "element": "enum",
-                                    "meta": {},
                                     "attributes": {
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               160,
@@ -284,13 +234,10 @@
                                     "content": [
                                       {
                                         "element": "string",
-                                        "meta": {},
                                         "attributes": {
                                           "sourceMap": [
                                             {
                                               "element": "sourceMap",
-                                              "meta": {},
-                                              "attributes": {},
                                               "content": [
                                                 [
                                                   238,
@@ -308,13 +255,10 @@
                               },
                               {
                                 "element": "member",
-                                "meta": {},
                                 "attributes": {
                                   "sourceMap": [
                                     {
                                       "element": "sourceMap",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": [
                                         [
                                           424,
@@ -330,19 +274,14 @@
                                 "content": {
                                   "key": {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "bar"
                                   },
                                   "value": {
                                     "element": "enum",
-                                    "meta": {},
                                     "attributes": {
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               424,
@@ -355,13 +294,10 @@
                                     "content": [
                                       {
                                         "element": "string",
-                                        "meta": {},
                                         "attributes": {
                                           "sourceMap": [
                                             {
                                               "element": "sourceMap",
-                                              "meta": {},
-                                              "attributes": {},
                                               "content": [
                                                 [
                                                   510,
@@ -384,17 +320,13 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     574,
@@ -410,13 +342,10 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     589,

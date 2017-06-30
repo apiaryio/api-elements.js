@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,13 +9,10 @@
         ],
         "title": {
           "element": "string",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     40,
@@ -43,8 +38,6 @@
               "sourceMap": [
                 {
                   "element": "sourceMap",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     [
                       118,
@@ -57,14 +50,10 @@
             "content": {
               "key": {
                 "element": "string",
-                "meta": {},
-                "attributes": {},
                 "content": "HOST"
               },
               "value": {
                 "element": "string",
-                "meta": {},
-                "attributes": {},
                 "content": "http://example.com"
               }
             }
@@ -74,13 +63,10 @@
       "content": [
         {
           "element": "copy",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     59,
@@ -94,17 +80,13 @@
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": {
               "element": "string",
-              "meta": {},
               "attributes": {
                 "sourceMap": [
                   {
                     "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
                     "content": [
                       [
                         225,
@@ -123,17 +105,13 @@
               "meta": {
                 "id": "getResource"
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "copy",
-                  "meta": {},
                   "attributes": {
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             251,
@@ -147,22 +125,16 @@
                 },
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     240,
@@ -176,8 +148,6 @@
                         },
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
@@ -185,7 +155,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#consumes-content-type"
@@ -194,18 +163,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/json"
                                 }
                               }
@@ -216,7 +180,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#produces-accept"
@@ -225,18 +188,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Accept"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/json"
                                 }
                               }
@@ -248,12 +206,9 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
@@ -261,7 +216,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#produces-content-type"
@@ -270,18 +224,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/json"
                                 }
                               }
@@ -290,13 +239,10 @@
                         },
                         "statusCode": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     335,
@@ -312,13 +258,10 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     350,
@@ -339,7 +282,6 @@
                             "links": [
                               {
                                 "element": "link",
-                                "meta": {},
                                 "attributes": {
                                   "relation": "inferred",
                                   "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
@@ -365,8 +307,6 @@
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     394,

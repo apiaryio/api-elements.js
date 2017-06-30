@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,13 +9,10 @@
         ],
         "title": {
           "element": "string",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     42,
@@ -30,7 +25,6 @@
           "content": "Swagger Oauth2 Application"
         }
       },
-      "attributes": {},
       "content": [
         {
           "element": "category",
@@ -39,20 +33,16 @@
               "authSchemes"
             ]
           },
-          "attributes": {},
           "content": [
             {
               "element": "OAuth2 Scheme",
               "meta": {
                 "id": {
                   "element": "string",
-                  "meta": {},
                   "attributes": {
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             99,
@@ -65,17 +55,13 @@
                   "content": "customOauth2"
                 }
               },
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
-                  "meta": {},
                   "attributes": {
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             134,
@@ -88,46 +74,33 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "grantType"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "client credentials"
                     }
                   }
                 },
                 {
                   "element": "member",
-                  "meta": {},
-                  "attributes": {},
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "scopes"
                     },
                     "value": {
                       "element": "array",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "string",
                           "meta": {
                             "description": {
                               "element": "string",
-                              "meta": {},
                               "attributes": {
                                 "sourceMap": [
                                   {
                                     "element": "sourceMap",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": [
                                       [
                                         217,
@@ -144,8 +117,6 @@
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     217,
@@ -162,13 +133,10 @@
                           "meta": {
                             "description": {
                               "element": "string",
-                              "meta": {},
                               "attributes": {
                                 "sourceMap": [
                                   {
                                     "element": "sourceMap",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": [
                                       [
                                         244,
@@ -185,8 +153,6 @@
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     244,
@@ -204,17 +170,13 @@
                 },
                 {
                   "element": "transition",
-                  "meta": {},
                   "attributes": {
                     "relation": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 156,
@@ -228,13 +190,10 @@
                     },
                     "href": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 156,
@@ -255,17 +214,13 @@
         },
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": {
               "element": "string",
-              "meta": {},
               "attributes": {
                 "sourceMap": [
                   {
                     "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
                     "content": [
                       [
                         274,
@@ -281,23 +236,17 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
                   "attributes": {
                     "authSchemes": [
                       {
                         "element": "customOauth2",
-                        "meta": {},
                         "attributes": {
                           "sourceMap": [
                             {
                               "element": "sourceMap",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 [
                                   320,
@@ -310,29 +259,20 @@
                         "content": [
                           {
                             "element": "member",
-                            "meta": {},
-                            "attributes": {},
                             "content": {
                               "key": {
                                 "element": "string",
-                                "meta": {},
-                                "attributes": {},
                                 "content": "scopes"
                               },
                               "value": {
                                 "element": "array",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   {
                                     "element": "string",
-                                    "meta": {},
                                     "attributes": {
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               346,
@@ -346,13 +286,10 @@
                                   },
                                   {
                                     "element": "string",
-                                    "meta": {},
                                     "attributes": {
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               365,
@@ -375,17 +312,13 @@
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     289,
@@ -402,17 +335,13 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     397,
@@ -428,13 +357,10 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     412,
@@ -458,8 +384,6 @@
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     449,
@@ -473,12 +397,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }

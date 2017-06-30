@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,13 +9,10 @@
         ],
         "title": {
           "element": "string",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     23,
@@ -30,29 +25,22 @@
           "content": "Path Level Parameters"
         }
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "hrefVariables": {
               "element": "hrefVariables",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
                   "meta": {
                     "description": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 150,
@@ -69,8 +57,6 @@
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             116,
@@ -86,19 +72,14 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "id"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 116,
@@ -117,13 +98,10 @@
                   "meta": {
                     "description": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 272,
@@ -140,8 +118,6 @@
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             233,
@@ -157,19 +133,14 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "search"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 233,
@@ -187,13 +158,10 @@
             },
             "href": {
               "element": "string",
-              "meta": {},
               "attributes": {
                 "sourceMap": [
                   {
                     "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
                     "content": [
                       [
                         78,
@@ -209,26 +177,20 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
               "attributes": {
                 "href": "/test/{id}{?search,arg}",
                 "hrefVariables": {
                   "element": "hrefVariables",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "member",
                       "meta": {
                         "description": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     429,
@@ -245,8 +207,6 @@
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 389,
@@ -262,19 +222,14 @@
                       "content": {
                         "key": {
                           "element": "string",
-                          "meta": {},
-                          "attributes": {},
                           "content": "arg"
                         },
                         "value": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     389,
@@ -294,22 +249,16 @@
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     356,
@@ -326,17 +275,13 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     530,
@@ -352,13 +297,10 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     545,

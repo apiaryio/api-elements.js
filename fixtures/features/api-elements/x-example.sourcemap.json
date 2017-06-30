@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,13 +9,10 @@
         ],
         "title": {
           "element": "string",
-          "meta": {},
           "attributes": {
             "sourceMap": [
               {
                 "element": "sourceMap",
-                "meta": {},
-                "attributes": {},
                 "content": [
                   [
                     23,
@@ -30,26 +25,19 @@
           "content": "Form Test"
         }
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "hrefVariables": {
               "element": "hrefVariables",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "member",
-                  "meta": {},
                   "attributes": {
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             109,
@@ -65,19 +53,14 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "param"
                     },
                     "value": {
                       "element": "number",
-                      "meta": {},
                       "attributes": {
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 109,
@@ -93,13 +76,10 @@
                 },
                 {
                   "element": "member",
-                  "meta": {},
                   "attributes": {
                     "sourceMap": [
                       {
                         "element": "sourceMap",
-                        "meta": {},
-                        "attributes": {},
                         "content": [
                           [
                             212,
@@ -112,23 +92,17 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "meta": {},
-                      "attributes": {},
                       "content": "order"
                     },
                     "value": {
                       "element": "string",
-                      "meta": {},
                       "attributes": {
                         "default": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     294,
@@ -143,8 +117,6 @@
                         "sourceMap": [
                           {
                             "element": "sourceMap",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               [
                                 212,
@@ -162,13 +134,10 @@
             },
             "href": {
               "element": "string",
-              "meta": {},
               "attributes": {
                 "sourceMap": [
                   {
                     "element": "sourceMap",
-                    "meta": {},
-                    "attributes": {},
                     "content": [
                       [
                         68,
@@ -184,27 +153,19 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     312,
@@ -218,18 +179,13 @@
                         },
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
                               "attributes": {
                                 "sourceMap": [
                                   {
                                     "element": "sourceMap",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": [
                                       [
                                         698,
@@ -242,14 +198,10 @@
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "user-agent"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Examplebot/4.2 (+http://www.example.com/bot.html)"
                                 }
                               }
@@ -260,7 +212,6 @@
                                 "links": [
                                   {
                                     "element": "link",
-                                    "meta": {},
                                     "attributes": {
                                       "relation": "inferred",
                                       "href": "http://docs.apiary.io/validations/swagger#form-data-content-type"
@@ -269,18 +220,13 @@
                                   }
                                 ]
                               },
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/x-www-form-urlencoded"
                                 }
                               }
@@ -298,7 +244,6 @@
                             "links": [
                               {
                                 "element": "link",
-                                "meta": {},
                                 "attributes": {
                                   "relation": "inferred",
                                   "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
@@ -314,22 +259,15 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "object",
-                            "meta": {},
-                            "attributes": {},
                             "content": [
                               {
                                 "element": "member",
-                                "meta": {},
                                 "attributes": {
                                   "sourceMap": [
                                     {
                                       "element": "sourceMap",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": [
                                         [
                                           345,
@@ -345,19 +283,14 @@
                                 "content": {
                                   "key": {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "id"
                                   },
                                   "value": {
                                     "element": "boolean",
-                                    "meta": {},
                                     "attributes": {
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               345,
@@ -373,13 +306,10 @@
                               },
                               {
                                 "element": "member",
-                                "meta": {},
                                 "attributes": {
                                   "sourceMap": [
                                     {
                                       "element": "sourceMap",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": [
                                         [
                                           463,
@@ -395,13 +325,10 @@
                                 "content": {
                                   "key": {
                                     "element": "string",
-                                    "meta": {},
-                                    "attributes": {},
                                     "content": "greeting"
                                   },
                                   "value": {
                                     "element": "enum",
-                                    "meta": {},
                                     "attributes": {
                                       "samples": [
                                         [
@@ -411,13 +338,10 @@
                                       "default": [
                                         {
                                           "element": "string",
-                                          "meta": {},
                                           "attributes": {
                                             "sourceMap": [
                                               {
                                                 "element": "sourceMap",
-                                                "meta": {},
-                                                "attributes": {},
                                                 "content": [
                                                   [
                                                     666,
@@ -433,8 +357,6 @@
                                       "sourceMap": [
                                         {
                                           "element": "sourceMap",
-                                          "meta": {},
-                                          "attributes": {},
                                           "content": [
                                             [
                                               463,
@@ -447,13 +369,10 @@
                                     "content": [
                                       {
                                         "element": "string",
-                                        "meta": {},
                                         "attributes": {
                                           "sourceMap": [
                                             {
                                               "element": "sourceMap",
-                                              "meta": {},
-                                              "attributes": {},
                                               "content": [
                                                 [
                                                   554,
@@ -467,13 +386,10 @@
                                       },
                                       {
                                         "element": "string",
-                                        "meta": {},
                                         "attributes": {
                                           "sourceMap": [
                                             {
                                               "element": "sourceMap",
-                                              "meta": {},
-                                              "attributes": {},
                                               "content": [
                                                 [
                                                   571,
@@ -487,13 +403,10 @@
                                       },
                                       {
                                         "element": "string",
-                                        "meta": {},
                                         "attributes": {
                                           "sourceMap": [
                                             {
                                               "element": "sourceMap",
-                                              "meta": {},
-                                              "attributes": {},
                                               "content": [
                                                 [
                                                   598,
@@ -516,17 +429,13 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": {
                           "element": "string",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     880,
@@ -542,13 +451,10 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
                           "attributes": {
                             "sourceMap": [
                               {
                                 "element": "sourceMap",
-                                "meta": {},
-                                "attributes": {},
                                 "content": [
                                   [
                                     895,
