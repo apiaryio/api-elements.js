@@ -1,3 +1,8 @@
+# 0.4.1 - 2017-06-29
+
+- We don't try to re-define `copy` on an Element when `copy` already exists.
+  Such as when you create multiple namespaces of minim-api-description.
+
 # 0.4.0 - 2017-06-29
 
 - Updated to support minim 0.17.1.

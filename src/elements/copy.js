@@ -2,11 +2,13 @@ export default function (namespace) {
   const StringElement = namespace.getElementClass('string');
   const ArrayElement = namespace.getElementClass('array');
 
-  Object.defineProperty(ArrayElement.prototype, 'copy', {
-    get() {
-      return this.children.filter(item => item.element === 'copy');
-    },
-  });
+  if (!Object.getOwnPropertyNames(ArrayElement.prototype).includes('copy')) {
+    Object.defineProperty(ArrayElement.prototype, 'copy', {
+      get() {
+        return this.children.filter(item => item.element === 'copy');
+      },
+    });
+  }
 
   class Copy extends StringElement {
     constructor(...args) {
