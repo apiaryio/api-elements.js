@@ -1,3 +1,9 @@
+# 0.6.1 - 2017-06-29
+
+- We don't try to re-define `sourceMapValue` on an Element when
+  `sourceMapValue` already exists. Such as when you create multiple namespaces
+  of minim-parse-result
+
 # 0.6.0 - 2017-06-29
 
 - Updated to support minim 0.17.1.
