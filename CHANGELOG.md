@@ -1,3 +1,8 @@
+# 3.0.0-beta.2 - 2017-06-29
+
+- Update minim to 0.17.1
+- Update minim-parse-result to 0.6.1
+
 # 3.0.0-beta.1 - 2017-05-12
 
 - Update minim to 0.16.0

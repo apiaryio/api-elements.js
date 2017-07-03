@@ -63,15 +63,12 @@ describe('Validation', () => {
 
       fury.validate({ source: 'dummy' }, (err, res) => {
         expect(err).to.be.null;
-        expect(res.toRefract()).to.deep.equal({
+        expect(fury.minim.toRefract(res)).to.deep.equal({
           element: 'parseResult',
-          meta: {},
-          attributes: {},
           content: [
             {
               element: 'annotation',
               meta: { classes: ['warning'] },
-              attributes: {},
               content: 'a wild warning appeared',
             },
           ],
@@ -148,15 +145,12 @@ describe('Validation', () => {
 
       fury.validate({ source: 'dummy', mediaType: 'text/vnd.passthrough' }, (err, res) => {
         expect(err).to.be.null;
-        expect(res.toRefract()).to.deep.equal({
+        expect(fury.minim.toRefract(res)).to.deep.equal({
           element: 'parseResult',
-          meta: {},
-          attributes: {},
           content: [
             {
               element: 'annotation',
               meta: { classes: ['warning'] },
-              attributes: {},
               content: 'a wild warning appeared',
             },
           ],
