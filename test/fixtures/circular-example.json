@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -20,18 +18,13 @@
                 "user"
               ]
             },
-            "attributes": {},
             "content": {
               "key": {
                 "element": "string",
-                "meta": {},
-                "attributes": {},
                 "content": "HOST"
               },
               "value": {
                 "element": "string",
-                "meta": {},
-                "attributes": {},
                 "content": "petstore.swagger.io"
               }
             }
@@ -41,24 +34,18 @@
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
-              "attributes": {},
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -66,28 +53,19 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "headers": {
                           "element": "httpHeaders",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "member",
-                              "meta": {},
-                              "attributes": {},
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "Content-Type"
                                 },
                                 "value": {
                                   "element": "string",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": "application/json"
                                 }
                               }
@@ -99,8 +77,6 @@
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Get company info"
                         }
                       ]
@@ -122,7 +98,6 @@
         "links": [
           {
             "element": "link",
-            "meta": {},
             "attributes": {
               "relation": "origin",
               "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
@@ -136,8 +111,6 @@
         "sourceMap": [
           {
             "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
             "content": [
               [
                 231,

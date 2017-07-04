@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,47 +9,35 @@
         ],
         "title": "Parameters"
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/"
           },
           "content": [
             {
               "element": "transition",
-              "meta": {},
               "attributes": {
                 "href": "/{?arg}",
                 "hrefVariables": {
                   "element": "hrefVariables",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "member",
                       "meta": {
                         "description": "Query argument"
                       },
-                      "attributes": {},
                       "content": {
                         "key": {
                           "element": "string",
-                          "meta": {},
-                          "attributes": {},
                           "content": "arg"
                         },
                         "value": {
                           "element": "array",
-                          "meta": {},
-                          "attributes": {},
                           "content": [
                             {
                               "element": "string",
-                              "meta": {},
-                              "attributes": {},
                               "content": null
                             }
                           ]
@@ -64,12 +50,9 @@
               "content": [
                 {
                   "element": "httpTransaction",
-                  "meta": {},
-                  "attributes": {},
                   "content": [
                     {
                       "element": "httpRequest",
-                      "meta": {},
                       "attributes": {
                         "method": "GET"
                       },
@@ -77,15 +60,12 @@
                     },
                     {
                       "element": "httpResponse",
-                      "meta": {},
                       "attributes": {
                         "statusCode": "200"
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "meta": {},
-                          "attributes": {},
                           "content": "Response"
                         },
                         {
@@ -102,12 +82,8 @@
                         },
                         {
                           "element": "dataStructure",
-                          "meta": {},
-                          "attributes": {},
                           "content": {
                             "element": "string",
-                            "meta": {},
-                            "attributes": {},
                             "content": null
                           }
                         }
@@ -130,7 +106,6 @@
         "links": [
           {
             "element": "link",
-            "meta": {},
             "attributes": {
               "relation": "origin",
               "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
@@ -144,8 +119,6 @@
         "sourceMap": [
           {
             "element": "sourceMap",
-            "meta": {},
-            "attributes": {},
             "content": [
               [
                 249,

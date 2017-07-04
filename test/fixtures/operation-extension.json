@@ -1,7 +1,5 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
@@ -11,11 +9,9 @@
         ],
         "title": "Simple API overview"
       },
-      "attributes": {},
       "content": [
         {
           "element": "resource",
-          "meta": {},
           "attributes": {
             "href": "/path"
           },
@@ -26,7 +22,6 @@
                 "links": [
                   {
                     "element": "link",
-                    "meta": {},
                     "attributes": {
                       "relation": "profile",
                       "href": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
@@ -35,7 +30,6 @@
                   }
                 ]
               },
-              "attributes": {},
               "content": {
                 "x-k": null
               }

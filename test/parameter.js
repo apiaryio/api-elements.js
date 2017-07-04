@@ -6,6 +6,8 @@ import Parser from '../src/parser';
 const minim = minimModule.namespace()
   .use(minimParseResult);
 
+const SourceMap = minim.elements.SourceMap;
+
 describe('Parameter to Member converter', () => {
   context('when I use it with parameter', () => {
     const parser = new Parser({
@@ -50,23 +52,23 @@ describe('Parameter to Member converter', () => {
 
     context('when the sourcemap path is not given', () => {
       it('returns the correct member', () => {
-        const member = parser.convertParameterToMember(parameter).toRefract();
-        const sourceMap = member.content.value.attributes.default.attributes.sourceMap;
+        const member = parser.convertParameterToMember(parameter);
+        const sourceMap = member.value.attributes.get('default').attributes.get('sourceMap');
 
         expect(sourceMap.length).to.equal(1);
-        expect(sourceMap[0].element).to.equal('sourceMap');
-        expect(sourceMap[0].content).to.deep.equal([[10, 10]]); // path 1
+        expect(sourceMap.get(0)).to.be.instanceof(SourceMap);
+        expect(sourceMap.get(0).toValue()).to.deep.equal([[10, 10]]); // path 1
       });
     });
 
     context('when the sourcemap path is given', () => {
       it('returns the correct member', () => {
-        const member = parser.convertParameterToMember(parameter, ['path2']).toRefract();
-        const sourceMap = member.content.value.attributes.default.attributes.sourceMap;
+        const member = parser.convertParameterToMember(parameter, ['path2']);
+        const sourceMap = member.value.attributes.get('default').attributes.get('sourceMap');
 
         expect(sourceMap.length).to.equal(1);
-        expect(sourceMap[0].element).to.equal('sourceMap');
-        expect(sourceMap[0].content).to.deep.equal([[20, 10]]); // path 2
+        expect(sourceMap.get(0)).to.be.instanceof(SourceMap);
+        expect(sourceMap.get(0).toValue()).to.deep.equal([[20, 10]]); // path 2
       });
     });
   });
