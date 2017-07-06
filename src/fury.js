@@ -41,6 +41,11 @@ class Fury {
     return this.minim.fromRefract(elements);
   }
 
+  // Returns an array of adapters which can handle the given API Description Source
+  detect(source) {
+    return this.adapters.filter(adapter => adapter.detect && adapter.detect(source));
+  }
+
   findAdapter(source, mediaType, method) {
     let adapter;
 
