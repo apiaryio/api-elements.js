@@ -47,22 +47,11 @@ class Fury {
   }
 
   findAdapter(source, mediaType, method) {
-    let adapter;
-
     if (mediaType) {
-      adapter = findAdapter(this.adapters, mediaType, method);
-    } else {
-      for (let i = 0; i < this.adapters.length; i += 1) {
-        const current = this.adapters[i];
-
-        if (current.detect && current.detect(source) && current[method]) {
-          adapter = this.adapters[i];
-          break;
-        }
-      }
+      return findAdapter(this.adapters, mediaType, method);
     }
 
-    return adapter;
+    return this.detect(source).filter(adapter => adapter[method])[0];
   }
 
   validate({ source, mediaType, adapterOptions }, done) {
