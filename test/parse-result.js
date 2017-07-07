@@ -52,21 +52,45 @@ describe('Parse result namespace', () => {
           {
             element: 'annotation',
             meta: {
-              classes: ['warning'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'warning',
+                  },
+                ],
+              },
             },
             content: [],
           },
           {
             element: 'annotation',
             meta: {
-              classes: ['error'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'error',
+                  },
+                ],
+              },
             },
             content: [],
           },
           {
             element: 'category',
             meta: {
-              classes: ['api'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'api',
+                  },
+                ],
+              },
             },
             content: [],
           },
@@ -125,7 +149,10 @@ describe('Parse result namespace', () => {
       refracted = {
         element: 'annotation',
         attributes: {
-          code: 123,
+          code: {
+            element: 'number',
+            content: 123,
+          },
         },
         content: 'Missing argument description',
       };
@@ -179,12 +206,29 @@ describe('Parse result namespace', () => {
       refracted = {
         element: 'string',
         attributes: {
-          sourceMap: [
-            {
-              element: 'sourceMap',
-              content: [[1, 2]],
-            },
-          ],
+          sourceMap: {
+            element: 'array',
+            content: [
+              {
+                element: 'sourceMap',
+                content: [
+                  {
+                    element: 'array',
+                    content: [
+                      {
+                        element: 'number',
+                        content: 1,
+                      },
+                      {
+                        element: 'number',
+                        content: 2,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
         },
         content: '',
       };
@@ -209,23 +253,6 @@ describe('Parse result namespace', () => {
 
     it('should have a convenience method for retrieving source map', () => {
       expect(element.sourceMapValue).to.deep.equal([[1, 2]]);
-    });
-
-    it('should serialize with a sourceMap attribute', () => {
-      const expected = {
-        element: 'string',
-        attributes: {
-          sourceMap: [
-            {
-              element: 'sourceMap',
-              content: [[1, 2]],
-            },
-          ],
-        },
-        content: '',
-      };
-
-      expect(namespace.toRefract(element)).to.deep.equal(expected);
     });
   });
 
