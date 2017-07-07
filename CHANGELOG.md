@@ -1,3 +1,8 @@
+# Master
+
+- Update to follow Refract 1.0 / API Elements 1.0.
+- Compatibility with Minim 0.18.
+
 # 0.4.1 - 2017-06-29
 
 - We don't try to re-define `copy` on an Element when `copy` already exists.
