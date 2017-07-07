@@ -1,4 +1,4 @@
-# Master
+# 0.7.0
 
 - Compatibility with Minim 0.18 and minim-api-description 0.5.
 
