@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
+import { Namespace } from 'minim';
 import { validate } from '../src/adapter';
+
+const minim = new Namespace();
 
 describe('API Blueprint validation', () => {
   it('can validate an API Blueprint', (done) => {
@@ -19,29 +22,50 @@ describe('API Blueprint validation', () => {
 
     validate({ source }, (err, parseResult) => {
       expect(err).to.be.null;
-      expect(parseResult).to.deep.equal({
+      expect(minim.toRefract(parseResult)).to.deep.equal({
         element: 'parseResult',
         content: [
           {
             element: 'annotation',
             meta: {
-              classes: [
-                'warning',
-              ],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'warning',
+                  },
+                ],
+              },
             },
             attributes: {
-              code: 6,
-              sourceMap: [
-                {
-                  element: 'sourceMap',
-                  content: [
-                    [
-                      0,
-                      8,
+              code: {
+                element: 'number',
+                content: 6,
+              },
+              sourceMap: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'sourceMap',
+                    content: [
+                      {
+                        element: 'array',
+                        content: [
+                          {
+                            element: 'number',
+                            content: 0,
+                          },
+                          {
+                            element: 'number',
+                            content: 8,
+                          },
+                        ],
+                      },
                     ],
-                  ],
-                },
-              ],
+                  },
+                ],
+              },
             },
             content: 'action is missing a response',
           },
@@ -57,29 +81,50 @@ describe('API Blueprint validation', () => {
 
     validate({ source }, (err, parseResult) => {
       expect(err).to.be.null;
-      expect(parseResult).to.deep.equal({
+      expect(minim.toRefract(parseResult)).to.deep.equal({
         element: 'parseResult',
         content: [
           {
             element: 'annotation',
             meta: {
-              classes: [
-                'error',
-              ],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'error',
+                  },
+                ],
+              },
             },
             attributes: {
-              code: 4,
-              sourceMap: [
-                {
-                  element: 'sourceMap',
-                  content: [
-                    [
-                      18,
-                      8,
+              code: {
+                element: 'number',
+                content: 4,
+              },
+              sourceMap: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'sourceMap',
+                    content: [
+                      {
+                        element: 'array',
+                        content: [
+                          {
+                            element: 'number',
+                            content: 18,
+                          },
+                          {
+                            element: 'number',
+                            content: 8,
+                          },
+                        ],
+                      },
                     ],
-                  ],
-                },
-              ],
+                  },
+                ],
+              },
             },
             content: "base type 'A' circularly referencing itself",
           },
