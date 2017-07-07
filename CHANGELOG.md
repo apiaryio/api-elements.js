@@ -1,4 +1,4 @@
-# Master
+# 0.5.0
 
 - Update to follow Refract 1.0 / API Elements 1.0.
 - Compatibility with Minim 0.18.
