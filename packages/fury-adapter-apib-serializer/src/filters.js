@@ -44,7 +44,7 @@
 
    return payload.messageBody && !(
      headers.length || payload.dataStructure || payload.messageBodySchema ||
-     payload.children(item => item.element === 'copy').length
+     payload.children.filter(item => item.element === 'copy').length
    );
  }
 
@@ -82,5 +82,5 @@
   * old js array.
   */
  export function getCopy(element) {
-   return element.children(item => item.element === 'copy').content;
+   return element.children.filter(item => item.element === 'copy').content;
  }
