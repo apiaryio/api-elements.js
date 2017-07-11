@@ -1,109 +1,133 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "API"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "API"
+        }
       },
       "attributes": {
-        "meta": [
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "attributes": {},
-            "content": {
-              "key": {
-                "element": "string",
-                "meta": {},
-                "attributes": {},
-                "content": "HOST"
+        "meta": {
+          "element": "array",
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
               },
-              "value": {
-                "element": "string",
-                "meta": {},
-                "attributes": {},
-                "content": "https://example.com/path/"
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "https://example.com/path/"
+                }
               }
             }
-          }
-        ]
+          ]
+        }
       },
       "content": [
         {
           "element": "category",
           "meta": {
-            "title": "Example Resources",
-            "classes": [
-              "resourceGroup"
-            ]
+            "title": {
+              "element": "string",
+              "content": "Example Resources"
+            },
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            }
           },
-          "attributes": {},
           "content": [
             {
               "element": "resource",
-              "meta": {},
               "attributes": {
-                "href": "/response-schema"
+                "href": {
+                  "element": "string",
+                  "content": "/response-schema"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "GET"
+                    "title": {
+                      "element": "string",
+                      "content": "GET"
+                    }
                   },
                   "attributes": {
-                    "href": "/response-schema"
+                    "href": {
+                      "element": "string",
+                      "content": "/response-schema"
+                    }
                   },
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "headers": null
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
+                            "headers": {
+                              "element": "null",
+                              "content": null
+                            }
                           },
                           "content": []
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
-                            "statusCode": 200,
+                            "statusCode": {
+                              "element": "number",
+                              "content": 200
+                            },
                             "headers": {
                               "element": "httpHeaders",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 {
                                   "element": "member",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": {
                                     "key": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "Content-Type"
                                     },
                                     "value": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "application/json"
                                     }
                                   }
@@ -115,22 +139,36 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
-                              "attributes": {},
                               "content": "{ \"name\": \"Kyle\" }"
                             },
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBodySchema"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/schema+json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
                               },
                               "content": "{\n  \"type\": \"object\"\n}"
                             }

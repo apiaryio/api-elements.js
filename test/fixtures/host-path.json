@@ -1,90 +1,125 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "API"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "API"
+        }
       },
       "attributes": {
-        "meta": [
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "attributes": {},
-            "content": {
-              "key": {
-                "element": "string",
-                "meta": {},
-                "attributes": {},
-                "content": "HOST"
+        "meta": {
+          "element": "array",
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
               },
-              "value": {
-                "element": "string",
-                "meta": {},
-                "attributes": {},
-                "content": "https://example.com/test"
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "https://example.com/test"
+                }
               }
             }
-          }
-        ]
+          ]
+        }
       },
       "content": [
         {
           "element": "category",
           "meta": {
-            "title": "Having a path in the HOST should not result in the transaction including the path.",
-            "classes": [
-              "resourceGroup"
-            ]
+            "title": {
+              "element": "string",
+              "content": "Having a path in the HOST should not result in the transaction including the path."
+            },
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            }
           },
-          "attributes": {},
           "content": [
             {
               "element": "resource",
-              "meta": {},
               "attributes": {
-                "href": "/message"
+                "href": {
+                  "element": "string",
+                  "content": "/message"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "GET"
+                    "title": {
+                      "element": "string",
+                      "content": "GET"
+                    }
                   },
                   "attributes": {
-                    "href": "/message"
+                    "href": {
+                      "element": "string",
+                      "content": "/message"
+                    }
                   },
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "headers": null
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
+                            "headers": {
+                              "element": "null",
+                              "content": null
+                            }
                           },
                           "content": []
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
-                            "statusCode": 204,
-                            "headers": null
+                            "statusCode": {
+                              "element": "number",
+                              "content": 204
+                            },
+                            "headers": {
+                              "element": "null",
+                              "content": null
+                            }
                           },
                           "content": []
                         }

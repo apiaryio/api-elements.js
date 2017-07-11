@@ -1,5 +1,11 @@
 # Changelog
 
+## Master
+
+### Enhancements
+
+- Support fury 3.0.0-beta.3.
+
 # 2.0.0 - 2017-03-30
 
 - Upgrade babel-runtime dependency to v6

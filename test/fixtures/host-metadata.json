@@ -1,42 +1,53 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Blueprint Title"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Blueprint Title"
+        }
       },
       "attributes": {
-        "meta": [
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "attributes": {},
-            "content": {
-              "key": {
-                "element": "string",
-                "meta": {},
-                "attributes": {},
-                "content": "HOST"
+        "meta": {
+          "element": "array",
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
               },
-              "value": {
-                "element": "string",
-                "meta": {},
-                "attributes": {},
-                "content": "https://apiary.io/"
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "https://apiary.io/"
+                }
               }
             }
-          }
-        ]
+          ]
+        }
       },
       "content": []
     }
