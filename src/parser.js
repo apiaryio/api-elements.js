@@ -39,7 +39,7 @@ export default class Parser {
       const { Member: MemberElement } = this.minim.elements;
       const member = new MemberElement('HOST', this.blueprint.location);
       member.meta.set('classes', ['user']);
-      this.api.attributes.set('meta', [member]);
+      this.api.attributes.set('metadata', [member]);
     }
 
     if (this.blueprint.description) {

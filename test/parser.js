@@ -28,11 +28,11 @@ describe('Apiary Blueprint Parser', () => {
         }
 
         if (process.env.GENERATE) {
-          expected = output.toRefract();
+          expected = fury.minim.toRefract(output);
           fs.writeFileSync(path.join(elementsFilename), JSON.stringify(expected, null, 2), 'utf8');
         }
 
-        expect(output.toRefract()).to.deep.equal(expected);
+        expect(fury.minim.toRefract(output)).to.deep.equal(expected);
         return done();
       });
     });

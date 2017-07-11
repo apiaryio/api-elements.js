@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apiary-blueprint-parser",
-  "version": "2.0.0",
+  "version": "3.0.0-beta.1",
   "description": "Parser for Fury.js for the deprecated Apiary Blueprint language",
   "repository": {
     "type": "git",
@@ -20,9 +20,12 @@
     "apiary-blueprint-parser": "^0.5.3",
     "deckardcain": "^0.3.2"
   },
+  "peerDependencies": {
+    "fury": "3.0.0-beta.3"
+  },
   "devDependencies": {
     "chai": "^3.2.0",
-    "fury": "2.x.x",
+    "fury": "3.0.0-beta.3",
     "glob": "^7.1.1",
     "peasant": "^1.1.0"
   },

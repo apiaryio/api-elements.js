@@ -1,17 +1,23 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Blueprint Title"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Blueprint Title"
+        }
       },
-      "attributes": {},
       "content": []
     }
   ]

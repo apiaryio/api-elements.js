@@ -67,19 +67,40 @@ Test Section 1
     const expectedAnnotation = {
       element: 'annotation',
       meta: {
-        classes: ['error'],
+        classes: {
+          element: 'array',
+          content: [
+            {
+              element: 'string',
+              content: 'error',
+            },
+          ],
+        },
       },
       attributes: {
-        sourceMap: [
-          {
-            element: 'sourceMap',
-            meta: {},
-            attributes: {},
-            content: [
-              [78, 1],
-            ],
-          },
-        ],
+        sourceMap: {
+          element: 'array',
+          content: [
+            {
+              element: 'sourceMap',
+              content: [
+                {
+                  element: 'array',
+                  content: [
+                    {
+                      element: 'number',
+                      content: 78,
+                    },
+                    {
+                      element: 'number',
+                      content: 1,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       },
       content: 'Expected "COPY", "DELETE", "GET", "HEAD", "LOCK", "MKCOL", "MOVE", "OPTIONS", "PATCH", "POST", "PROPPATCH", "PUT" or "UNLOCK" but end of input found.',
     };
@@ -102,7 +123,7 @@ Test Section 1
 
     it('has an annotation element', () => {
       expect(parseResult.annotations).to.have.length(1);
-      const annotation = parseResult.annotations.first().toRefract();
+      const annotation = fury.minim.toRefract(parseResult.annotations.first());
       expect(annotation).to.eql(expectedAnnotation);
     });
 

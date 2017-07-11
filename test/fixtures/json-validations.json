@@ -1,81 +1,102 @@
 {
   "element": "parseResult",
-  "meta": {},
-  "attributes": {},
   "content": [
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "API"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "API"
+        }
       },
-      "attributes": {},
       "content": [
         {
           "element": "category",
           "meta": {
-            "title": "Example Resources",
-            "classes": [
-              "resourceGroup"
-            ]
+            "title": {
+              "element": "string",
+              "content": "Example Resources"
+            },
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            }
           },
-          "attributes": {},
           "content": [
             {
               "element": "resource",
-              "meta": {},
               "attributes": {
-                "href": "/response-schema"
+                "href": {
+                  "element": "string",
+                  "content": "/response-schema"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "GET"
+                    "title": {
+                      "element": "string",
+                      "content": "GET"
+                    }
                   },
-                  "attributes": {},
+                  "attributes": {
+                    "href": {
+                      "element": "string",
+                      "content": "/response-schema"
+                    }
+                  },
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
-                            "method": "GET",
-                            "headers": null
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
+                            "headers": {
+                              "element": "null",
+                              "content": null
+                            }
                           },
                           "content": []
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
-                            "statusCode": 200,
+                            "statusCode": {
+                              "element": "number",
+                              "content": 200
+                            },
                             "headers": {
                               "element": "httpHeaders",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 {
                                   "element": "member",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": {
                                     "key": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "Content-Type"
                                     },
                                     "value": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "application/json"
                                     }
                                   }
@@ -87,22 +108,36 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
-                              "attributes": {},
                               "content": "{ \"name\": \"Kyle\" }"
                             },
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBodySchema"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/schema+json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
                               },
                               "content": "{\n  \"type\": \"object\"\n}"
                             }
@@ -115,42 +150,40 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "POST"
+                    "title": {
+                      "element": "string",
+                      "content": "POST"
+                    }
                   },
                   "attributes": {
-                    "href": "/implicit-request-schema"
+                    "href": {
+                      "element": "string",
+                      "content": "/implicit-request-schema"
+                    }
                   },
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 {
                                   "element": "member",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": {
                                     "key": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "Content-Type"
                                     },
                                     "value": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "application/json"
                                     }
                                   }
@@ -162,22 +195,36 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
-                              "attributes": {},
                               "content": "{ \"name\": \"Kyle\" }"
                             },
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBodySchema"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/schema+json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
                               },
                               "content": "{ \"type\": \"object\", \"required\": [\"name\"] }"
                             }
@@ -185,29 +232,23 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
-                            "statusCode": 201,
+                            "statusCode": {
+                              "element": "number",
+                              "content": 201
+                            },
                             "headers": {
                               "element": "httpHeaders",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 {
                                   "element": "member",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": {
                                     "key": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "Content-Type"
                                     },
                                     "value": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "application/json"
                                     }
                                   }
@@ -219,11 +260,16 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
-                              "attributes": {},
                               "content": "{ \"name\": \"Kyle\", \"url\": \"/me\" }"
                             }
                           ]
@@ -235,42 +281,40 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "POST"
+                    "title": {
+                      "element": "string",
+                      "content": "POST"
+                    }
                   },
                   "attributes": {
-                    "href": "/request-response-schema"
+                    "href": {
+                      "element": "string",
+                      "content": "/request-response-schema"
+                    }
                   },
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 {
                                   "element": "member",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": {
                                     "key": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "Content-Type"
                                     },
                                     "value": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "application/json"
                                     }
                                   }
@@ -282,22 +326,36 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
-                              "attributes": {},
                               "content": "{ \"name\": \"Kyle\" }"
                             },
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBodySchema"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/schema+json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
                               },
                               "content": "{\n  \"type\": \"object\"\n}"
                             }
@@ -305,29 +363,23 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
-                            "statusCode": 201,
+                            "statusCode": {
+                              "element": "number",
+                              "content": 201
+                            },
                             "headers": {
                               "element": "httpHeaders",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 {
                                   "element": "member",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": {
                                     "key": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "Content-Type"
                                     },
                                     "value": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "application/json"
                                     }
                                   }
@@ -339,22 +391,36 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
-                              "attributes": {},
                               "content": "{ \"name\": \"Kyle\", \"url\": \"/me\" }"
                             },
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBodySchema"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/schema+json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
                               },
                               "content": "{\n  \"type\": \"object\",\n  \"required\": [\n    \"url\"\n  ]\n}"
                             }
@@ -367,42 +433,40 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "POST"
+                    "title": {
+                      "element": "string",
+                      "content": "POST"
+                    }
                   },
                   "attributes": {
-                    "href": "/invalid-schema"
+                    "href": {
+                      "element": "string",
+                      "content": "/invalid-schema"
+                    }
                   },
                   "content": [
                     {
                       "element": "httpTransaction",
-                      "meta": {},
-                      "attributes": {},
                       "content": [
                         {
                           "element": "httpRequest",
-                          "meta": {},
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 {
                                   "element": "member",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": {
                                     "key": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "Content-Type"
                                     },
                                     "value": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "application/json"
                                     }
                                   }
@@ -414,22 +478,36 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
-                              "attributes": {},
                               "content": "{ \"name\": \"Kyle\" }"
                             },
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBodySchema"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/schema+json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
                               },
                               "content": "{ \"Invalid JSON\" }"
                             }
@@ -437,29 +515,23 @@
                         },
                         {
                           "element": "httpResponse",
-                          "meta": {},
                           "attributes": {
-                            "statusCode": 201,
+                            "statusCode": {
+                              "element": "number",
+                              "content": 201
+                            },
                             "headers": {
                               "element": "httpHeaders",
-                              "meta": {},
-                              "attributes": {},
                               "content": [
                                 {
                                   "element": "member",
-                                  "meta": {},
-                                  "attributes": {},
                                   "content": {
                                     "key": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "Content-Type"
                                     },
                                     "value": {
                                       "element": "string",
-                                      "meta": {},
-                                      "attributes": {},
                                       "content": "application/json"
                                     }
                                   }
@@ -471,11 +543,16 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
-                              "attributes": {},
                               "content": "{ \"name\": \"Kyle\", \"url\": \"/me\" }"
                             }
                           ]
