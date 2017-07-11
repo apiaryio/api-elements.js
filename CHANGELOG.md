@@ -1,3 +1,9 @@
+# 0.4.0 - 2017-06-11
+
+## Enhancements
+
+- Adds support for Fury 3.0.0-beta.3.
+
 # 0.3.1 - 2017-05-12
 
 - Adds support for Fury@3 and includes multiple fixes

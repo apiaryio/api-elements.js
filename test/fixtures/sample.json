@@ -4,50 +4,74 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "My API"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "My API"
+        }
       },
       "attributes": {
-        "meta": [
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "content": {
-              "key": {
-                "element": "string",
-                "content": "FORMAT"
+        "metadata": {
+          "element": "array",
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
               },
-              "value": {
-                "element": "string",
-                "content": "1A"
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "FORMAT"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "1A"
+                }
+              }
+            },
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "https://example.com"
+                }
               }
             }
-          },
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "content": {
-              "key": {
-                "element": "string",
-                "content": "HOST"
-              },
-              "value": {
-                "element": "string",
-                "content": "https://example.com"
-              }
-            }
-          }
-        ]
+          ]
+        }
       },
       "content": [
         {
@@ -57,10 +81,19 @@
         {
           "element": "category",
           "meta": {
-            "classes": [
-              "resourceGroup"
-            ],
-            "title": "My Group"
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            },
+            "title": {
+              "element": "string",
+              "content": "My Group"
+            }
           },
           "content": [
             {
@@ -70,22 +103,37 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Frob"
+                "title": {
+                  "element": "string",
+                  "content": "Frob"
+                }
               },
               "attributes": {
-                "href": "/frobs/{id}",
+                "href": {
+                  "element": "string",
+                  "content": "/frobs/{id}"
+                },
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "content": [
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Unique identifier"
+                        "description": {
+                          "element": "string",
+                          "content": "Unique identifier"
+                        }
                       },
                       "attributes": {
-                        "typeAttributes": [
-                          "required"
-                        ]
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "required"
+                            }
+                          ]
+                        }
                       },
                       "content": {
                         "key": {
@@ -112,15 +160,24 @@
                     {
                       "element": "object",
                       "meta": {
-                        "id": "Frob"
+                        "id": {
+                          "element": "string",
+                          "content": "Frob"
+                        }
                       },
                       "content": [
                         {
                           "element": "member",
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -134,6 +191,12 @@
                         },
                         {
                           "element": "ref",
+                          "attributes": {
+                            "path": {
+                              "element": "string",
+                              "content": "element"
+                            }
+                          },
                           "content": {
                             "href": "User",
                             "path": "content"
@@ -155,12 +218,21 @@
                                     {
                                       "element": "member",
                                       "meta": {
-                                        "description": "Tag name."
+                                        "description": {
+                                          "element": "string",
+                                          "content": "Tag name."
+                                        }
                                       },
                                       "attributes": {
-                                        "typeAttributes": [
-                                          "required"
-                                        ]
+                                        "typeAttributes": {
+                                          "element": "array",
+                                          "content": [
+                                            {
+                                              "element": "string",
+                                              "content": "required"
+                                            }
+                                          ]
+                                        }
                                       },
                                       "content": {
                                         "key": {
@@ -175,7 +247,10 @@
                                     {
                                       "element": "member",
                                       "meta": {
-                                        "description": "I am some long content.\n\n- one\n\n- two"
+                                        "description": {
+                                          "element": "string",
+                                          "content": "I am some long content.\n\n- one\n\n- two"
+                                        }
                                       },
                                       "content": {
                                         "key": {
@@ -185,7 +260,10 @@
                                         "value": {
                                           "element": "number",
                                           "attributes": {
-                                            "default": 1
+                                            "default": {
+                                              "element": "number",
+                                              "content": 1
+                                            }
                                           },
                                           "content": 23
                                         }
@@ -204,10 +282,16 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": ""
+                    "title": {
+                      "element": "string",
+                      "content": ""
+                    }
                   },
                   "attributes": {
-                    "relation": "self"
+                    "relation": {
+                      "element": "string",
+                      "content": "self"
+                    }
                   },
                   "content": [
                     {
@@ -220,14 +304,20 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET"
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            }
                           },
                           "content": []
                         },
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -264,24 +354,42 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"id\": \"1\",\n  \"tags\": [\n    {\n      \"name\": \"foo\",\n      \"count\": 23\n    }\n  ]\n}\n"
                             },
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBodySchema"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/schema+json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
                               },
                               "content": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"tags\": {\n      \"type\": \"array\"\n    }\n  }\n}\n"
                             }
@@ -294,11 +402,20 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Restart a frob"
+                    "title": {
+                      "element": "string",
+                      "content": "Restart a frob"
+                    }
                   },
                   "attributes": {
-                    "relation": "restart",
-                    "href": "/frobs"
+                    "relation": {
+                      "element": "string",
+                      "content": "restart"
+                    },
+                    "href": {
+                      "element": "string",
+                      "content": "/frobs"
+                    }
                   },
                   "content": [
                     {
@@ -311,10 +428,16 @@
                         {
                           "element": "httpRequest",
                           "meta": {
-                            "title": "Create"
+                            "title": {
+                              "element": "string",
+                              "content": "Create"
+                            }
                           },
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -338,12 +461,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{}\n"
                             }
@@ -352,7 +484,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "204"
+                            "statusCode": {
+                              "element": "string",
+                              "content": "204"
+                            }
                           },
                           "content": [
                             {
@@ -372,9 +507,15 @@
         {
           "element": "category",
           "meta": {
-            "classes": [
-              "dataStructures"
-            ]
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "dataStructures"
+                }
+              ]
+            }
           },
           "content": [
             {
@@ -383,15 +524,24 @@
                 {
                   "element": "object",
                   "meta": {
-                    "id": "User"
+                    "id": {
+                      "element": "string",
+                      "content": "User"
+                    }
                   },
                   "content": [
                     {
                       "element": "member",
                       "attributes": {
-                        "typeAttributes": [
-                          "required"
-                        ]
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "required"
+                            }
+                          ]
+                        }
                       },
                       "content": {
                         "key": {
@@ -401,9 +551,15 @@
                         "value": {
                           "element": "string",
                           "attributes": {
-                            "samples": [
-                              "pavan"
-                            ]
+                            "samples": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "pavan"
+                                }
+                              ]
+                            }
                           }
                         }
                       }
@@ -411,7 +567,10 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Long description\n\n- Hello"
+                        "description": {
+                          "element": "string",
+                          "content": "Long description\n\n- Hello"
+                        }
                       },
                       "content": {
                         "key": {
@@ -447,4 +606,3 @@
     }
   ]
 }
-
