@@ -1,3 +1,11 @@
+# Master
+
+## Enhancements
+
+- Fury contains a `detect` method which takes an API Description source and
+  returns the registered adapters which can handle the API Description
+  source.
+
 # 3.0.0-beta.2 - 2017-06-29
 
 - Update minim to 0.17.1

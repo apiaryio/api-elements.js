@@ -204,6 +204,30 @@ describe('Fury class', () => {
 
     assert.notDeepEqual(fury1.adapters, fury2.adapters);
   });
+
+  describe('detecting type', () => {
+    let localFury;
+    let adapter;
+
+    before(() => {
+      adapter = {
+        name: 'test',
+        mediaTypes: ['text/vnd.test', 'text/vnd.testing'],
+        detect: source => source === 'test',
+      };
+
+      localFury = new Fury();
+      localFury.use(adapter);
+    });
+
+    it('can detect adapters from the source', () => {
+      assert.deepEqual(localFury.detect('test'), [adapter]);
+    });
+
+    it('returns empty array when the type cannot be detected', () => {
+      assert.equal(localFury.detect('none').length, 0);
+    });
+  });
 });
 
 describe('Parser', () => {
