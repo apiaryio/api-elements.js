@@ -55,7 +55,17 @@ describe('Validation', () => {
         content: [
           {
             element: 'annotation',
-            meta: { classes: ['warning'] },
+            meta: {
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'warning',
+                  },
+                ],
+              },
+            },
             content: 'a wild warning appeared',
           },
         ],
@@ -68,7 +78,17 @@ describe('Validation', () => {
           content: [
             {
               element: 'annotation',
-              meta: { classes: ['warning'] },
+              meta: {
+                classes: {
+                  element: 'array',
+                  content: [
+                    {
+                      element: 'string',
+                      content: 'warning',
+                    },
+                  ],
+                },
+              },
               content: 'a wild warning appeared',
             },
           ],
@@ -113,7 +133,17 @@ describe('Validation', () => {
         content: [
           {
             element: 'category',
-            meta: { classes: ['api'] },
+            meta: {
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'api',
+                  },
+                ],
+              },
+            },
             content: [],
           },
         ],
@@ -132,12 +162,32 @@ describe('Validation', () => {
         content: [
           {
             element: 'category',
-            meta: { classes: ['api'] },
+            meta: {
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'api',
+                  },
+                ],
+              },
+            },
             content: [],
           },
           {
             element: 'annotation',
-            meta: { classes: ['warning'] },
+            meta: {
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'warning',
+                  },
+                ],
+              },
+            },
             content: 'a wild warning appeared',
           },
         ],
@@ -150,7 +200,17 @@ describe('Validation', () => {
           content: [
             {
               element: 'annotation',
-              meta: { classes: ['warning'] },
+              meta: {
+                classes: {
+                  element: 'array',
+                  content: [
+                    {
+                      element: 'string',
+                      content: 'warning',
+                    },
+                  ],
+                },
+              },
               content: 'a wild warning appeared',
             },
           ],

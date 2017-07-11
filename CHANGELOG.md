@@ -1,10 +1,11 @@
-# Master
+# 3.0.0-beta.3
 
 ## Enhancements
 
 - Fury contains a `detect` method which takes an API Description source and
   returns the registered adapters which can handle the API Description
   source.
+- Updates to minim 0.18.0 which updates API Element and Refract serialisation.
 
 # 3.0.0-beta.2 - 2017-06-29
 

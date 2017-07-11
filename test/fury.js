@@ -8,8 +8,19 @@ const refractedApi = {
     {
       element: 'category',
       meta: {
-        classes: ['api'],
-        title: 'My API',
+        classes: {
+          element: 'array',
+          content: [
+            {
+              element: 'string',
+              content: 'api',
+            },
+          ],
+        },
+        title: {
+          element: 'string',
+          content: 'My API',
+        },
       },
       content: [
         {
@@ -19,24 +30,44 @@ const refractedApi = {
         {
           element: 'category',
           meta: {
-            classes: ['resourceGroup'],
-            title: 'My Group',
+            classes: {
+              element: 'array',
+              content: [
+                {
+                  element: 'string',
+                  content: 'resourceGroup',
+                },
+              ],
+            },
+            title: {
+              element: 'string',
+              content: 'My Group',
+            },
           },
           content: [
             {
               element: 'copy',
               attributes: {
-                contentType: 'text/plain',
+                contentType: {
+                  element: 'string',
+                  content: 'text/plain',
+                },
               },
               content: 'This is a group of resources',
             },
             {
               element: 'resource',
               meta: {
-                title: 'Frob',
+                title: {
+                  element: 'string',
+                  content: 'Frob',
+                },
               },
               attributes: {
-                href: '/frobs/{id}',
+                href: {
+                  element: 'string',
+                  content: '/frobs/{id}',
+                },
                 hrefVariables: {
                   element: 'hrefVariables',
                   content: [
@@ -68,9 +99,16 @@ const refractedApi = {
                     content: [
                       {
                         element: 'member',
-                        meta: {},
                         attributes: {
-                          typeAttributes: ['required'],
+                          typeAttributes: {
+                            element: 'array',
+                            content: [
+                              {
+                                element: 'string',
+                                content: 'required',
+                              },
+                            ],
+                          },
                         },
                         content: {
                           key: {
@@ -109,20 +147,29 @@ const refractedApi = {
                     {
                       element: 'httpTransaction',
                       meta: {
-                        title: 'Get a frob',
+                        title: {
+                          element: 'string',
+                          content: 'Get a frob',
+                        },
                       },
                       content: [
                         {
                           element: 'httpRequest',
                           attributes: {
-                            method: 'GET',
+                            method: {
+                              element: 'string',
+                              content: 'GET',
+                            },
                           },
                           content: [],
                         },
                         {
                           element: 'httpResponse',
                           attributes: {
-                            statusCode: 200,
+                            statusCode: {
+                              element: 'number',
+                              content: 200,
+                            },
                             headers: {
                               element: 'httpHeaders',
                               content: [
@@ -146,7 +193,15 @@ const refractedApi = {
                             {
                               element: 'asset',
                               meta: {
-                                classes: ['messageBody'],
+                                classes: {
+                                  element: 'array',
+                                  content: [
+                                    {
+                                      element: 'string',
+                                      content: 'messageBody',
+                                    },
+                                  ],
+                                },
                               },
                               content: '{\n  "id": "1",\n  "tag": "foo"\n}\n',
                             },
@@ -165,16 +220,44 @@ const refractedApi = {
     {
       element: 'annotation',
       meta: {
-        classes: ['warning'],
+        classes: {
+          element: 'array',
+          content: [
+            {
+              element: 'string',
+              content: 'warning',
+            },
+          ],
+        },
       },
       attributes: {
-        code: 6,
-        sourceMap: [
-          {
-            element: 'sourceMap',
-            content: [[0, 10]],
-          },
-        ],
+        code: {
+          element: 'number',
+          content: 6,
+        },
+        sourceMap: {
+          element: 'array',
+          content: [
+            {
+              element: 'sourceMap',
+              content: [
+                {
+                  element: 'array',
+                  content: [
+                    {
+                      element: 'number',
+                      content: 0,
+                    },
+                    {
+                      element: 'number',
+                      content: 10,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       },
       content: 'description',
     },
@@ -311,7 +394,7 @@ describe('Parser', () => {
 
     it('should error on parser error', (done) => {
       const expectedError = new Error();
-      const expectedElements = {};
+      const expectedElements = { element: 'string', content: 'Hello' };
       fury.adapters[fury.adapters.length - 1].parse = (options, done2) => {
         done2(expectedError, expectedElements);
       };
@@ -371,7 +454,15 @@ describe('Refract loader', () => {
       const api = fury.load({
         element: 'category',
         meta: {
-          classes: 'api',
+          classes: {
+            element: 'array',
+            content: [
+              {
+                element: 'string',
+                content: 'api',
+              },
+            ],
+          },
         },
         content: [],
       });
