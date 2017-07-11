@@ -21,6 +21,9 @@
     "drafter": "^1.2.0",
     "minim": "^0.18.0"
   },
+  "peerDependencies": {
+    "fury": "3.0.0-beta.3"
+  },
   "devDependencies": {
     "chai": "^3.2.0",
     "peasant": "^1.1.0"
