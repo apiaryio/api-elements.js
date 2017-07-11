@@ -1,3 +1,7 @@
+# 0.7.0
+
+- Compatibility with Minim 0.18 and minim-api-description 0.5.
+
 # 0.6.1 - 2017-06-29
 
 - We don't try to re-define `sourceMapValue` on an Element when
