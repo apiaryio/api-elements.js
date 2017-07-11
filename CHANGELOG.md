@@ -1,3 +1,7 @@
+# 0.8.0
+
+- Compatibility with minim 0.18 and Fury 3.0.0-beta.3.
+
 # 0.7.0 - 2017-03-30
 
 - Upgraded babel-runtime dependency to v6

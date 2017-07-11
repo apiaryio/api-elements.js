@@ -2,6 +2,7 @@
 
 import deckardcain from 'deckardcain';
 import drafter from 'drafter';
+import JSON06Serialiser from 'minim/lib/serialisers/json-0.6';
 
 export const name = 'api-blueprint';
 export const mediaTypes = [
@@ -13,24 +14,40 @@ export function detect(source) {
   return mediaTypes.indexOf(deckardcain.identify(source)) !== -1;
 }
 
-export function validate({ source, requireBlueprintName }, done) {
+export function validate({ minim, source, requireBlueprintName }, done) {
   const options = {
     requireBlueprintName,
   };
 
-  drafter.validate(source, options, done);
+  const serialiser = new JSON06Serialiser(minim);
+
+  drafter.validate(source, options, (err, parseResult) => {
+    if (parseResult) {
+      done(err, serialiser.deserialise(parseResult));
+    } else {
+      done(err, parseResult);
+    }
+  });
 }
 
 /*
  * Parse an API Blueprint into refract elements.
  */
-export function parse({ source, generateSourceMap, requireBlueprintName }, done) {
+export function parse({ minim, source, generateSourceMap, requireBlueprintName }, done) {
   const options = {
     exportSourcemap: !!generateSourceMap,
     requireBlueprintName,
   };
 
-  drafter.parse(source, options, done);
+  const serialiser = new JSON06Serialiser(minim);
+
+  drafter.parse(source, options, (err, parseResult) => {
+    if (parseResult) {
+      done(err, serialiser.deserialise(parseResult));
+    } else {
+      done(err, parseResult);
+    }
+  });
 }
 
 export default { name, mediaTypes, detect, validate, parse };

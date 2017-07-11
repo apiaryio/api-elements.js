@@ -41,7 +41,7 @@ describe('API Blueprint parser adapter', () => {
     });
 
     it('has API category inside parse result', () => {
-      const filtered = result.content.filter(item => item.element === 'category' && item.meta.classes.indexOf('api') !== -1);
+      const filtered = result.children.filter(item => item.element === 'category' && item.classes.contains('api'));
 
       expect(filtered).to.have.length(1);
       expect(filtered[0]).to.be.an.object;
