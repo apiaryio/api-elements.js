@@ -4,16 +4,28 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Dereferencing a local file"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Dereferencing a local file"
+        }
       },
       "content": [
         {
           "element": "resource",
           "attributes": {
-            "href": "/"
+            "href": {
+              "element": "string",
+              "content": "/"
+            }
           },
           "content": [
             {
@@ -25,7 +37,10 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
@@ -50,7 +65,10 @@
                             }
                           ]
                         },
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -60,9 +78,15 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBody"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            }
                           },
                           "content": "{\n  \"example\": {\n    \"$ref\": \"package.json\"\n  }\n}"
                         }

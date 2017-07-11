@@ -4,55 +4,103 @@
     {
       "element": "annotation",
       "meta": {
-        "classes": [
-          "error"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "error"
+            }
+          ]
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "origin"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
+                }
+              },
+              "content": []
+            }
+          ]
+        }
       },
       "attributes": {
-        "code": 4
+        "code": {
+          "element": "number",
+          "content": 4
+        }
       },
       "content": "Additional properties not allowed: invalid"
     },
     {
       "element": "annotation",
       "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#yaml-parser"
-            },
-            "content": []
-          }
-        ]
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "origin"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://docs.apiary.io/validations/swagger#yaml-parser"
+                }
+              },
+              "content": []
+            }
+          ]
+        }
       },
       "attributes": {
-        "code": 2,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "content": [
-              [
-                94,
-                1
+        "code": {
+          "element": "number",
+          "content": 2
+        },
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "content": 94
+                    },
+                    {
+                      "element": "number",
+                      "content": 1
+                    }
+                  ]
+                }
               ]
-            ]
-          }
-        ]
+            }
+          ]
+        }
       },
       "content": "YAML Syntax Error: expected <block end>, but found <scalar>"
     }

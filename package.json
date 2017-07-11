@@ -28,12 +28,12 @@
   "devDependencies": {
     "babel-plugin-array-includes": "^2.0.3",
     "chai": "^3.2.0",
-    "fury": "3.0.0-beta.2",
+    "fury": "3.0.0-beta.3",
     "glob": "^7.1.1",
-    "minim": "^0.17.1",
-    "minim-parse-result": "^0.6.1",
+    "minim": "^0.18.0",
+    "minim-parse-result": "^0.7.0",
     "peasant": "^1.1.0",
-    "swagger-zoo": "2.3.1"
+    "swagger-zoo": "2.4.0"
   },
   "engines": {
     "node": ">=4"
