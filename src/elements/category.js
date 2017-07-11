@@ -41,7 +41,7 @@ export default function (namespace) {
     }
 
     metadata(value) {
-      const metadata = this.attributes.get('meta');
+      const metadata = this.attributes.get('metadata');
 
       if (!metadata) {
         return undefined;

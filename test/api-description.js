@@ -60,61 +60,120 @@ describe('API description namespace', () => {
       refracted = {
         element: 'category',
         meta: {
-          classes: ['api'],
+          classes: {
+            element: 'array',
+            content: [
+              {
+                element: 'string',
+                content: 'api',
+              },
+            ],
+          },
         },
         attributes: {
-          meta: [
-            {
-              element: 'member',
-              meta: {
-                classes: ['user'],
-              },
-              content: {
-                key: {
-                  element: 'string',
-                  content: 'HOST',
+          metadata: {
+            element: 'object',
+            content: [
+              {
+                element: 'member',
+                meta: {
+                  classes: {
+                    element: 'array',
+                    content: [
+                      {
+                        element: 'string',
+                        content: 'user',
+                      },
+                    ],
+                  },
                 },
-                value: {
-                  element: 'string',
-                  content: 'https://example.com',
+                content: {
+                  key: {
+                    element: 'string',
+                    content: 'HOST',
+                  },
+                  value: {
+                    element: 'string',
+                    content: 'https://example.com',
+                  },
                 },
               },
-            },
-          ],
+            ],
+          },
         },
         content: [
           {
             element: 'category',
             meta: {
-              classes: ['resourceGroup'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'resourceGroup',
+                  },
+                ],
+              },
             },
             content: [],
           },
           {
             element: 'category',
             meta: {
-              classes: ['dataStructures'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'dataStructures',
+                  },
+                ],
+              },
             },
             content: [],
           },
           {
             element: 'category',
             meta: {
-              classes: ['scenario'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'scenario',
+                  },
+                ],
+              },
             },
             content: [],
           },
           {
             element: 'category',
             meta: {
-              classes: ['transitions'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'transitions',
+                  },
+                ],
+              },
             },
             content: [],
           },
           {
             element: 'category',
             meta: {
-              classes: ['authSchemes'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'authSchemes',
+                  },
+                ],
+              },
             },
             content: [],
           },
@@ -145,7 +204,7 @@ describe('API description namespace', () => {
     });
 
     it('should have host API metadata', () => {
-      const meta = category.attributes.get('meta').first();
+      const meta = category.attributes.get('metadata').first();
       expect(meta.key.toValue()).to.equal('HOST');
       expect(meta.value.toValue()).to.equal('https://example.com');
     });
@@ -239,20 +298,34 @@ describe('API description namespace', () => {
       refracted = {
         element: 'category',
         meta: {
-          classes: ['authSchemes'],
+          classes: {
+            element: 'array',
+            content: [
+              {
+                element: 'string',
+                content: 'authSchemes',
+              },
+            ],
+          },
         },
         content: [
           {
             element: 'Basic Authentication Scheme',
             meta: {
-              id: 'custom_basic',
+              id: {
+                element: 'string',
+                content: 'custom_basic',
+              },
             },
             content: [],
           },
           {
             element: 'Token Authentication Scheme',
             meta: {
-              id: 'custom_api_key',
+              id: {
+                element: 'string',
+                content: 'custom_api_key',
+              },
             },
             content: [
               {
@@ -273,7 +346,10 @@ describe('API description namespace', () => {
           {
             element: 'OAuth2 Scheme',
             meta: {
-              id: 'custom_oauth',
+              id: {
+                element: 'string',
+                content: 'custom_oauth',
+              },
             },
             content: [
               {
@@ -326,7 +402,10 @@ describe('API description namespace', () => {
       refracted = {
         element: 'copy',
         attributes: {
-          contentType: 'text/html',
+          contentType: {
+            element: 'string',
+            content: 'text/html',
+          },
         },
         content: 'I am some text',
       };
@@ -642,7 +721,10 @@ describe('API description namespace', () => {
       refracted = {
         element: 'resource',
         attributes: {
-          href: '/resource/{id}',
+          href: {
+            element: 'string',
+            content: '/resource/{id}',
+          },
           hrefVariables: {
             element: 'hrefVariables',
             content: [
@@ -745,8 +827,14 @@ describe('API description namespace', () => {
       refracted = {
         element: 'transition',
         attributes: {
-          relation: 'action',
-          href: '/resource',
+          relation: {
+            element: 'string',
+            content: 'action',
+          },
+          href: {
+            element: 'string',
+            content: '/resource',
+          },
           hrefVariables: {
             element: 'hrefVariables',
             content: [
@@ -772,7 +860,15 @@ describe('API description namespace', () => {
               content: [],
             },
           },
-          contentTypes: ['application/json'],
+          contentTypes: {
+            element: 'array',
+            content: [
+              {
+                element: 'string',
+                content: 'application/json',
+              },
+            ],
+          },
         },
         content: [
           {
@@ -785,7 +881,10 @@ describe('API description namespace', () => {
               {
                 element: 'httpRequest',
                 attributes: {
-                  method: 'GET',
+                  method: {
+                    element: 'string',
+                    content: 'GET',
+                  },
                 },
                 content: [],
               },
@@ -896,7 +995,10 @@ describe('API description namespace', () => {
       refracted = {
         element: 'Token Auth Scheme',
         meta: {
-          id: 'Custom Token Auth',
+          id: {
+            element: 'string',
+            content: 'Custom Token Auth',
+          },
         },
         content: [
           {
@@ -919,8 +1021,14 @@ describe('API description namespace', () => {
           {
             element: 'transition',
             attributes: {
-              relation: 'authorize',
-              href: 'http://example.com/oauth/authorize',
+              relation: {
+                element: 'string',
+                content: 'authorize',
+              },
+              href: {
+                element: 'string',
+                content: 'http://example.com/oauth/authorize',
+              },
             },
             content: [],
           },
@@ -970,12 +1078,15 @@ describe('API description namespace', () => {
       refracted = {
         element: 'httpTransaction',
         attributes: {
-          authSchemes: [
-            {
-              element: 'Token Authentication Scheme',
-              content: [],
-            },
-          ],
+          authSchemes: {
+            element: 'array',
+            content: [
+              {
+                element: 'Token Authentication Scheme',
+                content: [],
+              },
+            ],
+          },
         },
         content: [
           {
@@ -1025,8 +1136,14 @@ describe('API description namespace', () => {
       refracted = {
         element: 'httpRequest',
         attributes: {
-          method: 'GET',
-          href: '/foo',
+          method: {
+            element: 'string',
+            content: 'GET',
+          },
+          href: {
+            element: 'string',
+            content: '/foo',
+          },
         },
         content: [
           {
@@ -1086,7 +1203,10 @@ describe('API description namespace', () => {
       refracted = {
         element: 'httpResponse',
         attributes: {
-          statusCode: 200,
+          statusCode: {
+            element: 'number',
+            content: 200,
+          },
         },
         content: [
           {
@@ -1181,18 +1301,40 @@ describe('API description namespace', () => {
           {
             element: 'asset',
             meta: {
-              classes: ['messageBody'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'messageBody',
+                  },
+                ],
+              },
             },
             attributes: {
-              contentType: 'text/plain',
-              href: '/some/path',
+              contentType: {
+                element: 'string',
+                content: 'text/plain',
+              },
+              href: {
+                element: 'string',
+                content: '/some/path',
+              },
             },
             content: '',
           },
           {
             element: 'asset',
             meta: {
-              classes: ['messageBodySchema'],
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'messageBodySchema',
+                  },
+                ],
+              },
             },
             content: '',
           },
@@ -1293,20 +1435,41 @@ describe('API description namespace', () => {
       refracted = {
         element: 'extension',
         meta: {
-          links: [
-            {
-              element: 'link',
-              attributes: {
-                relation: 'profile',
-                href: 'https://example.com/extensions/info/',
+          links: {
+            element: 'array',
+            content: [
+              {
+                element: 'link',
+                attributes: {
+                  relation: {
+                    element: 'string',
+                    content: 'profile',
+                  },
+                  href: {
+                    element: 'string',
+                    content: 'https://example.com/extensions/info/',
+                  },
+                },
+                content: undefined,
               },
-              content: undefined,
+            ],
+          },
+        },
+        content: [
+          {
+            element: 'member',
+            content: {
+              key: {
+                element: 'string',
+                content: 'version',
+              },
+              value: {
+                element: 'number',
+                content: 1.0,
+              },
             },
-          ],
-        },
-        content: {
-          version: 1.0,
-        },
+          },
+        ],
       };
 
       extension = namespace.fromRefract(refracted);
