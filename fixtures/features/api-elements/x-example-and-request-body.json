@@ -4,16 +4,28 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Parameters"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Parameters"
+        }
       },
       "content": [
         {
           "element": "resource",
           "attributes": {
-            "href": "/test"
+            "href": {
+              "element": "string",
+              "content": "/test"
+            }
           },
           "content": [
             {
@@ -25,18 +37,30 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "POST"
+                        "method": {
+                          "element": "string",
+                          "content": "POST"
+                        }
                       },
                       "content": [
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{\"type\":\"string\"}"
                         },
@@ -52,7 +76,10 @@
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -72,33 +99,63 @@
     {
       "element": "annotation",
       "meta": {
-        "classes": [
-          "error"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#swagger-validation"
-            },
-            "content": []
-          }
-        ]
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "error"
+            }
+          ]
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "origin"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
+                }
+              },
+              "content": []
+            }
+          ]
+        }
       },
       "attributes": {
-        "code": 4,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "content": [
-              [
-                260,
-                22
+        "code": {
+          "element": "number",
+          "content": 4
+        },
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "content": 260
+                    },
+                    {
+                      "element": "number",
+                      "content": 22
+                    }
+                  ]
+                }
               ]
-            ]
-          }
-        ]
+            }
+          ]
+        }
       },
       "content": "The 'x-example' property isn't allowed for body parameters - use 'schema.example' instead"
     }

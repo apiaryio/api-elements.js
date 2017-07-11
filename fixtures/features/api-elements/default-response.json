@@ -4,16 +4,28 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Default Response"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Default Response"
+        }
       },
       "content": [
         {
           "element": "resource",
           "attributes": {
-            "href": "/test"
+            "href": {
+              "element": "string",
+              "content": "/test"
+            }
           },
           "content": [
             {
@@ -25,14 +37,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -52,33 +70,63 @@
     {
       "element": "annotation",
       "meta": {
-        "classes": [
-          "warning"
-        ],
-        "links": [
-          {
-            "element": "link",
-            "attributes": {
-              "relation": "origin",
-              "href": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-            },
-            "content": []
-          }
-        ]
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "origin"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
+                }
+              },
+              "content": []
+            }
+          ]
+        }
       },
       "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "content": [
-              [
-                165,
-                92
+        "code": {
+          "element": "number",
+          "content": 3
+        },
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "content": 165
+                    },
+                    {
+                      "element": "number",
+                      "content": 92
+                    }
+                  ]
+                }
               ]
-            ]
-          }
-        ]
+            }
+          ]
+        }
       },
       "content": "Default response is not yet supported"
     }

@@ -4,34 +4,58 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Parameters"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Parameters"
+        }
       },
       "content": [
         {
           "element": "resource",
           "attributes": {
-            "href": "/test/{id}"
+            "href": {
+              "element": "string",
+              "content": "/test/{id}"
+            }
           },
           "content": [
             {
               "element": "transition",
               "attributes": {
-                "href": "/test/{id}{?arg}",
+                "href": {
+                  "element": "string",
+                  "content": "/test/{id}{?arg}"
+                },
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "content": [
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Unique identifier"
+                        "description": {
+                          "element": "string",
+                          "content": "Unique identifier"
+                        }
                       },
                       "attributes": {
-                        "typeAttributes": [
-                          "required"
-                        ]
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "required"
+                            }
+                          ]
+                        }
                       },
                       "content": {
                         "key": {
@@ -47,12 +71,21 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Query argument"
+                        "description": {
+                          "element": "string",
+                          "content": "Query argument"
+                        }
                       },
                       "attributes": {
-                        "typeAttributes": [
-                          "required"
-                        ]
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "required"
+                            }
+                          ]
+                        }
                       },
                       "content": {
                         "key": {
@@ -80,14 +113,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -105,7 +144,10 @@
         {
           "element": "resource",
           "attributes": {
-            "href": "/test"
+            "href": {
+              "element": "string",
+              "content": "/test"
+            }
           },
           "content": [
             {
@@ -117,18 +159,30 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "POST"
+                        "method": {
+                          "element": "string",
+                          "content": "POST"
+                        }
                       },
                       "content": [
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{\"type\":\"string\"}"
                         },
@@ -144,7 +198,10 @@
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {

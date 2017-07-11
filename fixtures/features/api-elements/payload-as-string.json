@@ -4,38 +4,59 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Not formatted example"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Not formatted example"
+        }
       },
       "attributes": {
-        "meta": [
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "content": {
-              "key": {
-                "element": "string",
-                "content": "HOST"
+        "meta": {
+          "element": "array",
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
               },
-              "value": {
-                "element": "string",
-                "content": "custom-instance.filter.ly"
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "custom-instance.filter.ly"
+                }
               }
             }
-          }
-        ]
+          ]
+        }
       },
       "content": [
         {
           "element": "resource",
           "attributes": {
-            "href": "/example/"
+            "href": {
+              "element": "string",
+              "content": "/example/"
+            }
           },
           "content": [
             {
@@ -47,7 +68,10 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
@@ -72,7 +96,10 @@
                             }
                           ]
                         },
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -82,9 +109,15 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBody"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            }
                           },
                           "content": "{\n  \"requestId\" : 123123213231,\n  \"results\": [\n    {\n      \"id\": 12312323,\n      \"type\": \"article\"\n    }\n  ]\n}"
                         }

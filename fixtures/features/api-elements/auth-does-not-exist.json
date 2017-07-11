@@ -4,16 +4,28 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Swagger Auth Does Not Exist"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Swagger Auth Does Not Exist"
+        }
       },
       "content": [
         {
           "element": "resource",
           "attributes": {
-            "href": "/endpoint"
+            "href": {
+              "element": "string",
+              "content": "/endpoint"
+            }
           },
           "content": [
             {
@@ -22,25 +34,34 @@
                 {
                   "element": "httpTransaction",
                   "attributes": {
-                    "authSchemes": [
-                      {
-                        "element": "doesNotExist",
-                        "content": []
-                      }
-                    ]
+                    "authSchemes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "doesNotExist",
+                          "content": []
+                        }
+                      ]
+                    }
                   },
                   "content": [
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -50,12 +71,21 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{\"type\":\"string\"}"
                         },

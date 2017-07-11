@@ -4,32 +4,50 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Body Test"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Body Test"
+        }
       },
       "attributes": {
-        "meta": [
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "content": {
-              "key": {
-                "element": "string",
-                "content": "HOST"
+        "meta": {
+          "element": "array",
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
               },
-              "value": {
-                "element": "string",
-                "content": "http://example.com"
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "http://example.com"
+                }
               }
             }
-          }
-        ]
+          ]
+        }
       },
       "content": [
         {
@@ -39,13 +57,19 @@
         {
           "element": "resource",
           "attributes": {
-            "href": "/resource"
+            "href": {
+              "element": "string",
+              "content": "/resource"
+            }
           },
           "content": [
             {
               "element": "transition",
               "meta": {
-                "id": "getResource"
+                "id": {
+                  "element": "string",
+                  "content": "getResource"
+                }
               },
               "content": [
                 {
@@ -58,23 +82,35 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET",
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        },
                         "headers": {
                           "element": "httpHeaders",
                           "content": [
                             {
                               "element": "member",
                               "meta": {
-                                "links": [
-                                  {
-                                    "element": "link",
-                                    "attributes": {
-                                      "relation": "inferred",
-                                      "href": "http://docs.apiary.io/validations/swagger#consumes-content-type"
-                                    },
-                                    "content": []
-                                  }
-                                ]
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                        }
+                                      },
+                                      "content": []
+                                    }
+                                  ]
+                                }
                               },
                               "content": {
                                 "key": {
@@ -90,16 +126,25 @@
                             {
                               "element": "member",
                               "meta": {
-                                "links": [
-                                  {
-                                    "element": "link",
-                                    "attributes": {
-                                      "relation": "inferred",
-                                      "href": "http://docs.apiary.io/validations/swagger#produces-accept"
-                                    },
-                                    "content": []
-                                  }
-                                ]
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#produces-accept"
+                                        }
+                                      },
+                                      "content": []
+                                    }
+                                  ]
+                                }
                               },
                               "content": {
                                 "key": {
@@ -126,16 +171,25 @@
                             {
                               "element": "member",
                               "meta": {
-                                "links": [
-                                  {
-                                    "element": "link",
-                                    "attributes": {
-                                      "relation": "inferred",
-                                      "href": "http://docs.apiary.io/validations/swagger#produces-content-type"
-                                    },
-                                    "content": []
-                                  }
-                                ]
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#produces-content-type"
+                                        }
+                                      },
+                                      "content": []
+                                    }
+                                  ]
+                                }
                               },
                               "content": {
                                 "key": {
@@ -150,7 +204,10 @@
                             }
                           ]
                         },
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -160,34 +217,61 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBody"
-                            ],
-                            "links": [
-                              {
-                                "element": "link",
-                                "attributes": {
-                                  "relation": "inferred",
-                                  "href": "http://docs.apiary.io/validations/swagger#message-body-generation"
-                                },
-                                "content": []
-                              }
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            },
+                            "links": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "link",
+                                  "attributes": {
+                                    "relation": {
+                                      "element": "string",
+                                      "content": "inferred"
+                                    },
+                                    "href": {
+                                      "element": "string",
+                                      "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                    }
+                                  },
+                                  "content": []
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/json"
+                            }
                           },
                           "content": "{\n  \"id\": 123,\n  \"name\": \"Resource 1\"\n}"
                         },
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{}"
                         }

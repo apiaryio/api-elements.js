@@ -4,24 +4,42 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Swagger Global Auth"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Swagger Global Auth"
+        }
       },
       "content": [
         {
           "element": "category",
           "meta": {
-            "classes": [
-              "authSchemes"
-            ]
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "authSchemes"
+                }
+              ]
+            }
           },
           "content": [
             {
               "element": "Token Authentication Scheme",
               "meta": {
-                "id": "customApiKey"
+                "id": {
+                  "element": "string",
+                  "content": "customApiKey"
+                }
               },
               "content": [
                 {
@@ -42,7 +60,10 @@
             {
               "element": "Basic Authentication Scheme",
               "meta": {
-                "id": "customBasic"
+                "id": {
+                  "element": "string",
+                  "content": "customBasic"
+                }
               },
               "content": []
             }
@@ -51,7 +72,10 @@
         {
           "element": "resource",
           "attributes": {
-            "href": "/endpoint1"
+            "href": {
+              "element": "string",
+              "content": "/endpoint1"
+            }
           },
           "content": [
             {
@@ -60,25 +84,34 @@
                 {
                   "element": "httpTransaction",
                   "attributes": {
-                    "authSchemes": [
-                      {
-                        "element": "customApiKey",
-                        "content": []
-                      }
-                    ]
+                    "authSchemes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "customApiKey",
+                          "content": []
+                        }
+                      ]
+                    }
                   },
                   "content": [
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -88,12 +121,21 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{\"type\":\"string\"}"
                         },
@@ -115,7 +157,10 @@
         {
           "element": "resource",
           "attributes": {
-            "href": "/endpoint2"
+            "href": {
+              "element": "string",
+              "content": "/endpoint2"
+            }
           },
           "content": [
             {
@@ -127,14 +172,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -144,12 +195,21 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{\"type\":\"string\"}"
                         },
@@ -171,7 +231,10 @@
         {
           "element": "resource",
           "attributes": {
-            "href": "/endpoint3"
+            "href": {
+              "element": "string",
+              "content": "/endpoint3"
+            }
           },
           "content": [
             {
@@ -180,25 +243,34 @@
                 {
                   "element": "httpTransaction",
                   "attributes": {
-                    "authSchemes": [
-                      {
-                        "element": "customBasic",
-                        "content": []
-                      }
-                    ]
+                    "authSchemes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "customBasic",
+                          "content": []
+                        }
+                      ]
+                    }
                   },
                   "content": [
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -208,12 +280,21 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{\"type\":\"string\"}"
                         },

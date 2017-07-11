@@ -4,24 +4,42 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Swagger Oauth2 Implicit"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Swagger Oauth2 Implicit"
+        }
       },
       "content": [
         {
           "element": "category",
           "meta": {
-            "classes": [
-              "authSchemes"
-            ]
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "authSchemes"
+                }
+              ]
+            }
           },
           "content": [
             {
               "element": "OAuth2 Scheme",
               "meta": {
-                "id": "customOauth2"
+                "id": {
+                  "element": "string",
+                  "content": "customOauth2"
+                }
               },
               "content": [
                 {
@@ -50,14 +68,20 @@
                         {
                           "element": "string",
                           "meta": {
-                            "description": "Test Scope 1"
+                            "description": {
+                              "element": "string",
+                              "content": "Test Scope 1"
+                            }
                           },
                           "content": "scope1"
                         },
                         {
                           "element": "string",
                           "meta": {
-                            "description": "Test Scope 2"
+                            "description": {
+                              "element": "string",
+                              "content": "Test Scope 2"
+                            }
                           },
                           "content": "scope2"
                         }
@@ -68,8 +92,14 @@
                 {
                   "element": "transition",
                   "attributes": {
-                    "relation": "authorize",
-                    "href": "http://example.com/oauth/authorize"
+                    "relation": {
+                      "element": "string",
+                      "content": "authorize"
+                    },
+                    "href": {
+                      "element": "string",
+                      "content": "http://example.com/oauth/authorize"
+                    }
                   },
                   "content": []
                 }
@@ -80,7 +110,10 @@
         {
           "element": "resource",
           "attributes": {
-            "href": "/endpoint"
+            "href": {
+              "element": "string",
+              "content": "/endpoint"
+            }
           },
           "content": [
             {
@@ -89,48 +122,57 @@
                 {
                   "element": "httpTransaction",
                   "attributes": {
-                    "authSchemes": [
-                      {
-                        "element": "customOauth2",
-                        "content": [
-                          {
-                            "element": "member",
-                            "content": {
-                              "key": {
-                                "element": "string",
-                                "content": "scopes"
-                              },
-                              "value": {
-                                "element": "array",
-                                "content": [
-                                  {
-                                    "element": "string",
-                                    "content": "scope1"
-                                  },
-                                  {
-                                    "element": "string",
-                                    "content": "scope2"
-                                  }
-                                ]
+                    "authSchemes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "customOauth2",
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "scopes"
+                                },
+                                "value": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "scope1"
+                                    },
+                                    {
+                                      "element": "string",
+                                      "content": "scope2"
+                                    }
+                                  ]
+                                }
                               }
                             }
-                          }
-                        ]
-                      }
-                    ]
+                          ]
+                        }
+                      ]
+                    }
                   },
                   "content": [
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -140,12 +182,21 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{\"type\":\"string\"}"
                         },
