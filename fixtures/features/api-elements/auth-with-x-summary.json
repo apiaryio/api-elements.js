@@ -4,26 +4,50 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Swagger Auth with x-summary"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Swagger Auth with x-summary"
+        }
       },
       "content": [
         {
           "element": "category",
           "meta": {
-            "classes": [
-              "authSchemes"
-            ]
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "authSchemes"
+                }
+              ]
+            }
           },
           "content": [
             {
               "element": "Basic Authentication Scheme",
               "meta": {
-                "id": "customBasic",
-                "title": "Custom Basic Auth",
-                "description": "Auth description"
+                "id": {
+                  "element": "string",
+                  "content": "customBasic"
+                },
+                "title": {
+                  "element": "string",
+                  "content": "Custom Basic Auth"
+                },
+                "description": {
+                  "element": "string",
+                  "content": "Auth description"
+                }
               },
               "content": []
             }
@@ -32,7 +56,10 @@
         {
           "element": "resource",
           "attributes": {
-            "href": "/endpoint"
+            "href": {
+              "element": "string",
+              "content": "/endpoint"
+            }
           },
           "content": [
             {
@@ -41,25 +68,34 @@
                 {
                   "element": "httpTransaction",
                   "attributes": {
-                    "authSchemes": [
-                      {
-                        "element": "customBasic",
-                        "content": []
-                      }
-                    ]
+                    "authSchemes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "customBasic",
+                          "content": []
+                        }
+                      ]
+                    }
                   },
                   "content": [
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
@@ -69,12 +105,21 @@
                         {
                           "element": "asset",
                           "meta": {
-                            "classes": [
-                              "messageBodySchema"
-                            ]
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
                           },
                           "attributes": {
-                            "contentType": "application/schema+json"
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            }
                           },
                           "content": "{\"type\":\"string\"}"
                         },

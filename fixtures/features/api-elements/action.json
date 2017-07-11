@@ -4,22 +4,37 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Action"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Action"
+        }
       },
       "content": [
         {
           "element": "resource",
           "attributes": {
-            "href": "/test"
+            "href": {
+              "element": "string",
+              "content": "/test"
+            }
           },
           "content": [
             {
               "element": "transition",
               "meta": {
-                "title": "Test head"
+                "title": {
+                  "element": "string",
+                  "content": "Test head"
+                }
               },
               "content": [
                 {
@@ -28,14 +43,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "HEAD"
+                        "method": {
+                          "element": "string",
+                          "content": "HEAD"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "204"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "204"
+                        }
                       },
                       "content": [
                         {
@@ -51,7 +72,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "Test options"
+                "title": {
+                  "element": "string",
+                  "content": "Test options"
+                }
               },
               "content": [
                 {
@@ -60,14 +84,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "OPTIONS"
+                        "method": {
+                          "element": "string",
+                          "content": "OPTIONS"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "204"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "204"
+                        }
                       },
                       "content": [
                         {
@@ -83,8 +113,14 @@
             {
               "element": "transition",
               "meta": {
-                "title": "Test get",
-                "id": "test"
+                "title": {
+                  "element": "string",
+                  "content": "Test get"
+                },
+                "id": {
+                  "element": "string",
+                  "content": "test"
+                }
               },
               "content": [
                 {
@@ -97,14 +133,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "204"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "204"
+                        }
                       },
                       "content": [
                         {
@@ -120,7 +162,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "Test post"
+                "title": {
+                  "element": "string",
+                  "content": "Test post"
+                }
               },
               "content": [
                 {
@@ -129,14 +174,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "POST"
+                        "method": {
+                          "element": "string",
+                          "content": "POST"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "204"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "204"
+                        }
                       },
                       "content": [
                         {
@@ -152,7 +203,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "Test put"
+                "title": {
+                  "element": "string",
+                  "content": "Test put"
+                }
               },
               "content": [
                 {
@@ -161,14 +215,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "PUT"
+                        "method": {
+                          "element": "string",
+                          "content": "PUT"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "204"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "204"
+                        }
                       },
                       "content": [
                         {
@@ -184,7 +244,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "Test patch"
+                "title": {
+                  "element": "string",
+                  "content": "Test patch"
+                }
               },
               "content": [
                 {
@@ -193,14 +256,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "PATCH"
+                        "method": {
+                          "element": "string",
+                          "content": "PATCH"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "204"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "204"
+                        }
                       },
                       "content": [
                         {
@@ -216,7 +285,10 @@
             {
               "element": "transition",
               "meta": {
-                "title": "Test delete"
+                "title": {
+                  "element": "string",
+                  "content": "Test delete"
+                }
               },
               "content": [
                 {
@@ -225,14 +297,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "DELETE"
+                        "method": {
+                          "element": "string",
+                          "content": "DELETE"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "204"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "204"
+                        }
                       },
                       "content": [
                         {

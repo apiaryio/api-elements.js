@@ -4,29 +4,47 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Parameters"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Parameters"
+        }
       },
       "content": [
         {
           "element": "resource",
           "attributes": {
-            "href": "/test"
+            "href": {
+              "element": "string",
+              "content": "/test"
+            }
           },
           "content": [
             {
               "element": "transition",
               "attributes": {
-                "href": "/test{?arg,arg2}",
+                "href": {
+                  "element": "string",
+                  "content": "/test{?arg,arg2}"
+                },
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "content": [
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Query argument"
+                        "description": {
+                          "element": "string",
+                          "content": "Query argument"
+                        }
                       },
                       "content": {
                         "key": {
@@ -36,9 +54,15 @@
                         "value": {
                           "element": "enum",
                           "attributes": {
-                            "default": [
-                              "A"
-                            ]
+                            "default": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "A"
+                                }
+                              ]
+                            }
                           },
                           "content": [
                             {
@@ -56,7 +80,10 @@
                     {
                       "element": "member",
                       "meta": {
-                        "description": "Query argument 2"
+                        "description": {
+                          "element": "string",
+                          "content": "Query argument 2"
+                        }
                       },
                       "content": {
                         "key": {
@@ -66,9 +93,15 @@
                         "value": {
                           "element": "array",
                           "attributes": {
-                            "default": [
-                              "A"
-                            ]
+                            "default": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "A"
+                                }
+                              ]
+                            }
                           },
                           "content": [
                             {
@@ -89,14 +122,20 @@
                     {
                       "element": "httpRequest",
                       "attributes": {
-                        "method": "GET"
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
                       },
                       "content": []
                     },
                     {
                       "element": "httpResponse",
                       "attributes": {
-                        "statusCode": "200"
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
                       },
                       "content": [
                         {
