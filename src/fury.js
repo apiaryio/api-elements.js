@@ -82,11 +82,11 @@ class FuryCLI {
 
   serialize(result) {
     if (this.outputFormat === 'application/vnd.refract.parse-result+json') {
-      const output = JSON.stringify(result.toRefract(), null, 2);
+      const output = JSON.stringify(fury.minim.toRefract(result), null, 2);
       this.write(output, true);
       this.validateResult(result);
     } else if (this.outputFormat === 'application/vnd.refract.parse-result+yaml') {
-      const output = yaml.dump(result.toRefract());
+      const output = yaml.dump(fury.minim.toRefract(result));
       this.write(output);
       this.validateResult(result);
     } else {
