@@ -48,7 +48,7 @@ let warnings = parseResult.warnings;
 An element that annotates the input or parse result with additional information, such as warnings or errors. The content of the annotation contains the text:
 
 ```js
-console.log(`Warning: ${annotation.getValue()}`);
+console.log(`Warning: ${annotation.toValue()}`);
 ```
 
 #### Properties
