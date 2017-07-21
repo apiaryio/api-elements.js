@@ -1,3 +1,10 @@
+# 0.12.1
+
+## Enhancements
+
+- Support `allOf` in object JSON Schemas when producing object data structure
+  elements.
+
 # 0.12.0
 
 - Updates to fury 3.0.0-beta.3 which supports Refract 1.0 serialisation
