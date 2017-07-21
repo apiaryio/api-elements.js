@@ -61,20 +61,35 @@ export default class DataStructureGenerator {
       String: StringElement,
     } = this.minim.elements;
 
-    const element = new ObjectElement();
+    let properties = schema.properties || {};
+    let required = schema.required || [];
 
-    if (schema.properties) {
-      element.content = _.map(schema.properties, (subschema, property) => {
-        const member = this.generateMember(property, subschema);
+    if (schema.allOf && Array.isArray(schema.allOf)) {
+      // Merge all of the object allOf into properties and required
+      const allOf = schema.allOf.filter(subschema => subschema.type === 'object');
 
-        const required = schema.required && schema.required.includes(property);
-        member.attributes.typeAttributes = new ArrayElement([
-          new StringElement(required ? 'required' : 'optional'),
-        ]);
+      const allProperties = allOf
+        .filter(subschema => subschema.properties)
+        .map(subschema => subschema.properties);
+      properties = Object.assign(properties, ...allProperties);
 
-        return member;
-      });
+      required = allOf
+        .filter(subschema => subschema.required)
+        .map(subschema => subschema.required)
+        .reduce((accumulator, property) => accumulator.concat(property), required);
     }
+
+    const element = new ObjectElement();
+    element.content = _.map(properties, (subschema, property) => {
+      const member = this.generateMember(property, subschema);
+
+      const isRequired = required.includes(property);
+      member.attributes.typeAttributes = new ArrayElement([
+        new StringElement(isRequired ? 'required' : 'optional'),
+      ]);
+
+      return member;
+    });
 
     return element;
   }

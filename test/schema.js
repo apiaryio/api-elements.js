@@ -404,6 +404,43 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.content.description.toValue())
         .to.equal('- Object must have more than, or equal to 2 properties');
     });
+
+    it('produces object element from multiple allOf objects', () => {
+      const schema = {
+        type: 'object',
+        allOf: [
+          {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+          {
+            type: 'object',
+            properties: {
+              admin: {
+                type: 'boolean',
+              },
+            },
+            required: ['admin'],
+          },
+        ],
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      const name = dataStructure.content.get('name');
+      expect(name).not.to.be.undefined;
+
+      const admin = dataStructure.content.getMember('admin');
+      expect(admin).not.to.be.undefined;
+      expect(admin.attributes.typeAttributes.toValue()).to.deep.equal(['required']);
+    });
   });
 
   context('array schema', () => {
