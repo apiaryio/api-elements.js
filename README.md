@@ -241,7 +241,7 @@ transition.relation = '...';
 Overrides the resources URL template with one specific to this transition.
 
 ```js
-// Get the herf
+// Get the href
 console.log(`URL: ${transition.href.toValue()}`);
 
 // Set the href
@@ -358,7 +358,7 @@ request.method = 'PUT';
 Overrides the resources URL template with one specific to this request.
 
 ```js
-// Get the herf
+// Get the href
 console.log(`URL: ${request.href.toValue()}`);
 
 // Set the href
