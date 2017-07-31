@@ -22,7 +22,7 @@ export function namespace(options) {
     }
 
     get api() {
-      return this.children.filter(item => item.classes.contains('api')).first();
+      return this.children.filter(item => item.classes.contains('api')).first;
     }
 
     get annotations() {
@@ -77,7 +77,7 @@ export function namespace(options) {
         const sourceMap = this.attributes.get('sourceMap');
 
         if (sourceMap) {
-          return sourceMap.first().toValue();
+          return sourceMap.first.toValue();
         }
 
         return undefined;
