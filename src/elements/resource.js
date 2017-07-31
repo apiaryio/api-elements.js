@@ -29,7 +29,7 @@ export default function (namespace) {
     }
 
     get dataStructure() {
-      return this.children.filter(item => item.element === 'dataStructure').first();
+      return this.children.filter(item => item.element === 'dataStructure').first;
     }
   }
 

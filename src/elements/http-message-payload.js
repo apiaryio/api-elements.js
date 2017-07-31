@@ -35,19 +35,19 @@ export default function (namespace) {
     }
 
     get dataStructure() {
-      return this.findByElement('dataStructure').first();
+      return this.findByElement('dataStructure').first;
     }
 
     get messageBody() {
       // Returns the *first* message body. Only one should be defined according
       // to the spec, but it's possible to include more.
-      return this.filter(item => item.element === 'asset' && item.classes.contains('messageBody')).first();
+      return this.filter(item => item.element === 'asset' && item.classes.contains('messageBody')).first;
     }
 
     get messageBodySchema() {
       // Returns the *first* message body schema. Only one should be defined
       // according to the spec, but it's possible to include more.
-      return this.filter(item => item.element === 'asset' && item.classes.contains('messageBodySchema')).first();
+      return this.filter(item => item.element === 'asset' && item.classes.contains('messageBodySchema')).first;
     }
   }
 
