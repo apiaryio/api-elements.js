@@ -246,6 +246,40 @@
                                   "value": {
                                     "element": "enum",
                                     "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "number",
+                                            "attributes": {
+                                              "sourceMap": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "sourceMap",
+                                                    "content": [
+                                                      {
+                                                        "element": "array",
+                                                        "content": [
+                                                          {
+                                                            "element": "number",
+                                                            "content": 387
+                                                          },
+                                                          {
+                                                            "element": "number",
+                                                            "content": 1
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "content": 1
+                                          }
+                                        ]
+                                      },
                                       "sourceMap": {
                                         "element": "array",
                                         "content": [
@@ -270,37 +304,7 @@
                                         ]
                                       }
                                     },
-                                    "content": [
-                                      {
-                                        "element": "number",
-                                        "attributes": {
-                                          "sourceMap": {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "sourceMap",
-                                                "content": [
-                                                  {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "number",
-                                                        "content": 387
-                                                      },
-                                                      {
-                                                        "element": "number",
-                                                        "content": 1
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        "content": 1
-                                      }
-                                    ]
+                                    "content": null
                                   }
                                 }
                               },
@@ -348,6 +352,40 @@
                                   "value": {
                                     "element": "enum",
                                     "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "string",
+                                            "attributes": {
+                                              "sourceMap": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "sourceMap",
+                                                    "content": [
+                                                      {
+                                                        "element": "array",
+                                                        "content": [
+                                                          {
+                                                            "element": "number",
+                                                            "content": 238
+                                                          },
+                                                          {
+                                                            "element": "number",
+                                                            "content": 3
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "content": "bar"
+                                          }
+                                        ]
+                                      },
                                       "sourceMap": {
                                         "element": "array",
                                         "content": [
@@ -372,37 +410,7 @@
                                         ]
                                       }
                                     },
-                                    "content": [
-                                      {
-                                        "element": "string",
-                                        "attributes": {
-                                          "sourceMap": {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "sourceMap",
-                                                "content": [
-                                                  {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "number",
-                                                        "content": 238
-                                                      },
-                                                      {
-                                                        "element": "number",
-                                                        "content": 3
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        "content": "bar"
-                                      }
-                                    ]
+                                    "content": null
                                   }
                                 }
                               },
@@ -450,6 +458,40 @@
                                   "value": {
                                     "element": "enum",
                                     "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "string",
+                                            "attributes": {
+                                              "sourceMap": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "sourceMap",
+                                                    "content": [
+                                                      {
+                                                        "element": "array",
+                                                        "content": [
+                                                          {
+                                                            "element": "number",
+                                                            "content": 510
+                                                          },
+                                                          {
+                                                            "element": "number",
+                                                            "content": 13
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "content": "chocolate-bar"
+                                          }
+                                        ]
+                                      },
                                       "sourceMap": {
                                         "element": "array",
                                         "content": [
@@ -474,37 +516,7 @@
                                         ]
                                       }
                                     },
-                                    "content": [
-                                      {
-                                        "element": "string",
-                                        "attributes": {
-                                          "sourceMap": {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "sourceMap",
-                                                "content": [
-                                                  {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "number",
-                                                        "content": 510
-                                                      },
-                                                      {
-                                                        "element": "number",
-                                                        "content": 13
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        "content": "chocolate-bar"
-                                      }
-                                    ]
+                                    "content": null
                                   }
                                 }
                               }
