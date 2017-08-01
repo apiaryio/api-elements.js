@@ -154,7 +154,7 @@
                         "value": {
                           "element": "enum",
                           "attributes": {
-                            "default": {
+                            "enumerations": {
                               "element": "array",
                               "content": [
                                 {
@@ -171,11 +171,11 @@
                                               "content": [
                                                 {
                                                   "element": "number",
-                                                  "content": 214
+                                                  "content": 255
                                                 },
                                                 {
                                                   "element": "number",
-                                                  "content": 10
+                                                  "content": 1
                                                 }
                                               ]
                                             }
@@ -184,9 +184,67 @@
                                       ]
                                     }
                                   },
-                                  "content": "A"
+                                  "content": "B"
+                                },
+                                {
+                                  "element": "string",
+                                  "attributes": {
+                                    "sourceMap": {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "sourceMap",
+                                          "content": [
+                                            {
+                                              "element": "array",
+                                              "content": [
+                                                {
+                                                  "element": "number",
+                                                  "content": 271
+                                                },
+                                                {
+                                                  "element": "number",
+                                                  "content": 1
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "content": "C"
                                 }
                               ]
+                            },
+                            "default": {
+                              "element": "string",
+                              "attributes": {
+                                "sourceMap": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "sourceMap",
+                                      "content": [
+                                        {
+                                          "element": "array",
+                                          "content": [
+                                            {
+                                              "element": "number",
+                                              "content": 214
+                                            },
+                                            {
+                                              "element": "number",
+                                              "content": 10
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": "A"
                             },
                             "sourceMap": {
                               "element": "array",
@@ -212,66 +270,7 @@
                               ]
                             }
                           },
-                          "content": [
-                            {
-                              "element": "string",
-                              "attributes": {
-                                "sourceMap": {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "sourceMap",
-                                      "content": [
-                                        {
-                                          "element": "array",
-                                          "content": [
-                                            {
-                                              "element": "number",
-                                              "content": 255
-                                            },
-                                            {
-                                              "element": "number",
-                                              "content": 1
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              "content": "B"
-                            },
-                            {
-                              "element": "string",
-                              "attributes": {
-                                "sourceMap": {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "sourceMap",
-                                      "content": [
-                                        {
-                                          "element": "array",
-                                          "content": [
-                                            {
-                                              "element": "number",
-                                              "content": 271
-                                            },
-                                            {
-                                              "element": "number",
-                                              "content": 1
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              "content": "C"
-                            }
-                          ]
+                          "content": null
                         }
                       }
                     },

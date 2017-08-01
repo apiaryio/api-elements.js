@@ -233,44 +233,32 @@
                                   "value": {
                                     "element": "enum",
                                     "attributes": {
-                                      "samples": {
-                                        "element": "array",
-                                        "content": [
-                                          {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "string",
-                                                "content": "hello"
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      },
-                                      "default": {
+                                      "enumerations": {
                                         "element": "array",
                                         "content": [
                                           {
                                             "element": "string",
+                                            "content": "hi"
+                                          },
+                                          {
+                                            "element": "string",
                                             "content": "good morning"
+                                          },
+                                          {
+                                            "element": "string",
+                                            "content": "hello"
                                           }
                                         ]
-                                      }
-                                    },
-                                    "content": [
-                                      {
-                                        "element": "string",
-                                        "content": "hi"
                                       },
-                                      {
+                                      "default": {
                                         "element": "string",
                                         "content": "good morning"
-                                      },
-                                      {
-                                        "element": "string",
-                                        "content": "hello"
                                       }
-                                    ]
+                                    },
+                                    "content": {
+                                      "element": "string",
+                                      "content": "hello"
+                                    }
                                   }
                                 }
                               }

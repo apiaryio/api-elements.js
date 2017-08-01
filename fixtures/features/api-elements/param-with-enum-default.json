@@ -54,26 +54,25 @@
                         "value": {
                           "element": "enum",
                           "attributes": {
-                            "default": {
+                            "enumerations": {
                               "element": "array",
                               "content": [
                                 {
                                   "element": "string",
-                                  "content": "A"
+                                  "content": "B"
+                                },
+                                {
+                                  "element": "string",
+                                  "content": "C"
                                 }
                               ]
+                            },
+                            "default": {
+                              "element": "string",
+                              "content": "A"
                             }
                           },
-                          "content": [
-                            {
-                              "element": "string",
-                              "content": "B"
-                            },
-                            {
-                              "element": "string",
-                              "content": "C"
-                            }
-                          ]
+                          "content": null
                         }
                       }
                     },

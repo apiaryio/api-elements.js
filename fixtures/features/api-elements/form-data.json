@@ -147,12 +147,18 @@
                                   },
                                   "value": {
                                     "element": "enum",
-                                    "content": [
-                                      {
-                                        "element": "number",
-                                        "content": 1
+                                    "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "number",
+                                            "content": 1
+                                          }
+                                        ]
                                       }
-                                    ]
+                                    },
+                                    "content": null
                                   }
                                 }
                               },
@@ -176,12 +182,18 @@
                                   },
                                   "value": {
                                     "element": "enum",
-                                    "content": [
-                                      {
-                                        "element": "string",
-                                        "content": "bar"
+                                    "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "string",
+                                            "content": "bar"
+                                          }
+                                        ]
                                       }
-                                    ]
+                                    },
+                                    "content": null
                                   }
                                 }
                               },
@@ -205,12 +217,18 @@
                                   },
                                   "value": {
                                     "element": "enum",
-                                    "content": [
-                                      {
-                                        "element": "string",
-                                        "content": "chocolate-bar"
+                                    "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "string",
+                                            "content": "chocolate-bar"
+                                          }
+                                        ]
                                       }
-                                    ]
+                                    },
+                                    "content": null
                                   }
                                 }
                               }

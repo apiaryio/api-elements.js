@@ -157,6 +157,29 @@
                     "value": {
                       "element": "string",
                       "attributes": {
+                        "sourceMap": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "sourceMap",
+                              "content": [
+                                {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "number",
+                                      "content": 212
+                                    },
+                                    {
+                                      "element": "number",
+                                      "content": 100
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
                         "default": {
                           "element": "string",
                           "attributes": {
@@ -185,29 +208,6 @@
                             }
                           },
                           "content": "desc"
-                        },
-                        "sourceMap": {
-                          "element": "array",
-                          "content": [
-                            {
-                              "element": "sourceMap",
-                              "content": [
-                                {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "number",
-                                      "content": 212
-                                    },
-                                    {
-                                      "element": "number",
-                                      "content": 100
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
                         }
                       },
                       "content": "asc"
@@ -525,46 +525,7 @@
                                   "value": {
                                     "element": "enum",
                                     "attributes": {
-                                      "samples": {
-                                        "element": "array",
-                                        "content": [
-                                          {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "string",
-                                                "attributes": {
-                                                  "sourceMap": {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "sourceMap",
-                                                        "content": [
-                                                          {
-                                                            "element": "array",
-                                                            "content": [
-                                                              {
-                                                                "element": "number",
-                                                                "content": 639
-                                                              },
-                                                              {
-                                                                "element": "number",
-                                                                "content": 16
-                                                              }
-                                                            ]
-                                                          }
-                                                        ]
-                                                      }
-                                                    ]
-                                                  }
-                                                },
-                                                "content": "hello"
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      },
-                                      "default": {
+                                      "enumerations": {
                                         "element": "array",
                                         "content": [
                                           {
@@ -581,11 +542,40 @@
                                                         "content": [
                                                           {
                                                             "element": "number",
-                                                            "content": 666
+                                                            "content": 554
                                                           },
                                                           {
                                                             "element": "number",
-                                                            "content": 21
+                                                            "content": 2
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "content": "hi"
+                                          },
+                                          {
+                                            "element": "string",
+                                            "attributes": {
+                                              "sourceMap": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "sourceMap",
+                                                    "content": [
+                                                      {
+                                                        "element": "array",
+                                                        "content": [
+                                                          {
+                                                            "element": "number",
+                                                            "content": 571
+                                                          },
+                                                          {
+                                                            "element": "number",
+                                                            "content": 12
                                                           }
                                                         ]
                                                       }
@@ -595,8 +585,66 @@
                                               }
                                             },
                                             "content": "good morning"
+                                          },
+                                          {
+                                            "element": "string",
+                                            "attributes": {
+                                              "sourceMap": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "sourceMap",
+                                                    "content": [
+                                                      {
+                                                        "element": "array",
+                                                        "content": [
+                                                          {
+                                                            "element": "number",
+                                                            "content": 598
+                                                          },
+                                                          {
+                                                            "element": "number",
+                                                            "content": 5
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "content": "hello"
                                           }
                                         ]
+                                      },
+                                      "default": {
+                                        "element": "string",
+                                        "attributes": {
+                                          "sourceMap": {
+                                            "element": "array",
+                                            "content": [
+                                              {
+                                                "element": "sourceMap",
+                                                "content": [
+                                                  {
+                                                    "element": "array",
+                                                    "content": [
+                                                      {
+                                                        "element": "number",
+                                                        "content": 666
+                                                      },
+                                                      {
+                                                        "element": "number",
+                                                        "content": 21
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        "content": "good morning"
                                       },
                                       "sourceMap": {
                                         "element": "array",
@@ -622,95 +670,35 @@
                                         ]
                                       }
                                     },
-                                    "content": [
-                                      {
-                                        "element": "string",
-                                        "attributes": {
-                                          "sourceMap": {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "sourceMap",
-                                                "content": [
-                                                  {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "number",
-                                                        "content": 554
-                                                      },
-                                                      {
-                                                        "element": "number",
-                                                        "content": 2
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        "content": "hi"
+                                    "content": {
+                                      "element": "string",
+                                      "attributes": {
+                                        "sourceMap": {
+                                          "element": "array",
+                                          "content": [
+                                            {
+                                              "element": "sourceMap",
+                                              "content": [
+                                                {
+                                                  "element": "array",
+                                                  "content": [
+                                                    {
+                                                      "element": "number",
+                                                      "content": 639
+                                                    },
+                                                    {
+                                                      "element": "number",
+                                                      "content": 16
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
                                       },
-                                      {
-                                        "element": "string",
-                                        "attributes": {
-                                          "sourceMap": {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "sourceMap",
-                                                "content": [
-                                                  {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "number",
-                                                        "content": 571
-                                                      },
-                                                      {
-                                                        "element": "number",
-                                                        "content": 12
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        "content": "good morning"
-                                      },
-                                      {
-                                        "element": "string",
-                                        "attributes": {
-                                          "sourceMap": {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "sourceMap",
-                                                "content": [
-                                                  {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "number",
-                                                        "content": 598
-                                                      },
-                                                      {
-                                                        "element": "number",
-                                                        "content": 5
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        "content": "hello"
-                                      }
-                                    ]
+                                      "content": "hello"
+                                    }
                                   }
                                 }
                               }
