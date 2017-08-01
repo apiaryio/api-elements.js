@@ -1162,7 +1162,7 @@ export default class Parser {
       Type = StringElement;
     }
 
-    let sampleContent = new Type(parameter['x-example']);
+    const sampleContent = new Type(parameter['x-example']);
 
     if (parameter['x-example'] !== undefined && this.generateSourceMap) {
       this.createSourceMap(sampleContent, path.concat(['x-example']));
@@ -1198,16 +1198,13 @@ export default class Parser {
         this.createAnnotation(annotations.VALIDATION_WARNING, path.concat(['default']),
           ('Value of default should be an array'));
       } else {
-        let e;
         const defaultElement = this.minim.toElement(parameter.default);
 
         if (this.generateSourceMap) {
           this.createSourceMap(defaultElement, path.concat(['default']));
         }
 
-        e = defaultElement;
-
-        element.attributes.set('default', e);
+        element.attributes.set('default', defaultElement);
       }
     }
 
