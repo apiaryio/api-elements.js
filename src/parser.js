@@ -1142,7 +1142,7 @@ export default class Parser {
   convertParameterToElement(parameter, path, setAttributes = false) {
     const {
       Array: ArrayElement, Boolean: BooleanElement, Number: NumberElement,
-      String: StringElement,
+      String: StringElement, Element,
     } = this.minim.elements;
 
     let element;
@@ -1162,9 +1162,17 @@ export default class Parser {
       Type = StringElement;
     }
 
+    const sampleContent = new Type(parameter['x-example']);
+
+    if (parameter['x-example'] !== undefined && this.generateSourceMap) {
+      this.createSourceMap(sampleContent, path.concat(['x-example']));
+    }
+
     if (parameter.enum) {
-      element = new ArrayElement();
+      element = new Element();
       element.element = 'enum';
+
+      const enumerations = new ArrayElement();
 
       _.forEach(parameter.enum, (value, index) => {
         const e = new Type();
@@ -1174,33 +1182,13 @@ export default class Parser {
           this.createSourceMap(e, path.concat('enum', index));
         }
 
-        element.content.push(e);
+        enumerations.push(e);
       });
 
-      if (parameter['x-example'] !== undefined) {
-        const sampleElement = new Type();
-        sampleElement.content = parameter['x-example'];
-
-        if (this.generateSourceMap) {
-          this.createSourceMap(sampleElement, path.concat(['x-example']));
-        }
-
-        const samplesElement = new ArrayElement();
-        samplesElement.content.push(sampleElement);
-
-        const e = new ArrayElement();
-        e.content.push(samplesElement);
-
-        element.attributes.set('samples', e);
-      }
+      element.attributes.set('enumerations', enumerations);
+      element.content = parameter['x-example'] ? sampleContent : null;
     } else {
-      let example;
-
-      if (parameter['x-example'] !== undefined) {
-        example = parameter['x-example'];
-      }
-
-      element = new Type(example);
+      element = sampleContent;
     }
 
     // If there is a default, it is set on the member value instead of the member
@@ -1210,21 +1198,13 @@ export default class Parser {
         this.createAnnotation(annotations.VALIDATION_WARNING, path.concat(['default']),
           ('Value of default should be an array'));
       } else {
-        let e;
         const defaultElement = this.minim.toElement(parameter.default);
 
         if (this.generateSourceMap) {
           this.createSourceMap(defaultElement, path.concat(['default']));
         }
 
-        if (parameter.enum) {
-          e = new ArrayElement();
-          e.content.push(defaultElement);
-        } else {
-          e = defaultElement;
-        }
-
-        element.attributes.set('default', e);
+        element.attributes.set('default', defaultElement);
       }
     }
 

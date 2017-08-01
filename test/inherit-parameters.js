@@ -315,7 +315,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'formData', 'op'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: ['op'] });
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: null });
 
         // ensure there is no warning about unsupported "Path-level formData Parameter")
         expect(result.result.annotations.toValue()).to.be.empty;
