@@ -1147,6 +1147,7 @@ export default class Parser {
 
     let element;
     let Type;
+    let example = parameter['x-example'];
 
     // Convert from Swagger types to Minim elements
     if (parameter.type === 'string') {
@@ -1157,12 +1158,19 @@ export default class Parser {
       Type = BooleanElement;
     } else if (parameter.type === 'array') {
       Type = ArrayElement;
+
+      if (example && !Array.isArray(example)) {
+        example = [];
+
+        this.createAnnotation(annotations.VALIDATION_WARNING, path.concat(['x-example']),
+          ('Value of example should be an array'));
+      }
     } else {
       // Default to a string in case we get a type we haven't seen
       Type = StringElement;
     }
 
-    const sampleContent = new Type(parameter['x-example']);
+    const sampleContent = new Type(example);
 
     if (parameter['x-example'] !== undefined && this.generateSourceMap) {
       this.createSourceMap(sampleContent, path.concat(['x-example']));
@@ -1186,7 +1194,7 @@ export default class Parser {
       });
 
       element.attributes.set('enumerations', enumerations);
-      element.content = parameter['x-example'] ? sampleContent : null;
+      element.content = example ? sampleContent : null;
     } else {
       element = sampleContent;
     }
@@ -1208,7 +1216,7 @@ export default class Parser {
       }
     }
 
-    if (parameter.type === 'array' && parameter.items && !parameter['x-example']) {
+    if (parameter.type === 'array' && parameter.items && !example) {
       element.content = [this.convertParameterToElement(parameter.items, (path || []).concat(['items']), true)];
     }
 

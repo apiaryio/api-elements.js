@@ -117,4 +117,25 @@ describe('Parameter to Member converter', () => {
     expect(member.value).to.be.instanceof(minim.elements.Array);
     expect(member.value.toValue()).to.deep.equal(['one', 'two']);
   });
+
+  it('can convert a parameter to a member with array x-example and items but with string example', () => {
+    const parser = new Parser({ minim, source: '' });
+    const parameter = {
+      in: 'query',
+      name: 'tags',
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+      'x-example': "['one', 'two']",
+    };
+
+    parser.result = new minim.elements.ParseResult();
+
+    const member = parser.convertParameterToMember(parameter);
+
+    expect(member.value).to.be.instanceof(minim.elements.Array);
+    expect(member.value.toValue()).to.deep.equal([]);
+    expect(parser.result.toValue()).to.deep.equal(['Value of example should be an array']);
+  });
 });
