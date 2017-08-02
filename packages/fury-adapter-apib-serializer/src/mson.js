@@ -11,7 +11,7 @@ import { indent } from './filters';
 function getTypeAttributes(element, attributes, parent) {
   let typeAttributes = [];
 
-  if (element.element !== 'string' && !!parent) {
+  if (element.element !== 'string' && (!!parent || element.element === 'array')) {
     // String is the default type. Any parentless type is probably a
     // section (# Data Structures or + Attributes) so we don't print
     // the type there either.
@@ -47,7 +47,7 @@ function handleContent(element, spaces, marker) {
       // This is an object type or something similar.
       objectLike = true;
       /* eslint-disable no-use-before-define */
-      renderedContent += handle(item.key.content, item.value, {
+      renderedContent += handle(item.key.toValue(), item.value, {
         parent: element,
         spaces,
         marker,
@@ -125,7 +125,7 @@ function handleDescription(description, element, parent, spaces, marker) {
 
   // Now, depending on the content type, we will recursively handle child
   // elements within objects and arrays.
-  if (element.content && element.content.length) {
+  if (element.content && Array.isArray(element.content) && element.content.length) {
     str += '\n';
 
     if (!parent) {
@@ -173,24 +173,26 @@ function handle(name, element, { parent = null, spaces = 4, marker = '+',
     str += ` ${name}`;
   }
 
-  // Next, comes the optional example value
-  if (element.content && typeof element.content !== 'object') {
-    if (parent && parent.element !== 'array') {
-      str += ':';
+  if (element) {
+    // Next, comes the optional example value
+    if (element.content && typeof element.content !== 'object') {
+      if (parent && parent.element !== 'array') {
+        str += ':';
+      }
+
+      str += ` ${element.content}`;
     }
 
-    str += ` ${element.content}`;
-  }
-
-  // Then the type and attribute information (e.g. required)
-  const attributes = getTypeAttributes(element, attributesElement.attributes,
+    // Then the type and attribute information (e.g. required)
+    const attributes = getTypeAttributes(element, attributesElement.attributes,
                                        parent);
-  if (attributes.length) {
-    str += ` (${attributes.join(', ')})`;
-  }
+    if (attributes.length) {
+      str += ` (${attributes.join(', ')})`;
+    }
 
-  str += handleDescription(attributesElement.description,
-                           element, parent, spaces, marker);
+    str += handleDescription(attributesElement.description,
+                             element, parent, spaces, marker);
+  }
 
   // Return the entire block indented to the correct number of spaces.
   if (initialIndent) {
@@ -204,7 +206,12 @@ function handle(name, element, { parent = null, spaces = 4, marker = '+',
  * Render out a piece of MSON from refract element instances.
  */
 export function renderDataStructure(dataStructure) {
-  const mson = dataStructure.content[0];
+  let mson = dataStructure.content;
+
+  if (Array.isArray(mson)) {
+    mson = mson[0];
+  }
+
   const title = mson.id;
 
   return handle(title.toValue(), mson, {
@@ -214,7 +221,11 @@ export function renderDataStructure(dataStructure) {
 }
 
 export function renderAttributes(dataStructure) {
-  const mson = dataStructure.content[0];
+  let mson = dataStructure.content;
+
+  if (Array.isArray(mson)) {
+    mson = mson[0];
+  }
 
   return handle('Attributes', mson, {
     initialMarker: '+',
