@@ -1,3 +1,9 @@
+# Master
+
+## Bug Fixes
+
+- Adds support for Data Structures produced from the Fury Swagger Adapter.
+
 # 0.4.0 - 2017-06-11
 
 ## Enhancements
