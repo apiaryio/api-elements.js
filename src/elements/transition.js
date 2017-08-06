@@ -9,7 +9,7 @@ export default function (namespace) {
     }
 
     get method() {
-      const transaction = this.transactions.first();
+      const transaction = this.transactions.first;
 
       if (transaction) {
         const request = transaction.request;

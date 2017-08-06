@@ -204,7 +204,7 @@ describe('API description namespace', () => {
     });
 
     it('should have host API metadata', () => {
-      const meta = category.attributes.get('metadata').first();
+      const meta = category.attributes.get('metadata').first;
       expect(meta.key.toValue()).to.equal('HOST');
       expect(meta.value.toValue()).to.equal('https://example.com');
     });
@@ -937,7 +937,7 @@ describe('API description namespace', () => {
     it('should have a computed href', () => {
       expect(transition.computedHref.toValue()).to.equal('/resource');
       transition.href = undefined;
-      transition.transactions.first().request.attributes.set('href', '/foo');
+      transition.transactions.first.request.attributes.set('href', '/foo');
       expect(transition.computedHref.toValue()).to.equal('/foo');
     });
 

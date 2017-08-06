@@ -1,3 +1,7 @@
+# 0.6.0
+
+- Updated to support Minim 0.19.
+
 # 0.5.0
 
 - Update to follow Refract 1.0 / API Elements 1.0.

@@ -8,11 +8,11 @@ export default function (namespace) {
     }
 
     get request() {
-      return this.children.filter(item => item.element === 'httpRequest').first();
+      return this.children.filter(item => item.element === 'httpRequest').first;
     }
 
     get response() {
-      return this.children.filter(item => item.element === 'httpResponse').first();
+      return this.children.filter(item => item.element === 'httpResponse').first;
     }
 
     get authSchemes() {

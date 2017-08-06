@@ -49,11 +49,11 @@ export default function (namespace) {
 
       const result = metadata.children.filter(item => item.key.toValue() === value);
 
-      if (!result.length) {
+      if (result.isEmpty) {
         return undefined;
       }
 
-      return result.first().value;
+      return result.first.value;
     }
   }
 
