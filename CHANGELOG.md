@@ -1,3 +1,10 @@
+# 3.0.0-beta.4
+
+## Breaking
+
+Fury was updated to use [Minim
+0.19](https://github.com/refractproject/minim/releases/tag/v0.19.0).
+
 # 3.0.0-beta.3
 
 ## Enhancements
