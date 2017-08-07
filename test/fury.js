@@ -475,9 +475,9 @@ describe('Refract loader', () => {
     let annotation;
 
     before(() => {
-      const result = fury.load(refractedApi);
-      api = result.first();
-      annotation = result.get(1);
+      const parseResult = fury.load(refractedApi);
+      api = parseResult.api;
+      annotation = parseResult.annotations.first;
     });
 
     it('should contain parse result annotation', () => {
@@ -493,7 +493,7 @@ describe('Refract loader', () => {
     });
 
     it('should contain annotation source map', () => {
-      assert.deepEqual(annotation.attributes.get('sourceMap').first().toValue(), [[0, 10]]);
+      assert.deepEqual(annotation.attributes.get('sourceMap').first.toValue(), [[0, 10]]);
     });
 
     it('should parse a refract API', () => {
