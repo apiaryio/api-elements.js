@@ -248,7 +248,7 @@ describe('Parse result namespace', () => {
     });
 
     it('should have the source map location', () => {
-      expect(sourceMaps.first().toValue()).to.deep.equal([[1, 2]]);
+      expect(sourceMaps.first.toValue()).to.deep.equal([[1, 2]]);
     });
 
     it('should have a convenience method for retrieving source map', () => {
