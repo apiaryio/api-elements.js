@@ -123,7 +123,7 @@ Test Section 1
 
     it('has an annotation element', () => {
       expect(parseResult.annotations).to.have.length(1);
-      const annotation = fury.minim.toRefract(parseResult.annotations.first());
+      const annotation = fury.minim.toRefract(parseResult.annotations.first);
       expect(annotation).to.eql(expectedAnnotation);
     });
 
