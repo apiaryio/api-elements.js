@@ -80,7 +80,7 @@ export default class Parser {
         (err.reason || 'Problem loading the input'));
 
       if (err.mark) {
-        this.result.first().attributes.set('sourceMap', [
+        this.result.first.attributes.set('sourceMap', [
           new SourceMap([[err.mark.position, 1]]),
         ]);
       }
@@ -1114,7 +1114,7 @@ export default class Parser {
     const { Category, Copy } = this.minim.elements;
 
     if (name) {
-      this.group = this.api.find(el => el.element === 'category' && el.classes.contains('resourceGroup') && el.title.toValue() === name).first();
+      this.group = this.api.find(el => el.element === 'category' && el.classes.contains('resourceGroup') && el.title.toValue() === name).first;
 
       if (!this.group) {
         // TODO: Source maps for these groups. The problem is that the location
