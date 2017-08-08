@@ -485,17 +485,21 @@
                                   "value": {
                                     "element": "enum",
                                     "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "number",
+                                            "content": 123
+                                          }
+                                        ]
+                                      },
                                       "default": {
                                         "element": "number",
                                         "content": 456
                                       }
                                     },
-                                    "content": [
-                                      {
-                                        "element": "number",
-                                        "content": 123
-                                      }
-                                    ]
+                                    "content": null
                                   }
                                 }
                               },
@@ -765,17 +769,21 @@
                                   "value": {
                                     "element": "enum",
                                     "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "number",
+                                            "content": 123
+                                          }
+                                        ]
+                                      },
                                       "default": {
                                         "element": "number",
                                         "content": 456
                                       }
                                     },
-                                    "content": [
-                                      {
-                                        "element": "number",
-                                        "content": 123
-                                      }
-                                    ]
+                                    "content": null
                                   }
                                 }
                               },
