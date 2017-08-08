@@ -47,9 +47,13 @@ export default class DataStructureGenerator {
 
   // Generates an enum element for the given enum schema
   generateEnum(schema) {
-    const { Array: ArrayElement } = this.minim.elements;
-    const element = new ArrayElement(schema.enum);
+    const { Array: ArrayElement, Element } = this.minim.elements;
+
+    const element = new Element();
     element.element = 'enum';
+
+    element.attributes.set('enumerations', new ArrayElement(schema.enum));
+
     return element;
   }
 

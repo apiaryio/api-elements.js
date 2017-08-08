@@ -596,12 +596,15 @@ describe('JSON Schema to Data Structure', () => {
 
     expect(dataStructure.element).to.equal('dataStructure');
     expect(dataStructure.content.element).to.equal('enum');
-    expect(dataStructure.content.length).to.equal(3);
-    expect(dataStructure.content.get(0)).to.be.instanceof(StringElement);
-    expect(dataStructure.content.getValue(0)).to.equal('one');
-    expect(dataStructure.content.get(1)).to.be.instanceof(NumberElement);
-    expect(dataStructure.content.getValue(1)).to.equal(2);
-    expect(dataStructure.content.get(2)).to.be.instanceof(NullElement);
+
+    const enumerations = dataStructure.content.attributes.get('enumerations');
+
+    expect(enumerations.length).to.equal(3);
+    expect(enumerations.get(0)).to.be.instanceof(StringElement);
+    expect(enumerations.getValue(0)).to.equal('one');
+    expect(enumerations.get(1)).to.be.instanceof(NumberElement);
+    expect(enumerations.getValue(1)).to.equal(2);
+    expect(enumerations.get(2)).to.be.instanceof(NullElement);
   });
 
   it('produces description containing the schema format', () => {
