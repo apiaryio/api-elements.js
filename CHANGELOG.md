@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-beta.2
+
+### Enhancements
+
+- Support [Fury 3.0.0-beta.4](https://github.com/apiaryio/fury.js/releases/tag/v3.0.0-beta.4).
+
 ## 3.0.0-beta.1
 
 ### Enhancements
