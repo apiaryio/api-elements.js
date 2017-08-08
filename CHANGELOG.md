@@ -1,3 +1,17 @@
+# 0.13.0
+
+- Compatibility with [Minim 0.19](https://github.com/refractproject/minim/releases/tag/v0.19.0)
+  and [Fury 3.0.0-beta.4](https://github.com/apiaryio/fury.js/releases/tag/v3.0.0-beta.4).
+
+## Enhancements
+- Support `allOf` when generating data structures for objects
+
+## Breaking
+- Updated enum to match the new [format](https://github.com/apiaryio/api-elements/pull/28)
+
+## Bug Fixes
+- Add warning when x-example is not of error type when defined as array
+
 # 0.12.1
 
 ## Enhancements

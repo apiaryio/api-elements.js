@@ -21,7 +21,7 @@ export function pushHeader(key, value, payload, parser, fragment) {
   );
 
   if (duplicate.length) {
-    header = duplicate.first();
+    header = duplicate.first;
     header.value = value;
   } else {
     header = new MemberElement(key, value);
