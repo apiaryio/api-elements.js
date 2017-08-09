@@ -82,5 +82,5 @@
   * old js array.
   */
  export function getCopy(element) {
-   return element.children.filter(item => item.element === 'copy').content;
+   return element.children.filter(item => item.element === 'copy').elements;
  }
