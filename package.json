@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apib-serializer",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "API Blueprint serializer for Fury.js",
   "main": "./lib/adapter.js",
   "repository": {
@@ -20,11 +20,11 @@
     "nunjucks": "^2.0.0"
   },
   "peerDependencies": {
-    "fury": "^3.0.0-beta.3"
+    "fury": "^3.0.0-beta.4"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "fury": "^3.0.0-beta.3",
+    "fury": "^3.0.0-beta.4",
     "glob": "^7.1.1",
     "peasant": "^1.1.0"
   },

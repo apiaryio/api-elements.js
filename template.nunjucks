@@ -17,7 +17,7 @@ FORMAT: 1A
   {% if example.headers and example.headers.exclude('Content-Type').length %}
     + Headers
 
-      {% for header in example.headers.exclude('Content-Type').content %}
+      {% for header in example.headers.exclude('Content-Type').elements %}
             {{ header.key.toValue() }}: {{ header.value.toValue() }}{% endfor %}
 
   {% endif %}
@@ -94,7 +94,7 @@ FORMAT: 1A
 + Relation: {{ transition.relation.toValue() }}
 {% endif %}
 
-{% for transaction in transition.transactions.content %}
+{% for transaction in transition.transactions.elements %}
   {{ renderTransaction(transaction) }}
 {% endfor %}
 {% endmacro %}
@@ -128,7 +128,7 @@ FORMAT: 1A
 {% if resource.dataStructure %}
 {{ resource.dataStructure|mson }}
 {% endif %}
-{% for transition in resource.transitions.content %}
+{% for transition in resource.transitions.elements %}
   {{ renderTransition(transition, href) }}
 {% endfor %}
 {% endmacro %}
@@ -164,7 +164,7 @@ FORMAT: 1A
   {# Categories can contain copy (text) elements, other categories, and resources #}
   {% for item in category.content %}
     {% if item.element == 'copy' %}
-{{ item.content }}
+{{ item.toValue() }}
     {% endif %}
     {% if item.element == 'category' and item.classes.contains('resourceGroup') %}
       {{ renderGroup(item) }}
