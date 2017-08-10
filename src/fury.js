@@ -6,6 +6,7 @@ import yaml from 'js-yaml';
 import commander from 'commander';
 import { highlight } from 'cardinal';
 import theme from 'cardinal/themes/tomorrow-night';
+import JSON06Serialiser from 'minim/lib/serialisers/json-0.6';
 import fury from 'fury';
 import swagger from 'fury-adapter-swagger';
 import apiBlueprintParser from 'fury-adapter-apib-parser';
@@ -68,11 +69,19 @@ class FuryCLI {
     }
 
     result.warnings.forEach((annotation) => {
-      process.stderr.write(`warning: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
+      if (annotation.code) {
+        process.stderr.write(`warning: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
+      } else {
+        process.stderr.write(`warning: ${annotation.toValue()}\n`);
+      }
     });
 
     result.errors.forEach((annotation) => {
-      process.stderr.write(`error: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
+      if (annotation.code) {
+        process.stderr.write(`error: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
+      } else {
+        process.stderr.write(`error: ${annotation.toValue()}\n`);
+      }
     });
 
     if (result.errors.length > 0) {
@@ -87,6 +96,16 @@ class FuryCLI {
       this.validateResult(result);
     } else if (this.outputFormat === 'application/vnd.refract.parse-result+yaml') {
       const output = yaml.dump(fury.minim.toRefract(result));
+      this.write(output);
+      this.validateResult(result);
+    } else if (this.outputFormat === 'application/vnd.refract.parse-result+json; version=0.6') {
+      const serialiser = new JSON06Serialiser(fury.minim);
+      const output = JSON.stringify(serialiser.serialise(result), null, 2);
+      this.write(output, true);
+      this.validateResult(result);
+    } else if (this.outputFormat === 'application/vnd.refract.parse-result+yaml; version=0.6') {
+      const serialiser = new JSON06Serialiser(fury.minim);
+      const output = yaml.dump(serialiser.serialise(result));
       this.write(output);
       this.validateResult(result);
     } else {
