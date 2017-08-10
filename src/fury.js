@@ -69,11 +69,19 @@ class FuryCLI {
     }
 
     result.warnings.forEach((annotation) => {
-      process.stderr.write(`warning: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
+      if (annotation.code) {
+        process.stderr.write(`warning: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
+      } else {
+        process.stderr.write(`warning: ${annotation.toValue()}\n`);
+      }
     });
 
     result.errors.forEach((annotation) => {
-      process.stderr.write(`error: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
+      if (annotation.code) {
+        process.stderr.write(`error: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
+      } else {
+        process.stderr.write(`error: ${annotation.toValue()}\n`);
+      }
     });
 
     if (result.errors.length > 0) {

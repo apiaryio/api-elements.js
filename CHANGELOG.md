@@ -8,6 +8,11 @@
   and `application/vnd.refract.parse-result+yaml; version=0.6` were added which
   allows you to serialise to the Refract 0.6 JSON/YAML Serialisation format.
 
+### Bug Fixes
+
+- Prevent fury-cli from erroring when handling annotations that do not contain
+  a code.
+
 ## 0.3.0 - 2017-06-11
 
 - Update to Fury 3.0.0-beta.3 which updates Refract JSON serialisation rules to
