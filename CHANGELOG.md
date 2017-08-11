@@ -1,3 +1,9 @@
+# 0.13.1
+
+## Bug Fixes
+
+- Handle array parameters which contain enumerations.
+
 # 0.13.0
 
 - Compatibility with [Minim 0.19](https://github.com/refractproject/minim/releases/tag/v0.19.0)

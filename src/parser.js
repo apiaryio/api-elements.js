@@ -1183,8 +1183,7 @@ export default class Parser {
       const enumerations = new ArrayElement();
 
       _.forEach(parameter.enum, (value, index) => {
-        const e = new Type();
-        e.content = value;
+        const e = new Type(value);
 
         if (this.generateSourceMap) {
           this.createSourceMap(e, path.concat('enum', index));
