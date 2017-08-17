@@ -1,3 +1,10 @@
+# Master
+
+## Bug Fixes
+
+- Fixes an issue where auth scheme elements are re-used multiple times in
+  a parse result which can cause exceptions when the parse result is frozen.
+
 # 0.13.1
 
 ## Bug Fixes
