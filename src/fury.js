@@ -42,14 +42,11 @@ class FuryCLI {
       generateSourceMap: this.generateSourceMap,
     };
 
-    fury.parse(options, (err, result) => {
-      if (result) {
-        if (this.validate) {
-          this.validateResult(result);
-        } else {
-          this.serialize(result);
-        }
+    const functionName = this.validate ? 'validate' : 'parse';
 
+    fury[functionName](options, (err, result) => {
+      if (result) {
+        this.serialize(result);
         return;
       }
 
@@ -62,10 +59,8 @@ class FuryCLI {
 
   // eslint-disable-next-line class-methods-use-this
   validateResult(result) {
-    process.stdout.write('\n');
-
     if (result.warnings.length > 0 || result.errors.length > 0) {
-      process.stdout.write('\n');
+      process.stderr.write('\n');
     }
 
     result.warnings.forEach((annotation) => {

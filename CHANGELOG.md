@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+
+### Enhancements
+
+- Using validate will not output a minimized parse result
+
 ## 0.4.0
 
 ### Enhancements
