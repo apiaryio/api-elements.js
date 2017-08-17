@@ -32,6 +32,8 @@ function testFixture(description, fixture, generateSourceMap = false) {
         return done(err);
       }
 
+      output.freeze();
+
       // Invoke with the env var GENERATE set to regenerate the fixtures.
       if (process.env.GENERATE) {
         expected = fury.minim.toRefract(output);
