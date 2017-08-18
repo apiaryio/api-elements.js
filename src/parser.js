@@ -778,7 +778,7 @@ export default class Parser {
           // refactor the code below as this is a little weird.
           relevantResponses.null = {};
         } else {
-          this.createTransaction(transition, method, schemes);
+          this.createTransaction(transition, method, schemes.map(element => element.clone()));
         }
       }
 
@@ -786,7 +786,7 @@ export default class Parser {
       _.forEach(relevantResponses, (responseValue, statusCode) => {
         this.handleSwaggerResponse(transition, method, methodValue,
                                    transitionParams, responseValue, statusCode,
-                                   schemes, resourceParams);
+                                   schemes.map(element => element.clone()), resourceParams);
       });
 
       this.handleSwaggerVendorExtensions(transition, methodValue);
