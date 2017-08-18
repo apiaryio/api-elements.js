@@ -1,3 +1,10 @@
+# Master
+
+## Bug Fixes
+
+- HOST metadata was incorrectly included in an attribute called `meta`. The
+  attribute was renamed to `metadata` in API Elements 1.0.
+
 # 0.13.1
 
 ## Bug Fixes
