@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1
+
+### Enhancements
+
+- Added `application/vnd.refract.parse-result+json; version=1.0`
+  and `application/vnd.refract.parse-result+yaml; version=1.0`
+  formats.
+
 ## 0.5.0
 
 ### Enhancements
