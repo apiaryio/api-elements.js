@@ -2,6 +2,8 @@
 
 ## Bug Fixes
 
+- HOST metadata was incorrectly included in an attribute called `meta`. The
+  attribute was renamed to `metadata` in API Elements 1.0.
 - Fixes an issue where auth scheme elements are re-used multiple times in
   a parse result which can cause exceptions when the parse result is frozen.
 

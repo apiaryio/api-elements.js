@@ -348,7 +348,7 @@ export default class Parser {
           hostname = `${this.swagger.schemes[0]}://${hostname}`;
         }
 
-        const meta = [];
+        const metadata = [];
         const member = new MemberElement('HOST', hostname);
 
         member.meta.set('classes', ['user']);
@@ -357,8 +357,8 @@ export default class Parser {
           this.createSourceMap(member, this.path);
         }
 
-        meta.push(member);
-        this.api.attributes.set('meta', meta);
+        metadata.push(member);
+        this.api.attributes.set('metadata', metadata);
 
         return member;
       });
