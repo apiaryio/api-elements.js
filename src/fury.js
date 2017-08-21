@@ -103,6 +103,14 @@ class FuryCLI {
       const output = yaml.dump(serialiser.serialise(result));
       this.write(output);
       this.validateResult(result);
+    } else if (this.outputFormat === 'application/vnd.refract.parse-result+json; version=1.0') {
+      const output = JSON.stringify(fury.minim.serialiser.serialise(result), null, 2);
+      this.write(output, true);
+      this.validateResult(result);
+    } else if (this.outputFormat === 'application/vnd.refract.parse-result+yaml; version=1.0') {
+      const output = yaml.dump(fury.minim.serialiser.serialise(result));
+      this.write(output, true);
+      this.validateResult(result);
     } else {
       fury.serialize({ api: result.api, mediaType: this.outputFormat }, (err, content) => {
         if (err) {
