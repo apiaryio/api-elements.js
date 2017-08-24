@@ -1174,10 +1174,23 @@ export default class Parser {
     return types[parameter.type];
   }
 
-  createAnnotationsFromSchemaValidation(error) {
-    error.details.forEach((detail) => {
-      this.createAnnotation(annotations.VALIDATION_WARNING, this.path, detail.message);
-    });
+  convertValueToElement(value, schema) {
+    const validator = new ZSchema();
+    let element;
+
+    if (validator.validate(value, schema)) {
+      element = this.minim.toElement(value);
+
+      if (this.generateSourceMap) {
+        this.createSourceMap(element, this.path);
+      }
+    } else {
+      validator.getLastError().details.forEach((detail) => {
+        this.createAnnotation(annotations.VALIDATION_WARNING, this.path, detail.message);
+      });
+    }
+
+    return element;
   }
 
   // Convert a Swagger parameter into a Refract element.
@@ -1186,20 +1199,15 @@ export default class Parser {
 
     const Type = this.typeForParameter(parameter);
     const schema = this.schemaForParameterValue(parameter);
-    const validator = new ZSchema();
 
     let element = new Type();
 
     if (parameter['x-example'] !== undefined) {
       this.withPath('x-example', () => {
-        if (validator.validate(parameter['x-example'], schema)) {
-          element = new Type(parameter['x-example']);
+        const value = this.convertValueToElement(parameter['x-example'], schema);
 
-          if (this.generateSourceMap) {
-            this.createSourceMap(element, this.path);
-          }
-        } else {
-          this.createAnnotationsFromSchemaValidation(validator.getLastError());
+        if (value) {
+          element = value;
         }
       });
     }
@@ -1216,19 +1224,13 @@ export default class Parser {
       const enumerations = new ArrayElement();
 
       parameter.enum.forEach((value, index) => {
-        const enumeration = new Type(value);
+        this.withPath('enum', index, () => {
+          const enumeration = this.convertValueToElement(value, schema);
 
-        if (validator.validate(value, schema)) {
-          if (this.generateSourceMap) {
-            this.createSourceMap(enumeration, this.path.concat('enum', index));
+          if (enumeration) {
+            enumerations.push(enumeration);
           }
-
-          enumerations.push(enumeration);
-        } else {
-          this.withPath('enum', index, () => {
-            this.createAnnotationsFromSchemaValidation(validator.getLastError());
-          });
-        }
+        });
       });
 
       element.attributes.set('enumerations', enumerations);
@@ -1236,16 +1238,10 @@ export default class Parser {
 
     if (parameter.default) {
       this.withPath('default', () => {
-        if (validator.validate(parameter.default, schema)) {
-          const defaultElement = new Type(parameter.default);
+        const value = this.convertValueToElement(parameter.default, schema);
 
-          if (this.generateSourceMap) {
-            this.createSourceMap(defaultElement, this.path);
-          }
-
-          element.attributes.set('default', defaultElement);
-        } else {
-          this.createAnnotationsFromSchemaValidation(validator.getLastError());
+        if (value) {
+          element.attributes.set('default', value);
         }
       });
     }
