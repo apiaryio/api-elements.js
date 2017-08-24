@@ -171,4 +171,28 @@ describe('Parameter to Member converter', () => {
     expect(parser.result.get(0)).to.be.instanceof(Annotation);
     expect(parser.result.toValue()).to.deep.equal(['Expected type string but found type integer']);
   });
+
+  it('coerces an integer value that does not match string parameter type', () => {
+    const parser = new Parser({ minim, source: '' });
+    parser.result = new minim.elements.ParseResult();
+    const parameter = parser.convertParameterToElement({
+      type: 'string',
+      'x-example': 5,
+    });
+
+    expect(parser.result.get(0)).to.be.instanceof(Annotation);
+    expect(parameter.toValue()).to.equal('5');
+  });
+
+  it('coerces an boolean value that does not match string parameter type', () => {
+    const parser = new Parser({ minim, source: '' });
+    parser.result = new minim.elements.ParseResult();
+    const parameter = parser.convertParameterToElement({
+      type: 'string',
+      'x-example': true,
+    });
+
+    expect(parser.result.get(0)).to.be.instanceof(Annotation);
+    expect(parameter.toValue()).to.equal('true');
+  });
 });

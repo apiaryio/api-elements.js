@@ -1188,6 +1188,13 @@ export default class Parser {
       validator.getLastError().details.forEach((detail) => {
         this.createAnnotation(annotations.VALIDATION_WARNING, this.path, detail.message);
       });
+
+      // Coerce parameter to correct type
+      if (schema.type === 'string') {
+        if (typeof value === 'number' || typeof value === 'boolean') {
+          element = new this.minim.elements.String(String(value));
+        }
+      }
     }
 
     return element;
