@@ -1272,10 +1272,6 @@ export default class Parser {
       if (parameter.required) {
         element.attributes.set('typeAttributes', ['required']);
       }
-
-      if (parameter.default !== undefined) {
-        element.attributes.set('default', parameter.default);
-      }
     }
 
     return element;
