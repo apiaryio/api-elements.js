@@ -1,3 +1,6 @@
+// Chai uses unused expressions for expect
+/* eslint-disable no-unused-expressions */
+
 import { expect } from 'chai';
 import minimModule from 'minim';
 import minimParseResult from 'minim-parse-result';
@@ -5,6 +8,8 @@ import Parser from '../src/parser';
 
 const minim = minimModule.namespace()
   .use(minimParseResult);
+
+const Annotation = minim.elements.Annotation;
 
 describe('Parameter to Member converter', () => {
   it('can convert a parameter to a member with x-example', () => {
@@ -69,8 +74,12 @@ describe('Parameter to Member converter', () => {
     const member = parser.convertParameterToMember(parameter);
 
     expect(member.value).to.be.instanceof(minim.elements.Array);
-    expect(member.value.toValue()).to.deep.equal([]);
-    expect(parser.result.toValue()).to.deep.equal(['Value of example should be an array']);
+
+    expect(member.value.length).to.equal(1);
+    expect(member.value.get(0)).to.be.instanceof(minim.elements.String);
+    expect(member.value.get(0).toValue()).to.be.null;
+
+    expect(parser.result.toValue()).to.deep.equal(['Expected type array but found type string']);
   });
 
   it('can convert a parameter with enum values to a member with enumerations', () => {
@@ -110,5 +119,56 @@ describe('Parameter to Member converter', () => {
 
     expect(enumerations).to.be.instanceof(minim.elements.Array);
     expect(enumerations.toValue()).to.deep.equal([['hello']]);
+  });
+
+  it('creates a warning when example does not match parameter type', () => {
+    const parser = new Parser({ minim, source: '' });
+    parser.result = new minim.elements.ParseResult();
+    parser.convertParameterToMember({
+      type: 'string',
+      'x-example': 5,
+    });
+
+    expect(parser.result.get(0)).to.be.instanceof(Annotation);
+    expect(parser.result.toValue()).to.deep.equal(['Expected type string but found type integer']);
+  });
+
+  it('creates a warning when default does not match parameter type', () => {
+    const parser = new Parser({ minim, source: '' });
+    parser.result = new minim.elements.ParseResult();
+    parser.convertParameterToMember({
+      type: 'string',
+      default: 5,
+    });
+
+    expect(parser.result.get(0)).to.be.instanceof(Annotation);
+    expect(parser.result.toValue()).to.deep.equal(['Expected type string but found type integer']);
+  });
+
+  it('creates a warning when enum type does not match parameter type', () => {
+    const parser = new Parser({ minim, source: '' });
+    parser.result = new minim.elements.ParseResult();
+    parser.convertParameterToMember({
+      type: 'string',
+      enum: [5],
+    });
+
+    expect(parser.result.get(0)).to.be.instanceof(Annotation);
+    expect(parser.result.toValue()).to.deep.equal(['Expected type string but found type integer']);
+  });
+
+  it('creates a warning when example does not match items parameter type', () => {
+    const parser = new Parser({ minim, source: '' });
+    parser.result = new minim.elements.ParseResult();
+    parser.convertParameterToMember({
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+      'x-example': [5],
+    });
+
+    expect(parser.result.get(0)).to.be.instanceof(Annotation);
+    expect(parser.result.toValue()).to.deep.equal(['Expected type string but found type integer']);
   });
 });

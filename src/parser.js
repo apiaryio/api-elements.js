@@ -4,6 +4,7 @@ import _ from 'lodash';
 import yaml from 'js-yaml';
 import typer from 'media-typer';
 import SwaggerParser from 'swagger-parser';
+import ZSchema from 'z-schema';
 import annotations from './annotations';
 import { bodyFromSchema, bodyFromFormParameter } from './generator';
 import uriTemplate from './uri-template';
@@ -1138,86 +1139,118 @@ export default class Parser {
     }
   }
 
-  // Convert a Swagger parameter into a Refract element.
-  convertParameterToElement(parameter, setAttributes = false) {
-    const {
-      Array: ArrayElement, Boolean: BooleanElement, Number: NumberElement,
-      String: StringElement, Element,
-    } = this.minim.elements;
+  /* eslint-disable class-methods-use-this */
+  schemaForParameterValue(parameter) {
+    const schema = {
+      type: parameter.type,
+    };
 
-    let element;
-    let Type;
-    let example = parameter['x-example'];
-
-    // Convert from Swagger types to Minim elements
-    if (parameter.type === 'string') {
-      Type = StringElement;
-    } else if (parameter.type === 'integer' || parameter.type === 'number') {
-      Type = NumberElement;
-    } else if (parameter.type === 'boolean') {
-      Type = BooleanElement;
-    } else if (parameter.type === 'array') {
-      Type = ArrayElement;
-
-      if (example && !Array.isArray(example)) {
-        example = [];
-
-        this.createAnnotation(annotations.VALIDATION_WARNING, this.path.concat(['x-example']),
-          ('Value of example should be an array'));
-      }
-    } else {
-      // Default to a string in case we get a type we haven't seen
-      Type = StringElement;
+    if (schema.type === 'integer') {
+      schema.type = 'number';
     }
 
-    const sampleContent = new Type(example);
+    if (parameter.items) {
+      schema.items = parameter.items;
+    }
 
-    if (parameter['x-example'] !== undefined && this.generateSourceMap) {
-      this.createSourceMap(sampleContent, this.path.concat(['x-example']));
+    return schema;
+  }
+
+  typeForParameter(parameter) {
+    const {
+      Array: ArrayElement, Boolean: BooleanElement, Number: NumberElement,
+      String: StringElement,
+    } = this.minim.elements;
+
+    const types = {
+      string: StringElement,
+      number: NumberElement,
+      integer: NumberElement,
+      boolean: BooleanElement,
+      array: ArrayElement,
+      file: StringElement,
+    };
+
+    return types[parameter.type];
+  }
+
+  createAnnotationsFromSchemaValidation(error) {
+    error.details.forEach((detail) => {
+      this.createAnnotation(annotations.VALIDATION_WARNING, this.path, detail.message);
+    });
+  }
+
+  // Convert a Swagger parameter into a Refract element.
+  convertParameterToElement(parameter, setAttributes = false) {
+    const { Element, Array: ArrayElement } = this.minim.elements;
+
+    const Type = this.typeForParameter(parameter);
+    const schema = this.schemaForParameterValue(parameter);
+    const validator = new ZSchema();
+
+    let element = new Type();
+
+    if (parameter['x-example'] !== undefined) {
+      this.withPath('x-example', () => {
+        if (validator.validate(parameter['x-example'], schema)) {
+          element = new Type(parameter['x-example']);
+
+          if (this.generateSourceMap) {
+            this.createSourceMap(element, this.path);
+          }
+        } else {
+          this.createAnnotationsFromSchemaValidation(validator.getLastError());
+        }
+      });
     }
 
     if (parameter.enum) {
+      const example = element;
       element = new Element();
       element.element = 'enum';
 
+      if (example.content) {
+        element.content = example;
+      }
+
       const enumerations = new ArrayElement();
 
-      _.forEach(parameter.enum, (value, index) => {
-        const e = new Type(value);
+      parameter.enum.forEach((value, index) => {
+        const enumeration = new Type(value);
 
-        if (this.generateSourceMap) {
-          this.createSourceMap(e, this.path.concat('enum', index));
+        if (validator.validate(value, schema)) {
+          if (this.generateSourceMap) {
+            this.createSourceMap(enumeration, this.path.concat('enum', index));
+          }
+
+          enumerations.push(enumeration);
+        } else {
+          this.withPath('enum', index, () => {
+            this.createAnnotationsFromSchemaValidation(validator.getLastError());
+          });
         }
-
-        enumerations.push(e);
       });
 
       element.attributes.set('enumerations', enumerations);
-      element.content = example ? sampleContent : null;
-    } else {
-      element = sampleContent;
     }
 
-    // If there is a default, it is set on the member value instead of the member
-    // element itself because the default value applies to the value.
     if (parameter.default) {
       this.withPath('default', () => {
-        if (parameter.type === 'array' && !Array.isArray(parameter.default)) {
-          this.createAnnotation(annotations.VALIDATION_WARNING, this.path,
-            ('Value of default should be an array'));
-        } else {
-          const defaultElement = this.minim.toElement(parameter.default);
+        if (validator.validate(parameter.default, schema)) {
+          const defaultElement = new Type(parameter.default);
 
           if (this.generateSourceMap) {
             this.createSourceMap(defaultElement, this.path);
           }
 
           element.attributes.set('default', defaultElement);
+        } else {
+          this.createAnnotationsFromSchemaValidation(validator.getLastError());
         }
       });
     }
 
-    if (parameter.type === 'array' && parameter.items && !example) {
+    if (parameter.type === 'array' && parameter.items && element.content.length === 0) {
       this.withPath('items', () => {
         element.content = [this.convertParameterToElement(parameter.items, true)];
       });

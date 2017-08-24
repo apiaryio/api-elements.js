@@ -23,7 +23,8 @@
     "lodash": "^4.15.0",
     "swagger-parser": "^3.3.0",
     "yaml-js": "^0.1.5",
-    "media-typer": "^0.3.0"
+    "media-typer": "^0.3.0",
+    "z-schema": "^3.16.1"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.4"
