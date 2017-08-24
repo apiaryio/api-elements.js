@@ -323,6 +323,20 @@ describe('JSON Schema to Data Structure', () => {
     });
   });
 
+  context('integer schema', () => {
+    it('produces number element from integer type', () => {
+      const schema = {
+        type: 'integer',
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(NumberElement);
+      expect(dataStructure.content.content).to.be.null;
+    });
+  });
+
   context('object schema', () => {
     it('produces object data structure from object type', () => {
       const schema = {
