@@ -1,3 +1,9 @@
+# Master
+
+## Bug Fixes
+
+- Data Structure generation will now support integer JSON Schema type.
+
 # 0.13.2
 
 ## Bug Fixes
