@@ -191,7 +191,7 @@
           ]
         }
       },
-      "content": "Value of default should be an array"
+      "content": "Expected type array but found type string"
     }
   ]
 }
