@@ -5,6 +5,7 @@
 - Parameter default, example and enumerations values are now validated against
   the parameter type. Invalid values will emit warnings and be discarded, this
   resolves further problems when handling the invalid values.
+- Data Structure generation will now support integer JSON Schema type.
 
 # 0.13.2
 

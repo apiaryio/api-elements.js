@@ -176,6 +176,7 @@ export default class DataStructureGenerator {
       boolean: BooleanElement,
       string: StringElement,
       number: NumberElement,
+      integer: NumberElement,
       null: NullElement,
     };
 
