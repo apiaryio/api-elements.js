@@ -8,8 +8,6 @@ schemes:
 - http
 securityDefinitions: {}
 security: []
-externalDocs:
-  url: https://docs.example.com/
 paths:
   /foo:
     parameters:
@@ -17,8 +15,6 @@ paths:
         in: body
         schema: {}
     get:
-      externalDocs:
-        url: https://docs.example.com/
       responses:
         200:
           description: Test

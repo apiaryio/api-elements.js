@@ -117,11 +117,11 @@
                           "content": [
                             {
                               "element": "number",
-                              "content": 192
+                              "content": 145
                             },
                             {
                               "element": "number",
-                              "content": 326
+                              "content": 267
                             }
                           ]
                         }
@@ -157,11 +157,11 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 276
+                                          "content": 229
                                         },
                                         {
                                           "element": "number",
-                                          "content": 242
+                                          "content": 183
                                         }
                                       ]
                                     }
@@ -203,7 +203,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 261
+                                          "content": 214
                                         },
                                         {
                                           "element": "number",
@@ -240,7 +240,7 @@
                                           "content": [
                                             {
                                               "element": "number",
-                                              "content": 430
+                                              "content": 324
                                             },
                                             {
                                               "element": "number",
@@ -280,7 +280,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 365
+                                          "content": 259
                                         },
                                         {
                                           "element": "number",
@@ -311,7 +311,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 380
+                                          "content": 274
                                         },
                                         {
                                           "element": "number",
@@ -351,7 +351,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 430
+                                          "content": 324
                                         },
                                         {
                                           "element": "number",
@@ -487,133 +487,7 @@
                   "content": [
                     {
                       "element": "number",
-                      "content": 136
-                    },
-                    {
-                      "element": "number",
-                      "content": 47
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "External documentation is not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        },
-        "links": {
-          "element": "array",
-          "content": [
-            {
-              "element": "link",
-              "attributes": {
-                "relation": {
-                  "element": "string",
-                  "content": "origin"
-                },
-                "href": {
-                  "element": "string",
-                  "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-                }
-              },
-              "content": []
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "code": {
-          "element": "number",
-          "content": 3
-        },
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "content": 287
-                    },
-                    {
-                      "element": "number",
-                      "content": 59
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "External documentation is not yet supported"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        },
-        "links": {
-          "element": "array",
-          "content": [
-            {
-              "element": "link",
-              "attributes": {
-                "relation": {
-                  "element": "string",
-                  "content": "origin"
-                },
-                "href": {
-                  "element": "string",
-                  "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-                }
-              },
-              "content": []
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "code": {
-          "element": "number",
-          "content": 3
-        },
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "content": 481
+                      "content": 375
                     },
                     {
                       "element": "number",
