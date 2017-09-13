@@ -8,7 +8,7 @@ import ZSchema from 'z-schema';
 import annotations from './annotations';
 import { bodyFromSchema, bodyFromFormParameter } from './generator';
 import uriTemplate from './uri-template';
-import { origin } from './link';
+import { baseLink, origin } from './link';
 import { pushHeader, pushHeaderObject } from './headers';
 import Ast from './ast';
 import DataStructureGenerator from './schema';
@@ -173,10 +173,7 @@ export default class Parser {
         this.handleSwaggerHost();
         this.handleSwaggerAuth();
 
-        if (swagger.externalDocs) {
-          this.createAnnotation(annotations.DATA_LOST, ['externalDocs'],
-            'External documentation is not yet supported');
-        }
+        this.handleExternalDocs(this.api, swagger.externalDocs);
 
         this.validateProduces(this.swagger.produces);
         this.validateConsumes(this.swagger.consumes);
@@ -294,6 +291,18 @@ export default class Parser {
     this.path = this.path.slice(0, args[0]);
     this.withPath(...args.slice(1));
     this.path = original;
+  }
+
+  handleExternalDocs(element, docs) {
+    if (!docs) {
+      return;
+    }
+
+    baseLink(element, this, 'help', {
+      description: docs.description,
+      url: docs.url,
+      path: this.path.concat(['externalDocs']),
+    });
   }
 
   // Converts the Swagger title and description
@@ -703,12 +712,7 @@ export default class Parser {
       this.validateProduces(methodValue.produces);
       this.validateConsumes(methodValue.consumes);
 
-      if (methodValue.externalDocs) {
-        this.withPath('externalDocs', (path) => {
-          this.createAnnotation(annotations.DATA_LOST, path,
-          'External documentation is not yet supported');
-        });
-      }
+      this.handleExternalDocs(transition, methodValue.externalDocs);
 
       const transitionParams = methodValue.parameters || [];
 
@@ -1127,10 +1131,11 @@ export default class Parser {
 
         if (this.swagger.tags && _.isArray(this.swagger.tags)) {
           _.forEach(this.swagger.tags, (tag) => {
-            // TODO: Check for external docs here?
             if (tag.name === name && tag.description) {
               this.group.content.push(new Copy(tag.description));
             }
+
+            this.handleExternalDocs(this.group, tag.externalDocs);
           });
         }
 
@@ -1369,9 +1374,9 @@ export default class Parser {
 
   // Create a Refract asset element containing JSON Schema and push into payload
   pushSchemaAsset(schema, payload, path) {
+    let handledSchema = false;
     let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
     actualSchema = _.omitBy(actualSchema, isExtension);
-    let handledSchema = false;
 
     try {
       const Asset = this.minim.getElementClass('asset');
@@ -1383,6 +1388,8 @@ export default class Parser {
       if (this.generateSourceMap) {
         this.createSourceMap(schemaAsset, path);
       }
+
+      this.handleExternalDocs(schemaAsset, schema.externalDocs);
 
       payload.content.push(schemaAsset);
       handledSchema = true;
