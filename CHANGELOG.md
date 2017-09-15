@@ -1,3 +1,10 @@
+# 0.13.4
+
+## Enhancements
+
+- Added support for `externalDocs`.
+- Parser will now give warning about unsupported collection formats in parameters.
+
 # 0.13.3
 
 ## Bug Fixes
