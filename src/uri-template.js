@@ -5,7 +5,7 @@ function escapeUriTemplateVariable(variable) {
     .replace(/[-.!~*'()]/g, c => `%${c.charCodeAt(0).toString(16)}`);
 }
 
-export default function buildUriTemplate(basePath, href, pathObjectParams = [], queryParams = []) {
+export default function (basePath, href, pathObjectParams = [], queryParams = []) {
   const parameterNames = _.chain(pathObjectParams)
     .concat(queryParams)
     .filter(parameter => parameter.in === 'query')

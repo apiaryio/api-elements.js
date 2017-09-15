@@ -947,11 +947,13 @@ export default class Parser {
           'Arrays in form parameters are not fully supported yet');
       return;
     }
+
     if (param.type === 'file') {
       this.createAnnotation(annotations.DATA_LOST, this.path,
           'Files in form parameters are not fully supported yet');
       return;
     }
+
     if (param.allowEmptyValue) {
       this.createAnnotation(annotations.DATA_LOST, this.path,
           'The allowEmptyValue flag is not fully supported yet');
@@ -1359,6 +1361,13 @@ export default class Parser {
     _.forEach(params, (parameter, index) => {
       this.withPath('parameters', index, () => {
         let member;
+        const format = parameter.collectionFormat || 'csv';
+
+        // Adding a warning if format is not supported
+        if (!['multi', 'csv'].includes(format)) {
+          this.createAnnotation(annotations.DATA_LOST, this.path,
+            `Parameters of collection format '${format}' are not supported`);
+        }
 
         if (parameter.in === 'query' || parameter.in === 'path') {
           member = this.convertParameterToMember(parameter);
