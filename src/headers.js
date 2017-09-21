@@ -49,6 +49,7 @@ export function pushHeaderObject(key, header, payload, parser) {
   let value = '';
 
   if (header.type === 'array') {
+    // TODO: Support collectionFormat once arrays are supported
     parser.createAnnotation(annotations.DATA_LOST, parser.path,
       'Headers of type array are not yet supported');
 
