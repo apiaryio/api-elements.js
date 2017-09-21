@@ -1,0 +1,28 @@
+swagger: '2.0'
+info:
+  title: External Docs
+  version: '1.0'
+externalDocs:
+  description: API help center
+  url: http://help.com
+tags:
+  - name: Group1
+    externalDocs:
+      description: API resource group help center
+      url: http://help.com
+paths:
+  '/test':
+    get:
+      tags:
+        - Group1
+      externalDocs:
+        description: API method help center
+        url: http://help.com
+      responses:
+        200:
+          description: Test description
+          schema:
+            type: string
+            externalDocs:
+              description: API method response schema help center
+              url: http://help.com
