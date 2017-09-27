@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "description": "Swagger 2.0 parser for Fury.js",
   "main": "./lib/adapter.js",
   "tonicExampleFilename": "tonic-example.js",
@@ -37,7 +37,7 @@
     "minim": "^0.19.0",
     "minim-parse-result": "^0.8.0",
     "peasant": "^1.1.0",
-    "swagger-zoo": "2.6.0"
+    "swagger-zoo": "2.7.0"
   },
   "engines": {
     "node": ">=4"
