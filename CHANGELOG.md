@@ -1,3 +1,14 @@
+# 0.13.5
+
+## Bug Fixes
+
+- Request and response pairs are now created for all combinations of produces,
+  and consumes content types. This includes multiple JSON content types which
+  we're previously discarded and non-JSON content types.
+- `multipart/form-data` consumes type is no longer replaced by
+  `application/x-www-form-urlencoded` when formData parameters are provided.
+  [#96](https://github.com/apiaryio/fury-adapter-swagger/issues/96)
+
 # 0.13.4
 
 ## Enhancements

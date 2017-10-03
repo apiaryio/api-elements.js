@@ -22,6 +22,9 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
         // Form data
         // TODO: check for arrays etc.
         body = querystring.stringify(body);
+      } else if (contentType === 'multipart/form-data') {
+        // TODO: Unimplemented
+        return null;
       } else {
         // JSON
         body = JSON.stringify(body, null, 2);
