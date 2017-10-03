@@ -31,7 +31,7 @@
                         },
                         {
                           "element": "number",
-                          "content": 21
+                          "content": 37
                         }
                       ]
                     }
@@ -40,7 +40,7 @@
               ]
             }
           },
-          "content": "Example Header"
+          "content": "Response example with Produces"
         }
       },
       "content": [
@@ -61,11 +61,11 @@
                           "content": [
                             {
                               "element": "number",
-                              "content": 71
+                              "content": 122
                             },
                             {
                               "element": "number",
-                              "content": 463
+                              "content": 163
                             }
                           ]
                         }
@@ -101,11 +101,194 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 84
+                                          "content": 135
                                         },
                                         {
                                           "element": "number",
-                                          "content": 450
+                                          "content": 150
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "GET"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#produces-accept"
+                                        }
+                                      },
+                                      "content": []
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Accept"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/hal+json"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#produces-content-type"
+                                        }
+                                      },
+                                      "content": []
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/hal+json"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 165
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 120
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "200"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 180
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 29
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Test Description"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 135
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 150
                                         }
                                       ]
                                     }
@@ -133,11 +316,11 @@
                                           "content": [
                                             {
                                               "element": "number",
-                                              "content": 84
+                                              "content": 135
                                             },
                                             {
                                               "element": "number",
-                                              "content": 450
+                                              "content": 150
                                             }
                                           ]
                                         }
@@ -182,7 +365,7 @@
                                           "content": [
                                             {
                                               "element": "number",
-                                              "content": 491
+                                              "content": 242
                                             },
                                             {
                                               "element": "number",
@@ -205,151 +388,6 @@
                                   "content": "application/json"
                                 }
                               }
-                            },
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": {
-                                  "element": "string",
-                                  "attributes": {
-                                    "sourceMap": {
-                                      "element": "array",
-                                      "content": [
-                                        {
-                                          "element": "sourceMap",
-                                          "content": [
-                                            {
-                                              "element": "array",
-                                              "content": [
-                                                {
-                                                  "element": "number",
-                                                  "content": 213
-                                                },
-                                                {
-                                                  "element": "number",
-                                                  "content": 31
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  },
-                                  "content": "Header description"
-                                }
-                              },
-                              "attributes": {
-                                "sourceMap": {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "sourceMap",
-                                      "content": [
-                                        {
-                                          "element": "array",
-                                          "content": [
-                                            {
-                                              "element": "number",
-                                              "content": 190
-                                            },
-                                            {
-                                              "element": "number",
-                                              "content": 94
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "Accepts"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": ""
-                                }
-                              }
-                            },
-                            {
-                              "element": "member",
-                              "attributes": {
-                                "sourceMap": {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "sourceMap",
-                                      "content": [
-                                        {
-                                          "element": "array",
-                                          "content": [
-                                            {
-                                              "element": "number",
-                                              "content": 284
-                                            },
-                                            {
-                                              "element": "number",
-                                              "content": 75
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "X-Test1"
-                                },
-                                "value": {
-                                  "element": "number",
-                                  "content": 100
-                                }
-                              }
-                            },
-                            {
-                              "element": "member",
-                              "attributes": {
-                                "sourceMap": {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "sourceMap",
-                                      "content": [
-                                        {
-                                          "element": "array",
-                                          "content": [
-                                            {
-                                              "element": "number",
-                                              "content": 359
-                                            },
-                                            {
-                                              "element": "number",
-                                              "content": 110
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "X-Test2"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "abc"
-                                }
-                              }
                             }
                           ]
                         },
@@ -367,11 +405,11 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 114
+                                          "content": 165
                                         },
                                         {
                                           "element": "number",
-                                          "content": 420
+                                          "content": 120
                                         }
                                       ]
                                     }
@@ -398,7 +436,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 129
+                                          "content": 180
                                         },
                                         {
                                           "element": "number",
@@ -438,7 +476,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 491
+                                          "content": 242
                                         },
                                         {
                                           "element": "number",

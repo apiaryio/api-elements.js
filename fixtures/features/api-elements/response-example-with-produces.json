@@ -15,7 +15,7 @@
         },
         "title": {
           "element": "string",
-          "content": "Produces Header"
+          "content": "Response example with Produces"
         }
       },
       "content": [
@@ -74,7 +74,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/json"
+                                  "content": "application/hal+json"
                                 }
                               }
                             }
@@ -119,7 +119,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/json"
+                                  "content": "application/hal+json"
                                 }
                               }
                             }
@@ -133,7 +133,7 @@
                       "content": [
                         {
                           "element": "copy",
-                          "content": "Test description"
+                          "content": "Test Description"
                         }
                       ]
                     }
@@ -154,151 +154,6 @@
                           "content": [
                             {
                               "element": "member",
-                              "meta": {
-                                "links": {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "link",
-                                      "attributes": {
-                                        "relation": {
-                                          "element": "string",
-                                          "content": "inferred"
-                                        },
-                                        "href": {
-                                          "element": "string",
-                                          "content": "http://docs.apiary.io/validations/swagger#produces-accept"
-                                        }
-                                      },
-                                      "content": []
-                                    }
-                                  ]
-                                }
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "Accept"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "application/xml"
-                                }
-                              }
-                            }
-                          ]
-                        }
-                      },
-                      "content": []
-                    },
-                    {
-                      "element": "httpResponse",
-                      "attributes": {
-                        "headers": {
-                          "element": "httpHeaders",
-                          "content": [
-                            {
-                              "element": "member",
-                              "meta": {
-                                "links": {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "link",
-                                      "attributes": {
-                                        "relation": {
-                                          "element": "string",
-                                          "content": "inferred"
-                                        },
-                                        "href": {
-                                          "element": "string",
-                                          "content": "http://docs.apiary.io/validations/swagger#produces-content-type"
-                                        }
-                                      },
-                                      "content": []
-                                    }
-                                  ]
-                                }
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "Content-Type"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "application/xml"
-                                }
-                              }
-                            }
-                          ]
-                        },
-                        "statusCode": {
-                          "element": "string",
-                          "content": "200"
-                        }
-                      },
-                      "content": [
-                        {
-                          "element": "copy",
-                          "content": "Test description"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "element": "resource",
-          "attributes": {
-            "href": {
-              "element": "string",
-              "content": "/test-with-override"
-            }
-          },
-          "content": [
-            {
-              "element": "transition",
-              "content": [
-                {
-                  "element": "httpTransaction",
-                  "content": [
-                    {
-                      "element": "httpRequest",
-                      "attributes": {
-                        "method": {
-                          "element": "string",
-                          "content": "GET"
-                        },
-                        "headers": {
-                          "element": "httpHeaders",
-                          "content": [
-                            {
-                              "element": "member",
-                              "meta": {
-                                "links": {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "link",
-                                      "attributes": {
-                                        "relation": {
-                                          "element": "string",
-                                          "content": "inferred"
-                                        },
-                                        "href": {
-                                          "element": "string",
-                                          "content": "http://docs.apiary.io/validations/swagger#produces-accept"
-                                        }
-                                      },
-                                      "content": []
-                                    }
-                                  ]
-                                }
-                              },
                               "content": {
                                 "key": {
                                   "element": "string",
@@ -330,7 +185,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "text/plain"
+                                  "content": "application/json"
                                 }
                               }
                             }
@@ -344,7 +199,22 @@
                       "content": [
                         {
                           "element": "copy",
-                          "content": "Test description when overriding produce content type"
+                          "content": "Test Description"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            }
+                          },
+                          "content": "{\n  \"status\": \"ok\"\n}"
                         }
                       ]
                     }

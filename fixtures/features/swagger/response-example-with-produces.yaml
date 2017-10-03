@@ -1,0 +1,15 @@
+swagger: '2.0'
+info:
+  title: Response example with Produces
+  version: '1.0'
+produces:
+  - application/hal+json
+paths:
+  '/test':
+    get:
+      responses:
+        200:
+          description: Test Description
+          examples:
+            application/json:
+              status: ok
