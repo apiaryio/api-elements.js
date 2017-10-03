@@ -14,6 +14,11 @@ import Ast from './ast';
 import DataStructureGenerator from './schema';
 
 const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+// Content types capable of being produced from formData
+const FORM_DATA_CONTENT_TYPES = [
+  'application/x-www-form-urlencoded',
+  'multipart/form-data',
+];
 
 // Provide a `nextTick` function that either is Node's nextTick or a fallback
 // for browsers
@@ -952,7 +957,9 @@ export default class Parser {
         });
       });
 
-      this.generateFormParameters(formParams, formParamsSchema, request);
+      if (!contentType || FORM_DATA_CONTENT_TYPES.includes(contentType)) {
+        this.generateFormParameters(formParams, formParamsSchema, request, contentType);
+      }
 
       // Using form parameters instead of body? We will convert those to
       // data structures and will generate form-urlencoded body.
@@ -960,16 +967,23 @@ export default class Parser {
     });
   }
 
-  generateFormParameters(parameters, schema, request) {
+  generateFormParameters(parameters, schema, request, contentType) {
     if (_.isEmpty(parameters)) {
       return;
     }
 
     const { DataStructure, Object: ObjectElement } = this.minim.elements;
 
-    pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
+    if (!contentType) {
+      // No content type was provided, lets default to first form
+      pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
+    }
 
-    bodyFromSchema(schema, request, this, FORM_CONTENT_TYPE);
+    if (!contentType || contentType === FORM_CONTENT_TYPE) {
+      // Only produce a body for FORM_CONTENT_TYPE (default when content type is null)
+      // We do not want to produce these bodies for other types such as multipart
+      bodyFromSchema(schema, request, this, contentType || FORM_CONTENT_TYPE);
+    }
 
     // Generating data structure
     const dataStructure = new DataStructure();
