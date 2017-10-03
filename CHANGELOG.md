@@ -1,3 +1,11 @@
+# Master
+
+## Bug Fixes
+
+- Request and response pairs are now created for all combinations of produces,
+  and consumes content types. This includes multiple JSON content types which
+  we're previously discarded and non-JSON content types.
+
 # 0.13.4
 
 ## Enhancements

@@ -30,6 +30,15 @@ function isExtension(value, key) {
   return _.startsWith(key, 'x-');
 }
 
+function isValidContentType(contentType) {
+  try {
+    typer.parse(contentType);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 function isJsonContentType(contentType) {
   try {
     const type = typer.parse(contentType);
@@ -800,56 +809,91 @@ export default class Parser {
     });
   }
 
+  // Returns all of the content types for a request
+  // Request content types include all consumes types
+  // Returns `[null]` when there are no content types
+  gatherRequestContentTypes(methodValue) {
+    const contentTypes = (methodValue.consumes || this.swagger.consumes || [])
+      .filter(isValidContentType);
+
+    if (contentTypes.length === 0) {
+      return [null];
+    }
+
+    return contentTypes;
+  }
+
+  // Returns all of the content types for a response
+  // Response content types include all produces types including any examples
+  // Returns `[null]` when there are no content types
+  gatherResponseContentTypes(methodValue, examples) {
+    let contentTypes = (methodValue.produces || this.swagger.produces || []);
+
+    // Add any missing produces listed in examples
+    if (examples) {
+      const exampleContentTypes = Object.keys(examples)
+        .filter(example => !contentTypes.includes(example));
+      contentTypes = contentTypes.concat(exampleContentTypes);
+    }
+
+    contentTypes = contentTypes.filter(isValidContentType);
+
+    if (contentTypes.length === 0) {
+      return [null];
+    }
+
+    return contentTypes;
+  }
+
   // Convert a Swagger response & status code into Refract transactions.
   handleSwaggerResponse(
     transition, method, methodValue, transitionParams,
     responseValue, statusCode, schemes, resourceParams,
   ) {
-    let examples;
+    const requestContentTypes = this.gatherRequestContentTypes(methodValue);
+    const responseContentTypes = this.gatherResponseContentTypes(methodValue,
+                                                                 responseValue.examples);
 
-    if (responseValue.examples) {
-      examples = responseValue.examples;
-    } else {
-      // The only way to specify an HTTP method is by creating a transaction,
-      // and according to the Refract spec a transaction *MUST* have a request
-      // and response within it, so here we seed the examples to create a blank
-      // request/response within a new transaction. See:
-      // https://github.com/refractproject/refract-spec/blob/master/namespaces/api-description-namespace.md#http-transaction-element
-      examples = {
-        '': undefined,
-      };
-    }
+    responseContentTypes.forEach((responseContentType) => {
+      let responseBody;
 
-    examples = _.omit(examples, 'schema');
+      if (responseContentType && responseValue.examples &&
+          responseValue.examples[responseContentType]) {
+        responseBody = responseValue.examples[responseContentType];
+      }
 
-    _.forEach(examples, (responseBody, contentType) => {
-      const transaction = this.createTransaction(transition, method, schemes);
+      requestContentTypes.forEach((requestContentType) => {
+        const transaction = this.createTransaction(transition, method, schemes);
 
-      this.handleSwaggerExampleRequest(transaction, methodValue, transitionParams, resourceParams);
-      this.handleSwaggerExampleResponse(transaction, methodValue, responseValue,
-                                        statusCode, responseBody, contentType);
+        this.handleSwaggerExampleRequest(transaction, methodValue, transitionParams,
+                                         resourceParams, requestContentType, responseContentType,
+                                         responseBody === undefined);
+        this.handleSwaggerExampleResponse(transaction, methodValue, responseValue,
+                                          statusCode, responseBody, responseContentType);
+      });
     });
   }
 
   // Convert a Swagger example into a Refract request.
-  handleSwaggerExampleRequest(transaction, methodValue, transitionParams, resourceParams) {
+  handleSwaggerExampleRequest(
+    transaction, methodValue, transitionParams, resourceParams,
+    contentType, responseContentType, contentTypeFromProduces,
+  ) {
     const request = transaction.request;
 
     this.withPath(() => {
-      // Check if json is in consumes
-      const consumes = methodValue.consumes || this.swagger.consumes || [];
-      const produces = methodValue.produces || this.swagger.produces || [];
+      const consumeIsJson = contentType && isJsonContentType(contentType);
 
-      const jsonConsumesContentType = _.find(consumes, isJsonContentType);
-      const jsonProducesContentType = _.find(produces, isJsonContentType);
-
-      // Add content-type headers
-      if (jsonConsumesContentType) {
-        pushHeader('Content-Type', jsonConsumesContentType, request, this, 'consumes-content-type');
+      if (contentType) {
+        pushHeader('Content-Type', contentType, request, this, 'consumes-content-type');
       }
 
-      if (jsonProducesContentType) {
-        pushHeader('Accept', jsonProducesContentType, request, this, 'produces-accept');
+      if (responseContentType) {
+        if (contentTypeFromProduces) {
+          pushHeader('Accept', responseContentType, request, this, 'produces-accept');
+        } else {
+          pushHeader('Accept', responseContentType, request, this);
+        }
       }
 
       const formParams = [];
@@ -879,8 +923,8 @@ export default class Parser {
                 }
 
                 this.withPath('schema', () => {
-                  if (jsonConsumesContentType) {
-                    bodyFromSchema(param.schema, request, this, jsonConsumesContentType);
+                  if (consumeIsJson) {
+                    bodyFromSchema(param.schema, request, this, contentType);
                   }
 
                   this.pushSchemaAsset(param.schema, request, this.path);
@@ -979,17 +1023,16 @@ export default class Parser {
       }
 
       if (contentType) {
-        this.withPath('examples', contentType, () => {
-          pushHeader('Content-Type', contentType, response, this);
-        });
+        if (responseValue.examples && responseValue.examples[contentType]) {
+          this.withPath('examples', contentType, () => {
+            pushHeader('Content-Type', contentType, response, this);
+          });
+        } else {
+          pushHeader('Content-Type', contentType, response, this, 'produces-content-type');
+        }
       }
 
-      const produces = methodValue.produces || this.swagger.produces || [];
-      const jsonProducesContentType = _.find(produces, isJsonContentType);
-
-      if (jsonProducesContentType) {
-        pushHeader('Content-Type', jsonProducesContentType, response, this, 'produces-content-type');
-      }
+      const isJsonResponse = isJsonContentType(contentType);
 
       if (responseValue.headers) {
         this.updateHeaders(response, responseValue.headers);
@@ -1038,8 +1081,8 @@ export default class Parser {
           }
 
           this.withSlicedPath(...args.concat([() => {
-            if (jsonProducesContentType !== undefined && responseBody === undefined) {
-              bodyFromSchema(schema, response, this, jsonProducesContentType);
+            if (isJsonResponse && responseBody === undefined) {
+              bodyFromSchema(schema, response, this, contentType);
             }
 
             this.pushSchemaAsset(schema, response, this.path);
