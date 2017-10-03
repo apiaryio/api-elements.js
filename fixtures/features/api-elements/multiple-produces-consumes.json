@@ -353,7 +353,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/hal+json"
+                                  "content": "application/json"
                                 }
                               }
                             },
@@ -387,7 +387,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/json"
+                                  "content": "application/hal+json"
                                 }
                               }
                             }
@@ -430,7 +430,7 @@
                           "attributes": {
                             "contentType": {
                               "element": "string",
-                              "content": "application/hal+json"
+                              "content": "application/json"
                             }
                           },
                           "content": "{}"
@@ -501,7 +501,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/json"
+                                  "content": "application/hal+json"
                                 }
                               }
                             }
@@ -552,7 +552,7 @@
                           "attributes": {
                             "contentType": {
                               "element": "string",
-                              "content": "application/json"
+                              "content": "application/hal+json"
                             }
                           },
                           "content": "{}"
@@ -632,7 +632,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/json"
+                                  "content": "application/hal+json"
                                 }
                               }
                             },
@@ -666,7 +666,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/hal+json"
+                                  "content": "application/json"
                                 }
                               }
                             }
@@ -709,7 +709,7 @@
                           "attributes": {
                             "contentType": {
                               "element": "string",
-                              "content": "application/json"
+                              "content": "application/hal+json"
                             }
                           },
                           "content": "{}"
@@ -780,7 +780,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/hal+json"
+                                  "content": "application/json"
                                 }
                               }
                             }
@@ -831,7 +831,7 @@
                           "attributes": {
                             "contentType": {
                               "element": "string",
-                              "content": "application/hal+json"
+                              "content": "application/json"
                             }
                           },
                           "content": "{}"

@@ -219,7 +219,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "application/hal+json"
+                                  "content": "application/json"
                                 }
                               }
                             }
