@@ -187,6 +187,172 @@
                                   ]
                                 }
                               },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/hal+json"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 165
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 120
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "200"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 180
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 29
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Test Description"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 135
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 150
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "GET"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "attributes": {
+                                "sourceMap": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "sourceMap",
+                                      "content": [
+                                        {
+                                          "element": "array",
+                                          "content": [
+                                            {
+                                              "element": "number",
+                                              "content": 135
+                                            },
+                                            {
+                                              "element": "number",
+                                              "content": 150
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Accept"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "content": []
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
                               "attributes": {
                                 "sourceMap": {
                                   "element": "array",
