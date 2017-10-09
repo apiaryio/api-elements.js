@@ -12,13 +12,8 @@ import { baseLink, origin } from './link';
 import { pushHeader, pushHeaderObject } from './headers';
 import Ast from './ast';
 import DataStructureGenerator from './schema';
+import { FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary } from './media-type';
 
-const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
-// Content types capable of being produced from formData
-const FORM_DATA_CONTENT_TYPES = [
-  'application/x-www-form-urlencoded',
-  'multipart/form-data',
-];
 
 // Provide a `nextTick` function that either is Node's nextTick or a fallback
 // for browsers
@@ -33,24 +28,6 @@ function nextTick(cb) {
 // Test whether a key is a special Swagger extension.
 function isExtension(value, key) {
   return _.startsWith(key, 'x-');
-}
-
-function isValidContentType(contentType) {
-  try {
-    typer.parse(contentType);
-  } catch (e) {
-    return false;
-  }
-  return true;
-}
-
-function isJsonContentType(contentType) {
-  try {
-    const type = typer.parse(contentType);
-    return type.suffix === 'json' || type.subtype === 'json';
-  } catch (e) {
-    return false;
-  }
 }
 
 // The parser holds state about the current parsing environment and converts
@@ -882,12 +859,21 @@ export default class Parser {
   // Convert a Swagger example into a Refract request.
   handleSwaggerExampleRequest(
     transaction, methodValue, transitionParams, resourceParams,
-    contentType, responseContentType, contentTypeFromProduces,
+    requestContentType, responseContentType, contentTypeFromProduces,
   ) {
+    let contentType = requestContentType;
     const request = transaction.request;
 
     this.withPath(() => {
       const consumeIsJson = contentType && isJsonContentType(contentType);
+      const consumeIsMultipartFormData = contentType && isMultiPartFormData(contentType);
+
+      if (consumeIsMultipartFormData && !hasBoundary(contentType)) {
+        // When multipart/form-data conntent type doesn't have a boundary
+        // add a default one `BOUNDARY` which hopefully isn't found
+        // in an example content. `parseBoundary` will provide the default.
+        contentType += `; boundary=${parseBoundary(contentType)}`;
+      }
 
       if (contentType) {
         pushHeader('Content-Type', contentType, request, this, 'consumes-content-type');
@@ -957,7 +943,7 @@ export default class Parser {
         });
       });
 
-      if (!contentType || FORM_DATA_CONTENT_TYPES.includes(contentType)) {
+      if (!contentType || consumeIsMultipartFormData || isFormURLEncoded(contentType)) {
         this.generateFormParameters(formParams, formParamsSchema, request, contentType);
       }
 
@@ -979,11 +965,7 @@ export default class Parser {
       pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
     }
 
-    if (!contentType || contentType === FORM_CONTENT_TYPE) {
-      // Only produce a body for FORM_CONTENT_TYPE (default when content type is null)
-      // We do not want to produce these bodies for other types such as multipart
-      bodyFromSchema(schema, request, this, contentType || FORM_CONTENT_TYPE);
-    }
+    bodyFromSchema(schema, request, this, contentType || FORM_CONTENT_TYPE);
 
     // Generating data structure
     const dataStructure = new DataStructure();
