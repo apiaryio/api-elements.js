@@ -12,6 +12,7 @@ paths:
           in: formData
           required: true
           type: string
+          x-example: Doe
       responses:
         200:
           description: 'My Response'
