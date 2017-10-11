@@ -31,7 +31,7 @@
                         },
                         {
                           "element": "number",
-                          "content": 16
+                          "content": 28
                         }
                       ]
                     }
@@ -40,7 +40,7 @@
               ]
             }
           },
-          "content": "Form Data"
+          "content": "Multipart Form Test"
         }
       },
       "content": [
@@ -61,11 +61,11 @@
                           "content": [
                             {
                               "element": "number",
-                              "content": 100
+                              "content": 128
                             },
                             {
                               "element": "number",
-                              "content": 221
+                              "content": 352
                             }
                           ]
                         }
@@ -101,11 +101,11 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 113
+                                          "content": 271
                                         },
                                         {
                                           "element": "number",
-                                          "content": 208
+                                          "content": 209
                                         }
                                       ]
                                     }
@@ -149,7 +149,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "multipart/form-data; boundary=BOUNDARY"
+                                  "content": "multipart/form-data; boundary=hello"
                                 }
                               }
                             }
@@ -192,10 +192,10 @@
                           "attributes": {
                             "contentType": {
                               "element": "string",
-                              "content": "multipart/form-data; boundary=BOUNDARY"
+                              "content": "multipart/form-data; boundary=hello"
                             }
                           },
-                          "content": "--BOUNDARY\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\nDoe"
+                          "content": "--hello\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\ndoe--hello\r\nContent-Disposition: form-data; name=\"id\"\r\n\r\n1"
                         },
                         {
                           "element": "dataStructure",
@@ -216,11 +216,11 @@
                                             "content": [
                                               {
                                                 "element": "number",
-                                                "content": 147
+                                                "content": 161
                                               },
                                               {
                                                 "element": "number",
-                                                "content": 113
+                                                "content": 110
                                               }
                                             ]
                                           }
@@ -244,8 +244,42 @@
                                     "content": "name"
                                   },
                                   "value": {
-                                    "element": "string",
+                                    "element": "enum",
                                     "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "string",
+                                            "attributes": {
+                                              "sourceMap": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "sourceMap",
+                                                    "content": [
+                                                      {
+                                                        "element": "array",
+                                                        "content": [
+                                                          {
+                                                            "element": "number",
+                                                            "content": 240
+                                                          },
+                                                          {
+                                                            "element": "number",
+                                                            "content": 3
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "content": "doe"
+                                          }
+                                        ]
+                                      },
                                       "sourceMap": {
                                         "element": "array",
                                         "content": [
@@ -257,11 +291,11 @@
                                                 "content": [
                                                   {
                                                     "element": "number",
-                                                    "content": 147
+                                                    "content": 161
                                                   },
                                                   {
                                                     "element": "number",
-                                                    "content": 113
+                                                    "content": 110
                                                   }
                                                 ]
                                               }
@@ -270,7 +304,113 @@
                                         ]
                                       }
                                     },
-                                    "content": "Doe"
+                                    "content": null
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "attributes": {
+                                  "sourceMap": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "sourceMap",
+                                        "content": [
+                                          {
+                                            "element": "array",
+                                            "content": [
+                                              {
+                                                "element": "number",
+                                                "content": 305
+                                              },
+                                              {
+                                                "element": "number",
+                                                "content": 118
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "required"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "content": "id"
+                                  },
+                                  "value": {
+                                    "element": "enum",
+                                    "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "number",
+                                            "attributes": {
+                                              "sourceMap": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "sourceMap",
+                                                    "content": [
+                                                      {
+                                                        "element": "array",
+                                                        "content": [
+                                                          {
+                                                            "element": "number",
+                                                            "content": 390
+                                                          },
+                                                          {
+                                                            "element": "number",
+                                                            "content": 1
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "content": 1
+                                          }
+                                        ]
+                                      },
+                                      "sourceMap": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "sourceMap",
+                                            "content": [
+                                              {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "number",
+                                                    "content": 305
+                                                  },
+                                                  {
+                                                    "element": "number",
+                                                    "content": 118
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "content": null
                                   }
                                 }
                               }
@@ -296,11 +436,11 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 279
+                                          "content": 442
                                         },
                                         {
                                           "element": "number",
-                                          "content": 42
+                                          "content": 38
                                         }
                                       ]
                                     }
@@ -309,7 +449,7 @@
                               ]
                             }
                           },
-                          "content": "200"
+                          "content": "204"
                         }
                       },
                       "content": [
@@ -327,11 +467,11 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 294
+                                          "content": 457
                                         },
                                         {
                                           "element": "number",
-                                          "content": 26
+                                          "content": 22
                                         }
                                       ]
                                     }
@@ -340,7 +480,7 @@
                               ]
                             }
                           },
-                          "content": "My Response"
+                          "content": "Success"
                         }
                       ]
                     }

@@ -15,7 +15,7 @@
         },
         "title": {
           "element": "string",
-          "content": "Form Data"
+          "content": "Multipart Form Test"
         }
       },
       "content": [
@@ -74,7 +74,7 @@
                                 },
                                 "value": {
                                   "element": "string",
-                                  "content": "multipart/form-data; boundary=BOUNDARY"
+                                  "content": "multipart/form-data; boundary=hello"
                                 }
                               }
                             }
@@ -117,10 +117,10 @@
                           "attributes": {
                             "contentType": {
                               "element": "string",
-                              "content": "multipart/form-data; boundary=BOUNDARY"
+                              "content": "multipart/form-data; boundary=hello"
                             }
                           },
-                          "content": "--BOUNDARY\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\nDoe"
+                          "content": "--hello\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\ndoe--hello\r\nContent-Disposition: form-data; name=\"id\"\r\n\r\n1"
                         },
                         {
                           "element": "dataStructure",
@@ -146,8 +146,54 @@
                                     "content": "name"
                                   },
                                   "value": {
+                                    "element": "enum",
+                                    "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "string",
+                                            "content": "doe"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "content": null
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "attributes": {
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "required"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "content": {
+                                  "key": {
                                     "element": "string",
-                                    "content": "Doe"
+                                    "content": "id"
+                                  },
+                                  "value": {
+                                    "element": "enum",
+                                    "attributes": {
+                                      "enumerations": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "number",
+                                            "content": 1
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "content": null
                                   }
                                 }
                               }
@@ -161,13 +207,13 @@
                       "attributes": {
                         "statusCode": {
                           "element": "string",
-                          "content": "200"
+                          "content": "204"
                         }
                       },
                       "content": [
                         {
                           "element": "copy",
-                          "content": "My Response"
+                          "content": "Success"
                         }
                       ]
                     }
