@@ -1,3 +1,10 @@
+# Master
+
+## Enhancements
+
+- Request example bodies are now generated for formData parameters while using
+  the `multipart/form-data` consumes content type.
+
 # 0.14.0
 
 ## Bug Fixes

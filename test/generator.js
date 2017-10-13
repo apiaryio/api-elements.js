@@ -54,4 +54,25 @@ describe('bodyFromSchema', () => {
     expect(body).to.be.an('array');
     expect(body.length).to.equal(5);
   });
+
+  describe('multipart/form-data', () => {
+    it('can generate multipart form with specified boundary', () => {
+      const schema = {
+        type: 'object',
+        properties: {
+          example: {
+            type: 'string',
+            enum: ['Hello'],
+          },
+        },
+        required: ['example'],
+      };
+
+      const payload = { content: [] };
+      const asset = bodyFromSchema(schema, payload, parser, 'multipart/form-data; boundary=boundy');
+
+      expect(asset.content).to.be.a('string');
+      expect(asset.content).to.equal('--boundy\r\nContent-Disposition: form-data; name="example"\r\n\r\nHello');
+    });
+  });
 });

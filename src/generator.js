@@ -3,6 +3,7 @@ import querystring from 'querystring';
 import faker from 'json-schema-faker';
 import annotations from './annotations';
 import { inferred } from './link';
+import { isFormURLEncoded, isMultiPartFormData, parseBoundary } from './media-type';
 
 faker.option({
   useDefaultValue: true,
@@ -18,13 +19,21 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
     let body = schema.example || faker(schema);
 
     if (typeof body !== 'string') {
-      if (contentType.indexOf('x-www-form-urlencoded') !== -1) {
+      if (isFormURLEncoded(contentType)) {
         // Form data
         // TODO: check for arrays etc.
         body = querystring.stringify(body);
-      } else if (contentType === 'multipart/form-data') {
-        // TODO: Unimplemented
-        return null;
+      } else if (isMultiPartFormData(contentType)) {
+        const boundary = parseBoundary(contentType);
+        let content = '';
+
+        _.forEach(body, (value, key) => {
+          content += `--${boundary}\r\n`;
+          content += `Content-Disposition: form-data; name="${key}"\r\n\r\n`;
+          content += value;
+        });
+
+        body = content;
       } else {
         // JSON
         body = JSON.stringify(body, null, 2);
