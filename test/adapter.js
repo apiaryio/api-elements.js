@@ -111,20 +111,25 @@ describe('Swagger 2.0 adapter', () => {
 
   context('cannot parse invalid Swagger YAML', () => {
     const source = 'swagger: "2.0"\nbad: }';
-    let parseError;
-    let parseResult;
 
-    before((done) => {
-      fury.parse({ source }, (err, result) => {
-        parseError = err;
-        parseResult = result;
+    it('returns error for bad input yaml', (done) => {
+      fury.parse({ source }, (err, parseResult) => {
+        expect(err).to.exist;
+        expect(parseResult).to.exist;
+        expect(parseResult.errors.isEmpty).to.be.false;
+        expect(parseResult.warnings.isEmpty).to.be.true;
         done();
       });
     });
 
-    it('returns error for bad input yaml', () => {
-      expect(parseError).to.exist;
-      expect(parseResult).to.exist;
+    it('returns error for bad input yaml with source maps', (done) => {
+      fury.parse({ source, generateSourceMap: true }, (err, parseResult) => {
+        expect(err).to.exist;
+        expect(parseResult).to.exist;
+        expect(parseResult.errors.isEmpty).to.be.false;
+        expect(parseResult.warnings.isEmpty).to.be.true;
+        done();
+      });
     });
   });
 
