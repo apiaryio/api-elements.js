@@ -1,3 +1,16 @@
+# 0.14.2
+
+## Bug Fixes
+
+- Prevent throwing or attaching additional warning while handling a source YAML
+  document that produces an error while using the `generateSourceMap` flag.
+
+  There was a race condition where the `done` callback can be called twice as
+  we would call the callback with an error and `fury` would catch a raised
+  error and then return that error. This would also cause a state when parsing
+  an invalid YAML document would produce an error AND a warning in the returned
+  parse result.
+
 # 0.14.1
 
 ## Enhancements

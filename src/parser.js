@@ -68,6 +68,14 @@ export default class Parser {
     try {
       loaded = _.isString(this.source) ? yaml.safeLoad(this.source) : this.source;
     } catch (err) {
+      // Temporarily disable generateSourceMap while handling error
+      // This is because while handling this error we may try to generate
+      // source map which further tries to parse YAML to get source
+      // maps which causes another warning and raise conditions where we throw
+      // an error back to the caller.
+      const generateSourceMap = this.generateSourceMap;
+      this.generateSourceMap = false;
+
       this.createAnnotation(annotations.CANNOT_PARSE, null,
         (err.reason || 'Problem loading the input'));
 
@@ -77,6 +85,7 @@ export default class Parser {
         ]);
       }
 
+      this.generateSourceMap = generateSourceMap;
       return done(new Error(err.message), this.result);
     }
 
