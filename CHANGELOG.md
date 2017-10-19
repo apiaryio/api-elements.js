@@ -1,3 +1,11 @@
+# Master
+
+## Bug Fixes
+
+- Generated multipart form-data example requests were missing the end of the
+  multi-part.
+
+
 # 0.14.2
 
 ## Bug Fixes
