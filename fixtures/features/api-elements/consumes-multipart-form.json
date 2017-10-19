@@ -120,7 +120,7 @@
                               "content": "multipart/form-data; boundary=BOUNDARY"
                             }
                           },
-                          "content": "--BOUNDARY\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\nDoe"
+                          "content": "--BOUNDARY\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\nDoe\r\n\r\n--BOUNDARY--\r\n"
                         },
                         {
                           "element": "dataStructure",
