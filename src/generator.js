@@ -30,8 +30,10 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
         _.forEach(body, (value, key) => {
           content += `--${boundary}\r\n`;
           content += `Content-Disposition: form-data; name="${key}"\r\n\r\n`;
-          content += value;
+          content += `${value}\r\n`;
         });
+
+        content += `\r\n--${boundary}--\r\n`;
 
         body = content;
       } else {

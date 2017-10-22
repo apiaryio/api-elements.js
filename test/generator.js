@@ -72,7 +72,34 @@ describe('bodyFromSchema', () => {
       const asset = bodyFromSchema(schema, payload, parser, 'multipart/form-data; boundary=boundy');
 
       expect(asset.content).to.be.a('string');
-      expect(asset.content).to.equal('--boundy\r\nContent-Disposition: form-data; name="example"\r\n\r\nHello');
+      expect(asset.content).to.equal('--boundy\r\nContent-Disposition: form-data; name="example"\r\n\r\nHello\r\n\r\n--boundy--\r\n');
+    });
+
+    it('can generate multipart form with multiple parts', () => {
+      const schema = {
+        type: 'object',
+        properties: {
+          example1: {
+            type: 'string',
+            enum: ['Hello'],
+          },
+          example2: {
+            type: 'string',
+            enum: ['Hello'],
+          },
+        },
+        required: ['example1', 'example2'],
+      };
+
+      const payload = { content: [] };
+      const asset = bodyFromSchema(schema, payload, parser, 'multipart/form-data; boundary=boundy');
+
+      expect(asset.content).to.be.a('string');
+      expect(asset.content).to.equal(
+        '--boundy\r\nContent-Disposition: form-data; name="example1"\r\n\r\nHello\r\n' +
+        '--boundy\r\nContent-Disposition: form-data; name="example2"\r\n\r\nHello\r\n' +
+        '\r\n--boundy--\r\n',
+      );
     });
   });
 });
