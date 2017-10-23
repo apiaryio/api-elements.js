@@ -81,6 +81,22 @@ describe('JSON Schema to Data Structure', () => {
       expect(samples.toValue()).to.be.deep.equal(['doe']);
     });
 
+    it('produces string element with example', () => {
+      const schema = {
+        type: 'string',
+        example: 'doe',
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(StringElement);
+
+      const samples = dataStructure.content.attributes.get('samples');
+      expect(samples).to.be.instanceof(ArrayElement);
+      expect(samples.toValue()).to.be.deep.equal(['doe']);
+    });
+
     it('produces string element with description describing pattern', () => {
       const schema = {
         type: 'string',

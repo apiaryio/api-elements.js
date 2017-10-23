@@ -170,6 +170,7 @@ export default class DataStructureGenerator {
       Number: NumberElement,
       Boolean: BooleanElement,
       Null: NullElement,
+      Array: ArrayElement,
     } = this.minim.elements;
 
     const typeGeneratorMap = {
@@ -209,9 +210,14 @@ export default class DataStructureGenerator {
         element.attributes.set('default', schema.default);
       }
 
-      if (schema.examples && (schema.type === 'string' || schema.type === 'boolean' || schema.type === 'number')) {
+      const isPrimitiveType = (schema.type === 'string' || schema.type === 'boolean' || schema.type === 'number');
+      if (isPrimitiveType) {
         // TODO examples for array/object or multiple types
-        element.attributes.set('samples', schema.examples);
+        if (schema.examples) {
+          element.attributes.set('samples', schema.examples);
+        } else if (schema.example) {
+          element.attributes.set('samples', new ArrayElement([schema.example]));
+        }
       }
 
       const validationDescriptions = this.generateValidationDescriptions(schema);
