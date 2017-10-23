@@ -181,6 +181,17 @@
                           "element": "dataStructure",
                           "content": {
                             "element": "string",
+                            "attributes": {
+                              "samples": {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "string",
+                                    "content": "Hello"
+                                  }
+                                ]
+                              }
+                            },
                             "content": null
                           }
                         }
