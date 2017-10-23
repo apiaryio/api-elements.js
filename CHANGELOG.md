@@ -4,6 +4,8 @@
 
 - Generated multipart form-data example requests were missing the end of the
   multi-part.
+- `example` properties in Schema Object are not respected in data structure
+  generation.
 
 
 # 0.14.2
