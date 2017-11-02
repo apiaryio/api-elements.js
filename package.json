@@ -1,10 +1,10 @@
 {
   "name": "minim-parse-result",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Minim Parse Result Namespace",
   "main": "./lib/parse-result.js",
-  "browser": "./lib/minim-parse-result.js",
-  "src": "./src/parse-result.js",
+  "browser": "./src/parse-result.js",
+  "module": "./src/parse-result.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/refractproject/minim-parse-result.git"
@@ -26,7 +26,7 @@
     "babel-plugin-array-includes": "^2.0.3",
     "chai": "^3.2.0",
     "minim": "^0.19.0",
-    "peasant": "^1.2.0"
+    "peasant": "^1.3.0"
   },
   "engines": {
     "node": ">=4"

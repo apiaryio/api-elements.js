@@ -1,3 +1,7 @@
+# 0.9.0
+
+- Added browser build distribution
+
 # 0.8.0
 
 - Add support for minim 0.19 and minim-api-description 0.6.
