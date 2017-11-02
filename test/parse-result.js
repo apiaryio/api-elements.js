@@ -109,7 +109,7 @@ describe('Parse result namespace', () => {
     });
 
     it('should contain an API', () => {
-      const api = parseResult.api;
+      const { api } = parseResult;
       expect(api).to.be.an.instanceof(Category);
       expect(api).to.have.class('api');
     });

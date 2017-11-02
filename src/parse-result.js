@@ -11,7 +11,7 @@ import apiDescription from 'minim-api-description';
 
 export function namespace(options) {
   const minim = options.base;
-  const Element = minim.Element;
+  const { Element } = minim;
   const StringElement = minim.getElementClass('string');
   const ArrayElement = minim.getElementClass('array');
 
@@ -30,15 +30,13 @@ export function namespace(options) {
     }
 
     get warnings() {
-      return this.children.filter(
-        item => item.element === 'annotation' &&
-        item.classes.contains('warning'));
+      return this.children
+        .filter(item => item.element === 'annotation' && item.classes.contains('warning'));
     }
 
     get errors() {
-      return this.children.filter(
-        item => item.element === 'annotation' &&
-        item.classes.contains('error'));
+      return this.children
+        .filter(item => item.element === 'annotation' && item.classes.contains('error'));
     }
   }
 

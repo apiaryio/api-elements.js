@@ -3,27 +3,30 @@
   "version": "0.8.0",
   "description": "Minim Parse Result Namespace",
   "main": "./lib/parse-result.js",
+  "browser": "./lib/minim-parse-result.js",
+  "src": "./src/parse-result.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/refractproject/minim-parse-result.git"
   },
   "scripts": {
+    "lint": "peasant lint",
     "test": "peasant test",
-    "ci": "peasant -s lint test build",
-    "prepublish": "npm run ci",
+    "build": "peasant -s build",
+    "web": "peasant -w build",
+    "ci": "peasant -s lint test",
+    "prepublish": "npm run ci && npm run build && npm run web",
     "cover": "peasant cover",
-    "peasant": "peasant",
-    "lint": "peasant lint"
+    "peasant": "peasant"
   },
   "dependencies": {
-    "babel-runtime": "^6.23.0",
-    "minim-api-description": "^0.6.0"
+    "minim-api-description": "^0.7.0"
   },
   "devDependencies": {
     "babel-plugin-array-includes": "^2.0.3",
     "chai": "^3.2.0",
     "minim": "^0.19.0",
-    "peasant": "^1.1.0"
+    "peasant": "^1.2.0"
   },
   "engines": {
     "node": ">=4"
