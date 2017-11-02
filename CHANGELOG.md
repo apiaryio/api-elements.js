@@ -1,3 +1,7 @@
+# 0.7.0
+
+- Added browser build distribution
+
 # 0.6.0
 
 - Updated to support Minim 0.19.

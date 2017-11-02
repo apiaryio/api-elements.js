@@ -29,6 +29,12 @@ const Category = namespace.getElementClass('category');
 let category = new Category();
 ```
 
+## Browser Usage Example
+
+```html
+<script type="text/javascript" src="./lib/minim-api-description.min.js"></script>
+```
+
 ## Element Reference
 
 ### Category ([ArrayElement](https://github.com/refractproject/minim#arrayelement))
