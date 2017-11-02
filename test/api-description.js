@@ -966,16 +966,14 @@ describe('API description namespace', () => {
     });
 
     it('should have contentTypes', () => {
-      expect(transition.contentTypes.toValue()).to.deep.equal(
-        ['application/json'],
-      );
+      expect(transition.contentTypes.toValue()).to.deep
+        .equal(['application/json']);
     });
 
     it('should set contentTypes', () => {
       transition.contentTypes = ['application/xml'];
-      expect(attrValue(transition, 'contentTypes')).to.deep.equal(
-        ['application/xml'],
-      );
+      expect(attrValue(transition, 'contentTypes')).to.deep
+        .equal(['application/xml']);
     });
 
     it('should contain a transaction', () => {
@@ -1054,7 +1052,7 @@ describe('API description namespace', () => {
     });
 
     it('should contain members', () => {
-      const members = authScheme.members;
+      const { members } = authScheme;
       expect(members).to.have.length(1);
       members.forEach((item) => {
         expect(item).to.be.an.instanceof(MemberElement);
@@ -1062,7 +1060,7 @@ describe('API description namespace', () => {
     });
 
     it('should contain transitions', () => {
-      const transitions = authScheme.transitions;
+      const { transitions } = authScheme;
       expect(transitions).to.have.length(1);
       transitions.forEach((item) => {
         expect(item).to.be.an.instanceof(Transition);
@@ -1363,9 +1361,8 @@ describe('API description namespace', () => {
     });
 
     it('should exclude headers', () => {
-      const remaining = payload.headers.exclude('cache').map(
-        member => [member.key.toValue(), member.value.toValue()],
-      );
+      const remaining = payload.headers.exclude('cache')
+        .map(member => [member.key.toValue(), member.value.toValue()]);
 
       expect(remaining).to.deep.equal([
         ['Content-Type', 'application/json'],
