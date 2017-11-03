@@ -9,6 +9,32 @@ This library provides an interface to the [Refract Parse Result namespace](https
 
 It extends upon the base types as defined in [Minim](https://github.com/refractproject/minim) and should be used with the [minim-api-description](https://github.com/refractproject/minim-api-description) package.
 
+## Install
+
+```sh
+npm install minim-parse-result
+```
+
+## Usage
+
+```js
+import minim from 'minim';
+import parseResult from 'minim-parse-result';
+
+const namespace = minim.namespace()
+  .use(parseResult);
+
+// Initialize elements directly
+const ParseResult = namespace.getElementClass('parseResult');
+let category = new ParseResult();
+```
+
+## Browser Usage Example
+
+```html
+<script type="text/javascript" src="./lib/minim-parse-result.min.js"></script>
+```
+
 ## Elements
 
 ### ParseResult ([ArrayElement](https://github.com/refractproject/minim#arrayelement))
@@ -75,24 +101,4 @@ You can use a convenience property to retrieve the sourceMap from any element.
 ```js
 // Print [[1, 2]]
 console.log(element.sourceMapValue);
-```
-
-## Install
-
-```sh
-npm install minim-parse-result
-```
-
-## Usage
-
-```js
-import minim from 'minim';
-import parseResult from 'minim-parse-result';
-
-const namespace = minim.namespace()
-  .use(parseResult);
-
-// Initialize elements directly
-const ParseResult = namespace.getElementClass('parseResult');
-let category = new ParseResult();
 ```
