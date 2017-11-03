@@ -359,9 +359,9 @@ describe('Parser', () => {
     });
 
     it('should pass adapter options during parsing', (done) => {
-      const length = fury.adapters.length;
+      const { length } = fury.adapters;
 
-      fury.adapters[length - 1].parse = ({ minim, source, testOption = false }, cb) => {
+      fury.adapters[length - 1].parse = ({ minim, testOption = false }, cb) => {
         const BooleanElement = minim.getElementClass('boolean');
         return cb(null, new BooleanElement(testOption));
       };
@@ -476,7 +476,8 @@ describe('Refract loader', () => {
 
     before(() => {
       const parseResult = fury.load(refractedApi);
-      api = parseResult.api;
+      ({ api } = parseResult);
+
       annotation = parseResult.annotations.first;
     });
 
@@ -535,14 +536,14 @@ describe('Refract loader', () => {
 
     it('should contain a request', () => {
       const resource = api.resourceGroups.get(0).resources.get(0);
-      const request = resource.transitions.get(0).transactions.get(0).request;
+      const { request } = resource.transitions.get(0).transactions.get(0);
 
       assert(request);
     });
 
     it('should contain a response', () => {
       const resource = api.resourceGroups.get(0).resources.get(0);
-      const response = resource.transitions.get(0).transactions.get(0).response;
+      const { response } = resource.transitions.get(0).transactions.get(0);
 
       assert(response);
       assert.equal(response.statusCode.toValue(), 200);
@@ -550,7 +551,7 @@ describe('Refract loader', () => {
 
     it('should set content-type header in the response', () => {
       const resource = api.resourceGroups.get(0).resources.get(0);
-      const response = resource.transitions.get(0).transactions.get(0).response;
+      const { response } = resource.transitions.get(0).transactions.get(0);
 
       // Get the header element by index and read the value
       assert.equal(response.headers.get(0).value.toValue(), 'application/json');

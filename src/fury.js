@@ -90,7 +90,9 @@ class Fury {
    * then uses the adapter to convert into refract elements and loads
    * these into objects.
    */
-  parse({ source, mediaType, generateSourceMap = false, adapterOptions }, done) {
+  parse({
+    source, mediaType, generateSourceMap = false, adapterOptions,
+  }, done) {
     const adapter = this.findAdapter(source, mediaType, 'parse');
 
     if (!adapter) {
