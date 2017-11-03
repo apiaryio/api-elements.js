@@ -210,14 +210,10 @@ export default class DataStructureGenerator {
         element.attributes.set('default', schema.default);
       }
 
-      const isPrimitiveType = (schema.type === 'string' || schema.type === 'boolean' || schema.type === 'number');
-      if (isPrimitiveType) {
-        // TODO examples for array/object or multiple types
-        if (schema.examples) {
-          element.attributes.set('samples', schema.examples);
-        } else if (schema.example) {
-          element.attributes.set('samples', new ArrayElement([schema.example]));
-        }
+      if (schema.examples) {
+        element.attributes.set('samples', schema.examples);
+      } else if (schema.example) {
+        element.attributes.set('samples', new ArrayElement([schema.example]));
       }
 
       const validationDescriptions = this.generateValidationDescriptions(schema);

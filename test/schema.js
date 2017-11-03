@@ -471,6 +471,46 @@ describe('JSON Schema to Data Structure', () => {
       expect(admin).not.to.be.undefined;
       expect(admin.attributes.typeAttributes.toValue()).to.deep.equal(['required']);
     });
+
+    it('produces samples from examples', () => {
+      const schema = {
+        type: 'object',
+        examples: [
+          {
+            name: 'Doe',
+          },
+        ],
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      const samples = dataStructure.content.attributes.get('samples');
+      expect(samples).to.be.instanceof(ArrayElement);
+      expect(samples.get(0)).to.be.instanceof(ObjectElement);
+      expect(samples.toValue()).to.be.deep.equal([{ name: 'Doe' }]);
+    });
+
+    it('produces samples from example', () => {
+      const schema = {
+        type: 'object',
+        example: {
+          name: 'Doe',
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      const samples = dataStructure.content.attributes.get('samples');
+      expect(samples).to.be.instanceof(ArrayElement);
+      expect(samples.get(0)).to.be.instanceof(ObjectElement);
+      expect(samples.toValue()).to.be.deep.equal([{ name: 'Doe' }]);
+    });
   });
 
   context('array schema', () => {
@@ -588,6 +628,42 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(ArrayElement);
       expect(dataStructure.content.content.length).to.be.equal(0);
+    });
+
+    it('produces samples from examples', () => {
+      const schema = {
+        type: 'array',
+        examples: [
+          ['Doe'],
+        ],
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ArrayElement);
+
+      const samples = dataStructure.content.attributes.get('samples');
+      expect(samples).to.be.instanceof(ArrayElement);
+      expect(samples.get(0)).to.be.instanceof(ArrayElement);
+      expect(samples.toValue()).to.be.deep.equal([['Doe']]);
+    });
+
+    it('produces samples from example', () => {
+      const schema = {
+        type: 'array',
+        example: ['Doe'],
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ArrayElement);
+
+      const samples = dataStructure.content.attributes.get('samples');
+      expect(samples).to.be.instanceof(ArrayElement);
+      expect(samples.get(0)).to.be.instanceof(ArrayElement);
+      expect(samples.toValue()).to.be.deep.equal([['Doe']]);
     });
   });
 
