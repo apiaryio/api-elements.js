@@ -1,3 +1,9 @@
+# Master
+
+## Enhancements
+
+- Sample values are now generated for data structures of object and array types.
+
 # 0.14.3
 
 ## Bug Fixes
