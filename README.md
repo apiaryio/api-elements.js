@@ -173,6 +173,12 @@ fury.parse({source: 'some-test\n...'}, function (err, api) {
 });
 ```
 
+## Browser Usage
+
+```html
+<script type="text/javascript" src="./lib/fury.min.js"></script>
+```
+
 ## Development
 
 ### Building & Testing

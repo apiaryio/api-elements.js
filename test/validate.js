@@ -99,7 +99,7 @@ describe('Validation', () => {
 
     it('should pass adapter options during validation', (done) => {
       shouldDetect = true;
-      fury.adapters[0].validate = ({ minim, source, testOption = false }, cb) => {
+      fury.adapters[0].validate = ({ minim, testOption = false }, cb) => {
         const BooleanElement = minim.getElementClass('boolean');
         return cb(null, new BooleanElement(testOption));
       };

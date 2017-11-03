@@ -1,3 +1,7 @@
+# 3.0.0-beta.5
+
+- Added browser build distribution
+
 # 3.0.0-beta.4
 
 ## Breaking
