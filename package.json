@@ -36,7 +36,7 @@
     "glob": "^7.1.1",
     "minim": "^0.19.0",
     "minim-parse-result": "^0.8.0",
-    "peasant": "^1.1.0",
+    "peasant": "1.1.0",
     "swagger-zoo": "2.8.2"
   },
   "engines": {
