@@ -12,7 +12,7 @@ export default function (namespace) {
       const transaction = this.transactions.first;
 
       if (transaction) {
-        const request = transaction.request;
+        const { request } = transaction;
 
         if (request) {
           return request.method;
