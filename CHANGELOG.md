@@ -1,8 +1,10 @@
-# Master
+# 0.15.0
 
 ## Enhancements
 
 - Sample values are now generated for data structures of object and array types.
+- Request/Response pairs are now generated from explicit examples, or the first
+  JSON produces content-type.
 
 # 0.14.3
 

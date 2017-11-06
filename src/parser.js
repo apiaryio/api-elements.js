@@ -815,16 +815,20 @@ export default class Parser {
   }
 
   // Returns all of the content types for a response
-  // Response content types include all produces types including any examples
+  // Response content types include all example types OR the first JSON content type
   // Returns `[null]` when there are no content types
   gatherResponseContentTypes(methodValue, examples) {
-    let contentTypes = (methodValue.produces || this.swagger.produces || []);
+    let contentTypes = [];
 
-    // Add any missing produces listed in examples
-    if (examples) {
-      const exampleContentTypes = Object.keys(examples)
-        .filter(example => !contentTypes.includes(example));
-      contentTypes = contentTypes.concat(exampleContentTypes);
+    if (examples && Object.keys(examples).length > 0) {
+      contentTypes = Object.keys(examples);
+    } else {
+      const produces = (methodValue.produces || this.swagger.produces || []);
+      const jsonContentTypes = produces.filter(isJsonContentType);
+
+      if (jsonContentTypes.length > 0) {
+        contentTypes = [jsonContentTypes[0]];
+      }
     }
 
     contentTypes = contentTypes.filter(isValidContentType);
