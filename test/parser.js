@@ -41,6 +41,7 @@ describe('Parser', () => {
     it('gathers first JSON produces without examples', () => {
       const methodValue = {
         produces: [
+          'text/plain',
           'application/json',
           'application/hal+json',
         ],
