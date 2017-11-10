@@ -1,3 +1,10 @@
+# Master
+
+## Bug Fixes
+
+- Data Structure generation was not including required typeAttribute for
+  required object properties.
+
 # 0.15.0
 
 ## Enhancements

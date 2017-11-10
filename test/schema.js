@@ -404,7 +404,7 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.content).to.be.instanceof(ObjectElement);
 
       const member = dataStructure.content.content[0];
-      expect(member.attributes.typeAttributes.toValue()).to.deep.equal(['required']);
+      expect(member.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
     });
 
     it('produces object element with description of maxProperties', () => {
@@ -469,7 +469,7 @@ describe('JSON Schema to Data Structure', () => {
 
       const admin = dataStructure.content.getMember('admin');
       expect(admin).not.to.be.undefined;
-      expect(admin.attributes.typeAttributes.toValue()).to.deep.equal(['required']);
+      expect(admin.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
     });
 
     it('produces samples from examples', () => {

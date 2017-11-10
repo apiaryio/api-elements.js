@@ -60,9 +60,7 @@ export default class DataStructureGenerator {
   // Generates an object element from the given object schema
   generateObject(schema) {
     const {
-      Array: ArrayElement,
       Object: ObjectElement,
-      String: StringElement,
     } = this.minim.elements;
 
     let properties = schema.properties || {};
@@ -88,8 +86,8 @@ export default class DataStructureGenerator {
       const member = this.generateMember(property, subschema);
 
       const isRequired = required.includes(property);
-      member.attributes.typeAttributes = new ArrayElement([
-        new StringElement(isRequired ? 'required' : 'optional'),
+      member.attributes.set('typeAttributes', [
+        isRequired ? 'required' : 'optional',
       ]);
 
       return member;
