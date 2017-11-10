@@ -488,6 +488,17 @@
                             "content": [
                               {
                                 "element": "member",
+                                "attributes": {
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "required"
+                                      }
+                                    ]
+                                  }
+                                },
                                 "content": {
                                   "key": {
                                     "element": "string",
@@ -516,6 +527,17 @@
                               },
                               {
                                 "element": "member",
+                                "attributes": {
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "required"
+                                      }
+                                    ]
+                                  }
+                                },
                                 "content": {
                                   "key": {
                                     "element": "string",
@@ -772,6 +794,17 @@
                             "content": [
                               {
                                 "element": "member",
+                                "attributes": {
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "required"
+                                      }
+                                    ]
+                                  }
+                                },
                                 "content": {
                                   "key": {
                                     "element": "string",
@@ -800,6 +833,17 @@
                               },
                               {
                                 "element": "member",
+                                "attributes": {
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "required"
+                                      }
+                                    ]
+                                  }
+                                },
                                 "content": {
                                   "key": {
                                     "element": "string",
