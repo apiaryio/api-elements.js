@@ -1,0 +1,14 @@
+swagger: '2.0'
+info:
+  title: Produces file
+  version: '1.0'
+produces:
+  - image/png
+paths:
+  '/test.png':
+    get:
+      responses:
+        200:
+          description: 'My File Response'
+          schema:
+            type: file
