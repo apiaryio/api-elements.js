@@ -1,3 +1,9 @@
+# Master
+
+## Enhancements
+
+- File type parameters are now included instead of being ignored.
+
 # 0.15.1
 
 ## Bug Fixes
