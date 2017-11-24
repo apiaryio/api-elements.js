@@ -251,8 +251,11 @@
                                         ]
                                       },
                                       "default": {
-                                        "element": "string",
-                                        "content": "good morning"
+                                        "element": "enum",
+                                        "content": {
+                                          "element": "string",
+                                          "content": "good morning"
+                                        }
                                       }
                                     },
                                     "content": {

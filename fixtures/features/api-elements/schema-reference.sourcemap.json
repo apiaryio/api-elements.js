@@ -517,8 +517,11 @@
                                         ]
                                       },
                                       "default": {
-                                        "element": "number",
-                                        "content": 456
+                                        "element": "enum",
+                                        "content": {
+                                          "element": "number",
+                                          "content": 456
+                                        }
                                       }
                                     },
                                     "content": null
@@ -823,8 +826,11 @@
                                         ]
                                       },
                                       "default": {
-                                        "element": "number",
-                                        "content": 456
+                                        "element": "enum",
+                                        "content": {
+                                          "element": "number",
+                                          "content": 456
+                                        }
                                       }
                                     },
                                     "content": null

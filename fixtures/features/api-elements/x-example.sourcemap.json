@@ -618,33 +618,36 @@
                                         ]
                                       },
                                       "default": {
-                                        "element": "string",
-                                        "attributes": {
-                                          "sourceMap": {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "sourceMap",
-                                                "content": [
-                                                  {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "number",
-                                                        "content": 666
-                                                      },
-                                                      {
-                                                        "element": "number",
-                                                        "content": 21
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        "content": "good morning"
+                                        "element": "enum",
+                                        "content": {
+                                          "element": "string",
+                                          "attributes": {
+                                            "sourceMap": {
+                                              "element": "array",
+                                              "content": [
+                                                {
+                                                  "element": "sourceMap",
+                                                  "content": [
+                                                    {
+                                                      "element": "array",
+                                                      "content": [
+                                                        {
+                                                          "element": "number",
+                                                          "content": 666
+                                                        },
+                                                        {
+                                                          "element": "number",
+                                                          "content": 21
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "content": "good morning"
+                                        }
                                       },
                                       "sourceMap": {
                                         "element": "array",

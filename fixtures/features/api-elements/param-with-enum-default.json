@@ -68,8 +68,11 @@
                               ]
                             },
                             "default": {
-                              "element": "string",
-                              "content": "A"
+                              "element": "enum",
+                              "content": {
+                                "element": "string",
+                                "content": "A"
+                              }
                             }
                           },
                           "content": null
