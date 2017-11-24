@@ -1001,12 +1001,6 @@ export default class Parser {
       return;
     }
 
-    if (param.type === 'file') {
-      this.createAnnotation(annotations.DATA_LOST, this.path,
-          'Files in form parameters are not fully supported yet');
-      return;
-    }
-
     if (param.allowEmptyValue) {
       this.createAnnotation(annotations.DATA_LOST, this.path,
           'The allowEmptyValue flag is not fully supported yet');
