@@ -1255,7 +1255,7 @@ export default class Parser {
 
   // Convert a Swagger parameter into a Refract element.
   convertParameterToElement(parameter, setAttributes = false) {
-    const { Element, Array: ArrayElement } = this.minim.elements;
+    const { Array: ArrayElement, Enum: EnumElement } = this.minim.elements;
 
     const Type = this.typeForParameter(parameter);
     const schema = this.schemaForParameterValue(parameter);
@@ -1273,12 +1273,10 @@ export default class Parser {
     }
 
     if (parameter.enum) {
-      const example = element;
-      element = new Element();
-      element.element = 'enum';
-
-      if (example.content) {
-        element.content = example;
+      if (element.toValue()) {
+        element = new EnumElement(element);
+      } else {
+        element = new EnumElement();
       }
 
       const enumerations = new ArrayElement();
@@ -1293,14 +1291,18 @@ export default class Parser {
         });
       });
 
-      element.attributes.set('enumerations', enumerations);
+      element.enumerations = enumerations;
     }
 
     if (parameter.default) {
       this.withPath('default', () => {
-        const value = this.convertValueToElement(parameter.default, schema);
+        let value = this.convertValueToElement(parameter.default, schema);
 
         if (value) {
+          if (parameter.enum) {
+            value = new EnumElement(value);
+          }
+
           element.attributes.set('default', value);
         }
       });
