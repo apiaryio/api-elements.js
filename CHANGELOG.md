@@ -1,3 +1,7 @@
+# 0.8.0
+
+- Added `EnumElement`
+
 # 0.7.0
 
 - Added browser build distribution

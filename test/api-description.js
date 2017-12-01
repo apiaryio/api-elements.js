@@ -115,7 +115,6 @@ describe('API description namespace', () => {
                 ],
               },
             },
-            content: [],
           },
           {
             element: 'category',
@@ -130,7 +129,6 @@ describe('API description namespace', () => {
                 ],
               },
             },
-            content: [],
           },
           {
             element: 'category',
@@ -145,7 +143,6 @@ describe('API description namespace', () => {
                 ],
               },
             },
-            content: [],
           },
           {
             element: 'category',
@@ -160,7 +157,6 @@ describe('API description namespace', () => {
                 ],
               },
             },
-            content: [],
           },
           {
             element: 'category',
@@ -175,15 +171,12 @@ describe('API description namespace', () => {
                 ],
               },
             },
-            content: [],
           },
           {
             element: 'resource',
-            content: [],
           },
           {
             element: 'transition',
-            content: [],
           },
           {
             element: 'copy',
@@ -317,7 +310,6 @@ describe('API description namespace', () => {
                 content: 'custom_basic',
               },
             },
-            content: [],
           },
           {
             element: 'Token Authentication Scheme',
@@ -693,7 +685,6 @@ describe('API description namespace', () => {
                 },
                 value: {
                   element: 'Session',
-                  content: undefined,
                 },
               },
             },
@@ -751,13 +742,11 @@ describe('API description namespace', () => {
           },
           {
             element: 'transition',
-            content: [],
           },
           {
             element: 'dataStructure',
             content: {
               element: 'object',
-              content: [],
             },
           },
         ],
@@ -857,7 +846,6 @@ describe('API description namespace', () => {
             element: 'dataStructure',
             content: {
               element: 'object',
-              content: [],
             },
           },
           contentTypes: {
@@ -886,7 +874,6 @@ describe('API description namespace', () => {
                     content: 'GET',
                   },
                 },
-                content: [],
               },
             ],
           },
@@ -1028,7 +1015,6 @@ describe('API description namespace', () => {
                 content: 'http://example.com/oauth/authorize',
               },
             },
-            content: [],
           },
         ],
       };
@@ -1081,7 +1067,6 @@ describe('API description namespace', () => {
             content: [
               {
                 element: 'Token Authentication Scheme',
-                content: [],
               },
             ],
           },
@@ -1089,11 +1074,9 @@ describe('API description namespace', () => {
         content: [
           {
             element: 'httpRequest',
-            content: [],
           },
           {
             element: 'httpResponse',
-            content: [],
           },
         ],
       };
@@ -1293,7 +1276,6 @@ describe('API description namespace', () => {
             element: 'dataStructure',
             content: {
               element: 'object',
-              content: [],
             },
           },
           {
@@ -1447,7 +1429,6 @@ describe('API description namespace', () => {
                     content: 'https://example.com/extensions/info/',
                   },
                 },
-                content: undefined,
               },
             ],
           },
