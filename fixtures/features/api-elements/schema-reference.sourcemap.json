@@ -136,8 +136,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -170,8 +169,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#produces-accept"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -217,8 +215,7 @@
                                       "element": "string",
                                       "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
                                     }
-                                  },
-                                  "content": []
+                                  }
                                 }
                               ]
                             }
@@ -318,8 +315,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#produces-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -423,8 +419,7 @@
                                       "element": "string",
                                       "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
                                     }
-                                  },
-                                  "content": []
+                                  }
                                 }
                               ]
                             }
@@ -517,8 +512,11 @@
                                         ]
                                       },
                                       "default": {
-                                        "element": "number",
-                                        "content": 456
+                                        "element": "enum",
+                                        "content": {
+                                          "element": "number",
+                                          "content": 456
+                                        }
                                       }
                                     },
                                     "content": null
@@ -658,8 +656,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -677,8 +674,7 @@
                             }
                           ]
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -823,8 +819,11 @@
                                         ]
                                       },
                                       "default": {
-                                        "element": "number",
-                                        "content": 456
+                                        "element": "enum",
+                                        "content": {
+                                          "element": "number",
+                                          "content": 456
+                                        }
                                       }
                                     },
                                     "content": null

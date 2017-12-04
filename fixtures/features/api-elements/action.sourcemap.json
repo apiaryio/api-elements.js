@@ -147,8 +147,7 @@
                           },
                           "content": "HEAD"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -288,8 +287,7 @@
                           },
                           "content": "OPTIONS"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -462,8 +460,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -603,8 +600,7 @@
                           },
                           "content": "POST"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -744,8 +740,7 @@
                           },
                           "content": "PUT"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -885,8 +880,7 @@
                           },
                           "content": "PATCH"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -1026,8 +1020,7 @@
                           },
                           "content": "DELETE"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

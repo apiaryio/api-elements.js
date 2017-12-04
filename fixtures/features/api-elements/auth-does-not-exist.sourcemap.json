@@ -113,8 +113,7 @@
                                 }
                               ]
                             }
-                          },
-                          "content": []
+                          }
                         }
                       ]
                     }
@@ -152,8 +151,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

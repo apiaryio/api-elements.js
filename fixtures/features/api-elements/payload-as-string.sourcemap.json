@@ -215,8 +215,7 @@
                             }
                           ]
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

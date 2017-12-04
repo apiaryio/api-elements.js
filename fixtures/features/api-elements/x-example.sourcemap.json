@@ -343,8 +343,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#form-data-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -390,8 +389,7 @@
                                       "element": "string",
                                       "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
                                     }
-                                  },
-                                  "content": []
+                                  }
                                 }
                               ]
                             }
@@ -618,33 +616,36 @@
                                         ]
                                       },
                                       "default": {
-                                        "element": "string",
-                                        "attributes": {
-                                          "sourceMap": {
-                                            "element": "array",
-                                            "content": [
-                                              {
-                                                "element": "sourceMap",
-                                                "content": [
-                                                  {
-                                                    "element": "array",
-                                                    "content": [
-                                                      {
-                                                        "element": "number",
-                                                        "content": 666
-                                                      },
-                                                      {
-                                                        "element": "number",
-                                                        "content": 21
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        "content": "good morning"
+                                        "element": "enum",
+                                        "content": {
+                                          "element": "string",
+                                          "attributes": {
+                                            "sourceMap": {
+                                              "element": "array",
+                                              "content": [
+                                                {
+                                                  "element": "sourceMap",
+                                                  "content": [
+                                                    {
+                                                      "element": "array",
+                                                      "content": [
+                                                        {
+                                                          "element": "number",
+                                                          "content": 666
+                                                        },
+                                                        {
+                                                          "element": "number",
+                                                          "content": 21
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "content": "good morning"
+                                        }
                                       },
                                       "sourceMap": {
                                         "element": "array",

@@ -63,8 +63,7 @@
                               "element": "string",
                               "content": "GET"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -98,8 +97,7 @@
                               "element": "string",
                               "content": "POST"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -144,8 +142,7 @@
                               "element": "string",
                               "content": "GET"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -210,8 +207,7 @@
                               "element": "string",
                               "content": "GET"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -245,8 +241,7 @@
                               "element": "string",
                               "content": "DELETE"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",

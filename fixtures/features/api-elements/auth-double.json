@@ -40,8 +40,7 @@
                   "element": "string",
                   "content": "customBasic"
                 }
-              },
-              "content": []
+              }
             },
             {
               "element": "Token Authentication Scheme",
@@ -88,12 +87,10 @@
                       "element": "array",
                       "content": [
                         {
-                          "element": "customBasic",
-                          "content": []
+                          "element": "customBasic"
                         },
                         {
-                          "element": "customApiKey",
-                          "content": []
+                          "element": "customApiKey"
                         }
                       ]
                     }
@@ -106,8 +103,7 @@
                           "element": "string",
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

@@ -40,8 +40,7 @@
                   "element": "string",
                   "content": "customBasic"
                 }
-              },
-              "content": []
+              }
             }
           ]
         },
@@ -64,8 +63,7 @@
                       "element": "array",
                       "content": [
                         {
-                          "element": "customBasic",
-                          "content": []
+                          "element": "customBasic"
                         }
                       ]
                     }
@@ -78,8 +76,7 @@
                           "element": "string",
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

@@ -148,8 +148,7 @@
                   },
                   "content": "Auth description"
                 }
-              },
-              "content": []
+              }
             }
           ]
         },
@@ -222,8 +221,7 @@
                                 }
                               ]
                             }
-                          },
-                          "content": []
+                          }
                         }
                       ]
                     }
@@ -261,8 +259,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

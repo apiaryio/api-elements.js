@@ -398,8 +398,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -500,8 +499,7 @@
                   "element": "string",
                   "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
                 }
-              },
-              "content": []
+              }
             }
           ]
         }
@@ -563,8 +561,7 @@
                   "element": "string",
                   "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
                 }
-              },
-              "content": []
+              }
             }
           ]
         }

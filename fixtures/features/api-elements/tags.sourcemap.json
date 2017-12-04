@@ -138,8 +138,7 @@
                               },
                               "content": "GET"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -248,8 +247,7 @@
                               },
                               "content": "POST"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -394,8 +392,7 @@
                               },
                               "content": "GET"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -560,8 +557,7 @@
                               },
                               "content": "GET"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -670,8 +666,7 @@
                               },
                               "content": "DELETE"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
