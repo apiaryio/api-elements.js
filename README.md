@@ -1,5 +1,7 @@
 # Fury.js
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/apiaryio/fury.js.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://img.shields.io/travis/apiaryio/fury.js.svg)](https://travis-ci.org/apiaryio/fury.js)
 [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/apiaryio/fury.js.svg)](https://codeclimate.com/github/apiaryio/fury.js/coverage)
 [![NPM version](https://img.shields.io/npm/v/fury.svg)](https://www.npmjs.org/package/fury)
