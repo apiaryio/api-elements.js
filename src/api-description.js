@@ -18,6 +18,7 @@
  *           + Message body schema
  *   + Transition
  *   + Data structure
+ *     + Enumeration
  */
 
 import httpHeaders from './elements/http-headers';
@@ -32,6 +33,7 @@ import dataStructure from './elements/data-structure';
 import copy from './elements/copy';
 import category from './elements/category';
 import extension from './elements/extension';
+import enumeration from './elements/enum';
 
 export function namespace(options) {
   httpHeaders(options.base);
@@ -46,6 +48,7 @@ export function namespace(options) {
   copy(options.base);
   category(options.base);
   extension(options.base);
+  enumeration(options.base);
 }
 
 export default { namespace };
