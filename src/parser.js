@@ -73,11 +73,13 @@ export default class Parser {
       // source map which further tries to parse YAML to get source
       // maps which causes another warning and raise conditions where we throw
       // an error back to the caller.
-      const generateSourceMap = this.generateSourceMap;
+      const { generateSourceMap } = this;
       this.generateSourceMap = false;
 
-      this.createAnnotation(annotations.CANNOT_PARSE, null,
-        (err.reason || 'Problem loading the input'));
+      this.createAnnotation(
+        annotations.CANNOT_PARSE, null,
+        (err.reason || 'Problem loading the input'),
+      );
 
       if (err.mark) {
         this.result.first.attributes.set('sourceMap', [
@@ -148,8 +150,7 @@ export default class Parser {
           location = [this.source.indexOf(matches[1]), matches[1].length];
         }
 
-        const annotation = this.createAnnotation(annotations.VALIDATION_ERROR,
-            null, err.message);
+        const annotation = this.createAnnotation(annotations.VALIDATION_ERROR, null, err.message);
 
         if (location !== null) {
           annotation.attributes.set('sourceMap', [
@@ -207,8 +208,10 @@ export default class Parser {
           });
         });
       } catch (exception) {
-        this.createAnnotation(annotations.UNCAUGHT_ERROR, null,
-          ('There was a problem converting the Swagger document'));
+        this.createAnnotation(
+          annotations.UNCAUGHT_ERROR, null,
+          'There was a problem converting the Swagger document',
+        );
 
         return done(exception, this.result);
       }
@@ -240,8 +243,7 @@ export default class Parser {
           message = `${message}: ${err.problem}`;
         }
 
-        const annotation = this.createAnnotation(annotations.AST_UNAVAILABLE, null,
-          message);
+        const annotation = this.createAnnotation(annotations.AST_UNAVAILABLE, null, message);
 
         if (err.problem_mark && err.problem_mark.pointer) {
           const SourceMap = this.minim.getElementClass('sourceMap');
@@ -254,8 +256,10 @@ export default class Parser {
       }
     } else {
       this.internalAST = null;
-      this.createAnnotation(annotations.AST_UNAVAILABLE, null,
-        'Source maps are only available with string input');
+      this.createAnnotation(
+        annotations.AST_UNAVAILABLE, null,
+        'Source maps are only available with string input',
+      );
     }
 
     return this.internalAST;
@@ -351,8 +355,10 @@ export default class Parser {
 
         if (this.swagger.schemes) {
           if (this.swagger.schemes.length > 1) {
-            this.createAnnotation(annotations.DATA_LOST, ['schemes'],
-              'Only the first scheme will be used to create a hostname');
+            this.createAnnotation(
+              annotations.DATA_LOST, ['schemes'],
+              'Only the first scheme will be used to create a hostname',
+            );
           }
 
           hostname = `${this.swagger.schemes[0]}://${hostname}`;
@@ -771,8 +777,10 @@ export default class Parser {
 
       if (methodValue.responses && methodValue.responses.default) {
         this.withPath('responses', 'default', (path) => {
-          this.createAnnotation(annotations.DATA_LOST, path,
-            'Default response is not yet supported');
+          this.createAnnotation(
+            annotations.DATA_LOST, path,
+            'Default response is not yet supported',
+          );
         });
       }
 
@@ -789,9 +797,11 @@ export default class Parser {
 
       // Transactions are created for each response in the document
       _.forEach(relevantResponses, (responseValue, statusCode) => {
-        this.handleSwaggerResponse(transition, method, methodValue,
-                                   transitionParams, responseValue, statusCode,
-                                   schemes.map(element => element.clone()), resourceParams);
+        this.handleSwaggerResponse(
+          transition, method, methodValue,
+          transitionParams, responseValue, statusCode,
+          schemes.map(element => element.clone()), resourceParams,
+        );
       });
 
       this.handleSwaggerVendorExtensions(transition, methodValue);
@@ -846,8 +856,8 @@ export default class Parser {
     responseValue, statusCode, schemes, resourceParams,
   ) {
     const requestContentTypes = this.gatherRequestContentTypes(methodValue);
-    const responseContentTypes = this.gatherResponseContentTypes(methodValue,
-                                                                 responseValue.examples);
+    const responseContentTypes = this
+      .gatherResponseContentTypes(methodValue, responseValue.examples);
 
     responseContentTypes.forEach((responseContentType) => {
       let responseBody;
@@ -860,11 +870,15 @@ export default class Parser {
       requestContentTypes.forEach((requestContentType) => {
         const transaction = this.createTransaction(transition, method, schemes);
 
-        this.handleSwaggerExampleRequest(transaction, methodValue, transitionParams,
-                                         resourceParams, requestContentType, responseContentType,
-                                         responseBody === undefined);
-        this.handleSwaggerExampleResponse(transaction, methodValue, responseValue,
-                                          statusCode, responseBody, responseContentType);
+        this.handleSwaggerExampleRequest(
+          transaction, methodValue, transitionParams,
+          resourceParams, requestContentType, responseContentType, responseBody === undefined,
+        );
+
+        this.handleSwaggerExampleResponse(
+          transaction, methodValue, responseValue,
+          statusCode, responseBody, responseContentType,
+        );
       });
     });
   }
@@ -875,7 +889,7 @@ export default class Parser {
     requestContentType, responseContentType, contentTypeFromProduces,
   ) {
     let contentType = requestContentType;
-    const request = transaction.request;
+    const { request } = transaction;
 
     this.withPath(() => {
       const consumeIsJson = contentType && isJsonContentType(contentType);
@@ -906,8 +920,8 @@ export default class Parser {
       const parametersGenerator = {};
 
       _.forEach([
-          [resourceParams, '..'],
-          [transitionParams, '.'],
+        [resourceParams, '..'],
+        [transitionParams, '.'],
       ], (parameters) => {
         _.forEach(parameters[0], (param, index) => {
           switch (param.in) {
@@ -921,8 +935,10 @@ export default class Parser {
               _.set(parametersGenerator, [param.in, param.name], _.bind(this.withPath, this, parameters[1], 'parameters', index, () => {
                 if (param['x-example']) {
                   this.withPath('x-example', () => {
-                    this.createAnnotation(annotations.VALIDATION_ERROR, this.path,
-                        'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead');
+                    this.createAnnotation(
+                      annotations.VALIDATION_ERROR, this.path,
+                      'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead',
+                    );
                   });
                 }
 
@@ -996,14 +1012,19 @@ export default class Parser {
 
   formDataParameterCheck(param) {
     if (param.type === 'array') {
-      this.createAnnotation(annotations.DATA_LOST, this.path,
-          'Arrays in form parameters are not fully supported yet');
+      this.createAnnotation(
+        annotations.DATA_LOST, this.path,
+        'Arrays in form parameters are not fully supported yet',
+      );
+
       return;
     }
 
     if (param.allowEmptyValue) {
-      this.createAnnotation(annotations.DATA_LOST, this.path,
-          'The allowEmptyValue flag is not fully supported yet');
+      this.createAnnotation(
+        annotations.DATA_LOST, this.path,
+        'The allowEmptyValue flag is not fully supported yet',
+      );
     }
   }
 
@@ -1013,7 +1034,7 @@ export default class Parser {
     statusCode, responseBody, contentType,
   ) {
     const { Asset, Copy } = this.minim.elements;
-    const response = transaction.response;
+    const { response } = transaction;
 
     this.withPath('responses', statusCode, () => {
       if (responseValue.description) {
@@ -1142,7 +1163,7 @@ export default class Parser {
               }
 
               if (tag === null) {
-                tag = operation.tags[0];
+                [tag] = operation.tags;
               } else if (tag !== operation.tags[0]) {
                 // Non-matching tags... can't have a resource in multiple groups!
                 return false;
@@ -1371,6 +1392,7 @@ export default class Parser {
       const SourceMap = this.minim.getElementClass('sourceMap');
       const position = this.ast.getPosition(path);
 
+      // eslint-disable-next-line no-restricted-globals
       if (position && !isNaN(position.start) && !isNaN(position.end)) {
         element.attributes.set('sourceMap', [
           new SourceMap([[position.start, position.end - position.start]]),
@@ -1413,8 +1435,10 @@ export default class Parser {
 
         // Adding a warning if format is not supported
         if (!['multi', 'csv'].includes(format)) {
-          this.createAnnotation(annotations.DATA_LOST, this.path,
-            `Parameters of collection format '${format}' are not supported`);
+          this.createAnnotation(
+            annotations.DATA_LOST, this.path,
+            `Parameters of collection format '${format}' are not supported`,
+          );
         }
 
         if (parameter.in === 'query' || parameter.in === 'path') {
@@ -1451,8 +1475,10 @@ export default class Parser {
       payload.content.push(schemaAsset);
       handledSchema = true;
     } catch (exception) {
-      this.createAnnotation(annotations.DATA_LOST, path,
-        ('Circular references in schema are not yet supported'));
+      this.createAnnotation(
+        annotations.DATA_LOST, path,
+        'Circular references in schema are not yet supported',
+      );
     }
 
     if (handledSchema) {
@@ -1516,8 +1542,10 @@ export default class Parser {
       } catch (e) {
         const index = contentTypes.indexOf(contentType);
         this.withPath(index, () => {
-          this.createAnnotation(annotations.VALIDATION_WARNING, this.path,
-            `Invalid content type '${contentType}', ${e.message}`);
+          this.createAnnotation(
+            annotations.VALIDATION_WARNING, this.path,
+            `Invalid content type '${contentType}', ${e.message}`,
+          );
         });
       }
     });

@@ -95,11 +95,10 @@ describe('bodyFromSchema', () => {
       const asset = bodyFromSchema(schema, payload, parser, 'multipart/form-data; boundary=boundy');
 
       expect(asset.content).to.be.a('string');
-      expect(asset.content).to.equal(
-        '--boundy\r\nContent-Disposition: form-data; name="example1"\r\n\r\nHello\r\n' +
-        '--boundy\r\nContent-Disposition: form-data; name="example2"\r\n\r\nHello\r\n' +
-        '\r\n--boundy--\r\n',
-      );
+      expect(asset.content).to
+        .equal('--boundy\r\nContent-Disposition: form-data; name="example1"\r\n\r\nHello\r\n' +
+          '--boundy\r\nContent-Disposition: form-data; name="example2"\r\n\r\nHello\r\n' +
+          '\r\n--boundy--\r\n');
     });
   });
 });

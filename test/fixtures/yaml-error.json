@@ -27,8 +27,7 @@
                   "element": "string",
                   "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
                 }
-              },
-              "content": []
+              }
             }
           ]
         }
@@ -67,8 +66,7 @@
                   "element": "string",
                   "content": "http://docs.apiary.io/validations/swagger#yaml-parser"
                 }
-              },
-              "content": []
+              }
             }
           ]
         }

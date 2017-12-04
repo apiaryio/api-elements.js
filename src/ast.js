@@ -32,7 +32,7 @@ export default class Ast {
         // eslint-disable-next-line no-restricted-syntax
         for (const subNode of node.value) {
           if (subNode[0] && subNode[0].value === piece) {
-            newNode = subNode[1];
+            [, newNode] = subNode;
 
             if (!pieces.length) {
               // This is the last item!

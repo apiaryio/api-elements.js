@@ -153,12 +153,10 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(StringElement);
       expect(dataStructure.content.description.toValue())
-        .to.equal(
-          'A simple string\n' +
+        .to.equal('A simple string\n' +
           '\n' +
           '- Length of string must be less than, or equal to 10\n' +
-          '- Length of string must be greater than, or equal to 2',
-        );
+          '- Length of string must be greater than, or equal to 2');
     });
   });
 
@@ -725,7 +723,7 @@ describe('JSON Schema to Data Structure', () => {
     expect(dataStructure.element).to.equal('dataStructure');
     expect(dataStructure.content).to.be.instanceof(EnumElement);
 
-    const enumerations = dataStructure.content.enumerations;
+    const { enumerations } = dataStructure.content;
 
     expect(enumerations.length).to.equal(2);
     expect(enumerations.get(0)).to.be.instanceof(StringElement);

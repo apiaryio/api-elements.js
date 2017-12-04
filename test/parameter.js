@@ -9,7 +9,7 @@ import Parser from '../src/parser';
 const minim = minimModule.namespace()
   .use(minimParseResult);
 
-const Annotation = minim.elements.Annotation;
+const { Annotation } = minim.elements;
 
 describe('Parameter to Member converter', () => {
   it('can convert a parameter to a member with x-example', () => {

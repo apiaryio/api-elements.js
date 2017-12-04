@@ -167,7 +167,6 @@ export default class DataStructureGenerator {
       Number: NumberElement,
       Boolean: BooleanElement,
       Null: NullElement,
-      Array: ArrayElement,
       Enum: EnumElement,
     } = this.minim.elements;
 

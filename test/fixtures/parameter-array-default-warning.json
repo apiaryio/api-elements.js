@@ -76,8 +76,7 @@
                           "element": "string",
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -156,8 +155,7 @@
                   "element": "string",
                   "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
                 }
-              },
-              "content": []
+              }
             }
           ]
         }
