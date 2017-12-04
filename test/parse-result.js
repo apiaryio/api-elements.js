@@ -62,7 +62,6 @@ describe('Parse result namespace', () => {
                 ],
               },
             },
-            content: [],
           },
           {
             element: 'annotation',
@@ -77,7 +76,6 @@ describe('Parse result namespace', () => {
                 ],
               },
             },
-            content: [],
           },
           {
             element: 'category',
@@ -92,7 +90,6 @@ describe('Parse result namespace', () => {
                 ],
               },
             },
-            content: [],
           },
         ],
       };

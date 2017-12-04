@@ -1,5 +1,7 @@
 # Minim Parse Result Namespace
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/refractproject/minim-parse-result.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://img.shields.io/travis/refractproject/minim-parse-result.svg)](https://travis-ci.org/refractproject/minim-parse-result)
 [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/refractproject/minim-parse-result.svg)](https://codeclimate.com/github/refractproject/minim-parse-result/coverage)
 [![NPM version](https://img.shields.io/npm/v/minim-parse-result.svg)](https://www.npmjs.org/package/minim-parse-result)
