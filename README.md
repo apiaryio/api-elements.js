@@ -1,5 +1,7 @@
 # Fury CLI
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/apiaryio/fury-cli.svg)](https://greenkeeper.io/)
+
 Command line interface for the [fury.js](https://github.com/apiaryio/fury.js)
 API Description SDK. Fury allows you to parse API Descriptions into [API
 Elements](http://api-elements.readthedocs.org/) or other API Description
