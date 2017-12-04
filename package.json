@@ -21,18 +21,18 @@
     "babel-runtime": "^6.23.0",
     "cardinal": "^1.0.0",
     "commander": "^2.9",
-    "fury": "3.0.0-beta.4",
-    "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.2",
-    "fury-adapter-apib-parser": "^0.9.0",
-    "fury-adapter-apib-serializer": "^0.5.0",
-    "fury-adapter-swagger": "^0.13.1",
+    "fury": "3.0.0-beta.6",
+    "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.3",
+    "fury-adapter-apib-parser": "^0.10.0",
+    "fury-adapter-apib-serializer": "^0.6.0",
+    "fury-adapter-swagger": "^0.16.0",
     "js-yaml": "^3.6",
-    "minim": "^0.19.1"
+    "minim": "^0.20.1"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
+    "chai": "^4.1.2",
     "glob": "^7.1.1",
-    "peasant": "^1.1.0"
+    "peasant": "1.1.0"
   },
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT"
