@@ -159,8 +159,7 @@
                             }
                           ]
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

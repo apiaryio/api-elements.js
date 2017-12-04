@@ -164,8 +164,7 @@
                   },
                   "content": "customBasic"
                 }
-              },
-              "content": []
+              }
             }
           ]
         },
@@ -238,8 +237,7 @@
                                 }
                               ]
                             }
-                          },
-                          "content": []
+                          }
                         }
                       ]
                     }
@@ -277,8 +275,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -474,8 +471,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -668,8 +664,7 @@
                                 }
                               ]
                             }
-                          },
-                          "content": []
+                          }
                         }
                       ]
                     }
@@ -707,8 +702,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

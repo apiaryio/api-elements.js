@@ -38,8 +38,7 @@
                       "element": "array",
                       "content": [
                         {
-                          "element": "doesNotExist",
-                          "content": []
+                          "element": "doesNotExist"
                         }
                       ]
                     }
@@ -52,8 +51,7 @@
                           "element": "string",
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

@@ -100,8 +100,7 @@
                       "element": "string",
                       "content": "http://example.com/oauth/authorize"
                     }
-                  },
-                  "content": []
+                  }
                 }
               ]
             }
@@ -163,8 +162,7 @@
                           "element": "string",
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

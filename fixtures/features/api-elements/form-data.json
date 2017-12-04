@@ -61,8 +61,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#form-data-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -108,8 +107,7 @@
                                       "element": "string",
                                       "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
                                     }
-                                  },
-                                  "content": []
+                                  }
                                 }
                               ]
                             }

@@ -136,8 +136,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#produces-accept"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -155,8 +154,7 @@
                             }
                           ]
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -181,8 +179,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#produces-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -286,8 +283,7 @@
                                       "element": "string",
                                       "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
                                     }
-                                  },
-                                  "content": []
+                                  }
                                 }
                               ]
                             }
@@ -347,8 +343,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "object",
-                            "content": []
+                            "element": "object"
                           }
                         }
                       ]

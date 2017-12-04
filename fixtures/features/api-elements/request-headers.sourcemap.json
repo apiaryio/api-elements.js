@@ -197,8 +197,7 @@
                             }
                           ]
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -223,8 +222,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#produces-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -338,8 +336,7 @@
                   "element": "string",
                   "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
                 }
-              },
-              "content": []
+              }
             }
           ]
         }

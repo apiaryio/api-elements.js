@@ -325,8 +325,7 @@
                       },
                       "content": "http://example.com/oauth/authorize"
                     }
-                  },
-                  "content": []
+                  }
                 },
                 {
                   "element": "transition",
@@ -389,8 +388,7 @@
                       },
                       "content": "http://example.com/oauth/token"
                     }
-                  },
-                  "content": []
+                  }
                 }
               ]
             }
@@ -577,8 +575,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

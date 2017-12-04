@@ -61,8 +61,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -95,8 +94,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#produces-accept"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -173,8 +171,7 @@
                                           "element": "string",
                                           "content": "http://docs.apiary.io/validations/swagger#produces-content-type"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }
@@ -228,8 +225,7 @@
                                       "element": "string",
                                       "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
                                     }
-                                  },
-                                  "content": []
+                                  }
                                 }
                               ]
                             }
@@ -266,8 +262,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "object",
-                            "content": []
+                            "element": "object"
                           }
                         }
                       ]
@@ -306,8 +301,7 @@
                   "element": "string",
                   "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
                 }
-              },
-              "content": []
+              }
             }
           ]
         }

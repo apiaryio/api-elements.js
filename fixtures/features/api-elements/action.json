@@ -47,8 +47,7 @@
                           "element": "string",
                           "content": "HEAD"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -88,8 +87,7 @@
                           "element": "string",
                           "content": "OPTIONS"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -137,8 +135,7 @@
                           "element": "string",
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -178,8 +175,7 @@
                           "element": "string",
                           "content": "POST"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -219,8 +215,7 @@
                           "element": "string",
                           "content": "PUT"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -260,8 +255,7 @@
                           "element": "string",
                           "content": "PATCH"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -301,8 +295,7 @@
                           "element": "string",
                           "content": "DELETE"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",

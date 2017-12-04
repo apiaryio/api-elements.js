@@ -37,8 +37,7 @@
                   "element": "string",
                   "content": "http://help.com"
                 }
-              },
-              "content": []
+              }
             }
           ]
         }
@@ -80,8 +79,7 @@
                       "element": "string",
                       "content": "http://help.com"
                     }
-                  },
-                  "content": []
+                  }
                 }
               ]
             }
@@ -119,8 +117,7 @@
                               "element": "string",
                               "content": "http://help.com"
                             }
-                          },
-                          "content": []
+                          }
                         }
                       ]
                     }
@@ -136,8 +133,7 @@
                               "element": "string",
                               "content": "GET"
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -184,8 +180,7 @@
                                           "element": "string",
                                           "content": "http://help.com"
                                         }
-                                      },
-                                      "content": []
+                                      }
                                     }
                                   ]
                                 }

@@ -36,8 +36,7 @@
                       "element": "string",
                       "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                     }
-                  },
-                  "content": []
+                  }
                 }
               ]
             }
@@ -99,8 +98,7 @@
                           "element": "string",
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -132,8 +130,7 @@
                                       "element": "string",
                                       "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                                     }
-                                  },
-                                  "content": []
+                                  }
                                 }
                               ]
                             }
@@ -163,8 +160,7 @@
                               "element": "string",
                               "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                             }
-                          },
-                          "content": []
+                          }
                         }
                       ]
                     }
@@ -192,8 +188,7 @@
                           "element": "string",
                           "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                         }
-                      },
-                      "content": []
+                      }
                     }
                   ]
                 }
@@ -221,8 +216,7 @@
                       "element": "string",
                       "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
                     }
-                  },
-                  "content": []
+                  }
                 }
               ]
             }

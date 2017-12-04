@@ -325,8 +325,7 @@
                       },
                       "content": "http://example.com/oauth/authorize"
                     }
-                  },
-                  "content": []
+                  }
                 }
               ]
             }
@@ -513,8 +512,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": []
+                      }
                     },
                     {
                       "element": "httpResponse",
