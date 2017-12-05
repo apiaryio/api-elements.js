@@ -15,7 +15,7 @@ function doParse(source, done, expectations) {
       return done(err);
     }
 
-    const resources = output.content[0].resources;
+    const { resources } = output.content[0];
 
     expect(resources.length).to.be.equal(1);
     expect(resources.get(0).transitions.get(0).length).to.be.equal(1);
@@ -257,11 +257,14 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'body'));
       source.paths['/'].get.parameters.push(makeParameter('foo', 'body'));
 
-      doParse(source, (err) => {
-        expect(err.message).to.equal('Validation failed. /paths//get has 2 body parameters. Only one is allowed.');
-        done();
-      },
-      () => {});
+      doParse(
+        source,
+        (err) => {
+          expect(err.message).to.equal('Validation failed. /paths//get has 2 body parameters. Only one is allowed.');
+          done();
+        },
+        () => {},
+      );
     });
 
     it('on Path and Operation is same Parameter', (done) => {
@@ -270,9 +273,8 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'body', { type: 'number' }));
 
       doParse(source, done, (result) => {
-        expect(result.request.messageBodySchema.content).to.equal(
-          JSON.stringify(source.paths['/'].get.parameters[0].schema),
-        );
+        expect(result.request.messageBodySchema.content).to
+          .equal(JSON.stringify(source.paths['/'].get.parameters[0].schema));
       });
     });
   });

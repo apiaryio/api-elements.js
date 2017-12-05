@@ -17,8 +17,7 @@ export function pushHeader(key, value, payload, parser, fragment) {
   createHeaders(payload, parser);
 
   const duplicate = payload.headers.find(member =>
-    member.key.content.toLowerCase() === key.toLowerCase(),
-  );
+    member.key.content.toLowerCase() === key.toLowerCase());
 
   if (duplicate.length) {
     header = duplicate.first;
@@ -50,8 +49,10 @@ export function pushHeaderObject(key, header, payload, parser) {
 
   if (header.type === 'array') {
     // TODO: Support collectionFormat once arrays are supported
-    parser.createAnnotation(annotations.DATA_LOST, parser.path,
-      'Headers of type array are not yet supported');
+    parser.createAnnotation(
+      annotations.DATA_LOST, parser.path,
+      'Headers of type array are not yet supported',
+    );
 
     return;
   }
@@ -59,7 +60,7 @@ export function pushHeaderObject(key, header, payload, parser) {
   // Choose the first available option
   if (header.enum) {
     // TODO: This may lose data if there are multiple enums.
-    value = header.enum[0];
+    [value] = header.enum;
   }
 
   if (header['x-example']) {

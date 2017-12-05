@@ -101,11 +101,10 @@ describe('Swagger 2.0 adapter', () => {
 
     it('has API category inside parse result', () => {
       const filtered = result.filter(item =>
-        item.element === 'category' && item.classes.contains('api'),
-      );
+        item.element === 'category' && item.classes.contains('api'));
 
       expect(filtered).to.have.length(1);
-      expect(filtered[0]).to.be.an.object;
+      expect(filtered.first).to.be.an('object');
     });
   });
 

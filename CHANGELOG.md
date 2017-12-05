@@ -1,3 +1,10 @@
+# 0.16.0
+
+## Enhancements
+
+- Samples and Defaults of enum schema and parameters are now wrapped
+  in enum element.
+
 # 0.15.2
 
 ## Enhancements

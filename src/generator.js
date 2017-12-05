@@ -51,8 +51,10 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
 
     payload.content.push(asset);
   } catch (exception) {
-    parser.createAnnotation(annotations.DATA_LOST, parser.path,
-      `Unable to generate ${contentType} example message body out of JSON Schema`);
+    parser.createAnnotation(
+      annotations.DATA_LOST, parser.path,
+      `Unable to generate ${contentType} example message body out of JSON Schema`,
+    );
   }
 
   return asset;

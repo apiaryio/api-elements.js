@@ -18,6 +18,7 @@ const {
   Null: NullElement,
   Array: ArrayElement,
   Object: ObjectElement,
+  Enum: EnumElement,
 } = namespace.elements;
 
 function schemaToDataStructure(schema) {
@@ -152,12 +153,10 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(StringElement);
       expect(dataStructure.content.description.toValue())
-        .to.equal(
-          'A simple string\n' +
+        .to.equal('A simple string\n' +
           '\n' +
           '- Length of string must be less than, or equal to 10\n' +
-          '- Length of string must be greater than, or equal to 2',
-        );
+          '- Length of string must be greater than, or equal to 2');
     });
   });
 
@@ -701,7 +700,7 @@ describe('JSON Schema to Data Structure', () => {
     const dataStructure = schemaToDataStructure(schema);
 
     expect(dataStructure.element).to.equal('dataStructure');
-    expect(dataStructure.content.element).to.equal('enum');
+    expect(dataStructure.content).to.be.instanceof(EnumElement);
 
     const enumerations = dataStructure.content.attributes.get('enumerations');
 
@@ -711,6 +710,59 @@ describe('JSON Schema to Data Structure', () => {
     expect(enumerations.get(1)).to.be.instanceof(NumberElement);
     expect(enumerations.getValue(1)).to.equal(2);
     expect(enumerations.get(2)).to.be.instanceof(NullElement);
+  });
+
+  it('produces samples for enum element', () => {
+    const schema = {
+      enum: ['one', 'two'],
+      examples: ['one', 'two'],
+    };
+
+    const dataStructure = schemaToDataStructure(schema);
+
+    expect(dataStructure.element).to.equal('dataStructure');
+    expect(dataStructure.content).to.be.instanceof(EnumElement);
+
+    const { enumerations } = dataStructure.content;
+
+    expect(enumerations.length).to.equal(2);
+    expect(enumerations.get(0)).to.be.instanceof(StringElement);
+    expect(enumerations.getValue(0)).to.equal('one');
+    expect(enumerations.get(1)).to.be.instanceof(StringElement);
+    expect(enumerations.getValue(1)).to.equal('two');
+
+    const samples = dataStructure.content.attributes.get('samples');
+
+    expect(samples.length).to.equal(2);
+    expect(samples.get(0)).to.be.instanceof(EnumElement);
+    expect(samples.get(0).toValue()).to.be.deep.equal('one');
+    expect(samples.get(1)).to.be.instanceof(EnumElement);
+    expect(samples.get(1).toValue()).to.be.deep.equal('two');
+  });
+
+  it('produces default for enum element', () => {
+    const schema = {
+      enum: ['one', 'two'],
+      default: 'one',
+    };
+
+    const dataStructure = schemaToDataStructure(schema);
+
+    expect(dataStructure.element).to.equal('dataStructure');
+    expect(dataStructure.content).to.instanceof(EnumElement);
+
+    const enumerations = dataStructure.content.attributes.get('enumerations');
+
+    expect(enumerations.length).to.equal(2);
+    expect(enumerations.get(0)).to.be.instanceof(StringElement);
+    expect(enumerations.getValue(0)).to.equal('one');
+    expect(enumerations.get(1)).to.be.instanceof(StringElement);
+    expect(enumerations.getValue(1)).to.equal('two');
+
+    const defaultElement = dataStructure.content.attributes.get('default');
+
+    expect(defaultElement).to.be.instanceof(EnumElement);
+    expect(defaultElement.toValue()).to.be.deep.equal('one');
   });
 
   it('produces description containing the schema format', () => {

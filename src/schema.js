@@ -47,12 +47,11 @@ export default class DataStructureGenerator {
 
   // Generates an enum element for the given enum schema
   generateEnum(schema) {
-    const { Array: ArrayElement, Element } = this.minim.elements;
+    const { Enum: EnumElement } = this.minim.elements;
 
-    const element = new Element();
-    element.element = 'enum';
+    const element = new EnumElement();
 
-    element.attributes.set('enumerations', new ArrayElement(schema.enum));
+    element.enumerations = schema.enum;
 
     return element;
   }
@@ -168,7 +167,7 @@ export default class DataStructureGenerator {
       Number: NumberElement,
       Boolean: BooleanElement,
       Null: NullElement,
-      Array: ArrayElement,
+      Enum: EnumElement,
     } = this.minim.elements;
 
     const typeGeneratorMap = {
@@ -202,16 +201,31 @@ export default class DataStructureGenerator {
         element.description = new StringElement(schema.description);
       }
 
-      if (schema.default !== undefined && !_.isArray(schema.default) &&
-          !_.isObject(schema.default)) {
+      let def = schema.default;
+
+      if (def !== undefined && !_.isArray(def) && !_.isObject(def)) {
         // TODO Support defaults for arrays and objects
-        element.attributes.set('default', schema.default);
+        if (schema.enum) {
+          def = new EnumElement(def);
+        }
+
+        element.attributes.set('default', def);
       }
 
+      let samples = [];
+
       if (schema.examples) {
-        element.attributes.set('samples', schema.examples);
+        samples = schema.examples;
       } else if (schema.example) {
-        element.attributes.set('samples', new ArrayElement([schema.example]));
+        samples = [schema.example];
+      }
+
+      if (samples.length) {
+        if (schema.enum) {
+          samples = samples.map(item => new EnumElement(item));
+        }
+
+        element.attributes.set('samples', samples);
       }
 
       const validationDescriptions = this.generateValidationDescriptions(schema);

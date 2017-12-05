@@ -48,13 +48,13 @@ export function hasBoundary(contentType) {
 }
 
 export function parseBoundary(contentType) {
-  let boundary = 'BOUNDARY';
+  const boundary = 'BOUNDARY';
 
   try {
     const type = typer.parse(contentType);
 
     if (type.parameters.boundary) {
-      boundary = type.parameters.boundary;
+      return type.parameters.boundary;
     }
   } catch (e) {
     // Ignore invalid content type
