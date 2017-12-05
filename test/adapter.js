@@ -44,7 +44,7 @@ describe('API Blueprint parser adapter', () => {
       const filtered = result.children.filter(item => item.element === 'category' && item.classes.contains('api'));
 
       expect(filtered).to.have.length(1);
-      expect(filtered[0]).to.be.an.object;
+      expect(filtered.first).to.be.an('object');
     });
   });
 
