@@ -1,5 +1,7 @@
 # Fury API Blueprint Parser
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/apiaryio/fury-adapter-apib-parser.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://img.shields.io/travis/apiaryio/fury-adapter-apib-parser.svg)](https://travis-ci.org/apiaryio/fury-adapter-apib-parser)
 [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/apiaryio/fury-adapter-apib-parser.svg)](https://codeclimate.com/github/apiaryio/fury-adapter-apib-parser/coverage)
 [![NPM version](https://img.shields.io/npm/v/fury-adapter-apib-parser.svg)](https://www.npmjs.org/package/fury-adapter-apib-parser)
