@@ -106,8 +106,7 @@
                               "element": "null",
                               "content": null
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
@@ -120,8 +119,7 @@
                               "element": "null",
                               "content": null
                             }
-                          },
-                          "content": []
+                          }
                         }
                       ]
                     }

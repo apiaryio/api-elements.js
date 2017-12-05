@@ -118,8 +118,7 @@
                               "element": "null",
                               "content": null
                             }
-                          },
-                          "content": []
+                          }
                         },
                         {
                           "element": "httpResponse",
