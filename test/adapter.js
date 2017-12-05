@@ -47,7 +47,7 @@ describe('Apiary Blueprint Parser Adapter', () => {
       const filtered = result.filter(item => item.element === 'category' && item.classes.contains('api'));
 
       expect(filtered).to.have.length(1);
-      expect(filtered[0]).to.be.an.object;
+      expect(filtered.first).to.be.an('object');
     });
   });
 
