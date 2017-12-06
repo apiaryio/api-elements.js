@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.2
+
+### Enhancements
+
+- Updated Fury and other parser dependencies.
+
 ## 0.5.1
 
 ### Enhancements
