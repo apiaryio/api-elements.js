@@ -1329,7 +1329,7 @@ export default class Parser {
       });
     }
 
-    if (parameter.type === 'array' && parameter.items && element.content.length === 0) {
+    if (parameter.type === 'array' && parameter.items && parameter.items.type && element.content.length === 0) {
       this.withPath('items', () => {
         element.content = [this.convertParameterToElement(parameter.items, true)];
       });
