@@ -622,7 +622,7 @@ export default class Parser {
       // Provide users with a way to add a title to a resource in Swagger
       if (pathValue['x-summary']) {
         this.withPath('x-summary', () => {
-          resource.title = pathValue['x-summary'];
+          resource.title = String(pathValue['x-summary']);
 
           if (this.generateSourceMap) {
             this.createSourceMap(resource.meta.get('title'), this.path);

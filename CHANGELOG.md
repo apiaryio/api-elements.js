@@ -4,6 +4,10 @@
 
 - Allow parsing Swagger parameters of array type which do not have samples and
   offer `items` which does not include a type.
+- Coerce a resource `x-summary` value to a string if it is not already a
+  string. When a user enters an incorrect type such as boolean, number or
+  array. The title would become an incorrect type and can cause subsequent
+  tooling to fail.
 
 # 0.16.0
 
