@@ -1,3 +1,10 @@
+# Master
+
+## Bug Fixes
+
+- Allow parsing Swagger parameters of array type which do not have samples and
+  offer `items` which does not include a type.
+
 # 0.16.0
 
 ## Enhancements
