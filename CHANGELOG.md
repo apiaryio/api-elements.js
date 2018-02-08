@@ -1,5 +1,12 @@
 # Changelog
 
+## Master
+
+### Enhancements
+
+- Added a `--shell` option, this allows you to launch a interactive repl where
+  you can interact with the parse result.
+
 ## 0.5.2
 
 ### Enhancements
