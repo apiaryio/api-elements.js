@@ -23,6 +23,23 @@ describe('bodyFromSchema', () => {
     expect(body).to.be.an('array');
   });
 
+  it('can generate a JSON object from optional properties', () => {
+    const schema = {
+      type: 'object',
+      properties: {
+        name: {
+          enum: ['doe'],
+        },
+      },
+    };
+
+    const payload = { content: [] };
+    const asset = bodyFromSchema(schema, payload, parser, 'application/json');
+    const body = JSON.parse(asset.content);
+
+    expect(body).to.deep.equal({ name: 'doe' });
+  });
+
   it('limits a strings min/max length to 256', () => {
     const schema = {
       type: 'string',
