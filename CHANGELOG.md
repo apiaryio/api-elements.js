@@ -1,3 +1,9 @@
+# 0.17.0
+
+## Enhancements
+
+- Optional object properties are now always present in generated JSON examples.
+
 # 0.16.1
 
 ## Bug Fixes
