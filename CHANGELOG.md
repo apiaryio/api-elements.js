@@ -1,5 +1,12 @@
 # Changelog
 
+## Master
+
+### Bug Fixes
+
+- Parser will no longer create place a `null` element as the HTTP headers when
+  there are no HTTP headers.
+
 ## 3.0.0-beta.3
 
 ### Enhancements

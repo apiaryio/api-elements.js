@@ -70,10 +70,6 @@
                             "method": {
                               "element": "string",
                               "content": "GET"
-                            },
-                            "headers": {
-                              "element": "null",
-                              "content": null
                             }
                           }
                         },
