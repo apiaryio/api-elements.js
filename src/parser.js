@@ -140,7 +140,10 @@ export default class Parser {
     const { Asset, HttpRequest } = this.minim.elements;
     const httpRequest = new HttpRequest();
     httpRequest.method = resource.method;
-    httpRequest.headers = this.handleHeaders(request.headers);
+    const headers = this.handleHeaders(request.headers);
+    if (headers) {
+      httpRequest.headers = headers;
+    }
 
     if (request.body) {
       const bodyAsset = new Asset(request.body);
@@ -160,7 +163,10 @@ export default class Parser {
     const httpResponse = new HttpResponse();
 
     httpResponse.statusCode = response.status;
-    httpResponse.headers = this.handleHeaders(response.headers);
+    const headers = this.handleHeaders(response.headers);
+    if (headers) {
+      httpResponse.headers = headers;
+    }
 
     if (response.body) {
       const bodyAsset = new Asset(response.body);

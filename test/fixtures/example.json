@@ -113,10 +113,6 @@
                             "method": {
                               "element": "string",
                               "content": "GET"
-                            },
-                            "headers": {
-                              "element": "null",
-                              "content": null
                             }
                           }
                         },
@@ -341,10 +337,6 @@
                             "method": {
                               "element": "string",
                               "content": "POST"
-                            },
-                            "headers": {
-                              "element": "null",
-                              "content": null
                             }
                           },
                           "content": [
@@ -371,10 +363,6 @@
                             "statusCode": {
                               "element": "number",
                               "content": 200
-                            },
-                            "headers": {
-                              "element": "null",
-                              "content": null
                             }
                           },
                           "content": [
