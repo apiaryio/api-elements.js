@@ -1459,6 +1459,14 @@ export default class Parser {
     let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
     actualSchema = _.omitBy(actualSchema, isExtension);
 
+    if (schema['x-nullable']) {
+      if (actualSchema.type) {
+        actualSchema.type = [actualSchema.type, 'null'];
+      } else {
+        actualSchema.type = 'null';
+      }
+    }
+
     try {
       const Asset = this.minim.getElementClass('asset');
       const schemaAsset = new Asset(JSON.stringify(actualSchema));

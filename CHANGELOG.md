@@ -1,3 +1,12 @@
+# Master
+
+## Enhancements
+
+- Adds support for the `x-nullable` schema extension. This allows adding `null`
+  as a type to a schema. This is an OpenAPI 3 feature ported to Swagger 2 as a
+  vendored extension.  
+  [#112](https://github.com/apiaryio/fury-adapter-swagger/issues/112)
+
 # 0.17.0
 
 ## Enhancements
