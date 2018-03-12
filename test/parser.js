@@ -75,4 +75,22 @@ describe('Parser', () => {
       expect(contentTypes).to.deep.equal([null]);
     });
   });
+
+  context('schema', () => {
+    it('can push schema onto HTTP message payload', () => {
+      const schema = { type: 'object' };
+      const payload = new fury.minim.elements.HttpResponse();
+      parser.pushSchemaAsset(schema, payload);
+
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object"}');
+    });
+
+    it('strips extensions from schema', () => {
+      const schema = { type: 'object', 'x-test': true };
+      const payload = new fury.minim.elements.HttpResponse();
+      parser.pushSchemaAsset(schema, payload);
+
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object"}');
+    });
+  });
 });
