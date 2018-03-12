@@ -786,4 +786,17 @@ describe('JSON Schema to Data Structure', () => {
 
     expect(dataStructure).to.be.null;
   });
+
+  it('adds nullable typeAttribute with x-nullable extension', () => {
+    const schema = {
+      type: 'string',
+      'x-nullable': true,
+    };
+
+    const dataStructure = schemaToDataStructure(schema);
+
+    expect(dataStructure.element).to.equal('dataStructure');
+    expect(dataStructure.content).to.be.instanceof(StringElement);
+    expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['nullable']);
+  });
 });
