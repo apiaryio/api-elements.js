@@ -201,6 +201,10 @@ export default class DataStructureGenerator {
         element.description = new StringElement(schema.description);
       }
 
+      if (schema['x-nullable']) {
+        element.attributes.set('typeAttributes', ['nullable']);
+      }
+
       let def = schema.default;
 
       if (def !== undefined && !_.isArray(def) && !_.isObject(def)) {

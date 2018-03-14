@@ -75,4 +75,38 @@ describe('Parser', () => {
       expect(contentTypes).to.deep.equal([null]);
     });
   });
+
+  context('schema', () => {
+    it('can push schema onto HTTP message payload', () => {
+      const schema = { type: 'object' };
+      const payload = new fury.minim.elements.HttpResponse();
+      parser.pushSchemaAsset(schema, payload);
+
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object"}');
+    });
+
+    it('strips extensions from schema', () => {
+      const schema = { type: 'object', 'x-test': true };
+      const payload = new fury.minim.elements.HttpResponse();
+      parser.pushSchemaAsset(schema, payload);
+
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object"}');
+    });
+
+    it('adds null to type when x-nullable is provided', () => {
+      const schema = { type: 'object', 'x-nullable': true };
+      const payload = new fury.minim.elements.HttpResponse();
+      parser.pushSchemaAsset(schema, payload);
+
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":["object","null"]}');
+    });
+
+    it('sets null as type when x-nullable is provided without type', () => {
+      const schema = { 'x-nullable': true };
+      const payload = new fury.minim.elements.HttpResponse();
+      parser.pushSchemaAsset(schema, payload);
+
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"null"}');
+    });
+  });
 });
