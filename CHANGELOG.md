@@ -1,4 +1,9 @@
-# Master
+# 0.18.0
+
+## Breaking
+
+- Support for Node 4 was removed. Node 6 is the minimum supported version of
+  Node.
 
 ## Enhancements
 
