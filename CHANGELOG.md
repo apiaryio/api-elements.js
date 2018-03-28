@@ -1,3 +1,9 @@
+# 0.18.1
+
+## Enhancements
+
+- Allow `date` and `date-time` format support.
+
 # 0.18.0
 
 ## Breaking

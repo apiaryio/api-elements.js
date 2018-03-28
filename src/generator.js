@@ -71,7 +71,7 @@ export function bodyFromFormParameter(param, schema) {
   // If there's example value, we want to force the body generator
   // to use it. This is done using 'enum' with a single value.
   if (param['x-example'] !== undefined) {
-    paramSchema.enum = [param['x-example']];
+    paramSchema.default = param['x-example'];
   }
 
   delete paramSchema.name;
