@@ -282,7 +282,7 @@
                               "content": "application/json"
                             }
                           },
-                          "content": "{\n  \"id\": 123,\n  \"name\": \"Item name\"\n}"
+                          "content": "{\n  \"id\": 456,\n  \"name\": \"Item name\"\n}"
                         },
                         {
                           "element": "asset",
