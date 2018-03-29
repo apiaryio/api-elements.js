@@ -1,0 +1,10 @@
+{
+  "source": {
+    "include": [
+      "../node_modules/minim/lib/primitives",
+      "../node_modules/minim/lib/elements",
+      "../node_modules/minim-api-description/lib/elements",
+      "../node_modules/minim-parse-result/lib"
+    ]
+  }
+}
