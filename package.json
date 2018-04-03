@@ -13,7 +13,7 @@
   "author": "Apiary",
   "license": "MIT",
   "dependencies": {
-    "minim": "^0.20.4",
+    "minim": "git+https://github.com/refractproject/minim.git",
     "minim-parse-result": "^0.10.0"
   },
   "devDependencies": {

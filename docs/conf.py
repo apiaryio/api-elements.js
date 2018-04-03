@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
+import subprocess
+
+IS_READTHEDOCS = os.environ.get('READTHEDOCS') == 'True'
+
+if IS_READTHEDOCS:
+    docs_dir = os.path.dirname(__file__)
+    project_dir = os.path.join(docs_dir, '..')
+    subprocess.check_call('npm install', cwd=project_dir, shell=True)
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -10,6 +20,7 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+extensions = ['sphinx_js']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -140,3 +151,9 @@ texinfo_documents = [
      author, 'APIElementsJS', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+
+# JS Doc
+
+primary_domain = 'js'
+jsdoc_config_path = 'conf.json'

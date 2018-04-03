@@ -30,6 +30,14 @@ Usage
     const parseResult = new namespace.elements.ParseResult();
     console.log(parseResult);
 
+API Reference
+-------------
+
+.. toctree::
+   :maxdepth: 2
+
+   elements
+
 Indices and tables
 ==================
 
