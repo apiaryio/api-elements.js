@@ -1,6 +1,15 @@
 export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
 
+  /**
+   * @class Transition
+   *
+   * @param {Array} content
+   * @param meta
+   * @param attributes
+   *
+   * @extends ArrayElement
+   */
   class Transition extends ArrayElement {
     constructor(...args) {
       super(...args);
@@ -8,6 +17,11 @@ export default function (namespace) {
       this.element = 'transition';
     }
 
+    /**
+     * @name method
+     * @type StringElement
+     * @memberof Transition.prototype
+     */
     get method() {
       const transaction = this.transactions.first;
 
@@ -22,6 +36,11 @@ export default function (namespace) {
       return undefined;
     }
 
+    /**
+     * @name relation
+     * @type StringElement
+     * @memberof Transition.prototype
+     */
     get relation() {
       return this.attributes.get('relation');
     }
@@ -30,6 +49,11 @@ export default function (namespace) {
       this.attributes.set('relation', value);
     }
 
+    /**
+     * @name href
+     * @type StringElement
+     * @memberof Transition.prototype
+     */
     get href() {
       return this.attributes.get('href');
     }
@@ -46,6 +70,11 @@ export default function (namespace) {
       }
     }
 
+    /**
+     * @name hrefVariables
+     * @type HrefVariables
+     * @memberof Transition.prototype
+     */
     get hrefVariables() {
       return this.attributes.get('hrefVariables');
     }
@@ -54,6 +83,11 @@ export default function (namespace) {
       this.attributes.set('hrefVariables', value);
     }
 
+    /**
+     * @name data
+     * @type DataStructure
+     * @memberof Transition.prototype
+     */
     get data() {
       return this.attributes.get('data');
     }
@@ -62,6 +96,11 @@ export default function (namespace) {
       this.attributes.set('data', value);
     }
 
+    /**
+     * @name contentTypes
+     * @type ArrayElement
+     * @memberof Transition.prototype
+     */
     get contentTypes() {
       return this.attributes.get('contentTypes');
     }
@@ -70,6 +109,11 @@ export default function (namespace) {
       this.attributes.set('contentTypes', value);
     }
 
+    /**
+     * @name transactions
+     * @type ArraySlice
+     * @memberof Transition.prototype
+     */
     get transactions() {
       return this.children.filter(item => item.element === 'httpTransaction');
     }

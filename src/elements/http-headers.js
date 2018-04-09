@@ -1,6 +1,15 @@
 export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
 
+  /**
+   * @class HttpHeaders
+   *
+   * @param {Array} content
+   * @param meta
+   * @param attributes
+   *
+   * @extends ArrayElement
+   */
   class HttpHeaders extends ArrayElement {
     constructor(...args) {
       super(...args);
