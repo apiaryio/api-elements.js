@@ -10,7 +10,7 @@
   "scripts": {
     "test": "mocha"
   },
-  "author": "Apiary",
+  "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "dependencies": {
     "minim": "git+https://github.com/refractproject/minim.git",
@@ -22,7 +22,5 @@
   },
   "engines": {
     "node": ">=4"
-  },
-  "author": "Apiary.io <support@apiary.io>",
-  "license": "MIT"
+  }
 }
