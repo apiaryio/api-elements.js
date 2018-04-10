@@ -15,31 +15,69 @@ export function namespace(options) {
   const StringElement = minim.getElementClass('string');
   const ArrayElement = minim.getElementClass('array');
 
+  /**
+   * @class ParseResult
+   *
+   * @param {Array} content
+   * @param meta
+   * @param attributes
+   *
+   * @extends ArrayElement
+   */
   class ParseResult extends ArrayElement {
     constructor(...args) {
       super(...args);
       this.element = 'parseResult';
     }
 
+    /**
+     * @name api
+     * @type Category
+     * @memberof ParseResult.prototype
+     */
     get api() {
       return this.children.filter(item => item.classes.contains('api')).first;
     }
 
+    /**
+     * @name annotations
+     * @type ArraySlice
+     * @memberof ParseResult.prototype
+     */
     get annotations() {
       return this.children.filter(item => item.element === 'annotation');
     }
 
+    /**
+     * @name warnings
+     * @type ArraySlice
+     * @memberof ParseResult.prototype
+     */
     get warnings() {
       return this.children
         .filter(item => item.element === 'annotation' && item.classes.contains('warning'));
     }
 
+    /**
+     * @name errors
+     * @type ArraySlice
+     * @memberof ParseResult.prototype
+     */
     get errors() {
       return this.children
         .filter(item => item.element === 'annotation' && item.classes.contains('error'));
     }
   }
 
+  /**
+   * @class Annotation
+   *
+   * @param {string} content
+   * @param meta
+   * @param attributes
+   *
+   * @extends StringElement
+   */
   class Annotation extends StringElement {
     constructor(...args) {
       super(...args);
@@ -55,6 +93,15 @@ export function namespace(options) {
     }
   }
 
+  /**
+   * @class SourceMap
+   *
+   * @param {Array} content
+   * @param meta
+   * @param attributes
+   *
+   * @extends ArrayElement
+   */
   class SourceMap extends minim.elements.Array {
     constructor(...args) {
       super(...args);
@@ -69,6 +116,11 @@ export function namespace(options) {
     }
   }
 
+  /**
+   * @name sourceMapValue
+   * @type Array
+   * @memberof Element.prototype
+   */
   if (!Object.getOwnPropertyNames(Element.prototype).includes('sourceMapValue')) {
     Object.defineProperty(Element.prototype, 'sourceMapValue', {
       get() {
