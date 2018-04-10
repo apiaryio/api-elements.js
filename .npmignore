@@ -1,0 +1,4 @@
+venv/
+docs/
+.readthedocs.yml
+.travis.yml
