@@ -1307,6 +1307,7 @@ export default class Parser {
           const enumeration = this.convertValueToElement(value, schema);
 
           if (enumeration) {
+            enumeration.attributes.set('typeAttributes', ['fixed']);
             enumerations.push(enumeration);
           }
         });
