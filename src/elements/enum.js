@@ -1,12 +1,26 @@
 export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
 
+  /**
+   * @class Enum
+   *
+   * @param {Element} content
+   * @param meta
+   * @param attributes
+   *
+   * @extends Element
+   */
   class Enum extends namespace.Element {
     constructor(content, meta, attributes) {
       super(namespace.toElement(content), meta, attributes);
       this.element = 'enum';
     }
 
+    /**
+     * @name enumerations
+     * @type ArrayElement
+     * @memberof Enum.prototype
+     */
     get enumerations() {
       return this.attributes.get('enumerations');
     }

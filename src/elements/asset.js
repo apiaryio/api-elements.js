@@ -1,10 +1,24 @@
 export default function (namespace) {
+  /**
+   * @class Asset
+   *
+   * @param {string} content
+   * @param meta
+   * @param attributes
+   *
+   * @extends Element
+   */
   class Asset extends namespace.Element {
     constructor(...args) {
       super(...args);
       this.element = 'asset';
     }
 
+    /**
+     * @name contentType
+     * @type StringElement
+     * @memberof Asset.prototype
+     */
     get contentType() {
       return this.attributes.get('contentType');
     }
@@ -12,7 +26,11 @@ export default function (namespace) {
     set contentType(value) {
       this.attributes.set('contentType', value);
     }
-
+    /**
+     * @name href
+     * @type StringElement
+     * @memberof Asset.prototype
+     */
     get href() {
       return this.attributes.get('href');
     }

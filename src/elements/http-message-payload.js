@@ -4,7 +4,21 @@ import httpResponse from './http-response';
 export default function (namespace) {
   const ArrayElement = namespace.getElementClass('array');
 
+  /**
+   * @class HttpMessagePayload
+   *
+   * @param {Array} content
+   * @param meta
+   * @param attributes
+   *
+   * @extends ArrayElement
+   */
   class HttpMessagePayload extends ArrayElement {
+    /**
+     * @name headers
+     * @type HttpHeaders
+     * @memberof HttpMessagePayload.prototype
+     */
     get headers() {
       return this.attributes.get('headers');
     }
@@ -24,6 +38,11 @@ export default function (namespace) {
       return header;
     }
 
+    /**
+     * @name contentType
+     * @type StringElement
+     * @memberof HttpMessagePayload.prototype
+     */
     get contentType() {
       const header = this.header('Content-Type');
 
@@ -34,16 +53,31 @@ export default function (namespace) {
       return this.content && this.content.contentType;
     }
 
+    /**
+     * @name dataStructure
+     * @type Asset
+     * @memberof HttpMessagePayload.prototype
+     */
     get dataStructure() {
       return this.findByElement('dataStructure').first;
     }
 
+    /**
+     * @name messageBody
+     * @type Asset
+     * @memberof HttpMessagePayload.prototype
+     */
     get messageBody() {
       // Returns the *first* message body. Only one should be defined according
       // to the spec, but it's possible to include more.
       return this.filter(item => item.element === 'asset' && item.classes.contains('messageBody')).first;
     }
 
+    /**
+     * @name messageBodySchema
+     * @type Asset
+     * @memberof HttpMessagePayload.prototype
+     */
     get messageBodySchema() {
       // Returns the *first* message body schema. Only one should be defined
       // according to the spec, but it's possible to include more.
