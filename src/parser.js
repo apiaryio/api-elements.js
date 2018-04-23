@@ -1321,6 +1321,7 @@ export default class Parser {
 
         if (value) {
           if (parameter.enum) {
+            value.attributes.set('typeAttributes', ['fixed']);
             value = new EnumElement(value);
           }
 
