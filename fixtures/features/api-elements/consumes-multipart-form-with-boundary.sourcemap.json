@@ -272,6 +272,15 @@
                                                     ]
                                                   }
                                                 ]
+                                              },
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "content": "doe"
@@ -376,6 +385,15 @@
                                                         ]
                                                       }
                                                     ]
+                                                  }
+                                                ]
+                                              },
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
                                                   }
                                                 ]
                                               }
