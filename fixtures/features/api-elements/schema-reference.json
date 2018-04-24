@@ -336,6 +336,17 @@
                                         "content": [
                                           {
                                             "element": "number",
+                                            "attributes": {
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
+                                              }
+                                            },
                                             "content": 123
                                           }
                                         ]
@@ -520,6 +531,17 @@
                                         "content": [
                                           {
                                             "element": "number",
+                                            "attributes": {
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
+                                              }
+                                            },
                                             "content": 123
                                           }
                                         ]
