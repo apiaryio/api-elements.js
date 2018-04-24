@@ -766,6 +766,7 @@ describe('JSON Schema to Data Structure', () => {
 
     expect(defaultElement).to.be.instanceof(EnumElement);
     expect(defaultElement.toValue()).to.be.deep.equal('one');
+    expect(defaultElement.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
   });
 
   it('produces description containing the schema format', () => {

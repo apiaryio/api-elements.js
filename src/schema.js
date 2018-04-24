@@ -215,6 +215,8 @@ export default class DataStructureGenerator {
         // TODO Support defaults for arrays and objects
         if (schema.enum) {
           def = new EnumElement(def);
+
+          def.content.attributes.set('typeAttributes', ['fixed']);
         }
 
         element.attributes.set('default', def);
