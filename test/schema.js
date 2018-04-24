@@ -738,8 +738,10 @@ describe('JSON Schema to Data Structure', () => {
 
     expect(samples.length).to.equal(2);
     expect(samples.get(0)).to.be.instanceof(EnumElement);
+    expect(samples.get(0).content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     expect(samples.get(0).toValue()).to.be.deep.equal('one');
     expect(samples.get(1)).to.be.instanceof(EnumElement);
+    expect(samples.get(1).content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     expect(samples.get(1).toValue()).to.be.deep.equal('two');
   });
 

@@ -232,7 +232,11 @@ export default class DataStructureGenerator {
 
       if (samples.length) {
         if (schema.enum) {
-          samples = samples.map(item => new EnumElement(item));
+          samples = samples.map(item => {
+            const enumeration = new EnumElement(item);
+            enumeration.content.attributes.set('typeAttributes', ['fixed']);
+            return enumeration;
+          });
         }
 
         element.attributes.set('samples', samples);
