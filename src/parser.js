@@ -791,7 +791,7 @@ export default class Parser {
           // refactor the code below as this is a little weird.
           relevantResponses.null = {};
         } else {
-          this.createTransaction(transition, method, schemes.map(element => element.clone()));
+          this.createTransaction(transition, method, schemes);
         }
       }
 
@@ -800,7 +800,7 @@ export default class Parser {
         this.handleSwaggerResponse(
           transition, method, methodValue,
           transitionParams, responseValue, statusCode,
-          schemes.map(element => element.clone()), resourceParams,
+          schemes, resourceParams,
         );
       });
 
@@ -1521,7 +1521,7 @@ export default class Parser {
     }
 
     if (schemes.length) {
-      transaction.attributes.set('authSchemes', schemes);
+      transaction.attributes.set('authSchemes', schemes.map(scheme => scheme.clone()));
     }
 
     return transaction;
