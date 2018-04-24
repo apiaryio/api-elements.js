@@ -706,10 +706,13 @@ describe('JSON Schema to Data Structure', () => {
 
     expect(enumerations.length).to.equal(3);
     expect(enumerations.get(0)).to.be.instanceof(StringElement);
+    expect(enumerations.get(0).attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     expect(enumerations.getValue(0)).to.equal('one');
     expect(enumerations.get(1)).to.be.instanceof(NumberElement);
+    expect(enumerations.get(1).attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     expect(enumerations.getValue(1)).to.equal(2);
     expect(enumerations.get(2)).to.be.instanceof(NullElement);
+    expect(enumerations.get(2).attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
   });
 
   it('produces samples for enum element', () => {

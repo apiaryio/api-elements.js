@@ -53,6 +53,10 @@ export default class DataStructureGenerator {
 
     element.enumerations = schema.enum;
 
+    for (const enumeration of element.enumerations) {
+      enumeration.attributes.set('typeAttributes', ['fixed']);
+    }
+
     return element;
   }
 
