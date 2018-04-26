@@ -551,6 +551,15 @@
                                                     ]
                                                   }
                                                 ]
+                                              },
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "content": "hi"
@@ -580,6 +589,15 @@
                                                     ]
                                                   }
                                                 ]
+                                              },
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "content": "good morning"
@@ -607,6 +625,15 @@
                                                         ]
                                                       }
                                                     ]
+                                                  }
+                                                ]
+                                              },
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
                                                   }
                                                 ]
                                               }
@@ -640,6 +667,15 @@
                                                       ]
                                                     }
                                                   ]
+                                                }
+                                              ]
+                                            },
+                                            "typeAttributes": {
+                                              "element": "array",
+                                              "content": [
+                                                {
+                                                  "element": "string",
+                                                  "content": "fixed"
                                                 }
                                               ]
                                             }
@@ -694,6 +730,15 @@
                                                   ]
                                                 }
                                               ]
+                                            }
+                                          ]
+                                        },
+                                        "typeAttributes": {
+                                          "element": "array",
+                                          "content": [
+                                            {
+                                              "element": "string",
+                                              "content": "fixed"
                                             }
                                           ]
                                         }

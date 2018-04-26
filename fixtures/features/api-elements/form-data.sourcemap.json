@@ -272,6 +272,15 @@
                                                     ]
                                                   }
                                                 ]
+                                              },
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "content": 1
@@ -378,6 +387,15 @@
                                                     ]
                                                   }
                                                 ]
+                                              },
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
                                               }
                                             },
                                             "content": "bar"
@@ -482,6 +500,15 @@
                                                         ]
                                                       }
                                                     ]
+                                                  }
+                                                ]
+                                              },
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
                                                   }
                                                 ]
                                               }

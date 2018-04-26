@@ -236,14 +236,47 @@
                                         "content": [
                                           {
                                             "element": "string",
+                                            "attributes": {
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
+                                              }
+                                            },
                                             "content": "hi"
                                           },
                                           {
                                             "element": "string",
+                                            "attributes": {
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
+                                              }
+                                            },
                                             "content": "good morning"
                                           },
                                           {
                                             "element": "string",
+                                            "attributes": {
+                                              "typeAttributes": {
+                                                "element": "array",
+                                                "content": [
+                                                  {
+                                                    "element": "string",
+                                                    "content": "fixed"
+                                                  }
+                                                ]
+                                              }
+                                            },
                                             "content": "hello"
                                           }
                                         ]
@@ -252,12 +285,34 @@
                                         "element": "enum",
                                         "content": {
                                           "element": "string",
+                                          "attributes": {
+                                            "typeAttributes": {
+                                              "element": "array",
+                                              "content": [
+                                                {
+                                                  "element": "string",
+                                                  "content": "fixed"
+                                                }
+                                              ]
+                                            }
+                                          },
                                           "content": "good morning"
                                         }
                                       }
                                     },
                                     "content": {
                                       "element": "string",
+                                      "attributes": {
+                                        "typeAttributes": {
+                                          "element": "array",
+                                          "content": [
+                                            {
+                                              "element": "string",
+                                              "content": "fixed"
+                                            }
+                                          ]
+                                        }
+                                      },
                                       "content": "hello"
                                     }
                                   }

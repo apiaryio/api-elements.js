@@ -182,6 +182,15 @@
                                           ]
                                         }
                                       ]
+                                    },
+                                    "typeAttributes": {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "string",
+                                          "content": "fixed"
+                                        }
+                                      ]
                                     }
                                   },
                                   "content": "B"
@@ -209,6 +218,15 @@
                                               ]
                                             }
                                           ]
+                                        }
+                                      ]
+                                    },
+                                    "typeAttributes": {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "string",
+                                          "content": "fixed"
                                         }
                                       ]
                                     }
@@ -242,6 +260,15 @@
                                             ]
                                           }
                                         ]
+                                      }
+                                    ]
+                                  },
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "fixed"
                                       }
                                     ]
                                   }
