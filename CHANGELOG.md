@@ -1,3 +1,12 @@
+# Master
+
+## Bug Fixes
+
+- Swagger Schemas are now recursively translated from Swagger schema into JSON
+  Schema draft 4 in the resultant messageSchema of a parse result. This fixes
+  bugs where components such as `x-nullable`, `readOnly`, `externalDocs` etc
+  are not handled when found inside another schema as a sub-schema.
+
 # 0.18.2
 
 ### Bug Fixes
