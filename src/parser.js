@@ -12,6 +12,7 @@ import { baseLink, origin } from './link';
 import { pushHeader, pushHeaderObject } from './headers';
 import Ast from './ast';
 import DataStructureGenerator from './schema';
+import convertSchema from './json-schema';
 import { FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary } from './media-type';
 
 
@@ -1456,20 +1457,11 @@ export default class Parser {
   // Create a Refract asset element containing JSON Schema and push into payload
   pushSchemaAsset(schema, payload, path) {
     let handledSchema = false;
-    let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
-    actualSchema = _.omitBy(actualSchema, isExtension);
-
-    if (schema['x-nullable']) {
-      if (actualSchema.type) {
-        actualSchema.type = [actualSchema.type, 'null'];
-      } else {
-        actualSchema.type = 'null';
-      }
-    }
 
     try {
+      const jsonSchema = convertSchema(schema);
       const Asset = this.minim.getElementClass('asset');
-      const schemaAsset = new Asset(JSON.stringify(actualSchema));
+      const schemaAsset = new Asset(JSON.stringify(jsonSchema));
 
       schemaAsset.classes.push('messageBodySchema');
       schemaAsset.contentType = 'application/schema+json';
