@@ -560,6 +560,8 @@ export default class Parser {
           }
 
           schemes.push(element);
+
+          this.handleSwaggerVendorExtensions(element, item);
         });
       });
     }
