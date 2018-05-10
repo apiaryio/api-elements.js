@@ -1371,11 +1371,7 @@ export default class Parser {
   convertParameterToMember(parameter) {
     const MemberElement = this.minim.getElementClass('member');
     const memberValue = this.convertParameterToElement(parameter);
-
-    // TODO: Update when Minim has better support for elements as values
-    // should be: new MemberType(parameter.name, memberValue);
-    const member = new MemberElement(parameter.name);
-    member.content.value = memberValue;
+    const member = new MemberElement(parameter.name, memberValue);
 
     if (this.generateSourceMap) {
       this.createSourceMap(member, this.path);
