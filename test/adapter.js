@@ -75,6 +75,10 @@ describe('Swagger 2.0 adapter', () => {
       expect(detect('swagger:  \t "2.0"')).to.be.true;
     });
 
+    it('works with JSON Swagger', () => {
+      expect(detect('{ "swagger" : "2.0" }')).to.be.true;
+    });
+
     it('ignores other data', () => {
       expect(detect('{"title": "Not Swagger!"}')).to.be.false;
     });

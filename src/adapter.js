@@ -11,7 +11,7 @@ export const mediaTypes = [
 
 export function detect(source) {
   return !!(_.isString(source)
-    ? source.match(/"?swagger"?:\s*["']2\.0["']/g)
+    ? source.match(/"?swagger"?\s*:\s*["']2\.0["']/g)
     : source.swagger === '2.0');
 }
 
