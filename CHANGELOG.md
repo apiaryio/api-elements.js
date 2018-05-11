@@ -1,3 +1,11 @@
+# Master
+
+## Bug Fixes
+
+- Supports detecting Swagger documents which are JSON formatted with spaces
+  before the `:`. For example, the following document would not be matched to
+  this adapter: `{ "swagger" : "2.0" }`.
+
 # 0.18.3
 
 ## Bug Fixes
