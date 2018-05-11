@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
+import repl from 'repl';
 import { isatty } from 'tty';
 import yaml from 'js-yaml';
 import commander from 'commander';
@@ -20,12 +21,13 @@ fury.use(apiBlueprintSerializer);
 fury.use(apiaryBlueprintParser);
 
 class FuryCLI {
-  constructor(inputPath, outputPath, outputFormat, validate, generateSourceMap) {
+  constructor(inputPath, outputPath, outputFormat, validate, generateSourceMap, shell) {
     this.inputPath = inputPath;
     this.outputPath = outputPath;
     this.outputFormat = outputFormat;
     this.validate = validate;
     this.generateSourceMap = generateSourceMap;
+    this.shell = shell;
   }
 
   run() {
@@ -46,7 +48,12 @@ class FuryCLI {
 
     fury[functionName](options, (err, result) => {
       if (result) {
-        this.serialize(result);
+        if (this.shell) {
+          repl.start('> ').context.parseResult = result;
+        } else {
+          this.serialize(result);
+        }
+
         return;
       }
 
@@ -147,6 +154,7 @@ if (require.main === module) {
     .option('-f, --format [format]', 'output format', 'application/vnd.refract.parse-result+json')
     .option('-l, --validate', 'validate input only')
     .option('-s, --sourcemap', 'Export sourcemaps into API Elements parse result')
+    .option('--shell', 'Launch an interactive shell to interact with parse result')
     .option('--adapter [adapter]', 'Load a fury adapter')
     .arguments('<input> [output]')
     .action((inputArgument, outputArgument) => {
@@ -168,6 +176,6 @@ if (require.main === module) {
   }
 
   const furyCLI = new FuryCLI(input, output, commander.format,
-    commander.validate, commander.sourcemap);
+    commander.validate, commander.sourcemap, commander.shell);
   furyCLI.run();
 }
