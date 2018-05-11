@@ -2,6 +2,10 @@
 
 ## Bug Fixes
 
+- Supports detecting Swagger documents which are JSON formatted with spaces
+  before the `:`. For example, the following document would not be matched to
+  this adapter: `{ "swagger" : "2.0" }`.
+
 - When a parameter has no valid enumerations defined in an `enum`, we will now
   discard the enumeration in the parse result. Previously the parser would create an
   empty enumeration element from completely invalid enumerations in a Swagger
