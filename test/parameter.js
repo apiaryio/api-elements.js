@@ -172,6 +172,30 @@ describe('Parameter to Member converter', () => {
     expect(parser.result.toValue()).to.deep.equal(['Expected type string but found type integer']);
   });
 
+  it('discards invalid parameter enumerations', () => {
+    const parser = new Parser({ minim, source: '' });
+    parser.result = new minim.elements.ParseResult();
+
+    const parameter = {
+      in: 'query',
+      name: 'tags',
+      type: 'array',
+      items: {
+        type: 'string',
+        enum: ['red'],
+      },
+      enum: ['red'],
+    };
+    const member = parser.convertParameterToMember(parameter);
+
+    expect(member.value).to.be.instanceof(minim.elements.Array);
+    expect(member.value.get(0)).to.be.instanceof(minim.elements.Enum);
+    expect(member.value.get(0).enumerations.toValue()).to.deep.equal(['red']);
+
+    expect(parser.result.warnings.get(0)).to.be.instanceof(Annotation);
+    expect(parser.result.warnings.toValue()).to.deep.equal(['Expected type array but found type string']);
+  });
+
   it('creates a warning when example does not match items parameter type', () => {
     const parser = new Parser({ minim, source: '' });
     parser.result = new minim.elements.ParseResult();

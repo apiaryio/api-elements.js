@@ -1295,12 +1295,6 @@ export default class Parser {
     }
 
     if (parameter.enum) {
-      if (element.toValue()) {
-        element = new EnumElement(element);
-      } else {
-        element = new EnumElement();
-      }
-
       const enumerations = new ArrayElement();
 
       parameter.enum.forEach((value, index) => {
@@ -1313,7 +1307,22 @@ export default class Parser {
         });
       });
 
-      element.enumerations = enumerations;
+
+      if (enumerations.length > 0) {
+        // We should only wrap the existing element in an enumeration
+        // iff there was valid enumeations. When there is enuerations
+        // and they are all invalid, let's discard the enumeration.
+        // The user already got a warning about it which is
+        // raised from `convertValueToElement`.
+
+        if (element.toValue()) {
+          element = new EnumElement(element);
+        } else {
+          element = new EnumElement();
+        }
+
+        element.enumerations = enumerations;
+      }
     }
 
     if (parameter.default) {
@@ -1362,11 +1371,7 @@ export default class Parser {
   convertParameterToMember(parameter) {
     const MemberElement = this.minim.getElementClass('member');
     const memberValue = this.convertParameterToElement(parameter);
-
-    // TODO: Update when Minim has better support for elements as values
-    // should be: new MemberType(parameter.name, memberValue);
-    const member = new MemberElement(parameter.name);
-    member.content.value = memberValue;
+    const member = new MemberElement(parameter.name, memberValue);
 
     if (this.generateSourceMap) {
       this.createSourceMap(member, this.path);

@@ -6,6 +6,12 @@
   before the `:`. For example, the following document would not be matched to
   this adapter: `{ "swagger" : "2.0" }`.
 
+- When a parameter has no valid enumerations defined in an `enum`, we will now
+  discard the enumeration in the parse result. Previously the parser would create an
+  empty enumeration element from completely invalid enumerations in a Swagger
+  document which can cause issues further down in subsequent tooling and Minim
+  serialisation.
+
 # 0.18.3
 
 ## Bug Fixes
