@@ -67,6 +67,7 @@ The following locations of vendor extensions are supported:
 - within the path-item object
 - within the operation object
 - within the responses object
+- within the security-scheme object
 
 These vendor extensions will be available as extensions using the relation
 [`https://help.apiary.io/profiles/api-elements/vendor-extensions/`](https://help.apiary.io/profiles/api-elements/vendor-extensions/).
