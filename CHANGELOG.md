@@ -1,4 +1,9 @@
-# Master
+# 0.18.4
+
+## Enhancements
+
+- Swagger `security-scheme` vendored extensions are now present in the parse
+  result.
 
 ## Bug Fixes
 
