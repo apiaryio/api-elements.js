@@ -20,7 +20,7 @@
     "peasant": "peasant"
   },
   "dependencies": {
-    "minim-api-description": "^0.8.0"
+    "minim-api-description": "^0.8.1"
   },
   "devDependencies": {
     "babel-plugin-array-includes": "^2.0.3",
