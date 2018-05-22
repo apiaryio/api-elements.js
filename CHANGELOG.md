@@ -1,3 +1,9 @@
+# 0.8.1
+
+## Enhancements
+
+- Improved documentation coverage of JSDoc comments for methods.
+
 # 0.8.0
 
 - Added `EnumElement`
