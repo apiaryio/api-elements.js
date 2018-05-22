@@ -1,6 +1,6 @@
 {
   "name": "minim-parse-result",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Minim Parse Result Namespace",
   "main": "./lib/parse-result.js",
   "browser": "./src/parse-result.js",
@@ -20,7 +20,7 @@
     "peasant": "peasant"
   },
   "dependencies": {
-    "minim-api-description": "^0.8.0"
+    "minim-api-description": "^0.8.1"
   },
   "devDependencies": {
     "babel-plugin-array-includes": "^2.0.3",

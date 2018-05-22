@@ -1,3 +1,15 @@
+# 0.10.1
+
+## Enhancements
+
+- Improved documentation coverage of JSDoc comments for methods.
+
+# 0.10.0
+
+## Enhancements
+
+- Adds support for minim api-description ^0.9.0 and minim ^0.20.0.
+
 # 0.9.0
 
 - Added browser build distribution
