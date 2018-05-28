@@ -27,16 +27,16 @@
     "z-schema": "^3.16.1"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.6"
+    "fury": "3.0.0-beta.7"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "fury": "3.0.0-beta.6",
-    "glob": "^7.1.1",
-    "minim": "^0.20.1",
-    "minim-parse-result": "^0.10.0",
+    "fury": "3.0.0-beta.7",
+    "glob": "^7.1.2",
+    "minim": "^0.20.5",
+    "minim-parse-result": "^0.10.1",
     "peasant": "1.1.0",
-    "swagger-zoo": "2.12.0"
+    "swagger-zoo": "2.13.0"
   },
   "engines": {
     "node": ">=6"

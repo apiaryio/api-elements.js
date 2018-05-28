@@ -53,6 +53,7 @@ export default class DataStructureGenerator {
 
     element.enumerations = schema.enum;
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const enumeration of element.enumerations) {
       enumeration.attributes.set('typeAttributes', ['fixed']);
     }
@@ -232,7 +233,7 @@ export default class DataStructureGenerator {
 
       if (samples.length) {
         if (schema.enum) {
-          samples = samples.map(item => {
+          samples = samples.map((item) => {
             const enumeration = new EnumElement(item);
             enumeration.content.attributes.set('typeAttributes', ['fixed']);
             return enumeration;
