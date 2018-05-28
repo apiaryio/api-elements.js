@@ -53,6 +53,11 @@ export default class DataStructureGenerator {
 
     element.enumerations = schema.enum;
 
+    // eslint-disable-next-line no-restricted-syntax
+    for (const enumeration of element.enumerations) {
+      enumeration.attributes.set('typeAttributes', ['fixed']);
+    }
+
     return element;
   }
 
@@ -211,6 +216,8 @@ export default class DataStructureGenerator {
         // TODO Support defaults for arrays and objects
         if (schema.enum) {
           def = new EnumElement(def);
+
+          def.content.attributes.set('typeAttributes', ['fixed']);
         }
 
         element.attributes.set('default', def);
@@ -226,7 +233,11 @@ export default class DataStructureGenerator {
 
       if (samples.length) {
         if (schema.enum) {
-          samples = samples.map(item => new EnumElement(item));
+          samples = samples.map((item) => {
+            const enumeration = new EnumElement(item);
+            enumeration.content.attributes.set('typeAttributes', ['fixed']);
+            return enumeration;
+          });
         }
 
         element.attributes.set('samples', samples);

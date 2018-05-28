@@ -706,10 +706,13 @@ describe('JSON Schema to Data Structure', () => {
 
     expect(enumerations.length).to.equal(3);
     expect(enumerations.get(0)).to.be.instanceof(StringElement);
+    expect(enumerations.get(0).attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     expect(enumerations.getValue(0)).to.equal('one');
     expect(enumerations.get(1)).to.be.instanceof(NumberElement);
+    expect(enumerations.get(1).attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     expect(enumerations.getValue(1)).to.equal(2);
     expect(enumerations.get(2)).to.be.instanceof(NullElement);
+    expect(enumerations.get(2).attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
   });
 
   it('produces samples for enum element', () => {
@@ -735,8 +738,10 @@ describe('JSON Schema to Data Structure', () => {
 
     expect(samples.length).to.equal(2);
     expect(samples.get(0)).to.be.instanceof(EnumElement);
+    expect(samples.get(0).content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     expect(samples.get(0).toValue()).to.be.deep.equal('one');
     expect(samples.get(1)).to.be.instanceof(EnumElement);
+    expect(samples.get(1).content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     expect(samples.get(1).toValue()).to.be.deep.equal('two');
   });
 
@@ -763,6 +768,7 @@ describe('JSON Schema to Data Structure', () => {
 
     expect(defaultElement).to.be.instanceof(EnumElement);
     expect(defaultElement.toValue()).to.be.deep.equal('one');
+    expect(defaultElement.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
   });
 
   it('produces description containing the schema format', () => {

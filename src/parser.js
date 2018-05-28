@@ -1291,6 +1291,10 @@ export default class Parser {
         const value = this.convertValueToElement(parameter['x-example'], schema);
 
         if (value) {
+          if (parameter.enum) {
+            value.attributes.set('typeAttributes', ['fixed']);
+          }
+
           element = value;
         }
       });
@@ -1304,6 +1308,7 @@ export default class Parser {
           const enumeration = this.convertValueToElement(value, schema);
 
           if (enumeration) {
+            enumeration.attributes.set('typeAttributes', ['fixed']);
             enumerations.push(enumeration);
           }
         });
@@ -1333,6 +1338,7 @@ export default class Parser {
 
         if (value) {
           if (parameter.enum) {
+            value.attributes.set('typeAttributes', ['fixed']);
             value = new EnumElement(value);
           }
 
