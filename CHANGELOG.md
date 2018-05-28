@@ -1,6 +1,11 @@
-# Master
+# 3.0.0-beta.7
 
 - Update minim to 0.20.5.
+
+# 3.0.0-beta.6
+
+- Update minim to 0.20.1.
+- Update minim-parse-result to 0.10.0.
 
 # 3.0.0-beta.5
 
