@@ -24,8 +24,8 @@
     "peasant": "peasant"
   },
   "dependencies": {
-    "minim": "^0.20.1",
-    "minim-parse-result": "^0.10.0"
+    "minim": "^0.20.5",
+    "minim-parse-result": "^0.10.1"
   },
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",

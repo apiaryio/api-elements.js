@@ -1,3 +1,7 @@
+# Master
+
+- Update minim to 0.20.5.
+
 # 3.0.0-beta.5
 
 - Added browser build distribution
