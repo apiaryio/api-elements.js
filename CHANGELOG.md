@@ -1,3 +1,10 @@
+# 0.19.0
+
+## Enhancements
+
+- Enumeration behaviour is now the same as API Elements 1.0 such that the
+  values that are fixed will now have a fixed type attribute.
+
 # 0.18.4
 
 ## Enhancements
