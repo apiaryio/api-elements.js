@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
-    "cardinal": "^1.0.0",
+    "cardinal": "^2.1.1",
     "commander": "^2.9",
     "fury": "3.0.0-beta.6",
     "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.3",
