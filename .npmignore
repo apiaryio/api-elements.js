@@ -1,4 +1,8 @@
 src/
-.eslinecache
-coverage
+.travis.yml
+circle.yml
 .git*
+coverage
+.vagrant
+.npmignore
+.eslintcache
