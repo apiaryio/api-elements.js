@@ -1,3 +1,9 @@
+# Master
+
+## Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 7](https://github.com/apiaryio/fury.js/releases/tag/v3.0.0-beta.7).
+
 # 0.6.0
 
 ## Enhancements
