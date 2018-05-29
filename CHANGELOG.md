@@ -1,6 +1,10 @@
 # Changelog
 
-## Master
+## 3.0.0-beta.4
+
+### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 7](https://github.com/apiaryio/fury.js/releases/tag/v3.0.0-beta.7).
 
 ### Bug Fixes
 
