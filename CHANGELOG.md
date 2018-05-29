@@ -6,7 +6,7 @@
 
 # 0.10.0
 
-## Enhancements
+## Enhancements
 
 - Compatibility with [Minim 0.20.1](https://github.com/refractproject/minim/releases/tag/v0.20.1)
   and [Fury 3.0.0 Beta 6](https://github.com/apiaryio/fury.js/releases/tag/v3.0.0-beta.6).
