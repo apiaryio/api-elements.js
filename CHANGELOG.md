@@ -1,3 +1,24 @@
+# Master
+
+## Enhancements
+
+- When a schema uses `allOf` and doesn't provide a type hint at the schema
+  root, the `allOf` types are matched for object schemas. This allows the
+  following schema to work where before `type: object` was required at the
+  schema root at the same level as `allOf`:
+
+  ```yaml
+  allOf:
+    - type: object
+      properties:
+        username:
+          type: string
+    - type: object
+      properties:
+        name:
+          type: string
+  ```
+
 # 0.19.0
 
 ## Enhancements

@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+/* eslint-disable class-methods-use-this, arrow-body-style */
 
 import _ from 'lodash';
 
@@ -165,6 +165,26 @@ export default class DataStructureGenerator {
       .value();
   }
 
+  /* Validates that the given schema matches the given type
+   *
+   * In the case where there is no provided type, the allOf types are matched.
+   */
+  validateSchemaTypes(schema, type) {
+    if (schema.type === type) {
+      return true;
+    }
+
+    if (schema.type === undefined && schema.allOf && schema.allOf.length > 0) {
+      const schemasWithoutMatchingType = schema.allOf.filter((subschema) => {
+        return !this.validateSchemaTypes(subschema, type);
+      });
+
+      return schemasWithoutMatchingType.length === 0;
+    }
+
+    return false;
+  }
+
   // Generates an element representing the given schema
   generateElement(schema) {
     const {
@@ -189,7 +209,7 @@ export default class DataStructureGenerator {
       element = this.generateEnum(schema);
     } else if (schema.type === 'array') {
       element = this.generateArray(schema);
-    } else if (schema.type === 'object') {
+    } else if (this.validateSchemaTypes(schema, 'object')) {
       element = this.generateObject(schema);
     } else if (schema.type && typeGeneratorMap[schema.type]) {
       element = new typeGeneratorMap[schema.type]();
