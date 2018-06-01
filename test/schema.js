@@ -471,6 +471,42 @@ describe('JSON Schema to Data Structure', () => {
       expect(admin.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
     });
 
+    it('produces object element from multiple allOf objects when schema root doesnt provide a type', () => {
+      const schema = {
+        allOf: [
+          {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+          {
+            type: 'object',
+            properties: {
+              admin: {
+                type: 'boolean',
+              },
+            },
+            required: ['admin'],
+          },
+        ],
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      const name = dataStructure.content.get('name');
+      expect(name).not.to.be.undefined;
+
+      const admin = dataStructure.content.getMember('admin');
+      expect(admin).not.to.be.undefined;
+      expect(admin.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
+    });
+
     it('produces samples from examples', () => {
       const schema = {
         type: 'object',
