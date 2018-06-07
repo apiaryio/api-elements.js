@@ -12,8 +12,12 @@ function convertSubSchema(schema) {
   if (schema['x-nullable']) {
     if (actualSchema.type) {
       actualSchema.type = [actualSchema.type, 'null'];
-    } else {
+    } else if (actualSchema.enum === undefined) {
       actualSchema.type = 'null';
+    }
+
+    if (actualSchema.enum && !actualSchema.enum.includes(null)) {
+      actualSchema.enum.push(null);
     }
   }
 

@@ -108,5 +108,21 @@ describe('Parser', () => {
 
       expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"null"}');
     });
+
+    it('adds null value to enum when x-nullable is provided', () => {
+      const schema = { 'x-nullable': true, enum: ['north', 'south'] };
+      const payload = new fury.minim.elements.HttpResponse();
+      parser.pushSchemaAsset(schema, payload);
+
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"enum":["north","south",null]}');
+    });
+
+    it('does not add null value to enum when x-nullable is provided and null in enum', () => {
+      const schema = { 'x-nullable': true, enum: ['north', 'south', null] };
+      const payload = new fury.minim.elements.HttpResponse();
+      parser.pushSchemaAsset(schema, payload);
+
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"enum":["north","south",null]}');
+    });
   });
 });
