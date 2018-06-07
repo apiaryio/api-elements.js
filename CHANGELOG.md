@@ -1,4 +1,4 @@
-# Master
+# 0.19.1
 
 ## Enhancements
 
@@ -18,6 +18,11 @@
         name:
           type: string
   ```
+
+## Bug Fixes
+
+- When using `enum` in conjunction with `x-nullable` in a schema, this will now
+  result in the `null` value being present in schema if it isn't already.
 
 # 0.19.0
 
