@@ -954,6 +954,10 @@ export default class Parser {
                   });
                 }
 
+                if (param.schema && param.schema.format === 'binary') {
+                  return;
+                }
+
                 this.withPath('schema', () => {
                   if (consumeIsJson) {
                     bodyFromSchema(param.schema, request, this, contentType);
