@@ -1111,7 +1111,7 @@ export default class Parser {
         const exampleSchema = responseValue.examples && responseValue.examples.schema;
         const schema = responseValue.schema || exampleSchema;
 
-        if (schema) {
+        if (schema && schema.format !== 'binary') {
           let args;
 
           if (responseValue.examples && responseValue.examples.schema) {
