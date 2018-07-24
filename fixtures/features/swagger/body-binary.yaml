@@ -1,0 +1,19 @@
+swagger: '2.0'
+info:
+  title: request body as binary
+  version: '1.0'
+consumes:
+  - image/png
+paths:
+  '/test':
+    post:
+      parameters:
+        - name: image
+          in: body
+          required: true
+          schema:
+            type: string
+            format: binary
+      responses:
+        204:
+          description: 'My Response'
