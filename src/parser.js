@@ -92,6 +92,15 @@ export default class Parser {
       return done(new Error(err.message), this.result);
     }
 
+    if (!_.isObject(loaded)) {
+      this.createAnnotation(
+        annotations.CANNOT_PARSE, null,
+        ('Swagger document is not an object'),
+      );
+
+      return done(null, this.result);
+    }
+
     // Some sane defaults since these are sometimes left out completely
     if (loaded.info === undefined) {
       loaded.info = {};

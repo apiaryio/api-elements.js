@@ -27,7 +27,9 @@ function testFixture(description, fixture, generateSourceMap = false) {
       expected = fixture.apiElements;
     }
 
-    fury.parse({ source, generateSourceMap }, (err, output) => {
+    const mediaType = 'application/swagger+yaml';
+
+    fury.parse({ source, mediaType, generateSourceMap }, (err, output) => {
       if (err && !output) {
         return done(err);
       }

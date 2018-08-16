@@ -1,3 +1,10 @@
+# Master
+
+## Bug Fixes
+
+- Return an error in the parse result when the source API Description Document
+  is not an object. Previously an error was thrown.
+
 # 0.19.1
 
 ## Enhancements
