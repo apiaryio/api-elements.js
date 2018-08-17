@@ -954,6 +954,10 @@ export default class Parser {
                   });
                 }
 
+                if (param.schema && param.schema.format === 'binary') {
+                  return;
+                }
+
                 this.withPath('schema', () => {
                   if (consumeIsJson) {
                     bodyFromSchema(param.schema, request, this, contentType);
@@ -1107,7 +1111,7 @@ export default class Parser {
         const exampleSchema = responseValue.examples && responseValue.examples.schema;
         const schema = responseValue.schema || exampleSchema;
 
-        if (schema) {
+        if (schema && schema.format !== 'binary') {
           let args;
 
           if (responseValue.examples && responseValue.examples.schema) {

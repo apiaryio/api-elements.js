@@ -5,6 +5,10 @@
 - Return an error in the parse result when the source API Description Document
   is not an object. Previously an error was thrown.
 
+- When a request or response body has a schema of `format: binary` then we no
+  longer generate a JSON Schema in the parse result. A JSON Schema for binary
+  types doesn't make sense as you cannot place binary data in JSON.
+
 # 0.19.1
 
 ## Enhancements
