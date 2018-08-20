@@ -43,10 +43,15 @@ describe('Swagger Schema to JSON Schema', () => {
       expect(schema).to.deep.equal({ type: 'object' });
     });
 
-    it('removes Swagger example extension', () => {
+    it('translates Swagger example extension to examples', () => {
       const schema = convertSchema({ type: 'object', example: { message: 'hello' } });
 
-      expect(schema).to.deep.equal({ type: 'object' });
+      expect(schema).to.deep.equal({
+        type: 'object',
+        examples: [
+          { message: 'hello' },
+        ],
+      });
     });
   });
 

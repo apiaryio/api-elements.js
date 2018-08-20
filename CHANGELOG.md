@@ -9,6 +9,14 @@
   longer generate a JSON Schema in the parse result. A JSON Schema for binary
   types doesn't make sense as you cannot place binary data in JSON.
 
+- Example values found in schemas are now translated into examples in
+  generated JSON Schema exposed in parse results.
+
+- Data Structure sample values will now include schema example values.
+
+- Request and Response body examples will now respect the example values of a
+  schema.
+
 # 0.19.1
 
 ## Enhancements

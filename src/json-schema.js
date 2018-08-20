@@ -9,6 +9,10 @@ function convertSubSchema(schema) {
   let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
   actualSchema = _.omitBy(actualSchema, isExtension);
 
+  if (schema.example) {
+    actualSchema.examples = [schema.example];
+  }
+
   if (schema['x-nullable']) {
     if (actualSchema.type) {
       actualSchema.type = [actualSchema.type, 'null'];
