@@ -150,7 +150,7 @@
                             },
                             {
                               "element": "number",
-                              "content": 251
+                              "content": 276
                             }
                           ]
                         }
@@ -225,7 +225,7 @@
                                         },
                                         {
                                           "element": "number",
-                                          "content": 236
+                                          "content": 261
                                         }
                                       ]
                                     }
@@ -368,7 +368,7 @@
                                         },
                                         {
                                           "element": "number",
-                                          "content": 141
+                                          "content": 166
                                         }
                                       ]
                                     }
@@ -482,7 +482,7 @@
                                         },
                                         {
                                           "element": "number",
-                                          "content": 82
+                                          "content": 107
                                         }
                                       ]
                                     }
@@ -491,7 +491,51 @@
                               ]
                             }
                           },
-                          "content": "{}"
+                          "content": "{\"type\":\"object\",\"examples\":[{\"id\":123,\"name\":\"Resource 1\"}]}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "object",
+                            "attributes": {
+                              "samples": {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "object",
+                                    "content": [
+                                      {
+                                        "element": "member",
+                                        "content": {
+                                          "key": {
+                                            "element": "string",
+                                            "content": "id"
+                                          },
+                                          "value": {
+                                            "element": "number",
+                                            "content": 123
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "element": "member",
+                                        "content": {
+                                          "key": {
+                                            "element": "string",
+                                            "content": "name"
+                                          },
+                                          "value": {
+                                            "element": "string",
+                                            "content": "Resource 1"
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          }
                         }
                       ]
                     }

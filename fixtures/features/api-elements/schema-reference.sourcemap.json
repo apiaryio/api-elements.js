@@ -270,7 +270,7 @@
                               ]
                             }
                           },
-                          "content": "{\"type\":\"string\"}"
+                          "content": "{\"type\":\"string\",\"examples\":[\"Hello\"]}"
                         },
                         {
                           "element": "dataStructure",

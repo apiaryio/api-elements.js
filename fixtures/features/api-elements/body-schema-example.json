@@ -268,7 +268,51 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{}"
+                          "content": "{\"type\":\"object\",\"examples\":[{\"id\":123,\"name\":\"Resource 1\"}]}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "object",
+                            "attributes": {
+                              "samples": {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "object",
+                                    "content": [
+                                      {
+                                        "element": "member",
+                                        "content": {
+                                          "key": {
+                                            "element": "string",
+                                            "content": "id"
+                                          },
+                                          "value": {
+                                            "element": "number",
+                                            "content": 123
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "element": "member",
+                                        "content": {
+                                          "key": {
+                                            "element": "string",
+                                            "content": "name"
+                                          },
+                                          "value": {
+                                            "element": "string",
+                                            "content": "Resource 1"
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          }
                         }
                       ]
                     }

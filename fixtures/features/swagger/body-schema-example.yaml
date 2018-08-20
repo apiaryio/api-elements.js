@@ -19,6 +19,7 @@ paths:
         200:
           description: response description
           schema:
+            type: object
             example:
               id: 123
               name: Resource 1

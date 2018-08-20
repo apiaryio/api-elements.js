@@ -172,7 +172,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"type\":\"string\"}"
+                          "content": "{\"type\":\"string\",\"examples\":[\"Hello\"]}"
                         },
                         {
                           "element": "dataStructure",
