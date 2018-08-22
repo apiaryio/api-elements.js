@@ -1,3 +1,11 @@
+# Master
+
+## Bug Fixes
+
+- Example values in a Schema Object will now be placed into the dataStructure
+  as a value instead of inside samples in cases where there isn't already a
+  value.
+
 # 0.19.2
 
 ## Bug Fixes

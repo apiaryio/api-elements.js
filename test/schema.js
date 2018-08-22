@@ -18,6 +18,7 @@ const {
   Null: NullElement,
   Array: ArrayElement,
   Object: ObjectElement,
+  Member: MemberElement,
   Enum: EnumElement,
 } = namespace.elements;
 
@@ -77,15 +78,13 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(StringElement);
 
-      const samples = dataStructure.content.attributes.get('samples');
-      expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.toValue()).to.be.deep.equal(['doe']);
+      expect(dataStructure.toValue()).to.equal('doe');
     });
 
     it('produces string element with example', () => {
       const schema = {
         type: 'string',
-        example: 'doe',
+        examples: ['doe'],
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -93,9 +92,24 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(StringElement);
 
+      expect(dataStructure.toValue()).to.equal('doe');
+    });
+
+    it('produces string element with samples for example type mismatch', () => {
+      const schema = {
+        type: 'string',
+        examples: [1],
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(StringElement);
+      expect(dataStructure.toValue()).to.be.null;
+
       const samples = dataStructure.content.attributes.get('samples');
       expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.toValue()).to.be.deep.equal(['doe']);
+      expect(samples.toValue()).to.deep.equal([1]);
     });
 
     it('produces string element with description describing pattern', () => {
@@ -216,9 +230,7 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(BooleanElement);
 
-      const samples = dataStructure.content.attributes.get('samples');
-      expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.toValue()).to.deep.equal([true]);
+      expect(dataStructure.toValue()).to.equal(true);
     });
   });
 
@@ -507,7 +519,7 @@ describe('JSON Schema to Data Structure', () => {
       expect(admin.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
     });
 
-    it('produces samples from examples', () => {
+    it('produces value from examples', () => {
       const schema = {
         type: 'object',
         examples: [
@@ -521,19 +533,22 @@ describe('JSON Schema to Data Structure', () => {
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(ObjectElement);
-
-      const samples = dataStructure.content.attributes.get('samples');
-      expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.get(0)).to.be.instanceof(ObjectElement);
-      expect(samples.toValue()).to.be.deep.equal([{ name: 'Doe' }]);
+      expect(dataStructure.toValue()).to.be.deep.equal({ name: 'Doe' });
     });
 
-    it('produces samples from example', () => {
+    it('produces samples from examples when we have properties', () => {
       const schema = {
         type: 'object',
-        example: {
-          name: 'Doe',
+        properties: {
+          name: {
+            type: 'string',
+          },
         },
+        examples: [
+          {
+            name: 'Doe',
+          },
+        ],
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -541,9 +556,15 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(ObjectElement);
 
+      expect(dataStructure.content.length).to.equal(1);
+      const member = dataStructure.content.content[0];
+      expect(member).to.be.instanceof(MemberElement);
+      expect(member.key.toValue()).to.equal('name');
+      expect(member.value).to.be.instanceof(StringElement);
+      expect(member.value.content).to.be.null;
+
       const samples = dataStructure.content.attributes.get('samples');
       expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.get(0)).to.be.instanceof(ObjectElement);
       expect(samples.toValue()).to.be.deep.equal([{ name: 'Doe' }]);
     });
   });
@@ -665,7 +686,7 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.content.content.length).to.be.equal(0);
     });
 
-    it('produces samples from examples', () => {
+    it('produces value from examples', () => {
       const schema = {
         type: 'array',
         examples: [
@@ -677,17 +698,18 @@ describe('JSON Schema to Data Structure', () => {
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(ArrayElement);
-
-      const samples = dataStructure.content.attributes.get('samples');
-      expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.get(0)).to.be.instanceof(ArrayElement);
-      expect(samples.toValue()).to.be.deep.equal([['Doe']]);
+      expect(dataStructure.toValue()).to.be.deep.equal(['Doe']);
     });
 
-    it('produces samples from example', () => {
+    it('produces samples from examples when we have items', () => {
       const schema = {
         type: 'array',
-        example: ['Doe'],
+        items: {
+          type: 'string',
+        },
+        examples: [
+          ['Doe'],
+        ],
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -695,9 +717,12 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(ArrayElement);
 
+      expect(dataStructure.content.length).to.equal(1);
+      expect(dataStructure.content.get(0)).to.be.instanceof(StringElement);
+      expect(dataStructure.content.get(0).content).to.be.null;
+
       const samples = dataStructure.content.attributes.get('samples');
       expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.get(0)).to.be.instanceof(ArrayElement);
       expect(samples.toValue()).to.be.deep.equal([['Doe']]);
     });
   });

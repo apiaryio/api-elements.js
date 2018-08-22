@@ -174,18 +174,7 @@
                                   },
                                   "value": {
                                     "element": "string",
-                                    "attributes": {
-                                      "samples": {
-                                        "element": "array",
-                                        "content": [
-                                          {
-                                            "element": "string",
-                                            "content": "doe"
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    "content": null
+                                    "content": "doe"
                                   }
                                 }
                               }

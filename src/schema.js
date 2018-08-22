@@ -251,7 +251,7 @@ export default class DataStructureGenerator {
         samples = [schema.example];
       }
 
-      if (samples.length) {
+      if (samples.length > 0) {
         if (schema.enum) {
           samples = samples.map((item) => {
             const enumeration = new EnumElement(item);
@@ -260,7 +260,25 @@ export default class DataStructureGenerator {
           });
         }
 
-        element.attributes.set('samples', samples);
+        const hasSample = samples.length === 1 && samples[0];
+        const emptyContent = !element.content || element.content.length === 0;
+
+        if (hasSample && emptyContent) {
+          // Convert the sample value to an element as a cheap and easy way to
+          // check the type matches our element. It will also refract
+          // object/array items that are the sample value as members/elements
+          // for us so we can grab its content
+
+          const example = this.minim.toElement(samples[0]);
+
+          if (element.element === example.element) {
+            element.content = example.content;
+          } else {
+            element.attributes.set('samples', samples);
+          }
+        } else {
+          element.attributes.set('samples', samples);
+        }
       }
 
       const validationDescriptions = this.generateValidationDescriptions(schema);
