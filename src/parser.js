@@ -1487,7 +1487,7 @@ export default class Parser {
     }
 
     if (pushBody) {
-      bodyFromSchema(schema, payload, this, contentType);
+      bodyFromSchema(jsonSchema, payload, this, contentType);
     }
 
     this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
