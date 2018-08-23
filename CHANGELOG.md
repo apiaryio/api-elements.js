@@ -1,5 +1,12 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Example values in nested Schema Object will now be used for JSON body
+  generation.
+
 ## 0.22.2 (2018-10-25)
 
 - Fixes a regression introduced in 0.22.0 where using `$ref` directly inside a

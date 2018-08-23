@@ -8,6 +8,7 @@ import { isFormURLEncoded, isMultiPartFormData, parseBoundary } from './media-ty
 faker.option({
   fixedProbabilities: true,
   optionalsProbability: 1.0,
+  useExamplesValue: true,
   useDefaultValue: true,
   maxItems: 5,
   maxLength: 256,
@@ -23,17 +24,11 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
   let asset = null;
 
   try {
-    let body;
+    faker.option({
+      alwaysFakeOptionals: !hasCircularReference(schema),
+    });
 
-    if (schema.examples && schema.examples[0]) {
-      body = schema.examples[0];
-    } else {
-      faker.option({
-        alwaysFakeOptionals: !hasCircularReference(schema),
-      });
-
-      body = faker.generate(_.cloneDeep(schema));
-    }
+    let body = faker.generate(_.cloneDeep(schema));
 
     if (typeof body !== 'string') {
       if (isFormURLEncoded(contentType)) {
