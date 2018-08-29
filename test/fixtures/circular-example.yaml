@@ -3,22 +3,23 @@ info:
   version: 1.0.0
   title: Test circular reference in example
 host: petstore.swagger.io
+produces:
+  - application/json
 paths:
   /:
     get:
       responses:
         200:
           description: Get company info
-          examples:
-            application/json:
-              example:
-                $ref: '#/definitions/Company'
+          schema:
+            $ref: '#/definitions/Company'
 
 definitions:
   Company:
     properties:
       id:
         type: string
+        default: ORCL
       user:
         type: object
         properties:
@@ -29,6 +30,7 @@ definitions:
     properties:
       name:
         type: string
+        default: doe
       company:
         properties:
           data:
