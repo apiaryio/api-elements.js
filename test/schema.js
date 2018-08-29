@@ -6,7 +6,7 @@ import { expect } from 'chai';
 import minimModule from 'minim';
 import minimParseResult from 'minim-parse-result';
 
-import DataStructureGenerator from '../src/schema';
+import { DataStructureGenerator } from '../src/schema';
 
 const namespace = minimModule.namespace()
   .use(minimParseResult);

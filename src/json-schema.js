@@ -87,7 +87,7 @@ function convertSubSchema(schema, references) {
   return actualSchema;
 }
 
-function lookupReference(reference, root) {
+export function parseReference(reference) {
   const parts = reference.split('/');
 
   if (parts[0] !== '#') {
@@ -99,6 +99,12 @@ function lookupReference(reference, root) {
   }
 
   const id = parts[2];
+
+  return id;
+}
+
+function lookupReference(reference, root) {
+  const id = parseReference(reference);
 
   if (!root.definitions || !root.definitions[id]) {
     throw new Error(`Reference to ${reference} does not exist`);

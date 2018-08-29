@@ -11,7 +11,7 @@ import uriTemplate from './uri-template';
 import { baseLink, origin } from './link';
 import { pushHeader, pushHeaderObject } from './headers';
 import Ast from './ast';
-import DataStructureGenerator from './schema';
+import { DataStructureGenerator, idForDataStructure } from './schema';
 import convertSchema from './json-schema';
 import { FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary } from './media-type';
 
@@ -119,6 +119,10 @@ export default class Parser {
       },
     };
 
+    // Swagger parser is mutating the given input and dereferencing.
+    // Let's give it no changes to screw the original and give it a deep copy
+    const dereferencedSwagger = JSON.parse(JSON.stringify(loaded));
+
     return swaggerParser.validate(loaded, swaggerOptions, (err) => {
       const swagger = swaggerParser.api;
       this.swagger = swaggerParser.api;
@@ -192,6 +196,13 @@ export default class Parser {
 
         const complete = () => {
           this.handleSwaggerVendorExtensions(this.api, swagger.paths);
+
+          if (dereferencedSwagger.definitions) {
+            this.withPath('definitions', () => {
+              this.handleSwaggerDefinitions(dereferencedSwagger.definitions);
+            });
+          }
+
           return done(null, this.result);
         };
 
@@ -636,6 +647,37 @@ export default class Parser {
     this.handleSwaggerSecurity(methodValue.security, schemes);
 
     return schemes;
+  }
+
+  handleSwaggerDefinitions(definitions) {
+    const { Category } = this.minim.elements;
+    const generator = new DataStructureGenerator(this.minim);
+    const dataStructures = new Category();
+    dataStructures.classes.push('dataStructures');
+
+    _.forEach(definitions, (schema, key) => {
+      this.withPath(key, () => {
+        try {
+          const dataStructure = generator.generateDataStructure(schema);
+
+          if (dataStructure) {
+            dataStructure.content.id = idForDataStructure(`#/definitions/${key}`);
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(dataStructure, this.path);
+            }
+
+            dataStructures.push(dataStructure);
+          }
+        } catch (error) {
+          // TODO: Expose errors once feature is more-complete
+        }
+      });
+    });
+
+    if (dataStructures.length > 0) {
+      this.api.push(dataStructures);
+    }
   }
 
   // Convert a Swagger path into a Refract resource.
