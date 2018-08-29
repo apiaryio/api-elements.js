@@ -1489,7 +1489,7 @@ export default class Parser {
     let jsonSchema;
 
     try {
-      jsonSchema = convertSchema(schema);
+      jsonSchema = convertSchema(schema, this.swagger);
     } catch (exception) {
       this.createAnnotation(
         annotations.DATA_LOST, this.path,
