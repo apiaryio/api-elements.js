@@ -20,6 +20,18 @@ fury.use(apiBlueprintParser);
 fury.use(apiBlueprintSerializer);
 fury.use(apiaryBlueprintParser);
 
+function isRefract(source) {
+  let parseResult;
+
+  try {
+    parseResult = JSON.parse(source);
+  } catch (error) {
+    // NOOP
+  }
+
+  return parseResult && parseResult.element === 'parseResult';
+}
+
 class FuryCLI {
   constructor(inputPath, outputPath, outputFormat, validate, generateSourceMap, shell) {
     this.inputPath = inputPath;
@@ -39,6 +51,12 @@ class FuryCLI {
       source = fs.readFileSync(this.inputPath, 'utf8');
     }
 
+    if (isRefract(source)) {
+      const result = fury.minim.deserialise(JSON.parse(source));
+      this.handleResult(result);
+      return;
+    }
+
     const options = {
       source,
       generateSourceMap: this.generateSourceMap,
@@ -48,12 +66,7 @@ class FuryCLI {
 
     fury[functionName](options, (err, result) => {
       if (result) {
-        if (this.shell) {
-          repl.start('> ').context.parseResult = result;
-        } else {
-          this.serialize(result);
-        }
-
+        this.handleResult(result);
         return;
       }
 
@@ -62,6 +75,14 @@ class FuryCLI {
         process.exit(1);
       }
     });
+  }
+
+  handleResult(result) {
+    if (this.shell) {
+      repl.start('> ').context.parseResult = result;
+    } else {
+      this.serialize(result);
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
