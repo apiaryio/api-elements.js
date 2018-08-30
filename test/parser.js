@@ -80,7 +80,7 @@ describe('Parser', () => {
     it('can push schema onto HTTP message payload', () => {
       const schema = { type: 'object' };
       const payload = new fury.minim.elements.HttpResponse();
-      parser.pushBodyAssets(schema, payload);
+      parser.pushAssets(schema, payload);
 
       expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object"}');
     });
@@ -88,7 +88,7 @@ describe('Parser', () => {
     it('strips extensions from schema', () => {
       const schema = { type: 'object', 'x-test': true };
       const payload = new fury.minim.elements.HttpResponse();
-      parser.pushBodyAssets(schema, payload);
+      parser.pushAssets(schema, payload);
 
       expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object"}');
     });
@@ -96,7 +96,7 @@ describe('Parser', () => {
     it('adds null to type when x-nullable is provided', () => {
       const schema = { type: 'object', 'x-nullable': true };
       const payload = new fury.minim.elements.HttpResponse();
-      parser.pushBodyAssets(schema, payload);
+      parser.pushAssets(schema, payload);
 
       expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":["object","null"]}');
     });
@@ -104,7 +104,7 @@ describe('Parser', () => {
     it('sets null as type when x-nullable is provided without type', () => {
       const schema = { 'x-nullable': true };
       const payload = new fury.minim.elements.HttpResponse();
-      parser.pushBodyAssets(schema, payload);
+      parser.pushAssets(schema, payload);
 
       expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"null"}');
     });
@@ -112,7 +112,7 @@ describe('Parser', () => {
     it('adds null value to enum when x-nullable is provided', () => {
       const schema = { 'x-nullable': true, enum: ['north', 'south'] };
       const payload = new fury.minim.elements.HttpResponse();
-      parser.pushBodyAssets(schema, payload);
+      parser.pushAssets(schema, payload);
 
       expect(payload.messageBodySchema.toValue()).to.deep.equal('{"enum":["north","south",null]}');
     });
@@ -120,7 +120,7 @@ describe('Parser', () => {
     it('does not add null value to enum when x-nullable is provided and null in enum', () => {
       const schema = { 'x-nullable': true, enum: ['north', 'south', null] };
       const payload = new fury.minim.elements.HttpResponse();
-      parser.pushBodyAssets(schema, payload);
+      parser.pushAssets(schema, payload);
 
       expect(payload.messageBodySchema.toValue()).to.deep.equal('{"enum":["north","south",null]}');
     });

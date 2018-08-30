@@ -959,7 +959,7 @@ export default class Parser {
                 }
 
                 this.withPath('schema', () => {
-                  this.pushBodyAssets(param.schema, request, contentType, consumeIsJson);
+                  this.pushAssets(param.schema, request, contentType, consumeIsJson);
                 });
               }));
               break;
@@ -1117,8 +1117,8 @@ export default class Parser {
           }
 
           this.withSlicedPath(...args.concat([() => {
-            this.pushBodyAssets(schema, response, contentType,
-                                isJsonResponse && responseBody === undefined);
+            this.pushAssets(schema, response, contentType,
+                            isJsonResponse && responseBody === undefined);
           }]));
         }
 
@@ -1473,7 +1473,7 @@ export default class Parser {
     return hrefVariables.length ? hrefVariables : undefined;
   }
 
-  pushBodyAssets(schema, payload, contentType, pushBody) {
+  pushAssets(schema, payload, contentType, pushBody) {
     let jsonSchema;
 
     try {
