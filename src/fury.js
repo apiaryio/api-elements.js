@@ -46,7 +46,7 @@ function printAnnotation(annotation, source) {
   if (annotation.sourceMapValue) {
     annotation.sourceMapValue.forEach((sourceMap) => {
       if (sourceMap.length !== 2) {
-        throw new Error(`Source Invalid source map ${sourceMap}`);
+        throw new Error(`Invalid source map ${sourceMap}`);
       }
 
       const beginning = source.substring(0, sourceMap[0]).split('\n');
