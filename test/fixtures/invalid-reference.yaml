@@ -1,0 +1,14 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Test References
+produces:
+  - application/json
+paths:
+  /external:
+    get:
+      responses:
+        200:
+          description: External Reference
+          schema:
+            $ref: 'https://example.com'

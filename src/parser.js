@@ -1479,7 +1479,14 @@ export default class Parser {
   }
 
   pushAssets(schema, payload, contentType, pushBody) {
-    const jsonSchema = convertSchema(schema, this.swagger);
+    let jsonSchema;
+
+    try {
+      jsonSchema = convertSchema(schema, this.swagger);
+    } catch (error) {
+      this.createAnnotation(annotations.VALIDATION_ERROR, this.path, error.message);
+      return;
+    }
 
     if (pushBody) {
       bodyFromSchema(jsonSchema, payload, this, contentType);
