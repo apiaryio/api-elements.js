@@ -17,7 +17,13 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
   let asset = null;
 
   try {
-    let body = schema.example || faker(schema);
+    let body;
+
+    if (schema.examples && schema.examples[0]) {
+      body = schema.examples[0];
+    } else {
+      body = faker(schema);
+    }
 
     if (typeof body !== 'string') {
       if (isFormURLEncoded(contentType)) {

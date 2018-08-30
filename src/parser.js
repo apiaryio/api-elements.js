@@ -959,11 +959,7 @@ export default class Parser {
                 }
 
                 this.withPath('schema', () => {
-                  if (consumeIsJson) {
-                    bodyFromSchema(param.schema, request, this, contentType);
-                  }
-
-                  this.pushSchemaAsset(param.schema, request, this.path);
+                  this.pushAssets(param.schema, request, contentType, consumeIsJson);
                 });
               }));
               break;
@@ -1121,11 +1117,8 @@ export default class Parser {
           }
 
           this.withSlicedPath(...args.concat([() => {
-            if (isJsonResponse && responseBody === undefined) {
-              bodyFromSchema(schema, response, this, contentType);
-            }
-
-            this.pushSchemaAsset(schema, response, this.path);
+            this.pushAssets(schema, response, contentType,
+                            isJsonResponse && responseBody === undefined);
           }]));
         }
 
@@ -1480,43 +1473,53 @@ export default class Parser {
     return hrefVariables.length ? hrefVariables : undefined;
   }
 
-  // Create a Refract asset element containing JSON Schema and push into payload
-  pushSchemaAsset(schema, payload, path) {
-    let handledSchema = false;
+  pushAssets(schema, payload, contentType, pushBody) {
+    let jsonSchema;
 
     try {
-      const jsonSchema = convertSchema(schema);
-      const Asset = this.minim.getElementClass('asset');
-      const schemaAsset = new Asset(JSON.stringify(jsonSchema));
-
-      schemaAsset.classes.push('messageBodySchema');
-      schemaAsset.contentType = 'application/schema+json';
-
-      if (this.generateSourceMap) {
-        this.createSourceMap(schemaAsset, path);
-      }
-
-      this.handleExternalDocs(schemaAsset, schema.externalDocs);
-
-      payload.content.push(schemaAsset);
-      handledSchema = true;
+      jsonSchema = convertSchema(schema);
     } catch (exception) {
       this.createAnnotation(
-        annotations.DATA_LOST, path,
+        annotations.DATA_LOST, this.path,
         'Circular references in schema are not yet supported',
       );
+      return;
     }
 
-    if (handledSchema) {
-      try {
-        const generator = new DataStructureGenerator(this.minim);
-        const dataStructure = generator.generateDataStructure(schema);
-        if (dataStructure) {
-          payload.content.push(dataStructure);
-        }
-      } catch (exception) {
-        // TODO: Expose errors once feature is more-complete
+    if (pushBody) {
+      bodyFromSchema(jsonSchema, payload, this, contentType);
+    }
+
+    this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
+    this.pushDataStructureAsset(schema, payload);
+  }
+
+  // Create a Refract asset element containing JSON Schema and push into payload
+  pushSchemaAsset(schema, jsonSchema, payload, path) {
+    const Asset = this.minim.getElementClass('asset');
+    const schemaAsset = new Asset(JSON.stringify(jsonSchema));
+
+    schemaAsset.classes.push('messageBodySchema');
+    schemaAsset.contentType = 'application/schema+json';
+
+    if (this.generateSourceMap) {
+      this.createSourceMap(schemaAsset, path);
+    }
+
+    this.handleExternalDocs(schemaAsset, schema.externalDocs);
+
+    payload.content.push(schemaAsset);
+  }
+
+  pushDataStructureAsset(schema, payload) {
+    try {
+      const generator = new DataStructureGenerator(this.minim);
+      const dataStructure = generator.generateDataStructure(schema);
+      if (dataStructure) {
+        payload.content.push(dataStructure);
       }
+    } catch (exception) {
+      // TODO: Expose errors once feature is more-complete
     }
   }
 
