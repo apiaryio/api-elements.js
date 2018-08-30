@@ -1092,27 +1092,19 @@ export default class Parser {
         if (responseBody !== undefined) {
           this.withPath(contentType, () => {
             let formattedResponseBody = responseBody;
-            let serialized = true;
 
             if (typeof responseBody !== 'string') {
-              try {
-                formattedResponseBody = JSON.stringify(responseBody, null, 2);
-              } catch (exception) {
-                this.createAnnotation(annotations.DATA_LOST, this.path, 'Circular references in examples are not yet supported.');
-                serialized = false;
-              }
+              formattedResponseBody = JSON.stringify(responseBody, null, 2);
             }
 
-            if (serialized) {
-              const bodyAsset = new Asset(formattedResponseBody);
-              bodyAsset.classes.push('messageBody');
+            const bodyAsset = new Asset(formattedResponseBody);
+            bodyAsset.classes.push('messageBody');
 
-              if (this.generateSourceMap) {
-                this.createSourceMap(bodyAsset, this.path);
-              }
-
-              response.content.push(bodyAsset);
+            if (this.generateSourceMap) {
+              this.createSourceMap(bodyAsset, this.path);
             }
+
+            response.content.push(bodyAsset);
           });
         }
 
@@ -1487,17 +1479,7 @@ export default class Parser {
   }
 
   pushAssets(schema, payload, contentType, pushBody) {
-    let jsonSchema;
-
-    try {
-      jsonSchema = convertSchema(schema, this.swagger);
-    } catch (exception) {
-      this.createAnnotation(
-        annotations.DATA_LOST, this.path,
-        'Circular references in schema are not yet supported',
-      );
-      return;
-    }
+    const jsonSchema = convertSchema(schema, this.swagger);
 
     if (pushBody) {
       bodyFromSchema(jsonSchema, payload, this, contentType);
