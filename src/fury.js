@@ -32,6 +32,31 @@ function isRefract(source) {
   return parseResult && parseResult.element === 'parseResult';
 }
 
+function printAnnotation(annotation, source) {
+  const type = annotation.classes.toValue()[0] || 'unknown';
+
+  process.stderr.write(`${type}:`);
+
+  if (annotation.code) {
+    process.stderr.write(` (${annotation.code.toValue()})`);
+  }
+
+  process.stderr.write(` ${annotation.toValue()}`);
+
+  if (annotation.sourceMapValue) {
+    annotation.sourceMapValue.forEach((sourceMap) => {
+      if (sourceMap.length !== 2) {
+        throw new Error(`Source Invalid source map ${sourceMap}`);
+      }
+
+      const beginning = source.substring(0, sourceMap[0]).split('\n');
+      process.stderr.write(` - line ${beginning.length}`);
+    });
+  }
+
+  process.stderr.write('\n');
+}
+
 class FuryCLI {
   constructor(inputPath, outputPath, outputFormat, validate, generateSourceMap, shell) {
     this.inputPath = inputPath;
@@ -53,7 +78,7 @@ class FuryCLI {
 
     if (isRefract(source)) {
       const result = fury.minim.deserialise(JSON.parse(source));
-      this.handleResult(result);
+      this.handleResult(result, source);
       return;
     }
 
@@ -66,7 +91,7 @@ class FuryCLI {
 
     fury[functionName](options, (err, result) => {
       if (result) {
-        this.handleResult(result);
+        this.handleResult(result, source);
         return;
       }
 
@@ -77,68 +102,54 @@ class FuryCLI {
     });
   }
 
-  handleResult(result) {
+  handleResult(result, source) {
     if (this.shell) {
       repl.start('> ').context.parseResult = result;
     } else {
-      this.serialize(result);
+      this.serialize(result, source);
     }
   }
 
   // eslint-disable-next-line class-methods-use-this
-  validateResult(result) {
-    if (result.warnings.length > 0 || result.errors.length > 0) {
+  validateResult(result, source) {
+    if (result.annotations.length > 0) {
       process.stderr.write('\n');
     }
 
-    result.warnings.forEach((annotation) => {
-      if (annotation.code) {
-        process.stderr.write(`warning: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
-      } else {
-        process.stderr.write(`warning: ${annotation.toValue()}\n`);
-      }
-    });
-
-    result.errors.forEach((annotation) => {
-      if (annotation.code) {
-        process.stderr.write(`error: (${annotation.code.toValue()})  ${annotation.toValue()}\n`);
-      } else {
-        process.stderr.write(`error: ${annotation.toValue()}\n`);
-      }
-    });
+    result.annotations.forEach(annotation => printAnnotation(annotation, source));
 
     if (result.errors.length > 0) {
       process.exit(1);
     }
   }
 
-  serialize(result) {
+  serialize(result, source) {
     if (this.outputFormat === 'application/vnd.refract.parse-result+json') {
       const output = JSON.stringify(fury.minim.toRefract(result), null, 2);
       this.write(output, true);
-      this.validateResult(result);
+      this.validateResult(result, source);
     } else if (this.outputFormat === 'application/vnd.refract.parse-result+yaml') {
       const output = yaml.dump(fury.minim.toRefract(result));
       this.write(output);
-      this.validateResult(result);
+      this.validateResult(result, source);
     } else if (this.outputFormat === 'application/vnd.refract.parse-result+json; version=0.6') {
       const serialiser = new JSON06Serialiser(fury.minim);
       const output = JSON.stringify(serialiser.serialise(result), null, 2);
       this.write(output, true);
-      this.validateResult(result);
+      this.validateResult(result, source);
     } else if (this.outputFormat === 'application/vnd.refract.parse-result+yaml; version=0.6') {
       const serialiser = new JSON06Serialiser(fury.minim);
       const output = yaml.dump(serialiser.serialise(result));
       this.write(output);
-      this.validateResult(result);
+      this.validateResult(result, source);
     } else if (this.outputFormat === 'application/vnd.refract.parse-result+json; version=1.0') {
       const output = JSON.stringify(fury.minim.serialiser.serialise(result), null, 2);
       this.write(output, true);
-      this.validateResult(result);
+      this.validateResult(result, source);
     } else if (this.outputFormat === 'application/vnd.refract.parse-result+yaml; version=1.0') {
       const output = yaml.dump(fury.minim.serialiser.serialise(result));
       this.write(output, true);
-      this.validateResult(result);
+      this.validateResult(result, source);
     } else {
       fury.serialize({ api: result.api, mediaType: this.outputFormat }, (err, content) => {
         if (err) {
@@ -147,7 +158,7 @@ class FuryCLI {
         }
 
         this.write(content);
-        this.validateResult(result);
+        this.validateResult(result, source);
       });
     }
   }

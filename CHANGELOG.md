@@ -5,6 +5,7 @@
 ### Enhancements
 
 - Command line allows you to pass in an API Elements document as source.
+- Annotations are now printed with the source line number.
 
 ## 0.7.0
 
