@@ -1,8 +1,14 @@
 # Changelog
 
+## Master
+
+### Enhancements
+
+- Command line allows you to pass in an API Elements document as source.
+
 ## 0.7.0
 
-## Enhancements
+### Enhancements
 
 - Compatibility with [Fury 3.0.0 Beta 7](https://github.com/apiaryio/fury.js/releases/tag/v3.0.0-beta.7).
 
