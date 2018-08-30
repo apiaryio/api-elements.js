@@ -7,6 +7,9 @@
 - The API Version is now exposed in the parse result. The API category now
   contains a version attribute including the API version.
 
+- Circular references are now supported in schemas and JSON and JSON Schemas
+  will now be present in parse results when you use circular references.
+
 ### Bug Fixes
 
 - Example values in a Schema Object will now be placed into the dataStructure
