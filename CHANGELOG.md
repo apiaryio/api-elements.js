@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.1
+
+### Bug Fixes
+
+- Fixes an exception being raised when trying to pass API Elements document to
+  Fury CLI as source.
+
 ## 0.8.0
 
 ### Enhancements

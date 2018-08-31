@@ -77,7 +77,7 @@ class FuryCLI {
     }
 
     if (isRefract(source)) {
-      const result = fury.minim.deserialise(JSON.parse(source));
+      const result = fury.load(JSON.parse(source));
       this.handleResult(result, source);
       return;
     }
