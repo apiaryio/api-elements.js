@@ -18,6 +18,12 @@
           "content": "Resource summary as incorrect type coerces to string"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
       "content": [
         {
           "element": "resource",

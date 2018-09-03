@@ -2,6 +2,11 @@
 
 ## Master
 
+### Enhancements
+
+- The API Version is now exposed in the parse result. The API category now
+  contains a version attribute including the API version.
+
 ### Bug Fixes
 
 - Example values in a Schema Object will now be placed into the dataStructure

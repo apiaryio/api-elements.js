@@ -337,6 +337,18 @@ export default class Parser {
           });
         }
 
+        if (this.swagger.info.version) {
+          this.withPath('version', () => {
+            this.api.attributes.set('version', this.swagger.info.version);
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(this.api.attributes.get('version'), this.path);
+            }
+
+            return this.api.attributes.get('version');
+          });
+        }
+
         if (this.swagger.info.description) {
           this.withPath('description', () => {
             const description = new Copy(this.swagger.info.description);

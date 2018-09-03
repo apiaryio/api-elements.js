@@ -18,6 +18,12 @@
           "content": "Dereferencing a local file"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "v2"
+        }
+      },
       "content": [
         {
           "element": "resource",

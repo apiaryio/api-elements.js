@@ -18,6 +18,12 @@
           "content": "Authentication with multiple consumes"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0.0"
+        }
+      },
       "content": [
         {
           "element": "category",

@@ -18,6 +18,12 @@
           "content": "Produces JSON with invalid content type"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
       "content": [
         {
           "element": "resource",
