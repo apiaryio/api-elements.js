@@ -18,6 +18,12 @@
           "content": "formData with type file"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
       "content": [
         {
           "element": "resource",

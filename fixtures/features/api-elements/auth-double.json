@@ -18,6 +18,12 @@
           "content": "Swagger Basic Auth"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0.0"
+        }
+      },
       "content": [
         {
           "element": "category",

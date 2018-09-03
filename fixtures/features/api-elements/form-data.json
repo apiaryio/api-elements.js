@@ -18,6 +18,12 @@
           "content": "Form Test"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
       "content": [
         {
           "element": "resource",

@@ -18,6 +18,12 @@
           "content": "request body as binary"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
       "content": [
         {
           "element": "resource",

@@ -18,6 +18,12 @@
           "content": "Swagger Token Auth in Header"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0.0"
+        }
+      },
       "content": [
         {
           "element": "category",

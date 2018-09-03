@@ -17,6 +17,12 @@
           "element": "string",
           "content": "Minimal Swagger Example"
         }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
       }
     }
   ]

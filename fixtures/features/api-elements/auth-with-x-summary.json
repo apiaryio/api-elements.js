@@ -18,6 +18,12 @@
           "content": "Swagger Auth with x-summary"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0.0"
+        }
+      },
       "content": [
         {
           "element": "category",

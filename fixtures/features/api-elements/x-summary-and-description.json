@@ -18,6 +18,12 @@
           "content": "X-Summary and X-Description"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
       "content": [
         {
           "element": "resource",

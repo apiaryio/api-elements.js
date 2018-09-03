@@ -17,6 +17,12 @@
           "element": "string",
           "content": "Auth No Security"
         }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
       }
     }
   ]

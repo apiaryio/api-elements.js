@@ -18,6 +18,12 @@
           "content": "Swagger Oauth2 Application"
         }
       },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0.0"
+        }
+      },
       "content": [
         {
           "element": "category",
