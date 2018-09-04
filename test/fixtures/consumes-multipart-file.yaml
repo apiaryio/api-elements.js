@@ -1,0 +1,18 @@
+swagger: '2.0'
+info:
+  title: Consumes Multipart Form Data with file
+  version: '1.0'
+consumes:
+  - multipart/form-data
+paths:
+  '/test':
+    post:
+      parameters:
+        - name: image
+          in: formData
+          required: true
+          x-example: value
+          type: file
+      responses:
+        200:
+          description: 'My Response'

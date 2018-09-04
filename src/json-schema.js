@@ -14,6 +14,11 @@ function convertSubSchema(schema, references) {
   let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
   actualSchema = _.omitBy(actualSchema, isExtension);
 
+  if (schema.type === 'file') {
+    // file is not a valid JSON Schema type let's pick string instead
+    actualSchema.type = 'string';
+  }
+
   if (schema.example) {
     actualSchema.examples = [schema.example];
   }

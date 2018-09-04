@@ -10,6 +10,8 @@
 
 - Header values will now contain source map information in the parse result.
 
+- Fix support for type `file` in multipart-form body generation.
+
 ## 0.20.0 (2018-09-04)
 
 ### Enhancements

@@ -1019,7 +1019,8 @@ export default class Parser {
       pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
     }
 
-    bodyFromSchema(schema, request, this, contentType || FORM_CONTENT_TYPE);
+    const jsonSchema = convertSchema(schema, this.swagger);
+    bodyFromSchema(jsonSchema, request, this, contentType || FORM_CONTENT_TYPE);
 
     // Generating data structure
     const dataStructure = new DataStructure();
@@ -1265,6 +1266,11 @@ export default class Parser {
   convertValueToElement(value, schema) {
     const validator = new ZSchema();
     let element;
+
+    if (schema.type === 'file') {
+      // files don't have types
+      return this.minim.toElement(value);
+    }
 
     if (validator.validate(value, schema)) {
       element = this.minim.toElement(value);
