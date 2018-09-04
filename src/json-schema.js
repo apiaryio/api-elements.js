@@ -112,15 +112,15 @@ function checkSchemaHasReferences(schema) {
     return true;
   }
 
-  let hasRef = false;
-
-  Object.values(schema).forEach((value) => {
-    if (_.isObject(value) && checkSchemaHasReferences(value)) {
-      hasRef = true;
+  return Object.values(schema).some((value) => {
+    if (_.isArray(value)) {
+      return value.some(checkSchemaHasReferences);
+    } else if (_.isObject(value)) {
+      return checkSchemaHasReferences(value);
     }
-  });
 
-  return hasRef;
+    return false;
+  });
 }
 
 /** Convert Swagger schema to JSON Schema

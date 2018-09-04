@@ -364,6 +364,47 @@ describe('Swagger Schema to JSON Schema', () => {
       });
     });
 
+    it('does not dererferences root when references found inside schema with items', () => {
+      const root = {
+        definitions: {
+          Node: {
+            type: 'object',
+            properties: {
+              children: {
+                type: 'array',
+                items: [
+                  { $ref: '#/definitions/Node' },
+                ],
+              },
+            },
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        $ref: '#/definitions/Node',
+      }, root);
+
+      expect(schema).to.deep.equal({
+        allOf: [
+          { $ref: '#/definitions/Node' },
+        ],
+        definitions: {
+          Node: {
+            type: 'object',
+            properties: {
+              children: {
+                type: 'array',
+                items: [
+                  { $ref: '#/definitions/Node' },
+                ],
+              },
+            },
+          },
+        },
+      });
+    });
+
     it('copies references to schema', () => {
       const root = {
         definitions: {
