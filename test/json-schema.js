@@ -329,6 +329,41 @@ describe('Swagger Schema to JSON Schema', () => {
       });
     });
 
+    it('does not dererferences circular root reference', () => {
+      const root = {
+        definitions: {
+          Node: {
+            type: 'object',
+            properties: {
+              parent: {
+                $ref: '#/definitions/Node',
+              },
+            },
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        $ref: '#/definitions/Node',
+      }, root);
+
+      expect(schema).to.deep.equal({
+        allOf: [
+          { $ref: '#/definitions/Node' },
+        ],
+        definitions: {
+          Node: {
+            type: 'object',
+            properties: {
+              parent: {
+                $ref: '#/definitions/Node',
+              },
+            },
+          },
+        },
+      });
+    });
+
     it('copies references to schema', () => {
       const root = {
         definitions: {

@@ -105,15 +105,29 @@ function lookupReference(reference, root) {
   };
 }
 
+/** Returns true if the given schema contains any references
+ */
+function checkSchemaHasReferences(schema) {
+  if (schema.$ref) {
+    return true;
+  }
+
+  let hasRef = false;
+
+  Object.values(schema).forEach((value) => {
+    if (_.isObject(value) && checkSchemaHasReferences(value)) {
+      hasRef = true;
+    }
+  });
+
+  return hasRef;
+}
+
 /** Convert Swagger schema to JSON Schema
  */
 export default function convertSchema(schema, root) {
   const references = [];
   const result = convertSubSchema(schema, references);
-
-  if (result.$ref) {
-    return convertSchema(lookupReference(result.$ref, root).referenced, root);
-  }
 
   if (references.length !== 0) {
     result.definitions = {};
@@ -125,6 +139,22 @@ export default function convertSchema(schema, root) {
     if (result.definitions[lookup.id] === undefined) {
       result.definitions[lookup.id] = convertSubSchema(lookup.referenced, references);
     }
+  }
+
+  if (result.$ref) {
+    const reference = lookupReference(result.$ref, root);
+
+    if (!checkSchemaHasReferences(result.definitions[reference.id])) {
+      // Dereference the root reference if possible
+      return result.definitions[reference.id];
+    }
+
+    // Wrap any root reference in allOf because faker will end up in
+    // loop with root references which is avoided with allOf
+    return {
+      allOf: [{ $ref: result.$ref }],
+      definitions: result.definitions,
+    };
   }
 
   return result;
