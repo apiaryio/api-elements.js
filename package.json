@@ -25,7 +25,7 @@
     "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.4",
     "fury-adapter-apib-parser": "^0.11.0",
     "fury-adapter-apib-serializer": "^0.7.0",
-    "fury-adapter-swagger": "^0.19.0",
+    "fury-adapter-swagger": "^0.20.0",
     "js-yaml": "^3.6",
     "minim": "^0.20.5"
   },
