@@ -290,4 +290,243 @@ describe('Swagger Schema to JSON Schema', () => {
       });
     });
   });
+
+  describe('$ref', () => {
+    it('dereferences root reference', () => {
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        $ref: '#/definitions/User',
+      }, root);
+
+      expect(schema).to.deep.equal({
+        type: 'object',
+      });
+    });
+
+    it('dereferences root reference and converts to JSON Schema', () => {
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+            'x-nullable': true,
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        $ref: '#/definitions/User',
+      }, root);
+
+      expect(schema).to.deep.equal({
+        type: ['object', 'null'],
+      });
+    });
+
+    it('does not dererferences circular root reference', () => {
+      const root = {
+        definitions: {
+          Node: {
+            type: 'object',
+            properties: {
+              parent: {
+                $ref: '#/definitions/Node',
+              },
+            },
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        $ref: '#/definitions/Node',
+      }, root);
+
+      expect(schema).to.deep.equal({
+        allOf: [
+          { $ref: '#/definitions/Node' },
+        ],
+        definitions: {
+          Node: {
+            type: 'object',
+            properties: {
+              parent: {
+                $ref: '#/definitions/Node',
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('does not dererferences root when references found inside schema with items', () => {
+      const root = {
+        definitions: {
+          Node: {
+            type: 'object',
+            properties: {
+              children: {
+                type: 'array',
+                items: [
+                  { $ref: '#/definitions/Node' },
+                ],
+              },
+            },
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        $ref: '#/definitions/Node',
+      }, root);
+
+      expect(schema).to.deep.equal({
+        allOf: [
+          { $ref: '#/definitions/Node' },
+        ],
+        definitions: {
+          Node: {
+            type: 'object',
+            properties: {
+              children: {
+                type: 'array',
+                items: [
+                  { $ref: '#/definitions/Node' },
+                ],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('copies references to schema', () => {
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User',
+        },
+      }, root);
+
+      expect(schema).to.deep.equal({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User',
+        },
+        definitions: {
+          User: {
+            type: 'object',
+          },
+        },
+      });
+    });
+
+    it('copies references to schema and converts them to JSON Schema', () => {
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+            'x-custom': true,
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User',
+        },
+      }, root);
+
+      expect(schema).to.deep.equal({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User',
+        },
+        definitions: {
+          User: {
+            type: 'object',
+          },
+        },
+      });
+    });
+
+    it('recursively handles references to schema and converts them to JSON Schema', () => {
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+            properties: {
+              last_comment: {
+                $ref: '#/definitions/Comment',
+              },
+            },
+          },
+          Comment: {
+            type: 'object',
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User',
+        },
+      }, root);
+
+      expect(schema).to.deep.equal({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User',
+        },
+        definitions: {
+          User: {
+            type: 'object',
+            properties: {
+              last_comment: {
+                $ref: '#/definitions/Comment',
+              },
+            },
+          },
+          Comment: {
+            type: 'object',
+          },
+        },
+      });
+    });
+
+    describe('invalid references', () => {
+      it('errors for non-root reference', () => {
+        expect(() => {
+          convertSchema({ $ref: 'https://example.com' });
+        }).to.throw('must start with document root');
+      });
+
+      it('errors for non-definitions reference', () => {
+        expect(() => {
+          convertSchema({ $ref: '#/defs' });
+        }).to.throw('must be reference to #/definitions');
+      });
+
+      it('errors for non-definitions reference', () => {
+        expect(() => {
+          convertSchema({ $ref: '#/definitions/Bar' }, {});
+        }).to.throw('Reference to #/definitions/Bar does not exist');
+      });
+    });
+  });
 });

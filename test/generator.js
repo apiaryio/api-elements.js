@@ -96,6 +96,31 @@ describe('bodyFromSchema', () => {
     expect(body.length).to.equal(5);
   });
 
+  it('can generate a structure with references', () => {
+    const schema = {
+      type: 'array',
+      items: {
+        $ref: '#/definitions/User',
+      },
+      minItems: 1,
+      maxItems: 1,
+      definitions: {
+        User: {
+          type: 'object',
+          properties: {
+            name: { type: 'string', default: 'doe' },
+          },
+        },
+      },
+    };
+
+    const payload = { content: [] };
+    const asset = bodyFromSchema(schema, payload, parser, 'application/json');
+    const body = JSON.parse(asset.content);
+
+    expect(body).to.deep.equal([{ name: 'doe' }]);
+  });
+
   describe('multipart/form-data', () => {
     it('can generate multipart form with specified boundary', () => {
       const schema = {

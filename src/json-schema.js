@@ -5,7 +5,12 @@ function isExtension(value, key) {
   return _.startsWith(key, 'x-');
 }
 
-function convertSubSchema(schema) {
+function convertSubSchema(schema, references) {
+  if (schema.$ref) {
+    references.push(schema.$ref);
+    return { $ref: schema.$ref };
+  }
+
   let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
   actualSchema = _.omitBy(actualSchema, isExtension);
 
@@ -26,58 +31,131 @@ function convertSubSchema(schema) {
   }
 
   if (schema.allOf) {
-    actualSchema.allOf = schema.allOf.map(convertSubSchema);
+    actualSchema.allOf = schema.allOf.map(s => convertSubSchema(s, references));
   }
 
   if (schema.anyOf) {
-    actualSchema.anyOf = schema.anyOf.map(convertSubSchema);
+    actualSchema.anyOf = schema.anyOf.map(s => convertSubSchema(s, references));
   }
 
   if (schema.oneOf) {
-    actualSchema.oneOf = schema.oneOf.map(convertSubSchema);
+    actualSchema.oneOf = schema.oneOf.map(s => convertSubSchema(s, references));
   }
 
   if (schema.not) {
-    actualSchema.not = convertSubSchema(schema.not);
+    actualSchema.not = convertSubSchema(schema.not, references);
   }
 
   // Array
 
   if (schema.items) {
     if (Array.isArray(schema.items)) {
-      actualSchema.items = schema.items.map(convertSubSchema);
+      actualSchema.items = schema.items.map(s => convertSubSchema(s, references));
     } else {
-      actualSchema.items = convertSubSchema(schema.items);
+      actualSchema.items = convertSubSchema(schema.items, references);
     }
   }
 
   if (schema.additionalItems && typeof schema.additionalItems === 'object') {
-    actualSchema.additionalItems = convertSubSchema(schema.additionalItems);
+    actualSchema.additionalItems = convertSubSchema(schema.additionalItems, references);
   }
 
   // Object
 
   if (schema.properties) {
     Object.keys(schema.properties).forEach((key) => {
-      actualSchema.properties[key] = convertSubSchema(schema.properties[key]);
+      actualSchema.properties[key] = convertSubSchema(schema.properties[key], references);
     });
   }
 
   if (schema.patternProperties) {
     Object.keys(schema.patternProperties).forEach((key) => {
-      actualSchema.patternProperties[key] = convertSubSchema(schema.patternProperties[key]);
+      actualSchema.patternProperties[key] =
+        convertSubSchema(schema.patternProperties[key], references);
     });
   }
 
   if (schema.additionalProperties && typeof schema.additionalProperties === 'object') {
-    actualSchema.additionalProperties = convertSubSchema(schema.additionalProperties);
+    actualSchema.additionalProperties = convertSubSchema(schema.additionalProperties, references);
   }
 
   return actualSchema;
 }
 
+function lookupReference(reference, root) {
+  const parts = reference.split('/');
+
+  if (parts[0] !== '#') {
+    throw new Error('Schema reference must start with document root (#)');
+  }
+
+  if (parts[1] !== 'definitions' || parts.length !== 3) {
+    throw new Error('Schema reference must be reference to #/definitions');
+  }
+
+  const id = parts[2];
+
+  if (!root.definitions || !root.definitions[id]) {
+    throw new Error(`Reference to ${reference} does not exist`);
+  }
+
+  return {
+    id,
+    referenced: root.definitions[id],
+  };
+}
+
+/** Returns true if the given schema contains any references
+ */
+function checkSchemaHasReferences(schema) {
+  if (schema.$ref) {
+    return true;
+  }
+
+  return Object.values(schema).some((value) => {
+    if (_.isArray(value)) {
+      return value.some(checkSchemaHasReferences);
+    } else if (_.isObject(value)) {
+      return checkSchemaHasReferences(value);
+    }
+
+    return false;
+  });
+}
+
 /** Convert Swagger schema to JSON Schema
  */
-export default function convertSchema(schema) {
-  return convertSubSchema(schema);
+export default function convertSchema(schema, root) {
+  const references = [];
+  const result = convertSubSchema(schema, references);
+
+  if (references.length !== 0) {
+    result.definitions = {};
+  }
+
+  while (references.length !== 0) {
+    const lookup = lookupReference(references.pop(), root);
+
+    if (result.definitions[lookup.id] === undefined) {
+      result.definitions[lookup.id] = convertSubSchema(lookup.referenced, references);
+    }
+  }
+
+  if (result.$ref) {
+    const reference = lookupReference(result.$ref, root);
+
+    if (!checkSchemaHasReferences(result.definitions[reference.id])) {
+      // Dereference the root reference if possible
+      return result.definitions[reference.id];
+    }
+
+    // Wrap any root reference in allOf because faker will end up in
+    // loop with root references which is avoided with allOf
+    return {
+      allOf: [{ $ref: result.$ref }],
+      definitions: result.definitions,
+    };
+  }
+
+  return result;
 }
