@@ -176,7 +176,7 @@
                                   "content": "application/schema+json"
                                 }
                               },
-                              "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"categoryAsArray\":{\"type\":\"array\",\"description\":\"A list of categories\",\"items\":{\"$ref\":\"#/definitions/category\"}},\"categoryAsObject\":{\"$ref\":\"#/definitions/category\"}},\"description\":\"A category groups one or more categories\",\"definitions\":{\"category\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"categoryAsArray\":{\"type\":\"array\",\"description\":\"A list of categories\",\"items\":{\"$ref\":\"#/definitions/category\"}},\"categoryAsObject\":{\"$ref\":\"#/definitions/category\"}},\"description\":\"A category groups one or more categories\"}}}"
+                              "content": "{\"allOf\":[{\"$ref\":\"#/definitions/category\"}],\"definitions\":{\"category\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"categoryAsArray\":{\"type\":\"array\",\"description\":\"A list of categories\",\"items\":{\"$ref\":\"#/definitions/category\"}},\"categoryAsObject\":{\"$ref\":\"#/definitions/category\"}},\"description\":\"A category groups one or more categories\"}}}"
                             }
                           ]
                         }
