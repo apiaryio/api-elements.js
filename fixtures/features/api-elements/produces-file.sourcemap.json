@@ -254,7 +254,7 @@
                               ]
                             }
                           },
-                          "content": "{\"type\":\"file\"}"
+                          "content": "{\"type\":\"string\"}"
                         }
                       ]
                     }
