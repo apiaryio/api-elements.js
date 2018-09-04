@@ -156,6 +156,27 @@
                             {
                               "element": "copy",
                               "content": "Success"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
+                              },
+                              "attributes": {
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
+                              },
+                              "content": "{\"allOf\":[{\"$ref\":\"#/definitions/category\"}],\"definitions\":{\"category\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"categoryAsArray\":{\"type\":\"array\",\"description\":\"A list of categories\",\"items\":{\"$ref\":\"#/definitions/category\"}},\"categoryAsObject\":{\"$ref\":\"#/definitions/category\"}},\"description\":\"A category groups one or more categories\"}}}"
                             }
                           ]
                         }
@@ -168,68 +189,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        },
-        "links": {
-          "element": "array",
-          "content": [
-            {
-              "element": "link",
-              "attributes": {
-                "relation": {
-                  "element": "string",
-                  "content": "origin"
-                },
-                "href": {
-                  "element": "string",
-                  "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-                }
-              }
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "code": {
-          "element": "number",
-          "content": 3
-        },
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "content": 590
-                    },
-                    {
-                      "element": "number",
-                      "content": 53
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "Circular references in schema are not yet supported"
     }
   ]
 }
