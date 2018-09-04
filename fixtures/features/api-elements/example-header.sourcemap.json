@@ -339,6 +339,31 @@
                                 },
                                 "value": {
                                   "element": "number",
+                                  "attributes": {
+                                    "sourceMap": {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "sourceMap",
+                                          "content": [
+                                            {
+                                              "element": "array",
+                                              "content": [
+                                                {
+                                                  "element": "number",
+                                                  "content": 334
+                                                },
+                                                {
+                                                  "element": "number",
+                                                  "content": 12
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  },
                                   "content": 100
                                 }
                               }
