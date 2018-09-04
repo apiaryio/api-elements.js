@@ -14,6 +14,7 @@ paths:
           in: formData
           required: true
           type: file
+          x-example: test
       responses:
         200:
           description: 'My Response'

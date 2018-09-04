@@ -157,7 +157,7 @@
                               "content": "multipart/form-data; boundary=BOUNDARY"
                             }
                           },
-                          "content": "--BOUNDARY\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\nex enim consequat\r\n\r\n--BOUNDARY--\r\n"
+                          "content": "--BOUNDARY\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\ntest\r\n\r\n--BOUNDARY--\r\n"
                         },
                         {
                           "element": "dataStructure",
@@ -184,7 +184,7 @@
                                   },
                                   "value": {
                                     "element": "string",
-                                    "content": null
+                                    "content": "test"
                                   }
                                 }
                               }
