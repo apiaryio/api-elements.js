@@ -658,7 +658,8 @@ export default class Parser {
     _.forEach(definitions, (schema, key) => {
       this.withPath(key, () => {
         try {
-          const dataStructure = generator.generateDataStructure(schema);
+          const jsonSchema = convertSchema(schema, { definitions }, false);
+          const dataStructure = generator.generateDataStructure(jsonSchema);
 
           if (dataStructure) {
             dataStructure.content.id = idForDataStructure(`#/definitions/${key}`);
