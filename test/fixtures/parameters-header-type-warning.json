@@ -1,0 +1,223 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Request Header Parameter Example"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "content": "/"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "UserID"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "RequestID"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "content": "204"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "content": "Response"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "origin"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "code": {
+          "element": "number",
+          "content": 6
+        },
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "content": 202
+                    },
+                    {
+                      "element": "number",
+                      "content": 15
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "Expected type number but found type string"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "origin"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "code": {
+          "element": "number",
+          "content": 6
+        },
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "content": 313
+                    },
+                    {
+                      "element": "number",
+                      "content": 13
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "Expected type number but found type string"
+    }
+  ]
+}

@@ -1,5 +1,15 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Default and example values for headers are now validated to match the header
+  type. For example, placing a string as a value for a number type header will
+  now emit a warning.
+
+- Header values will now contain source map information in the parse result.
+
 ## 0.20.0 (2018-09-04)
 
 ### Enhancements

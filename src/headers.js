@@ -57,6 +57,8 @@ export function pushHeaderObject(key, header, payload, parser) {
     return;
   }
 
+  const schema = { type: header.type };
+
   // Choose the first available option
   if (header.enum) {
     // TODO: This may lose data if there are multiple enums.
@@ -64,9 +66,13 @@ export function pushHeaderObject(key, header, payload, parser) {
   }
 
   if (header['x-example']) {
-    value = header['x-example'];
+    parser.withPath('x-example', () => {
+      value = parser.convertValueToElement(header['x-example'], schema);
+    });
   } else if (header.default) {
-    value = header.default;
+    parser.withPath('default', () => {
+      value = parser.convertValueToElement(header.default, schema);
+    });
   }
 
   const headerElement = pushHeader(key, value, payload, parser);
