@@ -205,10 +205,30 @@
                   "content": [
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 7
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 8
+                        }
+                      },
                       "content": 112
                     },
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 15
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 4
+                        }
+                      },
                       "content": 182
                     }
                   ]
@@ -267,10 +287,30 @@
                   "content": [
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 17
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 10
+                        }
+                      },
                       "content": 327
                     },
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 25
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 6
+                        }
+                      },
                       "content": 197
                     }
                   ]

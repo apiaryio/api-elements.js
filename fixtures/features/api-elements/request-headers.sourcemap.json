@@ -413,10 +413,30 @@
                   "content": [
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 21
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 10
+                        }
+                      },
                       "content": 415
                     },
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 26
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 6
+                        }
+                      },
                       "content": 101
                     }
                   ]
