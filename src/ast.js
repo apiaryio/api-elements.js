@@ -36,8 +36,8 @@ export default class Ast {
 
             if (!pieces.length) {
               // This is the last item!
-              start = subNode[0].start_mark.pointer;
-              end = subNode[1].end_mark.pointer;
+              start = subNode[0].start_mark;
+              end = subNode[1].end_mark;
             }
             break;
           }
@@ -52,11 +52,11 @@ export default class Ast {
           if (!newNode && piece > 0 && node.value[piece - 1]) {
             // Element in sequence does not exist. It could have been empty
             // Let's provide the end of previous element
-            start = node.value[piece - 1].end_mark.pointer;
-            end = start + 1;
+            start = node.value[piece - 1].end_mark;
+            end = start;
           } else {
-            start = newNode.start_mark.pointer;
-            end = newNode.end_mark.pointer;
+            start = newNode.start_mark;
+            end = newNode.end_mark;
           }
         }
       } else {

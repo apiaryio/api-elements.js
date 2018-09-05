@@ -2,6 +2,11 @@
 
 ## Master
 
+### Enhancements
+
+- Line and column numbers are now exposed in the parse result in source maps
+  for annotation elements.
+
 ### Bug Fixes
 
 - Default and example values for headers are now validated to match the header

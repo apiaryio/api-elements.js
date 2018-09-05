@@ -148,10 +148,30 @@
                   "content": [
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 6
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 4
+                        }
+                      },
                       "content": 107
                     },
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 6
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 13
+                        }
+                      },
                       "content": 9
                     }
                   ]

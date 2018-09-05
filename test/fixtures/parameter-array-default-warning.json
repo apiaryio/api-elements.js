@@ -182,10 +182,30 @@
                   "content": [
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 14
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 10
+                        }
+                      },
                       "content": 249
                     },
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 14
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 20
+                        }
+                      },
                       "content": 10
                     }
                   ]

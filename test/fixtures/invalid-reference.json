@@ -195,10 +195,30 @@
                   "content": [
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 12
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 10
+                        }
+                      },
                       "content": 205
                     },
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 14
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 0
+                        }
+                      },
                       "content": 48
                     }
                   ]

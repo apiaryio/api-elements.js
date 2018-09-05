@@ -48,11 +48,31 @@
                   "content": [
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 11
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 9
+                        }
+                      },
                       "content": 226
                     },
                     {
                       "element": "number",
-                      "content": 1
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 11
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 9
+                        }
+                      },
+                      "content": 0
                     }
                   ]
                 }
@@ -110,10 +130,30 @@
                   "content": [
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 11
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 9
+                        }
+                      },
                       "content": 226
                     },
                     {
                       "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 11
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 9
+                        }
+                      },
                       "content": 0
                     }
                   ]

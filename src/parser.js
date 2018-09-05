@@ -1418,16 +1418,26 @@ export default class Parser {
   }
 
   // Make a new source map for the given element
-  createSourceMap(element, path) {
+  createSourceMap(element, path, produceLineColumnAttributes) {
     if (this.ast) {
+      const NumberElement = this.minim.elements.Number;
       const SourceMap = this.minim.getElementClass('sourceMap');
       const position = this.ast.getPosition(path);
 
       // eslint-disable-next-line no-restricted-globals
-      if (position && !isNaN(position.start) && !isNaN(position.end)) {
-        element.attributes.set('sourceMap', [
-          new SourceMap([[position.start, position.end - position.start]]),
-        ]);
+      if (position && position.start && position.end &&
+          !isNaN(position.start.pointer) && !isNaN(position.end.pointer)) {
+        const start = new NumberElement(position.start.pointer);
+        const end = new NumberElement(position.end.pointer - position.start.pointer);
+
+        if (produceLineColumnAttributes) {
+          start.attributes.set('line', position.start.line);
+          start.attributes.set('column', position.start.column);
+          end.attributes.set('line', position.end.line);
+          end.attributes.set('column', position.end.column);
+        }
+
+        element.attributes.set('sourceMap', [new SourceMap([[start, end]])]);
       }
     }
   }
@@ -1447,7 +1457,7 @@ export default class Parser {
     }
 
     if (path && this.ast) {
-      this.createSourceMap(annotation, path);
+      this.createSourceMap(annotation, path, true);
     }
 
     return annotation;
