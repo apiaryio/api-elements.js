@@ -96,7 +96,7 @@
                             },
                             {
                               "element": "number",
-                              "content": 237
+                              "content": 263
                             }
                           ]
                         }
@@ -136,7 +136,7 @@
                                         },
                                         {
                                           "element": "number",
-                                          "content": 224
+                                          "content": 250
                                         }
                                       ]
                                     }
@@ -221,6 +221,45 @@
                       },
                       "content": [
                         {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            },
+                            "links": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "link",
+                                  "attributes": {
+                                    "relation": {
+                                      "element": "string",
+                                      "content": "inferred"
+                                    },
+                                    "href": {
+                                      "element": "string",
+                                      "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "multipart/form-data; boundary=BOUNDARY"
+                            }
+                          },
+                          "content": "--BOUNDARY\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\ntest\r\n\r\n--BOUNDARY--\r\n"
+                        },
+                        {
                           "element": "dataStructure",
                           "content": {
                             "element": "object",
@@ -243,7 +282,7 @@
                                               },
                                               {
                                                 "element": "number",
-                                                "content": 86
+                                                "content": 112
                                               }
                                             ]
                                           }
@@ -284,7 +323,7 @@
                                                   },
                                                   {
                                                     "element": "number",
-                                                    "content": 86
+                                                    "content": 112
                                                   }
                                                 ]
                                               }
@@ -293,7 +332,7 @@
                                         ]
                                       }
                                     },
-                                    "content": null
+                                    "content": "test"
                                   }
                                 }
                               }
@@ -357,7 +396,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 297
+                                          "content": 323
                                         },
                                         {
                                           "element": "number",
@@ -388,7 +427,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 312
+                                          "content": 338
                                         },
                                         {
                                           "element": "number",
@@ -471,7 +510,7 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 349
+                                          "content": 375
                                         },
                                         {
                                           "element": "number",
@@ -501,68 +540,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        },
-        "links": {
-          "element": "array",
-          "content": [
-            {
-              "element": "link",
-              "attributes": {
-                "relation": {
-                  "element": "string",
-                  "content": "origin"
-                },
-                "href": {
-                  "element": "string",
-                  "content": "http://docs.apiary.io/validations/swagger#refract-not-supported"
-                }
-              }
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "code": {
-          "element": "number",
-          "content": 3
-        },
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "content": 158
-                    },
-                    {
-                      "element": "number",
-                      "content": 224
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "Unable to generate multipart/form-data; boundary=BOUNDARY example message body out of JSON Schema"
     }
   ]
 }

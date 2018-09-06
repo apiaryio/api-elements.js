@@ -81,7 +81,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"type\":\"file\"}"
+                          "content": "{\"type\":\"string\"}"
                         }
                       ]
                     }
