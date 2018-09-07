@@ -1,5 +1,13 @@
 # Changelog
 
+## Master
+
+### Enhancements
+
+This update now uses fury-adapter-swagger 0.20.0. Please see
+[fury-adapter-swagger 0.20.0](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.20.0)
+for the list of changes.
+
 ## 0.8.1
 
 ### Bug Fixes
