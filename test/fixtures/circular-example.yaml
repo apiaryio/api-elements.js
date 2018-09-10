@@ -16,6 +16,7 @@ paths:
 
 definitions:
   Company:
+    type: object
     properties:
       id:
         type: string
@@ -25,8 +26,11 @@ definitions:
         properties:
           data:
             $ref: '#/definitions/User'
+    default:
+      id: ORCL
 
   User:
+    type: object
     properties:
       name:
         type: string

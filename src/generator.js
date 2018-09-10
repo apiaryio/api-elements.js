@@ -12,6 +12,11 @@ faker.option({
   maxLength: 256,
 });
 
+function hasCircularReference(schema) {
+  // Primitive implementation, right now only schemas with definitions are circular
+  return schema.definitions !== undefined;
+}
+
 export function bodyFromSchema(schema, payload, parser, contentType = 'application/json') {
   const { Asset } = parser.minim.elements;
   let asset = null;
@@ -22,6 +27,10 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
     if (schema.examples && schema.examples[0]) {
       body = schema.examples[0];
     } else {
+      faker.option({
+        alwaysFakeOptionals: !hasCircularReference(schema),
+      });
+
       body = faker(schema);
     }
 

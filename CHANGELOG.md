@@ -1,5 +1,12 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- No longer expand all option values (properties, array values) etc in the case
+  that a schema has a circular reference.
+
 ## 0.21.0 (2018-09-07)
 
 ### Enhancements
