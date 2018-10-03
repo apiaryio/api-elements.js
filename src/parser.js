@@ -121,7 +121,8 @@ export default class Parser {
 
     // Swagger parser is mutating the given input and dereferencing.
     // Let's give it no changes to screw the original and give it a deep copy
-    const dereferencedSwagger = JSON.parse(JSON.stringify(loaded));
+    const referencedSwagger = JSON.parse(JSON.stringify(loaded));
+    this.referencedSwagger = referencedSwagger;
 
     return swaggerParser.validate(loaded, swaggerOptions, (err) => {
       const swagger = swaggerParser.api;
@@ -197,9 +198,9 @@ export default class Parser {
         const complete = () => {
           this.handleSwaggerVendorExtensions(this.api, swagger.paths);
 
-          if (dereferencedSwagger.definitions) {
+          if (referencedSwagger.definitions) {
             this.withPath('definitions', () => {
-              this.handleSwaggerDefinitions(dereferencedSwagger.definitions);
+              this.handleSwaggerDefinitions(referencedSwagger.definitions);
             });
           }
 
@@ -1572,10 +1573,22 @@ export default class Parser {
     payload.content.push(schemaAsset);
   }
 
+  /** Retrieves the value of the current path in the original Swagger document (referenced document)
+   */
+  referencedPathValue() {
+    let value = this.referencedSwagger;
+
+    this.path.forEach((path) => {
+      value = value[path];
+    });
+
+    return value;
+  }
+
   pushDataStructureAsset(schema, payload) {
     try {
       const generator = new DataStructureGenerator(this.minim);
-      const dataStructure = generator.generateDataStructure(schema);
+      const dataStructure = generator.generateDataStructure(this.referencedPathValue() || schema);
       if (dataStructure) {
         payload.content.push(dataStructure);
       }
