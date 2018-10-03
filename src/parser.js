@@ -1579,7 +1579,11 @@ export default class Parser {
     let value = this.referencedSwagger;
 
     this.path.forEach((path) => {
-      value = value[path];
+      if (value) {
+        value = value[path];
+      } else {
+        value = null;
+      }
     });
 
     return value;
