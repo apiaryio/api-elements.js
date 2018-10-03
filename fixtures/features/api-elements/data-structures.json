@@ -92,33 +92,8 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "object",
-                            "content": [
-                              {
-                                "element": "member",
-                                "attributes": {
-                                  "typeAttributes": {
-                                    "element": "array",
-                                    "content": [
-                                      {
-                                        "element": "string",
-                                        "content": "optional"
-                                      }
-                                    ]
-                                  }
-                                },
-                                "content": {
-                                  "key": {
-                                    "element": "string",
-                                    "content": "username"
-                                  },
-                                  "value": {
-                                    "element": "string",
-                                    "content": null
-                                  }
-                                }
-                              }
-                            ]
+                            "element": "definitions/User",
+                            "content": null
                           }
                         }
                       ]
