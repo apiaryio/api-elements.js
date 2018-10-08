@@ -1,5 +1,15 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Enhancements
+
+- Adds a dataStructures section to the parse result containing every data
+  structure found within the definitions section of a Swagger document. We now
+  use referencing between data structures found within a request or response
+  data structure which generally makes parse results smaller instead of
+  duplicating the data structure contents.
+
 ## 0.21.1 (2018-09-10)
 
 ### Bug Fixes

@@ -1,6 +1,11 @@
 /* eslint-disable class-methods-use-this, arrow-body-style */
 
 import _ from 'lodash';
+import { parseReference } from './json-schema';
+
+export function idForDataStructure(reference) {
+  return `definitions/${parseReference(reference)}`;
+}
 
 /*
  * Data Structure Generator
@@ -9,7 +14,7 @@ import _ from 'lodash';
  * >>> const generator = new DataStructureGenerator(minimNamespace);
  * >>> const dataStructure = generator.generateDataStructure({type: 'string'});
 */
-export default class DataStructureGenerator {
+export class DataStructureGenerator {
   constructor(minim) {
     this.minim = minim;
   }
@@ -193,6 +198,7 @@ export default class DataStructureGenerator {
       Boolean: BooleanElement,
       Null: NullElement,
       Enum: EnumElement,
+      // Ref: RefElement,
     } = this.minim.elements;
 
     const typeGeneratorMap = {
@@ -205,7 +211,12 @@ export default class DataStructureGenerator {
 
     let element;
 
-    if (schema.enum) {
+    if (schema.$ref) {
+      // element = new RefElement(idForDataStructure(schema.$ref));
+      element = new this.minim.elements.Element();
+      element.element = idForDataStructure(schema.$ref);
+      return element;
+    } else if (schema.enum) {
       element = this.generateEnum(schema);
     } else if (schema.type === 'array') {
       element = this.generateArray(schema);
