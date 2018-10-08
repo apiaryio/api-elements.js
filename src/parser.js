@@ -1542,7 +1542,7 @@ export default class Parser {
     let jsonSchema;
 
     try {
-      jsonSchema = convertSchema(schema, this.swagger);
+      jsonSchema = convertSchema(this.referencedPathValue() || schema, this.referencedSwagger);
     } catch (error) {
       this.createAnnotation(annotations.VALIDATION_ERROR, this.path, error.message);
       return;
