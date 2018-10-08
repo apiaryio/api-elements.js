@@ -12,7 +12,7 @@ import { baseLink, origin } from './link';
 import { pushHeader, pushHeaderObject } from './headers';
 import Ast from './ast';
 import { DataStructureGenerator, idForDataStructure } from './schema';
-import convertSchema from './json-schema';
+import { convertSchema, convertSchemaDefinitions } from './json-schema';
 import { FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary } from './media-type';
 
 
@@ -195,12 +195,14 @@ export default class Parser {
         this.validateProduces(this.swagger.produces);
         this.validateConsumes(this.swagger.consumes);
 
+        this.definitions = convertSchemaDefinitions(referencedSwagger.definitions);
+
         const complete = () => {
           this.handleSwaggerVendorExtensions(this.api, swagger.paths);
 
-          if (referencedSwagger.definitions) {
+          if (this.definitions) {
             this.withPath('definitions', () => {
-              this.handleSwaggerDefinitions(referencedSwagger.definitions);
+              this.handleSwaggerDefinitions(this.definitions);
             });
           }
 
@@ -659,8 +661,7 @@ export default class Parser {
     _.forEach(definitions, (schema, key) => {
       this.withPath(key, () => {
         try {
-          const jsonSchema = convertSchema(schema, { definitions }, false);
-          const dataStructure = generator.generateDataStructure(jsonSchema);
+          const dataStructure = generator.generateDataStructure(schema);
 
           if (dataStructure) {
             dataStructure.content.id = idForDataStructure(`#/definitions/${key}`);
@@ -1063,7 +1064,7 @@ export default class Parser {
       pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
     }
 
-    const jsonSchema = convertSchema(schema, this.swagger);
+    const jsonSchema = convertSchema(schema, { definitions: this.definitions });
     bodyFromSchema(jsonSchema, request, this, contentType || FORM_CONTENT_TYPE);
 
     // Generating data structure
@@ -1542,7 +1543,8 @@ export default class Parser {
     let jsonSchema;
 
     try {
-      jsonSchema = convertSchema(this.referencedPathValue() || schema, this.referencedSwagger);
+      const root = { definitions: this.definitions };
+      jsonSchema = convertSchema(this.referencedPathValue() || schema, root);
     } catch (error) {
       this.createAnnotation(annotations.VALIDATION_ERROR, this.path, error.message);
       return;

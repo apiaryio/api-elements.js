@@ -3,7 +3,7 @@
 
 import { expect } from 'chai';
 
-import convertSchema from '../src/json-schema';
+import { convertSchema } from '../src/json-schema';
 
 describe('Swagger Schema to JSON Schema', () => {
   it('returns compatible schema when given valid JSON Schema', () => {
@@ -310,25 +310,6 @@ describe('Swagger Schema to JSON Schema', () => {
       });
     });
 
-    it('dereferences root reference and converts to JSON Schema', () => {
-      const root = {
-        definitions: {
-          User: {
-            type: 'object',
-            'x-nullable': true,
-          },
-        },
-      };
-
-      const schema = convertSchema({
-        $ref: '#/definitions/User',
-      }, root);
-
-      expect(schema).to.deep.equal({
-        type: ['object', 'null'],
-      });
-    });
-
     it('does not dererferences circular root reference', () => {
       const root = {
         definitions: {
@@ -434,37 +415,7 @@ describe('Swagger Schema to JSON Schema', () => {
       });
     });
 
-    it('copies references to schema and converts them to JSON Schema', () => {
-      const root = {
-        definitions: {
-          User: {
-            type: 'object',
-            'x-custom': true,
-          },
-        },
-      };
-
-      const schema = convertSchema({
-        type: 'array',
-        items: {
-          $ref: '#/definitions/User',
-        },
-      }, root);
-
-      expect(schema).to.deep.equal({
-        type: 'array',
-        items: {
-          $ref: '#/definitions/User',
-        },
-        definitions: {
-          User: {
-            type: 'object',
-          },
-        },
-      });
-    });
-
-    it('recursively handles references to schema and converts them to JSON Schema', () => {
+    it('recursively handles references to schema', () => {
       const root = {
         definitions: {
           User: {

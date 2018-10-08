@@ -134,13 +134,74 @@ function checkSchemaHasReferences(schema) {
   });
 }
 
+/** Traverses the entire schema to find all of the references
+ * @returns array of each reference that is found in the schema
+ */
+function findReferences(schema) {
+  if (schema.$ref) {
+    return [schema.$ref];
+  }
+
+  let references = [];
+
+  if (schema.allOf) {
+    references = references.concat(...schema.allOf.map(findReferences));
+  }
+
+  if (schema.anyOf) {
+    references = references.concat(...schema.anyOf.map(findReferences));
+  }
+
+  if (schema.oneOf) {
+    references = references.concat(...schema.oneOf.map(findReferences));
+  }
+
+  if (schema.not) {
+    references = references.concat(...findReferences(schema.not));
+  }
+
+  // Array
+
+  if (schema.items) {
+    if (Array.isArray(schema.items)) {
+      references = references.concat(...schema.items.map(findReferences));
+    } else {
+      references = references.concat(findReferences(schema.items));
+    }
+  }
+
+  if (schema.additionalItems && typeof schema.additionalItems === 'object') {
+    references = references.concat(findReferences(schema.additionalItems));
+  }
+
+  // Object
+
+  if (schema.properties) {
+    Object.keys(schema.properties).forEach((key) => {
+      references = references.concat(findReferences(schema.properties[key]));
+    });
+  }
+
+  if (schema.patternProperties) {
+    Object.keys(schema.patternProperties).forEach((key) => {
+      references = references.concat(findReferences(schema.patternProperties[key]));
+    });
+  }
+
+  if (schema.additionalProperties && typeof schema.additionalProperties === 'object') {
+    references = references.concat(findReferences(schema.additionalProperties));
+  }
+
+  return references;
+}
+
 /** Convert Swagger schema to JSON Schema
  */
-export default function convertSchema(schema, root, convertDefinitions = true) {
-  const references = [];
+export function convertSchema(schema, root, copyDefinitions = true) {
+  let references = [];
   const result = convertSubSchema(schema, references);
 
-  if (convertDefinitions) {
+  if (copyDefinitions) {
     if (references.length !== 0) {
       result.definitions = {};
     }
@@ -149,7 +210,8 @@ export default function convertSchema(schema, root, convertDefinitions = true) {
       const lookup = lookupReference(references.pop(), root);
 
       if (result.definitions[lookup.id] === undefined) {
-        result.definitions[lookup.id] = convertSubSchema(lookup.referenced, references);
+        references = references.concat(findReferences(lookup.referenced));
+        result.definitions[lookup.id] = lookup.referenced;
       }
     }
   }
@@ -171,4 +233,16 @@ export default function convertSchema(schema, root, convertDefinitions = true) {
   }
 
   return result;
+}
+
+export function convertSchemaDefinitions(definitions) {
+  const jsonSchemaDefinitions = {};
+
+  if (definitions) {
+    _.forEach(definitions, (schema, key) => {
+      jsonSchemaDefinitions[key] = convertSchema(schema, { definitions }, false);
+    });
+  }
+
+  return jsonSchemaDefinitions;
 }
