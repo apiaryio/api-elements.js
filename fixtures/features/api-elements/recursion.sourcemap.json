@@ -525,6 +525,13 @@
                                 }
                               },
                               "content": "{\"allOf\":[{\"$ref\":\"#/definitions/category\"}],\"definitions\":{\"category\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"categoryAsArray\":{\"type\":\"array\",\"description\":\"A list of categories\",\"items\":{\"$ref\":\"#/definitions/category\"}},\"categoryAsObject\":{\"$ref\":\"#/definitions/category\"}},\"description\":\"A category groups one or more categories\"}}}"
+                            },
+                            {
+                              "element": "dataStructure",
+                              "content": {
+                                "element": "definitions/category",
+                                "content": null
+                              }
                             }
                           ]
                         }
@@ -533,6 +540,154 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "dataStructures"
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "dataStructure",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "content": 658
+                            },
+                            {
+                              "element": "number",
+                              "content": 361
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "element": "object",
+                "meta": {
+                  "description": {
+                    "element": "string",
+                    "content": "A category groups one or more categories"
+                  },
+                  "id": {
+                    "element": "string",
+                    "content": "definitions/category"
+                  }
+                },
+                "content": [
+                  {
+                    "element": "member",
+                    "attributes": {
+                      "typeAttributes": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "string",
+                            "content": "optional"
+                          }
+                        ]
+                      }
+                    },
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "id"
+                      },
+                      "value": {
+                        "element": "string",
+                        "content": null
+                      }
+                    }
+                  },
+                  {
+                    "element": "member",
+                    "meta": {
+                      "description": {
+                        "element": "string",
+                        "content": "A list of categories"
+                      }
+                    },
+                    "attributes": {
+                      "typeAttributes": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "string",
+                            "content": "optional"
+                          }
+                        ]
+                      }
+                    },
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "categoryAsArray"
+                      },
+                      "value": {
+                        "element": "array",
+                        "meta": {
+                          "description": {
+                            "element": "string",
+                            "content": "A list of categories"
+                          }
+                        },
+                        "content": [
+                          {
+                            "element": "definitions/category",
+                            "content": null
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "element": "member",
+                    "attributes": {
+                      "typeAttributes": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "string",
+                            "content": "optional"
+                          }
+                        ]
+                      }
+                    },
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "categoryAsObject"
+                      },
+                      "value": {
+                        "element": "definitions/category",
+                        "content": null
+                      }
+                    }
+                  }
+                ]
+              }
             }
           ]
         }
