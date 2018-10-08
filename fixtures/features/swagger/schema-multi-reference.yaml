@@ -1,0 +1,33 @@
+swagger: '2.0'
+info:
+  title: Schema Reference
+  version: '1.0'
+produces:
+  - application/json
+paths:
+  '/user':
+    get:
+      responses:
+        200:
+          description: Retrieve User
+          schema:
+            $ref: '#/definitions/User'
+definitions:
+  User:
+    type: object
+    properties:
+      name:
+        type: string
+        default: doe
+      address:
+        $ref: '#/definitions/Address'
+    required: [name, address]
+  Address:
+    type: object
+    properties:
+      country:
+        $ref: '#/definitions/Country'
+    required: [country]
+  Country:
+    type: string
+    default: cz
