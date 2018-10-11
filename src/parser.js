@@ -13,7 +13,7 @@ import { pushHeader, pushHeaderObject } from './headers';
 import Ast from './ast';
 import { DataStructureGenerator, idForDataStructure } from './schema';
 import { convertSchema, convertSchemaDefinitions } from './json-schema';
-import { FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary } from './media-type';
+import { FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isTextContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary } from './media-type';
 
 
 // Provide a `nextTick` function that either is Node's nextTick or a fallback
@@ -1001,7 +1001,9 @@ export default class Parser {
               }));
               break;
 
-            case 'body':
+            case 'body': {
+              let bodyIsPrimitive = false;
+
               _.set(parametersGenerator, [param.in, param.name], _.bind(this.withPath, this, parameters[1], 'parameters', index, () => {
                 if (param['x-example']) {
                   this.withPath('x-example', () => {
@@ -1012,15 +1014,22 @@ export default class Parser {
                   });
                 }
 
-                if (param.schema && param.schema.format === 'binary') {
-                  return;
+                if (param.schema) {
+                  if (param.schema.format === 'binary') {
+                    return;
+                  }
+
+                  bodyIsPrimitive = (param.schema.type && ['string', 'boolean', 'number'].includes(param.schema.type));
                 }
 
                 this.withPath('schema', () => {
-                  this.pushAssets(param.schema, request, contentType, consumeIsJson);
+                  const pushBody = (consumeIsJson ||
+                      (bodyIsPrimitive && isTextContentType(contentType)));
+                  this.pushAssets(param.schema, request, contentType, pushBody);
                 });
               }));
               break;
+            }
 
             case 'formData':
               _.set(parametersGenerator, [param.in, param.name], _.bind(this.withPath, this, parameters[1], 'parameters', index, () => {

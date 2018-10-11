@@ -20,6 +20,14 @@ export function isJsonContentType(contentType) {
   }
 }
 
+export function isTextContentType(contentType) {
+  try {
+    return typer.parse(contentType).type === 'text';
+  } catch (e) {
+    return false;
+  }
+}
+
 export function isMultiPartFormData(contentType) {
   try {
     const type = typer.parse(contentType);

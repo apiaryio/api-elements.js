@@ -10,6 +10,10 @@
   data structure which generally makes parse results smaller instead of
   duplicating the data structure contents.
 
+### Bug Fixes
+
+- Adds support for primitive request bodies.
+
 ## 0.21.1 (2018-09-10)
 
 ### Bug Fixes
