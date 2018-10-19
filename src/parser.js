@@ -1073,7 +1073,8 @@ export default class Parser {
       pushHeader('Content-Type', FORM_CONTENT_TYPE, request, this, 'form-data-content-type');
     }
 
-    const jsonSchema = convertSchema(schema, { definitions: this.definitions });
+    const jsonSchema = convertSchema(schema, { definitions: this.definitions },
+        this.referencedSwagger);
     bodyFromSchema(jsonSchema, request, this, contentType || FORM_CONTENT_TYPE);
 
     // Generating data structure
@@ -1550,10 +1551,12 @@ export default class Parser {
 
   pushAssets(schema, payload, contentType, pushBody) {
     let jsonSchema;
+    const referencedPathValue = this.referencedPathValue();
 
     try {
       const root = { definitions: this.definitions };
-      jsonSchema = convertSchema(this.referencedPathValue() || schema, root);
+      jsonSchema = convertSchema(referencedPathValue || schema, root,
+                                 this.referencedSwagger);
     } catch (error) {
       this.createAnnotation(annotations.VALIDATION_ERROR, this.path, error.message);
       return;
@@ -1564,7 +1567,16 @@ export default class Parser {
     }
 
     this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
-    this.pushDataStructureAsset(schema, payload);
+
+    if (referencedPathValue && referencedPathValue.$ref) {
+      // If the schema is a reference just produce a data structure for the ref
+      this.pushDataStructureAsset(referencedPathValue, payload);
+    } else {
+      // Otherwise, we want to use the JSON Schema instead of Swagger Schema.
+      // In some cases, the created JSON Schema will dereference the $ref
+      // so we have the above if clause.
+      this.pushDataStructureAsset(jsonSchema, payload);
+    }
   }
 
   // Create a Refract asset element containing JSON Schema and push into payload
@@ -1603,7 +1615,7 @@ export default class Parser {
   pushDataStructureAsset(schema, payload) {
     try {
       const generator = new DataStructureGenerator(this.minim);
-      const dataStructure = generator.generateDataStructure(this.referencedPathValue() || schema);
+      const dataStructure = generator.generateDataStructure(schema);
       if (dataStructure) {
         payload.content.push(dataStructure);
       }

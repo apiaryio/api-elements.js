@@ -209,6 +209,14 @@ export class DataStructureGenerator {
       null: NullElement,
     };
 
+    if (schema.allOf && schema.allOf.length === 1 && schema.definitions &&
+        Object.keys(schema).length === 2) {
+      // Since we can't have $ref at root with definitions.
+      // `allOf` with a single item is used as a work around for this type of schema
+      // We can safely ignore the allOf and unwrap it as normal schema in this case
+      return this.generateElement(schema.allOf[0]);
+    }
+
     let element;
 
     if (schema.$ref) {

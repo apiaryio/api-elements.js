@@ -53,6 +53,78 @@ describe('Swagger Schema to JSON Schema', () => {
         ],
       });
     });
+
+    it('dereferences Swagger example extension to examples', () => {
+      const root = {
+        definitions: {
+          User: {
+            example: { message: 'hello' },
+          },
+        },
+      };
+      const swaggerSchema = {
+        type: 'object',
+        example: { $ref: '#/definitions/User/example' },
+      };
+      const schema = convertSchema(swaggerSchema, {}, root);
+
+      expect(schema).to.deep.equal({
+        type: 'object',
+        examples: [
+          { message: 'hello' },
+        ],
+      });
+    });
+
+    it('dereferences nested object Swagger example extension to examples', () => {
+      const root = {
+        definitions: {
+          User: {
+            example: { message: 'hello' },
+          },
+        },
+      };
+      const swaggerSchema = {
+        type: 'object',
+        example: {
+          user: { $ref: '#/definitions/User/example' },
+        },
+      };
+      const schema = convertSchema(swaggerSchema, {}, root);
+
+      expect(schema).to.deep.equal({
+        type: 'object',
+        examples: [
+          {
+            user: { message: 'hello' },
+          },
+        ],
+      });
+    });
+
+    it('dereferences nested array Swagger example extension to examples', () => {
+      const root = {
+        definitions: {
+          User: {
+            example: { message: 'hello' },
+          },
+        },
+      };
+      const swaggerSchema = {
+        type: 'object',
+        example: [
+          { $ref: '#/definitions/User/example' },
+        ],
+      };
+      const schema = convertSchema(swaggerSchema, {}, root);
+
+      expect(schema).to.deep.equal({
+        type: 'object',
+        examples: [
+          [{ message: 'hello' }],
+        ],
+      });
+    });
   });
 
   context('x-nullable', () => {

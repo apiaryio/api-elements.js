@@ -5,7 +5,73 @@ function isExtension(value, key) {
   return _.startsWith(key, 'x-');
 }
 
-function convertSubSchema(schema, references) {
+export function parseReference(reference) {
+  const parts = reference.split('/');
+
+  if (parts[0] !== '#') {
+    throw new Error('Schema reference must start with document root (#)');
+  }
+
+  if (parts[1] !== 'definitions' || parts.length !== 3) {
+    throw new Error('Schema reference must be reference to #/definitions');
+  }
+
+  const id = parts[2];
+
+  return id;
+}
+
+function lookupReference(reference, root) {
+  const parts = reference.split('/').reverse();
+
+  if (parts.pop() !== '#') {
+    throw new Error('Schema reference must start with document root (#)');
+  }
+
+  if (parts.pop() !== 'definitions') {
+    throw new Error('Schema reference must be reference to #/definitions');
+  }
+
+  const id = parts[0];
+  let value = root.definitions;
+
+  while (parts.length > 0 && value !== undefined) {
+    const key = parts.pop();
+    value = value[key];
+  }
+
+  if (value === undefined) {
+    throw new Error(`Reference to ${reference} does not exist`);
+  }
+
+  return {
+    id,
+    referenced: value,
+  };
+}
+
+function convertExample(example, swagger) {
+  if (_.isArray(example)) {
+    return example.map(value => convertExample(value, swagger));
+  } else if (_.isObject(example)) {
+    if (example.$ref) {
+      const ref = lookupReference(example.$ref, swagger);
+      return convertExample(ref.referenced, swagger);
+    }
+
+    const result = {};
+
+    _.forEach(example, (value, key) => {
+      result[key] = convertExample(value, swagger);
+    });
+
+    return result;
+  }
+
+  return example;
+}
+
+function convertSubSchema(schema, references, swagger) {
   if (schema.$ref) {
     references.push(schema.$ref);
     return { $ref: schema.$ref };
@@ -20,7 +86,7 @@ function convertSubSchema(schema, references) {
   }
 
   if (schema.example) {
-    actualSchema.examples = [schema.example];
+    actualSchema.examples = [convertExample(schema.example, swagger)];
   }
 
   if (schema['x-nullable']) {
@@ -85,35 +151,6 @@ function convertSubSchema(schema, references) {
   }
 
   return actualSchema;
-}
-
-export function parseReference(reference) {
-  const parts = reference.split('/');
-
-  if (parts[0] !== '#') {
-    throw new Error('Schema reference must start with document root (#)');
-  }
-
-  if (parts[1] !== 'definitions' || parts.length !== 3) {
-    throw new Error('Schema reference must be reference to #/definitions');
-  }
-
-  const id = parts[2];
-
-  return id;
-}
-
-function lookupReference(reference, root) {
-  const id = parseReference(reference);
-
-  if (!root.definitions || !root.definitions[id]) {
-    throw new Error(`Reference to ${reference} does not exist`);
-  }
-
-  return {
-    id,
-    referenced: root.definitions[id],
-  };
 }
 
 /** Returns true if the given schema contains any references
@@ -196,10 +233,14 @@ function findReferences(schema) {
 }
 
 /** Convert Swagger schema to JSON Schema
+ * @param schema - The Swagger schema to convert
+ * @param root - The document root (this contains the JSON schema definitions)
+ * @param swagger - The swagger document root (this contains the Swagger schema definitions)
+ * @param copyDefinitins - Whether to copy the referenced definitions to the resulted schema
  */
-export function convertSchema(schema, root, copyDefinitions = true) {
+export function convertSchema(schema, root, swagger, copyDefinitions = true) {
   let references = [];
-  const result = convertSubSchema(schema, references);
+  const result = convertSubSchema(schema, references, swagger);
 
   if (copyDefinitions) {
     if (references.length !== 0) {
@@ -240,7 +281,7 @@ export function convertSchemaDefinitions(definitions) {
 
   if (definitions) {
     _.forEach(definitions, (schema, key) => {
-      jsonSchemaDefinitions[key] = convertSchema(schema, { definitions }, false);
+      jsonSchemaDefinitions[key] = convertSchema(schema, { definitions }, { definitions }, false);
     });
   }
 

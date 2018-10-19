@@ -1,5 +1,14 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixes a regression introduced in 0.22.0 where the parse result may contain
+  invalid references inside a JSON Schema for example values if they used
+  references. This regression also caused `$ref` to be incorrectly present in
+  Data Structure sample values.
+
 ## 0.22.0 (2018-10-11)
 
 ### Enhancements
