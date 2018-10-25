@@ -1,5 +1,11 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+- Fixes a regression introduced in 0.22.0 where using `$ref` directly inside a
+  Swagger Schema found within the `definitions` section would cause a parsing
+  failure.
+
 ## 0.22.1 (2018-10-22)
 
 ### Bug Fixes

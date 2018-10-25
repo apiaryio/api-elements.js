@@ -3,7 +3,7 @@
 
 import { expect } from 'chai';
 
-import { convertSchema } from '../src/json-schema';
+import { convertSchema, convertSchemaDefinitions } from '../src/json-schema';
 
 describe('Swagger Schema to JSON Schema', () => {
   it('returns compatible schema when given valid JSON Schema', () => {
@@ -549,6 +549,43 @@ describe('Swagger Schema to JSON Schema', () => {
         expect(() => {
           convertSchema({ $ref: '#/definitions/Bar' }, {});
         }).to.throw('Reference to #/definitions/Bar does not exist');
+      });
+    });
+  });
+
+  describe('converting JSON Schema definitions', () => {
+    it('can convert a Swagger Schema definitions section', () => {
+      const result = convertSchemaDefinitions({
+        User: {
+          type: 'object',
+          'x-extension': true,
+        },
+      });
+
+      expect(result).to.deep.equal({
+        User: {
+          type: 'object',
+        },
+      });
+    });
+
+    it('can convert a Swagger Schema definition with root reference', () => {
+      const result = convertSchemaDefinitions({
+        Base: {
+          type: 'object',
+        },
+        User: {
+          $ref: '#/definitions/Base',
+        },
+      });
+
+      expect(result).to.deep.equal({
+        Base: {
+          type: 'object',
+        },
+        User: {
+          $ref: '#/definitions/Base',
+        },
       });
     });
   });

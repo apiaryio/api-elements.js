@@ -257,7 +257,7 @@ export function convertSchema(schema, root, swagger, copyDefinitions = true) {
     }
   }
 
-  if (result.$ref) {
+  if (result.$ref && copyDefinitions) {
     const reference = lookupReference(result.$ref, root);
 
     if (!checkSchemaHasReferences(result.definitions[reference.id])) {
