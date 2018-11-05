@@ -1,6 +1,7 @@
 // The main Swagger parsing component that outputs refract.
 
 import _ from 'lodash';
+import { sep } from 'path';
 import yaml from 'js-yaml';
 import typer from 'media-typer';
 import SwaggerParser from 'swagger-parser';
@@ -113,9 +114,11 @@ export default class Parser {
     // Next, we dereference and validate the loaded Swagger object. Any schema
     // violations get converted into annotations with source maps.
     const swaggerOptions = {
-      $refs: {
-        external: false,
+      dereference: {
         circular: 'ignore',
+      },
+      resolve: {
+        external: false,
       },
     };
 
@@ -160,13 +163,16 @@ export default class Parser {
         // Maybe there is some information in the error itself? Let's check
         // whether it is a messed up reference!
         let location = null;
-        const matches = err.message.match(/\$ref pointer "(.*?)"/);
+
+        // Workaround for https://github.com/APIDevTools/json-schema-ref-parser/pull/80#issuecomment-436041573
+        const message = err.message.replace(`${process.cwd()}${sep}`, '');
+        const matches = message.match(/\$ref pointer "(.*?)"/);
 
         if (matches) {
           location = [this.source.indexOf(matches[1]), matches[1].length];
         }
 
-        const annotation = this.createAnnotation(annotations.VALIDATION_ERROR, null, err.message);
+        const annotation = this.createAnnotation(annotations.VALIDATION_ERROR, null, message);
 
         if (location !== null) {
           annotation.attributes.set('sourceMap', [
