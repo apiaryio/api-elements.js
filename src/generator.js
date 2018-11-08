@@ -32,7 +32,7 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
         alwaysFakeOptionals: !hasCircularReference(schema),
       });
 
-      body = faker(schema);
+      body = faker.generate(_.cloneDeep(schema));
     }
 
     if (typeof body !== 'string') {
