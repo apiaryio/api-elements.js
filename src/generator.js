@@ -6,7 +6,8 @@ import { inferred } from './link';
 import { isFormURLEncoded, isMultiPartFormData, parseBoundary } from './media-type';
 
 faker.option({
-  alwaysFakeOptionals: true,
+  fixedProbabilities: true,
+  optionalsProbability: 1.0,
   useDefaultValue: true,
   maxItems: 5,
   maxLength: 256,
