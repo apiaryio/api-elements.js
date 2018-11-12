@@ -1,3 +1,5 @@
+const parser = require('./parser');
+
 const name = 'oas3';
 
 // Per https://github.com/OAI/OpenAPI-Specification/issues/110#issuecomment-364498200
@@ -11,12 +13,7 @@ function detect(source) {
 }
 
 function parse(options, cb) {
-  const parseResult = new options.minim.elements.ParseResult();
-
-  const annotation = new options.minim.elements.Annotation('OpenAPI 3 is unsupported');
-  annotation.classes = ['error'];
-  parseResult.push(annotation);
-
+  const parseResult = parser(options.source, options.minim);
   cb(null, parseResult);
 }
 

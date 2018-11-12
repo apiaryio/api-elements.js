@@ -8,9 +8,11 @@
     "url": "https://github.com/apiaryio/fury-adapter-oas3-parser.git"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test --recursive"
   },
   "dependencies": {
+    "ramda": "0.25.0",
+    "yaml-js": "0.2.3"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.7"
