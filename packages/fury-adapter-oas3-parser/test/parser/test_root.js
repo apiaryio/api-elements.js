@@ -27,7 +27,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.length).to.equal(1);
-    expect(result.errors.get(0).toValue()).to.equal("OpenAPI Object is missing required property 'openapi'");
+    expect(result.errors.get(0).toValue()).to.equal("'OpenAPI Object' is missing required property 'openapi'");
   });
 
   it('provides error for missing info', function () {
@@ -39,7 +39,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.length).to.equal(1);
-    expect(result.errors.get(0).toValue()).to.equal("OpenAPI Object is missing required property 'info'");
+    expect(result.errors.get(0).toValue()).to.equal("'OpenAPI Object' is missing required property 'info'");
   });
 
   it('provides error for missing paths', function () {
@@ -51,7 +51,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.length).to.equal(1);
-    expect(result.errors.get(0).toValue()).to.equal("OpenAPI Object is missing required property 'paths'");
+    expect(result.errors.get(0).toValue()).to.equal("'OpenAPI Object' is missing required property 'paths'");
   });
 
   it('provides warning for unsupported keys', function () {
@@ -65,7 +65,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains invalid key 'invalid'");
+    expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains invalid key 'invalid'");
   });
 
   it('provides warning for unsupported security key', function () {
@@ -79,7 +79,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains unsupported key 'security'");
+    expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'security'");
   });
 
   it('provides warning for unsupported tags key', function () {
@@ -93,7 +93,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains unsupported key 'tags'");
+    expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'tags'");
   });
 
   it('provides warning for unsupported externalDocs key', function () {
@@ -107,7 +107,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains unsupported key 'externalDocs'");
+    expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'externalDocs'");
   });
 
   it('provides warning for unsupported components key', function () {
@@ -121,7 +121,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains unsupported key 'components'");
+    expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'components'");
   });
 
   it('provides warning for unsupported servers key', function () {
@@ -135,7 +135,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains unsupported key 'servers'");
+    expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'servers'");
   });
 
   it('provides warning for invalid keys', function () {
@@ -149,7 +149,7 @@ describe('#parseOASObject', function () {
     const result = parseOASObject(minim, object);
 
     expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains invalid key 'invalid'");
+    expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains invalid key 'invalid'");
   });
 
   it("doesn't provide warning for OpenAPI Object extensions", function () {

@@ -11,12 +11,12 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 const isExtension = member => member.key.toValue().startsWith('x-');
 
 const createUnsupportedMemberWarning = R.curry((minim, member) => {
-  const message = `OpenAPI Object contains unsupported key '${member.key.toValue()}'`;
+  const message = `'OpenAPI Object' contains unsupported key '${member.key.toValue()}'`;
   return createWarning(minim, message, member.key);
 });
 
 const createInvalidMemberWarning = R.curry((minim, member) => {
-  const message = `OpenAPI Object contains invalid key '${member.key.toValue()}'`;
+  const message = `'OpenAPI Object' contains invalid key '${member.key.toValue()}'`;
   return createWarning(minim, message, member.key);
 });
 
@@ -27,7 +27,7 @@ function parseOASObject(minim, object) {
 
   if (missingRequiredKeys.length > 0) {
     const errorFromKey = (key) => {
-      return createError(minim, `OpenAPI Object is missing required property '${key}'`, object);
+      return createError(minim, `'OpenAPI Object' is missing required property '${key}'`, object);
     };
 
     return new minim.elements.ParseResult(
