@@ -65,14 +65,14 @@ describe('Adapter', function () {
     });
   });
 
-  it('fails to parse an OAS3 document', function (done) {
+  it('parses a valid OAS3 document', function (done) {
     const minim = new Fury().minim;
-    const source = 'openapi: "3.0.0"\ninfo: {}\npaths: {}\n';
+    const source = 'openapi: "3.0.0"\ninfo: {title: My API, version: 1.0.0}\npaths: {}\n';
 
     adapter.parse({ source, minim }, (err, parseResult) => {
       expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
-      expect(parseResult.errors.length).to.equal(1);
-      expect(parseResult.errors.get(0).toValue()).to.equal('OpenAPI 3 is unsupported');
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.api.title.toValue()).to.equal('My API');
       done();
     });
   });

@@ -12,8 +12,7 @@ function parseOpenAPI(minim, openapi) {
     return new minim.elements.ParseResult([createError(minim, `Unsupported OpenAPI version '${openapi.value.toValue()}'`, openapi.value)]);
   }
 
-  // FIXME: Returning error that OAS is unsupported
-  return new minim.elements.ParseResult([createError(minim, 'OpenAPI 3 is unsupported', openapi.value)]);
+  return new minim.elements.ParseResult([]);
 }
 
 module.exports = R.curry(parseOpenAPI);

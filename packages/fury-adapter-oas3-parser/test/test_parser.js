@@ -26,13 +26,12 @@ describe('#parse', function () {
     expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[0, 2]]);
   });
 
-  it('fails to parse a valid YAML document', function () {
-    const source = 'openapi: "3.0.0"\ninfo: {}\npaths: {}\n';
+  it('parses a valid OAS3 document', function () {
+    const source = 'openapi: "3.0.0"\ninfo: {title: My API, version: 1.0.0}\npaths: {}\n';
 
     const parseResult = parse(source, minim);
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.length).to.equal(1);
-    expect(parseResult.errors.get(0).toValue()).to.equal('OpenAPI 3 is unsupported');
-    expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[9, 7]]);
+    expect(parseResult.api.title.toValue()).to.equal('My API');
   });
 });

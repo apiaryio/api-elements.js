@@ -6,16 +6,19 @@ const parseOASObject = require('../../lib/parser/root');
 const minim = new Fury().minim;
 
 describe('#parseOASObject', function () {
-  it('provides error for valid document', function () {
+  it('can parse a valid document', function () {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
-      info: {},
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
       paths: {},
     });
 
     const result = parseOASObject(minim, object);
     expect(result.length).to.equal(1);
-    expect(result.errors.get(0).toValue()).to.equal('OpenAPI 3 is unsupported');
+    expect(result.api.title.toValue()).to.equal('My API');
   });
 
   it('provides error for missing openapi version', function () {
@@ -57,7 +60,10 @@ describe('#parseOASObject', function () {
   it('provides warning for unsupported keys', function () {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
-      info: {},
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
       paths: {},
       invalid: {},
     });
@@ -71,7 +77,10 @@ describe('#parseOASObject', function () {
   it('provides warning for unsupported security key', function () {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
-      info: {},
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
       paths: {},
       security: {},
     });
@@ -85,7 +94,10 @@ describe('#parseOASObject', function () {
   it('provides warning for unsupported tags key', function () {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
-      info: {},
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
       paths: {},
       tags: [],
     });
@@ -99,7 +111,10 @@ describe('#parseOASObject', function () {
   it('provides warning for unsupported externalDocs key', function () {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
-      info: {},
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
       paths: {},
       externalDocs: {},
     });
@@ -113,7 +128,10 @@ describe('#parseOASObject', function () {
   it('provides warning for unsupported components key', function () {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
-      info: {},
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
       paths: {},
       components: {},
     });
@@ -127,7 +145,10 @@ describe('#parseOASObject', function () {
   it('provides warning for unsupported servers key', function () {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
-      info: {},
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
       paths: {},
       servers: [],
     });
@@ -141,7 +162,10 @@ describe('#parseOASObject', function () {
   it('provides warning for invalid keys', function () {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
-      info: {},
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
       paths: {},
       invalid: {},
     });
