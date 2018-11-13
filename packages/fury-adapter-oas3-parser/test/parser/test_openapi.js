@@ -12,7 +12,7 @@ describe('#parseOpenAPI', function () {
     const parseResult = parseOpenAPI(minim, openapi);
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.errors.length).to.equal(1);
-    expect(parseResult.errors.getValue(0)).to.equal('openapi version is not a string');
+    expect(parseResult.errors.getValue(0)).to.equal('OpenAPI version is not a string');
   });
 
   it('fails to parse unknown version', function () {
@@ -21,7 +21,7 @@ describe('#parseOpenAPI', function () {
     const parseResult = parseOpenAPI(minim, openapi);
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.errors.length).to.equal(1);
-    expect(parseResult.errors.getValue(0)).to.equal("Unsupported openapi version '4.0.0'");
+    expect(parseResult.errors.getValue(0)).to.equal("Unsupported OpenAPI version '4.0.0'");
   });
 
   it('fails to parse openapi 3', function () {
