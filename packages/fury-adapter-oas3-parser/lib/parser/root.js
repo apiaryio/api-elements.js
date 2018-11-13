@@ -2,14 +2,9 @@ const R = require('ramda');
 
 const { isAnnotation, isObject } = require('../predicates');
 const { createError } = require('../elements');
+const parseOpenAPI = require('./openapi');
 
 const requiredKeys = ['openapi', 'info', 'paths'];
-
-// Parse the OpenAPI Version member
-const parseOpenAPI = R.curry((minim, openapi) => {
-  // FIXME: Returning error that OAS is unsupported
-  return createError(minim, 'OpenAPI 3 is unsupported', openapi.value);
-});
 
 function parseOASObject(minim, object) {
   // Validate Missing Keys
