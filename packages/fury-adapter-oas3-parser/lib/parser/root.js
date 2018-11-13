@@ -5,6 +5,12 @@ const { createError } = require('../elements');
 
 const requiredKeys = ['openapi', 'info', 'paths'];
 
+// Parse the OpenAPI Version member
+const parseOpenAPI = R.curry((minim, openapi) => {
+  // FIXME: Returning error that OAS is unsupported
+  return createError(minim, 'OpenAPI 3 is unsupported', openapi.value);
+});
+
 function parseOASObject(minim, object) {
   // Validate Missing Keys
   const isKeyMissing = key => object.get(key) === undefined;
@@ -20,10 +26,20 @@ function parseOASObject(minim, object) {
     );
   }
 
-  // FIXME: Returning error that OAS is unsupported
-  return new minim.elements.ParseResult([
-    createError(minim, 'OpenAPI 3 is unsupported', object)
+  // Parse object members
+
+  const hasKey = R.curry((key, member) => member.key.toValue() === key);
+  const parseMember = R.cond([
+    [hasKey('openapi'), parseOpenAPI(minim)],
+    // FIXME `info` unhandled
+    // FIXME `path` unhandled
+    [R.T, () => new minim.elements.ParseResult()],
   ]);
+
+  return R.chain(
+    parseMember,
+    new minim.elements.ParseResult(object.content)
+  );
 }
 
 module.exports = R.curry(parseOASObject);

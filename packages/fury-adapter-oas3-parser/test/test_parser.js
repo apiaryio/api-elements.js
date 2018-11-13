@@ -33,6 +33,6 @@ describe('#parse', function () {
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.length).to.equal(1);
     expect(parseResult.errors.get(0).toValue()).to.equal('OpenAPI 3 is unsupported');
-    expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[0, 36]]);
+    expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[9, 7]]);
   });
 });
