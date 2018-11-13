@@ -151,4 +151,17 @@ describe('#parseOASObject', function () {
     expect(result.warnings.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains invalid key 'invalid'");
   });
+
+  it("doesn't provide warning for OpenAPI Object extensions", function () {
+    const object = new minim.elements.Object({
+      openapi: '3.0.0',
+      info: {},
+      paths: {},
+      'x-extension': {},
+    });
+
+    const result = parseOASObject(minim, object);
+
+    expect(result.warnings.isEmpty).to.be.true;
+  });
 });

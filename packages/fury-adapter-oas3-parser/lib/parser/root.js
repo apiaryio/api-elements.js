@@ -8,6 +8,7 @@ const requiredKeys = ['openapi', 'info', 'paths'];
 const unsupportedKeys = ['components', 'servers', 'security', 'tags', 'externalDocs'];
 const hasKey = R.curry((key, member) => member.key.toValue() === key);
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
+const isExtension = member => member.key.toValue().startsWith('x-');
 
 const createUnsupportedMemberWarning = R.curry((minim, member) => {
   const message = `OpenAPI Object contains unsupported key '${member.key.toValue()}'`;
@@ -46,6 +47,9 @@ function parseOASObject(minim, object) {
 
     // FIXME Ignoring `info` and `path` keys
     [isUnhandledKey, () => new minim.elements.ParseResult()],
+
+    // FIXME Support exposing extensions into parse result
+    [isExtension, () => new minim.elements.ParseResult()],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(minim)],
 
