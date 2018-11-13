@@ -67,7 +67,7 @@ describe('Adapter', function () {
 
   it('fails to parse an OAS3 document', function (done) {
     const minim = new Fury().minim;
-    const source = 'openapi: "3.0.0"';
+    const source = 'openapi: "3.0.0"\ninfo: {}\npaths: {}\n';
 
     adapter.parse({ source, minim }, (err, parseResult) => {
       expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
