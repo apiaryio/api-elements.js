@@ -53,4 +53,18 @@ describe('#parseOASObject', function () {
     expect(result.length).to.equal(1);
     expect(result.errors.get(0).toValue()).to.equal("OpenAPI Object is missing required property 'paths'");
   });
+
+  it('provides warning for invalid keys', function () {
+    const object = new minim.elements.Object({
+      openapi: '3.0.0',
+      info: {},
+      paths: {},
+      invalid: {},
+    });
+
+    const result = parseOASObject(minim, object);
+
+    expect(result.warnings.length).to.equal(1);
+    expect(result.warnings.get(0).toValue()).to.equal("OpenAPI Object contains invalid key 'invalid'");
+  });
 });

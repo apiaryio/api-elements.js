@@ -1,10 +1,15 @@
 const R = require('ramda');
 
 const { isAnnotation, isObject } = require('../predicates');
-const { createError } = require('../elements');
+const { createError, createWarning } = require('../elements');
 const parseOpenAPI = require('./openapi');
 
 const requiredKeys = ['openapi', 'info', 'paths'];
+
+const createInvalidMemberWarning = R.curry((minim, member) => {
+  const message = `OpenAPI Object contains invalid key '${member.key.toValue()}'`;
+  return createWarning(minim, message, member.key);
+});
 
 function parseOASObject(minim, object) {
   // Validate Missing Keys
@@ -24,11 +29,18 @@ function parseOASObject(minim, object) {
   // Parse object members
 
   const hasKey = R.curry((key, member) => member.key.toValue() === key);
+  const isUnhandledKey = R.anyPass([
+    hasKey('info'),
+    hasKey('paths'),
+  ]);
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(minim)],
-    // FIXME `info` unhandled
-    // FIXME `path` unhandled
-    [R.T, () => new minim.elements.ParseResult()],
+
+    // FIXME Ignoring `info` and `path` keys
+    [isUnhandledKey, () => new minim.elements.ParseResult()],
+
+    // Return a warning for every other key
+    [R.T, createInvalidMemberWarning(minim)],
   ]);
 
   return R.chain(
