@@ -1,17 +1,29 @@
 const R = require('ramda');
 const parseYAML = require('./parser/yaml');
 
-const { unlessAnnotation } = require('./predicates');
+const { isAnnotation, isObject } = require('./predicates');
+
+const isObjectOrAnnotation = R.either(isObject, isAnnotation);
 
 function parse(source, minim) {
-  const unsupportedElement = () => {
-    const annotation = new minim.elements.Annotation('OpenAPI 3 is unsupported');
+  const createError = R.curry((message, element) => {
+    const annotation = new minim.elements.Annotation(message);
     annotation.classes = ['error'];
+    annotation.attributes.set('sourceMap', element.attributes.get('sourceMap'));
     return annotation;
-  }
+  });
+
+  // parseOASObject - Right now OAS Object is unsupported and returns annotation
+  const parseOASObject = createError('OpenAPI 3 is unsupported');
 
   const document = parseYAML(source, minim);
-  return R.map(unlessAnnotation(unsupportedElement), document);
+
+  const parseDocument = R.compose(
+    R.unless(isAnnotation, parseOASObject),
+    R.unless(isObjectOrAnnotation, createError('Source document is not an object'))
+  )
+
+  return R.map(parseDocument, document)
 }
 
 module.exports = parse;

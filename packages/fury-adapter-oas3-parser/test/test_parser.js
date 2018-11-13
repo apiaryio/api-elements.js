@@ -16,6 +16,16 @@ describe('#parse', function () {
     expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[2, 1]]);
   });
 
+  it('fails to parse a non-object YAML document', function () {
+    const source = '[]';
+
+    const parseResult = parse(source, minim);
+    expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult.errors.get(0).toValue()).to.equal('Source document is not an object');
+    expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[0, 2]]);
+  });
+
   it('fails to parse a valid YAML document', function () {
     const source = 'openapi: "3.0.0"';
 
@@ -23,5 +33,6 @@ describe('#parse', function () {
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.length).to.equal(1);
     expect(parseResult.errors.get(0).toValue()).to.equal('OpenAPI 3 is unsupported');
+    expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[0, 16]]);
   });
 });
