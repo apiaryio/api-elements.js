@@ -1,12 +1,9 @@
 import { expect } from 'chai';
 
-import minimModule from 'minim';
-import minimParseResult from 'minim-parse-result';
-
+import { Fury } from 'fury';
 import { bodyFromSchema } from '../src/generator';
 
-const minim = minimModule.namespace()
-  .use(minimParseResult);
+const { minim } = new Fury();
 
 describe('bodyFromSchema', () => {
   const parser = { minim };

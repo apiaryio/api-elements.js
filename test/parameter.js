@@ -2,13 +2,10 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
-import minimModule from 'minim';
-import minimParseResult from 'minim-parse-result';
+import { Fury } from 'fury';
 import Parser from '../src/parser';
 
-const minim = minimModule.namespace()
-  .use(minimParseResult);
-
+const { minim } = new Fury();
 const { Annotation } = minim.elements;
 
 describe('Parameter to Member converter', () => {
