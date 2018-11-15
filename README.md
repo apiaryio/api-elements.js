@@ -1,32 +1,50 @@
-# API Elements JavaScript
+# API Elements
 
-This library provides an interface to [API Elements](http://apielements.org) in JavaScript.
+## Using Lerna
 
-## Install
+Install dependencies of all packages:
 
 ```shell
-$ npm install api-elements
+$ npm install --global yarn
+$ yarn
 ```
 
-## Usage
+> **NOTE**: Please do commit the yarn.lock to the github repo
 
-### Node
+To list all packages:
 
-```javascript
-const apiElements = require('api-elements');
-const namespace = new apiElements.Namespace();
+```shell
+$ npx lerna ls -a -l
+```
 
+To add a new dependency to a package:
 
-// Parsing a JSON Representation of API Elements tree
-const parseResult = namespace.serialiser.deserialise({
-  element: 'parseResult',
-  content: []
-});
+```shell
+$ npx lerna add --scope='package_name' dep@version
+```
 
-console.log(parseResult);
+To run tests for a single package:
 
+```shell
+$ npx lerna exec --scope='package_name' -- npm run test
+```
 
-// Creating API Elements directly
-const parseResult = new namespace.elements.ParseResult();
-console.log(parseResult);
+## Documentation
+
+The documentation is built using Sphinx, a Python tool. Assuming you have
+Python 3 installed, the following steps can be used to build the site.
+
+```shell
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ cd docs/
+$ pip install -r requirements.txt
+```
+
+### Running the Development Server
+
+You can run a local development server to preview changes using the following:
+
+```shell
+$ make watch
 ```
