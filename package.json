@@ -24,7 +24,7 @@
     "peasant": "peasant"
   },
   "dependencies": {
-    "minim": "^0.20.5",
+    "minim": "^0.21.0",
     "minim-parse-result": "^0.10.1"
   },
   "devDependencies": {
