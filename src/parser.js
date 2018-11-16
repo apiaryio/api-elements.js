@@ -3,7 +3,8 @@
 import _ from 'lodash';
 import { sep } from 'path';
 import yaml from 'js-yaml';
-import typer from 'media-typer';
+import contentTypeModule from 'content-type';
+import mediaTyper from 'media-typer';
 import SwaggerParser from 'swagger-parser';
 import ZSchema from 'z-schema';
 import annotations from './annotations';
@@ -1674,7 +1675,8 @@ export default class Parser {
   validateContentTypes(contentTypes) {
     contentTypes.forEach((contentType) => {
       try {
-        typer.parse(contentType);
+        const { type } = contentTypeModule.parse(contentType);
+        mediaTyper.parse(type);
       } catch (e) {
         const index = contentTypes.indexOf(contentType);
         this.withPath(index, () => {
