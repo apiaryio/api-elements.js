@@ -6,7 +6,8 @@ import { inferred } from './link';
 import { isFormURLEncoded, isMultiPartFormData, parseBoundary } from './media-type';
 
 faker.option({
-  alwaysFakeOptionals: true,
+  fixedProbabilities: true,
+  optionalsProbability: 1.0,
   useDefaultValue: true,
   maxItems: 5,
   maxLength: 256,
@@ -31,7 +32,7 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
         alwaysFakeOptionals: !hasCircularReference(schema),
       });
 
-      body = faker(schema);
+      body = faker.generate(_.cloneDeep(schema));
     }
 
     if (typeof body !== 'string') {
