@@ -2,14 +2,10 @@
 // Allows chai `expect(null).to.be.null;`
 
 import { expect } from 'chai';
-
-import minimModule from 'minim';
-import minimParseResult from 'minim-parse-result';
-
+import { Fury } from 'fury';
 import { DataStructureGenerator } from '../src/schema';
 
-const namespace = minimModule.namespace()
-  .use(minimParseResult);
+const namespace = new Fury().minim;
 
 const {
   String: StringElement,
