@@ -8,6 +8,23 @@ const { isAnnotation, isParseResult } = require('./predicates');
 // This should become something like `parseResult.find(R.not(isAnnotation))` or `R.find(R.not(isAnnotation), parseResult)`;
 const findValueFromParseResult = parseResult => R.reject(isAnnotation, parseResult.content)[0];
 
+/*
+ * Returns true iff the parse result does not contain errors
+ * @param parseResult {ParseResult}
+ * @returns boolean
+ */
+const hasNoErrors = parseResult => parseResult.errors.isEmpty;
+
+/**
+ * Concatate the lhs and rhs array into a parse result
+ * @param lhs {Element[]}
+ * @param rhs {Element[]}
+ * @returns {ParseResult}
+ */
+function concatParseResult(minim, lhs, rhs) {
+  return new minim.elements.ParseResult(lhs.concat(rhs));
+}
+
 /**
  * Performs left-to-right composition of one or more ParseResult-returning
  * functions. The leftmost function may have any arity; the remaining functions
@@ -24,27 +41,28 @@ const findValueFromParseResult = parseResult => R.reject(isAnnotation, parseResu
  * @see R.pipe
  */
 function pipeParseResult() {
+  // pipeParseResult effectively takes arguments of `(minim, transform, transform, ..., element)
+  // Similiar to `R.pipe` we are expecting the pipe to be created with all transformation functions
+  // Then the pipe will return a function which invokes the pipe with an element
+
   const minim = arguments[0];
   const functions = R.tail(arguments);
 
-  return (value) => {
-    const earlyExit = result => result.errors.isEmpty;
-
+  // Return a closure that takes the element to pipe
+  return element => {
     const run = (accumulator, func) => {
       let parseResult = func(findValueFromParseResult(accumulator));
 
       if (!isParseResult(parseResult)) {
-        // Wrap bare element in ParseResult
+        // Result is either a ParseResult, or it is an element that can be
+        // wrapped in a parse result
         parseResult = new minim.elements.ParseResult([parseResult]);
       }
 
-      // Attach prior annotations
-      parseResult.content = parseResult.content.concat(accumulator.annotations.elements);
-
-      return parseResult;
+      return concatParseResult(minim, parseResult.content, accumulator.annotations.elements);
     };
 
-    return R.reduceWhile(earlyExit, run, new minim.elements.ParseResult([value]), functions);
+    return R.reduceWhile(hasNoErrors, run, new minim.elements.ParseResult([element]), functions);
   };
 }
 
