@@ -9,7 +9,7 @@ $ npm install --global yarn
 $ yarn
 ```
 
-> **NOTE**: Please do commit the yarn.lock to the github repo
+> **NOTE**: Please do commit the `yarn.lock` to the GitHub repo
 
 To list all packages:
 
