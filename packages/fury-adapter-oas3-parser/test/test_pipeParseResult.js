@@ -30,9 +30,8 @@ describe('#pipeParseResult', function () {
 
     const parseResult = parse(new minim.elements.String());
 
-    expect(parseResult.toValue()).to.deep.equal([
-      'Value must be a number'
-    ]);
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult.errors.length).to.equal(1);
   });
 
   it('all annotations are merged into result', function () {
@@ -45,9 +44,7 @@ describe('#pipeParseResult', function () {
 
     const parseResult = parse(new minim.elements.Number(5));
 
-    expect(parseResult.toValue()).to.deep.equal([
-      10,
-      'example warning'
-    ]);
+    expect(parseResult.length).to.equal(2);
+    expect(parseResult.warnings.length).to.equal(1);
   });
 });
