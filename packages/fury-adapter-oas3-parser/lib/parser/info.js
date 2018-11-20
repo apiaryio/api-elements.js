@@ -8,25 +8,34 @@ const {
   validateObjectContainsRequiredKeys,
   validateMembers,
 } = require('./annotations');
-const { isString, isObject } = require('../predicates');
+const { isString, isObject, hasKey, isExtension, getValue } = require('../predicates');
 const { pipeParseResult } = require('../fp');
 
 const name = 'Info Object';
 const requiredKeys = ['title', 'version'];
 const unsupportedKeys = ['termsOfService', 'contact', 'license'];
 
-const hasKey = R.curry((key, member) => member.key.toValue() === key);
+/**
+ * Returns whether the given member element is unsupported
+ * @param member {MemberElement}
+ * @returns {boolean}
+ * @see unsupportedKeys
+ */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
+/**
+ * Returns a clone of the value of a member
+ * @param member {MemberElement}
+ * @returns {Element}
+ */
 const cloneValue = member => member.value.clone();
-const isExtension = member => member.key.toValue().startsWith('x-');
 
 /**
- * Parse the OpenAPI 'Info Object'
+ * Parse the OpenAPI 'Info Object' (`#/info`)
+ * @see https://github.com/OAI/OpenAPI-Specification/blob/50c152549263cda0f05608d514ba78546b390d0e/versions/3.0.0.md#infoObject
  * @returns ParseResult<Category>
  */
 function parseInfo(minim, info) {
-  const getValue = R.curry((transform, member) => transform(member.value));
   const createCopy = element => {
     const copy = new minim.elements.Copy(element.content);
     // FIXME no tests for sourcemap copy
@@ -34,10 +43,38 @@ function parseInfo(minim, info) {
     return copy;
   }
 
+  /**
+   * Ensures that the given member value is a string, or return error
+   *
+   * @param member {MemberElement}
+   *
+   * @returns {Element} Either a MemberElement<String> or Annotation.
+   */
+  const memberIsStringOrError = R.unless(
+    R.compose(isString, getValue),
+    createMemberValueNotStringError(minim, name));
+
+  /**
+   * Parse Description
+   *
+   * @param member {MemberElement}
+   *
+   * @returns {Element} Either a MemberElement<Copy> or Annotation.
+   */
+  const parseDescription = R.ifElse(
+    // If the member value is string
+    R.compose(isString, getValue),
+
+    // Create a CopyElement from the members value
+    R.compose(createCopy, getValue),
+
+    // Member value not string, return annotation
+    createMemberValueNotStringWarning(minim, name));
+
   const parseMember = R.cond([
-    [hasKey('title'), R.unless(getValue(isString), createMemberValueNotStringError(minim, name))],
-    [hasKey('version'), R.unless(getValue(isString), createMemberValueNotStringError(minim, name))],
-    [hasKey('description'), R.ifElse(getValue(isString), getValue(createCopy), createMemberValueNotStringWarning(minim, name))],
+    [hasKey('title'), memberIsStringOrError],
+    [hasKey('version'), memberIsStringOrError],
+    [hasKey('description'), parseDescription],
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
     // FIXME Support exposing extensions into parse result

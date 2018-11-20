@@ -1,6 +1,6 @@
 const R = require('ramda');
 
-const { isAnnotation, isObject, isMember } = require('../predicates');
+const { isAnnotation, isObject, isMember, isExtension, hasKey, getValue } = require('../predicates');
 const { createError, createWarning } = require('../elements');
 const {
   createUnsupportedMemberWarning,
@@ -16,11 +16,13 @@ const name = 'OpenAPI Object';
 const requiredKeys = ['openapi', 'info', 'paths'];
 const unsupportedKeys = ['components', 'servers', 'security', 'tags', 'externalDocs'];
 
-const hasKey = R.curry((key, member) => member.key.toValue() === key);
+/**
+ * Returns whether the given member element is unsupported
+ * @param member {MemberElement}
+ * @returns {boolean}
+ * @see unsupportedKeys
+ */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
-
-const isExtension = member => member.key.toValue().startsWith('x-');
-const getValue = member => member.value;
 
 function parseOASObject(minim, object) {
   const parseMember = R.cond([
