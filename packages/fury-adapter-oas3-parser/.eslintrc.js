@@ -8,5 +8,10 @@ module.exports = {
   rules: {
     'max-len': 'off',
     'no-shadow': 'off', // FIXME
+    'comma-dangle': ['error', {
+      'arrays': 'always-multiline',
+      'objects': 'always-multiline',
+      'functions': 'never',
+    }],
   }
 };

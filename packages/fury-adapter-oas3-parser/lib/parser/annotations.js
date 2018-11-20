@@ -42,9 +42,10 @@ function validateObjectContainsRequiredKeys(minim, path, requiredKeys, object) {
 
   if (missingKeys.length > 0) {
     return new minim.elements.ParseResult(
-      R.map(errorFromKey, missingKeys),
+      R.map(errorFromKey, missingKeys)
     );
   }
+
   return new minim.elements.ParseResult([object]);
 }
 
@@ -129,7 +130,7 @@ function validateMembers(minim, parseMember, object) {
   const validateMembers = R.pipe(
     wrapObjectInParseResult,
     chainParseResult(transformMember),
-    R.unless(parseResultHasErrors, convertParseResultMembersToObject),
+    R.unless(parseResultHasErrors, convertParseResultMembersToObject)
   );
 
   return validateMembers(object);

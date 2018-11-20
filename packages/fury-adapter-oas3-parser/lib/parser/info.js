@@ -47,7 +47,7 @@ function parseInfo(minim, info) {
    */
   const memberIsStringOrError = R.unless(
     R.compose(isString, getValue),
-    createMemberValueNotStringError(minim, name),
+    createMemberValueNotStringError(minim, name)
   );
 
   /**
@@ -65,7 +65,7 @@ function parseInfo(minim, info) {
     R.compose(createCopy, getValue),
 
     // Member value not string, return annotation
-    createMemberValueNotStringWarning(minim, name),
+    createMemberValueNotStringWarning(minim, name)
   );
 
   const parseMember = R.cond([

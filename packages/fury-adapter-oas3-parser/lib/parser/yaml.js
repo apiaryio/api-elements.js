@@ -52,7 +52,7 @@ function parse(source, minim) {
     const annotation = new minim.elements.Annotation(
       `YAML Syntax: ${error.context}`,
       { classes: ['error'] },
-      { sourceMap: new minim.elements.Array([sourceMap]) },
+      { sourceMap: new minim.elements.Array([sourceMap]) }
     );
 
     parseResult.push(annotation);
