@@ -49,6 +49,4 @@ function pipeParseResult() {
 }
 
 
-module.exports = {
-  pipeParseResult,
-};
+module.exports = pipeParseResult;

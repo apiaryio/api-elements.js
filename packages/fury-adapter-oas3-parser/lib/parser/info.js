@@ -9,7 +9,7 @@ const {
   validateMembers,
 } = require('./annotations');
 const { isString, isObject, hasKey, isExtension, getValue } = require('../predicates');
-const { pipeParseResult } = require('../fp');
+const pipeParseResult = require('../pipeParseResult');
 
 const name = 'Info Object';
 const requiredKeys = ['title', 'version'];

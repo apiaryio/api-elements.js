@@ -8,7 +8,7 @@ const {
   validateObjectContainsRequiredKeys,
   validateMembers
 } = require('./annotations');
-const { pipeParseResult } = require('../fp');
+const pipeParseResult = require('../pipeParseResult');
 const parseOpenAPI = require('./openapi');
 const parseInfo = require('./info');
 
