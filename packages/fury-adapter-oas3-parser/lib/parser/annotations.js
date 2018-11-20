@@ -49,6 +49,31 @@ function validateObjectContainsRequiredKeys(minim, path, requiredKeys, object) {
   }
 }
 
+/*
+ * Returns true iff the given element is either an annotation or member element
+ * @param element {Element}
+ * @returns boolean
+ */
+const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
+
+
+/**
+ * Transform every non-annotation element in the parse result and then flatten all of the results into a parse result
+ * @param transform {function}
+ * @param parseResult {ParseResult}
+ */
+const chainParseResult = R.curry((transform, parseResult) => {
+  const result = R.chain(transform, parseResult);
+
+  if (!result.errors.isEmpty) {
+    return new parseResult.constructor(result.errors);
+  }
+
+  return result;
+});
+
+const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty
+
 /**
  * Transforms each member in an object.
  *
@@ -69,36 +94,46 @@ function validateObjectContainsRequiredKeys(minim, path, requiredKeys, object) {
  * @returns ParseResult
  **/
 function validateMembers(minim, parseMember, object) {
+  // Create a member from a key and value
   const createMember = R.constructN(2, minim.elements.Member);
-  const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
 
   // Wraps the given element in a parse result if it isn't already a parse result
   const coerceParseResult = R.unless(isParseResult, element => new minim.elements.ParseResult([element]));
 
-  // To make using `validateMembers` simpler, we are going to wrap `parseMember`
-  // so that parseMember can be another parser and we can wrap the result in
-  // a member if it isn't.
-  const convertMember = member => {
-    // Wraps the given element to a member if it is not a member element or annotation
-    const coerceMember = R.map(R.unless(isAnnotationOrMember, createMember(member.key)));
+  // Wrap the given parseMember transformation into one that also converts
+  // the result to a parse result if it isn't already a parse result.
+  const transform = R.pipe(parseMember, coerceParseResult);
 
-    const parse = R.pipe(
-      parseMember,
-      coerceParseResult,
-      coerceMember
-    )
-
-    return parse(member);
-  };
-
-  const chain = R.chain(convertMember, new minim.elements.ParseResult(object.content));
-
-  if (!chain.errors.isEmpty) {
-    return new minim.elements.ParseResult(chain.errors)
+  // Wrap the above transform function into one that also converts any
+  // values in the parse result that are not annotations or a member
+  // into a member using the same key as provided
+  const transformMember = member => {
+    const coerceMember = (R.unless(isAnnotationOrMember, createMember(member.key)));
+    return R.map(coerceMember, transform(member));
   }
 
-  const result = new minim.elements.Object(R.filter(isMember, chain))
-  return new minim.elements.ParseResult([result].concat(chain.annotations.elements));
+  /**
+   * Converts the given parse result of members into parse result of an object
+   * @param parseResult {ParseResult<Member>}
+   * @returns ParseResult<Object>
+   */
+  const convertParseResultMembersToObject = (parseResult) => {
+    const members = R.filter(isMember, parseResult);
+    const annotations = R.filter(isAnnotation, parseResult);
+    const object = new minim.elements.Object(members);
+    return new minim.elements.ParseResult([object].concat(annotations.elements));
+  };
+
+  // Create a parse result from an object using all of the members
+  const wrapObjectInParseResult = object => new minim.elements.ParseResult(object.content);
+
+  const validateMembers = R.pipe(
+    wrapObjectInParseResult,
+    chainParseResult(transformMember),
+    R.unless(parseResultHasErrors, convertParseResultMembersToObject)
+  )
+
+  return validateMembers(object);
 }
 
 
