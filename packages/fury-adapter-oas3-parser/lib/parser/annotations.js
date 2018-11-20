@@ -11,12 +11,12 @@ function createAnnotation(annotationClass, minim, message, element) {
 const createError = R.curry(createAnnotation)('error');
 const createWarning = R.curry(createAnnotation)('warning');
 
-function createUnsupportedMemberWarning (minim, path, member) {
+function createUnsupportedMemberWarning(minim, path, member) {
   const message = `'${path}' contains unsupported key '${member.key.toValue()}'`;
   return createWarning(minim, message, member.key);
 }
 
-function createInvalidMemberWarning (minim, path, member) {
+function createInvalidMemberWarning(minim, path, member) {
   const message = `'${path}' contains invalid key '${member.key.toValue()}'`;
   return createWarning(minim, message, member.key);
 }
@@ -31,7 +31,7 @@ function createMemberValueNotStringError(minim, path, member) {
 
 function validateObjectContainsRequiredKeys(minim, path, requiredKeys, object) {
   // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
-  const hasMember = key => {
+  const hasMember = (key) => {
     const findKey = R.allPass([isMember, member => member.key.toValue() === key]);
     const matchingMembers = object.content.filter(findKey);
     return matchingMembers.length > 0;
@@ -42,11 +42,10 @@ function validateObjectContainsRequiredKeys(minim, path, requiredKeys, object) {
 
   if (missingKeys.length > 0) {
     return new minim.elements.ParseResult(
-      R.map(errorFromKey, missingKeys)
+      R.map(errorFromKey, missingKeys),
     );
-  } else {
-    return new minim.elements.ParseResult([object]);
   }
+  return new minim.elements.ParseResult([object]);
 }
 
 /*
@@ -72,7 +71,7 @@ const chainParseResult = R.curry((transform, parseResult) => {
   return result;
 });
 
-const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty
+const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
 
 /**
  * Transforms each member in an object.
@@ -92,7 +91,7 @@ const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty
  * @param object {ObjectElement}
  *
  * @returns ParseResult
- **/
+ */
 function validateMembers(minim, parseMember, object) {
   // Create a member from a key and value
   const createMember = R.constructN(2, minim.elements.Member);
@@ -107,10 +106,10 @@ function validateMembers(minim, parseMember, object) {
   // Wrap the above transform function into one that also converts any
   // values in the parse result that are not annotations or a member
   // into a member using the same key as provided
-  const transformMember = member => {
+  const transformMember = (member) => {
     const coerceMember = (R.unless(isAnnotationOrMember, createMember(member.key)));
     return R.map(coerceMember, transform(member));
-  }
+  };
 
   /**
    * Converts the given parse result of members into parse result of an object
@@ -130,8 +129,8 @@ function validateMembers(minim, parseMember, object) {
   const validateMembers = R.pipe(
     wrapObjectInParseResult,
     chainParseResult(transformMember),
-    R.unless(parseResultHasErrors, convertParseResultMembersToObject)
-  )
+    R.unless(parseResultHasErrors, convertParseResultMembersToObject),
+  );
 
   return validateMembers(object);
 }
@@ -146,4 +145,4 @@ module.exports = {
   createMemberValueNotStringError: R.curry(createMemberValueNotStringError),
   validateObjectContainsRequiredKeys: R.curry(validateObjectContainsRequiredKeys),
   validateMembers: R.curry(validateMembers),
-}
+};

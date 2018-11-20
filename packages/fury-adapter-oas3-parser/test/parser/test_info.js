@@ -3,10 +3,10 @@ const { Fury } = require('fury');
 
 const parseInfo = require('../../lib/parser/info');
 
-const minim = new Fury().minim;
+const { minim } = new Fury();
 
-describe('#parseInfo', function () {
-  it('provides error when info is non-object', function () {
+describe('#parseInfo', () => {
+  it('provides error when info is non-object', () => {
     const info = new minim.elements.String();
 
     const result = parseInfo(minim, info);
@@ -15,8 +15,8 @@ describe('#parseInfo', function () {
     expect(result.errors.get(0).toValue()).to.equal("'Info Object' is not an object");
   });
 
-  describe('missing required properties', function () {
-    it('provides error for missing title', function () {
+  describe('missing required properties', () => {
+    it('provides error for missing title', () => {
       const info = new minim.elements.Object({
         version: '1.0.0',
       });
@@ -27,7 +27,7 @@ describe('#parseInfo', function () {
       expect(result.errors.get(0).toValue()).to.equal("'Info Object' is missing required property 'title'");
     });
 
-    it('provides error for missing version', function () {
+    it('provides error for missing version', () => {
       const info = new minim.elements.Object({
         title: 'My API',
       });
@@ -39,8 +39,8 @@ describe('#parseInfo', function () {
     });
   });
 
-  describe('required property type checking', function () {
-    it('provides error when title is non-string', function () {
+  describe('required property type checking', () => {
+    it('provides error when title is non-string', () => {
       const info = new minim.elements.Object({
         title: 1,
         version: '1.0.0',
@@ -52,7 +52,7 @@ describe('#parseInfo', function () {
       expect(result.errors.get(0).toValue()).to.equal("'Info Object' 'title' is not a string");
     });
 
-    it('provides error when version is non-string', function () {
+    it('provides error when version is non-string', () => {
       const info = new minim.elements.Object({
         title: 'My API',
         version: 1,
@@ -65,8 +65,8 @@ describe('#parseInfo', function () {
     });
   });
 
-  describe('optional property type checking', function () {
-    it('provides warning when description is non-string', function () {
+  describe('optional property type checking', () => {
+    it('provides warning when description is non-string', () => {
       const info = new minim.elements.Object({
         title: 'My API',
         version: '1.0.0',
@@ -79,8 +79,8 @@ describe('#parseInfo', function () {
     });
   });
 
-  describe('warnings for unsupported properties', function () {
-    it('provides warning for unsupported termsOfService key', function () {
+  describe('warnings for unsupported properties', () => {
+    it('provides warning for unsupported termsOfService key', () => {
       const object = new minim.elements.Object({
         title: 'My API',
         version: '1.0.0',
@@ -93,7 +93,7 @@ describe('#parseInfo', function () {
       expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'termsOfService'");
     });
 
-    it('provides warning for unsupported contact key', function () {
+    it('provides warning for unsupported contact key', () => {
       const object = new minim.elements.Object({
         title: 'My API',
         version: '1.0.0',
@@ -106,7 +106,7 @@ describe('#parseInfo', function () {
       expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'contact'");
     });
 
-    it('provides warning for unsupported license key', function () {
+    it('provides warning for unsupported license key', () => {
       const object = new minim.elements.Object({
         title: 'My API',
         version: '1.0.0',
@@ -119,7 +119,7 @@ describe('#parseInfo', function () {
       expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'license'");
     });
 
-    it('does not provide warning for Info Object extensions', function () {
+    it('does not provide warning for Info Object extensions', () => {
       const object = new minim.elements.Object({
         title: 'My API',
         version: '1.0.0',
@@ -131,7 +131,7 @@ describe('#parseInfo', function () {
       expect(result.annotations.length).to.equal(0);
     });
 
-    it('provides warning for invalid keys', function () {
+    it('provides warning for invalid keys', () => {
       const object = new minim.elements.Object({
         title: 'My API',
         version: '1.0.0',
@@ -145,7 +145,7 @@ describe('#parseInfo', function () {
     });
   });
 
-  it('provides api category with title and version', function () {
+  it('provides api category with title and version', () => {
     const info = new minim.elements.Object({
       title: 'My API',
       version: '1.0.0',
@@ -158,7 +158,7 @@ describe('#parseInfo', function () {
     expect(result.api.attributes.get('version').toValue()).to.equal('1.0.0');
   });
 
-  it('provides api category with description', function () {
+  it('provides api category with description', () => {
     const info = new minim.elements.Object({
       title: 'My API',
       version: '1.0.0',

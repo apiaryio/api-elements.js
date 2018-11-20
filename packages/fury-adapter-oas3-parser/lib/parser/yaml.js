@@ -1,4 +1,3 @@
-const R = require('ramda');
 const yaml = require('yaml-js');
 
 function parse(source, minim) {
@@ -30,8 +29,8 @@ function parse(source, minim) {
       const sourceMap = new minim.elements.SourceMap([
         [
           node.start_mark.pointer,
-          node.end_mark.pointer - node.start_mark.pointer
-        ]
+          node.end_mark.pointer - node.start_mark.pointer,
+        ],
       ]);
 
       element.attributes.set('sourceMap', new minim.elements.Array([sourceMap]));
@@ -47,13 +46,13 @@ function parse(source, minim) {
     ast = yaml.compose(source);
   } catch (error) {
     const sourceMap = new minim.elements.SourceMap([
-      [error.context_mark.pointer, 1]
+      [error.context_mark.pointer, 1],
     ]);
 
     const annotation = new minim.elements.Annotation(
       `YAML Syntax: ${error.context}`,
       { classes: ['error'] },
-      { sourceMap: new minim.elements.Array([sourceMap]) }
+      { sourceMap: new minim.elements.Array([sourceMap]) },
     );
 
     parseResult.push(annotation);

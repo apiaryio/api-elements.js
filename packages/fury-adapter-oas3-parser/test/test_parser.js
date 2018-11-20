@@ -3,10 +3,10 @@ const { Fury } = require('fury');
 
 const parse = require('../lib/parser');
 
-const minim = new Fury().minim;
+const { minim } = new Fury();
 
-describe('#parse', function () {
-  it('fails to parse an OAS3 document with invalid YAML', function () {
+describe('#parse', () => {
+  it('fails to parse an OAS3 document with invalid YAML', () => {
     const source = '{}{}';
 
     const parseResult = parse(source, minim);
@@ -16,7 +16,7 @@ describe('#parse', function () {
     expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[2, 1]]);
   });
 
-  it('fails to parse a non-object YAML document', function () {
+  it('fails to parse a non-object YAML document', () => {
     const source = '[]';
 
     const parseResult = parse(source, minim);
@@ -26,7 +26,7 @@ describe('#parse', function () {
     expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[0, 2]]);
   });
 
-  it('parses a valid OAS3 document', function () {
+  it('parses a valid OAS3 document', () => {
     const source = 'openapi: "3.0.0"\ninfo: {title: My API, version: 1.0.0}\npaths: {}\n';
 
     const parseResult = parse(source, minim);

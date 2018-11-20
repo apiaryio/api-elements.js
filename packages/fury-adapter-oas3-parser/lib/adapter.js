@@ -17,4 +17,6 @@ function parse(options, cb) {
   cb(null, parseResult);
 }
 
-module.exports = { name, mediaTypes, detect, parse };
+module.exports = {
+  name, mediaTypes, detect, parse,
+};

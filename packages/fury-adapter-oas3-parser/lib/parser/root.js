@@ -1,12 +1,13 @@
 const R = require('ramda');
 
-const { isAnnotation, isObject, isMember, isExtension, hasKey, getValue } = require('../predicates');
-const { createError, createWarning } = require('../elements');
+const {
+  isExtension, hasKey, getValue,
+} = require('../predicates');
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
   validateObjectContainsRequiredKeys,
-  validateMembers
+  validateMembers,
 } = require('./annotations');
 const pipeParseResult = require('../pipeParseResult');
 const parseOpenAPI = require('./openapi');
@@ -44,8 +45,7 @@ function parseOASObject(minim, object) {
   const parseOASObject = pipeParseResult(minim,
     validateObjectContainsRequiredKeys(minim, name, requiredKeys),
     validateMembers(minim, parseMember),
-    object => object.get('info')
-  );
+    object => object.get('info'));
 
   return parseOASObject(object);
 }

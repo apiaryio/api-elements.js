@@ -40,16 +40,9 @@ function concatParseResult(minim, lhs, rhs) {
  * @return {Function}
  * @see R.pipe
  */
-function pipeParseResult() {
-  // pipeParseResult effectively takes arguments of `(minim, transform, transform, ..., element)
-  // Similiar to `R.pipe` we are expecting the pipe to be created with all transformation functions
-  // Then the pipe will return a function which invokes the pipe with an element
-
-  const minim = arguments[0];
-  const functions = R.tail(arguments);
-
+function pipeParseResult(minim, ...functions) {
   // Return a closure that takes the element to pipe
-  return element => {
+  return (element) => {
     const run = (accumulator, func) => {
       let parseResult = func(findValueFromParseResult(accumulator));
 

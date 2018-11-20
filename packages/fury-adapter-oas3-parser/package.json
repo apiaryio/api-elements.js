@@ -8,6 +8,7 @@
     "url": "https://github.com/apiaryio/fury-adapter-oas3-parser.git"
   },
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha test --recursive"
   },
   "dependencies": {
@@ -19,6 +20,9 @@
   },
   "devDependencies": {
     "chai": "4.1.2",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "fury": "3.0.0-beta.7",
     "mocha": "5.0.2"
   },

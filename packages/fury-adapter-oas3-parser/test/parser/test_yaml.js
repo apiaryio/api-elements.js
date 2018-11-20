@@ -3,10 +3,10 @@ const { Fury } = require('fury');
 
 const parseYAML = require('../../lib/parser/yaml');
 
-const minim = new Fury().minim;
+const { minim } = new Fury();
 
 describe('#parseYAML', () => {
-  it('fails to parse an OAS3 document with invalid YAML', function () {
+  it('fails to parse an OAS3 document with invalid YAML', () => {
     const parseResult = parseYAML('{}{}', minim);
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.errors.length).to.equal(1);
@@ -94,7 +94,7 @@ describe('#parseYAML', () => {
     const object = element.first;
 
     expect(object).to.be.instanceof(minim.elements.Object);
-    expect(object.toValue()).to.deep.equal({'key': 'value'});
+    expect(object.toValue()).to.deep.equal({ key: 'value' });
     expect(object.sourceMapValue).to.deep.equal([[0, 10]]);
 
     const member = object.first;

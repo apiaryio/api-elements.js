@@ -4,29 +4,27 @@ const { Fury } = require('fury');
 const { createError, createWarning } = require('../lib/elements');
 const pipeParseResult = require('../lib/pipeParseResult');
 
-const minim = new Fury().minim;
+const { minim } = new Fury();
 
 const isNumber = element => element.element === 'number';
 const doubleNumber = number => number.toValue() * 2;
 const add = R.curry((value, number) => number.toValue() + value);
 
-describe('#pipeParseResult', function () {
-  it('can pipe success across functions', function () {
+describe('#pipeParseResult', () => {
+  it('can pipe success across functions', () => {
     const parse = pipeParseResult(minim,
       add(2),
-      doubleNumber,
-    );
+      doubleNumber);
 
     const parseResult = parse(new minim.elements.Number(3));
 
     expect(parseResult.toValue()).to.deep.equal([10]);
   });
 
-  it('fails early during a failure', function () {
+  it('fails early during a failure', () => {
     const parse = pipeParseResult(minim,
       R.unless(isNumber, createError(minim, 'Value must be a number')),
-      doubleNumber
-    );
+      doubleNumber);
 
     const parseResult = parse(new minim.elements.String());
 
@@ -34,13 +32,12 @@ describe('#pipeParseResult', function () {
     expect(parseResult.errors.length).to.equal(1);
   });
 
-  it('all annotations are merged into result', function () {
+  it('all annotations are merged into result', () => {
     const parse = pipeParseResult(minim,
-      (number) => new minim.elements.ParseResult([
-        number, createWarning(minim, 'example warning', number)
+      number => new minim.elements.ParseResult([
+        number, createWarning(minim, 'example warning', number),
       ]),
-      doubleNumber
-    );
+      doubleNumber);
 
     const parseResult = parse(new minim.elements.Number(5));
 

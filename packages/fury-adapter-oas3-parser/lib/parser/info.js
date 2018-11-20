@@ -8,7 +8,9 @@ const {
   validateObjectContainsRequiredKeys,
   validateMembers,
 } = require('./annotations');
-const { isString, isObject, hasKey, isExtension, getValue } = require('../predicates');
+const {
+  isString, isObject, hasKey, isExtension, getValue,
+} = require('../predicates');
 const pipeParseResult = require('../pipeParseResult');
 
 const name = 'Info Object';
@@ -24,24 +26,17 @@ const unsupportedKeys = ['termsOfService', 'contact', 'license'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 /**
- * Returns a clone of the value of a member
- * @param member {MemberElement}
- * @returns {Element}
- */
-const cloneValue = member => member.value.clone();
-
-/**
  * Parse the OpenAPI 'Info Object' (`#/info`)
  * @see https://github.com/OAI/OpenAPI-Specification/blob/50c152549263cda0f05608d514ba78546b390d0e/versions/3.0.0.md#infoObject
  * @returns ParseResult<Category>
  */
 function parseInfo(minim, info) {
-  const createCopy = element => {
+  const createCopy = (element) => {
     const copy = new minim.elements.Copy(element.content);
     // FIXME no tests for sourcemap copy
     copy.attributes.set('sourceMap', element.attributes.get('sourceMap'));
     return copy;
-  }
+  };
 
   /**
    * Ensures that the given member value is a string, or return error
@@ -52,7 +47,8 @@ function parseInfo(minim, info) {
    */
   const memberIsStringOrError = R.unless(
     R.compose(isString, getValue),
-    createMemberValueNotStringError(minim, name));
+    createMemberValueNotStringError(minim, name),
+  );
 
   /**
    * Parse Description
@@ -69,7 +65,8 @@ function parseInfo(minim, info) {
     R.compose(createCopy, getValue),
 
     // Member value not string, return annotation
-    createMemberValueNotStringWarning(minim, name));
+    createMemberValueNotStringWarning(minim, name),
+  );
 
   const parseMember = R.cond([
     [hasKey('title'), memberIsStringOrError],
@@ -99,8 +96,7 @@ function parseInfo(minim, info) {
       }
 
       return api;
-    }
-  );
+    });
 
   return parseInfo(info);
 }

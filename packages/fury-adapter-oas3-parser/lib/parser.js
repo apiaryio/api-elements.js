@@ -14,9 +14,9 @@ function parse(source, minim) {
   const parseDocument = R.pipe(
     R.unless(isObjectOrAnnotation, createError(minim, 'Source document is not an object')),
     R.unless(isAnnotation, parseOASObject(minim)),
-  )
+  );
 
-  return R.chain(parseDocument, document)
+  return R.chain(parseDocument, document);
 }
 
 module.exports = parse;
