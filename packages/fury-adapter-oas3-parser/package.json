@@ -8,6 +8,7 @@
     "url": "https://github.com/apiaryio/fury-adapter-oas3-parser.git"
   },
   "scripts": {
+    "install": "rm -fr node_modules/fury/node_modules/minim",
     "lint": "eslint .",
     "test": "mocha test --recursive"
   },
@@ -24,6 +25,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "fury": "3.0.0-beta.7",
+    "minim": "git://github.com/refractproject/minim.git#fantasyland",
     "mocha": "5.0.2"
   },
   "engines": {
