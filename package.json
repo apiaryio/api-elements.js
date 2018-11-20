@@ -1,26 +1,17 @@
 {
-  "name": "api-elements",
-  "version": "0.1.0",
-  "description": "API Elements JavaScript",
-  "main": "lib/api-elements.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/apiaryio/api-elements.js.git"
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
   },
   "scripts": {
-    "test": "mocha"
-  },
-  "author": "Apiary.io <support@apiary.io>",
-  "license": "MIT",
-  "dependencies": {
-    "minim": "^0.20.5",
-    "minim-parse-result": "^0.10.1"
+    "release": "lerna publish",
+    "release:force": "lerna publish --force-publish",
+    "test": "lerna exec --scope='*' -- npm run test",
+    "lint": "lerna exec --scope='*' -- npm run lint"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.0.2"
-  },
-  "engines": {
-    "node": ">=4"
+    "lerna": "^3.4.0"
   }
 }
