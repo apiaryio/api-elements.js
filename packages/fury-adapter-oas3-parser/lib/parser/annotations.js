@@ -30,6 +30,7 @@ function createMemberValueNotStringError(minim, path, member) {
 }
 
 function validateObjectContainsRequiredKeys(minim, path, requiredKeys, object) {
+  // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
   const hasMember = key => {
     const findKey = R.allPass([isMember, member => member.key.toValue() === key]);
     const matchingMembers = object.content.filter(findKey);
