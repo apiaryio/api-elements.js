@@ -1,5 +1,5 @@
 const R = require('ramda');
-const { createError } = require('../elements');
+const { createError } = require('../../elements');
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
@@ -7,12 +7,12 @@ const {
   createMemberValueNotStringWarning,
   validateObjectContainsRequiredKeys,
   validateMembers,
-} = require('./annotations');
+} = require('../annotations');
 const {
   isString, isObject, hasKey, isExtension, getValue,
-} = require('../predicates');
-const parseCopy = require('./parseCopy');
-const pipeParseResult = require('../pipeParseResult');
+} = require('../../predicates');
+const parseCopy = require('../parseCopy');
+const pipeParseResult = require('../../pipeParseResult');
 
 const name = 'Info Object';
 const requiredKeys = ['title', 'version'];

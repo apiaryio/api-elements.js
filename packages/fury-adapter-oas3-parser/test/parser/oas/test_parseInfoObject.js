@@ -1,15 +1,15 @@
 const { expect } = require('chai');
 const { Fury } = require('fury');
 
-const parseInfo = require('../../lib/parser/info');
+const parse = require('../../../lib/parser/oas/parseInfoObject');
 
 const { minim } = new Fury();
 
-describe('#parseInfo', () => {
+describe('#parseInfoObject', () => {
   it('provides error when info is non-object', () => {
     const info = new minim.elements.String();
 
-    const result = parseInfo(minim, info);
+    const result = parse(minim, info);
 
     expect(result.length).to.equal(1);
     expect(result.errors.get(0).toValue()).to.equal("'Info Object' is not an object");
@@ -21,7 +21,7 @@ describe('#parseInfo', () => {
         version: '1.0.0',
       });
 
-      const result = parseInfo(minim, info);
+      const result = parse(minim, info);
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal("'Info Object' is missing required property 'title'");
@@ -32,7 +32,7 @@ describe('#parseInfo', () => {
         title: 'My API',
       });
 
-      const result = parseInfo(minim, info);
+      const result = parse(minim, info);
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal("'Info Object' is missing required property 'version'");
@@ -46,7 +46,7 @@ describe('#parseInfo', () => {
         version: '1.0.0',
       });
 
-      const result = parseInfo(minim, info);
+      const result = parse(minim, info);
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal("'Info Object' 'title' is not a string");
@@ -58,7 +58,7 @@ describe('#parseInfo', () => {
         version: 1,
       });
 
-      const result = parseInfo(minim, info);
+      const result = parse(minim, info);
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal("'Info Object' 'version' is not a string");
@@ -73,7 +73,7 @@ describe('#parseInfo', () => {
         description: 1,
       });
 
-      const result = parseInfo(minim, info);
+      const result = parse(minim, info);
       expect(result.warnings.length).to.equal(1);
       expect(result.warnings.get(0).toValue()).to.equal("'Info Object' 'description' is not a string");
     });
@@ -87,7 +87,7 @@ describe('#parseInfo', () => {
         termsOfService: '',
       });
 
-      const result = parseInfo(minim, object);
+      const result = parse(minim, object);
 
       expect(result.warnings.length).to.equal(1);
       expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'termsOfService'");
@@ -100,7 +100,7 @@ describe('#parseInfo', () => {
         contact: {},
       });
 
-      const result = parseInfo(minim, object);
+      const result = parse(minim, object);
 
       expect(result.warnings.length).to.equal(1);
       expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'contact'");
@@ -113,7 +113,7 @@ describe('#parseInfo', () => {
         license: {},
       });
 
-      const result = parseInfo(minim, object);
+      const result = parse(minim, object);
 
       expect(result.warnings.length).to.equal(1);
       expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'license'");
@@ -126,7 +126,7 @@ describe('#parseInfo', () => {
         'x-extension': {},
       });
 
-      const result = parseInfo(minim, object);
+      const result = parse(minim, object);
 
       expect(result.annotations.length).to.equal(0);
     });
@@ -138,7 +138,7 @@ describe('#parseInfo', () => {
         invalid: {},
       });
 
-      const result = parseInfo(minim, object);
+      const result = parse(minim, object);
 
       expect(result.warnings.length).to.equal(1);
       expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains invalid key 'invalid'");
@@ -151,7 +151,7 @@ describe('#parseInfo', () => {
       version: '1.0.0',
     });
 
-    const result = parseInfo(minim, info);
+    const result = parse(minim, info);
     expect(result.length).to.equal(1);
     expect(result.api.classes.toValue()).to.deep.equal(['api']);
     expect(result.api.title.toValue()).to.equal('My API');
@@ -165,7 +165,7 @@ describe('#parseInfo', () => {
       description: 'My API Description',
     });
 
-    const result = parseInfo(minim, info);
+    const result = parse(minim, info);
     expect(result.length).to.equal(1);
     expect(result.api.copy.toValue()).to.deep.equal(['My API Description']);
   });

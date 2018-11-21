@@ -2,17 +2,17 @@ const R = require('ramda');
 
 const {
   isAnnotation, isExtension, hasKey, getValue,
-} = require('../predicates');
+} = require('../../predicates');
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
   validateObjectContainsRequiredKeys,
   validateMembers,
-} = require('./annotations');
-const pipeParseResult = require('../pipeParseResult');
-const parseOpenAPI = require('./openapi');
-const parseInfo = require('./info');
-const parsePaths = require('./paths');
+} = require('../annotations');
+const pipeParseResult = require('../../pipeParseResult');
+const parseOpenAPI = require('../openapi');
+const parseInfoObject = require('./parseInfoObject');
+const parsePathsObject = require('./parsePathsObject');
 
 const name = 'OpenAPI Object';
 const requiredKeys = ['openapi', 'info', 'paths'];
@@ -35,8 +35,8 @@ function parseOASObject(minim, object) {
 
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(minim)],
-    [hasKey('info'), R.compose(parseInfo(minim), getValue)],
-    [hasKey('paths'), R.compose(asArray, parsePaths(minim), getValue)],
+    [hasKey('info'), R.compose(parseInfoObject(minim), getValue)],
+    [hasKey('paths'), R.compose(asArray, parsePathsObject(minim), getValue)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new minim.elements.ParseResult()],

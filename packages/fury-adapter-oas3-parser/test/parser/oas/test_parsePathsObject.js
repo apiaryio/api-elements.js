@@ -1,15 +1,15 @@
 const { expect } = require('chai');
 const { Fury } = require('fury');
 
-const parsePaths = require('../../lib/parser/paths');
+const parse = require('../../../lib/parser/oas/parsePathsObject');
 
 const { minim } = new Fury();
 
-describe('#parsePaths', () => {
+describe('#parsePathsObject', () => {
   it('provides error when paths is non-object', () => {
     const paths = new minim.elements.String();
 
-    const result = parsePaths(minim, paths);
+    const result = parse(minim, paths);
 
     expect(result.length).to.equal(1);
     expect(result.errors.get(0).toValue()).to.equal("'Paths Object' is not an object");
@@ -17,7 +17,7 @@ describe('#parsePaths', () => {
 
   it('returns empty parse result when paths is empty', () => {
     const paths = new minim.elements.Object();
-    const result = parsePaths(minim, paths);
+    const result = parse(minim, paths);
 
     expect(result.isEmpty).to.be.true;
   });
@@ -27,7 +27,7 @@ describe('#parsePaths', () => {
       test: {},
     });
 
-    const result = parsePaths(minim, paths);
+    const result = parse(minim, paths);
 
     expect(result.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("'Paths Object' contains invalid key 'test'");
@@ -38,7 +38,7 @@ describe('#parsePaths', () => {
       'x-extension': {},
     });
 
-    const result = parsePaths(minim, paths);
+    const result = parse(minim, paths);
 
     expect(result.isEmpty).to.be.true;
   });
@@ -49,7 +49,7 @@ describe('#parsePaths', () => {
         '/': null,
       });
 
-      const result = parsePaths(minim, paths);
+      const result = parse(minim, paths);
 
       expect(result.length).to.equal(1);
       expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' is not an object");
@@ -60,7 +60,7 @@ describe('#parsePaths', () => {
         '/': new minim.elements.Object(),
       });
 
-      const result = parsePaths(minim, paths);
+      const result = parse(minim, paths);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -74,7 +74,7 @@ describe('#parsePaths', () => {
         '/2': new minim.elements.Object(),
       });
 
-      const result = parsePaths(minim, paths);
+      const result = parse(minim, paths);
 
       expect(result.length).to.equal(3);
       expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -95,7 +95,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(2);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -111,7 +111,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(2);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -127,7 +127,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(2);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -143,7 +143,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(2);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -159,7 +159,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(1);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -172,7 +172,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(2);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -190,7 +190,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(2);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -206,7 +206,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(1);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -222,7 +222,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(1);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
@@ -236,7 +236,7 @@ describe('#parsePaths', () => {
           }),
         });
 
-        const result = parsePaths(minim, paths);
+        const result = parse(minim, paths);
 
         expect(result.length).to.equal(2);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);

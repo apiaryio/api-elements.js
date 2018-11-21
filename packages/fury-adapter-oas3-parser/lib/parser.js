@@ -4,7 +4,7 @@ const parseYAML = require('./parser/yaml');
 const { isAnnotation, isObject } = require('./predicates');
 const { createError } = require('./elements');
 
-const parseOASObject = require('./parser/root');
+const parseOpenAPIObject = require('./parser/oas/parseOpenAPIObject');
 
 const isObjectOrAnnotation = R.either(isObject, isAnnotation);
 
@@ -13,7 +13,7 @@ function parse(source, minim) {
 
   const parseDocument = R.pipe(
     R.unless(isObjectOrAnnotation, createError(minim, 'Source document is not an object')),
-    R.unless(isAnnotation, parseOASObject(minim))
+    R.unless(isAnnotation, parseOpenAPIObject(minim))
   );
 
   return R.chain(parseDocument, document);

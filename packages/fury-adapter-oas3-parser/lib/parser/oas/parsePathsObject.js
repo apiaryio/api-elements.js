@@ -5,7 +5,7 @@ const {
   isExtension,
   hasKey,
   getValue,
-} = require('../predicates');
+} = require('../../predicates');
 const {
   createError,
   createWarning,
@@ -13,9 +13,9 @@ const {
   createMemberValueNotStringWarning,
   createUnsupportedMemberWarning,
   validateMembers,
-} = require('./annotations');
-const parseCopy = require('./parseCopy');
-const pipeParseResult = require('../pipeParseResult');
+} = require('../annotations');
+const parseCopy = require('../parseCopy');
+const pipeParseResult = require('../../pipeParseResult');
 
 const name = 'Paths Object';
 

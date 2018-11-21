@@ -1,11 +1,11 @@
 const { expect } = require('chai');
 const { Fury } = require('fury');
 
-const parseOASObject = require('../../lib/parser/root');
+const parse = require('../../../lib/parser/oas/parseOpenAPIObject');
 
 const { minim } = new Fury();
 
-describe('#parseOASObject', () => {
+describe('#parseOpenAPIObject', () => {
   it('can parse a valid document', () => {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
@@ -16,7 +16,7 @@ describe('#parseOASObject', () => {
       paths: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
     expect(result.length).to.equal(1);
     expect(result.api.title.toValue()).to.equal('My API');
   });
@@ -33,7 +33,7 @@ describe('#parseOASObject', () => {
       },
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
     expect(result.length).to.equal(1);
     expect(result.api.title.toValue()).to.equal('My API');
     expect(result.api.length).to.equal(1);
@@ -47,7 +47,7 @@ describe('#parseOASObject', () => {
       paths: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.length).to.equal(1);
     expect(result.errors.get(0).toValue()).to.equal("'OpenAPI Object' is missing required property 'openapi'");
@@ -59,7 +59,7 @@ describe('#parseOASObject', () => {
       paths: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.length).to.equal(1);
     expect(result.errors.get(0).toValue()).to.equal("'OpenAPI Object' is missing required property 'info'");
@@ -71,7 +71,7 @@ describe('#parseOASObject', () => {
       info: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.length).to.equal(1);
     expect(result.errors.get(0).toValue()).to.equal("'OpenAPI Object' is missing required property 'paths'");
@@ -88,7 +88,7 @@ describe('#parseOASObject', () => {
       invalid: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.warnings.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains invalid key 'invalid'");
@@ -105,7 +105,7 @@ describe('#parseOASObject', () => {
       security: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.warnings.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'security'");
@@ -122,7 +122,7 @@ describe('#parseOASObject', () => {
       tags: [],
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.warnings.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'tags'");
@@ -139,7 +139,7 @@ describe('#parseOASObject', () => {
       externalDocs: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.warnings.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'externalDocs'");
@@ -156,7 +156,7 @@ describe('#parseOASObject', () => {
       components: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.warnings.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'components'");
@@ -173,7 +173,7 @@ describe('#parseOASObject', () => {
       servers: [],
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.warnings.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'servers'");
@@ -190,7 +190,7 @@ describe('#parseOASObject', () => {
       invalid: {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.warnings.length).to.equal(1);
     expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains invalid key 'invalid'");
@@ -204,7 +204,7 @@ describe('#parseOASObject', () => {
       'x-extension': {},
     });
 
-    const result = parseOASObject(minim, object);
+    const result = parse(minim, object);
 
     expect(result.warnings.isEmpty).to.be.true;
   });
