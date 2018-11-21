@@ -11,6 +11,7 @@ const {
 const {
   isString, isObject, hasKey, isExtension, getValue,
 } = require('../predicates');
+const parseCopy = require('./parseCopy');
 const pipeParseResult = require('../pipeParseResult');
 
 const name = 'Info Object';
@@ -31,13 +32,6 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @returns ParseResult<Category>
  */
 function parseInfo(minim, info) {
-  const createCopy = (element) => {
-    const copy = new minim.elements.Copy(element.content);
-    // FIXME no tests for sourcemap copy
-    copy.attributes.set('sourceMap', element.attributes.get('sourceMap'));
-    return copy;
-  };
-
   /**
    * Ensures that the given member value is a string, or return error
    *
@@ -50,23 +44,8 @@ function parseInfo(minim, info) {
     createMemberValueNotStringError(minim, name)
   );
 
-  /**
-   * Parse Description
-   *
-   * @param member {MemberElement}
-   *
-   * @returns {Element} Either a MemberElement<Copy> or Annotation.
-   */
-  const parseDescription = R.ifElse(
-    // If the member value is string
-    R.compose(isString, getValue),
-
-    // Create a CopyElement from the members value
-    R.compose(createCopy, getValue),
-
-    // Member value not string, return annotation
-    createMemberValueNotStringWarning(minim, name)
-  );
+  const parseDescription = parseCopy(minim,
+    createMemberValueNotStringWarning(minim, name));
 
   const parseMember = R.cond([
     [hasKey('title'), memberIsStringOrError],

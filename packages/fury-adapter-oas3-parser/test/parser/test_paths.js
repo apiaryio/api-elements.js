@@ -104,22 +104,6 @@ describe('#parsePaths', () => {
         expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key '$ref'");
       });
 
-      it('warns for description', () => {
-        const paths = new minim.elements.Object({
-          '/': new minim.elements.Object({
-            description: '',
-          }),
-        });
-
-        const result = parsePaths(minim, paths);
-
-        expect(result.length).to.equal(2);
-        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
-        expect(result.get(0).href.toValue()).to.equal('/');
-
-        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'description'");
-      });
-
       it('warns for HTTP methods', () => {
         const paths = new minim.elements.Object({
           '/': new minim.elements.Object({
@@ -227,6 +211,40 @@ describe('#parsePaths', () => {
         expect(result.length).to.equal(1);
         expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
         expect(result.get(0).title.toValue()).to.equal('Root');
+      });
+    });
+
+    describe('#summary', () => {
+      it('exposes description as a copy element in the resource', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            description: 'This is a resource',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).copy.toValue()).to.deep.equal(['This is a resource']);
+      });
+
+      it('warns when description is not a string', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            description: 1,
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).length).to.equal(0);
+
+        expect(result.warnings.get(0).toValue()).to.equal(
+          "'Path Item Object' 'description' is not a string"
+        );
       });
     });
   });

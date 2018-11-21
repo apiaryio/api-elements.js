@@ -14,6 +14,7 @@ const {
   createUnsupportedMemberWarning,
   validateMembers,
 } = require('./annotations');
+const parseCopy = require('./parseCopy');
 const pipeParseResult = require('../pipeParseResult');
 
 const name = 'Paths Object';
@@ -45,11 +46,14 @@ const parsePathItem = R.curry((minim, member) => {
     createMemberValueNotStringWarning(minim, name)
   );
 
+  const parseDescription = parseCopy(minim,
+    createMemberValueNotStringWarning(minim, name));
+
   const parseMember = R.cond([
     [hasKey('summary'), memberIsStringOrWarning],
+    [hasKey('description'), parseDescription],
 
     // FIXME Parse $ref
-    // FIXME Parse description
     // FIXME Parse methods
     // FIXME Parse servers
     // FIXME Parse parameters
@@ -73,6 +77,11 @@ const parsePathItem = R.curry((minim, member) => {
       const summary = pathItem.get('summary');
       if (summary) {
         resource.title = summary.clone();
+      }
+
+      const description = pathItem.get('description');
+      if (description) {
+        resource.push(description);
       }
 
       return resource;
