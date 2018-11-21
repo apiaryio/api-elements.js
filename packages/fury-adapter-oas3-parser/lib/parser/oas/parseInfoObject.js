@@ -6,11 +6,11 @@ const {
   createMemberValueNotStringError,
   createMemberValueNotStringWarning,
   validateObjectContainsRequiredKeys,
-  validateMembers,
 } = require('../annotations');
 const {
   isString, isObject, hasKey, isExtension, getValue,
 } = require('../../predicates');
+const parseObject = require('../parseObject');
 const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
 
@@ -63,7 +63,7 @@ function parseInfo(minim, info) {
   const parseInfo = pipeParseResult(minim,
     R.unless(isObject, createError(minim, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(minim, name, requiredKeys),
-    validateMembers(minim, parseMember),
+    parseObject(minim, parseMember),
     (info) => {
       const api = new minim.elements.Category();
       api.classes = ['api'];

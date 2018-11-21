@@ -11,8 +11,8 @@ const {
   createInvalidMemberWarning,
   createMemberValueNotStringWarning,
   createUnsupportedMemberWarning,
-  validateMembers,
 } = require('../annotations');
+const parseObject = require('../parseObject');
 const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
 
@@ -62,7 +62,7 @@ function parsePathItemObject(minim, member) {
 
   const parsePathItem = pipeParseResult(minim,
     R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
-    validateMembers(minim, parseMember),
+    parseObject(minim, parseMember),
     (pathItem) => {
       const resource = new minim.elements.Resource();
       resource.href = member.key.clone();

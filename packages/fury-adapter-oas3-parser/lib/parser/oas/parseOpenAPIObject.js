@@ -7,9 +7,9 @@ const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
   validateObjectContainsRequiredKeys,
-  validateMembers,
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
+const parseObject = require('../parseObject');
 const parseOpenAPI = require('../openapi');
 const parseInfoObject = require('./parseInfoObject');
 const parsePathsObject = require('./parsePathsObject');
@@ -49,7 +49,7 @@ function parseOASObject(minim, object) {
 
   const parseOASObject = pipeParseResult(minim,
     validateObjectContainsRequiredKeys(minim, name, requiredKeys),
-    validateMembers(minim, parseMember),
+    parseObject(minim, parseMember),
     (object) => {
       const api = object.get('info');
 
