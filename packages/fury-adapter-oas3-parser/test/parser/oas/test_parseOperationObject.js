@@ -1,0 +1,186 @@
+const { expect } = require('chai');
+const { Fury } = require('fury');
+const parse = require('../../../lib/parser/oas/parseOperationObject');
+
+const { minim } = new Fury();
+
+describe('Operation Object', () => {
+  it('provides warning when operation is non-object', () => {
+    const operation = new minim.elements.Member('get', null);
+
+    const result = parse(minim, operation);
+
+    expect(result.length).to.equal(1);
+    expect(result.warnings.get(0).toValue()).to.equal(
+      "'Operation Object' is not an object"
+    );
+  });
+
+  describe('warnings for unsupported properties', () => {
+    it('provides warning for unsupported tags key', () => {
+      const operation = new minim.elements.Member('get', {
+        tags: [],
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'tags'"
+      );
+    });
+
+    it('provides warning for unsupported summary key', () => {
+      const operation = new minim.elements.Member('get', {
+        summary: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'summary'"
+      );
+    });
+
+    it('provides warning for unsupported description key', () => {
+      const operation = new minim.elements.Member('get', {
+        description: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'description'"
+      );
+    });
+
+    it('provides warning for unsupported externalDocs key', () => {
+      const operation = new minim.elements.Member('get', {
+        externalDocs: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'externalDocs'"
+      );
+    });
+
+    it('provides warning for unsupported operationId key', () => {
+      const operation = new minim.elements.Member('get', {
+        operationId: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'operationId'"
+      );
+    });
+
+    it('provides warning for unsupported parameters key', () => {
+      const operation = new minim.elements.Member('get', {
+        parameters: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'parameters'"
+      );
+    });
+
+    it('provides warning for unsupported requestBody key', () => {
+      const operation = new minim.elements.Member('get', {
+        requestBody: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'requestBody'"
+      );
+    });
+
+    it('provides warning for unsupported responses key', () => {
+      const operation = new minim.elements.Member('get', {
+        responses: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'responses'"
+      );
+    });
+
+    it('provides warning for unsupported callbacks key', () => {
+      const operation = new minim.elements.Member('get', {
+        callbacks: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'callbacks'"
+      );
+    });
+
+    it('provides warning for unsupported deprecated key', () => {
+      const operation = new minim.elements.Member('get', {
+        deprecated: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'deprecated'"
+      );
+    });
+
+    it('provides warning for unsupported security key', () => {
+      const operation = new minim.elements.Member('get', {
+        security: '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' contains unsupported key 'security'"
+      );
+    });
+
+    it('does not provide warning/errors for extensions', () => {
+      const operation = new minim.elements.Member('get', {
+        'x-extension': '',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.annotations.isEmpty).to.be.true;
+    });
+  });
+
+  it('provides warning for invalid keys', () => {
+    const operation = new minim.elements.Member('get', {
+      invalid: '',
+    });
+
+    const result = parse(minim, operation);
+
+    expect(result.warnings.length).to.equal(1);
+    expect(result.warnings.get(0).toValue()).to.equal(
+      "'Operation Object' contains invalid key 'invalid'"
+    );
+  });
+});
