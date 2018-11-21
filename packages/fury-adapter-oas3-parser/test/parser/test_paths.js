@@ -104,22 +104,6 @@ describe('#parsePaths', () => {
         expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key '$ref'");
       });
 
-      it('warns for summary', () => {
-        const paths = new minim.elements.Object({
-          '/': new minim.elements.Object({
-            summary: '',
-          }),
-        });
-
-        const result = parsePaths(minim, paths);
-
-        expect(result.length).to.equal(2);
-        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
-        expect(result.get(0).href.toValue()).to.equal('/');
-
-        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'summary'");
-      });
-
       it('warns for description', () => {
         const paths = new minim.elements.Object({
           '/': new minim.elements.Object({
@@ -211,6 +195,38 @@ describe('#parsePaths', () => {
         expect(result.get(0).href.toValue()).to.equal('/');
 
         expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains invalid key 'invalid'");
+      });
+    });
+
+    describe('#summary', () => {
+      it('warns when summary is not a string', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            summary: 1,
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).href.toValue()).to.equal('/');
+
+        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' 'summary' is not a string");
+      });
+
+      it('exposes summary as the title of the resource', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            summary: 'Root',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).title.toValue()).to.equal('Root');
       });
     });
   });

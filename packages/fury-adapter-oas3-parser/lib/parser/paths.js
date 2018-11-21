@@ -1,9 +1,16 @@
 const R = require('ramda');
-const { isObject, isExtension, hasKey } = require('../predicates');
+const {
+  isObject,
+  isString,
+  isExtension,
+  hasKey,
+  getValue,
+} = require('../predicates');
 const {
   createError,
   createWarning,
   createInvalidMemberWarning,
+  createMemberValueNotStringWarning,
   createUnsupportedMemberWarning,
   validateMembers,
 } = require('./annotations');
@@ -23,12 +30,25 @@ const parsePathItem = R.curry((minim, member) => {
   const name = 'Path Item Object';
 
   const httpMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
-  const unsupportedKeys = ['$ref', 'summary', 'description', 'servers', 'parameters'].concat(httpMethods);
+  const unsupportedKeys = ['$ref', 'description', 'servers', 'parameters'].concat(httpMethods);
   const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
+  /**
+   * Ensures that the given member value is a string, or return error
+   *
+   * @param member {MemberElement}
+   *
+   * @returns {Element} Either a MemberElement<String> or Annotation.
+   */
+  const memberIsStringOrWarning = R.unless(
+    R.compose(isString, getValue),
+    createMemberValueNotStringWarning(minim, name)
+  );
+
   const parseMember = R.cond([
+    [hasKey('summary'), memberIsStringOrWarning],
+
     // FIXME Parse $ref
-    // FIXME Parse summary
     // FIXME Parse description
     // FIXME Parse methods
     // FIXME Parse servers
@@ -46,9 +66,15 @@ const parsePathItem = R.curry((minim, member) => {
   const parsePathItem = pipeParseResult(minim,
     R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
     validateMembers(minim, parseMember),
-    () => {
+    (pathItem) => {
       const resource = new minim.elements.Resource();
       resource.href = member.key.clone();
+
+      const summary = pathItem.get('summary');
+      if (summary) {
+        resource.title = summary.clone();
+      }
+
       return resource;
     });
 
