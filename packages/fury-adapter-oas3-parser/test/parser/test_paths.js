@@ -86,5 +86,132 @@ describe('#parsePaths', () => {
       expect(result.get(2)).to.be.instanceof(minim.elements.Resource);
       expect(result.get(2).href.toValue()).to.equal('/2');
     });
+
+    describe('warnings for keys', () => {
+      it('warns for $ref', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            $ref: '',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).href.toValue()).to.equal('/');
+
+        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key '$ref'");
+      });
+
+      it('warns for summary', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            summary: '',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).href.toValue()).to.equal('/');
+
+        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'summary'");
+      });
+
+      it('warns for description', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            description: '',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).href.toValue()).to.equal('/');
+
+        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'description'");
+      });
+
+      it('warns for a http method', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            get: '',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).href.toValue()).to.equal('/');
+
+        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'get'");
+      });
+
+      it('warns for a servers', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            servers: '',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).href.toValue()).to.equal('/');
+
+        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'servers'");
+      });
+
+      it('warns for a parameters', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            parameters: '',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).href.toValue()).to.equal('/');
+
+        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'parameters'");
+      });
+
+      it('does not provide warning for Info Object extensions', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            'x-extension': '',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+      });
+
+      it('provides warning for invalid keys', () => {
+        const paths = new minim.elements.Object({
+          '/': new minim.elements.Object({
+            invalid: '',
+          }),
+        });
+
+        const result = parsePaths(minim, paths);
+
+        expect(result.length).to.equal(2);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+        expect(result.get(0).href.toValue()).to.equal('/');
+
+        expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains invalid key 'invalid'");
+      });
+    });
   });
 });

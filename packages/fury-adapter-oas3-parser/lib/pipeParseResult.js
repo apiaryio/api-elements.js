@@ -15,6 +15,20 @@ const findValueFromParseResult = parseResult => R.reject(isAnnotation, parseResu
  */
 const hasNoErrors = parseResult => parseResult.errors.isEmpty;
 
+/*
+ * Returns true iff the parse result contains non annotation values
+ * @param parseResult {ParseResult}
+ * @returns boolean
+ */
+const hasValue = parseResult => !R.reject(isAnnotation, parseResult).isEmpty;
+
+/*
+ * Returns true if the parse result contains an error or does not contain any non annotation values.
+ * @param parseResult {ParseResult}
+ * @returns boolean
+ */
+const hasNoErrorsOrValue = R.allPass([hasNoErrors, hasValue]);
+
 /**
  * Concatate the lhs and rhs array into a parse result
  * @param lhs {Element[]}
@@ -31,7 +45,8 @@ function concatParseResult(minim, lhs, rhs) {
  * must be unary.
  *
  * All of the annotations are collected and merged into the final resultant
- * parse result. Any errors will cause the pipe to fail early.
+ * parse result. The pipe will only continue if the function returns a
+ * value, if the function returns an error, the pipe will also fail early.
  *
  * @func
  * @category Function
@@ -55,7 +70,7 @@ function pipeParseResult(minim, ...functions) {
       return concatParseResult(minim, parseResult.content, accumulator.annotations.elements);
     };
 
-    return R.reduceWhile(hasNoErrors, run, new minim.elements.ParseResult([element]), functions);
+    return R.reduceWhile(hasNoErrorsOrValue, run, new minim.elements.ParseResult([element]), functions);
   };
 }
 

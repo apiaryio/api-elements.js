@@ -1,9 +1,11 @@
 const R = require('ramda');
-const { isObject, isExtension, getValue } = require('../predicates');
+const { isObject, isExtension, hasKey } = require('../predicates');
 const {
   createError,
   createWarning,
   createInvalidMemberWarning,
+  createUnsupportedMemberWarning,
+  validateMembers,
 } = require('./annotations');
 const pipeParseResult = require('../pipeParseResult');
 
@@ -18,15 +20,39 @@ const isPathField = member => member.key.toValue().startsWith('/');
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#path-item-object
  */
 const parsePathItem = R.curry((minim, member) => {
-  const resource = new minim.elements.Resource();
-  resource.href = member.key.clone();
-  // FIXME Parse $ref
-  // FIXME Parse summary
-  // FIXME Parse description
-  // FIXME Parse methods
-  // FIXME Parse servers
-  // FIXME Parse parameters
-  return resource;
+  const name = 'Path Item Object';
+
+  const httpMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
+  const unsupportedKeys = ['$ref', 'summary', 'description', 'servers', 'parameters'].concat(httpMethods);
+  const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
+
+  const parseMember = R.cond([
+    // FIXME Parse $ref
+    // FIXME Parse summary
+    // FIXME Parse description
+    // FIXME Parse methods
+    // FIXME Parse servers
+    // FIXME Parse parameters
+
+    [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
+
+    // FIXME Support exposing extensions into parse result
+    [isExtension, () => []],
+
+    // Return a warning for every other key
+    [R.T, createInvalidMemberWarning(minim, name)],
+  ]);
+
+  const parsePathItem = pipeParseResult(minim,
+    R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
+    validateMembers(minim, parseMember),
+    () => {
+      const resource = new minim.elements.Resource();
+      resource.href = member.key.clone();
+      return resource;
+    });
+
+  return parsePathItem(member.value);
 });
 
 
@@ -36,11 +62,7 @@ const parsePathItem = R.curry((minim, member) => {
  */
 function parsePaths(minim, paths) {
   const parseMember = R.cond([
-    [isPathField,
-      R.ifElse(R.compose(isObject, getValue),
-        parsePathItem(minim),
-        createWarning(minim, "'Path Item Object' is not an object")),
-    ],
+    [isPathField, parsePathItem(minim)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => []],
