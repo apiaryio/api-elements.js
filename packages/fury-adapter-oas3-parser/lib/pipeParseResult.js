@@ -16,14 +16,14 @@ const findValueFromParseResult = parseResult => R.reject(isAnnotation, parseResu
 const hasNoErrors = parseResult => parseResult.errors.isEmpty;
 
 /*
- * Returns true iff the parse result contains non annotation values
+ * Returns true iff the parse result contains non-annotation values
  * @param parseResult {ParseResult}
  * @returns boolean
  */
 const hasValue = parseResult => !R.reject(isAnnotation, parseResult).isEmpty;
 
 /*
- * Returns true if the parse result contains an error or does not contain any non annotation values.
+ * Returns true if the parse result contains an error or does not contain any non-annotation values.
  * @param parseResult {ParseResult}
  * @returns boolean
  */

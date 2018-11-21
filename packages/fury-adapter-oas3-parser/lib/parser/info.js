@@ -77,7 +77,7 @@ function parseInfo(minim, info) {
     // FIXME Support exposing extensions into parse result
     [isExtension, () => []],
 
-    // Return a warning for every other key
+    // Return a warning for additional properties
     [R.T, createInvalidMemberWarning(minim, name)],
   ]);
 

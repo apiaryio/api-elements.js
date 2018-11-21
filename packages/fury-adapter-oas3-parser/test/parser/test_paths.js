@@ -22,7 +22,7 @@ describe('#parsePaths', () => {
     expect(result.isEmpty).to.be.true;
   });
 
-  it('provides a warning when paths contains non path field pattern', () => {
+  it('provides a warning when paths contains non-path field pattern', () => {
     const paths = new minim.elements.Object({
       test: {},
     });
@@ -120,7 +120,7 @@ describe('#parsePaths', () => {
         expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'description'");
       });
 
-      it('warns for a http method', () => {
+      it('warns for HTTP methods', () => {
         const paths = new minim.elements.Object({
           '/': new minim.elements.Object({
             get: '',

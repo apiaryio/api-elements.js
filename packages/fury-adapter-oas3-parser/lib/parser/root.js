@@ -43,7 +43,7 @@ function parseOASObject(minim, object) {
 
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
-    // Return a warning for every other key
+    // Return a warning for additional properties
     [R.T, createInvalidMemberWarning(minim, name)],
   ]);
 
