@@ -21,6 +21,26 @@ describe('#parseOASObject', () => {
     expect(result.api.title.toValue()).to.equal('My API');
   });
 
+  it('can parse a document with Path Item Objects', () => {
+    const object = new minim.elements.Object({
+      openapi: '3.0.0',
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
+      paths: {
+        '/': {},
+      },
+    });
+
+    const result = parseOASObject(minim, object);
+    expect(result.length).to.equal(1);
+    expect(result.api.title.toValue()).to.equal('My API');
+    expect(result.api.length).to.equal(1);
+    expect(result.api.get(0)).to.be.instanceof(minim.elements.Resource);
+    expect(result.api.get(0).href.toValue()).to.equal('/');
+  });
+
   it('provides error for missing openapi version', () => {
     const object = new minim.elements.Object({
       info: {},

@@ -1,7 +1,7 @@
 const R = require('ramda');
 
 const {
-  isExtension, hasKey, getValue,
+  isAnnotation, isExtension, hasKey, getValue,
 } = require('../predicates');
 const {
   createUnsupportedMemberWarning,
@@ -12,6 +12,7 @@ const {
 const pipeParseResult = require('../pipeParseResult');
 const parseOpenAPI = require('./openapi');
 const parseInfo = require('./info');
+const parsePaths = require('./paths');
 
 const name = 'OpenAPI Object';
 const requiredKeys = ['openapi', 'info', 'paths'];
@@ -26,12 +27,16 @@ const unsupportedKeys = ['components', 'servers', 'security', 'tags', 'externalD
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 function parseOASObject(minim, object) {
+  // Takes a parse result, and wraps all of the non annotations inside an array
+  const asArray = (parseResult) => {
+    const array = new minim.elements.Array(R.reject(isAnnotation, parseResult));
+    return new minim.elements.ParseResult([array].concat(parseResult.annotations.elements));
+  };
+
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(minim)],
     [hasKey('info'), R.compose(parseInfo(minim), getValue)],
-
-    // FIXME Ignoring `path` keys
-    [hasKey('paths'), () => new minim.elements.ParseResult()],
+    [hasKey('paths'), R.compose(asArray, parsePaths(minim), getValue)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new minim.elements.ParseResult()],
@@ -45,7 +50,16 @@ function parseOASObject(minim, object) {
   const parseOASObject = pipeParseResult(minim,
     validateObjectContainsRequiredKeys(minim, name, requiredKeys),
     validateMembers(minim, parseMember),
-    object => object.get('info'));
+    (object) => {
+      const api = object.get('info');
+
+      const resources = object.get('paths');
+      if (resources) {
+        resources.forEach(resource => api.push(resource));
+      }
+
+      return api;
+    });
 
   return parseOASObject(object);
 }
