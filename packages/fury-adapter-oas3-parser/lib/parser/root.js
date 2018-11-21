@@ -55,7 +55,7 @@ function parseOASObject(minim, object) {
 
       const resources = object.get('paths');
       if (resources) {
-        resources.forEach(resource => api.push(resource));
+        api.content = api.content.concat(resources.content);
       }
 
       return api;
