@@ -5,6 +5,36 @@ const parse = require('../../../lib/parser/oas/parseOperationObject');
 const { minim } = new Fury();
 
 describe('Operation Object', () => {
+  it('returns a transition', () => {
+    const operation = new minim.elements.Member('get', {});
+
+    const result = parse(minim, operation);
+
+    expect(result.length).to.equal(1);
+    const transition = result.get(0);
+    expect(transition).to.be.instanceof(minim.elements.Transition);
+  });
+
+  it('returns a transition including a transaction', () => {
+    const operation = new minim.elements.Member('get', {});
+
+    const result = parse(minim, operation);
+
+    expect(result.length).to.equal(1);
+
+    const transition = result.get(0);
+    expect(transition).to.be.instanceof(minim.elements.Transition);
+    expect(transition.length).to.equal(1);
+
+    const transaction = transition.get(0);
+    expect(transaction).to.be.instanceof(minim.elements.HttpTransaction);
+    expect(transaction.length).to.equal(2);
+
+    expect(transaction.request).to.be.instanceof(minim.elements.HttpRequest);
+    expect(transaction.request.method.toValue()).to.equal('GET');
+    expect(transaction.response).to.be.instanceof(minim.elements.HttpResponse);
+  });
+
   it('provides warning when operation is non-object', () => {
     const operation = new minim.elements.Member('get', null);
 

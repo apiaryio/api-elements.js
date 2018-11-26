@@ -21,7 +21,7 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  *
  * @param minim {Namespace}
  * @param element {Element}
- * @returns ParseResult
+ * @returns ParseResult<Transition>
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject
  */
@@ -38,7 +38,18 @@ function parseOperationObject(minim, member) {
 
   const parseOperation = pipeParseResult(minim,
     R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
-    parseObject(minim, parseMember));
+    parseObject(minim, parseMember),
+    () => {
+      // FIXME create transactions for operation
+      const request = new minim.elements.HttpRequest();
+      const method = member.key.clone();
+      method.content = method.content.toUpperCase();
+      request.method = method;
+
+      const response = new minim.elements.HttpResponse();
+      const transaction = new minim.elements.HttpTransaction([request, response]);
+      return new minim.elements.Transition([transaction]);
+    });
 
   return parseOperation(member.value);
 }
