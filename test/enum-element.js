@@ -19,8 +19,8 @@ describe('Enum Element', () => {
     });
 
     it('does not set the content', () => {
-      expect(element.content).to.equal(null);
-      expect(element.toValue()).to.equal(null);
+      expect(element.content).to.equal(undefined);
+      expect(element.toValue()).to.equal(undefined);
     });
   });
 

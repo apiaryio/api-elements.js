@@ -11,6 +11,7 @@ import apiDescription from '../src/api-description';
 
 const namespace = minim.namespace().use(apiDescription);
 
+const ObjectElement = namespace.getElementClass('object');
 const Category = namespace.getElementClass('category');
 const Copy = namespace.getElementClass('copy');
 const Resource = namespace.getElementClass('resource');
@@ -588,7 +589,7 @@ describe('API description namespace', () => {
     let object;
 
     beforeEach(() => {
-      object = new DataStructure({ a: 'a', b: 1, c: [2] });
+      object = new DataStructure(new ObjectElement({ a: 'a', b: 1, c: [2] }));
     });
 
     it('should have element name dataStructure', () => {
