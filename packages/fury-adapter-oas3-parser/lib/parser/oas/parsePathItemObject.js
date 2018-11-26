@@ -14,11 +14,14 @@ const {
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseCopy = require('../parseCopy');
+const parseOperationObject = require('./parseOperationObject');
 const pipeParseResult = require('../../pipeParseResult');
 
 const name = 'Path Item Object';
 const httpMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
-const unsupportedKeys = ['$ref', 'description', 'servers', 'parameters'].concat(httpMethods);
+const unsupportedKeys = ['$ref', 'description', 'servers', 'parameters'];
+
+const isHttpMethodKey = R.anyPass(R.map(hasKey, httpMethods));
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 /**
@@ -45,9 +48,9 @@ function parsePathItemObject(minim, member) {
   const parseMember = R.cond([
     [hasKey('summary'), memberIsStringOrWarning],
     [hasKey('description'), parseDescription],
+    [isHttpMethodKey, parseOperationObject(minim)],
 
     // FIXME Parse $ref
-    // FIXME Parse methods
     // FIXME Parse servers
     // FIXME Parse parameters
 
@@ -76,6 +79,11 @@ function parsePathItemObject(minim, member) {
       if (description) {
         resource.push(description);
       }
+
+      const methods = pathItem.content
+        .filter(isHttpMethodKey)
+        .map(getValue);
+      resource.content = resource.content.concat(methods);
 
       return resource;
     });

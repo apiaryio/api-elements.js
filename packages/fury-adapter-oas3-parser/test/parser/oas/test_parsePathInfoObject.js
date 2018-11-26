@@ -15,6 +15,24 @@ describe('#parsePathItemObject', () => {
     expect(result.get(0).href.toValue()).to.equal('/');
   });
 
+  it('parses a path methods into a resource and transactions', () => {
+    const path = new minim.elements.Member('/', {
+      get: {},
+    });
+    const result = parse(minim, path);
+
+    expect(result.length).to.equal(1);
+
+    const resource = result.get(0);
+    expect(resource).to.be.instanceof(minim.elements.Resource);
+    expect(resource.href.toValue()).to.equal('/');
+    expect(resource.length).to.equal(1);
+
+    const transition = resource.get(0);
+    expect(transition).to.be.instanceof(minim.elements.Transition);
+    expect(transition.method.toValue()).to.equal('GET');
+  });
+
   it('provides a warning when the path item object is non-object', () => {
     const path = new minim.elements.Member('/', null);
     const result = parse(minim, path);
@@ -36,20 +54,6 @@ describe('#parsePathItemObject', () => {
       expect(result.get(0).href.toValue()).to.equal('/');
 
       expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key '$ref'");
-    });
-
-    it('warns for HTTP methods', () => {
-      const path = new minim.elements.Member('/', {
-        get: '',
-      });
-
-      const result = parse(minim, path);
-
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
-      expect(result.get(0).href.toValue()).to.equal('/');
-
-      expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'get'");
     });
 
     it('warns for a servers', () => {
