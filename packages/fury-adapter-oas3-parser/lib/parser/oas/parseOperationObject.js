@@ -8,14 +8,14 @@ const {
   createInvalidMemberWarning,
   createMemberValueNotStringWarning,
 } = require('../annotations');
+const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 
 const name = 'Operation Object';
 const unsupportedKeys = [
-  'tags', 'description', 'externalDocs',
-  'operationId', 'parameters', 'requestBody', 'responses', 'callbacks',
-  'deprecated', 'security',
+  'tags', 'externalDocs', 'operationId', 'parameters', 'requestBody',
+  'responses', 'callbacks', 'deprecated', 'security',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -34,8 +34,12 @@ function parseOperationObject(minim, member) {
     createMemberValueNotStringWarning(minim, name)
   );
 
+  const parseDescription = parseCopy(minim,
+    createMemberValueNotStringWarning(minim, name));
+
   const parseMember = R.cond([
     [hasKey('summary'), memberIsStringOrWarning],
+    [hasKey('description'), parseDescription],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
@@ -59,8 +63,15 @@ function parseOperationObject(minim, member) {
       const response = new minim.elements.HttpResponse();
       const transaction = new minim.elements.HttpTransaction([request, response]);
 
-      const transition = new minim.elements.Transition([transaction]);
+      const transition = new minim.elements.Transition();
       transition.title = operation.get('summary');
+
+      const description = operation.get('description');
+      if (description) {
+        transition.push(description);
+      }
+
+      transition.push(transaction);
 
       return transition;
     });

@@ -60,19 +60,6 @@ describe('Operation Object', () => {
       );
     });
 
-    it('provides warning for unsupported description key', () => {
-      const operation = new minim.elements.Member('get', {
-        description: '',
-      });
-
-      const result = parse(minim, operation);
-
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'description'"
-      );
-    });
-
     it('provides warning for unsupported externalDocs key', () => {
       const operation = new minim.elements.Member('get', {
         externalDocs: '',
@@ -229,6 +216,36 @@ describe('Operation Object', () => {
       expect(transition.length).to.equal(1);
 
       expect(transition.title.toValue()).to.equal('Example Summary');
+    });
+  });
+
+  describe('#description', () => {
+    it('exposes description as a copy element in the transition', () => {
+      const operation = new minim.elements.Member('get', {
+        description: 'This is a transition',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(minim.elements.Transition);
+      expect(result.get(0).copy.toValue()).to.deep.equal(['This is a transition']);
+    });
+
+    it('warns when description is not a string', () => {
+      const operation = new minim.elements.Member('get', {
+        description: {},
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.length).to.equal(2);
+      expect(result.get(0)).to.be.instanceof(minim.elements.Transition);
+      expect(result.get(0).length).to.equal(1);
+
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Operation Object' 'description' is not a string"
+      );
     });
   });
 });
