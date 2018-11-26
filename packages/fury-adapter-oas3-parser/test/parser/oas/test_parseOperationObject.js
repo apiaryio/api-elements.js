@@ -60,19 +60,6 @@ describe('Operation Object', () => {
       );
     });
 
-    it('provides warning for unsupported summary key', () => {
-      const operation = new minim.elements.Member('get', {
-        summary: '',
-      });
-
-      const result = parse(minim, operation);
-
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'summary'"
-      );
-    });
-
     it('provides warning for unsupported description key', () => {
       const operation = new minim.elements.Member('get', {
         description: '',
@@ -212,5 +199,36 @@ describe('Operation Object', () => {
     expect(result.warnings.get(0).toValue()).to.equal(
       "'Operation Object' contains invalid key 'invalid'"
     );
+  });
+
+  describe('#summary', () => {
+    it('warns when summary is not a string', () => {
+      const operation = new minim.elements.Member('get', {
+        summary: [],
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.length).to.equal(2);
+      expect(result.get(0)).to.be.instanceof(minim.elements.Transition);
+
+      expect(result.warnings.get(0).toValue()).to.equal("'Operation Object' 'summary' is not a string");
+    });
+
+    it('returns a transition with a summary', () => {
+      const operation = new minim.elements.Member('get', {
+        summary: 'Example Summary',
+      });
+
+      const result = parse(minim, operation);
+
+      expect(result.length).to.equal(1);
+
+      const transition = result.get(0);
+      expect(transition).to.be.instanceof(minim.elements.Transition);
+      expect(transition.length).to.equal(1);
+
+      expect(transition.title.toValue()).to.equal('Example Summary');
+    });
   });
 });

@@ -1,16 +1,19 @@
 const R = require('ramda');
-const { isObject, isExtension, hasKey } = require('../../predicates');
+const {
+  isObject, isString, isExtension, hasKey, getValue,
+} = require('../../predicates');
 const {
   createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
+  createMemberValueNotStringWarning,
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 
 const name = 'Operation Object';
 const unsupportedKeys = [
-  'tags', 'summary', 'description', 'externalDocs',
+  'tags', 'description', 'externalDocs',
   'operationId', 'parameters', 'requestBody', 'responses', 'callbacks',
   'deprecated', 'security',
 ];
@@ -26,7 +29,14 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject
  */
 function parseOperationObject(minim, member) {
+  const memberIsStringOrWarning = R.unless(
+    R.compose(isString, getValue),
+    createMemberValueNotStringWarning(minim, name)
+  );
+
   const parseMember = R.cond([
+    [hasKey('summary'), memberIsStringOrWarning],
+
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
     // FIXME Support exposing extensions into parse result
@@ -39,7 +49,7 @@ function parseOperationObject(minim, member) {
   const parseOperation = pipeParseResult(minim,
     R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
     parseObject(minim, parseMember),
-    () => {
+    (operation) => {
       // FIXME create transactions for operation
       const request = new minim.elements.HttpRequest();
       const method = member.key.clone();
@@ -48,7 +58,11 @@ function parseOperationObject(minim, member) {
 
       const response = new minim.elements.HttpResponse();
       const transaction = new minim.elements.HttpTransaction([request, response]);
-      return new minim.elements.Transition([transaction]);
+
+      const transition = new minim.elements.Transition([transaction]);
+      transition.title = operation.get('summary');
+
+      return transition;
     });
 
   return parseOperation(member.value);
