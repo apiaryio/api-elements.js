@@ -3,7 +3,6 @@ const { createError } = require('../../elements');
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
-  createMemberValueNotStringWarning,
   validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const {
@@ -32,13 +31,10 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @returns ParseResult<Category>
  */
 function parseInfo(minim, info) {
-  const parseDescription = parseCopy(minim,
-    createMemberValueNotStringWarning(minim, name));
-
   const parseMember = R.cond([
     [hasKey('title'), parseString(minim, name, true)],
     [hasKey('version'), parseString(minim, name, true)],
-    [hasKey('description'), parseDescription],
+    [hasKey('description'), parseCopy(minim, name, false)],
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
     // FIXME Support exposing extensions into parse result

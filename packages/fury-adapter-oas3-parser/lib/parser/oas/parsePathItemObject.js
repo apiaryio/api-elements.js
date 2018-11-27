@@ -8,7 +8,6 @@ const {
 const {
   createWarning,
   createInvalidMemberWarning,
-  createMemberValueNotStringWarning,
   createUnsupportedMemberWarning,
 } = require('../annotations');
 const parseObject = require('../parseObject');
@@ -30,12 +29,9 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#path-item-object
  */
 function parsePathItemObject(minim, member) {
-  const parseDescription = parseCopy(minim,
-    createMemberValueNotStringWarning(minim, name));
-
   const parseMember = R.cond([
     [hasKey('summary'), parseString(minim, name, false)],
-    [hasKey('description'), parseDescription],
+    [hasKey('description'), parseCopy(minim, name, false)],
     [isHttpMethodKey, parseOperationObject(minim)],
 
     // FIXME Parse $ref

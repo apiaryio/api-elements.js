@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const R = require('ramda');
 const { Fury } = require('fury');
 const parseCopy = require('../../lib/parser/parseCopy');
 
@@ -11,28 +10,42 @@ describe('parseCopy', () => {
     value.attributes.set('sourceMap', new minim.elements.Array([
       new minim.elements.SourceMap([[0, 11]]),
     ]));
-
     const member = new minim.elements.Member('message', value);
 
-    const copy = parseCopy(minim, R.T, member);
+    const parseResult = parseCopy(minim, 'Example Object', true, member);
 
+    expect(parseResult.length).to.equal(1);
+    const copy = parseResult.get(0);
     expect(copy).to.be.instanceof(minim.elements.Copy);
     expect(copy.content).to.equal('Hello World');
     expect(copy.sourceMapValue).to.deep.equal([[0, 11]]);
   });
 
-  it('returns an annotation when given element is not a StringElement', () => {
+  it('returns a warning annotation when given optional element is not a StringElement', () => {
     const value = new minim.elements.Number(1);
     const member = new minim.elements.Member('message', value);
 
-    const createAnnotation = (member) => {
-      const message = `${member.value.toValue()} is not a string`;
-      return new minim.elements.Annotation(message);
-    };
+    const parseResult = parseCopy(minim, 'Example Object', false, member);
 
-    const copy = parseCopy(minim, createAnnotation, member);
+    expect(parseResult.length).to.equal(1);
+    const warning = parseResult.warnings.get(0);
+    expect(warning).to.be.instanceof(minim.elements.Annotation);
+    expect(warning.toValue()).to.equal(
+      "'Example Object' 'message' is not a string"
+    );
+  });
 
-    expect(copy).to.be.instanceof(minim.elements.Annotation);
-    expect(copy.toValue()).to.equal('1 is not a string');
+  it('returns a error annotation when given required element is not a StringElement', () => {
+    const value = new minim.elements.Number(1);
+    const member = new minim.elements.Member('message', value);
+
+    const parseResult = parseCopy(minim, 'Example Object', true, member);
+
+    expect(parseResult.length).to.equal(1);
+    const error = parseResult.errors.get(0);
+    expect(error).to.be.instanceof(minim.elements.Annotation);
+    expect(error.toValue()).to.equal(
+      "'Example Object' 'message' is not a string"
+    );
   });
 });
