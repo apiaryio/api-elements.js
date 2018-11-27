@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
-    "deckardcain": "^0.3.2",
+    "deckardcain": "^0.4.0",
     "drafter": "^1.2.0",
     "minim": "^0.20.5"
   },
