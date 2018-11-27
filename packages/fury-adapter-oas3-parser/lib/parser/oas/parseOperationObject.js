@@ -1,7 +1,5 @@
 const R = require('ramda');
-const {
-  isObject, isString, isExtension, hasKey, getValue,
-} = require('../../predicates');
+const { isObject, isExtension, hasKey } = require('../../predicates');
 const {
   createWarning,
   createUnsupportedMemberWarning,
@@ -11,6 +9,7 @@ const {
 const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
+const parseString = require('../parseString');
 
 const name = 'Operation Object';
 const unsupportedKeys = [
@@ -29,16 +28,11 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject
  */
 function parseOperationObject(minim, member) {
-  const memberIsStringOrWarning = R.unless(
-    R.compose(isString, getValue),
-    createMemberValueNotStringWarning(minim, name)
-  );
-
   const parseDescription = parseCopy(minim,
     createMemberValueNotStringWarning(minim, name));
 
   const parseMember = R.cond([
-    [hasKey('summary'), memberIsStringOrWarning],
+    [hasKey('summary'), parseString(minim, name, false)],
     [hasKey('description'), parseDescription],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],

@@ -3,14 +3,14 @@ const { createError } = require('../../elements');
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
-  createMemberValueNotStringError,
   createMemberValueNotStringWarning,
   validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const {
-  isString, isObject, hasKey, isExtension, getValue,
+  isObject, hasKey, isExtension,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
+const parseString = require('../parseString');
 const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
 
@@ -32,24 +32,12 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @returns ParseResult<Category>
  */
 function parseInfo(minim, info) {
-  /**
-   * Ensures that the given member value is a string, or return error
-   *
-   * @param member {MemberElement}
-   *
-   * @returns {Element} Either a MemberElement<String> or Annotation.
-   */
-  const memberIsStringOrError = R.unless(
-    R.compose(isString, getValue),
-    createMemberValueNotStringError(minim, name)
-  );
-
   const parseDescription = parseCopy(minim,
     createMemberValueNotStringWarning(minim, name));
 
   const parseMember = R.cond([
-    [hasKey('title'), memberIsStringOrError],
-    [hasKey('version'), memberIsStringOrError],
+    [hasKey('title'), parseString(minim, name, true)],
+    [hasKey('version'), parseString(minim, name, true)],
     [hasKey('description'), parseDescription],
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
