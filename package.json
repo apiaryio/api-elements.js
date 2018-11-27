@@ -1,6 +1,6 @@
 {
   "name": "fury-cli",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "Command line tool interface for Fury.js",
   "bin": {
     "fury": "lib/fury.js"
