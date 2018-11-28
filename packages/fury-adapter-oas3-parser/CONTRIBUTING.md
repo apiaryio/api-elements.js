@@ -29,7 +29,7 @@ and our code base.
 
 For example, the code responsible for parsing the OpenAPI `Operation Object` is
 found within `lib/parser/oas/parseOperationObject.js` and the respective tests
-would be found in `test/parser/oas/test_parseOperationObject.js`.
+would be found in `test/parser/oas/parseOperationObject-test.js`.
 
 The module `parseOperationObject` would accept a [minim
 namespace](https://api-elements-js.readthedocs.io/en/latest/api.html#namespace)
@@ -69,7 +69,7 @@ module.exports = R.curry(parseOperationObject);
 ```
 
 ```js
-// test/parser/oas/test_parseOperationObject.js
+// test/parser/oas/parseOperationObject-test.js
 
 const { expect } = require('chai');
 const { Fury } = require('fury');
