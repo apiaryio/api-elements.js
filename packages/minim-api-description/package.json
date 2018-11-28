@@ -4,7 +4,7 @@
   "description": "Minim API Description Namespace",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
-  "main": "./src/api-description.js",
+  "main": "./lib/api-description.js",
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-api-description",
   "repository": {
     "type": "git",

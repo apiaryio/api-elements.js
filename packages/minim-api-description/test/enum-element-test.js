@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const minim = require('minim');
-const apiDescription = require('../src/api-description');
+const apiDescription = require('../lib/api-description');
 
 const namespace = minim.namespace().use(apiDescription);
 

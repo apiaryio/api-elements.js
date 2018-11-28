@@ -6,7 +6,7 @@
 
 const chai = require('chai');
 const minim = require('minim');
-const apiDescription = require('../src/api-description');
+const apiDescription = require('../lib/api-description');
 
 const { Assertion, expect } = chai;
 
@@ -41,7 +41,7 @@ chai.use((_chai, utils) => {
       'Expected class list #{act} to contain #{exp}',
       'Expected class list #{act} to not contain #{exp}',
       name,
-      obj.classes.toValue(),
+      obj.classes.toValue()
     );
   });
 });

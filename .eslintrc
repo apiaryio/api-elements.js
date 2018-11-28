@@ -3,6 +3,18 @@
   "env": {
     "mocha": true
   },
+  "rules": {
+    "max-len": "off",
+    "no-shadow": "off",
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "functions": "never"
+      }
+    ]
+  },
   "overrides": [
     {
       "files": "*-test.js",
