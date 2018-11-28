@@ -97,4 +97,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('category', Category);
-}
+};

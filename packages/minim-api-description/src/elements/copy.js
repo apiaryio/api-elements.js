@@ -45,4 +45,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('copy', Copy);
-}
+};

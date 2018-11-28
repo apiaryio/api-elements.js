@@ -18,4 +18,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('hrefVariables', HrefVariables);
-}
+};

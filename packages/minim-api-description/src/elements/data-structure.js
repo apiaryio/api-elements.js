@@ -20,4 +20,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('dataStructure', DataStructure);
-}
+};

@@ -8,11 +8,15 @@
   "scripts": {
     "release": "lerna publish",
     "release:force": "lerna publish --force-publish",
-    "test": "lerna exec --scope='*' -- npm run test",
-    "lint": "lerna exec --scope='*' -- npm run lint",
+    "test": "lerna exec --scope='*' --no-bail -- npm run test",
+    "lint": "lerna exec --scope='*' --no-bail -- npm run lint",
+    "lint:fix": "lerna exec --scope='*' --no-bail -- npm run lint:fix",
     "cover": "exit 0"
   },
   "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "lerna": "^3.4.0"
   }
 }

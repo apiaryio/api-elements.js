@@ -87,4 +87,4 @@ module.exports = (namespace) => {
 
   httpRequest(namespace, HttpMessagePayload);
   httpResponse(namespace, HttpMessagePayload);
-}
+};

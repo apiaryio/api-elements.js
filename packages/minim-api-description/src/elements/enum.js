@@ -41,4 +41,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('enum', Enum);
-}
+};

@@ -42,4 +42,4 @@ module.exports = (namespace, HttpMessagePayload) => {
   }
 
   namespace.register('httpRequest', HttpRequest);
-}
+};

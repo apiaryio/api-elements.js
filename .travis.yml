@@ -9,6 +9,9 @@ cache:
     - node_modules
 before_install:
   - npm install --global yarn
+script:
+  - npm run lint
+  - npm test
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter

@@ -120,4 +120,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('transition', Transition);
-}
+};

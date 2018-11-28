@@ -29,4 +29,4 @@ module.exports = (namespace, HttpMessagePayload) => {
   }
 
   namespace.register('httpResponse', HttpResponse);
-}
+};

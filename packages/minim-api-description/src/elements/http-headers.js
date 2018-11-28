@@ -43,4 +43,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('httpHeaders', HttpHeaders);
-}
+};

@@ -26,6 +26,7 @@ module.exports = (namespace) => {
     set contentType(value) {
       this.attributes.set('contentType', value);
     }
+
     /**
      * @name href
      * @type StringElement
@@ -41,4 +42,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('asset', Asset);
-}
+};

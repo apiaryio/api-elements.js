@@ -63,4 +63,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('resource', Resource);
-}
+};

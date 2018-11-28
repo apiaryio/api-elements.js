@@ -14,4 +14,4 @@ module.exports = (namespace) => {
   }
 
   namespace.register('extension', Extension);
-}
+};
