@@ -19,7 +19,7 @@
     "babel-runtime": "^6.23.0",
     "deckardcain": "^0.3.2",
     "drafter": "^1.2.0",
-    "minim": "^0.20.5"
+    "minim": "^0.21.1"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.7"
