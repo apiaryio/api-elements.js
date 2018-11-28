@@ -7,7 +7,7 @@ import yaml from 'js-yaml';
 import commander from 'commander';
 import { highlight } from 'cardinal';
 import theme from 'cardinal/themes/tomorrow-night';
-import JSON06Serialiser from 'minim/lib/serialisers/json-0.6';
+import { JSON06Serialiser } from 'minim';
 import fury from 'fury';
 import swagger from 'fury-adapter-swagger';
 import apiBlueprintParser from 'fury-adapter-apib-parser';

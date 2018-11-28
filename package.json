@@ -27,7 +27,7 @@
     "fury-adapter-apib-serializer": "^0.7.0",
     "fury-adapter-swagger": "^0.22.0",
     "js-yaml": "^3.6",
-    "minim": "^0.20.5"
+    "minim": "^0.21.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
