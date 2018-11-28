@@ -1,5 +1,5 @@
 const R = require('ramda');
-const parseYAML = require('./parser/yaml');
+const parseYAML = require('./parser/parseYAML');
 
 const { isAnnotation, isObject } = require('./predicates');
 const { createError } = require('./elements');
