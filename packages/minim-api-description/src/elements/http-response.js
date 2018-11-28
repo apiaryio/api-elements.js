@@ -1,4 +1,4 @@
-export default function (namespace, HttpMessagePayload) {
+module.exports = (namespace, HttpMessagePayload) => {
   /**
    * @class HttpResponse
    *

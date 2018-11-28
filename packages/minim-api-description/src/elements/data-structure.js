@@ -1,4 +1,4 @@
-export default function (namespace) {
+module.exports = (namespace) => {
   /**
    * @class DataStructure
    *

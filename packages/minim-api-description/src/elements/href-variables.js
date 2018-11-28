@@ -1,4 +1,4 @@
-export default function (namespace) {
+module.exports = (namespace) => {
   const ObjectElement = namespace.getElementClass('object');
 
   /**

@@ -2680,11 +2680,6 @@ mimic-fn@^1.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
-minim-api-description@^0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/minim-api-description/-/minim-api-description-0.8.1.tgz#3ce003db2aee016d9207f99c2bd90dbba3676439"
-  integrity sha512-Tby/4oxIGD+bHimYFrOuQjA2h0jbyjIt9EmCFfyAOpkDjGkFWCXvfo137w49+ToUMj30cYNGM6TXyVoX3Zuuww==
-
 minim-parse-result@^0.10.1:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/minim-parse-result/-/minim-parse-result-0.10.1.tgz#9a38d2714c824dc4861519d2f321a8e0cb2e9154"
@@ -2699,6 +2694,14 @@ minim@^0.20.5:
   dependencies:
     lodash "^4.15.0"
     uptown "^1.0.1"
+
+minim@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/minim/-/minim-0.21.1.tgz#9b25bc017ea6bc65aababfe04219dfb2da8b22d0"
+  integrity sha512-ixUvKzCta8l5UlDvekpnA71vIPOCQERT3GFl2plOp9gx5SdTUbinY55CCzaItpMneRgX4wIrMNIV4LX0AfEEVw==
+  dependencies:
+    lodash "^4.15.0"
+    uptown "^1.1.0"
 
 minimatch@3.0.4, minimatch@^3.0.0, minimatch@^3.0.4:
   version "3.0.4"
@@ -4185,7 +4188,7 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-uptown@^1.0.1:
+uptown@^1.0.1, uptown@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/uptown/-/uptown-1.1.0.tgz#e3a4a91e52188ab7f6b8c35bde181bd4cb3759b7"
   integrity sha512-8CVRVG6jNECwHMVl/i4AjmRemtNp/JwQVENdj6DLWXCk0agxY2sBNXqGEyIRhr22fLPj1AD98TK+88i+U1JsWA==

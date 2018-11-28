@@ -1,4 +1,4 @@
-export default function (namespace) {
+module.exports = (namespace) => {
   class Extension extends namespace.Element {
     constructor(...args) {
       super(...args);

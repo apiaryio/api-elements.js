@@ -9,7 +9,8 @@
     "release": "lerna publish",
     "release:force": "lerna publish --force-publish",
     "test": "lerna exec --scope='*' -- npm run test",
-    "lint": "lerna exec --scope='*' -- npm run lint"
+    "lint": "lerna exec --scope='*' -- npm run lint",
+    "cover": "exit 0"
   },
   "devDependencies": {
     "lerna": "^3.4.0"

@@ -1,7 +1,6 @@
-import { expect } from 'chai';
-
-import minim from 'minim';
-import apiDescription from '../src/api-description';
+const { expect } = require('chai');
+const minim = require('minim');
+const apiDescription = require('../src/api-description');
 
 const namespace = minim.namespace().use(apiDescription);
 
