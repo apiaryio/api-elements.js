@@ -1,13 +1,6 @@
 const R = require('ramda');
 const { isAnnotation, isParseResult } = require('./predicates');
 
-/**
- * Retrieve the first value that is not an annotation from a parse result.
- */
-// FIXME After https://github.com/refractproject/minim/issues/201
-// This should become something like `parseResult.find(R.not(isAnnotation))` or `R.find(R.not(isAnnotation), parseResult)`;
-const findValueFromParseResult = parseResult => R.reject(isAnnotation, parseResult.content)[0];
-
 /*
  * Returns true iff the parse result does not contain errors
  * @param parseResult {ParseResult}
@@ -59,7 +52,8 @@ function pipeParseResult(minim, ...functions) {
   // Return a closure that takes the element to pipe
   return (element) => {
     const run = (accumulator, func) => {
-      let parseResult = func(findValueFromParseResult(accumulator));
+      const elements = R.reject(isAnnotation, accumulator);
+      let parseResult = func(...elements);
 
       if (!isParseResult(parseResult)) {
         // Result is either a ParseResult, or it is an element that can be

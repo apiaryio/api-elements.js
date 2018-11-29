@@ -21,6 +21,18 @@ describe('#pipeParseResult', () => {
     expect(parseResult.toValue()).to.deep.equal([10]);
   });
 
+  it('streads multiple elements as arguments during pipe', () => {
+    const duplicate = element => new minim.elements.ParseResult([element, element]);
+    const multiply = (lhs, rhs) => lhs.toValue() * rhs.toValue();
+    const parse = pipeParseResult(minim,
+      duplicate,
+      multiply);
+
+    const parseResult = parse(new minim.elements.Number(3));
+
+    expect(parseResult.toValue()).to.deep.equal([9]);
+  });
+
   it('fails early during a failure', () => {
     const parse = pipeParseResult(minim,
       R.unless(isNumber, createError(minim, 'Value must be a number')),
