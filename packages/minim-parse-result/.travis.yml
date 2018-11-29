@@ -1,0 +1,20 @@
+language: node_js
+sudo: false
+node_js:
+- '10'
+- '8'
+- '6'
+- '4'
+before_script:
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- ./cc-test-reporter before-build
+script:
+- npm run ci
+after_script:
+- npm run cover
+- ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+notifications:
+  email: false
+  slack:
+    secure: l+7pEK+XtYNRaoM2BALUX1q2beUzKKqd4kcEXAxqZOYTakyH9f4a9F6R0n1XTd4Tqu79Aqn5BuNdYXA33pjT8vRRyrkx4L53Pn9DuHS31KNwc00FleqijGRvfCb3uUng3OwrF/07RDGah+jFjXx2uvKD8lcSL/M72rZ1f7nUAf9YFOyFukQqPvojgUqfGpX3xH7MycXIqPoQrC+QMpA17gWCkb8/BFSaP9m5mEjNPE5r3Nm9HIbreHuuNhLeU8DBp9qGaiZtKmLvQbojuNEBDNLotBvur5PuzL+m6F5huMS56htaojU/wto7FoF674bZcEB/A6CIs3ImdgSjXUVRE44fclWAT+3K3X+17nRbRyyzqp8TsXnR09ovPkHed1QOypGw3WUdMPv2ry1WVTCBSuyqHULYVZhZDgWaoH/fd8f1vHSy5czVBmlbTQTlTWXZ8WnKYNV6zKTF7ZRY3P2dLaifQjD6xbP8hQrxKKYiL6pwcCtLMnCXo0rg5hNQagsEf9MfHiXiL/rcKOaJiQsETgOv9cGOL39n9U3IzSlOxwSjxYfmZpqexE8jMN/CfzmAuw25Cau/Cpq02oBLm8tpXfiTF77hksGPHLa+7o5aKjiVcQiq4mJ1RJAMwInI/9+9OdzL8gPTgYn7xn+dpK9NFZMELSeQYKQ4SRHhDsoiYf8=
