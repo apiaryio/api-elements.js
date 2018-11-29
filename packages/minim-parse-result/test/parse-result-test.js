@@ -3,11 +3,11 @@
  * Tests for parse result namespace elements, including all their
  * convenience properties and methods.
  */
+const chai = require('chai');
+const minim = require('minim');
+const minimParseResult = require('../lib/parse-result');
 
-import chai, { Assertion, expect } from 'chai';
-
-import minim from 'minim';
-import minimParseResult from '../src/parse-result';
+const { Assertion, expect } = chai;
 
 const namespace = minim.namespace()
   .use(minimParseResult);
@@ -28,7 +28,7 @@ chai.use((_chai, utils) => {
       'Expected class list #{act} to contain #{exp}',
       'Expected class list #{act} to not contain #{exp}',
       name,
-      obj.classes.toValue(),
+      obj.classes.toValue()
     );
   });
 });

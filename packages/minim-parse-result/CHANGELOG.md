@@ -1,5 +1,11 @@
 # Minim Parse Result
 
+## Master
+
+### Breaking
+
+- Node 4 is not supported anymore.
+
 ## 0.10.1
 
 ### Enhancements

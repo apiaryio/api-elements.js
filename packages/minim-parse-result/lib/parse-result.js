@@ -7,9 +7,9 @@
  *   + Annotation
  */
 
-import apiDescription from 'minim-api-description';
+const apiDescription = require('minim-api-description');
 
-export function namespace(options) {
+const namespace = (options) => {
   const minim = options.base;
   const { Element } = minim;
   const StringElement = minim.getElementClass('string');
@@ -140,6 +140,6 @@ export function namespace(options) {
     .register('parseResult', ParseResult)
     .register('annotation', Annotation)
     .register('sourceMap', SourceMap);
-}
+};
 
-export default { namespace };
+module.exports = { namespace };

@@ -1,14 +1,11 @@
 # Minim Parse Result Namespace
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/refractproject/minim-parse-result.svg)](https://greenkeeper.io/)
-[![Build Status](https://img.shields.io/travis/refractproject/minim-parse-result.svg)](https://travis-ci.org/refractproject/minim-parse-result)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/refractproject/minim-parse-result.svg)](https://codeclimate.com/github/refractproject/minim-parse-result/coverage)
 [![NPM version](https://img.shields.io/npm/v/minim-parse-result.svg)](https://www.npmjs.org/package/minim-parse-result)
 [![License](https://img.shields.io/npm/l/minim-parse-result.svg)](https://www.npmjs.org/package/minim-parse-result)
 
 This library provides an interface to the [Refract Parse Result namespace](https://github.com/refractproject/refract-spec/blob/master/namespaces/parse-result-namespace.md).
 
-It extends upon the base types as defined in [Minim](https://github.com/refractproject/minim) and should be used with the [minim-api-description](https://github.com/refractproject/minim-api-description) package.
+It extends upon the base types as defined in [Minim](https://github.com/refractproject/minim) and should be used with the [minim-api-description](https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-api-description) package.
 
 ## Install
 
@@ -28,12 +25,6 @@ const namespace = minim.namespace()
 // Initialize elements directly
 const ParseResult = namespace.getElementClass('parseResult');
 let category = new ParseResult();
-```
-
-## Browser Usage Example
-
-```html
-<script type="text/javascript" src="./lib/minim-parse-result.min.js"></script>
 ```
 
 ## Elements
