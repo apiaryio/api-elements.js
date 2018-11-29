@@ -13,10 +13,11 @@ const parseObject = require('../parseObject');
 const parseOpenAPI = require('../openapi');
 const parseInfoObject = require('./parseInfoObject');
 const parsePathsObject = require('./parsePathsObject');
+const parseComponentsObject = require('./parseComponentsObject');
 
 const name = 'OpenAPI Object';
 const requiredKeys = ['openapi', 'info', 'paths'];
-const unsupportedKeys = ['components', 'servers', 'security', 'tags', 'externalDocs'];
+const unsupportedKeys = ['servers', 'security', 'tags', 'externalDocs'];
 
 /**
  * Returns whether the given member element is unsupported
@@ -37,6 +38,7 @@ function parseOASObject(minim, object) {
     [hasKey('openapi'), parseOpenAPI(minim)],
     [hasKey('info'), R.compose(parseInfoObject(minim), getValue)],
     [hasKey('paths'), R.compose(asArray, parsePathsObject(minim), getValue)],
+    [hasKey('components'), R.compose(parseComponentsObject(minim), getValue)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new minim.elements.ParseResult()],

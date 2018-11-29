@@ -159,7 +159,7 @@ describe('#parseOpenAPIObject', () => {
     const result = parse(minim, object);
 
     expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'components'");
+    expect(result.warnings.get(0).toValue()).to.equal("'Components Object' is unsupported");
   });
 
   it('provides warning for unsupported servers key', () => {
