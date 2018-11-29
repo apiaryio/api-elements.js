@@ -588,5 +588,51 @@ describe('Swagger Schema to JSON Schema', () => {
         },
       });
     });
+
+    it('can convert a Swagger Schema definition with a reference to Swagger Schema example', () => {
+      // This test came from a regression that caused the User schema to be
+      // mutated during the Swagger Schema to JSON Schema conversion and
+      // thus breaking the reference to `example` (`examples` in JSON Schema)
+
+      const result = convertSchemaDefinitions({
+        User: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              example: 'Doe',
+            },
+          },
+        },
+        Comment: {
+          type: 'object',
+          example: {
+            name: {
+              $ref: '#/definitions/User/properties/name/example',
+            },
+          },
+        },
+      });
+
+      expect(result).to.deep.equal({
+        User: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              examples: ['Doe'],
+            },
+          },
+        },
+        Comment: {
+          type: 'object',
+          examples: [
+            {
+              name: 'Doe',
+            },
+          ],
+        },
+      });
+    });
   });
 });
