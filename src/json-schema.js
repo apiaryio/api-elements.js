@@ -77,6 +77,8 @@ function convertSubSchema(schema, references, swagger) {
     return { $ref: schema.$ref };
   }
 
+  const recurseConvertSubSchema = s => convertSubSchema(s, references, swagger);
+
   let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
   actualSchema = _.omitBy(actualSchema, isExtension);
 
@@ -102,52 +104,52 @@ function convertSubSchema(schema, references, swagger) {
   }
 
   if (schema.allOf) {
-    actualSchema.allOf = schema.allOf.map(s => convertSubSchema(s, references));
+    actualSchema.allOf = schema.allOf.map(recurseConvertSubSchema);
   }
 
   if (schema.anyOf) {
-    actualSchema.anyOf = schema.anyOf.map(s => convertSubSchema(s, references));
+    actualSchema.anyOf = schema.anyOf.map(recurseConvertSubSchema);
   }
 
   if (schema.oneOf) {
-    actualSchema.oneOf = schema.oneOf.map(s => convertSubSchema(s, references));
+    actualSchema.oneOf = schema.oneOf.map(recurseConvertSubSchema);
   }
 
   if (schema.not) {
-    actualSchema.not = convertSubSchema(schema.not, references);
+    actualSchema.not = recurseConvertSubSchema(schema.not);
   }
 
   // Array
 
   if (schema.items) {
     if (Array.isArray(schema.items)) {
-      actualSchema.items = schema.items.map(s => convertSubSchema(s, references));
+      actualSchema.items = schema.items.map(recurseConvertSubSchema);
     } else {
-      actualSchema.items = convertSubSchema(schema.items, references);
+      actualSchema.items = recurseConvertSubSchema(schema.items);
     }
   }
 
   if (schema.additionalItems && typeof schema.additionalItems === 'object') {
-    actualSchema.additionalItems = convertSubSchema(schema.additionalItems, references);
+    actualSchema.additionalItems = recurseConvertSubSchema(schema.additionalItems);
   }
 
   // Object
 
   if (schema.properties) {
     Object.keys(schema.properties).forEach((key) => {
-      actualSchema.properties[key] = convertSubSchema(schema.properties[key], references);
+      actualSchema.properties[key] = recurseConvertSubSchema(schema.properties[key]);
     });
   }
 
   if (schema.patternProperties) {
     Object.keys(schema.patternProperties).forEach((key) => {
       actualSchema.patternProperties[key] =
-        convertSubSchema(schema.patternProperties[key], references);
+        recurseConvertSubSchema(schema.patternProperties[key]);
     });
   }
 
   if (schema.additionalProperties && typeof schema.additionalProperties === 'object') {
-    actualSchema.additionalProperties = convertSubSchema(schema.additionalProperties, references);
+    actualSchema.additionalProperties = recurseConvertSubSchema(schema.additionalProperties);
   }
 
   return actualSchema;
