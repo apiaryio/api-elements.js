@@ -60,13 +60,55 @@ describe('Parameter Object', () => {
         "'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'"
       );
     });
+
+    it('provides an unsupported error for query parameters', () => {
+      const parameter = new minim.elements.Object({
+        name: 'example',
+        in: 'query',
+      });
+
+      const result = parse(minim, parameter);
+
+      expect(result.length).to.equal(1);
+      expect(result.errors.get(0).toValue()).to.equal(
+        "Only 'in' values of 'path' is supported at the moment"
+      );
+    });
+
+    it('provides an unsupported error for header parameters', () => {
+      const parameter = new minim.elements.Object({
+        name: 'example',
+        in: 'header',
+      });
+
+      const result = parse(minim, parameter);
+
+      expect(result.length).to.equal(1);
+      expect(result.errors.get(0).toValue()).to.equal(
+        "Only 'in' values of 'path' is supported at the moment"
+      );
+    });
+
+    it('provides an unsupported error for cookie parameters', () => {
+      const parameter = new minim.elements.Object({
+        name: 'example',
+        in: 'cookie',
+      });
+
+      const result = parse(minim, parameter);
+
+      expect(result.length).to.equal(1);
+      expect(result.errors.get(0).toValue()).to.equal(
+        "Only 'in' values of 'path' is supported at the moment"
+      );
+    });
   });
 
   describe('#description', () => {
     it('attaches description to member', () => {
       const parameter = new minim.elements.Object({
         name: 'example',
-        in: 'query',
+        in: 'path',
         description: 'an example parameter',
       });
 
@@ -82,7 +124,7 @@ describe('Parameter Object', () => {
     it('provides a warning when description is not a string', () => {
       const parameter = new minim.elements.Object({
         name: 'example',
-        in: 'query',
+        in: 'path',
         description: true,
       });
 
