@@ -1,5 +1,11 @@
 # Fury Changelog
 
+## Master
+
+### Breaking
+
+- Node 4 is not support anymore.
+
 ## 3.0.0-beta.7
 
 - Update minim to 0.20.5.

@@ -1,5 +1,5 @@
-import minimModule from 'minim';
-import minimParseResult from 'minim-parse-result';
+const minimModule = require('minim');
+const minimParseResult = require('minim-parse-result');
 
 const minim = minimModule.namespace()
   .use(minimParseResult);
@@ -9,7 +9,7 @@ const minim = minimModule.namespace()
  * either `parse` or `serialize`. If no adapter is found, then
  * undefined is returned.
  */
-function findAdapter(adapters, mediaType, method) {
+const findAdapter = (adapters, mediaType, method) => {
   for (let i = 0; i < adapters.length; i += 1) {
     if (adapters[i].mediaTypes.indexOf(mediaType) !== -1 && adapters[i][method]) {
       return adapters[i];
@@ -17,7 +17,7 @@ function findAdapter(adapters, mediaType, method) {
   }
 
   return null;
-}
+};
 
 class Fury {
   constructor() {
@@ -146,4 +146,4 @@ const fury = new Fury();
 
 fury.Fury = Fury;
 
-export default fury;
+module.exports = fury;

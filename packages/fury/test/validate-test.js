@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-empty-pattern */
-import { expect } from 'chai';
-import { Fury } from '../src/fury';
+const { expect } = require('chai');
+const { Fury } = require('../lib/fury');
 
 describe('Validation', () => {
   context('with a validate adapter', () => {

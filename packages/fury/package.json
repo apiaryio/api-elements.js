@@ -1,36 +1,30 @@
 {
   "name": "fury",
-  "description": "API Description SDK",
   "version": "3.0.0-beta.7",
+  "description": "API Description SDK",
   "author": "Apiary.io <support@apiary.io>",
+  "license": "MIT",
   "main": "./lib/fury.js",
-  "browser": "./src/fury.js",
-  "module": "./src/fury.js",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:apiaryio/fury.git"
-  },
-  "engines": {
-    "node": ">=4"
+    "url": "https://github.com/apiaryio/api-elements.js.git"
   },
   "scripts": {
-    "lint": "peasant lint",
-    "test": "peasant test",
-    "build": "peasant -s build",
-    "web": "peasant -w build",
-    "ci": "peasant -s lint test",
-    "prepublish": "npm run ci && npm run build && npm run web",
-    "cover": "peasant cover",
-    "peasant": "peasant"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "mocha"
   },
   "dependencies": {
-    "minim": "^0.21.0",
+    "minim": "^0.21.1",
     "minim-parse-result": "^0.10.1"
   },
   "devDependencies": {
-    "babel-plugin-add-module-exports": "^0.2.1",
     "chai": "^4.1.2",
-    "peasant": "^1.3.0"
+    "eslint": "^5.9.0",
+    "mocha": "^5.0.2"
   },
-  "license": "MIT"
+  "engines": {
+    "node": ">=6"
+  }
 }

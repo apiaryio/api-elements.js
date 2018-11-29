@@ -1,9 +1,5 @@
 # Fury.js
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/apiaryio/fury.js.svg)](https://greenkeeper.io/)
-
-[![Build Status](https://img.shields.io/travis/apiaryio/fury.js.svg)](https://travis-ci.org/apiaryio/fury.js)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/apiaryio/fury.js.svg)](https://codeclimate.com/github/apiaryio/fury.js/coverage)
 [![NPM version](https://img.shields.io/npm/v/fury.svg)](https://www.npmjs.org/package/fury)
 [![License](https://img.shields.io/npm/l/fury.svg)](https://www.npmjs.org/package/fury)
 
@@ -101,8 +97,8 @@ api.find(filterFunc).forEach(function (request) {
 Reference:
 
 * [Minim](https://github.com/refractproject/minim)
-* [API description elements](https://github.com/refractproject/minim-api-description)
-* [Parse result elements](https://github.com/refractproject/minim-parse-result)
+* [API description elements](https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-api-description)
+* [Parse result elements](https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-parse-result)
 
 #### Multiple Fury Instances
 
@@ -173,29 +169,4 @@ fury.use(myAdapter);
 fury.parse({source: 'some-test\n...'}, function (err, api) {
   console.log(api.title);
 });
-```
-
-## Browser Usage
-
-```html
-<script type="text/javascript" src="./lib/fury.min.js"></script>
-```
-
-## Development
-
-### Building & Testing
-Fury is written in ES6 and is transpiled before publishing. All of the build/test/etc commands are run through npm:
-
-```sh
-# Run the unit and integration tests
-npm test
-
-# Lint the source code
-npm run lint
-
-# Generate a coverage report
-npm run cover
-
-# Open the HTML report
-open coverage/lcov-report/index.html
 ```
