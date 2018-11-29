@@ -145,23 +145,6 @@ describe('#parseOpenAPIObject', () => {
     expect(result.warnings.get(0).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'externalDocs'");
   });
 
-  it('provides warning for unsupported components key', () => {
-    const object = new minim.elements.Object({
-      openapi: '3.0.0',
-      info: {
-        title: 'My API',
-        version: '1.0.0',
-      },
-      paths: {},
-      components: {},
-    });
-
-    const result = parse(minim, object);
-
-    expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("'Components Object' is unsupported");
-  });
-
   it('provides warning for unsupported servers key', () => {
     const object = new minim.elements.Object({
       openapi: '3.0.0',
