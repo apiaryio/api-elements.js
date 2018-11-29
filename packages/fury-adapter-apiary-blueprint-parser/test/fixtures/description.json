@@ -1,0 +1,29 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Blueprint Title"
+        }
+      },
+      "content": [
+        {
+          "element": "copy",
+          "content": "An example description.\nIt's also multi-line.\n\n- Item 1\n- Item 2"
+        }
+      ]
+    }
+  ]
+}

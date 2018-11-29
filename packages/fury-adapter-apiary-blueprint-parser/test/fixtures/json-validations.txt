@@ -1,0 +1,44 @@
+--- API ---
+
+--
+Example Resources
+--
+
+GET /response-schema
+< 200
+< Content-Type: application/json
+{ "name": "Kyle" }
+
+POST /implicit-request-schema
+> Content-Type: application/json
+{ "name": "Kyle" }
+< 201
+< Content-Type: application/json
+{ "name": "Kyle", "url": "/me" }
+
+POST /request-response-schema
+> Content-Type: application/json
+{ "name": "Kyle" }
+< 201
+< Content-Type: application/json
+{ "name": "Kyle", "url": "/me" }
+
+POST /invalid-schema
+> Content-Type: application/json
+{ "name": "Kyle" }
+< 201
+< Content-Type: application/json
+{ "name": "Kyle", "url": "/me" }
+
+-- JSON Schema Validations --
+GET /response-schema
+{ "response": {"type": "object"} }
+
+POST /implicit-request-schema
+{ "type": "object", "required": ["name"] }
+
+POST /request-response-schema
+{ "request": {"type": "object"}, "response": {"type": "object", "required": ["url"]} }
+
+POST /invalid-schema
+{ "Invalid JSON" }
