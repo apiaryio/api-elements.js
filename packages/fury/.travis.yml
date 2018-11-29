@@ -1,0 +1,17 @@
+language: node_js
+sudo: false
+node_js:
+- '10'
+- '8'
+- '6'
+- '4'
+script:
+- npm run ci
+after_script:
+- npm install -g codeclimate-test-reporter
+- npm run cover
+- codeclimate-test-reporter < coverage/lcov.info
+notifications:
+  email: false
+  slack:
+    secure: elNUxdNRQoggipKMLqJMqy20Pa0vYjOuDl4gC10jSkrTW6t7jjn72cCNOaOp1HstNHs62d1MPxVgcYuBwFNYl96dvxIUF3XGmf8B4LoTCebG1ufGCcqKm3J5H5e/NKtvi0H5Q5nJ4bTGHZL72kq0dUQLXi3kBZjByvP3w1DoxVw=
