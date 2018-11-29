@@ -1,0 +1,30 @@
+{
+  "name": "minim-parse-result",
+  "version": "0.10.1",
+  "description": "Minim Parse Result Namespace",
+  "author": "Apiary.io <support@apiary.io>",
+  "license": "MIT",
+  "main": "./lib/parse-result.js",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-parse-result",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apiaryio/api-elements.js.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "minim-api-description": "^0.8.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^5.9.0",
+    "minim": "^0.21.1",
+    "mocha": "^5.0.2"
+  },
+  "engines": {
+    "node": ">=6"
+  }
+}

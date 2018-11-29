@@ -1,9 +1,5 @@
 # Minim API Description Namespace
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/refractproject/minim-api-description.svg)](https://greenkeeper.io/)
-
-[![Build Status](http://img.shields.io/travis/refractproject/minim-api-description.svg)](https://travis-ci.org/refractproject/minim-api-description)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/refractproject/minim-api-description.svg)](https://codeclimate.com/github/refractproject/minim-api-description/coverage)
 [![NPM version](http://img.shields.io/npm/v/minim-api-description.svg)](https://www.npmjs.org/package/minim-api-description)
 [![License](http://img.shields.io/npm/l/minim-api-description.svg)](https://www.npmjs.org/package/minim-api-description)
 
@@ -29,12 +25,6 @@ const namespace = minim.namespace()
 // Initialize elements directly
 const Category = namespace.getElementClass('category');
 let category = new Category();
-```
-
-## Browser Usage Example
-
-```html
-<script type="text/javascript" src="./lib/minim-api-description.min.js"></script>
 ```
 
 ## Element Reference

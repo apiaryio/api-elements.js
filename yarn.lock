@@ -3035,13 +3035,6 @@ mimic-fn@^1.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
-minim-parse-result@^0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/minim-parse-result/-/minim-parse-result-0.10.1.tgz#9a38d2714c824dc4861519d2f321a8e0cb2e9154"
-  integrity sha512-FZ9uZSsJOtGQ1fPjHOoT291J0K53BlL4XphiPIZc4zwNyrlS0m7o/QhupeAJ7xKz+6FNJJDKxfzw7LijPK0WBw==
-  dependencies:
-    minim-api-description "^0.8.1"
-
 minim@^0.20.5:
   version "0.20.7"
   resolved "https://registry.yarnpkg.com/minim/-/minim-0.20.7.tgz#9f428bd29607fff1d7a53699f777b964592be3b0"
