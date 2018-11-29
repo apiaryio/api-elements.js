@@ -70,20 +70,6 @@ describe('#parsePathItemObject', () => {
       expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'servers'");
     });
 
-    it('warns for a parameters', () => {
-      const path = new minim.elements.Member('/', {
-        parameters: '',
-      });
-
-      const result = parse(minim, path);
-
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
-      expect(result.get(0).href.toValue()).to.equal('/');
-
-      expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'parameters'");
-    });
-
     it('does not provide warning for Info Object extensions', () => {
       const path = new minim.elements.Member('/', {
         'x-extension': '',
@@ -165,6 +151,76 @@ describe('#parsePathItemObject', () => {
       expect(result.warnings.get(0).toValue()).to.equal(
         "'Path Item Object' 'description' is not a string"
       );
+    });
+  });
+
+  describe('#parameters', () => {
+    it('warns when parameters is not an array', () => {
+      const path = new minim.elements.Member('/', {
+        parameters: {},
+      });
+
+      const result = parse(minim, path);
+
+      expect(result.length).to.equal(2);
+      expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+      expect(result.get(0).href.toValue()).to.equal('/');
+
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Path Item Object' 'parameters' is not an array"
+      );
+    });
+
+    describe('path parameters', () => {
+      it('exposes parameter in hrefVariables', () => {
+        const path = new minim.elements.Member('/{resource}', {
+          parameters: [
+            {
+              name: 'resource',
+              in: 'path',
+            },
+          ],
+        });
+
+        const result = parse(minim, path);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+
+        const resource = result.get(0);
+        expect(resource.hrefVariables).to.be.instanceof(minim.elements.HrefVariables);
+        expect(resource.hrefVariables.length).to.equal(1);
+        expect(resource.hrefVariables.getMember('resource')).to.be.instanceof(minim.elements.Member);
+      });
+
+      it('errors when parameter is not found in path', () => {
+        const path = new minim.elements.Member('/', {
+          parameters: [
+            {
+              name: 'resource',
+              in: 'path',
+            },
+          ],
+        });
+
+        const result = parse(minim, path);
+
+        expect(result.length).to.equal(1);
+        expect(result.errors.get(0).toValue()).to.equal(
+          "Path '/' is missing path variable 'resource'. Add '{resource}' to the path"
+        );
+      });
+
+      it('errors when path variable not defined in parameters', () => {
+        const path = new minim.elements.Member('/{resource}', {});
+
+        const result = parse(minim, path);
+
+        expect(result.length).to.equal(1);
+        expect(result.errors.get(0).toValue()).to.equal(
+          "Path '/{resource}' contains variable 'resource' which is not declared in the parameters section of the 'Path Item Object'"
+        );
+      });
     });
   });
 });

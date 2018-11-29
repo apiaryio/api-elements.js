@@ -2,6 +2,7 @@ const R = require('ramda');
 
 /** @module predicates */
 
+const isArray = element => element.element === 'array';
 const isAnnotation = element => element.element === 'annotation';
 const isMember = element => element.element === 'member';
 const isObject = element => element.element === 'object';
@@ -33,6 +34,7 @@ const isExtension = member => member.key.toValue().startsWith('x-');
 const getValue = member => member.value;
 
 module.exports = {
+  isArray,
   isAnnotation,
   isMember,
   isObject,
