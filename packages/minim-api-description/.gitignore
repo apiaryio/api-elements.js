@@ -1,8 +1,0 @@
-node_modules
-/lib
-.vagrant
-npm-debug.log
-package-lock.json
-.DS_Store
-coverage
-.eslintcache

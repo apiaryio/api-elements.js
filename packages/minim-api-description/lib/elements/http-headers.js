@@ -1,4 +1,4 @@
-export default function (namespace) {
+module.exports = (namespace) => {
   const ArrayElement = namespace.getElementClass('array');
 
   /**
@@ -43,4 +43,4 @@ export default function (namespace) {
   }
 
   namespace.register('httpHeaders', HttpHeaders);
-}
+};

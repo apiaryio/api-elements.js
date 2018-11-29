@@ -1,4 +1,4 @@
-export default function (namespace, HttpMessagePayload) {
+module.exports = (namespace, HttpMessagePayload) => {
   /**
    * @class HttpRequest
    *
@@ -42,4 +42,4 @@ export default function (namespace, HttpMessagePayload) {
   }
 
   namespace.register('httpRequest', HttpRequest);
-}
+};

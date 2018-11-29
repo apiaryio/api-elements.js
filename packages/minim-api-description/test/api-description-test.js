@@ -4,10 +4,11 @@
  * convenience properties and methods.
  */
 
-import chai, { Assertion, expect } from 'chai';
+const chai = require('chai');
+const minim = require('minim');
+const apiDescription = require('../lib/api-description');
 
-import minim from 'minim';
-import apiDescription from '../src/api-description';
+const { Assertion, expect } = chai;
 
 const namespace = minim.namespace().use(apiDescription);
 
@@ -40,7 +41,7 @@ chai.use((_chai, utils) => {
       'Expected class list #{act} to contain #{exp}',
       'Expected class list #{act} to not contain #{exp}',
       name,
-      obj.classes.toValue(),
+      obj.classes.toValue()
     );
   });
 });

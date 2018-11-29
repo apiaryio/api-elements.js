@@ -1,4 +1,4 @@
-export default function (namespace) {
+module.exports = (namespace) => {
   /**
    * @class Asset
    *
@@ -26,6 +26,7 @@ export default function (namespace) {
     set contentType(value) {
       this.attributes.set('contentType', value);
     }
+
     /**
      * @name href
      * @type StringElement
@@ -41,4 +42,4 @@ export default function (namespace) {
   }
 
   namespace.register('asset', Asset);
-}
+};

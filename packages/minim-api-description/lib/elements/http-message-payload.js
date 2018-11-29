@@ -1,7 +1,7 @@
-import httpRequest from './http-request';
-import httpResponse from './http-response';
+const httpRequest = require('./http-request');
+const httpResponse = require('./http-response');
 
-export default function (namespace) {
+module.exports = (namespace) => {
   const ArrayElement = namespace.getElementClass('array');
 
   /**
@@ -87,4 +87,4 @@ export default function (namespace) {
 
   httpRequest(namespace, HttpMessagePayload);
   httpResponse(namespace, HttpMessagePayload);
-}
+};

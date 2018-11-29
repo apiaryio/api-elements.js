@@ -21,21 +21,21 @@
  *     + Enumeration
  */
 
-import httpHeaders from './elements/http-headers';
-import hrefVariables from './elements/href-variables';
-import asset from './elements/asset';
-import httpMessagePayload from './elements/http-message-payload';
-import authScheme from './elements/auth-scheme';
-import httpTransaction from './elements/http-transaction';
-import transition from './elements/transition';
-import resource from './elements/resource';
-import dataStructure from './elements/data-structure';
-import copy from './elements/copy';
-import category from './elements/category';
-import extension from './elements/extension';
-import enumeration from './elements/enum';
+const httpHeaders = require('./elements/http-headers');
+const hrefVariables = require('./elements/href-variables');
+const asset = require('./elements/asset');
+const httpMessagePayload = require('./elements/http-message-payload');
+const authScheme = require('./elements/auth-scheme');
+const httpTransaction = require('./elements/http-transaction');
+const transition = require('./elements/transition');
+const resource = require('./elements/resource');
+const dataStructure = require('./elements/data-structure');
+const copy = require('./elements/copy');
+const category = require('./elements/category');
+const extension = require('./elements/extension');
+const enumeration = require('./elements/enum');
 
-export function namespace(options) {
+const namespace = (options) => {
   httpHeaders(options.base);
   hrefVariables(options.base);
   asset(options.base);
@@ -49,6 +49,6 @@ export function namespace(options) {
   category(options.base);
   extension(options.base);
   enumeration(options.base);
-}
+};
 
-export default { namespace };
+module.exports = { namespace };

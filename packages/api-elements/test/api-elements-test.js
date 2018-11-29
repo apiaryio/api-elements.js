@@ -1,7 +1,5 @@
 const { expect } = require('chai');
-
 const apiElements = require('../lib/api-elements');
-
 
 describe('API Elements', () => {
   context('provides a default namespace', () => {

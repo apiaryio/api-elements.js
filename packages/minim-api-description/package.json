@@ -2,32 +2,26 @@
   "name": "minim-api-description",
   "version": "0.8.1",
   "description": "Minim API Description Namespace",
+  "author": "Apiary.io <support@apiary.io>",
+  "license": "MIT",
   "main": "./lib/api-description.js",
-  "browser": "./src/api-description.js",
-  "module": "./src/api-description.js",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-api-description",
   "repository": {
     "type": "git",
-    "url": "https://github.com/refractproject/minim-api-description.git"
+    "url": "https://github.com/apiaryio/api-elements.js.git"
   },
   "scripts": {
-    "lint": "peasant lint",
-    "test": "peasant test",
-    "build": "peasant -s build",
-    "web": "peasant -w build",
-    "ci": "peasant -s lint test",
-    "prepublish": "npm run ci && npm run build && npm run web",
-    "cover": "peasant cover",
-    "peasant": "peasant"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "mocha"
   },
   "devDependencies": {
-    "babel-plugin-array-includes": "^2.0.3",
     "chai": "^4.1.2",
-    "minim": "^0.21.0",
-    "peasant": "^1.3.0"
+    "eslint": "^5.9.0",
+    "minim": "^0.21.1",
+    "mocha": "^5.0.2"
   },
   "engines": {
-    "node": ">=4"
-  },
-  "author": "Apiary.io <support@apiary.io>",
-  "license": "MIT"
+    "node": ">=6"
+  }
 }

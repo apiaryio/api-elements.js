@@ -1,5 +1,11 @@
 # Minim API Description
 
+## Master
+
+### Breaking
+
+- Node 4 is not supported anymore
+
 ## 0.8.1
 
 ### Enhancements

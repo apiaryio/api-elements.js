@@ -1,4 +1,4 @@
-export default function (namespace) {
+module.exports = (namespace) => {
   /**
    * @class DataStructure
    *
@@ -20,4 +20,4 @@ export default function (namespace) {
   }
 
   namespace.register('dataStructure', DataStructure);
-}
+};
