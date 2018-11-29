@@ -14,4 +14,13 @@ describe('Components Object', () => {
       "'Components Object' is unsupported"
     );
   });
+
+  it('provides a warning when components is non-object', () => {
+    const components = new minim.elements.String();
+
+    const result = parse(minim, components);
+
+    expect(result.length).to.equal(1);
+    expect(result.warnings.get(0).toValue()).to.equal("'Components Object' is not an object");
+  });
 });
