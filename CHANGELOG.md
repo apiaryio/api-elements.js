@@ -1,5 +1,12 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixes a regression introduced in 0.22.3 which caused a reference (`$ref`)
+  from a definition to another definitions example value to fail.
+
 ## 0.22.3 (2018-11-27)
 
 ### Bug Fixes

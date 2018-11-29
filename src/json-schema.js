@@ -81,6 +81,7 @@ function convertSubSchema(schema, references, swagger) {
 
   let actualSchema = _.omit(schema, ['discriminator', 'readOnly', 'xml', 'externalDocs', 'example']);
   actualSchema = _.omitBy(actualSchema, isExtension);
+  actualSchema = _.cloneDeep(actualSchema);
 
   if (schema.type === 'file') {
     // file is not a valid JSON Schema type let's pick string instead
