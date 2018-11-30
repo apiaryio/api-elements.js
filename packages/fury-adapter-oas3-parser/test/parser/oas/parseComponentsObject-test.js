@@ -26,7 +26,7 @@ describe('Components Object', () => {
       expect(result.warnings.get(0).toValue()).to.equal("'Schemas Object' is not an object");
     });
 
-    it('provides warning for unsupported schemas key', () => {
+    it('parses valid schemas into data structures', () => {
       const components = new minim.elements.Object({
         schemas: {
           User: {
@@ -36,9 +36,14 @@ describe('Components Object', () => {
       });
 
       const result = parse(minim, components);
+      expect(result.length).to.equal(1);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Schema Object' is unsupported");
+      const parsedComponents = result.get(0);
+      expect(parsedComponents).to.be.instanceof(minim.elements.Object);
+
+      const schemas = parsedComponents.get('schemas');
+      expect(schemas).to.be.instanceof(minim.elements.Object);
+      expect(schemas.get('User')).to.be.instanceof(minim.elements.DataStructure);
     });
   });
 

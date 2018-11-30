@@ -60,6 +60,18 @@ function parseOASObject(minim, object) {
         api.content = api.content.concat(resources.content);
       }
 
+      const components = object.get('components');
+      if (components) {
+        const schemas = components.get('schemas');
+        if (schemas) {
+          const dataStructures = new minim.elements.Category(
+            schemas.content.map(getValue),
+            { classes: ['dataStructures'] }
+          );
+          api.push(dataStructures);
+        }
+      }
+
       return api;
     });
 

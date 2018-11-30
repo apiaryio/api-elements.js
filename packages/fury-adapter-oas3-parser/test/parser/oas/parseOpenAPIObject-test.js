@@ -41,6 +41,38 @@ describe('#parseOpenAPIObject', () => {
     expect(result.api.get(0).href.toValue()).to.equal('/');
   });
 
+  it('can parse a document with schema components into data structures', () => {
+    const object = new minim.elements.Object({
+      openapi: '3.0.0',
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
+      paths: {},
+      components: {
+        schemas: {
+          User: {
+            type: 'object',
+          },
+        },
+      },
+    });
+
+    const result = parse(minim, object);
+    expect(result.length).to.equal(1);
+    expect(result.api.title.toValue()).to.equal('My API');
+    expect(result.api.length).to.equal(1);
+
+    const dataStructures = result.api.get(0);
+    expect(dataStructures).to.be.instanceof(minim.elements.Category);
+    expect(dataStructures.classes.toValue()).to.deep.equal(['dataStructures']);
+    expect(dataStructures.length).to.equal(1);
+
+    const userStructure = dataStructures.get(0);
+    expect(userStructure).to.be.instanceof(minim.elements.DataStructure);
+    expect(userStructure.content.id.toValue()).to.equal('User');
+  });
+
   it('provides error for missing openapi version', () => {
     const object = new minim.elements.Object({
       info: {},
