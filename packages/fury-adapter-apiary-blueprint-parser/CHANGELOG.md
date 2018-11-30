@@ -1,5 +1,11 @@
 # Changelog
 
+## Master
+
+### Breaking
+
+- Node 4 is not supported anymore.
+
 ## 3.0.0-beta.4
 
 ### Enhancements

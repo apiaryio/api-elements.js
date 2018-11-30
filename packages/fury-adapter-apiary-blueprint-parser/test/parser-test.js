@@ -1,12 +1,11 @@
-/* eslint-disable no-loop-func */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-import { expect } from 'chai';
-import glob from 'glob';
-import path from 'path';
-import fs from 'fs';
-import fury from 'fury';
-import adapter from '../src/adapter';
+const { expect } = require('chai');
+const glob = require('glob');
+const path = require('path');
+const fs = require('fs');
+const fury = require('fury');
+const adapter = require('../lib/adapter');
 
 fury.adapters = [adapter];
 

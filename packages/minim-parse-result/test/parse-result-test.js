@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 /*
  * Tests for parse result namespace elements, including all their
  * convenience properties and methods.

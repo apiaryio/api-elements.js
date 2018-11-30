@@ -1,7 +1,7 @@
-import url from 'url';
-import ApiaryBlueprintParser from 'apiary-blueprint-parser';
+const url = require('url');
+const ApiaryBlueprintParser = require('apiary-blueprint-parser');
 
-export default class Parser {
+class Parser {
   constructor({ minim, source }) {
     this.minim = minim;
     this.source = source;
@@ -238,3 +238,5 @@ export default class Parser {
     return schema;
   }
 }
+
+module.exports = Parser;

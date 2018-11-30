@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 /* eslint-disable no-empty-pattern */
 const { expect } = require('chai');
 const { Fury } = require('../lib/fury');

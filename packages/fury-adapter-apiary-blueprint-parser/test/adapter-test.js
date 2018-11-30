@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-expressions */
-import { expect } from 'chai';
-import fury from 'fury';
-import adapter, { detect, mediaTypes } from '../src/adapter';
+const { expect } = require('chai');
+const fury = require('fury');
+const adapter = require('../lib/adapter');
+
+const { detect, mediaTypes } = adapter;
 
 fury.adapters = [adapter];
 
