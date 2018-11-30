@@ -1,5 +1,7 @@
 const R = require('ramda');
-const { isObject, hasKey, isExtension } = require('../../predicates');
+const {
+  isObject, hasKey, isExtension, getValue,
+} = require('../../predicates');
 const {
   createWarning,
   createUnsupportedMemberWarning,
@@ -7,9 +9,10 @@ const {
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const pipeParseResult = require('../../pipeParseResult');
+const parseSchemaObject = require('./parseSchemaObject');
 
 const name = 'Components Object';
-const unsupportedKeys = ['schemas', 'responses', 'parameters', 'examples', 'requestBodies', 'headers', 'securitySchemes', 'links', 'callbacks'];
+const unsupportedKeys = ['responses', 'parameters', 'examples', 'requestBodies', 'headers', 'securitySchemes', 'links', 'callbacks'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 /**
@@ -22,7 +25,15 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject
  */
 function parseComponentsObject(minim, element) {
+  const validateSchemasIsObject = R.unless(isObject,
+    createWarning(minim, "'Schemas Object' is not an object"));
+
+  const parseSchemasObject = pipeParseResult(minim,
+    validateSchemasIsObject,
+    parseObject(minim, parseSchemaObject(minim)));
+
   const parseMember = R.cond([
+    [hasKey('schemas'), R.compose(parseSchemasObject, getValue)],
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
     // FIXME Support exposing extensions into parse result

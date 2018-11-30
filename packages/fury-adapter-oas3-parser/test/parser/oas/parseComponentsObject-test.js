@@ -14,18 +14,35 @@ describe('Components Object', () => {
     expect(result.warnings.get(0).toValue()).to.equal("'Components Object' is not an object");
   });
 
-  describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported schemas key', () => {
+  describe('#schemas', () => {
+    it('provides a warning when schemas is non-object', () => {
       const components = new minim.elements.Object({
-        schemas: {},
+        schemas: '',
       });
 
       const result = parse(minim, components);
 
       expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'schemas'");
+      expect(result.warnings.get(0).toValue()).to.equal("'Schemas Object' is not an object");
     });
 
+    it('provides warning for unsupported schemas key', () => {
+      const components = new minim.elements.Object({
+        schemas: {
+          User: {
+            type: 'object',
+          },
+        },
+      });
+
+      const result = parse(minim, components);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal("'Schema Object' is unsupported");
+    });
+  });
+
+  describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported responses key', () => {
       const components = new minim.elements.Object({
         responses: {},
