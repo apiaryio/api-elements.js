@@ -1,0 +1,566 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "API"
+        }
+      },
+      "content": [
+        {
+          "element": "category",
+          "meta": {
+            "title": {
+              "element": "string",
+              "content": "Example Resources"
+            },
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "resource",
+              "attributes": {
+                "href": {
+                  "element": "string",
+                  "content": "/response-schema"
+                }
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "content": "GET"
+                    }
+                  },
+                  "attributes": {
+                    "href": {
+                      "element": "string",
+                      "content": "/response-schema"
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            }
+                          }
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": {
+                              "element": "number",
+                              "content": 200
+                            },
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": "{ \"name\": \"Kyle\" }"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
+                              },
+                              "attributes": {
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
+                              },
+                              "content": "{\n  \"type\": \"object\"\n}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "content": "POST"
+                    }
+                  },
+                  "attributes": {
+                    "href": {
+                      "element": "string",
+                      "content": "/implicit-request-schema"
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": "{ \"name\": \"Kyle\" }"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
+                              },
+                              "attributes": {
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
+                              },
+                              "content": "{ \"type\": \"object\", \"required\": [\"name\"] }"
+                            }
+                          ]
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": {
+                              "element": "number",
+                              "content": 201
+                            },
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": "{ \"name\": \"Kyle\", \"url\": \"/me\" }"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "content": "POST"
+                    }
+                  },
+                  "attributes": {
+                    "href": {
+                      "element": "string",
+                      "content": "/request-response-schema"
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": "{ \"name\": \"Kyle\" }"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
+                              },
+                              "attributes": {
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
+                              },
+                              "content": "{\n  \"type\": \"object\"\n}"
+                            }
+                          ]
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": {
+                              "element": "number",
+                              "content": 201
+                            },
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": "{ \"name\": \"Kyle\", \"url\": \"/me\" }"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
+                              },
+                              "attributes": {
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
+                              },
+                              "content": "{\n  \"type\": \"object\",\n  \"required\": [\n    \"url\"\n  ]\n}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": {
+                      "element": "string",
+                      "content": "POST"
+                    }
+                  },
+                  "attributes": {
+                    "href": {
+                      "element": "string",
+                      "content": "/invalid-schema"
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": "{ \"name\": \"Kyle\" }"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                }
+                              },
+                              "attributes": {
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
+                              },
+                              "content": "{ \"Invalid JSON\" }"
+                            }
+                          ]
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": {
+                              "element": "number",
+                              "content": 201
+                            },
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": "{ \"name\": \"Kyle\", \"url\": \"/me\" }"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 /*
  * Tests for API description namespace elements, including all their
  * convenience properties and methods.

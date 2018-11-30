@@ -659,6 +659,13 @@ ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
+apiary-blueprint-parser@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/apiary-blueprint-parser/-/apiary-blueprint-parser-0.5.3.tgz#f97a2cf89a9fa8bdc6f5b7a5edc2cb58c8dd34af"
+  integrity sha1-+Xos+JqfqL3G9bel7cLLWMjdNK8=
+  dependencies:
+    commander "2.0.0"
+
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
@@ -1114,6 +1121,11 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
+commander@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.0.0.tgz#d1b86f901f8b64bd941bdeadaf924530393be928"
+  integrity sha1-0bhvkB+LZL2UG96tr5JFMDk76Sg=
+
 commander@2.15.1:
   version "2.15.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
@@ -1379,6 +1391,11 @@ decamelize@^2.0.0:
   integrity sha512-Ikpp5scV3MSYxY39ymh45ZLEecsTdv/Xj2CaQfI8RLMuwi7XvjX9H/fhraiSuU+C5w5NTDu4ZU72xNiZnurBPg==
   dependencies:
     xregexp "4.0.0"
+
+deckardcain@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/deckardcain/-/deckardcain-0.4.0.tgz#fecd2e9eba10d78a66fc0d54f71818f87d95f52d"
+  integrity sha512-KK1pTUg9j4OMM7jmh6wZBzKzbJkqbHT4Tlx+JKAgzhbCaISc7pIVOr0Ny3RPMhlVcfJtIVByxPjIuh91pCUPcg==
 
 decode-uri-component@^0.2.0:
   version "0.2.0"
