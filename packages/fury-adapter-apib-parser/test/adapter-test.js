@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-expressions */
 /*
  * Tests for API Blueprint adapter.
  */
 
-import { expect } from 'chai';
-import { parse, detect } from '../src/adapter';
+const { expect } = require('chai');
+const { parse, detect } = require('../lib/adapter');
 
 describe('API Blueprint parser adapter', () => {
   context('detection', () => {

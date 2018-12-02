@@ -2,21 +2,20 @@
   "name": "fury-adapter-apib-parser",
   "version": "0.11.0",
   "description": "API Blueprint parser for Fury.js",
+  "author": "Apiary.io <support@apiary.io>",
+  "license": "MIT",
   "main": "./lib/adapter.js",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-apib-parser",
   "repository": {
     "type": "git",
-    "url": "https://github.com/apiaryio/fury-adapter-apib-parser.git"
+    "url": "https://github.com/apiaryio/api-elements.js.git"
   },
   "scripts": {
-    "test": "peasant test",
-    "ci": "peasant -s lint test build",
-    "prepublish": "npm run ci",
-    "cover": "peasant cover",
-    "peasant": "peasant",
-    "lint": "peasant lint"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "mocha"
   },
   "dependencies": {
-    "babel-runtime": "^6.23.0",
     "deckardcain": "^0.4.0",
     "drafter": "^1.2.0",
     "minim": "^0.21.1"
@@ -26,12 +25,12 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "eslint": "^5.9.0",
     "fury": "3.0.0-beta.7",
-    "peasant": "1.1.0"
+    "minim": "^0.21.1",
+    "mocha": "^5.0.2"
   },
   "engines": {
-    "node": ">=4"
-  },
-  "author": "Apiary.io <support@apiary.io>",
-  "license": "MIT"
+    "node": ">=6"
+  }
 }

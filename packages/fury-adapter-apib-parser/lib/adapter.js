@@ -1,20 +1,18 @@
 // API Blueprint parser for Fury.js
 
-import deckardcain from 'deckardcain';
-import drafter from 'drafter';
-import { JSON06Serialiser } from 'minim';
+const deckardcain = require('deckardcain');
+const drafter = require('drafter');
+const { JSON06Serialiser } = require('minim');
 
-export const name = 'api-blueprint';
-export const mediaTypes = [
+const name = 'api-blueprint';
+const mediaTypes = [
   'text/vnd.apiblueprint',
   'text/vnd.apiblueprint+markdown',
 ];
 
-export function detect(source) {
-  return mediaTypes.indexOf(deckardcain.identify(source)) !== -1;
-}
+const detect = source => mediaTypes.indexOf(deckardcain.identify(source)) !== -1;
 
-export function validate({ minim, source, requireBlueprintName }, done) {
+const validate = ({ minim, source, requireBlueprintName }, done) => {
   const options = {
     requireBlueprintName,
   };
@@ -28,12 +26,14 @@ export function validate({ minim, source, requireBlueprintName }, done) {
       done(err, parseResult);
     }
   });
-}
+};
 
 /*
  * Parse an API Blueprint into refract elements.
  */
-export function parse({ minim, source, generateSourceMap, requireBlueprintName }, done) {
+const parse = ({
+  minim, source, generateSourceMap, requireBlueprintName,
+}, done) => {
   const options = {
     exportSourcemap: !!generateSourceMap,
     requireBlueprintName,
@@ -48,6 +48,8 @@ export function parse({ minim, source, generateSourceMap, requireBlueprintName }
       done(err, parseResult);
     }
   });
-}
+};
 
-export default { name, mediaTypes, detect, validate, parse };
+module.exports = {
+  name, mediaTypes, detect, validate, parse,
+};

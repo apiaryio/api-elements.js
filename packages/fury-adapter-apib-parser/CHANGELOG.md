@@ -1,5 +1,11 @@
 # Fury API Blueprint Parser Changelog
 
+## Master
+
+### Breaking
+
+- Node 4 is not supported anymore.
+
 ## 0.11.0
 
 ### Enhancements
