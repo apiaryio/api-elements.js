@@ -43,6 +43,7 @@ function extractPathVariables(path) {
 }
 
 function createErrorForMissingPathParameter(minim, path, variable) {
+  // FIXME: This shouldn't be an error
   const message = `Path '${path.toValue()}' contains variable '${variable}' which is not declared in the parameters section of the '${name}'`;
   return createError(minim, message, path);
 }
@@ -60,15 +61,11 @@ function createErrorForMissingPathVariable(minim, path, variable) {
  */
 function validatePathForMissingHrefVariables(minim, path, pathItem) {
   const pathVariables = extractPathVariables(path.toValue());
-
-  let missingParameters;
-
   const hrefVariables = pathItem.get('parameters');
-  if (hrefVariables) {
-    missingParameters = pathVariables.filter(name => !hrefVariables.getMember(name));
-  } else {
-    missingParameters = pathVariables;
-  }
+
+  const missingParameters = hrefVariables
+    ? pathVariables.filter(name => !hrefVariables.getMember(name))
+    : pathVariables;
 
   if (missingParameters.length > 0) {
     const toError = R.curry(createErrorForMissingPathParameter)(minim, path);

@@ -71,7 +71,7 @@ describe('Parameter Object', () => {
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal(
-        "Only 'in' values of 'path' is supported at the moment"
+        "Only 'in' values of 'path' are supported at the moment"
       );
     });
 
@@ -85,7 +85,7 @@ describe('Parameter Object', () => {
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal(
-        "Only 'in' values of 'path' is supported at the moment"
+        "Only 'in' values of 'path' are supported at the moment"
       );
     });
 
@@ -99,7 +99,7 @@ describe('Parameter Object', () => {
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal(
-        "Only 'in' values of 'path' is supported at the moment"
+        "Only 'in' values of 'path' are supported at the moment"
       );
     });
   });

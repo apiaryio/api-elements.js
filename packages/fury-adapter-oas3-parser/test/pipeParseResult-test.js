@@ -21,7 +21,7 @@ describe('#pipeParseResult', () => {
     expect(parseResult.toValue()).to.deep.equal([10]);
   });
 
-  it('streads multiple elements as arguments during pipe', () => {
+  it('spreads multiple elements as arguments during pipe', () => {
     const duplicate = element => new minim.elements.ParseResult([element, element]);
     const multiply = (lhs, rhs) => lhs.toValue() * rhs.toValue();
     const parse = pipeParseResult(minim,
