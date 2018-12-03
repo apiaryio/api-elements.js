@@ -15,7 +15,16 @@ describe('#parseOpenAPI', () => {
     expect(parseResult.errors.getValue(0)).to.equal('OpenAPI version is not a string');
   });
 
-  it('fails to parse unknown version', () => {
+  it('fails to parse non valid semantic version', () => {
+    const openapi = new minim.elements.Member('openapi', '3.0');
+
+    const parseResult = parseOpenAPI(minim, openapi);
+    expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
+    expect(parseResult.errors.length).to.equal(1);
+    expect(parseResult.errors.getValue(0)).to.equal("OpenAPI version does not contain valid semantic version string '3.0'");
+  });
+
+  it('fails to parse unknown major version', () => {
     const openapi = new minim.elements.Member('openapi', '4.0.0');
 
     const parseResult = parseOpenAPI(minim, openapi);
@@ -30,5 +39,22 @@ describe('#parseOpenAPI', () => {
     const parseResult = parseOpenAPI(minim, openapi);
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.isEmpty).to.be.true;
+  });
+
+  it('allows openapi patch version 3.0.11', () => {
+    const openapi = new minim.elements.Member('openapi', '3.0.11');
+
+    const parseResult = parseOpenAPI(minim, openapi);
+    expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
+    expect(parseResult.isEmpty).to.be.true;
+  });
+
+  it('warns for unsuported minor versions', () => {
+    const openapi = new minim.elements.Member('openapi', '3.1.0');
+
+    const parseResult = parseOpenAPI(minim, openapi);
+    expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
+    expect(parseResult.warnings.length).to.equal(1);
+    expect(parseResult.warnings.getValue(0)).to.equal("Version '3.1.0' is not fully supported");
   });
 });

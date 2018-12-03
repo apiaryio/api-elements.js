@@ -15,7 +15,7 @@ Key:
 
 | Field Name | Support |
 |:--|:--|
-| openapi | [~](https://github.com/apiaryio/fury-adapter-parser-oas3/issues/32) |
+| openapi | ✓ |
 | info | [~](https://github.com/apiaryio/fury-adapter-parser-oas3/issues/30) |
 | servers | [✕](https://github.com/apiaryio/fury-adapter-parser-oas3/issues/24) |
 | paths | ~ |
