@@ -15,6 +15,8 @@ const isPathField = member => member.key.toValue().startsWith('/');
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject
  */
 function parsePaths(minim, paths) {
+  const createParseResult = annotation => new minim.elements.ParseResult([annotation]);
+
   const parseMember = R.cond([
     [isPathField, parsePathItemObject(minim)],
 
@@ -22,7 +24,7 @@ function parsePaths(minim, paths) {
     [isExtension, () => new minim.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(minim, name)],
+    [R.T, R.compose(createParseResult, createInvalidMemberWarning(minim, name))],
   ]);
 
   const parseMembers = object => R.chain(parseMember, new minim.elements.ParseResult(object.content));
