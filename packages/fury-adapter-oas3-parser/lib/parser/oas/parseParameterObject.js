@@ -57,7 +57,7 @@ function parseParameterObject(minim, object) {
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => []],
+    [isExtension, () => new minim.elements.ParseResult()],
 
     // Return a warning for additional properties
     [R.T, createInvalidMemberWarning(minim, name)],

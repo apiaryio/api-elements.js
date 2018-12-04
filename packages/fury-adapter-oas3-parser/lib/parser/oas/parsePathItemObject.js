@@ -132,7 +132,7 @@ function parsePathItemObject(minim, member) {
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => []],
+    [isExtension, () => new minim.elements.ParseResult()],
 
     // Return a warning for every other key
     [R.T, createInvalidMemberWarning(minim, name)],

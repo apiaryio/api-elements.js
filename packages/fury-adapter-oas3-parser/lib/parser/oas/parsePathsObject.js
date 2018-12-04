@@ -19,7 +19,7 @@ function parsePaths(minim, paths) {
     [isPathField, parsePathItemObject(minim)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => []],
+    [isExtension, () => new minim.elements.ParseResult()],
 
     // Return a warning for additional properties
     [R.T, createInvalidMemberWarning(minim, name)],
