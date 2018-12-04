@@ -487,6 +487,45 @@ describe('Swagger Schema to JSON Schema', () => {
       });
     });
 
+    it('copies arbitary references to schema', () => {
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User/properties/name',
+        },
+      }, root);
+
+      expect(schema).to.deep.equal({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User/properties/name',
+        },
+        definitions: {
+          User: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+        },
+      });
+    });
+
     it('recursively handles references to schema', () => {
       const root = {
         definitions: {

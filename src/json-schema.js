@@ -21,7 +21,19 @@ export function parseReference(reference) {
   return id;
 }
 
-function lookupReference(reference, root) {
+/**
+ * Lookup a reference
+ *
+ * Resolves a reference in the given root schema. An optional depth argument
+ * can be provided to limit resolution to a certain level. For example to
+ * limit the `#/definitions/User/properties/name` reference lookup to just a
+ * depth `#/definitions/User`, a depth of 3 can be supplied.
+ *
+ * @param reference {string} - Example: #/definitions/User/properties/name
+ * @param root {object} - The object to resolve the given reference
+ * @param depth {number} - A limit to resolving the depth
+ */
+function lookupReference(reference, root, depth) {
   const parts = reference.split('/').reverse();
 
   if (parts.pop() !== '#') {
@@ -32,12 +44,20 @@ function lookupReference(reference, root) {
     throw new Error('Schema reference must be reference to #/definitions');
   }
 
-  const id = parts[0];
+  const id = parts[parts.length - 1];
   let value = root.definitions;
+
+  // ['#', 'definitions'] (2)
+  let currentDepth = 2;
 
   while (parts.length > 0 && value !== undefined) {
     const key = parts.pop();
     value = value[key];
+    currentDepth += 1;
+
+    if (depth && depth === currentDepth) {
+      break;
+    }
   }
 
   if (value === undefined) {
@@ -251,7 +271,7 @@ export function convertSchema(schema, root, swagger, copyDefinitions = true) {
     }
 
     while (references.length !== 0) {
-      const lookup = lookupReference(references.pop(), root);
+      const lookup = lookupReference(references.pop(), root, 3);
 
       if (result.definitions[lookup.id] === undefined) {
         references = references.concat(findReferences(lookup.referenced));
