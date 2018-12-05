@@ -75,6 +75,8 @@ function parseParameterObject(minim, object) {
         member.description = description;
       }
 
+      member.in = parameter.getValue('in');
+
       return member;
     });
 

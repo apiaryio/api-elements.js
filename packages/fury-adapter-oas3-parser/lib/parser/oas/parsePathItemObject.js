@@ -1,7 +1,6 @@
 const R = require('ramda');
 const {
   isObject,
-  isArray,
   isExtension,
   hasKey,
   getValue,
@@ -15,7 +14,7 @@ const {
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseCopy = require('../parseCopy');
-const parseParameterObject = require('./parseParameterObject');
+const parseParameterObjects = require('./parseParameterObjects');
 const parseOperationObject = require('./parseOperationObject');
 const pipeParseResult = require('../../pipeParseResult');
 
@@ -61,7 +60,14 @@ function createErrorForMissingPathVariable(minim, path, variable) {
  */
 function validatePathForMissingHrefVariables(minim, path, pathItem) {
   const pathVariables = extractPathVariables(path.toValue());
-  const hrefVariables = pathItem.get('parameters');
+
+  const parameters = pathItem.get('parameters')
+    ? pathItem.get('parameters')
+    : new minim.elements.Object();
+
+  const hrefVariables = parameters.get('path')
+    ? parameters.get('path')
+    : new minim.elements.HrefVariables();
 
   const missingParameters = hrefVariables
     ? pathVariables.filter(name => !hrefVariables.getMember(name))
@@ -82,7 +88,7 @@ function validatePathForMissingHrefVariables(minim, path, pathItem) {
  * @param hrefVariables {HrefVariables}
  * @retuns ParseResult<HrefVariables>
  */
-function validateHrefVariablesInPath(minim, path, hrefVariables) {
+const validateHrefVariablesInPath = R.curry((minim, path, hrefVariables) => {
   const pathVariables = extractPathVariables(path.toValue());
   const variables = hrefVariables.content.map(member => member.key.toValue());
   const missingPathVariables = variables.filter(name => !pathVariables.includes(name));
@@ -94,7 +100,7 @@ function validateHrefVariablesInPath(minim, path, hrefVariables) {
   }
 
   return new minim.elements.ParseResult([hrefVariables]);
-}
+});
 
 /**
  * Parse parameters member
@@ -103,13 +109,13 @@ function validateHrefVariablesInPath(minim, path, hrefVariables) {
  * @param member {MemberElement} parameters member from an object element
  */
 function parseParameters(minim, path, member) {
-  const ParseResult = R.constructN(1, minim.elements.ParseResult);
+  const parseParameter = R.cond([
+    [hasKey('path'), R.compose(validateHrefVariablesInPath(minim, path), getValue)],
+  ]);
 
   const parseParameters = pipeParseResult(minim,
-    R.unless(isArray, createWarning(minim, `'${name}' 'parameters' is not an array`)),
-    R.compose(R.chain(parseParameterObject(minim)), ParseResult),
-    (...hrefVariables) => new minim.elements.HrefVariables([...hrefVariables]),
-    R.curry(validateHrefVariablesInPath)(minim, path));
+    parseParameterObjects(minim, name),
+    parseObject(minim, parseParameter));
 
   return parseParameters(member.value);
 }
@@ -145,7 +151,11 @@ function parsePathItemObject(minim, member) {
     (pathItem) => {
       const resource = new minim.elements.Resource();
       resource.href = member.key.clone();
-      resource.hrefVariables = pathItem.get('parameters');
+
+      const parameters = pathItem.get('parameters');
+      if (parameters) {
+        resource.hrefVariables = parameters.get('path');
+      }
 
       const summary = pathItem.get('summary');
       if (summary) {
