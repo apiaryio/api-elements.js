@@ -111,6 +111,7 @@ const validateHrefVariablesInPath = R.curry((minim, path, hrefVariables) => {
 function parseParameters(minim, path, member) {
   const parseParameter = R.cond([
     [hasKey('path'), R.compose(validateHrefVariablesInPath(minim, path), getValue)],
+    [hasKey('query'), member => member],
   ]);
 
   const parseParameters = pipeParseResult(minim,
@@ -118,6 +119,35 @@ function parseParameters(minim, path, member) {
     parseObject(minim, parseParameter));
 
   return parseParameters(member.value);
+}
+
+function hrefVariablesFromParameters(minim, parameters) {
+  if (parameters) {
+    const path = parameters.get('path')
+      ? parameters.get('path')
+      : new minim.elements.HrefVariables();
+
+    const query = parameters.get('query')
+      ? parameters.get('query')
+      : new minim.elements.HrefVariables();
+
+    if (!path.isEmpty || !query.isEmpty) {
+      return path.concat(query);
+    }
+  }
+
+  return undefined;
+}
+
+function hrefFromParameters(path, parameters) {
+  const href = path.clone();
+
+  if (parameters && parameters.get('query')) {
+    const queryString = parameters.get('query').keys().join(',');
+    href.content += `{?${queryString}}`;
+  }
+
+  return href;
 }
 
 /**
@@ -150,12 +180,10 @@ function parsePathItemObject(minim, member) {
     R.curry(validatePathForMissingHrefVariables)(minim, member.key),
     (pathItem) => {
       const resource = new minim.elements.Resource();
-      resource.href = member.key.clone();
 
       const parameters = pathItem.get('parameters');
-      if (parameters) {
-        resource.hrefVariables = parameters.get('path');
-      }
+      resource.href = hrefFromParameters(member.key, parameters);
+      resource.hrefVariables = hrefVariablesFromParameters(minim, parameters);
 
       const summary = pathItem.get('summary');
       if (summary) {

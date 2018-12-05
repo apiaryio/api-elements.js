@@ -61,20 +61,6 @@ describe('Parameter Object', () => {
       );
     });
 
-    it('provides an unsupported error for query parameters', () => {
-      const parameter = new minim.elements.Object({
-        name: 'example',
-        in: 'query',
-      });
-
-      const result = parse(minim, parameter);
-
-      expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal(
-        "Only 'in' values of 'path' are supported at the moment"
-      );
-    });
-
     it('provides an unsupported error for header parameters', () => {
       const parameter = new minim.elements.Object({
         name: 'example',
@@ -85,7 +71,7 @@ describe('Parameter Object', () => {
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal(
-        "Only 'in' values of 'path' are supported at the moment"
+        "Only 'in' values of 'path' and 'query' are supported at the moment"
       );
     });
 
@@ -99,7 +85,7 @@ describe('Parameter Object', () => {
 
       expect(result.length).to.equal(1);
       expect(result.errors.get(0).toValue()).to.equal(
-        "Only 'in' values of 'path' are supported at the moment"
+        "Only 'in' values of 'path' and 'query' are supported at the moment"
       );
     });
   });

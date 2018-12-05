@@ -41,13 +41,14 @@ function parseParameterObject(minim, object) {
     "'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'"));
 
   // FIXME: The following should not be an error
-  const ensureInPath = R.unless(hasValue('path'), createError(minim,
-    "Only 'in' values of 'path' are supported at the moment"));
+  const isSupportedIn = R.anyPass([hasValue('path'), hasValue('query')]);
+  const ensureSupportedIn = R.unless(isSupportedIn, createError(minim,
+    "Only 'in' values of 'path' and 'query' are supported at the moment"));
 
   const parseIn = pipeParseResult(minim,
     parseString(minim, name, true),
     validateIn,
-    ensureInPath);
+    ensureSupportedIn);
 
   const parseMember = R.cond([
     [hasKey('name'), parseString(minim, name, true)],

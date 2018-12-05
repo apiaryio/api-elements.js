@@ -222,5 +222,70 @@ describe('#parsePathItemObject', () => {
         );
       });
     });
+
+    describe('query parameters', () => {
+      it('exposes query parameter in href', () => {
+        const path = new minim.elements.Member('/', {
+          parameters: [
+            {
+              name: 'categories',
+              in: 'query',
+            },
+          ],
+        });
+
+        const result = parse(minim, path);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+
+        const resource = result.get(0);
+        expect(resource.href.toValue()).to.equal('/{?categories}');
+      });
+
+      it('exposes multiple query parameter in href', () => {
+        const path = new minim.elements.Member('/', {
+          parameters: [
+            {
+              name: 'categories',
+              in: 'query',
+            },
+            {
+              name: 'tags',
+              in: 'query',
+            },
+          ],
+        });
+
+        const result = parse(minim, path);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+
+        const resource = result.get(0);
+        expect(resource.href.toValue()).to.equal('/{?categories,tags}');
+      });
+
+      it('exposes query parameter in hrefVariables', () => {
+        const path = new minim.elements.Member('/', {
+          parameters: [
+            {
+              name: 'resource',
+              in: 'query',
+            },
+          ],
+        });
+
+        const result = parse(minim, path);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
+
+        const resource = result.get(0);
+        expect(resource.hrefVariables).to.be.instanceof(minim.elements.HrefVariables);
+        expect(resource.hrefVariables.length).to.equal(1);
+        expect(resource.hrefVariables.getMember('resource')).to.be.instanceof(minim.elements.Member);
+      });
+    });
   });
 });
