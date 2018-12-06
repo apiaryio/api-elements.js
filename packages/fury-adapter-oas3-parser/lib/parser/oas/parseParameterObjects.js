@@ -23,7 +23,7 @@ const isPathOrQuery = R.anyPass([hasKey('path'), hasKey('query')]);
 function parseParameterObjects(minim, name, array) {
   const ParseResult = R.constructN(1, minim.elements.ParseResult);
 
-  // Convert an array of parameter into the correct types
+  // Convert an array of parameters into the correct types
   const convertParameters = R.cond([
     [isPathOrQuery, member => new minim.elements.HrefVariables(member.value.content)],
     // FIXME when headers and cookies are supported these should be converted

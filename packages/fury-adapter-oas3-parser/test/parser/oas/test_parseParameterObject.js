@@ -47,7 +47,7 @@ describe('Parameter Object', () => {
   });
 
   describe('#in', () => {
-    it('provides an error when in is not a string', () => {
+    it('provides an error when value is not a string', () => {
       const parameter = new minim.elements.Object({
         name: 'example',
         in: 1,
@@ -61,7 +61,7 @@ describe('Parameter Object', () => {
       );
     });
 
-    it('provides an error when in is a permitted value', () => {
+    it('provides an error when value is not a permitted value', () => {
       const parameter = new minim.elements.Object({
         name: 'example',
         in: 'space',
