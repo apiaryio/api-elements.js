@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import querystring from 'querystring';
 import faker from 'json-schema-faker';
+import { dereference } from './json-schema';
 import annotations from './annotations';
 import { inferred } from './link';
 import { isFormURLEncoded, isMultiPartFormData, parseBoundary } from './media-type';
@@ -20,6 +21,7 @@ function hasCircularReference(schema) {
 }
 
 export function bodyFromSchema(schema, payload, parser, contentType = 'application/json') {
+  const dereferencedSchema = dereference(schema, schema);
   const { Asset } = parser.minim.elements;
   let asset = null;
 
@@ -28,7 +30,7 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
       alwaysFakeOptionals: !hasCircularReference(schema),
     });
 
-    let body = faker.generate(_.cloneDeep(schema));
+    let body = faker.generate(dereferencedSchema);
 
     if (typeof body !== 'string') {
       if (isFormURLEncoded(contentType)) {

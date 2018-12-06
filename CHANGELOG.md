@@ -13,6 +13,9 @@
   x-nullable: true
   ```
 
+- Fixes some cases where rendering a JSON example from a Swagger Schema using
+  example values which contain references would fail.
+
 ## 0.22.4 (2018-11-29)
 
 ### Bug Fixes

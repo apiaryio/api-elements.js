@@ -70,19 +70,50 @@ function lookupReference(reference, root, depth) {
   };
 }
 
-export function dereference(example, root) {
-  if (_.isArray(example)) {
-    return example.map(value => dereference(value, root));
-  } else if (_.isObject(example)) {
-    if (example.$ref) {
-      const ref = lookupReference(example.$ref, root);
-      return dereference(ref.referenced, root);
+function pathHasCircularReference(paths, path, reference) {
+  const currentPath = (path || []).join('/');
+
+  // Check for direct circular reference
+  if (currentPath.startsWith(reference)) {
+    return true;
+  }
+
+  // Check for indirect circular Reference
+  if ((paths || []).find(p => p.startsWith(reference))) {
+    return true;
+  }
+
+  return false;
+}
+
+export function dereference(example, root, paths, path) {
+  if (example === null || example === undefined) {
+    return example;
+  }
+
+  if (example.$ref) {
+    const refPath = example.$ref.split('/');
+    const currentPath = (path || []).join('/');
+
+    if (path && pathHasCircularReference(paths, path, example.$ref)) {
+      return null;
     }
 
+    const ref = lookupReference(example.$ref, root);
+
+    const newPaths = (paths || []).concat([currentPath]);
+    return dereference(ref.referenced, root, newPaths, refPath);
+  }
+
+  if (_.isArray(example)) {
+    return example.map(value => dereference(value, root, paths, path));
+  }
+
+  if (_.isObject(example)) {
     const result = {};
 
     _.forEach(example, (value, key) => {
-      result[key] = dereference(value, root);
+      result[key] = dereference(value, root, paths, (path || []).concat([key]));
     });
 
     return result;
