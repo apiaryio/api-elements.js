@@ -27,6 +27,11 @@ const isValidInValue = R.anyPass([
   hasValue('cookie'),
 ]);
 
+
+function nameContainsReservedCharacter(member) {
+  return !/^[A-z0-9]+$/.test(member.value.toValue());
+}
+
 /**
  * Parse Parameter Object
  *
@@ -50,8 +55,15 @@ function parseParameterObject(minim, object) {
     validateIn,
     ensureSupportedIn);
 
+  const createUnsupportedNameError = createError(minim,
+    `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`);
+  const validateName = R.when(nameContainsReservedCharacter, createUnsupportedNameError);
+  const parseName = pipeParseResult(minim,
+    parseString(minim, name, true),
+    validateName);
+
   const parseMember = R.cond([
-    [hasKey('name'), parseString(minim, name, true)],
+    [hasKey('name'), parseName],
     [hasKey('in'), parseIn],
     [hasKey('description'), parseString(minim, name, false)],
 

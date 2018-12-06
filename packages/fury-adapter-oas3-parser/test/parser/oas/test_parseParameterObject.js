@@ -30,6 +30,20 @@ describe('Parameter Object', () => {
         "'Parameter Object' 'name' is not a string"
       );
     });
+
+    it('provides an error when name contains unsupported characters', () => {
+      const parameter = new minim.elements.Object({
+        name: 'hello!',
+        in: 'path',
+      });
+
+      const result = parse(minim, parameter);
+
+      expect(result.length).to.equal(1);
+      expect(result.errors.get(0).toValue()).to.equal(
+        "'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported"
+      );
+    });
   });
 
   describe('#in', () => {
