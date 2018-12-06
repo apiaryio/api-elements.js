@@ -209,7 +209,7 @@ export default class Parser {
 
           if (this.definitions) {
             this.withPath('definitions', () => {
-              this.handleSwaggerDefinitions(this.definitions);
+              this.handleSwaggerDefinitions(referencedSwagger.definitions);
             });
           }
 
@@ -661,7 +661,7 @@ export default class Parser {
 
   handleSwaggerDefinitions(definitions) {
     const { Category } = this.minim.elements;
-    const generator = new DataStructureGenerator(this.minim);
+    const generator = new DataStructureGenerator(this.minim, this.referencedSwagger);
     const dataStructures = new Category();
     dataStructures.classes.push('dataStructures');
 
@@ -1574,16 +1574,7 @@ export default class Parser {
     }
 
     this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
-
-    if (referencedPathValue && referencedPathValue.$ref) {
-      // If the schema is a reference just produce a data structure for the ref
-      this.pushDataStructureAsset(referencedPathValue, payload);
-    } else {
-      // Otherwise, we want to use the JSON Schema instead of Swagger Schema.
-      // In some cases, the created JSON Schema will dereference the $ref
-      // so we have the above if clause.
-      this.pushDataStructureAsset(jsonSchema, payload);
-    }
+    this.pushDataStructureAsset(referencedPathValue || schema, payload);
   }
 
   // Create a Refract asset element containing JSON Schema and push into payload
@@ -1621,7 +1612,7 @@ export default class Parser {
 
   pushDataStructureAsset(schema, payload) {
     try {
-      const generator = new DataStructureGenerator(this.minim);
+      const generator = new DataStructureGenerator(this.minim, this.referencedSwagger);
       const dataStructure = generator.generateDataStructure(schema);
       if (dataStructure) {
         payload.content.push(dataStructure);

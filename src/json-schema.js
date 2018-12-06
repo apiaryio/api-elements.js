@@ -50,19 +50,19 @@ function lookupReference(reference, root) {
   };
 }
 
-function convertExample(example, swagger) {
+export function dereference(example, root) {
   if (_.isArray(example)) {
-    return example.map(value => convertExample(value, swagger));
+    return example.map(value => dereference(value, root));
   } else if (_.isObject(example)) {
     if (example.$ref) {
-      const ref = lookupReference(example.$ref, swagger);
-      return convertExample(ref.referenced, swagger);
+      const ref = lookupReference(example.$ref, root);
+      return dereference(ref.referenced, root);
     }
 
     const result = {};
 
     _.forEach(example, (value, key) => {
-      result[key] = convertExample(value, swagger);
+      result[key] = dereference(value, root);
     });
 
     return result;
@@ -89,7 +89,7 @@ function convertSubSchema(schema, references, swagger) {
   }
 
   if (schema.example) {
-    actualSchema.examples = [convertExample(schema.example, swagger)];
+    actualSchema.examples = [dereference(schema.example, swagger)];
   }
 
   if (schema['x-nullable']) {

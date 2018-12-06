@@ -1,5 +1,18 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixes using `x-nullable` in a schema which previously caused the schema not
+  to be converted to a data structure. For example, the following schema
+  wouldn't result in a data structure:
+
+  ```yaml
+  type: string
+  x-nullable: true
+  ```
+
 ## 0.22.4 (2018-11-29)
 
 ### Bug Fixes
