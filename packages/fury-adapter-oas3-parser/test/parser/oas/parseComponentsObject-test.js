@@ -23,7 +23,7 @@ describe('Components Object', () => {
       const result = parse(minim, components);
 
       expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Schemas Object' is not an object");
+      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' 'schemas' is not an object");
     });
 
     it('parses valid schemas into data structures', () => {
@@ -47,6 +47,41 @@ describe('Components Object', () => {
     });
   });
 
+  describe('#parameters', () => {
+    it('provides a warning when parameters is non-object', () => {
+      const components = new minim.elements.Object({
+        parameters: '',
+      });
+
+      const result = parse(minim, components);
+
+      expect(result.warnings.length).to.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' 'parameters' is not an object");
+    });
+
+    it('parses valid parameters', () => {
+      const components = new minim.elements.Object({
+        parameters: {
+          limitParam: {
+            name: 'limit',
+            in: 'query',
+          },
+        },
+      });
+
+      const result = parse(minim, components);
+      expect(result.length).to.equal(1);
+
+      const parsedComponents = result.get(0);
+      expect(parsedComponents).to.be.instanceof(minim.elements.Object);
+
+      const parameters = parsedComponents.get('parameters');
+      expect(parameters).to.be.instanceof(minim.elements.Object);
+      expect(parameters.get('limitParam')).to.be.instanceof(minim.elements.Member);
+      expect(parameters.get('limitParam').key.toValue()).to.equal('limit');
+    });
+  });
+
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported responses key', () => {
       const components = new minim.elements.Object({
@@ -57,17 +92,6 @@ describe('Components Object', () => {
 
       expect(result.warnings.length).to.equal(1);
       expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'responses'");
-    });
-
-    it('provides warning for unsupported parameters key', () => {
-      const components = new minim.elements.Object({
-        parameters: {},
-      });
-
-      const result = parse(minim, components);
-
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'parameters'");
     });
 
     it('provides warning for unsupported examples key', () => {
