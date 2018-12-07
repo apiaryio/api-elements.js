@@ -16,10 +16,11 @@ const {
   Object: ObjectElement,
   Member: MemberElement,
   Enum: EnumElement,
+  Ref: RefElement,
 } = namespace.elements;
 
-function schemaToDataStructure(schema) {
-  return new DataStructureGenerator(namespace).generateDataStructure(schema);
+function schemaToDataStructure(schema, root) {
+  return new DataStructureGenerator(namespace, root).generateDataStructure(schema);
 }
 
 describe('JSON Schema to Data Structure', () => {
@@ -529,6 +530,78 @@ describe('JSON Schema to Data Structure', () => {
       const name = dataStructure.content.get('name');
       expect(name).not.to.be.undefined;
     });
+
+    it('produces object element from multiple allOf where one allOf is reference base type', () => {
+      const schema = {
+        allOf: [
+          {
+            $ref: '#/definitions/User',
+          },
+          {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+        ],
+      };
+
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+          },
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema, root);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+      expect(dataStructure.content.element).to.equal('definitions/User');
+
+      const name = dataStructure.content.get('name');
+      expect(name).not.to.be.undefined;
+    });
+
+    it('produces object element from multiple allOf contain multiple reference to mixin objects', () => {
+      const schema = {
+        allOf: [
+          {
+            $ref: '#/definitions/User',
+          },
+          {
+            $ref: '#/definitions/UserMixin',
+          },
+        ],
+      };
+
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+          },
+          UserMixin: {
+            type: 'object',
+          },
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema, root);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+      expect(dataStructure.content.element).to.equal('object');
+
+      expect(dataStructure.content.content.length).to.equal(2);
+      expect(dataStructure.content.content[0]).to.be.instanceof(RefElement);
+      expect(dataStructure.content.content[0].toValue()).to.equal('definitions/User');
+      expect(dataStructure.content.content[1]).to.be.instanceof(RefElement);
+      expect(dataStructure.content.content[1].toValue()).to.equal('definitions/UserMixin');
+    });
+
 
     it('produces value from examples', () => {
       const schema = {

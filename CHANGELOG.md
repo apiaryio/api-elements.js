@@ -8,6 +8,28 @@
   to infer when the schema should be an object but the user has forgotten to
   put `type: object` by looking for the presence of `properties` in the schema.
 
+- Adds support for object inheritance and mixins via `allOf` referencing in
+  data structure generation.
+
+  For example, the following will create an object which inherits from `User`:
+
+  ```yaml
+  allOf:
+    - $ref: '#/definitions/User'
+    - properties:
+        id:
+          type: string
+  ```
+
+  Secondly, when you reference multiple objects using `allOf` they will be
+  treated as mixins:
+
+  ```yaml
+  allOf:
+    - $ref: '#/definitions/BaseUser'
+    - $ref: '#/definitions/UserMixin'
+  ```
+
 ### Bug Fixes
 
 - Fixes using `x-nullable` in a schema which previously caused the schema not
