@@ -512,6 +512,24 @@ describe('JSON Schema to Data Structure', () => {
       expect(admin.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
     });
 
+    it('produces object element from properties when schema root doesnt provide a type', () => {
+      const schema = {
+        properties: {
+          name: {
+            type: 'string',
+          },
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      const name = dataStructure.content.get('name');
+      expect(name).not.to.be.undefined;
+    });
+
     it('produces value from examples', () => {
       const schema = {
         type: 'object',

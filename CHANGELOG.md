@@ -2,6 +2,12 @@
 
 ## Master
 
+### Enhancements
+
+- While generating a data structure from a Swagger Schema, we will now attempt
+  to infer when the schema should be an object but the user has forgotten to
+  put `type: object` by looking for the presence of `properties` in the schema.
+
 ### Bug Fixes
 
 - Fixes using `x-nullable` in a schema which previously caused the schema not

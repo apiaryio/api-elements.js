@@ -178,13 +178,20 @@ export class DataStructureGenerator {
    * @returns {string} type
    */
   typeForSchema(schema) {
-    if (schema.type === undefined && schema.allOf && schema.allOf.length > 0) {
-      // Try to infer type from allOf values
-      const allTypes = schema.allOf.map(this.typeForSchema);
-      const uniqueTypes = _.uniq(allTypes);
+    if (schema.type === undefined) {
+      if (schema.allOf && schema.allOf.length > 0) {
+        // Try to infer type from allOf values
+        const allTypes = schema.allOf.map(this.typeForSchema);
+        const uniqueTypes = _.uniq(allTypes);
 
-      if (uniqueTypes.length === 1) {
-        return uniqueTypes[0];
+        if (uniqueTypes.length === 1) {
+          return uniqueTypes[0];
+        }
+      }
+
+      if (schema.properties) {
+        // Assume user meant object
+        return 'object';
       }
     }
 
