@@ -21,7 +21,19 @@ export function parseReference(reference) {
   return id;
 }
 
-function lookupReference(reference, root) {
+/**
+ * Lookup a reference
+ *
+ * Resolves a reference in the given root schema. An optional depth argument
+ * can be provided to limit resolution to a certain level. For example to
+ * limit the `#/definitions/User/properties/name` reference lookup to just a
+ * depth `#/definitions/User`, a depth of 3 can be supplied.
+ *
+ * @param reference {string} - Example: #/definitions/User/properties/name
+ * @param root {object} - The object to resolve the given reference
+ * @param depth {number} - A limit to resolving the depth
+ */
+function lookupReference(reference, root, depth) {
   const parts = reference.split('/').reverse();
 
   if (parts.pop() !== '#') {
@@ -32,12 +44,20 @@ function lookupReference(reference, root) {
     throw new Error('Schema reference must be reference to #/definitions');
   }
 
-  const id = parts[0];
+  const id = parts[parts.length - 1];
   let value = root.definitions;
+
+  // ['#', 'definitions'] (2)
+  let currentDepth = 2;
 
   while (parts.length > 0 && value !== undefined) {
     const key = parts.pop();
     value = value[key];
+    currentDepth += 1;
+
+    if (depth && depth === currentDepth) {
+      break;
+    }
   }
 
   if (value === undefined) {
@@ -50,19 +70,50 @@ function lookupReference(reference, root) {
   };
 }
 
-function convertExample(example, swagger) {
-  if (_.isArray(example)) {
-    return example.map(value => convertExample(value, swagger));
-  } else if (_.isObject(example)) {
-    if (example.$ref) {
-      const ref = lookupReference(example.$ref, swagger);
-      return convertExample(ref.referenced, swagger);
+function pathHasCircularReference(paths, path, reference) {
+  const currentPath = (path || []).join('/');
+
+  // Check for direct circular reference
+  if (currentPath.startsWith(reference)) {
+    return true;
+  }
+
+  // Check for indirect circular Reference
+  if ((paths || []).find(p => p.startsWith(reference))) {
+    return true;
+  }
+
+  return false;
+}
+
+export function dereference(example, root, paths, path) {
+  if (example === null || example === undefined) {
+    return example;
+  }
+
+  if (example.$ref) {
+    const refPath = example.$ref.split('/');
+    const currentPath = (path || []).join('/');
+
+    if (path && pathHasCircularReference(paths, path, example.$ref)) {
+      return null;
     }
 
+    const ref = lookupReference(example.$ref, root);
+
+    const newPaths = (paths || []).concat([currentPath]);
+    return dereference(ref.referenced, root, newPaths, refPath);
+  }
+
+  if (_.isArray(example)) {
+    return example.map(value => dereference(value, root, paths, path));
+  }
+
+  if (_.isObject(example)) {
     const result = {};
 
     _.forEach(example, (value, key) => {
-      result[key] = convertExample(value, swagger);
+      result[key] = dereference(value, root, paths, (path || []).concat([key]));
     });
 
     return result;
@@ -89,7 +140,7 @@ function convertSubSchema(schema, references, swagger) {
   }
 
   if (schema.example) {
-    actualSchema.examples = [convertExample(schema.example, swagger)];
+    actualSchema.examples = [dereference(schema.example, swagger)];
   }
 
   if (schema['x-nullable']) {
@@ -251,7 +302,7 @@ export function convertSchema(schema, root, swagger, copyDefinitions = true) {
     }
 
     while (references.length !== 0) {
-      const lookup = lookupReference(references.pop(), root);
+      const lookup = lookupReference(references.pop(), root, 3);
 
       if (result.definitions[lookup.id] === undefined) {
         references = references.concat(findReferences(lookup.referenced));

@@ -1,5 +1,21 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixes using `x-nullable` in a schema which previously caused the schema not
+  to be converted to a data structure. For example, the following schema
+  wouldn't result in a data structure:
+
+  ```yaml
+  type: string
+  x-nullable: true
+  ```
+
+- Fixes some cases where rendering a JSON example from a Swagger Schema using
+  example values which contain references would fail.
+
 ## 0.22.4 (2018-11-29)
 
 ### Bug Fixes

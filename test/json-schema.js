@@ -3,7 +3,7 @@
 
 import { expect } from 'chai';
 
-import { convertSchema, convertSchemaDefinitions } from '../src/json-schema';
+import { convertSchema, convertSchemaDefinitions, dereference } from '../src/json-schema';
 
 describe('Swagger Schema to JSON Schema', () => {
   it('returns compatible schema when given valid JSON Schema', () => {
@@ -487,6 +487,45 @@ describe('Swagger Schema to JSON Schema', () => {
       });
     });
 
+    it('copies arbitary references to schema', () => {
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+        },
+      };
+
+      const schema = convertSchema({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User/properties/name',
+        },
+      }, root);
+
+      expect(schema).to.deep.equal({
+        type: 'array',
+        items: {
+          $ref: '#/definitions/User/properties/name',
+        },
+        definitions: {
+          User: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+        },
+      });
+    });
+
     it('recursively handles references to schema', () => {
       const root = {
         definitions: {
@@ -633,6 +672,107 @@ describe('Swagger Schema to JSON Schema', () => {
           ],
         },
       });
+    });
+  });
+});
+
+describe('Dereferencing', () => {
+  it('can dereference an object without references', () => {
+    const result = dereference({ type: 'object' });
+
+    expect(result).to.deep.equal({
+      type: 'object',
+    });
+  });
+
+  it('can dereference an object with reference', () => {
+    const result = dereference({ $ref: '#/definitions/User' }, {
+      definitions: {
+        User: {
+          type: 'object',
+        },
+      },
+    });
+
+    expect(result).to.deep.equal({
+      type: 'object',
+    });
+  });
+
+  it('can dereference an object with a reference to another reference', () => {
+    const result = dereference({ $ref: '#/definitions/User' }, {
+      definitions: {
+        User: {
+          $ref: '#/definitions/BaseUser',
+        },
+        BaseUser: {
+          type: 'object',
+        },
+      },
+    });
+
+    expect(result).to.deep.equal({
+      type: 'object',
+    });
+  });
+
+  it('can dereference an array with a reference', () => {
+    const result = dereference([{ $ref: '#/definitions/User' }], {
+      definitions: {
+        User: {
+          $ref: '#/definitions/BaseUser',
+        },
+        BaseUser: {
+          type: 'object',
+        },
+      },
+    });
+
+    expect(result).to.deep.equal([
+      {
+        type: 'object',
+      },
+    ]);
+  });
+
+  it('can dereference a direct circular reference', () => {
+    const result = dereference({ $ref: '#/definitions/Node' }, {
+      definitions: {
+        Node: {
+          name: 'Doe',
+          parent: { $ref: '#/definitions/Node' },
+        },
+      },
+    });
+
+    expect(result).to.deep.equal({
+      name: 'Doe',
+      parent: null,
+    });
+  });
+
+  it('can dereference an indirect circular reference', () => {
+    const result = dereference({ $ref: '#/definitions/User' }, {
+      definitions: {
+        User: {
+          name: 'Doe',
+          company: {
+            $ref: '#/definitions/Company',
+          },
+        },
+        Company: {
+          owner: {
+            $ref: '#/definitions/User',
+          },
+        },
+      },
+    });
+
+    expect(result).to.deep.equal({
+      name: 'Doe',
+      company: {
+        owner: null,
+      },
     });
   });
 });

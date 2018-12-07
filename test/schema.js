@@ -66,7 +66,7 @@ describe('JSON Schema to Data Structure', () => {
     it('produces string element with examples', () => {
       const schema = {
         type: 'string',
-        examples: ['doe'],
+        example: 'doe',
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -80,7 +80,7 @@ describe('JSON Schema to Data Structure', () => {
     it('produces string element with example', () => {
       const schema = {
         type: 'string',
-        examples: ['doe'],
+        example: 'doe',
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -94,7 +94,7 @@ describe('JSON Schema to Data Structure', () => {
     it('produces string element with samples for example type mismatch', () => {
       const schema = {
         type: 'string',
-        examples: [1],
+        example: 1,
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -215,10 +215,10 @@ describe('JSON Schema to Data Structure', () => {
       expect(defaultElement.toValue()).to.equal(true);
     });
 
-    it('produces boolean element with examples', () => {
+    it('produces boolean element with example', () => {
       const schema = {
         type: 'boolean',
-        examples: [true],
+        example: true,
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -259,20 +259,17 @@ describe('JSON Schema to Data Structure', () => {
       expect(defaultElement.toValue()).to.be.equal(15);
     });
 
-    it('produces number element with examples', () => {
+    it('produces number element with example', () => {
       const schema = {
         type: 'number',
-        examples: [1, 2, 3],
+        example: 3,
       };
 
       const dataStructure = schemaToDataStructure(schema);
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(NumberElement);
-
-      const samples = dataStructure.content.attributes.get('samples');
-      expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.toValue()).to.deep.equal([1, 2, 3]);
+      expect(dataStructure.toValue()).to.equal(3);
     });
 
     it('produces number element with description of multipleOf', () => {
@@ -518,11 +515,9 @@ describe('JSON Schema to Data Structure', () => {
     it('produces value from examples', () => {
       const schema = {
         type: 'object',
-        examples: [
-          {
-            name: 'Doe',
-          },
-        ],
+        example: {
+          name: 'Doe',
+        },
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -540,11 +535,9 @@ describe('JSON Schema to Data Structure', () => {
             type: 'string',
           },
         },
-        examples: [
-          {
-            name: 'Doe',
-          },
-        ],
+        example: {
+          name: 'Doe',
+        },
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -682,12 +675,10 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.content.content.length).to.be.equal(0);
     });
 
-    it('produces value from examples', () => {
+    it('produces value from example', () => {
       const schema = {
         type: 'array',
-        examples: [
-          ['Doe'],
-        ],
+        example: ['Doe'],
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -697,15 +688,13 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.toValue()).to.be.deep.equal(['Doe']);
     });
 
-    it('produces samples from examples when we have items', () => {
+    it('produces samples from example when we have items', () => {
       const schema = {
         type: 'array',
         items: {
           type: 'string',
         },
-        examples: [
-          ['Doe'],
-        ],
+        example: 'Doe',
       };
 
       const dataStructure = schemaToDataStructure(schema);
@@ -719,8 +708,17 @@ describe('JSON Schema to Data Structure', () => {
 
       const samples = dataStructure.content.attributes.get('samples');
       expect(samples).to.be.instanceof(ArrayElement);
-      expect(samples.toValue()).to.be.deep.equal([['Doe']]);
+      expect(samples.toValue()).to.be.deep.equal(['Doe']);
     });
+  });
+
+  it('errors for unknown type', () => {
+    const schema = {
+      type: 'unknown',
+    };
+
+    expect(() => schemaToDataStructure(schema))
+      .to.throw("Unhandled schema type 'unknown'");
   });
 
   it('exposes the schema title', () => {
@@ -775,7 +773,7 @@ describe('JSON Schema to Data Structure', () => {
   it('produces samples for enum element', () => {
     const schema = {
       enum: ['one', 'two'],
-      examples: ['one', 'two'],
+      example: 'one',
     };
 
     const dataStructure = schemaToDataStructure(schema);
@@ -791,15 +789,10 @@ describe('JSON Schema to Data Structure', () => {
     expect(enumerations.get(1)).to.be.instanceof(StringElement);
     expect(enumerations.getValue(1)).to.equal('two');
 
-    const samples = dataStructure.content.attributes.get('samples');
-
-    expect(samples.length).to.equal(2);
-    expect(samples.get(0)).to.be.instanceof(EnumElement);
-    expect(samples.get(0).content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
-    expect(samples.get(0).toValue()).to.be.deep.equal('one');
-    expect(samples.get(1)).to.be.instanceof(EnumElement);
-    expect(samples.get(1).content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
-    expect(samples.get(1).toValue()).to.be.deep.equal('two');
+    const value = dataStructure.content.content;
+    expect(value).to.be.instanceof(StringElement);
+    expect(value.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
+    expect(value.toValue()).to.deep.equal('one');
   });
 
   it('produces default for enum element', () => {
