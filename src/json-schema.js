@@ -33,7 +33,7 @@ export function parseReference(reference) {
  * @param root {object} - The object to resolve the given reference
  * @param depth {number} - A limit to resolving the depth
  */
-function lookupReference(reference, root, depth) {
+export function lookupReference(reference, root, depth) {
   const parts = reference.split('/').reverse();
 
   if (parts.pop() !== '#') {

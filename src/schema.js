@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this, arrow-body-style */
 
 import _ from 'lodash';
-import { parseReference, dereference } from './json-schema';
+import { parseReference, lookupReference, dereference } from './json-schema';
 
 export function idForDataStructure(reference) {
   return `definitions/${parseReference(reference)}`;
@@ -73,6 +73,7 @@ export class DataStructureGenerator {
       Object: ObjectElement,
     } = this.minim.elements;
 
+    const element = new ObjectElement();
     let properties = schema.properties || {};
     let required = schema.required || [];
 
@@ -89,10 +90,22 @@ export class DataStructureGenerator {
         .filter(subschema => subschema.required)
         .map(subschema => subschema.required)
         .reduce((accumulator, property) => accumulator.concat(property), required);
+
+      const refs = schema.allOf
+        .filter(subschema => subschema.$ref)
+        .map(subschema => idForDataStructure(subschema.$ref));
+
+      if (refs.length === 1) {
+        // allOf contains ref, let's treat it as our base
+        element.element = refs[0];
+      } else if (refs.length > 1) {
+        const { Ref: RefElement } = this.minim.elements;
+        const refElements = refs.map(ref => new RefElement(ref));
+        element.content = element.content.concat(refElements);
+      }
     }
 
-    const element = new ObjectElement();
-    element.content = _.map(properties, (subschema, property) => {
+    element.content = element.content.concat(_.map(properties, (subschema, property) => {
       const member = this.generateMember(property, subschema);
 
       const isRequired = required.includes(property);
@@ -101,7 +114,7 @@ export class DataStructureGenerator {
       ]);
 
       return member;
-    });
+    }));
 
     return element;
   }
@@ -178,13 +191,27 @@ export class DataStructureGenerator {
    * @returns {string} type
    */
   typeForSchema(schema) {
-    if (schema.type === undefined && schema.allOf && schema.allOf.length > 0) {
-      // Try to infer type from allOf values
-      const allTypes = schema.allOf.map(this.typeForSchema);
-      const uniqueTypes = _.uniq(allTypes);
+    if (schema.$ref) {
+      // Peek into the reference, if we're calling typeForSchema from the
+      // allOf case below then we will need to know the destination type
+      const ref = lookupReference(schema.$ref, this.root);
+      return this.typeForSchema(ref.referenced);
+    }
 
-      if (uniqueTypes.length === 1) {
-        return uniqueTypes[0];
+    if (schema.type === undefined) {
+      if (schema.allOf && schema.allOf.length > 0) {
+        // Try to infer type from allOf values
+        const allTypes = schema.allOf.map(this.typeForSchema, this);
+        const uniqueTypes = _.uniq(allTypes);
+
+        if (uniqueTypes.length === 1) {
+          return uniqueTypes[0];
+        }
+      }
+
+      if (schema.properties) {
+        // Assume user meant object
+        return 'object';
       }
     }
 
