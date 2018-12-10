@@ -15,7 +15,7 @@ Key:
 
 | Field Name | Support |
 |:--|:--|
-| openapit | ✓ |
+| openapi | ✓ |
 | info | [~](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/30) |
 | servers | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/24) |
 | paths | ~ |
@@ -76,7 +76,7 @@ Key:
 | Field Name | Support |
 |:--|:--|
 | name | ✓ |
-| in | ✕ |
+| in | ~ |
 | description | ✓ |
 | required | ✕ |
 | deprecated | ✕ |
@@ -98,6 +98,6 @@ Key:
 | Location | Support |
 |:--|:--|
 | path | ✓ |
-| query | ✕ |
-| header | ✓ |
-| cookie | ✓ |
+| query | ✓ |
+| header | ✕ |
+| cookie | ✕ |
