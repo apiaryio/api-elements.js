@@ -19,8 +19,9 @@ Key:
 | info | [~](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/30) |
 | servers | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/24) |
 | paths | ~ |
-| components | ✕ |
+| components | ~ |
 | security | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/25) |
+| tags | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/26) |
 | externalDocs | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/27) |
 
 ## Info Object
@@ -43,26 +44,26 @@ Key:
 | $ref | ✕ |
 | summary | ✓ |
 | description | ✓ |
-| get | ~ |
-| put | ~ |
-| post | ~ |
-| delete | ~ |
-| options | ~ |
-| head | ~ |
-| patch | ~ |
-| trace | ~ |
+| get | [~](#operation-object) |
+| put | [~](#operation-object) |
+| post | [~](#operation-object) |
+| delete | [~](#operation-object) |
+| options | [~](#operation-object) |
+| head | [~](#operation-object) |
+| patch | [~](#operation-object) |
+| trace | [~](#operation-object) |
 | servers | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/24) |
-| parameters | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/33) |
+| parameters | [~](#parameter-location) |
 
 ## Operation Object
 
 | Field Name | Support |
 |:--|:--|
-| tags | ✕ |
+| tags | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/26) |
 | summary | ✓ |
 | description | ✓ |
 | externalDocs | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/28) |
-| operationId | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/34) |
+| operationId | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/34) <kbd>easy first issue</kbd> |
 | parameters | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/33) |
 | requestBody | ✕ |
 | responses | ✕ |
@@ -78,7 +79,7 @@ Key:
 | name | ✓ |
 | in | ~ |
 | description | ✓ |
-| required | ✕ |
+| required | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/48) <kbd>easy first issue</kbd> |
 | deprecated | ✕ |
 | allowEmptyValue | ✕ |
 
@@ -93,7 +94,7 @@ Key:
 | example | ✕ |
 | examples | ✕ |
 
-### Location
+### Parameter Location
 
 | Location | Support |
 |:--|:--|
