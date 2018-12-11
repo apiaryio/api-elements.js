@@ -1,6 +1,6 @@
 # Fury Swagger Parser Changelog
 
-## Master
+## 0.22.7 (2018-12-11)
 
 ### Bug Fixes
 
