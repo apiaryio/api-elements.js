@@ -11,7 +11,7 @@ describe('Components Object', () => {
     const result = parse(minim, components);
 
     expect(result.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("'Components Object' is not an object");
+    expect(result).to.contain.warning("'Components Object' is not an object");
   });
 
   describe('#schemas', () => {
@@ -22,8 +22,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' 'schemas' is not an object");
+      expect(result).to.contain.warning("'Components Object' 'schemas' is not an object");
     });
 
     it('parses valid schemas into data structures', () => {
@@ -54,9 +53,7 @@ describe('Components Object', () => {
       });
 
       const result = parse(minim, components);
-
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' 'parameters' is not an object");
+      expect(result).to.contain.warning("'Components Object' 'parameters' is not an object");
     });
 
     it('parses valid parameters', () => {
@@ -90,8 +87,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'responses'");
+      expect(result).to.contain.warning("'Components Object' contains unsupported key 'responses'");
     });
 
     it('provides warning for unsupported examples key', () => {
@@ -101,8 +97,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'examples'");
+      expect(result).to.contain.warning("'Components Object' contains unsupported key 'examples'");
     });
 
     it('provides warning for unsupported requestBodies key', () => {
@@ -112,8 +107,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'requestBodies'");
+      expect(result).to.contain.warning("'Components Object' contains unsupported key 'requestBodies'");
     });
 
     it('provides warning for unsupported headers key', () => {
@@ -123,8 +117,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'headers'");
+      expect(result).to.contain.warning("'Components Object' contains unsupported key 'headers'");
     });
 
     it('provides warning for unsupported securitySchemes key', () => {
@@ -134,8 +127,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'securitySchemes'");
+      expect(result).to.contain.warning("'Components Object' contains unsupported key 'securitySchemes'");
     });
 
     it('provides warning for unsupported links key', () => {
@@ -145,8 +137,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'links'");
+      expect(result).to.contain.warning("'Components Object' contains unsupported key 'links'");
     });
 
     it('provides warning for unsupported callbacks key', () => {
@@ -156,8 +147,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains unsupported key 'callbacks'");
+      expect(result).to.contain.warning("'Components Object' contains unsupported key 'callbacks'");
     });
 
     it('does not provide warning for Info Object extensions', () => {
@@ -167,7 +157,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.annotations.length).to.equal(0);
+      expect(result).to.not.contain.annotations;
     });
 
     it('provides warning for invalid keys', () => {
@@ -177,8 +167,7 @@ describe('Components Object', () => {
 
       const result = parse(minim, components);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Components Object' contains invalid key 'invalid'");
+      expect(result).to.contain.warning("'Components Object' contains invalid key 'invalid'");
     });
   });
 });
