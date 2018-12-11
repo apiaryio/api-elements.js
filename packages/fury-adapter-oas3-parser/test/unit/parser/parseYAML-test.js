@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { Fury } = require('fury');
 
-const parseYAML = require('../../lib/parser/parseYAML');
+const parseYAML = require('../../../lib/parser/parseYAML');
 
 const { minim } = new Fury();
 

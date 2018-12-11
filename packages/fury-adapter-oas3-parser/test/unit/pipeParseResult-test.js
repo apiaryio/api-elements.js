@@ -1,8 +1,8 @@
 const R = require('ramda');
 const { expect } = require('chai');
 const { Fury } = require('fury');
-const { createError, createWarning } = require('../lib/elements');
-const pipeParseResult = require('../lib/pipeParseResult');
+const { createError, createWarning } = require('../../lib/elements');
+const pipeParseResult = require('../../lib/pipeParseResult');
 
 const { minim } = new Fury();
 

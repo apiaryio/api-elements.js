@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { Fury } = require('fury');
 
-const parse = require('../../../lib/parser/oas/parseOpenAPIObject');
+const parse = require('../../../../lib/parser/oas/parseOpenAPIObject');
 
 const { minim } = new Fury();
 

@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { Fury } = require('fury');
 
-const adapter = require('../lib/adapter');
+const adapter = require('../../lib/adapter');
 
 describe('Adapter', () => {
   it('has a name', () => {
