@@ -11,8 +11,7 @@ describe('#parseYAML', () => {
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.errors.length).to.equal(1);
 
-    expect(parseResult).contain.error("YAML Syntax: expected '<document start>', but found {").with.sourceMap([[2,1]]);
-
+    expect(parseResult).contain.error("YAML Syntax: expected '<document start>', but found {").with.sourceMap([[2, 1]]);
   });
 
   it('can parse a string into a string element', () => {

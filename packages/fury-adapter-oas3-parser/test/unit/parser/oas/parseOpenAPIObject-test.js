@@ -214,7 +214,7 @@ describe('#parseOpenAPIObject', () => {
     const result = parse(minim, object);
 
     expect(result.warnings.isEmpty).to.be.true;
-		// FIXME: there are errors - is it correct?
-		//expect(result).to.not.contain.annnotations;
+    // FIXME: there are errors - is it correct?
+    // expect(result).to.not.contain.annnotations;
   });
 });

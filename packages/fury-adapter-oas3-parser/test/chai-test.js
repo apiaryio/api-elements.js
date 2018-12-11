@@ -14,7 +14,6 @@ function createAnnotation(annotationClass, message, sourceMap) {
 }
 
 describe('chai helpers', () => {
-
   it('will recognize there are no anotations in result', () => {
     const parseResult = new minim.elements.ParseResult();
     expect(parseResult).to.not.contain.annotations;
@@ -60,13 +59,13 @@ describe('chai helpers', () => {
   });
 
   it('will not identify annotation without corectly set class instance mesage in result', () => {
-    const parseResult = new minim.elements.ParseResult([ createAnnotation('dummy', 'foo')]);
+    const parseResult = new minim.elements.ParseResult([createAnnotation('dummy', 'foo')]);
 
     expect(parseResult).to.not.contain.annotations;
   });
 
   it('will not identify annotation without corectly set class instance mesage in result', () => {
-    const invalidAnnotation = new minim.elements.String("value");
+    const invalidAnnotation = new minim.elements.String('value');
     invalidAnnotation.classes = ['error'];
 
     const parseResult = new minim.elements.ParseResult([invalidAnnotation]);
@@ -76,15 +75,14 @@ describe('chai helpers', () => {
 
 
   it('will allow test sourceMap on element', () => {
-    const annotation = createAnnotation('error', 'x', [[1,1]]);
+    const annotation = createAnnotation('error', 'x', [[1, 1]]);
 
-    expect(annotation).to.have.sourceMap([[1,1]]);
+    expect(annotation).to.have.sourceMap([[1, 1]]);
   });
 
   it('will allow chain test sourceMap for picked annotation', () => {
-    const parseResult = new minim.elements.ParseResult([createAnnotation('error', 'x', [[1,1]])]);
+    const parseResult = new minim.elements.ParseResult([createAnnotation('error', 'x', [[1, 1]])]);
 
-    expect(parseResult).to.contain.error('x').with.sourceMap([[1,1]]);
+    expect(parseResult).to.contain.error('x').with.sourceMap([[1, 1]]);
   });
-
 });

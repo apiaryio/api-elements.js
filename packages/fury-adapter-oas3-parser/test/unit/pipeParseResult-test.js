@@ -34,7 +34,7 @@ describe('#pipeParseResult', () => {
   });
 
   it('fails early during a failure', () => {
-	const message = 'Value must be a number';
+    const message = 'Value must be a number';
     const parse = pipeParseResult(minim,
       R.unless(isNumber, createError(minim, message)),
       doubleNumber);
@@ -46,7 +46,7 @@ describe('#pipeParseResult', () => {
   });
 
   it('all annotations are merged into result', () => {
-	  const message = 'example warning';
+    const message = 'example warning';
     const parse = pipeParseResult(minim,
       number => new minim.elements.ParseResult([
         number, createWarning(minim, message, number),

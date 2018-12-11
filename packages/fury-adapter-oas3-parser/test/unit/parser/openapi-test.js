@@ -10,9 +10,9 @@ describe('#parseOpenAPI', () => {
     const openapi = new minim.elements.Member('openapi', 3);
 
     const parseResult = parseOpenAPI(minim, openapi);
-    
+
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
-    expect(parseResult).to.contain.error('OpenAPI version is not a string')
+    expect(parseResult).to.contain.error('OpenAPI version is not a string');
   });
 
   it('fails to parse non valid semantic version', () => {
