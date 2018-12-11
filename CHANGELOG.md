@@ -1,5 +1,22 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Adds support for generating JSON bodies for schemas where the root is an
+  array. For example, given following array schema:
+
+  ```yaml
+  type: array
+  items:
+    type: string
+    example: Doe
+  ```
+
+  The parser will now generate a JSON body of `["Doe"]` whereas in previous
+  versions would've resulted in an empty array.
+
 ## 0.22.6 (2018-12-07)
 
 ### Enhancements

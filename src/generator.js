@@ -15,10 +15,8 @@ faker.option({
   maxLength: 256,
 });
 
-function hasCircularReference(schema) {
-  // Primitive implementation, right now only schemas with definitions are circular
-  return schema.definitions !== undefined;
-}
+const schemaIsArrayAndHasItems = schema => schema.type && schema.type === 'array' && schema.items;
+const isEmptyArray = value => value && Array.isArray(value) && value.length === 0;
 
 export function bodyFromSchema(schema, payload, parser, contentType = 'application/json') {
   const dereferencedSchema = dereference(schema, schema);
@@ -26,11 +24,12 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
   let asset = null;
 
   try {
-    faker.option({
-      alwaysFakeOptionals: !hasCircularReference(schema),
-    });
-
     let body = faker.generate(dereferencedSchema);
+
+    if (isEmptyArray(body) && schemaIsArrayAndHasItems(dereferencedSchema)) {
+      // Faker failed to generate array schema, pass it `items` and wrap in array ourselves
+      body = [faker.generate(dereferencedSchema.items)];
+    }
 
     if (typeof body !== 'string') {
       if (isFormURLEncoded(contentType)) {

@@ -20,23 +20,6 @@ describe('bodyFromSchema', () => {
     expect(body).to.be.an('array');
   });
 
-  it('can generate a JSON object from optional properties', () => {
-    const schema = {
-      type: 'object',
-      properties: {
-        name: {
-          enum: ['doe'],
-        },
-      },
-    };
-
-    const payload = { content: [] };
-    const asset = bodyFromSchema(schema, payload, parser, 'application/json');
-    const body = JSON.parse(asset.content);
-
-    expect(body).to.deep.equal({ name: 'doe' });
-  });
-
   it('can generate a JSON object for date format', () => {
     const schema = {
       type: 'string',
@@ -162,6 +145,68 @@ describe('bodyFromSchema', () => {
         .equal('--boundy\r\nContent-Disposition: form-data; name="example1"\r\n\r\nHello\r\n' +
           '--boundy\r\nContent-Disposition: form-data; name="example2"\r\n\r\nHello\r\n' +
           '\r\n--boundy--\r\n');
+    });
+  });
+
+  describe('application/json', () => {
+    const generate = (schema) => {
+      const payload = { content: [] };
+      const asset = bodyFromSchema(schema, payload, parser, 'application/json');
+      return JSON.parse(asset.content);
+    };
+
+    describe('array type', () => {
+      it('can generate an array without any items', () => {
+        const schema = {
+          type: 'array',
+        };
+
+        const body = generate(schema);
+
+        expect(body).to.deep.equal([]);
+      });
+
+      it('can generate an array with items', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'string',
+            examples: ['doe'],
+          },
+        };
+
+        const body = generate(schema);
+
+        expect(body).to.deep.equal(['doe']);
+      });
+    });
+
+    describe('object type', () => {
+      it('can generate an object without any properties', () => {
+        const schema = {
+          type: 'object',
+        };
+
+        const body = generate(schema);
+
+        expect(body).to.deep.equal({});
+      });
+
+      it('can generate a JSON object from optional properties', () => {
+        const schema = {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              examples: ['doe'],
+            },
+          },
+        };
+
+        const body = generate(schema);
+
+        expect(body).to.deep.equal({ name: 'doe' });
+      });
     });
   });
 });
