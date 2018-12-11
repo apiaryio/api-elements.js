@@ -1,0 +1,1 @@
+const { Fury } = require('fury');

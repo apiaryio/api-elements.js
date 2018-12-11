@@ -10,8 +10,9 @@
   "scripts": {
     "install": "rm -fr node_modules/fury/node_modules/minim",
     "lint": "eslint .",
-    "test": "mocha test/unit",
-    "test:unit": "mocha test/unit"
+    "test": "mocha test/unit test/integration",
+    "test:unit": "mocha test/unit",
+    "test:integration": "mocha test/integration"
   },
   "dependencies": {
     "ramda": "0.25.0",
