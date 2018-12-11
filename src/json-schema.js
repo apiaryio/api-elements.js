@@ -91,7 +91,7 @@ export function dereference(example, root, paths, path) {
     return example;
   }
 
-  if (example.$ref) {
+  if (example.$ref && _.isString(example.$ref)) {
     const refPath = example.$ref.split('/');
     const currentPath = (path || []).join('/');
 

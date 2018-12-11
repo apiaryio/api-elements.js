@@ -17,6 +17,32 @@
   The parser will now generate a JSON body of `["Doe"]` whereas in previous
   versions would've resulted in an empty array.
 
+- Fixes parsing Swagger documents that contain properties called `$ref`.
+  Previously the parser would attempt to dereference the property as would
+  generically try to dereference any key in an object called `$ref`, as per the
+  JSON Schema specification, references are only permitted when a schema type
+  is expected.
+
+  For example, the following is a schema which is trying to describe an object
+  with a property called `$ref`, previously the parser would attempt to
+  dereference `$ref` and crash in the process.
+
+  ```yaml
+  type: object
+  properties:
+    $ref:
+      type: string
+      example: '#/definitions/User'
+  required: ['$ref']
+  ```
+
+  There is a still an open known issue
+  [#235](https://github.com/apiaryio/fury-adapter-swagger/issues/235) that
+  uses of `$ref` in a Swagger 2 document where the value a string will cause
+  the parser to attempt to dereference it incorrectly when the `$ref` property
+  is found on an object that does not support `$ref` as per the Swagger 2 and
+  JSON Schema specifications.
+
 ## 0.22.6 (2018-12-07)
 
 ### Enhancements

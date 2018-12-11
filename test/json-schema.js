@@ -775,4 +775,27 @@ describe('Dereferencing', () => {
       },
     });
   });
+
+  it('does not dereference non-string references', () => {
+    // https://github.com/apiaryio/fury-adapter-swagger/issues/235
+
+    // Schema for a JSON ReferencePointer
+    const result = dereference({
+      type: 'object',
+      properties: {
+        $ref: {
+          type: 'string',
+        },
+      },
+    });
+
+    expect(result).to.deep.equal({
+      type: 'object',
+      properties: {
+        $ref: {
+          type: 'string',
+        },
+      },
+    });
+  });
 });
