@@ -1,0 +1,5 @@
+swagger: '2.0'
+info:
+  title: Auth No Security
+  version: '1.0'
+securityDefinitions: {}

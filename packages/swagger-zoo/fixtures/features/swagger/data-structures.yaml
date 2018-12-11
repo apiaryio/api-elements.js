@@ -1,0 +1,19 @@
+swagger: '2.0'
+info:
+  title: Data Structures
+  version: '1.0'
+paths:
+  '/user':
+    get:
+      summary: Get User
+      responses:
+        200:
+          description: User Response
+          schema:
+            $ref: '#/definitions/User'
+definitions:
+  User:
+    type: object
+    properties:
+      username:
+        type: string

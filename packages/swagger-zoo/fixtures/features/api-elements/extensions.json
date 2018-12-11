@@ -1,0 +1,237 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Extensions"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
+      "content": [
+        {
+          "element": "extension",
+          "meta": {
+            "links": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "link",
+                  "attributes": {
+                    "relation": {
+                      "element": "string",
+                      "content": "profile"
+                    },
+                    "href": {
+                      "element": "string",
+                      "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "content": {
+            "x-info-extension": true
+          }
+        },
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "content": "/test/{id}"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "attributes": {
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "content": [
+                    {
+                      "element": "member",
+                      "attributes": {
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "required"
+                            }
+                          ]
+                        }
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "id"
+                        },
+                        "value": {
+                          "element": "string",
+                          "content": null
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "content": "Test Description"
+                        },
+                        {
+                          "element": "extension",
+                          "meta": {
+                            "links": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "link",
+                                  "attributes": {
+                                    "relation": {
+                                      "element": "string",
+                                      "content": "profile"
+                                    },
+                                    "href": {
+                                      "element": "string",
+                                      "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": {
+                            "x-response-extension": true
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "extension",
+                  "meta": {
+                    "links": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "link",
+                          "attributes": {
+                            "relation": {
+                              "element": "string",
+                              "content": "profile"
+                            },
+                            "href": {
+                              "element": "string",
+                              "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": {
+                    "x-transition-extension": true
+                  }
+                }
+              ]
+            },
+            {
+              "element": "extension",
+              "meta": {
+                "links": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "link",
+                      "attributes": {
+                        "relation": {
+                          "element": "string",
+                          "content": "profile"
+                        },
+                        "href": {
+                          "element": "string",
+                          "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "x-resource-extension": true
+              }
+            }
+          ]
+        },
+        {
+          "element": "extension",
+          "meta": {
+            "links": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "link",
+                  "attributes": {
+                    "relation": {
+                      "element": "string",
+                      "content": "profile"
+                    },
+                    "href": {
+                      "element": "string",
+                      "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "content": {
+            "x-paths-extension": true
+          }
+        }
+      ]
+    }
+  ]
+}

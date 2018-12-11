@@ -1,0 +1,46 @@
+swagger: '2.0'
+info:
+  description: Sample API
+  version: 1.0.0
+  title: Sample API
+host: 'example.com'
+basePath: /v1
+tags:
+  - name: Recursion
+    description: Lorem Ipsum
+schemes:
+  - https
+paths:
+  '/recursive':
+    get:
+      tags:
+        - Recursion
+      summary: Recursion test
+      description: |-
+        This is a test to show that there are issues with recursion
+      parameters:
+        - name: tag
+          in: query
+          description: 'Test 1 2'
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            "$ref": "#/definitions/category"
+definitions:
+  category:
+    type: object
+    properties:
+      id:
+        type: string
+      categoryAsArray:
+        type: array
+        description: A list of categories
+        items:
+          "$ref": "#/definitions/category"
+      categoryAsObject:
+        type: object
+        "$ref": "#/definitions/category"
+    description: A category groups one or more categories

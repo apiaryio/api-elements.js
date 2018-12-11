@@ -1,0 +1,25 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Body Test
+  description: A test to see how bodies get parsed / created
+host: example.com
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /resource:
+    get:
+      description: Get a resource
+      operationId: getResource
+      responses:
+        200:
+          description: response description
+          schema:
+            type: object
+            example:
+              id: 123
+              name: Resource 1

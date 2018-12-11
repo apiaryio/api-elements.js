@@ -1,0 +1,23 @@
+swagger: '2.0'
+info:
+  title: Extensions
+  version: '1.0'
+  x-info-extension: true
+x-ignored: true
+paths:
+  x-paths-extension: true
+  '/test/{id}':
+    x-resource-extension: true
+    get:
+      x-transition-extension: true
+      parameters:
+        - name: id
+          in: path
+          x-ignored: true
+          type: string
+          required: true
+      responses:
+        x-ignored: true
+        200:
+          x-response-extension: true
+          description: Test Description

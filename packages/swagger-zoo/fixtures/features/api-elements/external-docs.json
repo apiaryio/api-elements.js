@@ -1,0 +1,222 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "External Docs"
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "meta": {
+                "description": {
+                  "element": "string",
+                  "content": "API help center"
+                }
+              },
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "help"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://help.com"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      },
+      "content": [
+        {
+          "element": "category",
+          "meta": {
+            "title": {
+              "element": "string",
+              "content": "Group1"
+            },
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            },
+            "links": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "link",
+                  "meta": {
+                    "description": {
+                      "element": "string",
+                      "content": "API resource group help center"
+                    }
+                  },
+                  "attributes": {
+                    "relation": {
+                      "element": "string",
+                      "content": "help"
+                    },
+                    "href": {
+                      "element": "string",
+                      "content": "http://help.com"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "resource",
+              "attributes": {
+                "href": {
+                  "element": "string",
+                  "content": "/test"
+                }
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "links": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "link",
+                          "meta": {
+                            "description": {
+                              "element": "string",
+                              "content": "API method help center"
+                            }
+                          },
+                          "attributes": {
+                            "relation": {
+                              "element": "string",
+                              "content": "help"
+                            },
+                            "href": {
+                              "element": "string",
+                              "content": "http://help.com"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            }
+                          }
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "copy",
+                              "content": "Test description"
+                            },
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBodySchema"
+                                    }
+                                  ]
+                                },
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "meta": {
+                                        "description": {
+                                          "element": "string",
+                                          "content": "API method response schema help center"
+                                        }
+                                      },
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "help"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://help.com"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "attributes": {
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/schema+json"
+                                }
+                              },
+                              "content": "{\"type\":\"string\"}"
+                            },
+                            {
+                              "element": "dataStructure",
+                              "content": {
+                                "element": "string",
+                                "content": null
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

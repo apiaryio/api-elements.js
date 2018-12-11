@@ -1,0 +1,19 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Swagger Auth with x-summary
+securityDefinitions:
+  customBasic:
+    x-summary: Custom Basic Auth
+    description: Auth description
+    type: basic
+paths:
+  /endpoint:
+    get:
+      security:
+        - customBasic: []
+      responses:
+        200:
+          description: With Security
+          schema:
+            type: string

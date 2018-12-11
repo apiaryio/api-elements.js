@@ -1,0 +1,23 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: "Not formatted example"
+  description: ""
+host: custom-instance.filter.ly
+paths:
+  '/example/':
+    get:
+      responses:
+        '200':
+          description: Test description
+          examples:
+            application/json: |-
+              {
+                "requestId" : 123123213231,
+                "results": [
+                  {
+                    "id": 12312323,
+                    "type": "article"
+                  }
+                ]
+              }

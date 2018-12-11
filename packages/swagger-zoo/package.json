@@ -1,0 +1,24 @@
+{
+  "name": "swagger-zoo",
+  "version": "2.19.2",
+  "description": "Swagger example files for testing",
+  "author": "Apiary.io <support@apiary.io>",
+  "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/swagger-zoo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apiaryio/api-elements.js.git"
+  },
+  "scripts": {
+    "lint": "exit 0",
+    "lint:fix": "exit 0",
+    "test": "exit 0"
+  },
+  "dependencies": {
+    "glob": "^7.1.2"
+  },
+  "engines": {
+    "node": ">=4"
+  }
+}
