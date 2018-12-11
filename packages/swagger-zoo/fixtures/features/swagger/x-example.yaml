@@ -1,0 +1,42 @@
+swagger: '2.0'
+info:
+  title: 'Form Test'
+  version: '1.0'
+paths:
+  '/test/{param}':
+    parameters:
+      - name: param
+        in: path
+        type: number
+        required: true
+        x-example: 42
+      - name: order
+        in: query
+        type: string
+        x-example: asc
+        default: desc
+    get:
+      parameters:
+        - name: id
+          in: formData
+          type: boolean
+          required: true
+          x-example: false
+        - name: greeting
+          in: formData
+          type: string
+          enum:
+            - hi
+            - good morning
+            - hello
+          required: true
+          x-example: hello
+          default: good morning
+        - name: user-agent
+          in: header
+          type: string
+          required: true
+          x-example: Examplebot/4.2 (+http://www.example.com/bot.html)
+      responses:
+        200:
+          description: 'Success'

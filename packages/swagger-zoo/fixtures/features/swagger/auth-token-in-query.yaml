@@ -1,0 +1,19 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Swagger Token in Query
+securityDefinitions:
+  customApiKey:
+    type: apiKey
+    in: query
+    name: api_key
+paths:
+  /endpoint:
+    get:
+      security:
+        - customApiKey: []
+      responses:
+        200:
+          description: With Security
+          schema:
+            type: string

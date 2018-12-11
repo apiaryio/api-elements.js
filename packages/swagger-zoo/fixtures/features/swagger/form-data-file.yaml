@@ -1,0 +1,22 @@
+swagger: '2.0'
+info:
+  title: formData with type file
+  version: '1.0'
+produces:
+  - application/json
+consumes:
+  - multipart/form-data
+paths:
+  '/test':
+    post:
+      parameters:
+        - name: name
+          in: formData
+          required: true
+          type: file
+          x-example: test
+      responses:
+        200:
+          description: 'My Response'
+          schema:
+            type: object

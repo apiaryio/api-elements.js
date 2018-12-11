@@ -1,0 +1,28 @@
+swagger: '2.0'
+info:
+  title: Collection Format
+  version: '1.0'
+paths:
+  '/test/{id}':
+    parameters:
+      - name: id
+        in: path
+        description: Unique identifier
+        required: true
+        type: array
+        items:
+          type: string
+        collectionFormat: 'tsv'
+    get:
+      parameters:
+        - name: arg
+          in: query
+          description: Query argument
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: 'ssv'
+      responses:
+        200:
+          description: Test description

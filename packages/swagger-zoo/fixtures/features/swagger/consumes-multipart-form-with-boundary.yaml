@@ -1,0 +1,26 @@
+swagger: '2.0'
+info:
+  title: 'Multipart Form Test'
+  version: '1.0'
+consumes:
+  - multipart/form-data; boundary=hello
+paths:
+  '/test':
+    parameters:
+      - name: name
+        in: formData
+        type: string
+        enum:
+          - doe
+        required: true
+    post:
+      parameters:
+        - name: id
+          in: formData
+          type: number
+          enum:
+            - 1
+          required: true
+      responses:
+        204:
+          description: 'Success'

@@ -1,0 +1,22 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Swagger Basic Auth
+securityDefinitions:
+  customBasic:
+    type: basic
+  customApiKey:
+    type: apiKey
+    in: header
+    name: api_key
+paths:
+  /endpoint:
+    get:
+      security:
+        - customBasic: []
+        - customApiKey: []
+      responses:
+        200:
+          description: With Security
+          schema:
+            type: string
