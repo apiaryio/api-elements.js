@@ -12,7 +12,7 @@ describe('#parseInfoObject', () => {
     const result = parse(minim, info);
 
     expect(result.length).to.equal(1);
-    expect(result.errors.get(0).toValue()).to.equal("'Info Object' is not an object");
+    expect(result).to.contain.error("'Info Object' is not an object");
   });
 
   describe('missing required properties', () => {
@@ -24,7 +24,7 @@ describe('#parseInfoObject', () => {
       const result = parse(minim, info);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal("'Info Object' is missing required property 'title'");
+      expect(result).to.contain.error("'Info Object' is missing required property 'title'");
     });
 
     it('provides error for missing version', () => {
@@ -35,7 +35,7 @@ describe('#parseInfoObject', () => {
       const result = parse(minim, info);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal("'Info Object' is missing required property 'version'");
+      expect(result).to.contain.error("'Info Object' is missing required property 'version'");
     });
   });
 
@@ -49,7 +49,7 @@ describe('#parseInfoObject', () => {
       const result = parse(minim, info);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal("'Info Object' 'title' is not a string");
+      expect(result).to.contain.error("'Info Object' 'title' is not a string");
     });
 
     it('provides error when version is non-string', () => {
@@ -61,7 +61,7 @@ describe('#parseInfoObject', () => {
       const result = parse(minim, info);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal("'Info Object' 'version' is not a string");
+      expect(result).to.contain.error("'Info Object' 'version' is not a string");
     });
   });
 
@@ -74,8 +74,7 @@ describe('#parseInfoObject', () => {
       });
 
       const result = parse(minim, info);
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Info Object' 'description' is not a string");
+      expect(result).to.contain.warning("'Info Object' 'description' is not a string");
     });
   });
 
@@ -90,7 +89,7 @@ describe('#parseInfoObject', () => {
       const result = parse(minim, object);
 
       expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'termsOfService'");
+      expect(result).to.contain.warning("'Info Object' contains unsupported key 'termsOfService'");
     });
 
     it('provides warning for unsupported contact key', () => {
@@ -103,7 +102,7 @@ describe('#parseInfoObject', () => {
       const result = parse(minim, object);
 
       expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'contact'");
+      expect(result).to.contain.warning("'Info Object' contains unsupported key 'contact'");
     });
 
     it('provides warning for unsupported license key', () => {
@@ -115,8 +114,7 @@ describe('#parseInfoObject', () => {
 
       const result = parse(minim, object);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains unsupported key 'license'");
+      expect(result).to.contain.warning("'Info Object' contains unsupported key 'license'");
     });
 
     it('does not provide warning for Info Object extensions', () => {
@@ -128,7 +126,7 @@ describe('#parseInfoObject', () => {
 
       const result = parse(minim, object);
 
-      expect(result.annotations.length).to.equal(0);
+      expect(result).to.not.contain.annotations;
     });
 
     it('provides warning for invalid keys', () => {
@@ -140,8 +138,7 @@ describe('#parseInfoObject', () => {
 
       const result = parse(minim, object);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal("'Info Object' contains invalid key 'invalid'");
+      expect(result).to.contain.warning("'Info Object' contains invalid key 'invalid'");
     });
   });
 

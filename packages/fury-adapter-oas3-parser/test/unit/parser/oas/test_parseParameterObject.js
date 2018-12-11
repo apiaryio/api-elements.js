@@ -11,9 +11,7 @@ describe('Parameter Object', () => {
     const result = parse(minim, operation);
 
     expect(result.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal(
-      "'Parameter Object' is not an object"
-    );
+    expect(result).to.contain.warning("'Parameter Object' is not an object");
   });
 
   describe('#name', () => {
@@ -26,9 +24,7 @@ describe('Parameter Object', () => {
       const result = parse(minim, parameter);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal(
-        "'Parameter Object' 'name' is not a string"
-      );
+      expect(result).to.contain.error("'Parameter Object' 'name' is not a string");
     });
 
     it('provides an error when name contains unsupported characters', () => {
@@ -40,9 +36,7 @@ describe('Parameter Object', () => {
       const result = parse(minim, parameter);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal(
-        "'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported"
-      );
+      expect(result).to.contain.error("'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported");
     });
   });
 
@@ -56,9 +50,7 @@ describe('Parameter Object', () => {
       const result = parse(minim, parameter);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal(
-        "'Parameter Object' 'in' is not a string"
-      );
+      expect(result).to.contain.error("'Parameter Object' 'in' is not a string");
     });
 
     it('provides an error when value is not a permitted value', () => {
@@ -70,9 +62,7 @@ describe('Parameter Object', () => {
       const result = parse(minim, parameter);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal(
-        "'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'"
-      );
+      expect(result).to.contain.error("'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'");
     });
 
     it('provides an unsupported error for header parameters', () => {
@@ -84,9 +74,7 @@ describe('Parameter Object', () => {
       const result = parse(minim, parameter);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal(
-        "Only 'in' values of 'path' and 'query' are supported at the moment"
-      );
+      expect(result).to.contain.error("Only 'in' values of 'path' and 'query' are supported at the moment");
     });
 
     it('provides an unsupported error for cookie parameters', () => {
@@ -98,9 +86,7 @@ describe('Parameter Object', () => {
       const result = parse(minim, parameter);
 
       expect(result.length).to.equal(1);
-      expect(result.errors.get(0).toValue()).to.equal(
-        "Only 'in' values of 'path' and 'query' are supported at the moment"
-      );
+      expect(result).to.contain.error("Only 'in' values of 'path' and 'query' are supported at the moment");
     });
   });
 
@@ -114,6 +100,7 @@ describe('Parameter Object', () => {
 
       const result = parse(minim, parameter);
 
+      expect(result).to.not.contain.annotations;
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(minim.elements.Member);
       expect(result.get(0).description.toValue()).to.equal(
@@ -130,10 +117,7 @@ describe('Parameter Object', () => {
 
       const result = parse(minim, parameter);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Parameter Object' 'description' is not a string"
-      );
+      expect(result).to.contain.warning("'Parameter Object' 'description' is not a string");
     });
   });
 
@@ -147,10 +131,7 @@ describe('Parameter Object', () => {
 
       const result = parse(minim, parameter);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Parameter Object' contains unsupported key 'required'"
-      );
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'required'");
     });
 
     it('provides warning for unknown deprecated property', () => {
@@ -162,10 +143,7 @@ describe('Parameter Object', () => {
 
       const result = parse(minim, parameter);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Parameter Object' contains unsupported key 'deprecated'"
-      );
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'deprecated'");
     });
 
     it('provides warning for unknown deprecated property', () => {
@@ -177,10 +155,7 @@ describe('Parameter Object', () => {
 
       const result = parse(minim, parameter);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Parameter Object' contains unsupported key 'allowEmptyValue'"
-      );
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'allowEmptyValue'");
     });
 
     it('does not provide warning/errors for extensions', () => {
@@ -192,7 +167,7 @@ describe('Parameter Object', () => {
 
       const result = parse(minim, parameter);
 
-      expect(result.annotations.isEmpty).to.be.true;
+      expect(result).to.not.contain.annotations;
     });
   });
 
@@ -205,9 +180,6 @@ describe('Parameter Object', () => {
 
     const result = parse(minim, parameter);
 
-    expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal(
-      "'Parameter Object' contains invalid key 'invalid'"
-    );
+    expect(result).to.contain.warning("'Parameter Object' contains invalid key 'invalid'");
   });
 });

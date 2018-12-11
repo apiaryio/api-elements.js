@@ -34,26 +34,28 @@ describe('#pipeParseResult', () => {
   });
 
   it('fails early during a failure', () => {
+	const message = 'Value must be a number';
     const parse = pipeParseResult(minim,
-      R.unless(isNumber, createError(minim, 'Value must be a number')),
+      R.unless(isNumber, createError(minim, message)),
       doubleNumber);
 
     const parseResult = parse(new minim.elements.String());
 
     expect(parseResult.length).to.equal(1);
-    expect(parseResult.errors.length).to.equal(1);
+    expect(parseResult).to.contain.error(message);
   });
 
   it('all annotations are merged into result', () => {
+	  const message = 'example warning';
     const parse = pipeParseResult(minim,
       number => new minim.elements.ParseResult([
-        number, createWarning(minim, 'example warning', number),
+        number, createWarning(minim, message, number),
       ]),
       doubleNumber);
 
     const parseResult = parse(new minim.elements.Number(5));
 
     expect(parseResult.length).to.equal(2);
-    expect(parseResult.warnings.length).to.equal(1);
+    expect(parseResult).to.contain.warning(message);
   });
 });

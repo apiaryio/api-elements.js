@@ -38,7 +38,7 @@ describe('#parsePathItemObject', () => {
     const result = parse(minim, path);
 
     expect(result.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' is not an object");
+    expect(result).to.contain.warning("'Path Item Object' is not an object");
   });
 
   describe('warnings for keys', () => {
@@ -53,7 +53,7 @@ describe('#parsePathItemObject', () => {
       expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
       expect(result.get(0).href.toValue()).to.equal('/');
 
-      expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key '$ref'");
+      expect(result).to.contain.warning("'Path Item Object' contains unsupported key '$ref'");
     });
 
     it('warns for a servers', () => {
@@ -67,7 +67,7 @@ describe('#parsePathItemObject', () => {
       expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
       expect(result.get(0).href.toValue()).to.equal('/');
 
-      expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains unsupported key 'servers'");
+      expect(result).to.contain.warning("'Path Item Object' contains unsupported key 'servers'");
     });
 
     it('does not provide warning for Info Object extensions', () => {
@@ -92,7 +92,7 @@ describe('#parsePathItemObject', () => {
       expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
       expect(result.get(0).href.toValue()).to.equal('/');
 
-      expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' contains invalid key 'invalid'");
+      expect(result).to.contain.warning("'Path Item Object' contains invalid key 'invalid'");
     });
   });
 
@@ -108,7 +108,7 @@ describe('#parsePathItemObject', () => {
       expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
       expect(result.get(0).href.toValue()).to.equal('/');
 
-      expect(result.warnings.get(0).toValue()).to.equal("'Path Item Object' 'summary' is not a string");
+      expect(result).to.contain.warning("'Path Item Object' 'summary' is not a string");
     });
 
     it('exposes summary as the title of the resource', () => {
@@ -148,9 +148,7 @@ describe('#parsePathItemObject', () => {
       expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
       expect(result.get(0).length).to.equal(0);
 
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Path Item Object' 'description' is not a string"
-      );
+      expect(result).to.contain.warning("'Path Item Object' 'description' is not a string");
     });
   });
 
@@ -166,9 +164,7 @@ describe('#parsePathItemObject', () => {
       expect(result.get(0)).to.be.instanceof(minim.elements.Resource);
       expect(result.get(0).href.toValue()).to.equal('/');
 
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Path Item Object' 'parameters' is not an array"
-      );
+      expect(result).to.contain.warning("'Path Item Object' 'parameters' is not an array");
     });
 
     describe('path parameters', () => {
@@ -206,9 +202,7 @@ describe('#parsePathItemObject', () => {
         const result = parse(minim, path);
 
         expect(result.length).to.equal(1);
-        expect(result.errors.get(0).toValue()).to.equal(
-          "Path '/' is missing path variable 'resource'. Add '{resource}' to the path"
-        );
+        expect(result).to.contain.error("Path '/' is missing path variable 'resource'. Add '{resource}' to the path");
       });
 
       it('errors when path variable not defined in parameters', () => {
@@ -217,9 +211,7 @@ describe('#parsePathItemObject', () => {
         const result = parse(minim, path);
 
         expect(result.length).to.equal(1);
-        expect(result.errors.get(0).toValue()).to.equal(
-          "Path '/{resource}' contains variable 'resource' which is not declared in the parameters section of the 'Path Item Object'"
-        );
+        expect(result).to.contain.error("Path '/{resource}' contains variable 'resource' which is not declared in the parameters section of the 'Path Item Object'");
       });
     });
 

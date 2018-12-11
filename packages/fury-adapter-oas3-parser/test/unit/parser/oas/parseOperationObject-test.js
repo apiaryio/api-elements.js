@@ -41,9 +41,7 @@ describe('Operation Object', () => {
     const result = parse(minim, operation);
 
     expect(result.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal(
-      "'Operation Object' is not an object"
-    );
+    expect(result).to.contain.warning("'Operation Object' is not an object");
   });
 
   describe('warnings for unsupported properties', () => {
@@ -54,10 +52,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'tags'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'tags'");
     });
 
     it('provides warning for unsupported externalDocs key', () => {
@@ -67,10 +62,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'externalDocs'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'externalDocs'");
     });
 
     it('provides warning for unsupported operationId key', () => {
@@ -80,10 +72,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'operationId'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'operationId'");
     });
 
     it('provides warning for unsupported parameters key', () => {
@@ -93,10 +82,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'parameters'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'parameters'");
     });
 
     it('provides warning for unsupported requestBody key', () => {
@@ -106,10 +92,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'requestBody'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'requestBody'");
     });
 
     it('provides warning for unsupported responses key', () => {
@@ -119,10 +102,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'responses'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'responses'");
     });
 
     it('provides warning for unsupported callbacks key', () => {
@@ -132,10 +112,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'callbacks'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'callbacks'");
     });
 
     it('provides warning for unsupported deprecated key', () => {
@@ -145,10 +122,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'deprecated'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'deprecated'");
     });
 
     it('provides warning for unsupported security key', () => {
@@ -158,10 +132,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.warnings.length).to.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' contains unsupported key 'security'"
-      );
+      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'security'");
     });
 
     it('does not provide warning/errors for extensions', () => {
@@ -171,7 +142,7 @@ describe('Operation Object', () => {
 
       const result = parse(minim, operation);
 
-      expect(result.annotations.isEmpty).to.be.true;
+      expect(result).to.not.contain.annotations;
     });
   });
 
@@ -182,10 +153,7 @@ describe('Operation Object', () => {
 
     const result = parse(minim, operation);
 
-    expect(result.warnings.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal(
-      "'Operation Object' contains invalid key 'invalid'"
-    );
+    expect(result).to.contain.warning("'Operation Object' contains invalid key 'invalid'");
   });
 
   describe('#summary', () => {
@@ -199,7 +167,7 @@ describe('Operation Object', () => {
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(minim.elements.Transition);
 
-      expect(result.warnings.get(0).toValue()).to.equal("'Operation Object' 'summary' is not a string");
+      expect(result).to.contain.warning("'Operation Object' 'summary' is not a string");
     });
 
     it('returns a transition with a summary', () => {
@@ -243,9 +211,7 @@ describe('Operation Object', () => {
       expect(result.get(0)).to.be.instanceof(minim.elements.Transition);
       expect(result.get(0).length).to.equal(1);
 
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Operation Object' 'description' is not a string"
-      );
+      expect(result).to.contain.warning("'Operation Object' 'description' is not a string");
     });
   });
 });

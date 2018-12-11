@@ -10,10 +10,7 @@ describe('Parameter Objects', () => {
 
     const result = parse(minim, 'Operation Object', parameters);
 
-    expect(result.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal(
-      "'Operation Object' 'parameters' is not an array"
-    );
+    expect(result).to.contain.warning("'Operation Object' 'parameters' is not an array");
   });
 
   it('can parse parameters into groups', () => {

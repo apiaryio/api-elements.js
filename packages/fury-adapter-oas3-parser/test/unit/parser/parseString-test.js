@@ -13,6 +13,7 @@ describe('parseString', () => {
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0).value).to.be.instanceof(minim.elements.String);
     expect(parseResult.get(0).value.toValue()).to.equal('Hello World');
+    expect(parseResult).to.not.contain.annotations;
   });
 
   it('returns a warning annotation when given optional element is not a StringElement', () => {
@@ -21,12 +22,7 @@ describe('parseString', () => {
 
     const parseResult = parseString(minim, 'Example Object', false, member);
 
-    expect(parseResult.length).to.equal(1);
-    const warning = parseResult.warnings.get(0);
-    expect(warning).to.be.instanceof(minim.elements.Annotation);
-    expect(warning.toValue()).to.equal(
-      "'Example Object' 'message' is not a string"
-    );
+    expect(parseResult).to.contain.warning("'Example Object' 'message' is not a string");
   });
 
   it('returns a error annotation when given required element is not a StringElement', () => {
@@ -35,11 +31,6 @@ describe('parseString', () => {
 
     const parseResult = parseString(minim, 'Example Object', true, member);
 
-    expect(parseResult.length).to.equal(1);
-    const error = parseResult.errors.get(0);
-    expect(error).to.be.instanceof(minim.elements.Annotation);
-    expect(error.toValue()).to.equal(
-      "'Example Object' 'message' is not a string"
-    );
+    expect(parseResult).to.contain.error("'Example Object' 'message' is not a string");
   });
 });

@@ -12,7 +12,7 @@ describe('#parsePathsObject', () => {
     const result = parse(minim, paths);
 
     expect(result.length).to.equal(1);
-    expect(result.errors.get(0).toValue()).to.equal("'Paths Object' is not an object");
+    expect(result).to.contain.error("'Paths Object' is not an object");
   });
 
   it('returns empty parse result when paths is empty', () => {
@@ -30,7 +30,7 @@ describe('#parsePathsObject', () => {
     const result = parse(minim, paths);
 
     expect(result.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("'Paths Object' contains invalid key 'test'");
+    expect(result).to.contain.warning("'Paths Object' contains invalid key 'test'");
   });
 
   it('ignores extension objects', () => {

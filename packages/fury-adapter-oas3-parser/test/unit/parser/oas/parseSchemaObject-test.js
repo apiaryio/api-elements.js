@@ -10,7 +10,7 @@ describe('Schema Object', () => {
     const result = parse(minim, schema);
 
     expect(result.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal("'Schema Object' is not an object");
+    expect(result).to.contain.warning("'Schema Object' is not an object");
   });
 
   describe('#type', () => {
@@ -22,6 +22,7 @@ describe('Schema Object', () => {
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(minim.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
 
       const object = result.get(0).content;
       expect(object).to.be.instanceof(minim.elements.Object);
@@ -36,6 +37,7 @@ describe('Schema Object', () => {
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(minim.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
 
       const array = result.get(0).content;
       expect(array).to.be.instanceof(minim.elements.Array);
@@ -50,6 +52,7 @@ describe('Schema Object', () => {
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(minim.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
 
       const string = result.get(0).content;
       expect(string).to.be.instanceof(minim.elements.String);

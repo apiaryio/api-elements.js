@@ -11,8 +11,7 @@ describe('#parse', () => {
 
     const parseResult = parse(source, minim);
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
-    expect(parseResult.errors.length).to.equal(1);
-    expect(parseResult.errors.getValue(0)).to.equal("YAML Syntax: expected '<document start>', but found {");
+    expect(parseResult).to.contain.error("YAML Syntax: expected '<document start>', but found {");
     expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[2, 1]]);
   });
 
@@ -22,7 +21,7 @@ describe('#parse', () => {
     const parseResult = parse(source, minim);
     expect(parseResult).to.be.instanceof(minim.elements.ParseResult);
     expect(parseResult.length).to.equal(1);
-    expect(parseResult.errors.get(0).toValue()).to.equal('Source document is not an object');
+    expect(parseResult).to.contain.error('Source document is not an object');
     expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[0, 2]]);
   });
 
