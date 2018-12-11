@@ -1,9 +1,21 @@
 const fs = require('fs');
 const path = require('path');
-const { promisify } = require('util');
 const { expect } = require('chai');
 const { Fury } = require('fury');
 const adapter = require('../../lib/adapter');
+
+// FIXME use `util`.`promisify` for Node 8+ or https://github.com/apiaryio/api-elements.js/issues/37
+function promisify(func) {
+  return (...args) => new Promise((resolve, reject) => {
+    func(...args, (error, result) => {
+      if (error) {
+        return reject(error);
+      }
+
+      return resolve(result);
+    });
+  });
+}
 
 const fury = new Fury();
 fury.use(adapter);
