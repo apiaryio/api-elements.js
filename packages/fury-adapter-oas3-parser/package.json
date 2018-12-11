@@ -25,7 +25,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "fury": "3.0.0-beta.7",
-    "minim": "^0.22.0",
+    "minim": "^0.22.1",
     "mocha": "5.0.2"
   },
   "engines": {
