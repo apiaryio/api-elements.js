@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "test": "mocha test/unit test/integration",
     "test:unit": "mocha test/unit",
-    "test:integration": "mocha test/integration"
+    "test:integration": "mocha test/integration",
+    "test:integration:fix": "env GENERATE=1 mocha test/integration"
   },
   "dependencies": {
     "ramda": "0.25.0",

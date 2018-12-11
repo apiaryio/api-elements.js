@@ -19,6 +19,11 @@ describe('#parse', () => {
     expect(parseResult).to.be.instanceof(fury.minim.elements.ParseResult);
 
     const result = JSON.stringify(fury.minim.serialiser.serialise(parseResult), null, 2);
+
+    if (process.env.GENERATE) {
+      fs.writeFileSync(`${file}.json`, result);
+    }
+
     const expected = fs.readFileSync(`${file}.json`, 'utf-8');
     expect(result).to.equal(expected);
   });
