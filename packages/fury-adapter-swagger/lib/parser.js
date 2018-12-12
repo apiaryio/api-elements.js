@@ -1483,7 +1483,6 @@ class Parser {
       const SourceMap = this.minim.getElementClass('sourceMap');
       const position = this.ast.getPosition(path);
 
-      // eslint-disable-next-line no-restricted-globals
       if (position && position.start && position.end
           && !Number.isNaN(position.start.pointer) && !Number.isNaN(position.end.pointer)) {
         const start = new NumberElement(position.start.pointer);

@@ -3251,10 +3251,10 @@ minim@^0.20.5:
     lodash "^4.15.0"
     uptown "^1.0.1"
 
-minim@^0.21.1:
-  version "0.21.1"
-  resolved "https://registry.yarnpkg.com/minim/-/minim-0.21.1.tgz#9b25bc017ea6bc65aababfe04219dfb2da8b22d0"
-  integrity sha512-ixUvKzCta8l5UlDvekpnA71vIPOCQERT3GFl2plOp9gx5SdTUbinY55CCzaItpMneRgX4wIrMNIV4LX0AfEEVw==
+minim@^0.22.1:
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/minim/-/minim-0.22.1.tgz#8f57ed7bcab770b764a37e2056188a222b80d94a"
+  integrity sha512-wi52rk6Kbzr+OATkLJH3aCqkpFRV1w/CyniDcDAJ5fOFKdeORzfE6FI2Kg/XET9VHiIobLroBaa34DhnEs6+yQ==
   dependencies:
     lodash "^4.15.0"
     uptown "^1.1.0"
