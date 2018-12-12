@@ -1,36 +1,42 @@
 # Changelog
 
+## Master
+
+### Breaking
+
+- Node 4 is not supported anymore.
+
 ## 0.8.5 (2018-11-27)
 
 ### Enhancements
 
-This update now uses fury-adapter-swagger 0.22.3. Please see
-[fury-adapter-swagger 0.22.3](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.22.3)
-for the list of changes.
+- This update now uses fury-adapter-swagger 0.22.3. Please see
+  [fury-adapter-swagger 0.22.3](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.22.3)
+  for the list of changes.
 
 ## 0.8.4 (2018-10-16)
 
 ### Enhancements
 
-This update now uses fury-adapter-swagger 0.22.0. Please see
-[fury-adapter-swagger 0.22.0](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.22.0)
-for the list of changes.
+- This update now uses fury-adapter-swagger 0.22.0. Please see
+  [fury-adapter-swagger 0.22.0](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.22.0)
+  for the list of changes.
 
 ## 0.8.3 (2018-09-07)
 
 ### Enhancements
 
-This update now uses fury-adapter-swagger 0.21.0. Please see
-[fury-adapter-swagger 0.21.0](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.21.0)
-for the list of changes.
+- This update now uses fury-adapter-swagger 0.21.0. Please see
+  [fury-adapter-swagger 0.21.0](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.21.0)
+  for the list of changes.
 
 ## 0.8.2 (2018-09-07)
 
 ### Enhancements
 
-This update now uses fury-adapter-swagger 0.20.0. Please see
-[fury-adapter-swagger 0.20.0](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.20.0)
-for the list of changes.
+- This update now uses fury-adapter-swagger 0.20.0. Please see
+  [fury-adapter-swagger 0.20.0](https://github.com/apiaryio/fury-adapter-swagger/releases/tag/v0.20.0)
+  for the list of changes.
 
 ## 0.8.1
 
@@ -104,4 +110,4 @@ for the list of changes.
 
 ## 0.1.0
 
-Initial Library
+- Initial Library

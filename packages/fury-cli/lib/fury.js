@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-import fs from 'fs';
-import repl from 'repl';
-import { isatty } from 'tty';
-import yaml from 'js-yaml';
-import commander from 'commander';
-import { highlight } from 'cardinal';
-import theme from 'cardinal/themes/tomorrow-night';
-import { JSON06Serialiser } from 'minim';
-import fury from 'fury';
-import swagger from 'fury-adapter-swagger';
-import apiBlueprintParser from 'fury-adapter-apib-parser';
-import apiBlueprintSerializer from 'fury-adapter-apib-serializer';
-import apiaryBlueprintParser from 'fury-adapter-apiary-blueprint-parser';
-import pkg from '../package.json';
+const fs = require('fs');
+const repl = require('repl');
+const { isatty } = require('tty');
+const yaml = require('js-yaml');
+const commander = require('commander');
+const { highlight } = require('cardinal');
+const theme = require('cardinal/themes/tomorrow-night');
+const { JSON06Serialiser } = require('minim');
+const fury = require('fury');
+const swagger = require('fury-adapter-swagger');
+const apiBlueprintParser = require('fury-adapter-apib-parser');
+const apiBlueprintSerializer = require('fury-adapter-apib-serializer');
+const apiaryBlueprintParser = require('fury-adapter-apiary-blueprint-parser');
+const pkg = require('../package.json');
 
 fury.use(swagger);
 fury.use(apiBlueprintParser);

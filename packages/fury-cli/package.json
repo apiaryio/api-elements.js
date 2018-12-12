@@ -2,38 +2,33 @@
   "name": "fury-cli",
   "version": "0.8.5",
   "description": "Command line tool interface for Fury.js",
+  "author": "Apiary.io <support@apiary.io>",
+  "license": "MIT",
   "bin": {
     "fury": "lib/fury.js"
   },
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-cli",
   "repository": {
     "type": "git",
-    "url": "https://github.com/apiaryio/fury-cli.git"
+    "url": "https://github.com/apiaryio/api-elements.js.git"
   },
   "scripts": {
-    "test": "peasant test",
-    "ci": "peasant -s lint test build",
-    "prepublish": "npm run ci",
-    "cover": "peasant cover",
-    "peasant": "peasant",
-    "lint": "peasant lint"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "exit 0"
   },
   "dependencies": {
-    "babel-runtime": "^6.23.0",
     "cardinal": "^2.1.1",
     "commander": "^2.9",
     "fury": "3.0.0-beta.7",
     "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.4",
     "fury-adapter-apib-parser": "^0.11.0",
     "fury-adapter-apib-serializer": "^0.7.0",
-    "fury-adapter-swagger": "^0.22.3",
+    "fury-adapter-swagger": "^0.22.7",
     "js-yaml": "^3.6",
-    "minim": "^0.21.1"
+    "minim": "^0.22.1"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "glob": "^7.1.2",
-    "peasant": "1.1.0"
-  },
-  "author": "Apiary.io <support@apiary.io>",
-  "license": "MIT"
+    "eslint": "^5.9.0"
+  }
 }
