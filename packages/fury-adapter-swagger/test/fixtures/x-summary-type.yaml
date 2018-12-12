@@ -1,0 +1,17 @@
+swagger: '2.0'
+info:
+  title: Resource summary as incorrect type coerces to string
+  version: '1.0'
+paths:
+  '/boolean':
+    x-summary: true
+    get:
+      responses:
+        200:
+          description: 'My Response'
+  '/number':
+    x-summary: 1.0
+    get:
+      responses:
+        200:
+          description: 'My Response'

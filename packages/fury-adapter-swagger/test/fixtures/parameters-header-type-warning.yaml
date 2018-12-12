@@ -1,0 +1,21 @@
+swagger: '2.0'
+info:
+  title: Request Header Parameter Example
+  version: '1.0'
+paths:
+  '/':
+    parameters:
+      - name: UserID
+        in: header
+        type: number
+        required: true
+        x-example: five
+      - name: RequestID
+        in: header
+        type: number
+        required: true
+        default: five
+    get:
+      responses:
+        204:
+          description: Response

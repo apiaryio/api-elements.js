@@ -1,0 +1,68 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Simple API overview"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "v2"
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "content": "/path"
+            }
+          },
+          "content": [
+            {
+              "element": "extension",
+              "meta": {
+                "links": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "link",
+                      "attributes": {
+                        "relation": {
+                          "element": "string",
+                          "content": "profile"
+                        },
+                        "href": {
+                          "element": "string",
+                          "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "x-k": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

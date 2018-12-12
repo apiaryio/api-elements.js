@@ -1,0 +1,18 @@
+swagger: "2.0"
+info:
+  version: '1.0'
+  title: Test API
+  description: Nullable Member
+paths:
+  /test:
+    get:
+      summary: Test endpoint
+      responses:
+        200:
+          description: A response
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                x-nullable: true

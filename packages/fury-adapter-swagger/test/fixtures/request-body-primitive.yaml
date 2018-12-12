@@ -1,0 +1,46 @@
+swagger: '2.0'
+info:
+  title: Primitive Body
+  version: 1.0.0
+consumes:
+- text/plain
+paths:
+  /string:
+    post:
+      summary: Example Operation Using String Body
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: string
+            example: Http Request Body
+      responses:
+        204:
+          description: Success
+  /number:
+    post:
+      summary: Example Operation Using Number Body
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: number
+            example: 1.0
+      responses:
+        204:
+          description: Success
+  /boolean:
+    post:
+      summary: Example Operation Using Boolean Body
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: boolean
+            example: true
+      responses:
+        204:
+          description: Success
