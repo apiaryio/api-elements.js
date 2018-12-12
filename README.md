@@ -101,3 +101,19 @@ You can run a local development server to preview changes using the following:
 $ cd docs
 $ pipenv run serve
 ```
+
+### Release Process
+
+- Make sure you are on master branch.
+- Find packages which have been changed since last release.
+
+  ```shell
+  $ npx lerna changed
+  ```
+
+- Update the `CHANGELOG` for each of the above packages and commit to master
+- Publish to npm (which also creates a git commit with tags)
+
+  ```shell
+  $ npm run release
+  ```

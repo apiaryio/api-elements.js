@@ -6,8 +6,7 @@
     ]
   },
   "scripts": {
-    "release": "lerna publish",
-    "release:force": "lerna publish --force-publish",
+    "release": "lerna publish --exact",
     "lint": "lerna exec --scope='*' --concurrency 1 --no-bail -- npm run lint",
     "lint:fix": "lerna exec --scope='*' --concurrency 1 --no-bail -- npm run lint:fix",
     "test": "lerna exec --scope='*' --concurrency 1 --no-bail -- npm run test",
