@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import querystring from 'querystring';
-import faker from 'json-schema-faker';
-import { dereference } from './json-schema';
-import annotations from './annotations';
-import { inferred } from './link';
-import { isFormURLEncoded, isMultiPartFormData, parseBoundary } from './media-type';
+const _ = require('lodash');
+const querystring = require('querystring');
+const faker = require('json-schema-faker');
+const { dereference } = require('./json-schema');
+const annotations = require('./annotations');
+const { inferred } = require('./link');
+const { isFormURLEncoded, isMultiPartFormData, parseBoundary } = require('./media-type');
 
 faker.option({
   fixedProbabilities: true,
@@ -18,7 +18,7 @@ faker.option({
 const schemaIsArrayAndHasItems = schema => schema.type && schema.type === 'array' && schema.items;
 const isEmptyArray = value => value && Array.isArray(value) && value.length === 0;
 
-export function bodyFromSchema(schema, payload, parser, contentType = 'application/json') {
+const bodyFromSchema = (schema, payload, parser, contentType = 'application/json') => {
   const dereferencedSchema = dereference(schema, schema);
   const { Asset } = parser.minim.elements;
   let asset = null;
@@ -66,15 +66,15 @@ export function bodyFromSchema(schema, payload, parser, contentType = 'applicati
   } catch (exception) {
     parser.createAnnotation(
       annotations.DATA_LOST, parser.path,
-      `Unable to generate ${contentType} example message body out of JSON Schema`,
+      `Unable to generate ${contentType} example message body out of JSON Schema`
     );
   }
 
   return asset;
-}
+};
 
 // Generates body asset from formData parameters.
-export function bodyFromFormParameter(param, schema) {
+const bodyFromFormParameter = (param, schema) => {
   // Preparing throwaway schema. Later we will feed the 'bodyFromSchema'
   // with it.
   const paramSchema = _.clone(param);
@@ -102,6 +102,6 @@ export function bodyFromFormParameter(param, schema) {
   }
 
   return retSchema;
-}
+};
 
-export default { bodyFromSchema, bodyFromFormParameter };
+module.exports = { bodyFromSchema, bodyFromFormParameter };

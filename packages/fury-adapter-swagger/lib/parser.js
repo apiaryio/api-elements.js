@@ -1,21 +1,23 @@
 // The main Swagger parsing component that outputs refract.
 
-import _ from 'lodash';
-import { sep } from 'path';
-import yaml from 'js-yaml';
-import contentTypeModule from 'content-type';
-import mediaTyper from 'media-typer';
-import SwaggerParser from 'swagger-parser';
-import ZSchema from 'z-schema';
-import annotations from './annotations';
-import { bodyFromSchema, bodyFromFormParameter } from './generator';
-import uriTemplate from './uri-template';
-import { baseLink, origin } from './link';
-import { pushHeader, pushHeaderObject } from './headers';
-import Ast from './ast';
-import { DataStructureGenerator, idForDataStructure } from './schema';
-import { convertSchema, convertSchemaDefinitions } from './json-schema';
-import { FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isTextContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary } from './media-type';
+const _ = require('lodash');
+const { sep } = require('path');
+const yaml = require('js-yaml');
+const contentTypeModule = require('content-type');
+const mediaTyper = require('media-typer');
+const SwaggerParser = require('swagger-parser');
+const ZSchema = require('z-schema');
+const annotations = require('./annotations');
+const { bodyFromSchema, bodyFromFormParameter } = require('./generator');
+const uriTemplate = require('./uri-template');
+const { baseLink, origin } = require('./link');
+const { pushHeader, pushHeaderObject } = require('./headers');
+const Ast = require('./ast');
+const { DataStructureGenerator, idForDataStructure } = require('./schema');
+const { isExtension, convertSchema, convertSchemaDefinitions } = require('./json-schema');
+const {
+  FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isTextContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary,
+} = require('./media-type');
 
 
 // Provide a `nextTick` function that either is Node's nextTick or a fallback
@@ -28,15 +30,10 @@ function nextTick(cb) {
   }
 }
 
-// Test whether a key is a special Swagger extension.
-function isExtension(value, key) {
-  return _.startsWith(key, 'x-');
-}
-
 // The parser holds state about the current parsing environment and converts
 // the input Swagger into Refract elements. The `parse` function is its main
 // interface.
-export default class Parser {
+class Parser {
   constructor({ minim, source, generateSourceMap }) {
     // Parser options
     this.minim = minim;
@@ -81,7 +78,7 @@ export default class Parser {
 
       this.createAnnotation(
         annotations.CANNOT_PARSE, null,
-        (err.reason || 'Problem loading the input'),
+        (err.reason || 'Problem loading the input')
       );
 
       if (err.mark) {
@@ -97,7 +94,7 @@ export default class Parser {
     if (!_.isObject(loaded)) {
       this.createAnnotation(
         annotations.CANNOT_PARSE, null,
-        ('Swagger document is not an object'),
+        ('Swagger document is not an object')
       );
 
       return done(null, this.result);
@@ -242,7 +239,7 @@ export default class Parser {
       } catch (exception) {
         this.createAnnotation(
           annotations.UNCAUGHT_ERROR, null,
-          'There was a problem converting the Swagger document',
+          'There was a problem converting the Swagger document'
         );
 
         return done(exception, this.result);
@@ -290,7 +287,7 @@ export default class Parser {
       this.internalAST = null;
       this.createAnnotation(
         annotations.AST_UNAVAILABLE, null,
-        'Source maps are only available with string input',
+        'Source maps are only available with string input'
       );
     }
 
@@ -401,7 +398,7 @@ export default class Parser {
           if (this.swagger.schemes.length > 1) {
             this.createAnnotation(
               annotations.DATA_LOST, ['schemes'],
-              'Only the first scheme will be used to create a hostname',
+              'Only the first scheme will be used to create a hostname'
             );
           }
 
@@ -856,7 +853,7 @@ export default class Parser {
         this.withPath('responses', 'default', (path) => {
           this.createAnnotation(
             annotations.DATA_LOST, path,
-            'Default response is not yet supported',
+            'Default response is not yet supported'
           );
         });
       }
@@ -877,7 +874,7 @@ export default class Parser {
         this.handleSwaggerResponse(
           transition, method, methodValue,
           transitionParams, responseValue, statusCode,
-          schemes, resourceParams,
+          schemes, resourceParams
         );
       });
 
@@ -930,7 +927,7 @@ export default class Parser {
   // Convert a Swagger response & status code into Refract transactions.
   handleSwaggerResponse(
     transition, method, methodValue, transitionParams,
-    responseValue, statusCode, schemes, resourceParams,
+    responseValue, statusCode, schemes, resourceParams
   ) {
     const requestContentTypes = this.gatherRequestContentTypes(methodValue);
     const responseContentTypes = this
@@ -939,8 +936,8 @@ export default class Parser {
     responseContentTypes.forEach((responseContentType) => {
       let responseBody;
 
-      if (responseContentType && responseValue.examples &&
-          responseValue.examples[responseContentType]) {
+      if (responseContentType && responseValue.examples
+          && responseValue.examples[responseContentType]) {
         responseBody = responseValue.examples[responseContentType];
       }
 
@@ -949,12 +946,12 @@ export default class Parser {
 
         this.handleSwaggerExampleRequest(
           transaction, methodValue, transitionParams,
-          resourceParams, requestContentType, responseContentType, responseBody === undefined,
+          resourceParams, requestContentType, responseContentType, responseBody === undefined
         );
 
         this.handleSwaggerExampleResponse(
           transaction, methodValue, responseValue,
-          statusCode, responseBody, responseContentType,
+          statusCode, responseBody, responseContentType
         );
       });
     });
@@ -963,7 +960,7 @@ export default class Parser {
   // Convert a Swagger example into a Refract request.
   handleSwaggerExampleRequest(
     transaction, methodValue, transitionParams, resourceParams,
-    requestContentType, responseContentType, contentTypeFromProduces,
+    requestContentType, responseContentType, contentTypeFromProduces
   ) {
     let contentType = requestContentType;
     const { request } = transaction;
@@ -1016,7 +1013,7 @@ export default class Parser {
                   this.withPath('x-example', () => {
                     this.createAnnotation(
                       annotations.VALIDATION_ERROR, this.path,
-                      'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead',
+                      'The \'x-example\' property isn\'t allowed for body parameters - use \'schema.example\' instead'
                     );
                   });
                 }
@@ -1030,8 +1027,8 @@ export default class Parser {
                 }
 
                 this.withPath('schema', () => {
-                  const pushBody = (consumeIsJson ||
-                      (bodyIsPrimitive && isTextContentType(contentType)));
+                  const pushBody = (consumeIsJson
+                      || (bodyIsPrimitive && isTextContentType(contentType)));
                   this.pushAssets(param.schema, request, contentType, pushBody);
                 });
               }));
@@ -1081,7 +1078,7 @@ export default class Parser {
     }
 
     const jsonSchema = convertSchema(schema, { definitions: this.definitions },
-        this.referencedSwagger);
+      this.referencedSwagger);
     bodyFromSchema(jsonSchema, request, this, contentType || FORM_CONTENT_TYPE);
 
     // Generating data structure
@@ -1102,7 +1099,7 @@ export default class Parser {
     if (param.type === 'array') {
       this.createAnnotation(
         annotations.DATA_LOST, this.path,
-        'Arrays in form parameters are not fully supported yet',
+        'Arrays in form parameters are not fully supported yet'
       );
 
       return;
@@ -1111,7 +1108,7 @@ export default class Parser {
     if (param.allowEmptyValue) {
       this.createAnnotation(
         annotations.DATA_LOST, this.path,
-        'The allowEmptyValue flag is not fully supported yet',
+        'The allowEmptyValue flag is not fully supported yet'
       );
     }
   }
@@ -1119,7 +1116,7 @@ export default class Parser {
   // Convert a Swagger example into a Refract response.
   handleSwaggerExampleResponse(
     transaction, methodValue, responseValue,
-    statusCode, responseBody, contentType,
+    statusCode, responseBody, contentType
   ) {
     const { Asset, Copy } = this.minim.elements;
     const { response } = transaction;
@@ -1186,7 +1183,7 @@ export default class Parser {
 
           this.withSlicedPath(...args.concat([() => {
             this.pushAssets(schema, response, contentType,
-                            isJsonResponse && responseBody === undefined);
+              isJsonResponse && responseBody === undefined);
           }]));
         }
 
@@ -1487,8 +1484,8 @@ export default class Parser {
       const position = this.ast.getPosition(path);
 
       // eslint-disable-next-line no-restricted-globals
-      if (position && position.start && position.end &&
-          !isNaN(position.start.pointer) && !isNaN(position.end.pointer)) {
+      if (position && position.start && position.end
+          && !Number.isNaN(position.start.pointer) && !Number.isNaN(position.end.pointer)) {
         const start = new NumberElement(position.start.pointer);
         const end = new NumberElement(position.end.pointer - position.start.pointer);
 
@@ -1540,7 +1537,7 @@ export default class Parser {
         if (!['multi', 'csv'].includes(format)) {
           this.createAnnotation(
             annotations.DATA_LOST, this.path,
-            `Parameters of collection format '${format}' are not supported`,
+            `Parameters of collection format '${format}' are not supported`
           );
         }
 
@@ -1563,7 +1560,7 @@ export default class Parser {
     try {
       const root = { definitions: this.definitions };
       jsonSchema = convertSchema(referencedPathValue || schema, root,
-                                 this.referencedSwagger);
+        this.referencedSwagger);
     } catch (error) {
       this.createAnnotation(annotations.VALIDATION_ERROR, this.path, error.message);
       return;
@@ -1673,7 +1670,7 @@ export default class Parser {
         this.withPath(index, () => {
           this.createAnnotation(
             annotations.VALIDATION_WARNING, this.path,
-            `Invalid content type '${contentType}', ${e.message}`,
+            `Invalid content type '${contentType}', ${e.message}`
           );
         });
       }
@@ -1681,3 +1678,4 @@ export default class Parser {
   }
 }
 
+module.exports = Parser;

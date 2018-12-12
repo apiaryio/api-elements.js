@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import { expect } from 'chai';
-import Parser from '../src/parser';
+const _ = require('lodash');
+const { expect } = require('chai');
+const Parser = require('../lib/parser');
 
 describe('Test parser.withPath() ', () => {
   let parser;

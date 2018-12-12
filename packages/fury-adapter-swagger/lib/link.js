@@ -1,4 +1,4 @@
-export function baseLink(element, parser, relation, options = {}) {
+const baseLink = (element, parser, relation, options = {}) => {
   const { String: StringElement, Link } = parser.minim.elements;
 
   const opts = {
@@ -25,18 +25,18 @@ export function baseLink(element, parser, relation, options = {}) {
   }
 
   element.links.push(link);
-}
+};
 
-export function origin(fragment, element, parser) {
+const origin = (fragment, element, parser) => {
   baseLink(element, parser, 'origin', {
     fragment,
   });
-}
+};
 
-export function inferred(fragment, element, parser) {
+const inferred = (fragment, element, parser) => {
   baseLink(element, parser, 'inferred', {
     fragment,
   });
-}
+};
 
-export default { baseLink, origin, inferred };
+module.exports = { baseLink, origin, inferred };

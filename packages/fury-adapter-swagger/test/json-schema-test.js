@@ -1,9 +1,5 @@
-/* eslint-disable no-unused-expressions  */
-// Allows chai `expect(null).to.be.null;`
-
-import { expect } from 'chai';
-
-import { convertSchema, convertSchemaDefinitions, dereference } from '../src/json-schema';
+const { expect } = require('chai');
+const { convertSchema, convertSchemaDefinitions, dereference } = require('../lib/json-schema');
 
 describe('Swagger Schema to JSON Schema', () => {
   it('returns compatible schema when given valid JSON Schema', () => {

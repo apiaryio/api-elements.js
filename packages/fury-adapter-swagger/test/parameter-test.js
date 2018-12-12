@@ -1,9 +1,6 @@
-// Chai uses unused expressions for expect
-/* eslint-disable no-unused-expressions */
-
-import { expect } from 'chai';
-import { Fury } from 'fury';
-import Parser from '../src/parser';
+const { expect } = require('chai');
+const { Fury } = require('fury');
+const Parser = require('../lib/parser');
 
 const { minim } = new Fury();
 const { Annotation } = minim.elements;

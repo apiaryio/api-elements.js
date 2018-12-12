@@ -1,7 +1,6 @@
-import { expect } from 'chai';
-
-import { Fury } from 'fury';
-import { bodyFromSchema } from '../src/generator';
+const { expect } = require('chai');
+const { Fury } = require('fury');
+const { bodyFromSchema } = require('../lib/generator');
 
 const { minim } = new Fury();
 
@@ -142,9 +141,9 @@ describe('bodyFromSchema', () => {
 
       expect(asset.content).to.be.a('string');
       expect(asset.content).to
-        .equal('--boundy\r\nContent-Disposition: form-data; name="example1"\r\n\r\nHello\r\n' +
-          '--boundy\r\nContent-Disposition: form-data; name="example2"\r\n\r\nHello\r\n' +
-          '\r\n--boundy--\r\n');
+        .equal('--boundy\r\nContent-Disposition: form-data; name="example1"\r\n\r\nHello\r\n'
+          + '--boundy\r\nContent-Disposition: form-data; name="example2"\r\n\r\nHello\r\n'
+          + '\r\n--boundy--\r\n');
     });
   });
 

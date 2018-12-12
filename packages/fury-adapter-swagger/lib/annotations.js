@@ -1,7 +1,7 @@
 // These describe the type of annotations that are produced by this parser
 // and assigns a unique code to each one. Downstream applications can use this
 // code to group similar types of annotations together.
-export default {
+module.exports = {
   CANNOT_PARSE: {
     type: 'error',
     code: 1,

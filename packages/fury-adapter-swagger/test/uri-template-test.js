@@ -1,6 +1,5 @@
-import { expect } from 'chai';
-
-import buildUriTemplate from '../src/uri-template';
+const { expect } = require('chai');
+const buildUriTemplate = require('../lib/uri-template');
 
 describe('URI Template Handler', () => {
   context('when there are path object parameters', () => {

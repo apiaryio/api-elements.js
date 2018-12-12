@@ -1,11 +1,9 @@
-import _ from 'lodash';
+const _ = require('lodash');
 
 // Test whether a key is a special Swagger extension.
-function isExtension(value, key) {
-  return _.startsWith(key, 'x-');
-}
+const isExtension = (value, key) => _.startsWith(key, 'x-');
 
-export function parseReference(reference) {
+const parseReference = (reference) => {
   const parts = reference.split('/');
 
   if (parts[0] !== '#') {
@@ -19,7 +17,7 @@ export function parseReference(reference) {
   const id = parts[2];
 
   return id;
-}
+};
 
 /**
  * Lookup a reference
@@ -33,7 +31,7 @@ export function parseReference(reference) {
  * @param root {object} - The object to resolve the given reference
  * @param depth {number} - A limit to resolving the depth
  */
-export function lookupReference(reference, root, depth) {
+const lookupReference = (reference, root, depth) => {
   const parts = reference.split('/').reverse();
 
   if (parts.pop() !== '#') {
@@ -68,9 +66,9 @@ export function lookupReference(reference, root, depth) {
     id,
     referenced: value,
   };
-}
+};
 
-function pathHasCircularReference(paths, path, reference) {
+const pathHasCircularReference = (paths, path, reference) => {
   const currentPath = (path || []).join('/');
 
   // Check for direct circular reference
@@ -84,9 +82,9 @@ function pathHasCircularReference(paths, path, reference) {
   }
 
   return false;
-}
+};
 
-export function dereference(example, root, paths, path) {
+const dereference = (example, root, paths, path) => {
   if (example === null || example === undefined) {
     return example;
   }
@@ -120,9 +118,9 @@ export function dereference(example, root, paths, path) {
   }
 
   return example;
-}
+};
 
-function convertSubSchema(schema, references, swagger) {
+const convertSubSchema = (schema, references, swagger) => {
   if (schema.$ref) {
     references.push(schema.$ref);
     return { $ref: schema.$ref };
@@ -195,8 +193,7 @@ function convertSubSchema(schema, references, swagger) {
 
   if (schema.patternProperties) {
     Object.keys(schema.patternProperties).forEach((key) => {
-      actualSchema.patternProperties[key] =
-        recurseConvertSubSchema(schema.patternProperties[key]);
+      actualSchema.patternProperties[key] = recurseConvertSubSchema(schema.patternProperties[key]);
     });
   }
 
@@ -205,11 +202,11 @@ function convertSubSchema(schema, references, swagger) {
   }
 
   return actualSchema;
-}
+};
 
 /** Returns true if the given schema contains any references
  */
-function checkSchemaHasReferences(schema) {
+const checkSchemaHasReferences = (schema) => {
   if (schema.$ref) {
     return true;
   }
@@ -217,18 +214,20 @@ function checkSchemaHasReferences(schema) {
   return Object.values(schema).some((value) => {
     if (_.isArray(value)) {
       return value.some(checkSchemaHasReferences);
-    } else if (_.isObject(value)) {
+    }
+
+    if (_.isObject(value)) {
       return checkSchemaHasReferences(value);
     }
 
     return false;
   });
-}
+};
 
 /** Traverses the entire schema to find all of the references
  * @returns array of each reference that is found in the schema
  */
-function findReferences(schema) {
+const findReferences = (schema) => {
   if (schema.$ref) {
     return [schema.$ref];
   }
@@ -284,7 +283,7 @@ function findReferences(schema) {
   }
 
   return references;
-}
+};
 
 /** Convert Swagger schema to JSON Schema
  * @param schema - The Swagger schema to convert
@@ -292,7 +291,7 @@ function findReferences(schema) {
  * @param swagger - The swagger document root (this contains the Swagger schema definitions)
  * @param copyDefinitins - Whether to copy the referenced definitions to the resulted schema
  */
-export function convertSchema(schema, root, swagger, copyDefinitions = true) {
+const convertSchema = (schema, root, swagger, copyDefinitions = true) => {
   let references = [];
   const result = convertSubSchema(schema, references, swagger);
 
@@ -328,9 +327,9 @@ export function convertSchema(schema, root, swagger, copyDefinitions = true) {
   }
 
   return result;
-}
+};
 
-export function convertSchemaDefinitions(definitions) {
+const convertSchemaDefinitions = (definitions) => {
   const jsonSchemaDefinitions = {};
 
   if (definitions) {
@@ -340,4 +339,8 @@ export function convertSchemaDefinitions(definitions) {
   }
 
   return jsonSchemaDefinitions;
-}
+};
+
+module.exports = {
+  isExtension, parseReference, lookupReference, dereference, convertSchema, convertSchemaDefinitions,
+};

@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-expressions  */
-// Allows chai `expect(true).to.be.true;`
-
-import { expect } from 'chai';
-import { isTextContentType, isMultiPartFormData, hasBoundary, parseBoundary } from '../src/media-type';
+const { expect } = require('chai');
+const {
+  isTextContentType, isMultiPartFormData, hasBoundary, parseBoundary,
+} = require('../lib/media-type');
 
 describe('#isTextContentType', () => {
   it('does not detect non-text content type', () => {

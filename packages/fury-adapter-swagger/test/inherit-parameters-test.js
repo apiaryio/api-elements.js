@@ -1,11 +1,6 @@
-/* eslint-disable no-unused-expressions */
-/*
- * Tests for Swagger adapter.
- */
-
-import fury from 'fury';
-import { expect } from 'chai';
-import adapter from '../src/adapter';
+const { expect } = require('chai');
+const fury = require('fury');
+const adapter = require('../lib/adapter');
 
 fury.adapters = [adapter];
 
@@ -263,7 +258,7 @@ describe('Inherit Path Parameters', () => {
           expect(err.message).to.equal('Validation failed. /paths//get has 2 body parameters. Only one is allowed.');
           done();
         },
-        () => {},
+        () => {}
       );
     });
 

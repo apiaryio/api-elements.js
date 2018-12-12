@@ -1,11 +1,9 @@
-import _ from 'lodash';
+const _ = require('lodash');
 
-function escapeUriTemplateVariable(variable) {
-  return encodeURIComponent(variable)
-    .replace(/[-.!~*'()]/g, c => `%${c.charCodeAt(0).toString(16)}`);
-}
+const escapeUriTemplateVariable = variable => encodeURIComponent(variable)
+  .replace(/[-.!~*'()]/g, c => `%${c.charCodeAt(0).toString(16)}`);
 
-export default function (basePath, href, pathObjectParams = [], queryParams = []) {
+module.exports = (basePath, href, pathObjectParams = [], queryParams = []) => {
   const parameterNames = _.chain(pathObjectParams)
     .concat(queryParams)
     .filter(parameter => parameter.in === 'query')
@@ -27,4 +25,4 @@ export default function (basePath, href, pathObjectParams = [], queryParams = []
   }
 
   return basePath + href;
-}
+};

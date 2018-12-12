@@ -1,9 +1,6 @@
-/* eslint-disable no-unused-expressions  */
-// Allows chai `expect(null).to.be.null;`
-
-import { expect } from 'chai';
-import { Fury } from 'fury';
-import { DataStructureGenerator } from '../src/schema';
+const { expect } = require('chai');
+const { Fury } = require('fury');
+const { DataStructureGenerator } = require('../lib/schema');
 
 const namespace = new Fury().minim;
 
@@ -164,10 +161,10 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(StringElement);
       expect(dataStructure.content.description.toValue())
-        .to.equal('A simple string\n' +
-          '\n' +
-          '- Length of string must be less than, or equal to 10\n' +
-          '- Length of string must be greater than, or equal to 2');
+        .to.equal('A simple string\n'
+          + '\n'
+          + '- Length of string must be less than, or equal to 10\n'
+          + '- Length of string must be greater than, or equal to 2');
     });
   });
 

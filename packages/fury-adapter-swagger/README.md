@@ -1,15 +1,9 @@
 # Fury Swagger 2.0 Adapter
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/apiaryio/fury-adapter-swagger.svg)](https://greenkeeper.io/)
-
-[![Build Status](https://img.shields.io/travis/apiaryio/fury-adapter-swagger.svg)](https://travis-ci.org/apiaryio/fury-adapter-swagger)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/apiaryio/fury-adapter-swagger.svg)](https://codeclimate.com/github/apiaryio/fury-adapter-swagger/coverage)
 [![NPM version](https://img.shields.io/npm/v/fury-adapter-swagger.svg)](https://www.npmjs.org/package/fury-adapter-swagger)
 [![License](https://img.shields.io/npm/l/fury-adapter-swagger.svg)](https://www.npmjs.org/package/fury-adapter-swagger)
 
-This adapter provides support for parsing [Swagger 2.0](http://swagger.io/) in [Fury.js](https://github.com/apiaryio/fury.js). It does not yet provide a serializer.
-
-Try the [Fury adapter in your browser](https://tonicdev.com/npm/fury-adapter-swagger) to convert Swagger 2.0 documents into Refract elements.
+This adapter provides support for parsing [Swagger 2.0](http://swagger.io/) in [Fury](https://github.com/apiaryio/api-elements.js/tree/master/packages/fury). It does not yet provide a serializer.
 
 ## Install
 

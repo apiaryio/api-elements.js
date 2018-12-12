@@ -1,10 +1,10 @@
 // A module for dealing with YAML syntax trees and looking up source map
 // location information.
 
-import _ from 'lodash';
-import yamlAst from 'yaml-js';
+const _ = require('lodash');
+const yamlAst = require('yaml-js');
 
-export default class Ast {
+class Ast {
   constructor(source) {
     this.root = yamlAst.compose(source);
   }
@@ -78,3 +78,5 @@ export default class Ast {
     return { start, end };
   }
 }
+
+module.exports = Ast;

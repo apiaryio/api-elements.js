@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 /* eslint-disable no-loop-func */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
@@ -6,13 +5,15 @@
  * Tests for Swagger adapter.
  */
 
-import fs from 'fs';
-import path from 'path';
-import glob from 'glob';
-import fury from 'fury';
-import swaggerZoo from 'swagger-zoo';
-import { expect } from 'chai';
-import adapter, { detect } from '../src/adapter';
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
+const fury = require('fury');
+const swaggerZoo = require('swagger-zoo');
+const { expect } = require('chai');
+const adapter = require('../lib/adapter');
+
+const { detect } = adapter;
 
 fury.adapters = [adapter];
 
@@ -106,8 +107,7 @@ describe('Swagger 2.0 adapter', () => {
     });
 
     it('has API category inside parse result', () => {
-      const filtered = result.filter(item =>
-        item.element === 'category' && item.classes.contains('api'));
+      const filtered = result.filter(item => item.element === 'category' && item.classes.contains('api'));
 
       expect(filtered).to.have.length(1);
       expect(filtered.first).to.be.an('object');

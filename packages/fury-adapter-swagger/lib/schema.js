@@ -1,11 +1,11 @@
 /* eslint-disable class-methods-use-this, arrow-body-style */
 
-import _ from 'lodash';
-import { parseReference, lookupReference, dereference } from './json-schema';
+const _ = require('lodash');
+const { parseReference, lookupReference, dereference } = require('./json-schema');
 
-export function idForDataStructure(reference) {
+const idForDataStructure = (reference) => {
   return `definitions/${parseReference(reference)}`;
-}
+};
 
 /*
  * Data Structure Generator
@@ -14,7 +14,7 @@ export function idForDataStructure(reference) {
  * >>> const generator = new DataStructureGenerator(minimNamespace);
  * >>> const dataStructure = generator.generateDataStructure({type: 'string'});
 */
-export class DataStructureGenerator {
+class DataStructureGenerator {
   constructor(minim, root) {
     this.minim = minim;
     this.root = root;
@@ -97,7 +97,7 @@ export class DataStructureGenerator {
 
       if (refs.length === 1) {
         // allOf contains ref, let's treat it as our base
-        element.element = refs[0];
+        [element.element] = refs;
       } else if (refs.length > 1) {
         const { Ref: RefElement } = this.minim.elements;
         const refElements = refs.map(ref => new RefElement(ref));
@@ -238,8 +238,8 @@ export class DataStructureGenerator {
       file: StringElement,
     };
 
-    if (schema.allOf && schema.allOf.length === 1 && schema.definitions &&
-        Object.keys(schema).length === 2) {
+    if (schema.allOf && schema.allOf.length === 1 && schema.definitions
+        && Object.keys(schema).length === 2) {
       // Since we can't have $ref at root with definitions.
       // `allOf` with a single item is used as a work around for this type of schema
       // We can safely ignore the allOf and unwrap it as normal schema in this case
@@ -255,7 +255,7 @@ export class DataStructureGenerator {
       element = new this.minim.elements.Element();
       element.element = idForDataStructure(schema.$ref);
       return element;
-    } else if (schema.enum) {
+    } if (schema.enum) {
       element = this.generateEnum(schema);
     } else if (type === 'array') {
       element = this.generateArray(schema);
@@ -345,3 +345,5 @@ export class DataStructureGenerator {
     return element;
   }
 }
+
+module.exports = { idForDataStructure, DataStructureGenerator };

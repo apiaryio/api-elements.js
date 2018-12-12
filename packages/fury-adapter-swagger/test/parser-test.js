@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import fury from 'fury';
-import Parser from '../src/parser';
+const { expect } = require('chai');
+const fury = require('fury');
+const Parser = require('../lib/parser');
 
 describe('Parser', () => {
   let parser;

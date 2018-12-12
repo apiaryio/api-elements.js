@@ -1,23 +1,22 @@
-import { inferred } from './link';
-import annotations from './annotations';
+const { inferred } = require('./link');
+const annotations = require('./annotations');
 
-export function createHeaders(payload, parser) {
+const createHeaders = (payload, parser) => {
   const { HttpHeaders } = parser.minim.elements;
 
   const headers = new HttpHeaders();
 
   // eslint-disable-next-line no-param-reassign
   payload.headers = payload.headers || headers;
-}
+};
 
-export function pushHeader(key, value, payload, parser, fragment) {
+const pushHeader = (key, value, payload, parser, fragment) => {
   const { Member: MemberElement } = parser.minim.elements;
   let header;
 
   createHeaders(payload, parser);
 
-  const duplicate = payload.headers.find(member =>
-    member.key.content.toLowerCase() === key.toLowerCase());
+  const duplicate = payload.headers.find(member => member.key.content.toLowerCase() === key.toLowerCase());
 
   if (duplicate.length) {
     header = duplicate.first;
@@ -42,16 +41,16 @@ export function pushHeader(key, value, payload, parser, fragment) {
   }
 
   return header;
-}
+};
 
-export function pushHeaderObject(key, header, payload, parser) {
+const pushHeaderObject = (key, header, payload, parser) => {
   let value = '';
 
   if (header.type === 'array') {
     // TODO: Support collectionFormat once arrays are supported
     parser.createAnnotation(
       annotations.DATA_LOST, parser.path,
-      'Headers of type array are not yet supported',
+      'Headers of type array are not yet supported'
     );
 
     return;
@@ -84,6 +83,6 @@ export function pushHeaderObject(key, header, payload, parser) {
       parser.createSourceMap(headerElement.meta.get('description'), parser.path.concat(['description']));
     }
   }
-}
+};
 
-export default { pushHeader, pushHeaderObject };
+module.exports = { pushHeader, pushHeaderObject };
