@@ -101,3 +101,28 @@ You can run a local development server to preview changes using the following:
 $ cd docs
 $ pipenv run serve
 ```
+
+### Release Process
+
+- Make sure you are up to date on master branch.
+- Update the changelogs of all packages if they are missing any points. **Don't add the next version info**.
+- Make the release commit on the release branch.
+
+  ```shell
+  $ npm run release:start
+  ```
+
+- Make the pull request and get it approved and merged.
+
+#### Editing the release PR
+
+If you had a wrong version of one of the packages in the PR, we need to change it. There are four things that need to be done.
+
+- Update the package.json.
+- Update the changelog.
+- Delete the old tag.
+- Create the new tag using the following command.
+
+  ```shell
+  $ git tag pkg@version -m pkg@version
+  ```

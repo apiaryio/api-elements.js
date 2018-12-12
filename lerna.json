@@ -2,5 +2,14 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "registry": "https://registry.npmjs.org",
-  "version": "0.0.0"
+  "command": {
+    "publish": {
+      "allowBranch": "release",
+      "ignoreChanges": [
+        "*.md"
+      ],
+      "message": "chore(project): publish"
+    }
+  },
+  "version": "independent"
 }
