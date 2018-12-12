@@ -1,4 +1,10 @@
 const _ = require('lodash');
+const values = require('object.values');
+
+// Polyfill Object.values for node 6
+if (!Object.values) {
+  values.shim();
+}
 
 // Test whether a key is a special Swagger extension.
 const isExtension = (value, key) => _.startsWith(key, 'x-');
