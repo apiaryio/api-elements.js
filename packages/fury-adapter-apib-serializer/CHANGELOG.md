@@ -1,5 +1,11 @@
 # Fury API Blueprint Serializer
 
+## Master
+
+## Breaking
+
+- Node 4 is no longer supported. Please use Node 6 or higher.
+
 ## 0.7.0
 
 ### Enhancements
