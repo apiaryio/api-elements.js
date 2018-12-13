@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 const fs = require('fs');
 const repl = require('repl');
 const { isatty } = require('tty');
@@ -14,6 +16,13 @@ const apiBlueprintParser = require('fury-adapter-apib-parser');
 const apiBlueprintSerializer = require('fury-adapter-apib-serializer');
 const apiaryBlueprintParser = require('fury-adapter-apiary-blueprint-parser');
 const pkg = require('../package.json');
+
+const adapters = [
+  'fury-adapter-swagger',
+  'fury-adapter-apib-parser',
+  'fury-adapter-apib-serializer',
+  'fury-adapter-apiary-blueprint-parser',
+];
 
 fury.use(swagger);
 fury.use(apiBlueprintParser);
@@ -175,6 +184,19 @@ class FuryCLI {
   }
 }
 
+function getPackage(name) {
+  // eslint-disable-next-line import/no-dynamic-require, global-require
+  return require(`${name}/package.json`);
+}
+
+function getVersion() {
+  const packages = ['fury-cli'].concat(adapters);
+
+  return packages
+    .map(getPackage)
+    .map(pkg => `${pkg.name} ${pkg.version}`)
+    .join('\n');
+}
 
 if (require.main === module) {
   let input;
@@ -182,7 +204,7 @@ if (require.main === module) {
 
   commander
     .description(pkg.description)
-    .version(pkg.version)
+    .version(getVersion())
     .option('-f, --format [format]', 'output format', 'application/vnd.refract.parse-result+json')
     .option('-l, --validate', 'validate input only')
     .option('-s, --sourcemap', 'Export sourcemaps into API Elements parse result')
@@ -202,8 +224,7 @@ if (require.main === module) {
   }
 
   if (commander.adapter) {
-    /* eslint-disable global-require */
-    // eslint-disable-next-line import/no-dynamic-require
+    // eslint-disable-next-line import/no-dynamic-require, global-require
     fury.use(require(commander.adapter));
   }
 
