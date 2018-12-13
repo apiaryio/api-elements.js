@@ -7,10 +7,6 @@ node_js:
 - '10'
 script:
 - npm test
-after_script:
-- npm install -g codeclimate-test-reporter
-- npm run cover
-- codeclimate-test-reporter < coverage/lcov.info
 notifications:
   email: false
   slack:
