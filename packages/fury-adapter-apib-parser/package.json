@@ -18,7 +18,7 @@
   "dependencies": {
     "deckardcain": "^0.4.0",
     "drafter": "^1.2.0",
-    "minim": "^0.21.1"
+    "minim": "^0.22.1"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.7"
@@ -27,7 +27,6 @@
     "chai": "^4.1.2",
     "eslint": "^5.9.0",
     "fury": "3.0.0-beta.7",
-    "minim": "^0.21.1",
     "mocha": "^5.0.2"
   },
   "engines": {

@@ -16,7 +16,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "minim": "^0.21.1",
+    "minim": "^0.20.5",
     "minim-parse-result": "^0.10.1"
   },
   "devDependencies": {

@@ -1,0 +1,23 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Data Structure Generation
+paths:
+  /user:
+    get:
+      description: Get a resource
+      operationId: getResource
+      responses:
+        200:
+          description: response description
+          schema:
+            type: object
+            example:
+              id: 123
+              name: doe
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+                example: doe

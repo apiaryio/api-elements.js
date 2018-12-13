@@ -1,0 +1,14 @@
+swagger: '2.0'
+info:
+  title: Produces JSON with invalid content type
+  version: '1.0'
+produces:
+  - application/hal+json; invalid
+paths:
+  '/test':
+    get:
+      responses:
+        200:
+          description: 'My Response'
+          schema:
+            type: object

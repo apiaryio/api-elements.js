@@ -1,0 +1,14 @@
+swagger: "2.0"
+info:
+  title: Dereferencing a local file
+  version: v2
+paths:
+  /:
+    get:
+      responses:
+        200:
+          description: dereference package.json
+          examples:
+            application/json:
+              example:
+                $ref: 'package.json'

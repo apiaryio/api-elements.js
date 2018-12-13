@@ -1,0 +1,22 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Authentication with multiple consumes
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /query:
+    post:
+      consumes:
+        - application/json
+        - text/plain
+      security:
+        - APIKeyHeader: []
+      responses:
+        '200':
+          description: Example
+          schema:
+            type: object
