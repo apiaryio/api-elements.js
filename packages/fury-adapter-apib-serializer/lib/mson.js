@@ -2,7 +2,7 @@
  * Renders refract elements into MSON.
  */
 
-import { indent } from './filters';
+const { indent } = require('./filters');
 
 /*
  * Get type information for an element, such as the element name, whether
@@ -205,7 +205,7 @@ function handle(name, element, { parent = null, spaces = 4, marker = '+',
 /*
  * Render out a piece of MSON from refract element instances.
  */
-export function renderDataStructure(dataStructure) {
+function renderDataStructure(dataStructure) {
   let mson = dataStructure.content;
 
   if (Array.isArray(mson)) {
@@ -220,7 +220,7 @@ export function renderDataStructure(dataStructure) {
   });
 }
 
-export function renderAttributes(dataStructure) {
+function renderAttributes(dataStructure) {
   let mson = dataStructure.content;
 
   if (Array.isArray(mson)) {
@@ -233,4 +233,4 @@ export function renderAttributes(dataStructure) {
   });
 }
 
-export default { renderDataStructure, renderAttributes };
+module.exports = { renderDataStructure, renderAttributes };

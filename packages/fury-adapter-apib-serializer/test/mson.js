@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import { Fury } from 'fury';
-import { renderAttributes } from '../src/mson';
+const { expect } = require('chai');
+const { Fury } = require('fury');
+const { renderAttributes } = require('../lib/mson');
 
 const fury = new Fury();
 const elements = fury.minim.elements;

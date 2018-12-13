@@ -1,5 +1,4 @@
 node_modules
-/lib
 .vagrant
 npm-debug.log
 package-lock.json

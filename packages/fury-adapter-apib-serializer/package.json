@@ -8,15 +8,11 @@
     "url": "https://github.com/apiaryio/fury-adapter-apib-serializer.git"
   },
   "scripts": {
-    "test": "peasant test",
-    "ci": "peasant -s lint test build",
-    "prepublish": "npm run ci",
-    "cover": "peasant cover",
-    "peasant": "peasant",
-    "lint": "peasant lint"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "mocha"
   },
   "dependencies": {
-    "babel-runtime": "^6.23.0",
     "nunjucks": "^2.0.0"
   },
   "peerDependencies": {
@@ -24,9 +20,10 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "eslint": "^5.9.0",
     "fury": "3.0.0-beta.7",
     "glob": "^7.1.2",
-    "peasant": "1.1.0"
+    "mocha": "^5.0.2"
   },
   "engines": {
     "node": ">=4"

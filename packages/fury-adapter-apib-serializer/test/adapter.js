@@ -4,13 +4,13 @@
  * Tests for API Blueprint serializer.
  */
 
-import { expect } from 'chai';
-import fs from 'fs';
-import fury from 'fury';
-import glob from 'glob';
-import path from 'path';
-import { serialize } from '../src/adapter';
-import { indent } from '../src/filters';
+const { expect } = require('chai');
+const fs = require('fs');
+const fury = require('fury');
+const glob = require('glob');
+const path = require('path');
+const { serialize } = require('../lib/adapter');
+const { indent } = require('../lib/filters');
 
 const base = path.join(__dirname, 'fixtures');
 

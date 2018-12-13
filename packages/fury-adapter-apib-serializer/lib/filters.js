@@ -6,7 +6,7 @@
   * Indent a piece of multiline text by a number of spaces.
   * Setting `first` to `true` will also indent the first line.
   */
- export function indent(input, spaces, options = { first: false }) {
+ function indent(input, spaces, options = { first: false }) {
    let pre = '';
    let lines = [];
 
@@ -33,7 +33,7 @@
   * optionally has a content-type and nothing else. This lets us know when to
   * use a shorthand syntax in the template.
   */
- export function bodyOnly(payload) {
+ function bodyOnly(payload) {
    let headers;
 
    // First, we need to filter out the content-type header. This is handled
@@ -52,7 +52,7 @@
   * Detect when it is okay to use a resource shorthand, i.e. skip the resource
   * header and just do a single action with a URI.
   */
- export function resourceShorthand(resource) {
+ function resourceShorthand(resource) {
    return (!resource.title && !resource.description &&
            resource.transitions.length === 1 &&
            resource.transitions.get(0).computedHref);
@@ -65,7 +65,7 @@
   * - JSON
   *
   */
- export function pretty(input) {
+ function pretty(input) {
    let prettified;
 
    try {
@@ -81,6 +81,14 @@
   * Return all child elements with the element type of `copy` in a plain
   * old js array.
   */
- export function getCopy(element) {
+ function getCopy(element) {
    return element.children.filter(item => item.element === 'copy').elements;
  }
+
+module.exports = {
+  indent,
+  bodyOnly,
+  resourceShorthand,
+  pretty,
+  getCopy,
+};
