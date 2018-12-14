@@ -62,7 +62,7 @@ issue is not assigned by someone else to prevent wasted efforts.
 
 
 [API Elements]: https://apielements.org/
-[OpenAPI](https://github.com/OAI/OpenAPI-Specification)
+[OpenAPI]: https://github.com/OAI/OpenAPI-Specification
 [status document]: https://github.com/apiaryio/fury-adapter-oas3-parser/blob/master/STATUS.md
 [1.0.0 Milestone]: https://github.com/apiaryio/fury-adapter-oas3-parser/milestone/3
 [good first issue]: https://github.com/apiaryio/fury-adapter-oas3-parser/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22
