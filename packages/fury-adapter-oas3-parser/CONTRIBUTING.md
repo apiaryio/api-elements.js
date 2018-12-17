@@ -69,11 +69,11 @@ module.exports = R.curry(parseOperationObject);
 ```
 
 ```js
-// test/parser/oas/parseOperationObject-test.js
+// test/unit/parser/oas/parseOperationObject-test.js
 
 const { expect } = require('chai');
 const { Fury } = require('fury');
-const parse = require('../../../lib/parser/oas/parseOperationObject');
+const parse = require('../../../../lib/parser/oas/parseOperationObject');
 
 const { minim } = new Fury();
 
