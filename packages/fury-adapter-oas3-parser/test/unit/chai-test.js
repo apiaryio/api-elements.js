@@ -1,4 +1,3 @@
-
 const { expect } = require('chai');
 const { Fury } = require('fury');
 
