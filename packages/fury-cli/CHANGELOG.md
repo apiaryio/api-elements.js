@@ -6,6 +6,10 @@
 
 - Node 4 is not supported anymore.
 
+### Enhancements
+
+- `--version` will now return the version of the underlying Fury adapters.
+
 ## 0.8.5 (2018-11-27)
 
 ### Enhancements
