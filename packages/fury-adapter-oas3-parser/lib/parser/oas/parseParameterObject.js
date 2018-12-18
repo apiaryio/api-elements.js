@@ -10,12 +10,13 @@ const {
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
+const parseBoolean = require('../parseBoolean');
 
 const name = 'Parameter Object';
 const requiredKeys = ['name', 'in'];
 const unsupportedKeys = [
   // FIXME Only contains "fixed" fields from spec
-  'required', 'deprecated', 'allowEmptyValue',
+  'deprecated', 'allowEmptyValue',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -66,6 +67,7 @@ function parseParameterObject(minim, object) {
     [hasKey('name'), parseName],
     [hasKey('in'), parseIn],
     [hasKey('description'), parseString(minim, name, false)],
+    [hasKey('required'), parseBoolean(minim, name, false)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
 
@@ -86,6 +88,12 @@ function parseParameterObject(minim, object) {
       const description = parameter.get('description');
       if (description) {
         member.description = description;
+      }
+
+      const required = parameter.get('required');
+      if (required && required.toValue() === true) {
+        const typeAttributes = new minim.elements.Array([new minim.elements.String('required')]);
+        member.attributes.set('typeAttributes', typeAttributes);
       }
 
       member.in = parameter.getValue('in');

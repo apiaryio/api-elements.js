@@ -8,6 +8,7 @@ const isMember = element => element.element === 'member';
 const isObject = element => element.element === 'object';
 const isParseResult = element => element.element === 'parseResult';
 const isString = element => element.element === 'string';
+const isBoolean = element => element.element === 'boolean';
 
 // Member
 
@@ -40,6 +41,7 @@ module.exports = {
   isObject,
   isParseResult,
   isString,
+  isBoolean,
 
   hasKey: R.curry(hasKey),
   isExtension,

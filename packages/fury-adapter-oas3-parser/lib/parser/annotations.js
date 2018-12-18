@@ -29,6 +29,14 @@ function createMemberValueNotStringError(minim, path, member) {
   return createError(minim, `'${path}' '${member.key.toValue()}' is not a string`, member.value);
 }
 
+function createMemberValueNotBooleanWarning(minim, path, member) {
+  return createWarning(minim, `'${path}' '${member.key.toValue()}' is not a boolean`, member.value);
+}
+
+function createMemberValueNotBooleanError(minim, path, member) {
+  return createError(minim, `'${path}' '${member.key.toValue()}' is not a boolean`, member.value);
+}
+
 function validateObjectContainsRequiredKeys(minim, path, requiredKeys, object) {
   // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
   const hasMember = (key) => {
@@ -56,5 +64,7 @@ module.exports = {
   createInvalidMemberWarning: R.curry(createInvalidMemberWarning),
   createMemberValueNotStringWarning: R.curry(createMemberValueNotStringWarning),
   createMemberValueNotStringError: R.curry(createMemberValueNotStringError),
+  createMemberValueNotBooleanWarning: R.curry(createMemberValueNotBooleanWarning),
+  createMemberValueNotBooleanError: R.curry(createMemberValueNotBooleanError),
   validateObjectContainsRequiredKeys: R.curry(validateObjectContainsRequiredKeys),
 };

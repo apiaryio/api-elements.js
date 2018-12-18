@@ -335,6 +335,17 @@
                       "content": "The id of the pet to retrieve"
                     }
                   },
+                  "attributes": {
+                    "typeAttributes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "string",
+                          "content": "required"
+                        }
+                      ]
+                    }
+                  },
                   "content": {
                     "key": {
                       "element": "string",
@@ -939,46 +950,6 @@
         }
       },
       "content": "'Operation Object' contains unsupported key 'responses'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "content": 1430
-                    },
-                    {
-                      "element": "number",
-                      "content": 8
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Parameter Object' contains unsupported key 'required'"
     },
     {
       "element": "annotation",

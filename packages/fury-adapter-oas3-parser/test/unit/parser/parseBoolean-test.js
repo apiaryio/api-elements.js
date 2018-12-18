@@ -1,0 +1,55 @@
+const { expect } = require('chai');
+const { Fury } = require('fury');
+const parseBoolean = require('../../../lib/parser/parseBoolean');
+
+const { minim } = new Fury();
+
+describe('parseBoolean', () => {
+  it('can parse a BooleanElement with `true` value', () => {
+    const member = new minim.elements.Member('required', true);
+
+    const parseResult = parseBoolean(minim, 'Example Object', true, member);
+
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult.get(0).value).to.be.instanceof(minim.elements.Boolean);
+    expect(parseResult.get(0).value.toValue()).to.equal(true);
+  });
+
+  it('can parse a BooleanElement with `false` value', () => {
+    const member = new minim.elements.Member('required', false);
+
+    const parseResult = parseBoolean(minim, 'Example Object', true, member);
+
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult.get(0).value).to.be.instanceof(minim.elements.Boolean);
+    expect(parseResult.get(0).value.toValue()).to.equal(false);
+  });
+
+  it('returns a warning annotation when given optional element is not a BooleanElement', () => {
+    const value = new minim.elements.Number(1);
+    const member = new minim.elements.Member('required', value);
+
+    const parseResult = parseBoolean(minim, 'Example Object', false, member);
+
+    expect(parseResult.length).to.equal(1);
+    const warning = parseResult.warnings.get(0);
+    expect(warning).to.be.instanceof(minim.elements.Annotation);
+    expect(warning.toValue()).to.equal(
+      "'Example Object' 'required' is not a boolean"
+    );
+  });
+
+  it('returns a error annotation when given required element is not a BooleanElement', () => {
+    const value = new minim.elements.Number(1);
+    const member = new minim.elements.Member('required', value);
+
+    const parseResult = parseBoolean(minim, 'Example Object', true, member);
+
+    expect(parseResult.length).to.equal(1);
+    const error = parseResult.errors.get(0);
+    expect(error).to.be.instanceof(minim.elements.Annotation);
+    expect(error.toValue()).to.equal(
+      "'Example Object' 'required' is not a boolean"
+    );
+  });
+});

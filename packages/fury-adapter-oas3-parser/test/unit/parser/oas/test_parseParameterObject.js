@@ -121,8 +121,8 @@ describe('Parameter Object', () => {
     });
   });
 
-  describe('warnings for unsupported properties', () => {
-    it('provides warning for unknown required property', () => {
+  describe('#required', () => {
+    it('create typeAttribute required', () => {
       const parameter = new minim.elements.Object({
         name: 'example',
         in: 'path',
@@ -131,9 +131,56 @@ describe('Parameter Object', () => {
 
       const result = parse(minim, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'required'");
+      expect(result.warnings.length).to.be.equal(0);
+
+      expect(result.length).to.be.equal(1);
+
+      expect(result.get(0)).to.be.instanceof(minim.elements.Member);
+      const typeAttributes = result.get(0).attributes.get('typeAttributes');
+
+      expect(typeAttributes).to.be.instanceof(minim.elements.Array);
+      expect(typeAttributes.length).to.be.equal(1);
+      expect(typeAttributes.contains('required')).to.be.true;
     });
 
+    it('ignore required param if it is `false`', () => {
+      const parameter = new minim.elements.Object({
+        name: 'example',
+        in: 'path',
+        required: false,
+      });
+
+      const result = parse(minim, parameter);
+
+      expect(result.warnings.length).to.be.equal(0);
+
+      expect(result.length).to.be.equal(1);
+
+      expect(result.get(0)).to.be.instanceof(minim.elements.Member);
+      expect(result.get(0).attributes.get('typeAttributes')).to.be.undefined;
+    });
+
+    it('provide warning if required is not bool', () => {
+      const parameter = new minim.elements.Object({
+        name: 'example',
+        in: 'path',
+        required: 1,
+      });
+
+      const result = parse(minim, parameter);
+
+      expect(result.length).to.be.equal(2); // parameter && warning
+      expect(result.get(0)).to.be.instanceof(minim.elements.Member);
+      expect(result.get(0).attributes.get('typeAttributes')).to.be.undefined;
+
+      expect(result.warnings.length).to.be.equal(1);
+      expect(result.warnings.get(0).toValue()).to.equal(
+        "'Parameter Object' 'required' is not a boolean"
+      );
+    });
+  });
+
+  describe('warnings for unsupported properties', () => {
     it('provides warning for unknown deprecated property', () => {
       const parameter = new minim.elements.Object({
         name: 'example',
