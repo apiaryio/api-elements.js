@@ -83,9 +83,7 @@ describe('Operation Object', () => {
     const result = parse(minim, operation);
 
     expect(result.length).to.equal(1);
-    expect(result.warnings.get(0).toValue()).to.equal(
-      "'Operation Object' is unsupported"
-    );
+    expect(result).to.have.warning("'Operation Object' is unsupported");
   });
 });
 ```

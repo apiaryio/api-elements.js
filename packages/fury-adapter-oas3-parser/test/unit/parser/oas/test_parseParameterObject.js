@@ -131,7 +131,7 @@ describe('Parameter Object', () => {
 
       const result = parse(minim, parameter);
 
-      expect(result.warnings.length).to.be.equal(0);
+      expect(result).to.not.contain.annotations;
 
       expect(result.length).to.be.equal(1);
 
@@ -173,10 +173,7 @@ describe('Parameter Object', () => {
       expect(result.get(0)).to.be.instanceof(minim.elements.Member);
       expect(result.get(0).attributes.get('typeAttributes')).to.be.undefined;
 
-      expect(result.warnings.length).to.be.equal(1);
-      expect(result.warnings.get(0).toValue()).to.equal(
-        "'Parameter Object' 'required' is not a boolean"
-      );
+      expect(result).to.contain.warning("'Parameter Object' 'required' is not a boolean");
     });
   });
 
