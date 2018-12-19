@@ -47,9 +47,21 @@
               ]
             }
           },
-          "content": {
-            "x-info-extension": true
-          }
+          "content": [
+            {
+              "element": "member",
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "x-info-extension"
+                },
+                "value": {
+                  "element": "boolean",
+                  "content": true
+                }
+              }
+            }
+          ]
         },
         {
           "element": "resource",
@@ -85,8 +97,7 @@
                           "content": "id"
                         },
                         "value": {
-                          "element": "string",
-                          "content": null
+                          "element": "string"
                         }
                       }
                     }
@@ -141,9 +152,21 @@
                               ]
                             }
                           },
-                          "content": {
-                            "x-response-extension": true
-                          }
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "x-response-extension"
+                                },
+                                "value": {
+                                  "element": "boolean",
+                                  "content": true
+                                }
+                              }
+                            }
+                          ]
                         }
                       ]
                     }
@@ -171,9 +194,21 @@
                       ]
                     }
                   },
-                  "content": {
-                    "x-transition-extension": true
-                  }
+                  "content": [
+                    {
+                      "element": "member",
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "x-transition-extension"
+                        },
+                        "value": {
+                          "element": "boolean",
+                          "content": true
+                        }
+                      }
+                    }
+                  ]
                 }
               ]
             },
@@ -199,9 +234,21 @@
                   ]
                 }
               },
-              "content": {
-                "x-resource-extension": true
-              }
+              "content": [
+                {
+                  "element": "member",
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "content": "x-resource-extension"
+                    },
+                    "value": {
+                      "element": "boolean",
+                      "content": true
+                    }
+                  }
+                }
+              ]
             }
           ]
         },
@@ -227,9 +274,21 @@
               ]
             }
           },
-          "content": {
-            "x-paths-extension": true
-          }
+          "content": [
+            {
+              "element": "member",
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "x-paths-extension"
+                },
+                "value": {
+                  "element": "boolean",
+                  "content": true
+                }
+              }
+            }
+          ]
         }
       ]
     }

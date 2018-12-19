@@ -86,7 +86,7 @@ describe('Parameter to Member converter', () => {
 
     expect(member.value.length).to.equal(1);
     expect(member.value.get(0)).to.be.instanceof(minim.elements.String);
-    expect(member.value.get(0).toValue()).to.be.null;
+    expect(member.value.get(0).toValue()).to.be.undefined;
 
     expect(parser.result.toValue()).to.deep.equal(['Expected type array but found type string']);
   });

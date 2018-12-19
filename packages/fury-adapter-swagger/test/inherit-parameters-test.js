@@ -280,7 +280,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'formData'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: null });
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: undefined });
 
         // ensure there is no warning about unsupported "Path-level formData Parameter")
         expect(result.result.annotations.toValue()).to.be.empty;
@@ -292,7 +292,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'formData'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: null });
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: undefined });
       });
     });
 
@@ -302,7 +302,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('foo', 'formData'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({ foo: null, test: null });
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ foo: undefined, test: undefined });
       });
     });
 
@@ -312,7 +312,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'formData', 'op'));
 
       doParse(source, done, (result) => {
-        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: null });
+        expect(result.request.dataStructure.toValue()).to.deep.equal({ test: undefined });
 
         // ensure there is no warning about unsupported "Path-level formData Parameter")
         expect(result.result.annotations.toValue()).to.be.empty;

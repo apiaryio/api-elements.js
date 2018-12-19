@@ -374,8 +374,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "definitions/User",
-                            "content": null
+                            "element": "definitions/User"
                           }
                         }
                       ]
@@ -461,8 +460,7 @@
                             "element": "string",
                             "content": "doe"
                           }
-                        },
-                        "content": null
+                        }
                       }
                     }
                   },
@@ -485,8 +483,7 @@
                         "content": "address"
                       },
                       "value": {
-                        "element": "definitions/Address",
-                        "content": null
+                        "element": "definitions/Address"
                       }
                     }
                   }
@@ -548,8 +545,7 @@
                         "content": "country"
                       },
                       "value": {
-                        "element": "definitions/Country",
-                        "content": null
+                        "element": "definitions/Country"
                       }
                     }
                   }
@@ -596,8 +592,7 @@
                     "element": "string",
                     "content": "cz"
                   }
-                },
-                "content": null
+                }
               }
             }
           ]

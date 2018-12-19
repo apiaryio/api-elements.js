@@ -3486,14 +3486,6 @@ mimic-fn@^1.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
-minim@^0.20.5:
-  version "0.20.7"
-  resolved "https://registry.yarnpkg.com/minim/-/minim-0.20.7.tgz#9f428bd29607fff1d7a53699f777b964592be3b0"
-  integrity sha512-7qE5xFZddTaH6sHfZXuDzy+0KeA3OYLNBpBXw9yo9UWodgMDn9Bguz6pbaVCam5emFyTphrns76yH0aV/okbxg==
-  dependencies:
-    lodash "^4.15.0"
-    uptown "^1.0.1"
-
 minim@^0.22.1:
   version "0.22.1"
   resolved "https://registry.yarnpkg.com/minim/-/minim-0.22.1.tgz#8f57ed7bcab770b764a37e2056188a222b80d94a"
@@ -5379,7 +5371,7 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-uptown@^1.0.1, uptown@^1.1.0:
+uptown@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/uptown/-/uptown-1.1.0.tgz#e3a4a91e52188ab7f6b8c35bde181bd4cb3759b7"
   integrity sha512-8CVRVG6jNECwHMVl/i4AjmRemtNp/JwQVENdj6DLWXCk0agxY2sBNXqGEyIRhr22fLPj1AD98TK+88i+U1JsWA==

@@ -138,7 +138,9 @@ FORMAT: 1A
 
 
 {% macro renderGroup(group) %}
+{% if group.title.toValue() %}
 ## Group {{ group.title.toValue() }}
+{% endif %}
 
 {{ renderCategory(group) }}
 {% endmacro %}

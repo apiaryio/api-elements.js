@@ -119,8 +119,7 @@
                               "content": "tag"
                             },
                             "value": {
-                              "element": "string",
-                              "content": null
+                              "element": "string"
                             }
                           }
                         }
@@ -181,8 +180,7 @@
                             {
                               "element": "dataStructure",
                               "content": {
-                                "element": "definitions/category",
-                                "content": null
+                                "element": "definitions/category"
                               }
                             }
                           ]
@@ -243,8 +241,7 @@
                         "content": "id"
                       },
                       "value": {
-                        "element": "string",
-                        "content": null
+                        "element": "string"
                       }
                     }
                   },
@@ -282,8 +279,7 @@
                         },
                         "content": [
                           {
-                            "element": "definitions/category",
-                            "content": null
+                            "element": "definitions/category"
                           }
                         ]
                       }
@@ -308,8 +304,7 @@
                         "content": "categoryAsObject"
                       },
                       "value": {
-                        "element": "definitions/category",
-                        "content": null
+                        "element": "definitions/category"
                       }
                     }
                   }

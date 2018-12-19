@@ -61,8 +61,7 @@
                           "element": "array",
                           "content": [
                             {
-                              "element": "string",
-                              "content": null
+                              "element": "string"
                             }
                           ]
                         }
@@ -121,8 +120,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "string",
-                            "content": null
+                            "element": "string"
                           }
                         }
                       ]

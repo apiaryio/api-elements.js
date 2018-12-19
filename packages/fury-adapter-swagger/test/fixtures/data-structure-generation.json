@@ -155,8 +155,7 @@
                                     "content": "id"
                                   },
                                   "value": {
-                                    "element": "number",
-                                    "content": null
+                                    "element": "number"
                                   }
                                 }
                               },

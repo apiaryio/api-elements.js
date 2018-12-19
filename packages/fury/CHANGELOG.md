@@ -6,6 +6,10 @@
 
 - Node 4 is not support anymore.
 
+### Enhancements
+
+- Update minim to 0.22.1.
+
 ## 3.0.0-beta.7
 
 - Update minim to 0.20.5.

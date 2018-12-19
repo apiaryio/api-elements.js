@@ -499,8 +499,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "definitions/Item",
-                            "content": null
+                            "element": "definitions/Item"
                           }
                         }
                       ]
@@ -733,8 +732,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "definitions/Item",
-                            "content": null
+                            "element": "definitions/Item"
                           }
                         }
                       ]
@@ -854,8 +852,7 @@
                               "content": 456
                             }
                           }
-                        },
-                        "content": null
+                        }
                       }
                     }
                   },
@@ -884,8 +881,7 @@
                             "element": "string",
                             "content": "Item name"
                           }
-                        },
-                        "content": null
+                        }
                       }
                     }
                   }

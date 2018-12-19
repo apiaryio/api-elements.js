@@ -290,8 +290,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "definitions/User",
-                            "content": null
+                            "element": "definitions/User"
                           }
                         }
                       ]
@@ -371,8 +370,7 @@
                         "content": "username"
                       },
                       "value": {
-                        "element": "string",
-                        "content": null
+                        "element": "string"
                       }
                     }
                   }

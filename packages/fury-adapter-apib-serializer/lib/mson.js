@@ -55,7 +55,7 @@ function handleContent(element, spaces, marker) {
       });
       /* eslint-enable no-use-before-define */
     } else if (item.element === 'ref') {
-      renderedContent += `${marker} Include ${item.content.href}\n`;
+      renderedContent += `${marker} Include ${item.content}\n`;
     } else if (item.element === 'select') {
       // This is a `OneOf` mutually exclusive type. Currently not
       // supported as it needs some support upstream in Minim.
