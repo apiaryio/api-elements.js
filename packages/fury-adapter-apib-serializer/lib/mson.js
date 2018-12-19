@@ -2,7 +2,7 @@
  * Renders refract elements into MSON.
  */
 
-import { indent } from './filters';
+const { indent } = require('./filters');
 
 /*
  * Get type information for an element, such as the element name, whether
@@ -89,9 +89,9 @@ function handleDescription(description, element, parent, spaces, marker) {
   // means that some other special values like `+ Properties` will get used
   // later during rendering.
   let useLongDescription = false;
-  if (element.attributes &&
-      (element.attributes.default !== undefined ||
-       element.attributes.sample !== undefined)) {
+  if (element.attributes
+      && (element.attributes.default !== undefined
+       || element.attributes.sample !== undefined)) {
     useLongDescription = true;
   }
 
@@ -111,14 +111,14 @@ function handleDescription(description, element, parent, spaces, marker) {
 
   // Handle special list items like default/sample here as they are part
   // of the description, before the content (sub-elements) are rendere.
-  const defaultValue = element.attributes &&
-                       element.attributes.getValue('default');
+  const defaultValue = element.attributes
+                       && element.attributes.getValue('default');
   if (defaultValue !== undefined) {
     str += `\n${marker} Default: ${defaultValue}\n`;
   }
 
-  const sampleValue = element.attributes &&
-                      element.attributes.getValue('samples');
+  const sampleValue = element.attributes
+                      && element.attributes.getValue('samples');
   if (sampleValue !== undefined) {
     str += `\n${marker} Sample: ${sampleValue}\n`;
   }
@@ -162,10 +162,12 @@ function handleDescription(description, element, parent, spaces, marker) {
  * will call itself recursively to handle child elements for objects and
  * arrays.
  */
-function handle(name, element, { parent = null, spaces = 4, marker = '+',
-                                 initialMarker = '+',
-                                 initialIndent = true,
-                                 attributesElement = element }) {
+function handle(name, element, {
+  parent = null, spaces = 4, marker = '+',
+  initialMarker = '+',
+  initialIndent = true,
+  attributesElement = element,
+}) {
   let str = initialMarker;
 
   // Start with the item name if it has one.
@@ -185,13 +187,13 @@ function handle(name, element, { parent = null, spaces = 4, marker = '+',
 
     // Then the type and attribute information (e.g. required)
     const attributes = getTypeAttributes(element, attributesElement.attributes,
-                                       parent);
+      parent);
     if (attributes.length) {
       str += ` (${attributes.join(', ')})`;
     }
 
     str += handleDescription(attributesElement.description,
-                             element, parent, spaces, marker);
+      element, parent, spaces, marker);
   }
 
   // Return the entire block indented to the correct number of spaces.
@@ -205,11 +207,11 @@ function handle(name, element, { parent = null, spaces = 4, marker = '+',
 /*
  * Render out a piece of MSON from refract element instances.
  */
-export function renderDataStructure(dataStructure) {
+const renderDataStructure = (dataStructure) => {
   let mson = dataStructure.content;
 
   if (Array.isArray(mson)) {
-    mson = mson[0];
+    [mson] = mson;
   }
 
   const title = mson.id;
@@ -218,19 +220,19 @@ export function renderDataStructure(dataStructure) {
     initialMarker: '###',
     initialIndent: false,
   });
-}
+};
 
-export function renderAttributes(dataStructure) {
+const renderAttributes = (dataStructure) => {
   let mson = dataStructure.content;
 
   if (Array.isArray(mson)) {
-    mson = mson[0];
+    [mson] = mson;
   }
 
   return handle('Attributes', mson, {
     initialMarker: '+',
     initialIndent: true,
   });
-}
+};
 
-export default { renderDataStructure, renderAttributes };
+module.exports = { renderDataStructure, renderAttributes };

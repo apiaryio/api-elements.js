@@ -2,11 +2,12 @@
  * API Blueprint serializer for Fury.js
  */
 
-import nunjucks from 'nunjucks';
-import path from 'path';
-import { renderAttributes, renderDataStructure } from './mson';
-
-import { indent, bodyOnly, resourceShorthand, pretty, getCopy } from './filters';
+const nunjucks = require('nunjucks');
+const path = require('path');
+const { renderAttributes, renderDataStructure } = require('./mson');
+const {
+  indent, bodyOnly, resourceShorthand, pretty, getCopy,
+} = require('./filters');
 
 const env = nunjucks.configure(path.dirname(__dirname), {
   autoescape: false,
@@ -20,15 +21,15 @@ env.addFilter('resourceShorthand', resourceShorthand);
 env.addFilter('pretty', pretty);
 env.addFilter('getCopy', getCopy);
 
-export const name = 'api-blueprint-serializer';
-export const mediaTypes = [
+const name = 'api-blueprint-serializer';
+const mediaTypes = [
   'text/vnd.apiblueprint',
 ];
 
 /*
  * Serialize an API into API Blueprint.
  */
-export function serialize({ api }, done) {
+const serialize = ({ api }, done) => {
   nunjucks.render('template.nunjucks', { api }, (err, apib) => {
     if (err) {
       return done(err);
@@ -37,6 +38,6 @@ export function serialize({ api }, done) {
     // Attempt to filter out extra spacing
     return done(null, apib.replace(/\n\s*\n\s*\n/g, '\n\n'));
   });
-}
+};
 
-export default { name, mediaTypes, serialize };
+module.exports = { name, mediaTypes, serialize };
