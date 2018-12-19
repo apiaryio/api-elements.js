@@ -217,8 +217,7 @@
                                 }
                               ]
                             }
-                          },
-                          "content": null
+                          }
                         }
                       }
                     },
@@ -348,8 +347,7 @@
                                     }
                                   ]
                                 }
-                              },
-                              "content": null
+                              }
                             }
                           ]
                         }
@@ -588,8 +586,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "string",
-                            "content": null
+                            "element": "string"
                           }
                         }
                       ]

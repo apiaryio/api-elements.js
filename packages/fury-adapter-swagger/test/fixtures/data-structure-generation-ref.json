@@ -169,8 +169,7 @@
                                     "content": "id"
                                   },
                                   "value": {
-                                    "element": "number",
-                                    "content": null
+                                    "element": "number"
                                   }
                                 }
                               },
@@ -193,8 +192,7 @@
                                     "content": "name"
                                   },
                                   "value": {
-                                    "element": "definitions/User",
-                                    "content": null
+                                    "element": "definitions/User"
                                   }
                                 }
                               }

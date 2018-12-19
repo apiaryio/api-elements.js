@@ -113,8 +113,7 @@
                                 "content": "A"
                               }
                             }
-                          },
-                          "content": null
+                          }
                         }
                       }
                     },
@@ -146,8 +145,7 @@
                           },
                           "content": [
                             {
-                              "element": "string",
-                              "content": null
+                              "element": "string"
                             }
                           ]
                         }

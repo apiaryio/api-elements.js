@@ -42,7 +42,7 @@ describe('JSON Schema to Data Structure', () => {
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(StringElement);
-      expect(dataStructure.content.content).to.be.null;
+      expect(dataStructure.content.content).to.be.undefined;
     });
 
     it('produces string element with default value', () => {
@@ -99,7 +99,7 @@ describe('JSON Schema to Data Structure', () => {
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(StringElement);
-      expect(dataStructure.toValue()).to.be.null;
+      expect(dataStructure.toValue()).to.be.undefined;
 
       const samples = dataStructure.content.attributes.get('samples');
       expect(samples).to.be.instanceof(ArrayElement);
@@ -178,7 +178,7 @@ describe('JSON Schema to Data Structure', () => {
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(BooleanElement);
-      expect(dataStructure.content.content).to.be.null;
+      expect(dataStructure.content.content).to.be.undefined;
     });
 
     it('produces boolean element with false default value', () => {
@@ -238,7 +238,7 @@ describe('JSON Schema to Data Structure', () => {
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(NumberElement);
-      expect(dataStructure.content.content).to.be.null;
+      expect(dataStructure.content.content).to.be.undefined;
     });
 
     it('produces number element with default value', () => {
@@ -351,7 +351,7 @@ describe('JSON Schema to Data Structure', () => {
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(NumberElement);
-      expect(dataStructure.content.content).to.be.null;
+      expect(dataStructure.content.content).to.be.undefined;
     });
   });
 
@@ -638,7 +638,7 @@ describe('JSON Schema to Data Structure', () => {
       expect(member).to.be.instanceof(MemberElement);
       expect(member.key.toValue()).to.equal('name');
       expect(member.value).to.be.instanceof(StringElement);
-      expect(member.value.content).to.be.null;
+      expect(member.value.content).to.be.undefined;
 
       const samples = dataStructure.content.attributes.get('samples');
       expect(samples).to.be.instanceof(ArrayElement);
@@ -792,7 +792,7 @@ describe('JSON Schema to Data Structure', () => {
 
       expect(dataStructure.content.length).to.equal(1);
       expect(dataStructure.content.get(0)).to.be.instanceof(StringElement);
-      expect(dataStructure.content.get(0).content).to.be.null;
+      expect(dataStructure.content.get(0).content).to.be.undefined;
 
       const samples = dataStructure.content.attributes.get('samples');
       expect(samples).to.be.instanceof(ArrayElement);

@@ -230,8 +230,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "definitions/Company",
-                            "content": null
+                            "element": "definitions/Company"
                           }
                         }
                       ]
@@ -292,8 +291,7 @@
                             "element": "string",
                             "content": "ORCL"
                           }
-                        },
-                        "content": null
+                        }
                       }
                     }
                   },
@@ -337,8 +335,7 @@
                                 "content": "data"
                               },
                               "value": {
-                                "element": "definitions/User",
-                                "content": null
+                                "element": "definitions/User"
                               }
                             }
                           }
@@ -385,8 +382,7 @@
                             "element": "string",
                             "content": "doe"
                           }
-                        },
-                        "content": null
+                        }
                       }
                     }
                   },
@@ -430,8 +426,7 @@
                                 "content": "data"
                               },
                               "value": {
-                                "element": "definitions/Company",
-                                "content": null
+                                "element": "definitions/Company"
                               }
                             }
                           }

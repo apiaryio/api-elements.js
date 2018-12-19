@@ -56,9 +56,21 @@
                   ]
                 }
               },
-              "content": {
-                "x-k": null
-              }
+              "content": [
+                {
+                  "element": "member",
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "content": "x-k"
+                    },
+                    "value": {
+                      "element": "null",
+                      "content": null
+                    }
+                  }
+                }
+              ]
             }
           ]
         }

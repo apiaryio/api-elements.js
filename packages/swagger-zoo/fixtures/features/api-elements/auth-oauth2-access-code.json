@@ -220,8 +220,7 @@
                         {
                           "element": "dataStructure",
                           "content": {
-                            "element": "string",
-                            "content": null
+                            "element": "string"
                           }
                         }
                       ]
