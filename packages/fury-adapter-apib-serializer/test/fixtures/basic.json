@@ -64,7 +64,7 @@
             },
             "title": {
               "element": "string",
-              "content": ""
+              "content": "A"
             }
           },
           "content": [
@@ -167,4 +167,3 @@
     }
   ]
 }
-
