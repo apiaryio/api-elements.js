@@ -1,6 +1,6 @@
 # Fury API Blueprint Serializer
 
-## Master
+## 0.8.0 (2018-12-21)
 
 ### Breaking
 
