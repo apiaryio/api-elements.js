@@ -1,5 +1,11 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Breaking
+
+- Swagger Parser now requires [Fury 3.0.0 Beta 8](https://github.com/apiaryio/api-elements.js/releases/tag/fury-3.0.0-beta.8).
+
 ## 0.22.7 (2018-12-11)
 
 ### Bug Fixes

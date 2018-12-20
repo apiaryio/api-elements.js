@@ -1,6 +1,6 @@
 # Fury Changelog
 
-## Master
+## 3.0.0-beta.8 (2018-12-21)
 
 ### Breaking
 
@@ -8,7 +8,7 @@
 
 ### Enhancements
 
-- Update minim to 0.22.1.
+- Update minim to [0.22.1](https://github.com/refractproject/minim/releases/tag/v0.22.1).
 
 ## 3.0.0-beta.7
 
