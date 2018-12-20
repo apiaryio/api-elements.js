@@ -5,6 +5,7 @@
 ### Breaking
 
 - Node 4 is not supported anymore.
+- API Blueprint Parser now requires [Fury 3.0.0 Beta 8](https://github.com/apiaryio/api-elements.js/releases/tag/fury-3.0.0-beta.8).
 
 ### Enhancements
 
