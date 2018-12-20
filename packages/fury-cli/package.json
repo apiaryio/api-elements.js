@@ -1,6 +1,6 @@
 {
   "name": "fury-cli",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "Command line tool interface for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
