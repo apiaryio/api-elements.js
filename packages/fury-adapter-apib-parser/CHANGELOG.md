@@ -1,6 +1,6 @@
 # Fury API Blueprint Parser Changelog
 
-## Master
+## 0.12.0 (2018-12-21)
 
 ### Breaking
 
