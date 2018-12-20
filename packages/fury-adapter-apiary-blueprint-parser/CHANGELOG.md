@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 3.0.0-beta.5 (2018-12-21)
 
 ### Breaking
 

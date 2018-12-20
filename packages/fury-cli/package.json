@@ -21,7 +21,7 @@
     "cardinal": "^2.1.1",
     "commander": "^2.9",
     "fury": "3.0.0-beta.8",
-    "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.4",
+    "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.5",
     "fury-adapter-apib-parser": "^0.11.0",
     "fury-adapter-apib-serializer": "^0.7.0",
     "fury-adapter-swagger": "^0.23.0",
