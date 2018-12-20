@@ -20,6 +20,8 @@ function promisify(func) {
 const fury = new Fury();
 fury.use(adapter);
 
+const { minim: namespace } = fury;
+
 describe('#parse', () => {
   const parse = promisify(fury.parse.bind(fury));
 
@@ -28,9 +30,9 @@ describe('#parse', () => {
     const source = fs.readFileSync(`${file}.yaml`, 'utf-8');
 
     return parse({ source }).then((parseResult) => {
-      expect(parseResult).to.be.instanceof(fury.minim.elements.ParseResult);
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
 
-      const result = JSON.stringify(fury.minim.serialiser.serialise(parseResult), null, 2);
+      const result = JSON.stringify(namespace.serialiser.serialise(parseResult), null, 2);
 
       if (process.env.GENERATE) {
         fs.writeFileSync(`${file}.json`, result);

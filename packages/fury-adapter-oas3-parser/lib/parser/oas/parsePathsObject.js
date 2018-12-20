@@ -14,23 +14,23 @@ const isPathField = member => member.key.toValue().startsWith('/');
  * @returns ParseResult<Resource>
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject
  */
-function parsePaths(minim, paths) {
-  const createParseResult = annotation => new minim.elements.ParseResult([annotation]);
+function parsePaths(namespace, paths) {
+  const createParseResult = annotation => new namespace.elements.ParseResult([annotation]);
 
   const parseMember = R.cond([
-    [isPathField, parsePathItemObject(minim)],
+    [isPathField, parsePathItemObject(namespace)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => new minim.elements.ParseResult()],
+    [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, R.compose(createParseResult, createInvalidMemberWarning(minim, name))],
+    [R.T, R.compose(createParseResult, createInvalidMemberWarning(namespace, name))],
   ]);
 
-  const parseMembers = object => R.chain(parseMember, new minim.elements.ParseResult(object.content));
+  const parseMembers = object => R.chain(parseMember, new namespace.elements.ParseResult(object.content));
 
-  const parsePaths = pipeParseResult(minim,
-    R.unless(isObject, createError(minim, `'${name}' is not an object`)),
+  const parsePaths = pipeParseResult(namespace,
+    R.unless(isObject, createError(namespace, `'${name}' is not an object`)),
     parseMembers);
 
   return parsePaths(paths);

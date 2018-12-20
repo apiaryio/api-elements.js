@@ -36,54 +36,54 @@ function nameContainsReservedCharacter(member) {
 /**
  * Parse Parameter Object
  *
- * @param minim {Namespace}
+ * @param namespace {Namespace}
  * @param element {Element}
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject
  */
-function parseParameterObject(minim, object) {
-  const validateIn = R.unless(isValidInValue, createError(minim,
+function parseParameterObject(namespace, object) {
+  const validateIn = R.unless(isValidInValue, createError(namespace,
     "'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'"));
 
   // FIXME: The following should not be an error
   const isSupportedIn = R.anyPass([hasValue('path'), hasValue('query')]);
-  const ensureSupportedIn = R.unless(isSupportedIn, createError(minim,
+  const ensureSupportedIn = R.unless(isSupportedIn, createError(namespace,
     "Only 'in' values of 'path' and 'query' are supported at the moment"));
 
-  const parseIn = pipeParseResult(minim,
-    parseString(minim, name, true),
+  const parseIn = pipeParseResult(namespace,
+    parseString(namespace, name, true),
     validateIn,
     ensureSupportedIn);
 
-  const createUnsupportedNameError = createError(minim,
+  const createUnsupportedNameError = createError(namespace,
     `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`);
   const validateName = R.when(nameContainsReservedCharacter, createUnsupportedNameError);
-  const parseName = pipeParseResult(minim,
-    parseString(minim, name, true),
+  const parseName = pipeParseResult(namespace,
+    parseString(namespace, name, true),
     validateName);
 
   const parseMember = R.cond([
     [hasKey('name'), parseName],
     [hasKey('in'), parseIn],
-    [hasKey('description'), parseString(minim, name, false)],
-    [hasKey('required'), parseBoolean(minim, name, false)],
+    [hasKey('description'), parseString(namespace, name, false)],
+    [hasKey('required'), parseBoolean(namespace, name, false)],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => new minim.elements.ParseResult()],
+    [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(minim, name)],
+    [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const parseParameter = pipeParseResult(minim,
-    R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
-    validateObjectContainsRequiredKeys(minim, name, requiredKeys),
-    parseObject(minim, parseMember),
+  const parseParameter = pipeParseResult(namespace,
+    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
+    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
+    parseObject(namespace, parseMember),
     (parameter) => {
-      const member = new minim.elements.Member(parameter.get('name'));
+      const member = new namespace.elements.Member(parameter.get('name'));
 
       const description = parameter.get('description');
       if (description) {
@@ -92,7 +92,7 @@ function parseParameterObject(minim, object) {
 
       const required = parameter.get('required');
       if (required && required.toValue() === true) {
-        const typeAttributes = new minim.elements.Array([new minim.elements.String('required')]);
+        const typeAttributes = new namespace.elements.Array([new namespace.elements.String('required')]);
         member.attributes.set('typeAttributes', typeAttributes);
       }
 

@@ -1,7 +1,7 @@
 const R = require('ramda');
 
-function createAnnotation(annotationClass, minim, message, element) {
-  const annotation = new minim.elements.Annotation(message);
+function createAnnotation(annotationClass, namespace, message, element) {
+  const annotation = new namespace.elements.Annotation(message);
   annotation.classes = [annotationClass];
   annotation.attributes.set('sourceMap', element.attributes.get('sourceMap'));
   return annotation;

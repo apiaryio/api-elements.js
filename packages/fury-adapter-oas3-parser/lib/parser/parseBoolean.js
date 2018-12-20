@@ -19,10 +19,10 @@ const isValueBoolean = R.compose(isBoolean, getValue);
  *
  * @returns {ParseResult<MemberElement<BooleanElement>>}
  */
-const parseOptionalBoolean = (minim, name, member) => new minim.elements.ParseResult([
+const parseOptionalBoolean = (namespace, name, member) => new namespace.elements.ParseResult([
   R.unless(
     isValueBoolean,
-    createMemberValueNotBooleanWarning(minim, name),
+    createMemberValueNotBooleanWarning(namespace, name),
     member
   ),
 ]);
@@ -34,28 +34,28 @@ const parseOptionalBoolean = (minim, name, member) => new minim.elements.ParseRe
  *
  * @returns {ParseResult<MemberElement<BooleanElement>>}
  */
-const parseRequiredBoolean = (minim, name, member) => new minim.elements.ParseResult([
+const parseRequiredBoolean = (namespace, name, member) => new namespace.elements.ParseResult([
   R.unless(
     isValueBoolean,
-    createMemberValueNotBooleanError(minim, name),
+    createMemberValueNotBooleanError(namespace, name),
     member
   ),
 ]);
 
 /**
  * Parse a boolean from a member
- * @pram minim
+ * @pram namespace
  * @pram name {string}
  * @pram required {boolean} - Whether the member is required, indicates if we return a warning or an error
  * @pram member {MemberElement}
  * @returns {ParseResult<MemberElement<BooleanElement>>}
  */
-function parseBoolean(minim, name, required, member) {
+function parseBoolean(namespace, name, required, member) {
   if (required) {
-    return parseRequiredBoolean(minim, name, member);
+    return parseRequiredBoolean(namespace, name, member);
   }
 
-  return parseOptionalBoolean(minim, name, member);
+  return parseOptionalBoolean(namespace, name, member);
 }
 
 module.exports = R.curry(parseBoolean);

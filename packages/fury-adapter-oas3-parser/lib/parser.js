@@ -9,12 +9,12 @@ const parseOpenAPIObject = require('./parser/oas/parseOpenAPIObject');
 
 const isObjectOrAnnotation = R.either(isObject, isAnnotation);
 
-function parse(source, minim) {
-  const document = parseYAML(source, minim);
+function parse(source, namespace) {
+  const document = parseYAML(source, namespace);
 
-  const parseDocument = pipeParseResult(minim,
-    R.unless(isObjectOrAnnotation, createError(minim, 'Source document is not an object')),
-    R.unless(isAnnotation, parseOpenAPIObject(minim)));
+  const parseDocument = pipeParseResult(namespace,
+    R.unless(isObjectOrAnnotation, createError(namespace, 'Source document is not an object')),
+    R.unless(isAnnotation, parseOpenAPIObject(namespace)));
 
   return R.chain(parseDocument, document);
 }

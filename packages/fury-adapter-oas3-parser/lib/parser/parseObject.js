@@ -55,18 +55,18 @@ const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
  * |        > member > parseMember(member) >                     |
  * |-------->-------->--------------------->---------------------|
  *
- * @param minim
+ * @param namespace
  * @param transform {transformMember} - The callback to transform a member
  * @param object {ObjectElement} - The object containing members to transform
  *
  * @returns ParseResult<ObjectElement>
  */
-function parseObject(minim, parseMember, object) {
+function parseObject(namespace, parseMember, object) {
   // Create a member from a key and value
-  const createMember = R.constructN(2, minim.elements.Member);
+  const createMember = R.constructN(2, namespace.elements.Member);
 
   // Wraps the given element in a parse result if it isn't already a parse result
-  const coerceParseResult = R.unless(isParseResult, element => new minim.elements.ParseResult([element]));
+  const coerceParseResult = R.unless(isParseResult, element => new namespace.elements.ParseResult([element]));
 
   // Wrap the given parseMember transformation into one that also converts
   // the result to a parse result if it isn't already a parse result.
@@ -88,12 +88,12 @@ function parseObject(minim, parseMember, object) {
   const convertParseResultMembersToObject = (parseResult) => {
     const members = R.filter(isMember, parseResult);
     const annotations = R.filter(isAnnotation, parseResult);
-    const object = new minim.elements.Object(members);
-    return new minim.elements.ParseResult([object].concat(annotations.elements));
+    const object = new namespace.elements.Object(members);
+    return new namespace.elements.ParseResult([object].concat(annotations.elements));
   };
 
   // Create a parse result from an object using all of the members
-  const wrapObjectInParseResult = object => new minim.elements.ParseResult(object.content);
+  const wrapObjectInParseResult = object => new namespace.elements.ParseResult(object.content);
 
   const validateMembers = R.pipe(
     wrapObjectInParseResult,

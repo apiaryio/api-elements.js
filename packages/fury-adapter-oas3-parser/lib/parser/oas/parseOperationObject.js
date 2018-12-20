@@ -20,40 +20,40 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 /**
  * Parse Operation Object
  *
- * @param minim {Namespace}
+ * @param namespace {Namespace}
  * @param element {Element}
  * @returns ParseResult<Transition>
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject
  */
-function parseOperationObject(minim, member) {
+function parseOperationObject(namespace, member) {
   const parseMember = R.cond([
-    [hasKey('summary'), parseString(minim, name, false)],
-    [hasKey('description'), parseCopy(minim, name, false)],
+    [hasKey('summary'), parseString(namespace, name, false)],
+    [hasKey('description'), parseCopy(namespace, name, false)],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => new minim.elements.ParseResult()],
+    [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(minim, name)],
+    [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const parseOperation = pipeParseResult(minim,
-    R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
-    parseObject(minim, parseMember),
+  const parseOperation = pipeParseResult(namespace,
+    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
+    parseObject(namespace, parseMember),
     (operation) => {
       // FIXME create transactions for operation
-      const request = new minim.elements.HttpRequest();
+      const request = new namespace.elements.HttpRequest();
       const method = member.key.clone();
       method.content = method.content.toUpperCase();
       request.method = method;
 
-      const response = new minim.elements.HttpResponse();
-      const transaction = new minim.elements.HttpTransaction([request, response]);
+      const response = new namespace.elements.HttpResponse();
+      const transaction = new namespace.elements.HttpTransaction([request, response]);
 
-      const transition = new minim.elements.Transition();
+      const transition = new namespace.elements.Transition();
       transition.title = operation.get('summary');
 
       const description = operation.get('description');

@@ -41,95 +41,95 @@ function extractPathVariables(path) {
   return [];
 }
 
-function createErrorForMissingPathParameter(minim, path, variable) {
+function createErrorForMissingPathParameter(namespace, path, variable) {
   // FIXME: This shouldn't be an error
   const message = `Path '${path.toValue()}' contains variable '${variable}' which is not declared in the parameters section of the '${name}'`;
-  return createError(minim, message, path);
+  return createError(namespace, message, path);
 }
 
-function createErrorForMissingPathVariable(minim, path, variable) {
-  return createError(minim, `Path '${path.toValue()}' is missing path variable '${variable}'. Add '{${variable}}' to the path`, path);
+function createErrorForMissingPathVariable(namespace, path, variable) {
+  return createError(namespace, `Path '${path.toValue()}' is missing path variable '${variable}'. Add '{${variable}}' to the path`, path);
 }
 
 /**
  * Validates that there is a href variable for each path variable in the given path
- * @param minim
+ * @param namespace
  * @param path {StringElement}
  * @param pathItem {ObjectElement}
  * @retuns ParseResult<ObjectElement>
  */
-function validatePathForMissingHrefVariables(minim, path, pathItem) {
+function validatePathForMissingHrefVariables(namespace, path, pathItem) {
   const pathVariables = extractPathVariables(path.toValue());
 
   const parameters = pathItem.get('parameters')
     ? pathItem.get('parameters')
-    : new minim.elements.Object();
+    : new namespace.elements.Object();
 
   const hrefVariables = parameters.get('path')
     ? parameters.get('path')
-    : new minim.elements.HrefVariables();
+    : new namespace.elements.HrefVariables();
 
   const missingParameters = hrefVariables
     ? pathVariables.filter(name => !hrefVariables.getMember(name))
     : pathVariables;
 
   if (missingParameters.length > 0) {
-    const toError = R.curry(createErrorForMissingPathParameter)(minim, path);
-    return new minim.elements.ParseResult(missingParameters.map(toError));
+    const toError = R.curry(createErrorForMissingPathParameter)(namespace, path);
+    return new namespace.elements.ParseResult(missingParameters.map(toError));
   }
 
-  return new minim.elements.ParseResult([pathItem]);
+  return new namespace.elements.ParseResult([pathItem]);
 }
 
 /**
  * Validates that each href variable is found within the given path
- * @param minim
+ * @param namespace
  * @param path {StringElement}
  * @param hrefVariables {HrefVariables}
  * @retuns ParseResult<HrefVariables>
  */
-const validateHrefVariablesInPath = R.curry((minim, path, hrefVariables) => {
+const validateHrefVariablesInPath = R.curry((namespace, path, hrefVariables) => {
   const pathVariables = extractPathVariables(path.toValue());
   const variables = hrefVariables.content.map(member => member.key.toValue());
   const missingPathVariables = variables.filter(name => !pathVariables.includes(name));
 
   if (missingPathVariables.length > 0) {
-    const toError = R.curry(createErrorForMissingPathVariable)(minim, path);
+    const toError = R.curry(createErrorForMissingPathVariable)(namespace, path);
     const errors = missingPathVariables.map(toError);
-    return new minim.elements.ParseResult(errors);
+    return new namespace.elements.ParseResult(errors);
   }
 
-  return new minim.elements.ParseResult([hrefVariables]);
+  return new namespace.elements.ParseResult([hrefVariables]);
 });
 
 /**
  * Parse parameters member
- * @param minim
+ * @param namespace
  * @param path {StringElement}
  * @param member {MemberElement} parameters member from an object element
  */
-function parseParameters(minim, path, member) {
+function parseParameters(namespace, path, member) {
   const parseParameter = R.cond([
-    [hasKey('path'), R.compose(validateHrefVariablesInPath(minim, path), getValue)],
+    [hasKey('path'), R.compose(validateHrefVariablesInPath(namespace, path), getValue)],
     [hasKey('query'), member => member],
   ]);
 
-  const parseParameters = pipeParseResult(minim,
-    parseParameterObjects(minim, name),
-    parseObject(minim, parseParameter));
+  const parseParameters = pipeParseResult(namespace,
+    parseParameterObjects(namespace, name),
+    parseObject(namespace, parseParameter));
 
   return parseParameters(member.value);
 }
 
-function hrefVariablesFromParameters(minim, parameters) {
+function hrefVariablesFromParameters(namespace, parameters) {
   if (parameters) {
     const path = parameters.get('path')
       ? parameters.get('path')
-      : new minim.elements.HrefVariables();
+      : new namespace.elements.HrefVariables();
 
     const query = parameters.get('query')
       ? parameters.get('query')
-      : new minim.elements.HrefVariables();
+      : new namespace.elements.HrefVariables();
 
     if (!path.isEmpty || !query.isEmpty) {
       return path.concat(query);
@@ -155,35 +155,35 @@ function hrefFromParameters(path, parameters) {
  * @returns Resource
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#path-item-object
  */
-function parsePathItemObject(minim, member) {
+function parsePathItemObject(namespace, member) {
   const parseMember = R.cond([
-    [hasKey('summary'), parseString(minim, name, false)],
-    [hasKey('description'), parseCopy(minim, name, false)],
-    [hasKey('parameters'), R.curry(parseParameters)(minim, member.key)],
-    [isHttpMethodKey, parseOperationObject(minim)],
+    [hasKey('summary'), parseString(namespace, name, false)],
+    [hasKey('description'), parseCopy(namespace, name, false)],
+    [hasKey('parameters'), R.curry(parseParameters)(namespace, member.key)],
+    [isHttpMethodKey, parseOperationObject(namespace)],
 
     // FIXME Parse $ref
     // FIXME Parse servers
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => new minim.elements.ParseResult()],
+    [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for every other key
-    [R.T, createInvalidMemberWarning(minim, name)],
+    [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const parsePathItem = pipeParseResult(minim,
-    R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
-    parseObject(minim, parseMember),
-    R.curry(validatePathForMissingHrefVariables)(minim, member.key),
+  const parsePathItem = pipeParseResult(namespace,
+    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
+    parseObject(namespace, parseMember),
+    R.curry(validatePathForMissingHrefVariables)(namespace, member.key),
     (pathItem) => {
-      const resource = new minim.elements.Resource();
+      const resource = new namespace.elements.Resource();
 
       const parameters = pathItem.get('parameters');
       resource.href = hrefFromParameters(member.key, parameters);
-      resource.hrefVariables = hrefVariablesFromParameters(minim, parameters);
+      resource.hrefVariables = hrefVariablesFromParameters(namespace, parameters);
 
       const summary = pathItem.get('summary');
       if (summary) {

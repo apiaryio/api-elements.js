@@ -54,15 +54,15 @@ const name = 'Operation Object';
 /**
  * Parse Operation Object
  *
- * @param minim {Namespace}
+ * @param namespace {Namespace}
  * @param element {Element}
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject
  */
-function parseOperationObject(minim, element) {
-  const unsupportedAnnotation = createWarning(minim, `'${name}' is unsupported`, element);
-  return new minim.elements.ParseResult([unsupportedAnnotation]);
+function parseOperationObject(namespace, element) {
+  const unsupportedAnnotation = createWarning(namespace, `'${name}' is unsupported`, element);
+  return new namespace.elements.ParseResult([unsupportedAnnotation]);
 }
 
 module.exports = R.curry(parseOperationObject);
@@ -75,12 +75,12 @@ const { expect } = require('chai');
 const { Fury } = require('fury');
 const parse = require('../../../../lib/parser/oas/parseOperationObject');
 
-const { minim } = new Fury();
+const { minim: namespace } = new Fury();
 
 describe('Operation Object', () => {
   it('returns an unsupported warning', () => {
-    const operation = new minim.elements.Object();
-    const result = parse(minim, operation);
+    const operation = new namespace.elements.Object();
+    const result = parse(namespace, operation);
 
     expect(result.length).to.equal(1);
     expect(result).to.have.warning("'Operation Object' is unsupported");

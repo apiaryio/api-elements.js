@@ -5,7 +5,7 @@
 const chai = require('chai');
 const { Fury } = require('fury');
 
-const { minim } = new Fury();
+const { minim: namespace } = new Fury();
 
 chai.use((chai_, utils) => {
   const { Assertion } = chai_;
@@ -35,7 +35,7 @@ chai.use((chai_, utils) => {
 
     const err = obj.errors.get(0);
 
-    new Assertion(err).to.be.instanceof(minim.elements.Annotation);
+    new Assertion(err).to.be.instanceof(namespace.elements.Annotation);
 
     this.assert(
       err.toValue() === message,
@@ -61,7 +61,7 @@ chai.use((chai_, utils) => {
 
     const warning = obj.warnings.get(0);
 
-    new Assertion(warning).to.be.instanceof(minim.elements.Annotation);
+    new Assertion(warning).to.be.instanceof(namespace.elements.Annotation);
 
     this.assert(
       warning.toValue() === message,

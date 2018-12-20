@@ -19,10 +19,10 @@ const isValueString = R.compose(isString, getValue);
  *
  * @returns {ParseResult<MemberElement<StringElement>>}
  */
-const parseOptionalString = (minim, name, member) => new minim.elements.ParseResult([
+const parseOptionalString = (namespace, name, member) => new namespace.elements.ParseResult([
   R.unless(
     isValueString,
-    createMemberValueNotStringWarning(minim, name),
+    createMemberValueNotStringWarning(namespace, name),
     member
   ),
 ]);
@@ -34,28 +34,28 @@ const parseOptionalString = (minim, name, member) => new minim.elements.ParseRes
  *
  * @returns {ParseResult<MemberElement<StringElement>>}
  */
-const parseRequiredString = (minim, name, member) => new minim.elements.ParseResult([
+const parseRequiredString = (namespace, name, member) => new namespace.elements.ParseResult([
   R.unless(
     isValueString,
-    createMemberValueNotStringError(minim, name),
+    createMemberValueNotStringError(namespace, name),
     member
   ),
 ]);
 
 /**
  * Parse a string from a member
- * @pram minim
+ * @pram namespace
  * @pram name {string}
  * @pram required {boolean} - Whether the member is required, indicates if we return a warning or an error
  * @pram member {MemberElement}
  * @returns {ParseResult<MemberElement<StringElement>>}
  */
-function parseString(minim, name, required, member) {
+function parseString(namespace, name, required, member) {
   if (required) {
-    return parseRequiredString(minim, name, member);
+    return parseRequiredString(namespace, name, member);
   }
 
-  return parseOptionalString(minim, name, member);
+  return parseOptionalString(namespace, name, member);
 }
 
 module.exports = R.curry(parseString);

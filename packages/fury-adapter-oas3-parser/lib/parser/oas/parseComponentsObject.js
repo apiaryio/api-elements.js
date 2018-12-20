@@ -19,47 +19,47 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 /**
  * Parse Components Object
  *
- * @param minim {Namespace}
+ * @param namespace {Namespace}
  * @param element {Element}
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject
  */
-function parseComponentsObject(minim, element) {
+function parseComponentsObject(namespace, element) {
   const validateIsObject = key => R.unless(isObject,
-    createWarning(minim, `'${name}' '${key}' is not an object`));
+    createWarning(namespace, `'${name}' '${key}' is not an object`));
 
-  const parseSchemasObject = pipeParseResult(minim,
+  const parseSchemasObject = pipeParseResult(namespace,
     validateIsObject('schemas'),
-    parseObject(minim, parseSchemaObject(minim)));
+    parseObject(namespace, parseSchemaObject(namespace)));
 
   const parseParametersObjectMember = (member) => {
     // Create a Member Element with `member.key` as the key
-    const Member = R.constructN(2, minim.elements.Member)(member.key);
-    const parseResult = parseParameterObject(minim, member.value);
+    const Member = R.constructN(2, namespace.elements.Member)(member.key);
+    const parseResult = parseParameterObject(namespace, member.value);
     // Wrap non-annotation elements in member element
     return R.map(R.unless(isAnnotation, Member), parseResult);
   };
 
-  const parseParametersObject = pipeParseResult(minim,
+  const parseParametersObject = pipeParseResult(namespace,
     validateIsObject('parameters'),
-    parseObject(minim, parseParametersObjectMember));
+    parseObject(namespace, parseParametersObjectMember));
 
   const parseMember = R.cond([
     [hasKey('schemas'), R.compose(parseSchemasObject, getValue)],
     [hasKey('parameters'), R.compose(parseParametersObject, getValue)],
-    [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => new minim.elements.ParseResult()],
+    [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(minim, name)],
+    [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const parseComponents = pipeParseResult(minim,
-    R.unless(isObject, createWarning(minim, `'${name}' is not an object`)),
-    parseObject(minim, parseMember));
+  const parseComponents = pipeParseResult(namespace,
+    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
+    parseObject(namespace, parseMember));
 
   return parseComponents(element);
 }

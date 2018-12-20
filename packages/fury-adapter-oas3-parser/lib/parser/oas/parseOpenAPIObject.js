@@ -27,31 +27,31 @@ const unsupportedKeys = ['servers', 'security', 'tags', 'externalDocs'];
  */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-function parseOASObject(minim, object) {
+function parseOASObject(namespace, object) {
   // Takes a parse result, and wraps all of the non annotations inside an array
   const asArray = (parseResult) => {
-    const array = new minim.elements.Array(R.reject(isAnnotation, parseResult));
-    return new minim.elements.ParseResult([array].concat(parseResult.annotations.elements));
+    const array = new namespace.elements.Array(R.reject(isAnnotation, parseResult));
+    return new namespace.elements.ParseResult([array].concat(parseResult.annotations.elements));
   };
 
   const parseMember = R.cond([
-    [hasKey('openapi'), parseOpenAPI(minim)],
-    [hasKey('info'), R.compose(parseInfoObject(minim), getValue)],
-    [hasKey('paths'), R.compose(asArray, parsePathsObject(minim), getValue)],
-    [hasKey('components'), R.compose(parseComponentsObject(minim), getValue)],
+    [hasKey('openapi'), parseOpenAPI(namespace)],
+    [hasKey('info'), R.compose(parseInfoObject(namespace), getValue)],
+    [hasKey('paths'), R.compose(asArray, parsePathsObject(namespace), getValue)],
+    [hasKey('components'), R.compose(parseComponentsObject(namespace), getValue)],
 
     // FIXME Support exposing extensions into parse result
-    [isExtension, () => new minim.elements.ParseResult()],
+    [isExtension, () => new namespace.elements.ParseResult()],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(minim, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(minim, name)],
+    [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const parseOASObject = pipeParseResult(minim,
-    validateObjectContainsRequiredKeys(minim, name, requiredKeys),
-    parseObject(minim, parseMember),
+  const parseOASObject = pipeParseResult(namespace,
+    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
+    parseObject(namespace, parseMember),
     (object) => {
       const api = object.get('info');
 
@@ -64,7 +64,7 @@ function parseOASObject(minim, object) {
       if (components) {
         const schemas = components.get('schemas');
         if (schemas) {
-          const dataStructures = new minim.elements.Category(
+          const dataStructures = new namespace.elements.Category(
             schemas.content.map(getValue),
             { classes: ['dataStructures'] }
           );

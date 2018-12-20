@@ -28,8 +28,8 @@ const hasNoErrorsOrValue = R.allPass([hasNoErrors, hasValue]);
  * @param rhs {Element[]}
  * @returns {ParseResult}
  */
-function concatParseResult(minim, lhs, rhs) {
-  return new minim.elements.ParseResult(lhs.concat(rhs));
+function concatParseResult(namespace, lhs, rhs) {
+  return new namespace.elements.ParseResult(lhs.concat(rhs));
 }
 
 /**
@@ -48,7 +48,7 @@ function concatParseResult(minim, lhs, rhs) {
  * @return {Function}
  * @see R.pipe
  */
-function pipeParseResult(minim, ...functions) {
+function pipeParseResult(namespace, ...functions) {
   // Return a closure that takes the element to pipe
   return (element) => {
     const run = (accumulator, func) => {
@@ -58,13 +58,13 @@ function pipeParseResult(minim, ...functions) {
       if (!isParseResult(parseResult)) {
         // Result is either a ParseResult, or it is an element that can be
         // wrapped in a parse result
-        parseResult = new minim.elements.ParseResult([parseResult]);
+        parseResult = new namespace.elements.ParseResult([parseResult]);
       }
 
-      return concatParseResult(minim, parseResult.content, accumulator.annotations.elements);
+      return concatParseResult(namespace, parseResult.content, accumulator.annotations.elements);
     };
 
-    return R.reduceWhile(hasNoErrorsOrValue, run, new minim.elements.ParseResult([element]), functions);
+    return R.reduceWhile(hasNoErrorsOrValue, run, new namespace.elements.ParseResult([element]), functions);
   };
 }
 

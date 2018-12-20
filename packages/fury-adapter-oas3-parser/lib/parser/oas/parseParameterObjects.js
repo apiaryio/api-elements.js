@@ -13,29 +13,29 @@ const isPathOrQuery = R.anyPass([hasKey('path'), hasKey('query')]);
 
 /**
  * Parse parameters array
- * @param minim
+ * @param namespace
  * @param name {StringElement}
  * @param member {MemberElement} parameters member from an object element
  * @return {ParseResult<ObjectElement>} An object containing parameters grouped
  *   by their `in` value (`path`, `query` etc) as members. The object can
  *   be treated as a "named tuple".
  */
-function parseParameterObjects(minim, name, array) {
-  const ParseResult = R.constructN(1, minim.elements.ParseResult);
+function parseParameterObjects(namespace, name, array) {
+  const ParseResult = R.constructN(1, namespace.elements.ParseResult);
 
   // Convert an array of parameters into the correct types
   const convertParameters = R.cond([
-    [isPathOrQuery, member => new minim.elements.HrefVariables(member.value.content)],
+    [isPathOrQuery, member => new namespace.elements.HrefVariables(member.value.content)],
     // FIXME when headers and cookies are supported these should be converted
     [R.T, member => member],
   ]);
 
-  const parseParameters = pipeParseResult(minim,
-    R.unless(isArray, createWarning(minim, `'${name}' 'parameters' is not an array`)),
-    R.compose(R.chain(parseParameterObject(minim)), ParseResult),
-    (...parameters) => new minim.elements.Object([...parameters]),
+  const parseParameters = pipeParseResult(namespace,
+    R.unless(isArray, createWarning(namespace, `'${name}' 'parameters' is not an array`)),
+    R.compose(R.chain(parseParameterObject(namespace)), ParseResult),
+    (...parameters) => new namespace.elements.Object([...parameters]),
     R.groupBy(parameter => parameter.in),
-    parseObject(minim, convertParameters));
+    parseObject(namespace, convertParameters));
 
   return parseParameters(array);
 }
