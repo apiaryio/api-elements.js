@@ -12,7 +12,7 @@ describe('#parse', () => {
     const parseResult = parse(source, namespace);
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult).to.contain.error("YAML Syntax: expected '<document start>', but found {");
-    expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[2, 1]]);
+    expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[2, 0]]);
   });
 
   it('fails to parse a non-object YAML document', () => {

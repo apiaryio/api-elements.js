@@ -91,6 +91,186 @@ chai.use((chai_, utils) => {
       this._obj.sourceMapValue
     );
   });
+
+  Assertion.addMethod('sourceMapStart', function sourceMapAssert(n) {
+    const attr = this._obj.attributes;
+    this.assert(attr !== undefined);
+
+    const sourceMaps = attr.get('sourceMap');
+    this.assert(sourceMaps !== undefined);
+
+    const firstSourceMap = sourceMaps.get(0);
+    this.assert(firstSourceMap !== undefined);
+
+    const wrappingArray = firstSourceMap.get(0);
+    this.assert(wrappingArray !== undefined);
+
+    const start = wrappingArray.get(0);
+    this.assert(start !== undefined);
+
+    const line = start.attributes.get('line');
+    this.assert(line !== undefined);
+
+    const column = start.attributes.get('column');
+    this.assert(column !== undefined);
+
+    const actual = start.toValue();
+    this.assert(
+      new Assertion(actual).to.equal(n),
+      'expected start to be #{exp}, got #{act}',
+      'expected start to not equal #{exp}, got exactly that',
+      n,
+      actual
+    );
+  });
+
+  Assertion.addMethod('sourceMapOffset', function sourceMapAssert(n) {
+    const attr = this._obj.attributes;
+    this.assert(attr !== undefined);
+
+    const sourceMaps = attr.get('sourceMap');
+    this.assert(sourceMaps !== undefined);
+
+    const firstSourceMap = sourceMaps.get(0);
+    this.assert(firstSourceMap !== undefined);
+
+    const wrappingArray = firstSourceMap.get(0);
+    this.assert(wrappingArray !== undefined);
+
+    const offset = wrappingArray.get(1);
+    this.assert(offset !== undefined);
+
+    const line = offset.attributes.get('line');
+    this.assert(line !== undefined);
+
+    const column = offset.attributes.get('column');
+    this.assert(column !== undefined);
+
+    const actual = offset.toValue();
+    this.assert(
+      new Assertion(actual).to.equal(n),
+      'expected offset to be #{exp}, got #{act}',
+      'expected offset to not equal #{exp}, got exactly that',
+      n,
+      actual
+    );
+  });
+
+  Assertion.addMethod('sourceMapStartLine', function sourceMapAssert(n) {
+    const attr = this._obj.attributes;
+    this.assert(attr !== undefined);
+
+    const sourceMaps = attr.get('sourceMap');
+    this.assert(sourceMaps !== undefined);
+
+    const firstSourceMap = sourceMaps.get(0);
+    this.assert(firstSourceMap !== undefined);
+
+    const wrappingArray = firstSourceMap.get(0);
+    this.assert(wrappingArray !== undefined);
+
+    const start = wrappingArray.get(0);
+    this.assert(start !== undefined);
+
+    const line = start.attributes.get('line');
+    this.assert(line !== undefined);
+
+    const actual = line.toValue();
+    this.assert(
+      actual === n,
+      'expected start line to be #{exp}, got #{act}',
+      'expected start line to not equal #{exp}, got exactly that',
+      n,
+      actual
+    );
+  });
+
+  Assertion.addMethod('sourceMapStartColumn', function sourceMapAssert(n) {
+    const attr = this._obj.attributes;
+    this.assert(attr !== undefined);
+
+    const sourceMaps = attr.get('sourceMap');
+    this.assert(sourceMaps !== undefined);
+
+    const firstSourceMap = sourceMaps.get(0);
+    this.assert(firstSourceMap !== undefined);
+
+    const wrappingArray = firstSourceMap.get(0);
+    this.assert(wrappingArray !== undefined);
+
+    const start = wrappingArray.get(0);
+    this.assert(start !== undefined);
+
+    const column = start.attributes.get('column');
+    this.assert(column !== undefined);
+
+    const actual = column.toValue();
+    this.assert(
+      new Assertion(actual).to.equal(n),
+      'expected end column to be #{exp}, got #{act}',
+      'expected end column to not equal #{exp}, got exactly that',
+      n,
+      actual
+    );
+  });
+
+  Assertion.addMethod('sourceMapEndLine', function sourceMapAssert(n) {
+    const attr = this._obj.attributes;
+    this.assert(attr !== undefined);
+
+    const sourceMaps = attr.get('sourceMap');
+    this.assert(sourceMaps !== undefined);
+
+    const firstSourceMap = sourceMaps.get(0);
+    this.assert(firstSourceMap !== undefined);
+
+    const wrappingArray = firstSourceMap.get(0);
+    this.assert(wrappingArray !== undefined);
+
+    const offset = wrappingArray.get(1);
+    this.assert(offset !== undefined);
+
+    const line = offset.attributes.get('line');
+    this.assert(line !== undefined);
+
+    const actual = line.toValue();
+    this.assert(
+      new Assertion(actual).to.equal(n),
+      'expected end line to be #{exp}, got #{act}',
+      'expected end line to not equal #{exp}, got exactly that',
+      n,
+      actual
+    );
+  });
+
+  Assertion.addMethod('sourceMapEndColumn', function sourceMapAssert(n) {
+    const attr = this._obj.attributes;
+    this.assert(attr !== undefined);
+
+    const sourceMaps = attr.get('sourceMap');
+    this.assert(sourceMaps !== undefined);
+
+    const firstSourceMap = sourceMaps.get(0);
+    this.assert(firstSourceMap !== undefined);
+
+    const wrappingArray = firstSourceMap.get(0);
+    this.assert(wrappingArray !== undefined);
+
+    const offset = wrappingArray.get(1);
+    this.assert(offset !== undefined);
+
+    const column = offset.attributes.get('column');
+    this.assert(column !== undefined);
+
+    const actual = column.toValue();
+    this.assert(
+      new Assertion(actual).to.equal(n),
+      'expected end column to be #{exp}, got #{act}',
+      'expected end column to not equal #{exp}, got exactly that',
+      n,
+      actual
+    );
+  });
 });
 
 module.exports = chai;
