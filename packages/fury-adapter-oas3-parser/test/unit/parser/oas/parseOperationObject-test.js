@@ -6,7 +6,9 @@ const { minim: namespace } = new Fury();
 
 describe('Operation Object', () => {
   it('returns a transition', () => {
-    const operation = new namespace.elements.Member('get', {});
+    const operation = new namespace.elements.Member('get', {
+      responses: {},
+    });
 
     const result = parse(namespace, operation);
 
@@ -16,7 +18,12 @@ describe('Operation Object', () => {
   });
 
   it('returns a transition including a transaction', () => {
-    const operation = new namespace.elements.Member('get', {});
+    const operation = new namespace.elements.Member('get', {
+      responses: {
+        200: {
+        },
+      },
+    });
 
     const result = parse(namespace, operation);
 
@@ -48,6 +55,7 @@ describe('Operation Object', () => {
     it('provides warning for unsupported tags key', () => {
       const operation = new namespace.elements.Member('get', {
         tags: [],
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -58,6 +66,7 @@ describe('Operation Object', () => {
     it('provides warning for unsupported externalDocs key', () => {
       const operation = new namespace.elements.Member('get', {
         externalDocs: '',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -68,6 +77,7 @@ describe('Operation Object', () => {
     it('provides warning for unsupported parameters key', () => {
       const operation = new namespace.elements.Member('get', {
         parameters: '',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -78,6 +88,7 @@ describe('Operation Object', () => {
     it('provides warning for unsupported requestBody key', () => {
       const operation = new namespace.elements.Member('get', {
         requestBody: '',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -85,19 +96,10 @@ describe('Operation Object', () => {
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'requestBody'");
     });
 
-    it('provides warning for unsupported responses key', () => {
-      const operation = new namespace.elements.Member('get', {
-        responses: '',
-      });
-
-      const result = parse(namespace, operation);
-
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'responses'");
-    });
-
     it('provides warning for unsupported callbacks key', () => {
       const operation = new namespace.elements.Member('get', {
         callbacks: '',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -108,6 +110,7 @@ describe('Operation Object', () => {
     it('provides warning for unsupported deprecated key', () => {
       const operation = new namespace.elements.Member('get', {
         deprecated: '',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -118,6 +121,7 @@ describe('Operation Object', () => {
     it('provides warning for unsupported security key', () => {
       const operation = new namespace.elements.Member('get', {
         security: '',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -127,6 +131,7 @@ describe('Operation Object', () => {
 
     it('does not provide warning/errors for extensions', () => {
       const operation = new namespace.elements.Member('get', {
+        responses: {},
         'x-extension': '',
       });
 
@@ -138,6 +143,7 @@ describe('Operation Object', () => {
 
   it('provides warning for invalid keys', () => {
     const operation = new namespace.elements.Member('get', {
+      responses: {},
       invalid: '',
     });
 
@@ -146,10 +152,23 @@ describe('Operation Object', () => {
     expect(result).to.contain.warning("'Operation Object' contains invalid key 'invalid'");
   });
 
+  describe('missing required properties', () => {
+    it('provides error for missing responses', () => {
+      const operation = new namespace.elements.Member('get', {});
+
+      const result = parse(namespace, operation);
+
+      expect(result.length).to.equal(1);
+      expect(result).to.contain.error("'Operation Object' is missing required property 'responses'");
+    });
+  });
+
+
   describe('#summary', () => {
     it('warns when summary is not a string', () => {
       const operation = new namespace.elements.Member('get', {
         summary: [],
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -163,6 +182,7 @@ describe('Operation Object', () => {
     it('returns a transition with a summary', () => {
       const operation = new namespace.elements.Member('get', {
         summary: 'Example Summary',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -171,8 +191,6 @@ describe('Operation Object', () => {
 
       const transition = result.get(0);
       expect(transition).to.be.instanceof(namespace.elements.Transition);
-      expect(transition.length).to.equal(1);
-
       expect(transition.title.toValue()).to.equal('Example Summary');
     });
   });
@@ -181,6 +199,7 @@ describe('Operation Object', () => {
     it('exposes description as a copy element in the transition', () => {
       const operation = new namespace.elements.Member('get', {
         description: 'This is a transition',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -193,13 +212,13 @@ describe('Operation Object', () => {
     it('warns when description is not a string', () => {
       const operation = new namespace.elements.Member('get', {
         description: {},
+        responses: {},
       });
 
       const result = parse(namespace, operation);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
-      expect(result.get(0).length).to.equal(1);
 
       expect(result).to.contain.warning("'Operation Object' 'description' is not a string");
     });
@@ -209,6 +228,7 @@ describe('Operation Object', () => {
     it('warns when operationId is not a string', () => {
       const operation = new namespace.elements.Member('get', {
         operationId: [],
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -222,6 +242,7 @@ describe('Operation Object', () => {
     it('returns a transition with an id', () => {
       const operation = new namespace.elements.Member('get', {
         operationId: 'exampleId',
+        responses: {},
       });
 
       const result = parse(namespace, operation);
@@ -230,8 +251,6 @@ describe('Operation Object', () => {
 
       const transition = result.get(0);
       expect(transition).to.be.instanceof(namespace.elements.Transition);
-      expect(transition.length).to.equal(1);
-
       expect(transition.id.toValue()).to.equal('exampleId');
     });
   });

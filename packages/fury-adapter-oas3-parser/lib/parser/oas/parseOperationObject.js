@@ -1,21 +1,39 @@
 const R = require('ramda');
-const { isObject, isExtension, hasKey } = require('../../predicates');
+const {
+  isObject, isExtension, hasKey, getValue,
+} = require('../../predicates');
 const {
   createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
+  validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
+const parseResponsesObject = require('./parseResponsesObject');
 
 const name = 'Operation Object';
+const requiredKeys = ['responses'];
 const unsupportedKeys = [
   'tags', 'externalDocs', 'parameters', 'requestBody',
-  'responses', 'callbacks', 'deprecated', 'security',
+  'callbacks', 'deprecated', 'security',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
+
+function createTransactions(namespace, member, operation) {
+  const responses = operation.get('responses');
+
+  return responses.map((response) => {
+    const request = new namespace.elements.HttpRequest();
+    const method = member.key.clone();
+    method.content = method.content.toUpperCase();
+    request.method = method;
+
+    return new namespace.elements.HttpTransaction([request, response]);
+  });
+}
 
 /**
  * Parse Operation Object
@@ -31,6 +49,7 @@ function parseOperationObject(namespace, member) {
     [hasKey('summary'), parseString(namespace, name, false)],
     [hasKey('description'), parseCopy(namespace, name, false)],
     [hasKey('operationId'), parseString(namespace, name, false)],
+    [hasKey('responses'), R.compose(parseResponsesObject(namespace), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -43,17 +62,9 @@ function parseOperationObject(namespace, member) {
 
   const parseOperation = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
+    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
     parseObject(namespace, parseMember),
     (operation) => {
-      // FIXME create transactions for operation
-      const request = new namespace.elements.HttpRequest();
-      const method = member.key.clone();
-      method.content = method.content.toUpperCase();
-      request.method = method;
-
-      const response = new namespace.elements.HttpResponse();
-      const transaction = new namespace.elements.HttpTransaction([request, response]);
-
       const transition = new namespace.elements.Transition();
       transition.title = operation.get('summary');
 
@@ -67,7 +78,8 @@ function parseOperationObject(namespace, member) {
         transition.push(description);
       }
 
-      transition.push(transaction);
+      const transactions = createTransactions(namespace, member, operation);
+      transition.content = transition.content.concat(transactions);
 
       return transition;
     });

@@ -17,7 +17,11 @@ describe('#parsePathItemObject', () => {
 
   it('parses a path methods into a resource and transactions', () => {
     const path = new namespace.elements.Member('/', {
-      get: {},
+      get: {
+        responses: {
+          200: {},
+        },
+      },
     });
     const result = parse(namespace, path);
 

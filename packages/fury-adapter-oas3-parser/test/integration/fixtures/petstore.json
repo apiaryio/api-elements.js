@@ -330,7 +330,13 @@
                       }
                     },
                     {
-                      "element": "httpResponse"
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "number",
+                          "content": 200
+                        }
+                      }
                     }
                   ]
                 }
@@ -497,7 +503,13 @@
                       }
                     },
                     {
-                      "element": "httpResponse"
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "number",
+                          "content": 201
+                        }
+                      }
                     }
                   ]
                 }
@@ -841,7 +853,13 @@
                       }
                     },
                     {
-                      "element": "httpResponse"
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "number",
+                          "content": 200
+                        }
+                      }
                     }
                   ]
                 }
@@ -1306,28 +1324,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 24
+                          "content": 26
                         },
                         "column": {
                           "element": "number",
-                          "content": 7
+                          "content": 11
                         }
                       },
-                      "content": 480
+                      "content": 516
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 24
+                          "content": 26
                         },
                         "column": {
                           "element": "number",
-                          "content": 16
+                          "content": 22
                         }
                       },
-                      "content": 9
+                      "content": 11
                     }
                   ]
                 }
@@ -1336,7 +1354,143 @@
           ]
         }
       },
-      "content": "'Operation Object' contains unsupported key 'responses'"
+      "content": "'Response Object' contains unsupported key 'description'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 27
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 561
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 27
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 18
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Response Object' contains unsupported key 'headers'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 32
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 715
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 32
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 18
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Response Object' contains unsupported key 'content'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {},
+      "content": "'Response Object' response status code ranges are unsupported"
     },
     {
       "element": "annotation",
@@ -1426,28 +1580,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 47
+                          "content": 49
                         },
                         "column": {
                           "element": "number",
-                          "content": 7
+                          "content": 11
                         }
                       },
-                      "content": 1110
+                      "content": 1146
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 47
+                          "content": 49
                         },
                         "column": {
                           "element": "number",
-                          "content": 16
+                          "content": 22
                         }
                       },
-                      "content": 9
+                      "content": 11
                     }
                   ]
                 }
@@ -1456,7 +1610,23 @@
           ]
         }
       },
-      "content": "'Operation Object' contains unsupported key 'responses'"
+      "content": "'Response Object' contains unsupported key 'description'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {},
+      "content": "'Response Object' response status code ranges are unsupported"
     },
     {
       "element": "annotation",
@@ -1606,28 +1776,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 69
+                          "content": 71
                         },
                         "column": {
                           "element": "number",
-                          "content": 7
+                          "content": 11
                         }
                       },
-                      "content": 1647
+                      "content": 1683
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 69
+                          "content": 71
                         },
                         "column": {
                           "element": "number",
-                          "content": 16
+                          "content": 22
                         }
                       },
-                      "content": 9
+                      "content": 11
                     }
                   ]
                 }
@@ -1636,7 +1806,83 @@
           ]
         }
       },
-      "content": "'Operation Object' contains unsupported key 'responses'"
+      "content": "'Response Object' contains unsupported key 'description'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 72
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 1743
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 72
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 18
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Response Object' contains unsupported key 'content'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {},
+      "content": "'Response Object' response status code ranges are unsupported"
     }
   ]
 }
