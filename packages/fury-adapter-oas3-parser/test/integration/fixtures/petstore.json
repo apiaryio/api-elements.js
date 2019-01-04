@@ -140,6 +140,35 @@
                     }
                   },
                   "content": "List all pets"
+                },
+                "id": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 212
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 8
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "listPets"
                 }
               },
               "content": [
@@ -218,6 +247,35 @@
                     }
                   },
                   "content": "Create a pet"
+                },
+                "id": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 1066
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 10
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "createPets"
                 }
               },
               "content": [
@@ -413,6 +471,35 @@
                     }
                   },
                   "content": "Info for a specific pet"
+                },
+                "id": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 1602
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 11
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "showPetById"
                 }
               },
               "content": [
@@ -696,46 +783,6 @@
                   "content": [
                     {
                       "element": "number",
-                      "content": 199
-                    },
-                    {
-                      "element": "number",
-                      "content": 11
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Operation Object' contains unsupported key 'operationId'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
                       "content": 227
                     },
                     {
@@ -856,46 +903,6 @@
                   "content": [
                     {
                       "element": "number",
-                      "content": 1053
-                    },
-                    {
-                      "element": "number",
-                      "content": 11
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Operation Object' contains unsupported key 'operationId'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
                       "content": 1083
                     },
                     {
@@ -990,46 +997,6 @@
         }
       },
       "content": "'Parameter Object' contains invalid key 'schema'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "content": 1589
-                    },
-                    {
-                      "element": "number",
-                      "content": 11
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Operation Object' contains unsupported key 'operationId'"
     },
     {
       "element": "annotation",

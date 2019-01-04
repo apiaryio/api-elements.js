@@ -65,16 +65,6 @@ describe('Operation Object', () => {
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'externalDocs'");
     });
 
-    it('provides warning for unsupported operationId key', () => {
-      const operation = new namespace.elements.Member('get', {
-        operationId: '',
-      });
-
-      const result = parse(namespace, operation);
-
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'operationId'");
-    });
-
     it('provides warning for unsupported parameters key', () => {
       const operation = new namespace.elements.Member('get', {
         parameters: '',
@@ -212,6 +202,37 @@ describe('Operation Object', () => {
       expect(result.get(0).length).to.equal(1);
 
       expect(result).to.contain.warning("'Operation Object' 'description' is not a string");
+    });
+  });
+
+  describe('#operationId', () => {
+    it('warns when operationId is not a string', () => {
+      const operation = new namespace.elements.Member('get', {
+        operationId: [],
+      });
+
+      const result = parse(namespace, operation);
+
+      expect(result.length).to.equal(2);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+      expect(result).to.contain.warning("'Operation Object' 'operationId' is not a string");
+    });
+
+    it('returns a transition with an id', () => {
+      const operation = new namespace.elements.Member('get', {
+        operationId: 'exampleId',
+      });
+
+      const result = parse(namespace, operation);
+
+      expect(result.length).to.equal(1);
+
+      const transition = result.get(0);
+      expect(transition).to.be.instanceof(namespace.elements.Transition);
+      expect(transition.length).to.equal(1);
+
+      expect(transition.id.toValue()).to.equal('exampleId');
     });
   });
 });

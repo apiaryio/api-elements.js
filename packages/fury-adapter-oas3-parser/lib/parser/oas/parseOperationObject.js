@@ -12,7 +12,7 @@ const parseString = require('../parseString');
 
 const name = 'Operation Object';
 const unsupportedKeys = [
-  'tags', 'externalDocs', 'operationId', 'parameters', 'requestBody',
+  'tags', 'externalDocs', 'parameters', 'requestBody',
   'responses', 'callbacks', 'deprecated', 'security',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
@@ -30,6 +30,7 @@ function parseOperationObject(namespace, member) {
   const parseMember = R.cond([
     [hasKey('summary'), parseString(namespace, name, false)],
     [hasKey('description'), parseCopy(namespace, name, false)],
+    [hasKey('operationId'), parseString(namespace, name, false)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -55,6 +56,11 @@ function parseOperationObject(namespace, member) {
 
       const transition = new namespace.elements.Transition();
       transition.title = operation.get('summary');
+
+      const operationId = operation.get('operationId');
+      if (operationId) {
+        transition.id = operationId;
+      }
 
       const description = operation.get('description');
       if (description) {
