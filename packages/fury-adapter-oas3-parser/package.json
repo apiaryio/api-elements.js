@@ -8,7 +8,6 @@
     "url": "https://github.com/apiaryio/fury-adapter-oas3-parser.git"
   },
   "scripts": {
-    "install": "rm -fr node_modules/fury/node_modules/minim",
     "lint": "eslint .",
     "test": "mocha test/unit test/integration",
     "test:unit": "mocha test/unit",
@@ -20,15 +19,14 @@
     "yaml-js": "0.2.3"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.7"
+    "fury": "3.0.0-beta.8"
   },
   "devDependencies": {
     "chai": "4.1.2",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "fury": "3.0.0-beta.7",
-    "minim": "^0.22.1",
+    "fury": "3.0.0-beta.8",
     "mocha": "5.0.2"
   },
   "engines": {

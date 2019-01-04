@@ -11,23 +11,13 @@ of support for each feature.
 
 Install Fury and the Open API 3 Adapter including minim.
 
-**NOTE**: *We need to inject a newer `minim` namespace into Fury until a
-release of Fury has been made updating the `minim` version.*
-
 ```shell
-$ npm install minim@0.22.0 @apiaryio/fury-adapter-parser-oas3
+$ npm install @apiaryio/fury-adapter-parser-oas3
 ```
 
 ```js
 const { Fury } = require('fury');
-const { Namespace } = require('minim');
-const minimParseResult = require('minim-parse-result');
-
 const openapi3Adapter = require('@apiaryio/fury-adapter-oas3-parser');
-
-// OpenAPI 3 adapter requires minim 0.22.0, let's inject it into fury
-fury.minim = new Namespace();
-fury.minim.use(minimParseResult);
 
 // Add the OpenAPI 3 Adapter to Fury
 fury.use(openapi3Adapter);
