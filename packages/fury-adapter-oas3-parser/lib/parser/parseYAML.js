@@ -112,7 +112,6 @@ function parse(source, namespace) {
   const annotations = [];
 
   const result = convert(ast, annotations, namespace);
-  result.freeze();
 
   parseResult.push(result);
   parseResult.content = parseResult.content.concat(annotations);

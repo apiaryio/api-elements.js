@@ -32,6 +32,10 @@ describe('#parse', () => {
     return parse({ source }).then((parseResult) => {
       expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
 
+      // Freeze elements to ensure there is no duplicate elements in tree,
+      // or any elements from the YAML parser is cloned.
+      parseResult.freeze();
+
       const result = JSON.stringify(namespace.serialiser.serialise(parseResult), null, 2);
 
       if (process.env.GENERATE) {
