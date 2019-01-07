@@ -20,7 +20,7 @@ describe('Response Object', () => {
       const result = parse(namespace, response);
 
       expect(result.length).to.equal(1);
-      expect(result).to.contain.warning("'Response Object' response status code ranges are unsupported");
+      expect(result).to.contain.warning("'Response Object' default responses unsupported");
     });
 
     it('provides a warning for range responses', () => {

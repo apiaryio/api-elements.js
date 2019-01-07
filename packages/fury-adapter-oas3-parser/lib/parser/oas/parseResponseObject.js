@@ -27,8 +27,17 @@ function parseResponseObject(namespace, element) {
   if (!element.key.toValue().match(/^\d\d\d$/)) {
     // FIXME Add support for status code ranges
     // https://github.com/apiaryio/fury-adapter-oas3-parser/issues/64
+
+    let message;
+
+    if (element.key.toValue() === 'default') {
+      message = `'${name}' default responses unsupported`;
+    } else {
+      message = `'${name}' response status code ranges are unsupported`;
+    }
+
     return new namespace.elements.ParseResult([
-      createWarning(namespace, `'${name}' response status code ranges are unsupported`, element),
+      createWarning(namespace, message, element),
     ]);
   }
 

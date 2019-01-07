@@ -1490,7 +1490,7 @@
         }
       },
       "attributes": {},
-      "content": "'Response Object' response status code ranges are unsupported"
+      "content": "'Response Object' default responses unsupported"
     },
     {
       "element": "annotation",
@@ -1626,7 +1626,7 @@
         }
       },
       "attributes": {},
-      "content": "'Response Object' response status code ranges are unsupported"
+      "content": "'Response Object' default responses unsupported"
     },
     {
       "element": "annotation",
@@ -1882,7 +1882,7 @@
         }
       },
       "attributes": {},
-      "content": "'Response Object' response status code ranges are unsupported"
+      "content": "'Response Object' default responses unsupported"
     }
   ]
 }
