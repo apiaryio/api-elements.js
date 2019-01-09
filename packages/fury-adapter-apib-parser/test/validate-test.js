@@ -1,14 +1,15 @@
 const { expect } = require('chai');
-const { Namespace } = require('minim');
-const { validate } = require('../lib/adapter');
+const { Fury } = require('fury');
+const adapter = require('../lib/adapter');
 
-const minim = new Namespace();
+const fury = new Fury();
+fury.use(adapter);
 
 describe('API Blueprint validation', () => {
   it('can validate an API Blueprint', (done) => {
-    const source = '# API Name\n';
+    const source = 'FORMAT: 1A\n# API Name\n';
 
-    validate({ source }, (err, parseResult) => {
+    fury.validate({ source }, (err, parseResult) => {
       expect(err).to.be.null;
       expect(parseResult).to.be.null;
 
@@ -17,11 +18,11 @@ describe('API Blueprint validation', () => {
   });
 
   it('can validate an API Blueprint with a warning', (done) => {
-    const source = '# GET /\n';
+    const source = 'FORMAT: 1A\n# GET /\n';
 
-    validate({ source }, (err, parseResult) => {
+    fury.validate({ source }, (err, parseResult) => {
       expect(err).to.be.null;
-      expect(minim.toRefract(parseResult)).to.deep.equal({
+      expect(fury.minim.toRefract(parseResult)).to.deep.equal({
         element: 'parseResult',
         content: [
           {
@@ -53,7 +54,7 @@ describe('API Blueprint validation', () => {
                         content: [
                           {
                             element: 'number',
-                            content: 0,
+                            content: 11,
                           },
                           {
                             element: 'number',
@@ -76,11 +77,11 @@ describe('API Blueprint validation', () => {
   });
 
   it('can validate an API Blueprint with an error', (done) => {
-    const source = '# Data Structures\n# A (A)\n';
+    const source = 'FORMAT: 1A\n# Data Structures\n# A (A)\n';
 
-    validate({ source }, (err, parseResult) => {
+    fury.validate({ source }, (err, parseResult) => {
       expect(err).to.be.null;
-      expect(minim.toRefract(parseResult)).to.deep.equal({
+      expect(fury.minim.toRefract(parseResult)).to.deep.equal({
         element: 'parseResult',
         content: [
           {
@@ -112,7 +113,7 @@ describe('API Blueprint validation', () => {
                         content: [
                           {
                             element: 'number',
-                            content: 18,
+                            content: 29,
                           },
                           {
                             element: 'number',

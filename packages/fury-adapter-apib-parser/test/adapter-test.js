@@ -2,21 +2,25 @@
  * Tests for API Blueprint adapter.
  */
 
+const { Fury } = require('fury');
 const { expect } = require('chai');
-const { parse, detect } = require('../lib/adapter');
+const adapter = require('../lib/adapter');
+
+const fury = new Fury();
+fury.use(adapter);
 
 describe('API Blueprint parser adapter', () => {
   context('detection', () => {
     it('detects FORMAT: 1A', () => {
-      expect(detect('FORMAT: 1A\n# My API')).to.be.true;
+      expect(adapter.detect('FORMAT: 1A\n# My API')).to.be.true;
     });
 
     it('works with unicode BOM', () => {
-      expect(detect('\uFEFFFORMAT: 1A\n')).to.be.true;
+      expect(adapter.detect('\uFEFFFORMAT: 1A\n')).to.be.true;
     });
 
     it('ignores other data', () => {
-      expect(detect('{"title": "Not APIB!"}')).to.be.false;
+      expect(adapter.detect('{"title": "Not APIB!"}')).to.be.false;
     });
   });
 
@@ -25,7 +29,7 @@ describe('API Blueprint parser adapter', () => {
 
     before((done) => {
       const source = 'FORMAT: 1A\n# My API\n## Foo [/foo]\n';
-      parse({ source }, (err, output) => {
+      fury.parse({ source }, (err, output) => {
         if (err) {
           return done(err);
         }
@@ -50,9 +54,10 @@ describe('API Blueprint parser adapter', () => {
   it('can parse an API Blueprint with require blueprint name', (done) => {
     const source = '# GET /\n+ Response 204\n';
 
-    parse({ source, requireBlueprintName: true }, (err, output) => {
+    fury.parse({ source, adapterOptions: { requireBlueprintName: true } }, (err, parseResult) => {
       expect(err).not.to.be.null;
-      expect(output.content[0].element).to.equal('annotation');
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.errors.length).to.equal(1);
       done();
     });
   });
