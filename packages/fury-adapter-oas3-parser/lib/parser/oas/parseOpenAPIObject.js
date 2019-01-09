@@ -36,11 +36,20 @@ function parseOASObject(context, object) {
     return new namespace.elements.ParseResult([array].concat(parseResult.annotations.elements));
   };
 
+  // Pre-parse 'components', this needs to be done first since other
+  // structures can reference it.
+  let components = object.get('components');
+  if (components) {
+    components = parseComponentsObject(context, components);
+    object.set('components', components);
+    components = components.reject(isAnnotation).get(0);
+  }
+
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(context)],
     [hasKey('info'), R.compose(parseInfoObject(context), getValue)],
     [hasKey('paths'), R.compose(asArray, parsePathsObject(context), getValue)],
-    [hasKey('components'), R.compose(parseComponentsObject(context), getValue)],
+    [hasKey('components'), getValue],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
