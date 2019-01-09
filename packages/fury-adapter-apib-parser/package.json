@@ -17,8 +17,7 @@
   },
   "dependencies": {
     "deckardcain": "^0.4.0",
-    "drafter": "^1.2.0",
-    "minim": "^0.22.1"
+    "drafter": "2.0.0-pre.1"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.8"

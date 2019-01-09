@@ -2,7 +2,6 @@
 
 const deckardcain = require('deckardcain');
 const drafter = require('drafter');
-const { JSON06Serialiser } = require('minim');
 
 const name = 'api-blueprint';
 const mediaTypes = [
@@ -12,42 +11,26 @@ const mediaTypes = [
 
 const detect = source => mediaTypes.indexOf(deckardcain.identify(source)) !== -1;
 
-const validate = ({ minim, source, requireBlueprintName }, done) => {
+const validate = ({ source, requireBlueprintName }, done) => {
   const options = {
     requireBlueprintName,
   };
 
-  const serialiser = new JSON06Serialiser(minim);
-
-  drafter.validate(source, options, (err, parseResult) => {
-    if (parseResult) {
-      done(err, serialiser.deserialise(parseResult));
-    } else {
-      done(err, parseResult);
-    }
-  });
+  drafter.validate(source, options, done);
 };
 
 /*
  * Parse an API Blueprint into refract elements.
  */
 const parse = ({
-  minim, source, generateSourceMap, requireBlueprintName,
+  source, generateSourceMap, requireBlueprintName,
 }, done) => {
   const options = {
     exportSourcemap: !!generateSourceMap,
     requireBlueprintName,
   };
 
-  const serialiser = new JSON06Serialiser(minim);
-
-  drafter.parse(source, options, (err, parseResult) => {
-    if (parseResult) {
-      done(err, serialiser.deserialise(parseResult));
-    } else {
-      done(err, parseResult);
-    }
-  });
+  drafter.parse(source, options, done);
 };
 
 module.exports = {

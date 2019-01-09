@@ -55,7 +55,7 @@ describe('API Blueprint parser adapter', () => {
     const source = '# GET /\n+ Response 204\n';
 
     fury.parse({ source, adapterOptions: { requireBlueprintName: true } }, (err, parseResult) => {
-      expect(err).not.to.be.null;
+      expect(err).to.be.null;
       expect(parseResult.length).to.equal(1);
       expect(parseResult.errors.length).to.equal(1);
       done();
