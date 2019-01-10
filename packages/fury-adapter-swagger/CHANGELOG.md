@@ -1,5 +1,14 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixes a case where having `null` as an enum value or having
+  `x-nullable: true` on a schema with `enum` will cause an obscure error:
+
+  > Cannot read property '$ref' of null
+
 ## 0.23.0 (2018-12-21)
 
 ### Breaking
