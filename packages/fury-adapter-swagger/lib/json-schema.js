@@ -213,6 +213,10 @@ const convertSubSchema = (schema, references, swagger) => {
 /** Returns true if the given schema contains any references
  */
 const checkSchemaHasReferences = (schema) => {
+  if (!schema) {
+    return false;
+  }
+
   if (schema.$ref) {
     return true;
   }
