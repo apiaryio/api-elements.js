@@ -23,7 +23,9 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject
  */
-function parseResponseObject(namespace, element) {
+function parseResponseObject(context, element) {
+  const { namespace } = context;
+
   if (!element.key.toValue().match(/^\d\d\d$/)) {
     // FIXME Add support for status code ranges
     // https://github.com/apiaryio/fury-adapter-oas3-parser/issues/64
@@ -53,7 +55,7 @@ function parseResponseObject(namespace, element) {
 
   const parseResponse = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(namespace, parseMember),
+    parseObject(context, parseMember),
     () => {
       const response = new namespace.elements.HttpResponse();
       response.statusCode = Number(element.key.toValue());

@@ -108,15 +108,17 @@ const validateHrefVariablesInPath = R.curry((namespace, path, hrefVariables) => 
  * @param path {StringElement}
  * @param member {MemberElement} parameters member from an object element
  */
-function parseParameters(namespace, path, member) {
+function parseParameters(context, path, member) {
+  const { namespace } = context;
+
   const parseParameter = R.cond([
     [hasKey('path'), R.compose(validateHrefVariablesInPath(namespace, path), getValue)],
     [hasKey('query'), member => member],
   ]);
 
   const parseParameters = pipeParseResult(namespace,
-    parseParameterObjects(namespace, name),
-    parseObject(namespace, parseParameter));
+    parseParameterObjects(context, name),
+    parseObject(context, parseParameter));
 
   return parseParameters(member.value);
 }
@@ -155,12 +157,14 @@ function hrefFromParameters(path, parameters) {
  * @returns Resource
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#path-item-object
  */
-function parsePathItemObject(namespace, member) {
+function parsePathItemObject(context, member) {
+  const { namespace } = context;
+
   const parseMember = R.cond([
-    [hasKey('summary'), parseString(namespace, name, false)],
-    [hasKey('description'), parseCopy(namespace, name, false)],
-    [hasKey('parameters'), R.curry(parseParameters)(namespace, member.key)],
-    [isHttpMethodKey, parseOperationObject(namespace)],
+    [hasKey('summary'), parseString(context, name, false)],
+    [hasKey('description'), parseCopy(context, name, false)],
+    [hasKey('parameters'), R.curry(parseParameters)(context, member.key)],
+    [isHttpMethodKey, parseOperationObject(context)],
 
     // FIXME Parse $ref
     // FIXME Parse servers
@@ -176,7 +180,7 @@ function parsePathItemObject(namespace, member) {
 
   const parsePathItem = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(namespace, parseMember),
+    parseObject(context, parseMember),
     R.curry(validatePathForMissingHrefVariables)(namespace, member.key),
     (pathItem) => {
       const resource = new namespace.elements.Resource();

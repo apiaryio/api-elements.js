@@ -30,11 +30,13 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @see https://github.com/OAI/OpenAPI-Specification/blob/50c152549263cda0f05608d514ba78546b390d0e/versions/3.0.0.md#infoObject
  * @returns ParseResult<Category>
  */
-function parseInfo(namespace, info) {
+function parseInfo(context, info) {
+  const { namespace } = context;
+
   const parseMember = R.cond([
-    [hasKey('title'), parseString(namespace, name, true)],
-    [hasKey('version'), parseString(namespace, name, true)],
-    [hasKey('description'), parseCopy(namespace, name, false)],
+    [hasKey('title'), parseString(context, name, true)],
+    [hasKey('version'), parseString(context, name, true)],
+    [hasKey('description'), parseCopy(context, name, false)],
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
@@ -47,7 +49,7 @@ function parseInfo(namespace, info) {
   const parseInfo = pipeParseResult(namespace,
     R.unless(isObject, createError(namespace, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(namespace, parseMember),
+    parseObject(context, parseMember),
     (info) => {
       const api = new namespace.elements.Category();
       api.classes = ['api'];

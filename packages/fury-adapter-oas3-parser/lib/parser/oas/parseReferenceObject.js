@@ -24,7 +24,9 @@ const requiredKeys = ['$ref'];
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#referenceObject
  */
-function parseReferenceObject(namespace, components, componentName, element) {
+function parseReferenceObject(context, components, componentName, element) {
+  const { namespace } = context;
+
   const parseRef = (ref) => {
     if (!ref.toValue().startsWith('#/components/')) {
       return createError(namespace, "Only local references to '#/components' within the same file are supported", ref);
@@ -58,7 +60,7 @@ function parseReferenceObject(namespace, components, componentName, element) {
   };
 
   const parseMember = R.cond([
-    [hasKey('$ref'), parseString(namespace, name, true)],
+    [hasKey('$ref'), parseString(context, name, true)],
     [isExtension, createWarning(namespace, `Extensions are not permitted in '${name}'`)],
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
@@ -66,7 +68,7 @@ function parseReferenceObject(namespace, components, componentName, element) {
   const parseReference = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(namespace, parseMember),
+    parseObject(context, parseMember),
     object => object.get('$ref'),
     parseRef);
 

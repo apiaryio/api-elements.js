@@ -1,6 +1,7 @@
 const { Fury } = require('fury');
 const { expect } = require('../../chai');
 const parse = require('../../../../lib/parser/oas/parseOperationObject');
+const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
@@ -10,7 +11,7 @@ describe('Operation Object', () => {
       responses: {},
     });
 
-    const result = parse(namespace, operation);
+    const result = parse(new Context(namespace), operation);
 
     expect(result.length).to.equal(1);
     const transition = result.get(0);
@@ -25,7 +26,7 @@ describe('Operation Object', () => {
       },
     });
 
-    const result = parse(namespace, operation);
+    const result = parse(new Context(namespace), operation);
 
     expect(result.length).to.equal(1);
 
@@ -45,7 +46,7 @@ describe('Operation Object', () => {
   it('provides warning when operation is non-object', () => {
     const operation = new namespace.elements.Member('get', null);
 
-    const result = parse(namespace, operation);
+    const result = parse(new Context(namespace), operation);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Operation Object' is not an object");
@@ -58,7 +59,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'tags'");
     });
@@ -69,7 +70,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'externalDocs'");
     });
@@ -80,7 +81,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'parameters'");
     });
@@ -91,7 +92,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'requestBody'");
     });
@@ -102,7 +103,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'callbacks'");
     });
@@ -113,7 +114,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'deprecated'");
     });
@@ -124,7 +125,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'security'");
     });
@@ -135,7 +136,7 @@ describe('Operation Object', () => {
         'x-extension': '',
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result).to.not.contain.annotations;
     });
@@ -147,7 +148,7 @@ describe('Operation Object', () => {
       invalid: '',
     });
 
-    const result = parse(namespace, operation);
+    const result = parse(new Context(namespace), operation);
 
     expect(result).to.contain.warning("'Operation Object' contains invalid key 'invalid'");
   });
@@ -156,7 +157,7 @@ describe('Operation Object', () => {
     it('provides error for missing responses', () => {
       const operation = new namespace.elements.Member('get', {});
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("'Operation Object' is missing required property 'responses'");
@@ -171,7 +172,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
@@ -185,7 +186,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result.length).to.equal(1);
 
@@ -202,7 +203,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
@@ -215,7 +216,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
@@ -231,7 +232,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
@@ -245,7 +246,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(namespace, operation);
+      const result = parse(new Context(namespace), operation);
 
       expect(result.length).to.equal(1);
 

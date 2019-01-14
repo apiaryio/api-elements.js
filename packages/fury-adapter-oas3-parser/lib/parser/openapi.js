@@ -8,7 +8,9 @@ const supportedMinorVersion = 0;
 const supportedMajorVersion = 3;
 
 // Parse the OpenAPI Version member
-function parseOpenAPI(namespace, openapi) {
+function parseOpenAPI(context, openapi) {
+  const { namespace } = context;
+
   if (!isString(openapi.value)) {
     return new namespace.elements.ParseResult([createError(namespace, 'OpenAPI version is not a string', openapi.value)]);
   }

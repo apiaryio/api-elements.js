@@ -28,67 +28,70 @@ function copySourceMap(startMark, endMark, element, namespace) {
   ));
 }
 
-function yamlToObject(node, annotations, namespace) {
-  return new namespace.elements.Object(node.value.map((nodes) => {
-    const key = convert(nodes[0], annotations, namespace);
-    const value = convert(nodes[1], annotations, namespace);
-    return new namespace.elements.Member(key, value);
+function yamlToObject(node, annotations, context) {
+  return new context.namespace.elements.Object(node.value.map((nodes) => {
+    const key = convert(nodes[0], annotations, context);
+    const value = convert(nodes[1], annotations, context);
+    return new context.namespace.elements.Member(key, value);
   }));
 }
 
-function yamlToArray(node, annotations, namespace) {
-  return new namespace.elements.Array(node.value.map(nodes => convert(nodes, annotations, namespace)));
+function yamlToArray(node, annotations, context) {
+  return new context.namespace.elements.Array(node.value.map(nodes => convert(nodes, annotations, context)));
 }
 
-function convert(node, annotations, namespace) {
-  let element;
+function convert(node, annotations, context) {
+  const { namespace } = context;
 
+  let element;
   if (node.tag === 'tag:yaml.org,2002:map') {
-    element = yamlToObject(node, annotations, namespace);
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
+    element = yamlToObject(node, annotations, context);
   } else if (node.tag === 'tag:yaml.org,2002:seq') {
-    element = yamlToArray(node, annotations, namespace);
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
+    element = yamlToArray(node, annotations, context);
   } else if (node.tag === 'tag:yaml.org,2002:str') {
     element = new namespace.elements.String(node.value);
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
   } else if (node.tag === 'tag:yaml.org,2002:int' || node.tag === 'tag:yaml.org,2002:float') {
     element = new namespace.elements.Number(Number(node.value));
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
   } else if (node.tag === 'tag:yaml.org,2002:bool') {
     element = new namespace.elements.Boolean(Boolean(node.value));
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
   } else if (node.tag === 'tag:yaml.org,2002:null') {
     element = new namespace.elements.Null();
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
   } else if (node.tag === 'tag:yaml.org,2002:binary') {
     element = new namespace.elements.String(node.value);
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
-    annotations.push(createWarning(namespace, 'Interpreting YAML !!binary as string', element));
+    const warning = createWarning(namespace, 'Interpreting YAML !!binary as string', element);
+    copySourceMap(node.start_mark, node.end_mark, warning, namespace);
+    annotations.push(warning);
   } else if (node.tag === 'tag:yaml.org,2002:timestamp') {
     element = new namespace.elements.String(node.value);
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
-    annotations.push(createWarning(namespace, 'Interpreting YAML !!timestamp as string', element));
+    const warning = createWarning(namespace, 'Interpreting YAML !!timestamp as string', element);
+    copySourceMap(node.start_mark, node.end_mark, warning, namespace);
+    annotations.push(warning);
   } else if (node.tag === 'tag:yaml.org,2002:omap') {
-    element = yamlToObject(node, annotations, namespace);
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
-    annotations.push(createWarning(namespace, 'Interpreting YAML !!omap as object', element));
+    element = yamlToObject(node, annotations, context);
+    const warning = createWarning(namespace, 'Interpreting YAML !!omap as object', element);
+    copySourceMap(node.start_mark, node.end_mark, warning, namespace);
+    annotations.push(warning);
   } else if (node.tag === 'tag:yaml.org,2002:pairs') {
-    element = yamlToObject(node, annotations, namespace);
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
-    annotations.push(createWarning(namespace, 'Interpreting YAML !!pairs as object', element));
+    element = yamlToObject(node, annotations, context);
+    const warning = createWarning(namespace, 'Interpreting YAML !!pairs as object', element);
+    copySourceMap(node.start_mark, node.end_mark, warning, namespace);
+    annotations.push(warning);
   } else if (node.tag === 'tag:yaml.org,2002:set') {
-    element = yamlToArray(node, annotations, namespace);
-    copySourceMap(node.start_mark, node.end_mark, element, namespace);
-    annotations.push(createWarning(namespace, 'Interpreting YAML !!set as array', element));
+    element = yamlToArray(node, annotations, context);
+    const warning = createWarning(namespace, 'Interpreting YAML !!set as array', element);
+    copySourceMap(node.start_mark, node.end_mark, warning, namespace);
+    annotations.push(warning);
   } else {
     throw new Error('Unsupported YAML node');
   }
 
+  copySourceMap(node.start_mark, node.end_mark, element, namespace);
+
   return element;
 }
 
-function parse(source, namespace) {
+function parse(source, context) {
+  const { namespace } = context;
   const parseResult = new namespace.elements.ParseResult();
   let ast;
 
@@ -111,7 +114,7 @@ function parse(source, namespace) {
 
   const annotations = [];
 
-  const result = convert(ast, annotations, namespace);
+  const result = convert(ast, annotations, context);
 
   parseResult.push(result);
   parseResult.content = parseResult.content.concat(annotations);

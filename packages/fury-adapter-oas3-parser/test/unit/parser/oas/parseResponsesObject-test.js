@@ -1,13 +1,14 @@
 const { Fury } = require('fury');
 const { expect } = require('../../chai');
 const parse = require('../../../../lib/parser/oas/parseResponsesObject');
+const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
 describe('Responses Object', () => {
   it('provides warning when responses is non-object', () => {
     const responses = new namespace.elements.String('');
-    const result = parse(namespace, responses);
+    const result = parse(new Context(namespace), responses);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Responses Object' is not an object");
@@ -18,7 +19,7 @@ describe('Responses Object', () => {
       'x-extension': '',
     });
 
-    const result = parse(namespace, responses);
+    const result = parse(new Context(namespace), responses);
 
     expect(result).to.not.contain.annotations;
   });
@@ -28,7 +29,7 @@ describe('Responses Object', () => {
       invalid: '',
     });
 
-    const result = parse(namespace, responses);
+    const result = parse(new Context(namespace), responses);
 
     expect(result).to.contain.warning("'Responses Object' contains invalid key 'invalid'");
   });
@@ -38,7 +39,7 @@ describe('Responses Object', () => {
       invalid: '',
     });
 
-    const result = parse(namespace, responses);
+    const result = parse(new Context(namespace), responses);
 
     expect(result).to.contain.warning("'Responses Object' contains invalid key 'invalid'");
   });
@@ -48,7 +49,7 @@ describe('Responses Object', () => {
       200: {},
     });
 
-    const result = parse(namespace, responses);
+    const result = parse(new Context(namespace), responses);
     expect(result.length).to.equal(1);
 
     const array = result.get(0);
@@ -65,7 +66,7 @@ describe('Responses Object', () => {
       default: {},
     });
 
-    const result = parse(namespace, responses);
+    const result = parse(new Context(namespace), responses);
     expect(result).to.contain.warning("'Response Object' default responses unsupported");
   });
 
@@ -74,7 +75,7 @@ describe('Responses Object', () => {
       '2XX': {},
     });
 
-    const result = parse(namespace, responses);
+    const result = parse(new Context(namespace), responses);
     expect(result).to.contain.warning("'Response Object' response status code ranges are unsupported");
   });
 });

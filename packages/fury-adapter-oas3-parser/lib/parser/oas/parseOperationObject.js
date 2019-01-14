@@ -44,12 +44,14 @@ function createTransactions(namespace, member, operation) {
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject
  */
-function parseOperationObject(namespace, member) {
+function parseOperationObject(context, member) {
+  const { namespace } = context;
+
   const parseMember = R.cond([
-    [hasKey('summary'), parseString(namespace, name, false)],
-    [hasKey('description'), parseCopy(namespace, name, false)],
-    [hasKey('operationId'), parseString(namespace, name, false)],
-    [hasKey('responses'), R.compose(parseResponsesObject(namespace), getValue)],
+    [hasKey('summary'), parseString(context, name, false)],
+    [hasKey('description'), parseCopy(context, name, false)],
+    [hasKey('operationId'), parseString(context, name, false)],
+    [hasKey('responses'), R.compose(parseResponsesObject(context), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -63,7 +65,7 @@ function parseOperationObject(namespace, member) {
   const parseOperation = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(namespace, parseMember),
+    parseObject(context, parseMember),
     (operation) => {
       const transition = new namespace.elements.Transition();
       transition.title = operation.get('summary');

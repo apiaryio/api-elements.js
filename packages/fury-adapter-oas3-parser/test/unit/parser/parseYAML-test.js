@@ -1,13 +1,17 @@
 const { Fury } = require('fury');
 const { expect } = require('../chai');
 
+const Context = require('../../../lib/context');
+
 const parseYAML = require('../../../lib/parser/parseYAML');
 
 const { minim: namespace } = new Fury();
 
 describe('#parseYAML', () => {
   it('fails to parse an OAS3 document with invalid YAML', () => {
-    const parseResult = parseYAML('{}{}', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const parseResult = parseYAML('{}{}', context);
+
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult.errors.length).to.equal(1);
 
@@ -15,7 +19,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a string into a string element', () => {
-    const element = parseYAML('hello', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('hello', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(1);
@@ -31,7 +36,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an integer into a number element', () => {
-    const element = parseYAML('1', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('1', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(1);
@@ -47,7 +53,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an decimal into a number element', () => {
-    const element = parseYAML('1.5', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('1.5', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(1);
@@ -63,7 +70,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an boolean value into a boolean element', () => {
-    const element = parseYAML('yes', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('yes', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(1);
@@ -79,7 +87,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse null into a null element', () => {
-    const element = parseYAML('null', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('null', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(1);
@@ -94,7 +103,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an array into an array element', () => {
-    const element = parseYAML('["hello"]', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('["hello"]', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(1);
@@ -121,7 +131,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a dictionary into an object element', () => {
-    const element = parseYAML('key: value', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('key: value', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(1);
@@ -161,7 +172,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a binary into a string element', () => {
-    const element = parseYAML('!!binary "NDIK"', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('!!binary "NDIK"', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(2);
@@ -186,7 +198,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a timestamp into a string element', () => {
-    const element = parseYAML('1991-09-14 3:00:00.00 +2', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('1991-09-14 3:00:00.00 +2', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(2);
@@ -211,7 +224,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an omap into an object element', () => {
-    const element = parseYAML('!!omap\n  key: value', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('!!omap\n  key: value', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(2);
@@ -261,7 +275,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a pairs into an object element', () => {
-    const element = parseYAML('!!pairs\n  key: value', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('!!pairs\n  key: value', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(2);
@@ -311,7 +326,8 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a set into an array element', () => {
-    const element = parseYAML('!!set\n  - one\n  - two', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('!!set\n  - one\n  - two', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(2);
@@ -361,7 +377,8 @@ describe('#parseYAML', () => {
   });
 
   it('can accumulate annotations during YAML translation', () => {
-    const element = parseYAML('!!omap\n  key: !!binary "NDIK"', namespace);
+    const context = new Context(namespace, { generateSourceMap: true });
+    const element = parseYAML('!!omap\n  key: !!binary "NDIK"', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
     expect(element.length).to.equal(3);

@@ -19,10 +19,10 @@ const isValueBoolean = R.compose(isBoolean, getValue);
  *
  * @returns {ParseResult<MemberElement<BooleanElement>>}
  */
-const parseOptionalBoolean = (namespace, name, member) => new namespace.elements.ParseResult([
+const parseOptionalBoolean = (context, name, member) => new context.namespace.elements.ParseResult([
   R.unless(
     isValueBoolean,
-    createMemberValueNotBooleanWarning(namespace, name),
+    createMemberValueNotBooleanWarning(context.namespace, name),
     member
   ),
 ]);
@@ -34,10 +34,10 @@ const parseOptionalBoolean = (namespace, name, member) => new namespace.elements
  *
  * @returns {ParseResult<MemberElement<BooleanElement>>}
  */
-const parseRequiredBoolean = (namespace, name, member) => new namespace.elements.ParseResult([
+const parseRequiredBoolean = (context, name, member) => new context.namespace.elements.ParseResult([
   R.unless(
     isValueBoolean,
-    createMemberValueNotBooleanError(namespace, name),
+    createMemberValueNotBooleanError(context.namespace, name),
     member
   ),
 ]);
@@ -50,12 +50,12 @@ const parseRequiredBoolean = (namespace, name, member) => new namespace.elements
  * @pram member {MemberElement}
  * @returns {ParseResult<MemberElement<BooleanElement>>}
  */
-function parseBoolean(namespace, name, required, member) {
+function parseBoolean(context, name, required, member) {
   if (required) {
-    return parseRequiredBoolean(namespace, name, member);
+    return parseRequiredBoolean(context, name, member);
   }
 
-  return parseOptionalBoolean(namespace, name, member);
+  return parseOptionalBoolean(context, name, member);
 }
 
 module.exports = R.curry(parseBoolean);

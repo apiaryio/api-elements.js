@@ -25,25 +25,27 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject
  */
-function parseComponentsObject(namespace, element) {
+function parseComponentsObject(context, element) {
+  const { namespace } = context;
+
   const validateIsObject = key => R.unless(isObject,
     createWarning(namespace, `'${name}' '${key}' is not an object`));
 
   const parseSchemasObject = pipeParseResult(namespace,
     validateIsObject('schemas'),
-    parseObject(namespace, parseSchemaObject(namespace)));
+    parseObject(context, parseSchemaObject(context)));
 
   const parseParametersObjectMember = (member) => {
     // Create a Member Element with `member.key` as the key
     const Member = R.constructN(2, namespace.elements.Member)(member.key);
-    const parseResult = parseParameterObject(namespace, member.value);
+    const parseResult = parseParameterObject(context, member.value);
     // Wrap non-annotation elements in member element
     return R.map(R.unless(isAnnotation, Member), parseResult);
   };
 
   const parseParametersObject = pipeParseResult(namespace,
     validateIsObject('parameters'),
-    parseObject(namespace, parseParametersObjectMember));
+    parseObject(context, parseParametersObjectMember));
 
   const parseMember = R.cond([
     [hasKey('schemas'), R.compose(parseSchemasObject, getValue)],
@@ -59,7 +61,7 @@ function parseComponentsObject(namespace, element) {
 
   const parseComponents = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(namespace, parseMember));
+    parseObject(context, parseMember));
 
   return parseComponents(element);
 }

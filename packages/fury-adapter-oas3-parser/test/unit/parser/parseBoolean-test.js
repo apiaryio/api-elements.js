@@ -3,12 +3,15 @@ const { expect } = require('../chai');
 const parseBoolean = require('../../../lib/parser/parseBoolean');
 
 const { minim: namespace } = new Fury();
+const Context = require('../../../lib/context');
 
 describe('parseBoolean', () => {
   it('can parse a BooleanElement with `true` value', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const member = new namespace.elements.Member('required', true);
 
-    const parseResult = parseBoolean(namespace, 'Example Object', true, member);
+    const parseResult = parseBoolean(context, 'Example Object', true, member);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0).value).to.be.instanceof(namespace.elements.Boolean);
@@ -16,9 +19,11 @@ describe('parseBoolean', () => {
   });
 
   it('can parse a BooleanElement with `false` value', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const member = new namespace.elements.Member('required', false);
 
-    const parseResult = parseBoolean(namespace, 'Example Object', true, member);
+    const parseResult = parseBoolean(context, 'Example Object', true, member);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0).value).to.be.instanceof(namespace.elements.Boolean);
@@ -26,10 +31,12 @@ describe('parseBoolean', () => {
   });
 
   it('returns a warning annotation when given optional element is not a BooleanElement', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('required', value);
 
-    const parseResult = parseBoolean(namespace, 'Example Object', false, member);
+    const parseResult = parseBoolean(context, 'Example Object', false, member);
 
     expect(parseResult.length).to.equal(1);
     const warning = parseResult.warnings.get(0);
@@ -40,10 +47,12 @@ describe('parseBoolean', () => {
   });
 
   it('returns a error annotation when given required element is not a BooleanElement', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('required', value);
 
-    const parseResult = parseBoolean(namespace, 'Example Object', true, member);
+    const parseResult = parseBoolean(context, 'Example Object', true, member);
 
     expect(parseResult.length).to.equal(1);
     const error = parseResult.errors.get(0);

@@ -3,6 +3,7 @@ const { expect } = require('../chai');
 const parseObject = require('../../../lib/parser/parseObject');
 
 const { minim: namespace } = new Fury();
+const Context = require('../../../lib/context');
 
 describe('#parseObject', () => {
   const object = new namespace.elements.Object({
@@ -11,8 +12,10 @@ describe('#parseObject', () => {
   });
 
   it('can parse an object when the transform returns a member element', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const parseMember = member => member;
-    const parseResult = parseObject(namespace, parseMember, object);
+    const parseResult = parseObject(context, parseMember, object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -23,8 +26,10 @@ describe('#parseObject', () => {
   });
 
   it('can parse an object when the transform returns a value to be wrapped in a member', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const parseMember = member => member.value;
-    const parseResult = parseObject(namespace, parseMember, object);
+    const parseResult = parseObject(context, parseMember, object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -35,13 +40,15 @@ describe('#parseObject', () => {
   });
 
   it('can parse an object when the transform returns a parse result', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const object = new namespace.elements.Object({
       name: 'Doe',
       message: 'Hello',
     });
 
     const parseMember = member => new namespace.elements.ParseResult([member]);
-    const parseResult = parseObject(namespace, parseMember, object);
+    const parseResult = parseObject(context, parseMember, object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -52,8 +59,10 @@ describe('#parseObject', () => {
   });
 
   it('can parse an object when the transform returns a parse result containing a value to be wrapped in a member', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const parseMember = member => new namespace.elements.ParseResult([member.value]);
-    const parseResult = parseObject(namespace, parseMember, object);
+    const parseResult = parseObject(context, parseMember, object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -64,6 +73,8 @@ describe('#parseObject', () => {
   });
 
   it('can parse an object when the transform returns a parse result including a warning annotation', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const parseMember = (member) => {
       const warning = new namespace.elements.Annotation(
         `${member.key.toValue()} warning`,
@@ -71,7 +82,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([member, warning]);
     };
-    const parseResult = parseObject(namespace, parseMember, object);
+    const parseResult = parseObject(context, parseMember, object);
 
     expect(parseResult.length).to.equal(3);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -86,6 +97,8 @@ describe('#parseObject', () => {
   });
 
   it('discards any members when the transform returns a parse result which includes an error', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const parseMember = (member) => {
       const warning = new namespace.elements.Annotation(
         `${member.key.toValue()} error`,
@@ -93,7 +106,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([member, warning]);
     };
-    const parseResult = parseObject(namespace, parseMember, object);
+    const parseResult = parseObject(context, parseMember, object);
 
     expect(parseResult.length).to.equal(2);
     expect(parseResult.errors.get(0).toValue()).to.equal('name error');
@@ -101,6 +114,8 @@ describe('#parseObject', () => {
   });
 
   it('discards any members when the transform returns a parse result which includes a warning and no value', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const parseMember = (member) => {
       const warning = new namespace.elements.Annotation(
         `${member.key.toValue()} warning`,
@@ -108,7 +123,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([warning]);
     };
-    const parseResult = parseObject(namespace, parseMember, object);
+    const parseResult = parseObject(context, parseMember, object);
 
     expect(parseResult.length).to.equal(3);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);

@@ -33,9 +33,11 @@ const isResponseField = R.anyPass([isStatusCode, isStatusCodeRange, hasKey('defa
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responsesObject
  */
-function parseResponsesObject(namespace, element) {
+function parseResponsesObject(context, element) {
+  const { namespace } = context;
+
   const parseMember = R.cond([
-    [isResponseField, parseResponseObject(namespace)],
+    [isResponseField, parseResponseObject(context)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
@@ -46,7 +48,7 @@ function parseResponsesObject(namespace, element) {
 
   const parseResponses = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(namespace, parseMember),
+    parseObject(context, parseMember),
     object => object.content.map(getValue));
 
   return parseResponses(element);

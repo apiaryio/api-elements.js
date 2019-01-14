@@ -50,7 +50,9 @@ const parseRequiredString = (namespace, name, member) => new namespace.elements.
  * @pram member {MemberElement}
  * @returns {ParseResult<MemberElement<StringElement>>}
  */
-function parseString(namespace, name, required, member) {
+function parseString(context, name, required, member) {
+  const { namespace } = context;
+
   if (required) {
     return parseRequiredString(namespace, name, member);
   }

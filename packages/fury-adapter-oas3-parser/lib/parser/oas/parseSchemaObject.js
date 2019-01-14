@@ -14,7 +14,9 @@ const name = 'Schema Object';
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject
  */
-function parseSchemaObject(namespace, member) {
+function parseSchemaObject(context, member) {
+  const { namespace } = context;
+
   const parseSchema = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
     (object) => {

@@ -3,16 +3,19 @@ const { expect } = require('../chai');
 const parseCopy = require('../../../lib/parser/parseCopy');
 
 const { minim: namespace } = new Fury();
+const Context = require('../../../lib/context');
 
 describe('parseCopy', () => {
   it('can parse a StringElement into a Copy element', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const value = new namespace.elements.String('Hello World');
     value.attributes.set('sourceMap', new namespace.elements.Array([
       new namespace.elements.SourceMap([[0, 11]]),
     ]));
     const member = new namespace.elements.Member('message', value);
 
-    const parseResult = parseCopy(namespace, 'Example Object', true, member);
+    const parseResult = parseCopy(context, 'Example Object', true, member);
 
     expect(parseResult.length).to.equal(1);
     const copy = parseResult.get(0);
@@ -22,20 +25,24 @@ describe('parseCopy', () => {
   });
 
   it('returns a warning annotation when given optional element is not a StringElement', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('message', value);
 
-    const parseResult = parseCopy(namespace, 'Example Object', false, member);
+    const parseResult = parseCopy(context, 'Example Object', false, member);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult).to.contain.warning("'Example Object' 'message' is not a string");
   });
 
   it('returns a error annotation when given required element is not a StringElement', () => {
+    const context = new Context(namespace, { generateSourceMap: true });
+
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('message', value);
 
-    const parseResult = parseCopy(namespace, 'Example Object', true, member);
+    const parseResult = parseCopy(context, 'Example Object', true, member);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult).to.contain.error("'Example Object' 'message' is not a string");

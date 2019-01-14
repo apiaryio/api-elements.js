@@ -1,6 +1,7 @@
 const { Fury } = require('fury');
 const { expect } = require('../../chai');
 const parse = require('../../../../lib/parser/oas/parseReferenceObject');
+const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
@@ -18,7 +19,7 @@ describe('Reference Object', () => {
     const reference = new namespace.elements.Object({
       $ref: true,
     });
-    const result = parse(namespace, components, 'schemas', reference);
+    const result = parse(new Context(namespace), components, 'schemas', reference);
 
     expect(result).to.contain.error("'Reference Object' '$ref' is not a string");
   });
@@ -27,7 +28,7 @@ describe('Reference Object', () => {
     const reference = new namespace.elements.Object({
       $ref: '#/components/schemas/Node',
     });
-    const result = parse(namespace, components, 'schemas', reference);
+    const result = parse(new Context(namespace), components, 'schemas', reference);
 
     expect(result.length).to.equal(1);
     const structure = result.get(0);
@@ -39,7 +40,7 @@ describe('Reference Object', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/info/title',
       });
-      const result = parse(namespace, components, 'schemas', reference);
+      const result = parse(new Context(namespace), components, 'schemas', reference);
 
       expect(result).to.contain.error("Only local references to '#/components' within the same file are supported");
     });
@@ -48,7 +49,7 @@ describe('Reference Object', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/parameters/Node',
       });
-      const result = parse(namespace, components, 'parameters', reference);
+      const result = parse(new Context(namespace), components, 'parameters', reference);
 
       expect(result).to.contain.error("'#/components/parameters' is not defined");
     });
@@ -57,7 +58,7 @@ describe('Reference Object', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/parameters/Node',
       });
-      const result = parse(namespace, components, 'schemas', reference);
+      const result = parse(new Context(namespace), components, 'schemas', reference);
 
       expect(result).to.contain.error("Only references to 'schemas' are permitted from this location");
     });
@@ -66,7 +67,7 @@ describe('Reference Object', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/schemas/BaseNode',
       });
-      const result = parse(namespace, components, 'schemas', reference);
+      const result = parse(new Context(namespace), components, 'schemas', reference);
 
       expect(result).to.contain.error("'#/components/schemas/BaseNode' is not defined");
     });
@@ -75,7 +76,7 @@ describe('Reference Object', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/schemas/Node/inside',
       });
-      const result = parse(namespace, components, 'schemas', reference);
+      const result = parse(new Context(namespace), components, 'schemas', reference);
 
       expect(result).to.contain.error(
         "Only references to a reusable component inside '#/components/schemas' are supported"
@@ -99,7 +100,7 @@ describe('Reference Object', () => {
         invalid: {},
       });
 
-      const result = parse(namespace, components, 'schemas', reference);
+      const result = parse(new Context(namespace), components, 'schemas', reference);
 
       expect(result).to.contain.warning("'Reference Object' contains invalid key 'invalid'");
     });
@@ -110,7 +111,7 @@ describe('Reference Object', () => {
         'x-extension': {},
       });
 
-      const result = parse(namespace, components, 'schemas', reference);
+      const result = parse(new Context(namespace), components, 'schemas', reference);
 
       expect(result).to.contain.warning("Extensions are not permitted in 'Reference Object'");
     });

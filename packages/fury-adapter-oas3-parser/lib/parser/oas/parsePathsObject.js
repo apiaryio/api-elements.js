@@ -14,11 +14,13 @@ const isPathField = member => member.key.toValue().startsWith('/');
  * @returns ParseResult<Resource>
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject
  */
-function parsePaths(namespace, paths) {
+function parsePaths(context, paths) {
+  const { namespace } = context;
+
   const createParseResult = annotation => new namespace.elements.ParseResult([annotation]);
 
   const parseMember = R.cond([
-    [isPathField, parsePathItemObject(namespace)],
+    [isPathField, parsePathItemObject(context)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],

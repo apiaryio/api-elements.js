@@ -1,13 +1,14 @@
 const { Fury } = require('fury');
 const { expect } = require('../../chai');
 const parse = require('../../../../lib/parser/oas/parseResponseObject');
+const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
 describe('Response Object', () => {
   it('returns an HTTP response element', () => {
     const response = new namespace.elements.Member('200', {});
-    const result = parse(namespace, response);
+    const result = parse(new Context(namespace), response);
 
     expect(result.length).to.equal(1);
     const httpResponse = result.get(0);
@@ -17,7 +18,7 @@ describe('Response Object', () => {
   describe('status code', () => {
     it('provides a warning for default responses', () => {
       const response = new namespace.elements.Member('default', {});
-      const result = parse(namespace, response);
+      const result = parse(new Context(namespace), response);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.warning("'Response Object' default responses unsupported");
@@ -25,7 +26,7 @@ describe('Response Object', () => {
 
     it('provides a warning for range responses', () => {
       const response = new namespace.elements.Member('2XX', {});
-      const result = parse(namespace, response);
+      const result = parse(new Context(namespace), response);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.warning("'Response Object' response status code ranges are unsupported");
@@ -33,7 +34,7 @@ describe('Response Object', () => {
 
     it('exposes the status code', () => {
       const response = new namespace.elements.Member('200', {});
-      const result = parse(namespace, response);
+      const result = parse(new Context(namespace), response);
 
       expect(result.length).to.equal(1);
       const httpResponse = result.get(0);
@@ -46,7 +47,7 @@ describe('Response Object', () => {
   it('provides warning when response is non-object', () => {
     const response = new namespace.elements.Member('200', null);
 
-    const result = parse(namespace, response);
+    const result = parse(new Context(namespace), response);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Response Object' is not an object");
@@ -58,7 +59,7 @@ describe('Response Object', () => {
         description: 'Example Response',
       });
 
-      const result = parse(namespace, response);
+      const result = parse(new Context(namespace), response);
 
       expect(result).to.contain.warning("'Response Object' contains unsupported key 'description'");
     });
@@ -68,7 +69,7 @@ describe('Response Object', () => {
         description: 'Example Response',
       });
 
-      const result = parse(namespace, response);
+      const result = parse(new Context(namespace), response);
 
       expect(result).to.contain.warning("'Response Object' contains unsupported key 'description'");
     });
@@ -78,7 +79,7 @@ describe('Response Object', () => {
         'x-extension': '',
       });
 
-      const result = parse(namespace, response);
+      const result = parse(new Context(namespace), response);
 
       expect(result).to.not.contain.annotations;
     });
@@ -89,7 +90,7 @@ describe('Response Object', () => {
       invalid: '',
     });
 
-    const result = parse(namespace, response);
+    const result = parse(new Context(namespace), response);
 
     expect(result).to.contain.warning("'Response Object' contains invalid key 'invalid'");
   });

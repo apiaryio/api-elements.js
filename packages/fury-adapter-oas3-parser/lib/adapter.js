@@ -1,4 +1,5 @@
 const parser = require('./parser');
+const Context = require('./context');
 
 const name = 'oas3';
 
@@ -13,7 +14,13 @@ function detect(source) {
 }
 
 function parse(options, cb) {
-  const parseResult = parser(options.source, options.minim);
+  const ctxt = new Context(
+    options.minim,
+    {
+      generateSourceMap: options.generateSourceMap,
+    }
+  );
+  const parseResult = parser(options.source, ctxt);
   cb(null, parseResult);
 }
 

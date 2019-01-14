@@ -1,6 +1,7 @@
 const { Fury } = require('fury');
 const { expect } = require('../../chai');
 const parse = require('../../../../lib/parser/oas/parseParameterObject');
+const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
@@ -8,7 +9,7 @@ describe('Parameter Object', () => {
   it('provides warning when parameter is non-object', () => {
     const operation = new namespace.elements.String();
 
-    const result = parse(namespace, operation);
+    const result = parse(new Context(namespace), operation);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Parameter Object' is not an object");
@@ -21,7 +22,7 @@ describe('Parameter Object', () => {
         in: 'path',
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("'Parameter Object' 'name' is not a string");
@@ -33,7 +34,7 @@ describe('Parameter Object', () => {
         in: 'path',
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported");
@@ -47,7 +48,7 @@ describe('Parameter Object', () => {
         in: 1,
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("'Parameter Object' 'in' is not a string");
@@ -59,7 +60,7 @@ describe('Parameter Object', () => {
         in: 'space',
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'");
@@ -71,7 +72,7 @@ describe('Parameter Object', () => {
         in: 'header',
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("Only 'in' values of 'path' and 'query' are supported at the moment");
@@ -83,7 +84,7 @@ describe('Parameter Object', () => {
         in: 'cookie',
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("Only 'in' values of 'path' and 'query' are supported at the moment");
@@ -98,7 +99,7 @@ describe('Parameter Object', () => {
         description: 'an example parameter',
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result).to.not.contain.annotations;
       expect(result.length).to.equal(1);
@@ -115,7 +116,7 @@ describe('Parameter Object', () => {
         description: true,
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result).to.contain.warning("'Parameter Object' 'description' is not a string");
     });
@@ -129,7 +130,7 @@ describe('Parameter Object', () => {
         required: true,
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result).to.not.contain.annotations;
 
@@ -150,7 +151,7 @@ describe('Parameter Object', () => {
         required: false,
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result.warnings.length).to.be.equal(0);
 
@@ -167,7 +168,7 @@ describe('Parameter Object', () => {
         required: 1,
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result.length).to.be.equal(2); // parameter && warning
       expect(result.get(0)).to.be.instanceof(namespace.elements.Member);
@@ -185,7 +186,7 @@ describe('Parameter Object', () => {
         deprecated: true,
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'deprecated'");
     });
@@ -197,7 +198,7 @@ describe('Parameter Object', () => {
         allowEmptyValue: true,
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'allowEmptyValue'");
     });
@@ -209,7 +210,7 @@ describe('Parameter Object', () => {
         'x-extension': '',
       });
 
-      const result = parse(namespace, parameter);
+      const result = parse(new Context(namespace), parameter);
 
       expect(result).to.not.contain.annotations;
     });
@@ -222,7 +223,7 @@ describe('Parameter Object', () => {
       invalid: '',
     });
 
-    const result = parse(namespace, parameter);
+    const result = parse(new Context(namespace), parameter);
 
     expect(result).to.contain.warning("'Parameter Object' contains invalid key 'invalid'");
   });

@@ -16,9 +16,9 @@ const createCopy = R.curry((namespace, element) => {
  * @pram member {MemberElement}
  * @returns {ParseResult<MemberElement<Copy>>}
  */
-function parseCopy(namespace, name, required, member) {
-  const parseResult = parseString(namespace, name, required, member);
-  const copyValue = R.compose(createCopy(namespace), getValue);
+function parseCopy(context, name, required, member) {
+  const parseResult = parseString(context, name, required, member);
+  const copyValue = R.compose(createCopy(context.namespace), getValue);
   return R.map(R.unless(isAnnotation, copyValue), parseResult);
 }
 

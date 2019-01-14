@@ -61,7 +61,9 @@ const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
  *
  * @returns ParseResult<ObjectElement>
  */
-function parseObject(namespace, parseMember, object) {
+function parseObject(context, parseMember, object) {
+  const { namespace } = context;
+
   // Create a member from a key and value
   const createMember = R.constructN(2, namespace.elements.Member);
 

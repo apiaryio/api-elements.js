@@ -2,6 +2,7 @@ const { Fury } = require('fury');
 const { expect } = require('../chai');
 
 const parseOpenAPI = require('../../../lib/parser/openapi');
+const Context = require('../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
@@ -9,7 +10,7 @@ describe('#parseOpenAPI', () => {
   it('fails to parse an openapi version that is not a string', () => {
     const openapi = new namespace.elements.Member('openapi', 3);
 
-    const parseResult = parseOpenAPI(namespace, openapi);
+    const parseResult = parseOpenAPI(new Context(namespace), openapi);
 
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult).to.contain.error('OpenAPI version is not a string');
@@ -18,7 +19,7 @@ describe('#parseOpenAPI', () => {
   it('fails to parse non valid semantic version', () => {
     const openapi = new namespace.elements.Member('openapi', '3.0');
 
-    const parseResult = parseOpenAPI(namespace, openapi);
+    const parseResult = parseOpenAPI(new Context(namespace), openapi);
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult).to.contain.error("OpenAPI version does not contain valid semantic version string '3.0'");
   });
@@ -26,7 +27,7 @@ describe('#parseOpenAPI', () => {
   it('fails to parse unknown major version', () => {
     const openapi = new namespace.elements.Member('openapi', '4.0.0');
 
-    const parseResult = parseOpenAPI(namespace, openapi);
+    const parseResult = parseOpenAPI(new Context(namespace), openapi);
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult).to.contain.error("Unsupported OpenAPI version '4.0.0'");
   });
@@ -34,7 +35,7 @@ describe('#parseOpenAPI', () => {
   it('allows openapi 3.0.0', () => {
     const openapi = new namespace.elements.Member('openapi', '3.0.0');
 
-    const parseResult = parseOpenAPI(namespace, openapi);
+    const parseResult = parseOpenAPI(new Context(namespace), openapi);
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult).to.not.contain.annotations;
   });
@@ -42,7 +43,7 @@ describe('#parseOpenAPI', () => {
   it('allows openapi patch version 3.0.11', () => {
     const openapi = new namespace.elements.Member('openapi', '3.0.11');
 
-    const parseResult = parseOpenAPI(namespace, openapi);
+    const parseResult = parseOpenAPI(new Context(namespace), openapi);
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult).to.not.contain.annotations;
   });
@@ -50,7 +51,7 @@ describe('#parseOpenAPI', () => {
   it('warns for unsuported minor versions', () => {
     const openapi = new namespace.elements.Member('openapi', '3.1.0');
 
-    const parseResult = parseOpenAPI(namespace, openapi);
+    const parseResult = parseOpenAPI(new Context(namespace), openapi);
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult).to.contain.warning("Version '3.1.0' is not fully supported");
   });

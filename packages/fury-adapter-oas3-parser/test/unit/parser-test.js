@@ -5,11 +5,13 @@ const parse = require('../../lib/parser');
 
 const { minim: namespace } = new Fury();
 
+const Context = require('../../lib/context');
+
 describe('#parse', () => {
   it('fails to parse an OAS3 document with invalid YAML', () => {
     const source = '{}{}';
 
-    const parseResult = parse(source, namespace);
+    const parseResult = parse(source, new Context(namespace));
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult).to.contain.error("YAML Syntax: expected '<document start>', but found {");
     expect(parseResult.errors.get(0).sourceMapValue).to.deep.equal([[2, 0]]);
@@ -18,7 +20,7 @@ describe('#parse', () => {
   it('fails to parse a non-object YAML document', () => {
     const source = '[]';
 
-    const parseResult = parse(source, namespace);
+    const parseResult = parse(source, new Context(namespace));
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult.length).to.equal(1);
     expect(parseResult).to.contain.error('Source document is not an object');
@@ -28,7 +30,7 @@ describe('#parse', () => {
   it('parses a valid OAS3 document', () => {
     const source = 'openapi: "3.0.0"\ninfo: {title: My API, version: 1.0.0}\npaths: {}\n';
 
-    const parseResult = parse(source, namespace);
+    const parseResult = parse(source, new Context(namespace));
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult.length).to.equal(1);
     expect(parseResult.api.title.toValue()).to.equal('My API');

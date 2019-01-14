@@ -42,7 +42,9 @@ function nameContainsReservedCharacter(member) {
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject
  */
-function parseParameterObject(namespace, object) {
+function parseParameterObject(context, object) {
+  const { namespace } = context;
+
   const validateIn = R.unless(isValidInValue, createError(namespace,
     "'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'"));
 
@@ -52,7 +54,7 @@ function parseParameterObject(namespace, object) {
     "Only 'in' values of 'path' and 'query' are supported at the moment"));
 
   const parseIn = pipeParseResult(namespace,
-    parseString(namespace, name, true),
+    parseString(context, name, true),
     validateIn,
     ensureSupportedIn);
 
@@ -60,14 +62,14 @@ function parseParameterObject(namespace, object) {
     `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`);
   const validateName = R.when(nameContainsReservedCharacter, createUnsupportedNameError);
   const parseName = pipeParseResult(namespace,
-    parseString(namespace, name, true),
+    parseString(context, name, true),
     validateName);
 
   const parseMember = R.cond([
     [hasKey('name'), parseName],
     [hasKey('in'), parseIn],
-    [hasKey('description'), parseString(namespace, name, false)],
-    [hasKey('required'), parseBoolean(namespace, name, false)],
+    [hasKey('description'), parseString(context, name, false)],
+    [hasKey('required'), parseBoolean(context, name, false)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -81,7 +83,7 @@ function parseParameterObject(namespace, object) {
   const parseParameter = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(namespace, parseMember),
+    parseObject(context, parseMember),
     (parameter) => {
       const member = new namespace.elements.Member(parameter.get('name'));
 

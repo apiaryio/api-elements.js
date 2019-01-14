@@ -2,13 +2,14 @@ const { Fury } = require('fury');
 const { expect } = require('../../chai');
 
 const parse = require('../../../../lib/parser/oas/parsePathItemObject');
+const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
 describe('#parsePathItemObject', () => {
   it('parses a path into a resource', () => {
     const path = new namespace.elements.Member('/', {});
-    const result = parse(namespace, path);
+    const result = parse(new Context(namespace), path);
 
     expect(result.length).to.equal(1);
     expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -23,7 +24,7 @@ describe('#parsePathItemObject', () => {
         },
       },
     });
-    const result = parse(namespace, path);
+    const result = parse(new Context(namespace), path);
 
     expect(result.length).to.equal(1);
 
@@ -39,7 +40,7 @@ describe('#parsePathItemObject', () => {
 
   it('provides a warning when the path item object is non-object', () => {
     const path = new namespace.elements.Member('/', null);
-    const result = parse(namespace, path);
+    const result = parse(new Context(namespace), path);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Path Item Object' is not an object");
@@ -51,7 +52,7 @@ describe('#parsePathItemObject', () => {
         $ref: '',
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -65,7 +66,7 @@ describe('#parsePathItemObject', () => {
         servers: '',
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -79,7 +80,7 @@ describe('#parsePathItemObject', () => {
         'x-extension': '',
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -90,7 +91,7 @@ describe('#parsePathItemObject', () => {
         invalid: '',
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -106,7 +107,7 @@ describe('#parsePathItemObject', () => {
         summary: 1,
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -120,7 +121,7 @@ describe('#parsePathItemObject', () => {
         summary: 'Root',
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -134,7 +135,7 @@ describe('#parsePathItemObject', () => {
         description: 'This is a resource',
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -146,7 +147,7 @@ describe('#parsePathItemObject', () => {
         description: 1,
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -162,7 +163,7 @@ describe('#parsePathItemObject', () => {
         parameters: {},
       });
 
-      const result = parse(namespace, path);
+      const result = parse(new Context(namespace), path);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -182,7 +183,7 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(namespace, path);
+        const result = parse(new Context(namespace), path);
 
         expect(result.length).to.equal(1);
         expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -203,7 +204,7 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(namespace, path);
+        const result = parse(new Context(namespace), path);
 
         expect(result.length).to.equal(1);
         expect(result).to.contain.error("Path '/' is missing path variable 'resource'. Add '{resource}' to the path");
@@ -212,7 +213,7 @@ describe('#parsePathItemObject', () => {
       it('errors when path variable not defined in parameters', () => {
         const path = new namespace.elements.Member('/{resource}', {});
 
-        const result = parse(namespace, path);
+        const result = parse(new Context(namespace), path);
 
         expect(result.length).to.equal(1);
         expect(result).to.contain.error("Path '/{resource}' contains variable 'resource' which is not declared in the parameters section of the 'Path Item Object'");
@@ -230,7 +231,7 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(namespace, path);
+        const result = parse(new Context(namespace), path);
 
         expect(result.length).to.equal(1);
         expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -253,7 +254,7 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(namespace, path);
+        const result = parse(new Context(namespace), path);
 
         expect(result.length).to.equal(1);
         expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
@@ -272,7 +273,7 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(namespace, path);
+        const result = parse(new Context(namespace), path);
 
         expect(result.length).to.equal(1);
         expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);

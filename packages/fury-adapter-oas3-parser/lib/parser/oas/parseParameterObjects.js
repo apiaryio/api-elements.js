@@ -20,7 +20,9 @@ const isPathOrQuery = R.anyPass([hasKey('path'), hasKey('query')]);
  *   by their `in` value (`path`, `query` etc) as members. The object can
  *   be treated as a "named tuple".
  */
-function parseParameterObjects(namespace, name, array) {
+function parseParameterObjects(context, name, array) {
+  const { namespace } = context;
+
   const ParseResult = R.constructN(1, namespace.elements.ParseResult);
 
   // Convert an array of parameters into the correct types
@@ -32,10 +34,10 @@ function parseParameterObjects(namespace, name, array) {
 
   const parseParameters = pipeParseResult(namespace,
     R.unless(isArray, createWarning(namespace, `'${name}' 'parameters' is not an array`)),
-    R.compose(R.chain(parseParameterObject(namespace)), ParseResult),
+    R.compose(R.chain(parseParameterObject(context)), ParseResult),
     (...parameters) => new namespace.elements.Object([...parameters]),
     R.groupBy(parameter => parameter.in),
-    parseObject(namespace, convertParameters));
+    parseObject(context, convertParameters));
 
   return parseParameters(array);
 }

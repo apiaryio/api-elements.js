@@ -27,7 +27,9 @@ const unsupportedKeys = ['servers', 'security', 'tags', 'externalDocs'];
  */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-function parseOASObject(namespace, object) {
+function parseOASObject(context, object) {
+  const { namespace } = context;
+
   // Takes a parse result, and wraps all of the non annotations inside an array
   const asArray = (parseResult) => {
     const array = new namespace.elements.Array(R.reject(isAnnotation, parseResult));
@@ -35,10 +37,10 @@ function parseOASObject(namespace, object) {
   };
 
   const parseMember = R.cond([
-    [hasKey('openapi'), parseOpenAPI(namespace)],
-    [hasKey('info'), R.compose(parseInfoObject(namespace), getValue)],
-    [hasKey('paths'), R.compose(asArray, parsePathsObject(namespace), getValue)],
-    [hasKey('components'), R.compose(parseComponentsObject(namespace), getValue)],
+    [hasKey('openapi'), parseOpenAPI(context)],
+    [hasKey('info'), R.compose(parseInfoObject(context), getValue)],
+    [hasKey('paths'), R.compose(asArray, parsePathsObject(context), getValue)],
+    [hasKey('components'), R.compose(parseComponentsObject(context), getValue)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
@@ -51,7 +53,7 @@ function parseOASObject(namespace, object) {
 
   const parseOASObject = pipeParseResult(namespace,
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(namespace, parseMember),
+    parseObject(context, parseMember),
     (object) => {
       const api = object.get('info');
 
