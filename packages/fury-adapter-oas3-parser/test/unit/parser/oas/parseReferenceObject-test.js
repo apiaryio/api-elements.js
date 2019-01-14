@@ -44,7 +44,7 @@ describe('Reference Object', () => {
       expect(result).to.contain.error("Only local references to '#/components' within the same file are supported");
     });
 
-    it('errors when parsing reference to a non-existant component', () => {
+    it('errors when parsing reference to a nonexistent component', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/parameters/Node',
       });
@@ -80,6 +80,15 @@ describe('Reference Object', () => {
       expect(result).to.contain.error(
         "Only references to a reusable component inside '#/components/schemas' are supported"
       );
+    });
+
+    it('errors when parsing reference to nonexistent components', () => {
+      const reference = new namespace.elements.Object({
+        $ref: '#/components/schemas/Node',
+      });
+      const result = parse(namespace, undefined, 'schemas', reference);
+
+      expect(result).to.contain.error("'#/components' is not defined");
     });
   });
 

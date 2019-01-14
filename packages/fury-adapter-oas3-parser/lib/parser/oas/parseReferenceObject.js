@@ -40,6 +40,10 @@ function parseReferenceObject(namespace, components, componentName, element) {
         `Only references to a reusable component inside '#/components/${componentName}' are supported`, ref);
     }
 
+    if (!components) {
+      return createError(namespace, "'#/components' is not defined", ref);
+    }
+
     const component = components.get(referenceParts[2]);
     if (!component) {
       return createError(namespace, `'#/components/${componentName}' is not defined`, ref);
