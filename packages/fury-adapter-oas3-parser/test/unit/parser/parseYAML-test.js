@@ -8,8 +8,12 @@ const parseYAML = require('../../../lib/parser/parseYAML');
 const { minim: namespace } = new Fury();
 
 describe('#parseYAML', () => {
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace, { generateSourceMap: true });
+  });
+
   it('fails to parse an OAS3 document with invalid YAML', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const parseResult = parseYAML('{}{}', context);
 
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
@@ -19,7 +23,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a string into a string element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('hello', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -36,7 +39,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an integer into a number element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('1', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -53,7 +55,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an decimal into a number element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('1.5', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -70,7 +71,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an boolean value into a boolean element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('yes', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -87,7 +87,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse null into a null element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('null', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -103,7 +102,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an array into an array element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('["hello"]', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -131,7 +129,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a dictionary into an object element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('key: value', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -172,7 +169,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a binary into a string element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('!!binary "NDIK"', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -198,7 +194,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a timestamp into a string element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('1991-09-14 3:00:00.00 +2', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -224,7 +219,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse an omap into an object element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('!!omap\n  key: value', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -275,7 +269,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a pairs into an object element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('!!pairs\n  key: value', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -326,7 +319,6 @@ describe('#parseYAML', () => {
   });
 
   it('can parse a set into an array element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('!!set\n  - one\n  - two', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -377,7 +369,6 @@ describe('#parseYAML', () => {
   });
 
   it('can accumulate annotations during YAML translation', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const element = parseYAML('!!omap\n  key: !!binary "NDIK"', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);

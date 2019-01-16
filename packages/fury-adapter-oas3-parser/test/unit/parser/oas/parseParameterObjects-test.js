@@ -6,10 +6,15 @@ const Context = require('../../../../lib/context');
 const { minim: namespace } = new Fury();
 
 describe('Parameter Objects', () => {
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace);
+  });
+
   it('provides warning when parameter is non-array', () => {
     const parameters = new namespace.elements.String();
 
-    const result = parse(new Context(namespace), 'Operation Object', parameters);
+    const result = parse(context, 'Operation Object', parameters);
 
     expect(result).to.contain.warning("'Operation Object' 'parameters' is not an array");
   });
@@ -30,7 +35,7 @@ describe('Parameter Objects', () => {
       },
     ]);
 
-    const result = parse(new Context(namespace), 'Operation Object', parameters);
+    const result = parse(context, 'Operation Object', parameters);
 
     expect(result.length).to.equal(1);
     const parametersElement = result.get(0);

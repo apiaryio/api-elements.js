@@ -6,8 +6,12 @@ const { minim: namespace } = new Fury();
 const Context = require('../../../lib/context');
 
 describe('parseString', () => {
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace);
+  });
+
   it('can parse a StringElement', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const member = new namespace.elements.Member('message', 'Hello World');
 
     const parseResult = parseString(context, 'Example Object', true, member);
@@ -19,7 +23,6 @@ describe('parseString', () => {
   });
 
   it('returns a warning annotation when given optional element is not a StringElement', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('message', value);
 
@@ -29,7 +32,6 @@ describe('parseString', () => {
   });
 
   it('returns a error annotation when given required element is not a StringElement', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('message', value);
 

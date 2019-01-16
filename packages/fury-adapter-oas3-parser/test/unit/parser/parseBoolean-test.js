@@ -6,9 +6,12 @@ const { minim: namespace } = new Fury();
 const Context = require('../../../lib/context');
 
 describe('parseBoolean', () => {
-  it('can parse a BooleanElement with `true` value', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace);
+  });
 
+  it('can parse a BooleanElement with `true` value', () => {
     const member = new namespace.elements.Member('required', true);
 
     const parseResult = parseBoolean(context, 'Example Object', true, member);
@@ -19,8 +22,6 @@ describe('parseBoolean', () => {
   });
 
   it('can parse a BooleanElement with `false` value', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
-
     const member = new namespace.elements.Member('required', false);
 
     const parseResult = parseBoolean(context, 'Example Object', true, member);
@@ -31,8 +32,6 @@ describe('parseBoolean', () => {
   });
 
   it('returns a warning annotation when given optional element is not a BooleanElement', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
-
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('required', value);
 
@@ -47,8 +46,6 @@ describe('parseBoolean', () => {
   });
 
   it('returns a error annotation when given required element is not a BooleanElement', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
-
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('required', value);
 

@@ -6,10 +6,15 @@ const Context = require('../../../../lib/context');
 const { minim: namespace } = new Fury();
 
 describe('Components Object', () => {
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace);
+  });
+
   it('provides a warning when components is non-object', () => {
     const components = new namespace.elements.String();
 
-    const result = parse(new Context(namespace), components);
+    const result = parse(context, components);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Components Object' is not an object");
@@ -21,7 +26,7 @@ describe('Components Object', () => {
         schemas: '',
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' 'schemas' is not an object");
     });
@@ -35,7 +40,7 @@ describe('Components Object', () => {
         },
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
       expect(result.length).to.equal(1);
 
       const parsedComponents = result.get(0);
@@ -53,7 +58,7 @@ describe('Components Object', () => {
         parameters: '',
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
       expect(result).to.contain.warning("'Components Object' 'parameters' is not an object");
     });
 
@@ -67,7 +72,7 @@ describe('Components Object', () => {
         },
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
       expect(result.length).to.equal(1);
 
       const parsedComponents = result.get(0);
@@ -86,7 +91,7 @@ describe('Components Object', () => {
         responses: {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains unsupported key 'responses'");
     });
@@ -96,7 +101,7 @@ describe('Components Object', () => {
         examples: {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains unsupported key 'examples'");
     });
@@ -106,7 +111,7 @@ describe('Components Object', () => {
         requestBodies: {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains unsupported key 'requestBodies'");
     });
@@ -116,7 +121,7 @@ describe('Components Object', () => {
         headers: {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains unsupported key 'headers'");
     });
@@ -126,7 +131,7 @@ describe('Components Object', () => {
         securitySchemes: {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains unsupported key 'securitySchemes'");
     });
@@ -136,7 +141,7 @@ describe('Components Object', () => {
         links: {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains unsupported key 'links'");
     });
@@ -146,7 +151,7 @@ describe('Components Object', () => {
         callbacks: {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains unsupported key 'callbacks'");
     });
@@ -156,7 +161,7 @@ describe('Components Object', () => {
         'x-extension': {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.not.contain.annotations;
     });
@@ -166,7 +171,7 @@ describe('Components Object', () => {
         invalid: {},
       });
 
-      const result = parse(new Context(namespace), components);
+      const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains invalid key 'invalid'");
     });

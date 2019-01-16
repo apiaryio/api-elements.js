@@ -6,9 +6,12 @@ const { minim: namespace } = new Fury();
 const Context = require('../../../lib/context');
 
 describe('parseCopy', () => {
-  it('can parse a StringElement into a Copy element', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace);
+  });
 
+  it('can parse a StringElement into a Copy element', () => {
     const value = new namespace.elements.String('Hello World');
     value.attributes.set('sourceMap', new namespace.elements.Array([
       new namespace.elements.SourceMap([[0, 11]]),
@@ -25,8 +28,6 @@ describe('parseCopy', () => {
   });
 
   it('returns a warning annotation when given optional element is not a StringElement', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
-
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('message', value);
 
@@ -37,8 +38,6 @@ describe('parseCopy', () => {
   });
 
   it('returns a error annotation when given required element is not a StringElement', () => {
-    const context = new Context(namespace, { generateSourceMap: true });
-
     const value = new namespace.elements.Number(1);
     const member = new namespace.elements.Member('message', value);
 

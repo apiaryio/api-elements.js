@@ -7,10 +7,15 @@ const Context = require('../../../../lib/context');
 const { minim: namespace } = new Fury();
 
 describe('#parsePathsObject', () => {
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace);
+  });
+
   it('provides error when paths is non-object', () => {
     const paths = new namespace.elements.String();
 
-    const result = parse(new Context(namespace), paths);
+    const result = parse(context, paths);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.error("'Paths Object' is not an object");
@@ -18,7 +23,7 @@ describe('#parsePathsObject', () => {
 
   it('returns empty parse result when paths is empty', () => {
     const paths = new namespace.elements.Object();
-    const result = parse(new Context(namespace), paths);
+    const result = parse(context, paths);
 
     expect(result.isEmpty).to.be.true;
   });
@@ -28,7 +33,7 @@ describe('#parsePathsObject', () => {
       test: {},
     });
 
-    const result = parse(new Context(namespace), paths);
+    const result = parse(context, paths);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Paths Object' contains invalid key 'test'");
@@ -39,7 +44,7 @@ describe('#parsePathsObject', () => {
       'x-extension': {},
     });
 
-    const result = parse(new Context(namespace), paths);
+    const result = parse(context, paths);
 
     expect(result.isEmpty).to.be.true;
   });
@@ -51,7 +56,7 @@ describe('#parsePathsObject', () => {
       '/2': new namespace.elements.Object(),
     });
 
-    const result = parse(new Context(namespace), paths);
+    const result = parse(context, paths);
 
     expect(result.length).to.equal(3);
     expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);

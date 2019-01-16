@@ -6,9 +6,14 @@ const Context = require('../../../../lib/context');
 const { minim: namespace } = new Fury();
 
 describe('Schema Object', () => {
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace);
+  });
+
   it('provides a warning when schema is non-object', () => {
     const schema = new namespace.elements.Member('User', 'my schema');
-    const result = parse(new Context(namespace), schema);
+    const result = parse(context, schema);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Schema Object' is not an object");
@@ -19,7 +24,7 @@ describe('Schema Object', () => {
       const schema = new namespace.elements.Member('User', {
         type: 'object',
       });
-      const result = parse(new Context(namespace), schema);
+      const result = parse(context, schema);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
@@ -34,7 +39,7 @@ describe('Schema Object', () => {
       const schema = new namespace.elements.Member('Users', {
         type: 'array',
       });
-      const result = parse(new Context(namespace), schema);
+      const result = parse(context, schema);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
@@ -49,7 +54,7 @@ describe('Schema Object', () => {
       const schema = new namespace.elements.Member('name', {
         type: 'string',
       });
-      const result = parse(new Context(namespace), schema);
+      const result = parse(context, schema);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);

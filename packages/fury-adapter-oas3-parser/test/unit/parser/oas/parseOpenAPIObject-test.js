@@ -7,6 +7,11 @@ const Context = require('../../../../lib/context');
 const { minim: namespace } = new Fury();
 
 describe('#parseOpenAPIObject', () => {
+  let context;
+  beforeEach(() => {
+    context = new Context(namespace);
+  });
+
   it('can parse a valid document', () => {
     const object = new namespace.elements.Object({
       openapi: '3.0.0',
@@ -17,7 +22,7 @@ describe('#parseOpenAPIObject', () => {
       paths: {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
     expect(result.length).to.equal(1);
     expect(result.api.title.toValue()).to.equal('My API');
   });
@@ -34,7 +39,7 @@ describe('#parseOpenAPIObject', () => {
       },
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
     expect(result.length).to.equal(1);
     expect(result.api.title.toValue()).to.equal('My API');
     expect(result.api.length).to.equal(1);
@@ -59,7 +64,7 @@ describe('#parseOpenAPIObject', () => {
       },
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
     expect(result.length).to.equal(1);
     expect(result.api.title.toValue()).to.equal('My API');
     expect(result.api.length).to.equal(1);
@@ -80,7 +85,7 @@ describe('#parseOpenAPIObject', () => {
       paths: {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result).to.contain.error("'OpenAPI Object' is missing required property 'openapi'");
   });
@@ -91,7 +96,7 @@ describe('#parseOpenAPIObject', () => {
       paths: {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.error("'OpenAPI Object' is missing required property 'info'");
@@ -103,7 +108,7 @@ describe('#parseOpenAPIObject', () => {
       info: {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result).to.contain.error("'OpenAPI Object' is missing required property 'paths'");
   });
@@ -119,7 +124,7 @@ describe('#parseOpenAPIObject', () => {
       invalid: {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result).to.contain.warning("'OpenAPI Object' contains invalid key 'invalid'");
   });
@@ -135,7 +140,7 @@ describe('#parseOpenAPIObject', () => {
       security: {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result).to.contain.warning("'OpenAPI Object' contains unsupported key 'security'");
   });
@@ -151,7 +156,7 @@ describe('#parseOpenAPIObject', () => {
       tags: [],
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result).to.contain.warning("'OpenAPI Object' contains unsupported key 'tags'");
   });
@@ -167,7 +172,7 @@ describe('#parseOpenAPIObject', () => {
       externalDocs: {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result).to.contain.warning("'OpenAPI Object' contains unsupported key 'externalDocs'");
   });
@@ -183,7 +188,7 @@ describe('#parseOpenAPIObject', () => {
       servers: [],
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result).to.contain.warning("'OpenAPI Object' contains unsupported key 'servers'");
   });
@@ -199,7 +204,7 @@ describe('#parseOpenAPIObject', () => {
       invalid: {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result).to.contain.warning("'OpenAPI Object' contains invalid key 'invalid'");
   });
@@ -212,7 +217,7 @@ describe('#parseOpenAPIObject', () => {
       'x-extension': {},
     });
 
-    const result = parse(new Context(namespace), object);
+    const result = parse(context, object);
 
     expect(result.warnings.isEmpty).to.be.true;
   });

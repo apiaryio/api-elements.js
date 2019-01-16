@@ -14,13 +14,13 @@ function detect(source) {
 }
 
 function parse(options, cb) {
-  const ctxt = new Context(
+  const context = new Context(
     options.minim,
     {
       generateSourceMap: options.generateSourceMap,
     }
   );
-  const parseResult = parser(options.source, ctxt);
+  const parseResult = parser(options.source, context);
   cb(null, parseResult);
 }
 
