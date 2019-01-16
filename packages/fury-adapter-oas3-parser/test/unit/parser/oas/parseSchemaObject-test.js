@@ -20,6 +20,36 @@ describe('Schema Object', () => {
   });
 
   describe('#type', () => {
+    it('returns a null structure for null type', () => {
+      const schema = new namespace.elements.Member('User', {
+        type: 'null',
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const element = result.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Null);
+      expect(element.id.toValue()).to.equal('User');
+    });
+
+    it('returns a boolean structure for boolean type', () => {
+      const schema = new namespace.elements.Member('name', {
+        type: 'boolean',
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const string = result.get(0).content;
+      expect(string).to.be.instanceof(namespace.elements.Boolean);
+      expect(string.id.toValue()).to.equal('name');
+    });
+
     it('returns an object structure for object type', () => {
       const schema = new namespace.elements.Member('User', {
         type: 'object',
@@ -50,6 +80,21 @@ describe('Schema Object', () => {
       expect(array.id.toValue()).to.equal('Users');
     });
 
+    it('returns a number structure for number type', () => {
+      const schema = new namespace.elements.Member('id', {
+        type: 'number',
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const string = result.get(0).content;
+      expect(string).to.be.instanceof(namespace.elements.Number);
+      expect(string.id.toValue()).to.equal('id');
+    });
+
     it('returns a string structure for string type', () => {
       const schema = new namespace.elements.Member('name', {
         type: 'string',
@@ -63,6 +108,21 @@ describe('Schema Object', () => {
       const string = result.get(0).content;
       expect(string).to.be.instanceof(namespace.elements.String);
       expect(string.id.toValue()).to.equal('name');
+    });
+
+    it('returns a number structure for integer type', () => {
+      const schema = new namespace.elements.Member('id', {
+        type: 'integer',
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const string = result.get(0).content;
+      expect(string).to.be.instanceof(namespace.elements.Number);
+      expect(string.id.toValue()).to.equal('id');
     });
   });
 });

@@ -30,6 +30,12 @@ function parseSchemaObject(context, member) {
         element = new namespace.elements.Array();
       } else if (type === 'string') {
         element = new namespace.elements.String();
+      } else if (type === 'number' || type === 'integer') {
+        element = new namespace.elements.Number();
+      } else if (type === 'boolean') {
+        element = new namespace.elements.Boolean();
+      } else if (type === 'null') {
+        element = new namespace.elements.Null();
       } else {
         // FIXME: Unsupported type handling
         // Assuming unknown or missing type is object
