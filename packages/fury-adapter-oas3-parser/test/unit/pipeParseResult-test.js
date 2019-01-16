@@ -1,6 +1,6 @@
 const R = require('ramda');
-const { expect } = require('chai');
 const { Fury } = require('fury');
+const { expect } = require('./chai');
 const { createError, createWarning } = require('../../lib/elements');
 const pipeParseResult = require('../../lib/pipeParseResult');
 

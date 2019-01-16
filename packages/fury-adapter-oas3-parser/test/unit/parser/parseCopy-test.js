@@ -1,5 +1,5 @@
-const { expect } = require('chai');
 const { Fury } = require('fury');
+const { expect } = require('../chai');
 const parseCopy = require('../../../lib/parser/parseCopy');
 
 const { minim: namespace } = new Fury();
