@@ -15,6 +15,7 @@
     "test:integration:fix": "env GENERATE=1 mocha test/integration"
   },
   "dependencies": {
+    "media-typer": "1.0.1",
     "ramda": "0.26.1",
     "yaml-js": "0.2.3"
   },

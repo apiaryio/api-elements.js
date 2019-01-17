@@ -129,6 +129,6 @@ HTTP Status Code ranges are not currently supported.
 | Field Name | Support |
 |:--|:--|
 | schema | ✕ |
-| example | ✕ |
+| example | ✓ |
 | examples | ✕ |
 | encoding | ✕ |
