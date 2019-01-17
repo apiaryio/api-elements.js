@@ -18,7 +18,7 @@ Key:
 | openapi | ✓ |
 | info | [~](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/30) |
 | servers | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/24) |
-| paths | ~ |
+| paths | [~](#paths-object) |
 | components | ~ |
 | security | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/25) |
 | tags | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/26) |
@@ -37,11 +37,14 @@ Key:
 
 ## Paths Object
 
+| Field Name | Support |
+|:--|:--|
+| /{path} | [~](#path-item-object) |
+
 ## Path Item Object
 
 | Field Name | Support |
 |:--|:--|
-| $ref | ✕ |
 | summary | ✓ |
 | description | ✓ |
 | get | [~](#operation-object) |
@@ -53,7 +56,7 @@ Key:
 | patch | [~](#operation-object) |
 | trace | [~](#operation-object) |
 | servers | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/24) |
-| parameters | [~](#parameter-location) |
+| parameters | [~](#parameter-object) |
 
 ## Operation Object
 
@@ -66,7 +69,7 @@ Key:
 | operationId | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/34) <kbd>easy first issue</kbd> |
 | parameters | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/33) |
 | requestBody | ✕ |
-| responses | ✕ |
+| responses | [~](#responses-object) |
 | callbacks | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/36) |
 | deprecated | ✕ |
 | security | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/25) |
@@ -77,9 +80,9 @@ Key:
 | Field Name | Support |
 |:--|:--|
 | name | ✓ |
-| in | ~ |
+| in | [~](#parameter-location) |
 | description | ✓ |
-| required | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/48) <kbd>easy first issue</kbd> |
+| required | ✓ |
 | deprecated | ✕ |
 | allowEmptyValue | ✕ |
 
@@ -102,3 +105,30 @@ Key:
 | query | ✓ |
 | header | ✕ |
 | cookie | ✕ |
+
+## Responses Object
+
+| Field Name | Support |
+|:--|:--|
+| default | ✕ |
+| HTTP Status Code | [~](#response-object) |
+
+HTTP Status Code ranges are not currently supported.
+
+## Response Object
+
+| Field Name | Support |
+|:--|:--|
+| description | ✕ |
+| headers | ✕ |
+| content | [~](#media-type-object) |
+| links | ✕ |
+
+## Media Type Object
+
+| Field Name | Support |
+|:--|:--|
+| schema | ✕ |
+| example | ✕ |
+| examples | ✕ |
+| encoding | ✕ |
