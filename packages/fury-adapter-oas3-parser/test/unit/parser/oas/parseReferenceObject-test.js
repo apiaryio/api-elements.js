@@ -95,7 +95,7 @@ describe('Reference Object', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/schemas/Node',
       });
-      const result = parse(namespace, undefined, 'schemas', reference);
+      const result = parse(context, undefined, 'schemas', reference);
 
       expect(result).to.contain.error("'#/components' is not defined");
     });
