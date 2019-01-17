@@ -20,6 +20,26 @@ describe('Schema Object', () => {
   });
 
   describe('#type', () => {
+    it('warns when type is not a string', () => {
+      const schema = new namespace.elements.Member('User', {
+        type: ['null'],
+      });
+      const result = parse(context, schema);
+
+      expect(result).to.contain.warning("'Schema Object' 'type' is not a string");
+    });
+
+    it('warns when type is not a valid type', () => {
+      const schema = new namespace.elements.Member('User', {
+        type: 'invalid',
+      });
+      const result = parse(context, schema);
+
+      expect(result).to.contain.warning(
+        "'Schema Object' 'type' must be either null, boolean, object, array, number, string, integer"
+      );
+    });
+
     it('returns a null structure for null type', () => {
       const schema = new namespace.elements.Member('User', {
         type: 'null',
