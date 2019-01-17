@@ -12,12 +12,12 @@ of support for each feature.
 Install Fury and the Open API 3 Adapter including minim.
 
 ```shell
-$ npm install @apiaryio/fury-adapter-parser-oas3
+$ npm install fury-adapter-parser-oas3
 ```
 
 ```js
 const { Fury } = require('fury');
-const openapi3Adapter = require('@apiaryio/fury-adapter-oas3-parser');
+const openapi3Adapter = require('fury-adapter-oas3-parser');
 
 // Add the OpenAPI 3 Adapter to Fury
 fury.use(openapi3Adapter);
