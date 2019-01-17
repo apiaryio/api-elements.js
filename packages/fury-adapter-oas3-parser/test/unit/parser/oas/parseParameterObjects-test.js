@@ -52,4 +52,30 @@ describe('Parameter Objects', () => {
     expect(queryParameters.length).to.equal(1);
     expect(queryParameters.content[0].key.toValue()).to.equal('tags');
   });
+
+  it('can parse reference parameters', () => {
+    const parameters = new namespace.elements.Array([
+      {
+        $ref: '#/components/parameters/tags',
+      },
+    ]);
+
+    const tags = new namespace.elements.Member('tags');
+    tags.in = 'query';
+
+    context.state.components = new namespace.elements.Object({
+      parameters: { tags },
+    });
+
+    const result = parse(context, 'Operation Object', parameters);
+
+    expect(result.length).to.equal(1);
+    const parametersElement = result.get(0);
+    expect(parametersElement).to.be.instanceof(namespace.elements.Object);
+
+    const queryParameters = parametersElement.get('query');
+    expect(queryParameters).to.be.instanceof(namespace.elements.HrefVariables);
+    expect(queryParameters.length).to.equal(1);
+    expect(queryParameters.content[0].key.toValue()).to.equal('tags');
+  });
 });
