@@ -333,8 +333,8 @@
                       "element": "httpResponse",
                       "attributes": {
                         "statusCode": {
-                          "element": "number",
-                          "content": 200
+                          "element": "string",
+                          "content": "200"
                         }
                       }
                     }
@@ -506,8 +506,8 @@
                       "element": "httpResponse",
                       "attributes": {
                         "statusCode": {
-                          "element": "number",
-                          "content": 201
+                          "element": "string",
+                          "content": "201"
                         }
                       }
                     }
@@ -856,8 +856,8 @@
                       "element": "httpResponse",
                       "attributes": {
                         "statusCode": {
-                          "element": "number",
-                          "content": 200
+                          "element": "string",
+                          "content": "200"
                         }
                       }
                     }

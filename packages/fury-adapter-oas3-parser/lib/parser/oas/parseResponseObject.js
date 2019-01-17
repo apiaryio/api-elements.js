@@ -58,7 +58,7 @@ function parseResponseObject(context, element) {
     parseObject(context, parseMember),
     () => {
       const response = new namespace.elements.HttpResponse();
-      response.statusCode = Number(element.key.toValue());
+      response.statusCode = element.key.toValue();
       return response;
     });
 

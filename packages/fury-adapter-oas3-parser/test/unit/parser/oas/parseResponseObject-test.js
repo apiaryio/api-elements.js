@@ -45,7 +45,7 @@ describe('Response Object', () => {
       const httpResponse = result.get(0);
       expect(httpResponse).to.be.instanceof(namespace.elements.HttpResponse);
 
-      expect(httpResponse.statusCode.toValue()).to.equal(200);
+      expect(httpResponse.statusCode.toValue()).to.equal('200');
     });
   });
 

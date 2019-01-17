@@ -63,7 +63,7 @@ describe('Responses Object', () => {
 
     const response = array.get(0);
     expect(response).to.be.instanceof(namespace.elements.HttpResponse);
-    expect(response.statusCode.toValue()).to.equal(200);
+    expect(response.statusCode.toValue()).to.equal('200');
   });
 
   it('parses default response as warning', () => {
