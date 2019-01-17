@@ -1,0 +1,44 @@
+version: 2
+
+aliases:
+  - &install
+    run: sudo npm install -g yarn && yarn install --frozen-lockfile --ignore-optional
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10
+  steps:
+    - checkout
+    - <<: *install
+    - run: npm test
+
+jobs:
+  test-node6:
+    docker:
+      - image: circleci/node:6
+    <<: *defaults
+
+  test-node8:
+    docker:
+      - image: circleci/node:8
+    <<: *defaults
+
+  test-node10:
+    <<: *defaults
+
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *install
+      - run: npm run lint
+
+workflows:
+  version: 2
+  test-publish:
+    jobs:
+      - test-node6
+      - test-node8
+      - test-node10
+      - lint
