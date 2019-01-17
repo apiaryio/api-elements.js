@@ -7,6 +7,7 @@ const { minim: namespace } = new Fury();
 
 describe('Media Type Object', () => {
   let context;
+  const messageBodyClass = namespace.elements.HttpResponse;
 
   beforeEach(() => {
     context = new Context(namespace);
@@ -15,48 +16,58 @@ describe('Media Type Object', () => {
   it('provides warning when media type is non-object', () => {
     const mediaType = new namespace.elements.Member('application/json', null);
 
-    const result = parse(context, mediaType);
+    const result = parse(context, messageBodyClass, mediaType);
 
     expect(result).to.contain.warning("'Media Type Object' is not an object");
+  });
+
+  it('returns a HTTP message body', () => {
+    const mediaType = new namespace.elements.Member('application/json', {});
+
+    const result = parse(context, messageBodyClass, mediaType);
+
+    const message = result.get(0);
+    expect(message).to.be.instanceof(messageBodyClass);
+    expect(message.contentType.toValue()).to.equal('application/json');
   });
 
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported schema key', () => {
       const mediaType = new namespace.elements.Member('application/json', {
-        schema: {}
+        schema: {},
       });
 
-      const result = parse(context, mediaType);
+      const result = parse(context, messageBodyClass, mediaType);
 
       expect(result).to.contain.warning("'Media Type Object' contains unsupported key 'schema'");
     });
 
     it('provides warning for unsupported example key', () => {
       const mediaType = new namespace.elements.Member('application/json', {
-        example: {}
+        example: {},
       });
 
-      const result = parse(context, mediaType);
+      const result = parse(context, messageBodyClass, mediaType);
 
       expect(result).to.contain.warning("'Media Type Object' contains unsupported key 'example'");
     });
 
     it('provides warning for unsupported examples key', () => {
       const mediaType = new namespace.elements.Member('application/json', {
-        examples: {}
+        examples: {},
       });
 
-      const result = parse(context, mediaType);
+      const result = parse(context, messageBodyClass, mediaType);
 
       expect(result).to.contain.warning("'Media Type Object' contains unsupported key 'examples'");
     });
 
     it('provides warning for unsupported encoding key', () => {
       const mediaType = new namespace.elements.Member('application/json', {
-        encoding: {}
+        encoding: {},
       });
 
-      const result = parse(context, mediaType);
+      const result = parse(context, messageBodyClass, mediaType);
 
       expect(result).to.contain.warning("'Media Type Object' contains unsupported key 'encoding'");
     });

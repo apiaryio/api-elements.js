@@ -18,12 +18,13 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * Parse Media Type Object
  *
  * @param context {Context}
+ * @param MessageBodyClass {Class}
  * @param element {Element}
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/50c152549263cda0f05608d514ba78546b390d0e/versions/3.0.0.md#media-type-object
  */
-function parseMediaTypeObject(context, element) {
+function parseMediaTypeObject(context, MessageBodyClass, element) {
   const { namespace } = context;
 
   const parseMember = R.cond([
@@ -38,10 +39,18 @@ function parseMediaTypeObject(context, element) {
 
   const parseMediaType = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(context, parseMember));
+    parseObject(context, parseMember),
+    () => {
+      const message = new MessageBodyClass();
+
+      message.headers = new namespace.elements.HttpHeaders([
+        new namespace.elements.Member('Content-Type', element.key.toValue()),
+      ]);
+
+      return message;
+    });
 
   return parseMediaType(element.value);
 }
 
 module.exports = R.curry(parseMediaTypeObject);
-
