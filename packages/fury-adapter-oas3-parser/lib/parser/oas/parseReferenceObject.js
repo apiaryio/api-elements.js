@@ -17,15 +17,15 @@ const requiredKeys = ['$ref'];
  * Parse Reference Object
  *
  * @param namespace {Namespace}
- * @param components {ObjectElement}
  * @param componentName {string}
  * @param element {Element}
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#referenceObject
  */
-function parseReferenceObject(context, components, componentName, element) {
+function parseReferenceObject(context, componentName, element) {
   const { namespace } = context;
+  const { components } = context.state;
 
   const parseRef = (ref) => {
     if (!ref.toValue().startsWith('#/components/')) {
