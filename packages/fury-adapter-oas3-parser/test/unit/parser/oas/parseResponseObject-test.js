@@ -99,4 +99,37 @@ describe('Response Object', () => {
 
     expect(result).to.contain.warning("'Response Object' contains invalid key 'invalid'");
   });
+
+  describe('#content', () => {
+    it('warns when content is not an object', () => {
+      const response = new namespace.elements.Member('200', {
+        content: '',
+      });
+
+      const result = parse(context, response);
+
+      expect(result).to.contain.warning("'Response Object' 'content' is not an object");
+    });
+
+    it('returns a HTTP response elements matching the media types', () => {
+      const response = new namespace.elements.Member('200', {
+        content: {
+          'application/json': {},
+          'application/hal+json': {},
+        },
+      });
+
+      const result = parse(context, response);
+
+      expect(result.length).to.equal(2);
+
+      const jsonResponse = result.get(0);
+      expect(jsonResponse).to.be.instanceof(namespace.elements.HttpResponse);
+      expect(jsonResponse.contentType.toValue()).to.equal('application/json');
+
+      const halResponse = result.get(1);
+      expect(halResponse).to.be.instanceof(namespace.elements.HttpResponse);
+      expect(halResponse.contentType.toValue()).to.equal('application/hal+json');
+    });
+  });
 });

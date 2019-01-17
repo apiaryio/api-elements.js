@@ -1,16 +1,19 @@
 const R = require('ramda');
 const pipeParseResult = require('../../pipeParseResult');
-const { isObject, isExtension, hasKey } = require('../../predicates');
+const {
+  isObject, isExtension, hasKey, getValue,
+} = require('../../predicates');
 const {
   createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
 } = require('../annotations');
 const parseObject = require('../parseObject');
+const parseMediaTypeObject = require('./parseMediaTypeObject');
 
 const name = 'Response Object';
 const unsupportedKeys = [
-  'description', 'headers', 'content', 'links',
+  'description', 'headers', 'links',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -43,7 +46,19 @@ function parseResponseObject(context, element) {
     ]);
   }
 
+  const validateIsObject = key => R.unless(isObject,
+    createWarning(namespace, `'${name}' '${key}' is not an object`));
+
+  const parseContent = pipeParseResult(namespace,
+    validateIsObject('content'),
+    parseObject(context, parseMediaTypeObject(context, namespace.elements.HttpResponse)),
+    mediaTypes => new namespace.elements.ParseResult([
+      mediaTypes.content.map(getValue),
+    ]));
+
   const parseMember = R.cond([
+    [hasKey('content'), R.compose(parseContent, getValue)],
+
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
@@ -56,7 +71,19 @@ function parseResponseObject(context, element) {
   const parseResponse = pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
     parseObject(context, parseMember),
-    () => {
+    (responseObject) => {
+      const responses = responseObject.get('content');
+
+      if (responses) {
+        // If we have responses from the media type parsing, return those
+        // after attaching Response Object information
+        return new namespace.elements.ParseResult(responses.map((response) => {
+          response.statusCode = element.key.toValue();
+          return response;
+        }));
+      }
+
+      // No media types defined in content, return empty response
       const response = new namespace.elements.HttpResponse();
       response.statusCode = element.key.toValue();
       return response;

@@ -332,6 +332,24 @@
                     {
                       "element": "httpResponse",
                       "attributes": {
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        },
                         "statusCode": {
                           "element": "string",
                           "content": "200"
@@ -855,6 +873,24 @@
                     {
                       "element": "httpResponse",
                       "attributes": {
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        },
                         "statusCode": {
                           "element": "string",
                           "content": "200"
@@ -1444,28 +1480,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 32
+                          "content": 34
                         },
                         "column": {
                           "element": "number",
-                          "content": 11
+                          "content": 15
                         }
                       },
-                      "content": 715
+                      "content": 772
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 32
+                          "content": 34
                         },
                         "column": {
                           "element": "number",
-                          "content": 18
+                          "content": 21
                         }
                       },
-                      "content": 7
+                      "content": 6
                     }
                   ]
                 }
@@ -1474,7 +1510,7 @@
           ]
         }
       },
-      "content": "'Response Object' contains unsupported key 'content'"
+      "content": "'Media Type Object' contains unsupported key 'schema'"
     },
     {
       "element": "annotation",
@@ -1836,28 +1872,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 72
+                          "content": 74
                         },
                         "column": {
                           "element": "number",
-                          "content": 11
+                          "content": 15
                         }
                       },
-                      "content": 1743
+                      "content": 1796
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 72
+                          "content": 74
                         },
                         "column": {
                           "element": "number",
-                          "content": 18
+                          "content": 21
                         }
                       },
-                      "content": 7
+                      "content": 6
                     }
                   ]
                 }
@@ -1866,7 +1902,7 @@
           ]
         }
       },
-      "content": "'Response Object' contains unsupported key 'content'"
+      "content": "'Media Type Object' contains unsupported key 'schema'"
     },
     {
       "element": "annotation",
