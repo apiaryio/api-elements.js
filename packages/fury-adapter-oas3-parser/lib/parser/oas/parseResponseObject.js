@@ -11,9 +11,11 @@ const {
 const parseObject = require('../parseObject');
 const parseMediaTypeObject = require('./parseMediaTypeObject');
 
+const parseCopy = require('../parseCopy');
+
 const name = 'Response Object';
 const unsupportedKeys = [
-  'description', 'headers', 'links',
+  'headers', 'links',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -58,6 +60,7 @@ function parseResponseObject(context, element) {
 
   const parseMember = R.cond([
     [hasKey('content'), R.compose(parseContent, getValue)],
+    [hasKey('description'), parseCopy(context, name, false)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -71,21 +74,21 @@ function parseResponseObject(context, element) {
   const parseResponse = pipeParseResult(namespace,
     parseObject(context, name, parseMember),
     (responseObject) => {
-      const responses = responseObject.get('content');
+      // Try to fecth responses from the media type parsing
+      // if not, create empty HttpResponse
+      const responses = R.or(responseObject.get('content'), [new namespace.elements.HttpResponse()]);
 
-      if (responses) {
-        // If we have responses from the media type parsing, return those
-        // after attaching Response Object information
-        return new namespace.elements.ParseResult(responses.map((response) => {
-          response.statusCode = element.key.toValue();
-          return response;
-        }));
-      }
+      const description = responseObject.get('description');
 
-      // No media types defined in content, return empty response
-      const response = new namespace.elements.HttpResponse();
-      response.statusCode = element.key.toValue();
-      return response;
+      return new namespace.elements.ParseResult(responses.map((response) => {
+        response.statusCode = element.key.toValue();
+
+        if (description) {
+          response.push(description);
+        }
+
+        return response;
+      }));
     });
 
   return parseResponse(element.value);

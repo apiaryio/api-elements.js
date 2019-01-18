@@ -549,6 +549,55 @@
                           "content": {
                             "element": "array"
                           }
+                        },
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 14
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 24
+                                            }
+                                          },
+                                          "content": 296
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 14
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 45
+                                            }
+                                          },
+                                          "content": 21
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "A paged array of pets"
                         }
                       ]
                     }
@@ -559,66 +608,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 14
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 283
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 14
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 22
-                        }
-                      },
-                      "content": 11
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Response Object' contains unsupported key 'description'"
     }
   ]
 }
