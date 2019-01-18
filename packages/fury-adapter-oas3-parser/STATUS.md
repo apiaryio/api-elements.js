@@ -16,13 +16,13 @@ Key:
 | Field Name | Support |
 |:--|:--|
 | openapi | ✓ |
-| info | [~](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/30) |
-| servers | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/24) |
+| info | [~](#info-object) |
+| servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
 | paths | [~](#paths-object) |
 | components | ~ |
-| security | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/25) |
-| tags | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/26) |
-| externalDocs | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/27) |
+| security | [✕](https://github.com/apiaryio/api-elements.js/issues/77) |
+| tags | [✕](https://github.com/apiaryio/api-elements.js/issues/75) |
+| externalDocs | [✕](https://github.com/apiaryio/api-elements.js/issues/82) |
 
 ## Info Object
 
@@ -30,9 +30,9 @@ Key:
 |:--|:--|
 | title | ✓ |
 | description | ✓ |
-| termsOfService | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/29) |
-| contact | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/30) |
-| license | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/31) |
+| termsOfService | [✕](https://github.com/apiaryio/api-elements.js/issues/78) |
+| contact | [✕](https://github.com/apiaryio/api-elements.js/issues/79) |
+| license | [✕](https://github.com/apiaryio/api-elements.js/issues/80) |
 | version | ✓ |
 
 ## Paths Object
@@ -55,25 +55,25 @@ Key:
 | head | [~](#operation-object) |
 | patch | [~](#operation-object) |
 | trace | [~](#operation-object) |
-| servers | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/24) |
+| servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
 | parameters | [~](#parameter-object) |
 
 ## Operation Object
 
 | Field Name | Support |
 |:--|:--|
-| tags | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/26) |
+| tags | [✕](https://github.com/apiaryio/api-elements.js/issues/75) |
 | summary | ✓ |
 | description | ✓ |
-| externalDocs | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/28) |
-| operationId | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/34) <kbd>easy first issue</kbd> |
-| parameters | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/33) |
+| externalDocs | [✕](https://github.com/apiaryio/api-elements.js/issues/83) |
+| operationId | ✓ |
+| parameters | [✕](https://github.com/apiaryio/api-elements.js/issues/65) |
 | requestBody | ✕ |
 | responses | [~](#responses-object) |
-| callbacks | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/36) |
+| callbacks | [✕](https://github.com/apiaryio/api-elements.js/issues/74) |
 | deprecated | ✕ |
-| security | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/25) |
-| servers | [✕](https://github.com/apiaryio/fury-adapter-oas3-parser/issues/24) |
+| security | [✕](https://github.com/apiaryio/api-elements.js/issues/77) |
+| servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
 
 ## Parameter Object
 
