@@ -5,7 +5,7 @@
   "main": "./lib/adapter.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/apiaryio/fury-adapter-oas3-parser.git"
+    "url": "https://github.com/apiaryio/api-elements.js.git"
   },
   "scripts": {
     "lint": "eslint .",
