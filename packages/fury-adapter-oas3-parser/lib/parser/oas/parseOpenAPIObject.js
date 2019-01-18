@@ -64,7 +64,7 @@ function parseOASObject(context, object) {
 
   const parseOASObject = pipeParseResult(namespace,
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     (object) => {
       const api = object.get('info');
 

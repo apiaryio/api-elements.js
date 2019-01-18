@@ -41,7 +41,7 @@ function parseComponentsObject(context, element) {
 
   const parseSchemasObject = pipeParseResult(namespace,
     validateIsObject('schemas'),
-    parseObject(context, parseSchemaMember));
+    parseObject(context, name, parseSchemaMember));
 
   const parseParametersObjectMember = (member) => {
     // Create a Member Element with `member.key` as the key
@@ -53,7 +53,7 @@ function parseComponentsObject(context, element) {
 
   const parseParametersObject = pipeParseResult(namespace,
     validateIsObject('parameters'),
-    parseObject(context, parseParametersObjectMember));
+    parseObject(context, name, parseParametersObjectMember));
 
   const parseMember = R.cond([
     [hasKey('schemas'), R.compose(parseSchemasObject, getValue)],
@@ -67,11 +67,7 @@ function parseComponentsObject(context, element) {
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const parseComponents = pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(context, parseMember));
-
-  return parseComponents(element);
+  return parseObject(context, name, parseMember, element);
 }
 
 

@@ -1,10 +1,7 @@
 const R = require('ramda');
 const pipeParseResult = require('../../pipeParseResult');
+const { isExtension, hasKey } = require('../../predicates');
 const {
-  isObject, isExtension, hasKey,
-} = require('../../predicates');
-const {
-  createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
 } = require('../annotations');
@@ -39,8 +36,7 @@ function parseRequestBodyObject(context, element) {
   ]);
 
   const parseRequestBodyObject = pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     () => new namespace.elements.HttpRequest());
 
   return parseRequestBodyObject(element);

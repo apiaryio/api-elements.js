@@ -51,7 +51,7 @@ function parseResponseObject(context, element) {
 
   const parseContent = pipeParseResult(namespace,
     validateIsObject('content'),
-    parseObject(context, parseMediaTypeObject(context, namespace.elements.HttpResponse)),
+    parseObject(context, name, parseMediaTypeObject(context, namespace.elements.HttpResponse)),
     mediaTypes => new namespace.elements.ParseResult([
       mediaTypes.content.map(getValue),
     ]));
@@ -69,8 +69,7 @@ function parseResponseObject(context, element) {
   ]);
 
   const parseResponse = pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     (responseObject) => {
       const responses = responseObject.get('content');
 

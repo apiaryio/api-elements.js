@@ -1,5 +1,5 @@
 const R = require('ramda');
-const { isMember } = require('../predicates');
+const { isMember, isObject } = require('../predicates');
 
 function createAnnotation(annotationClass, namespace, message, element) {
   const annotation = new namespace.elements.Annotation(message);
@@ -38,6 +38,10 @@ function createMemberValueNotBooleanError(namespace, path, member) {
 }
 
 function validateObjectContainsRequiredKeys(namespace, path, requiredKeys, object) {
+  if (!isObject(object)) {
+    return new namespace.elements.ParseResult([object]);
+  }
+
   // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
   const hasMember = (key) => {
     const findKey = R.allPass([isMember, member => member.key.toValue() === key]);

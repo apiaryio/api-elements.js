@@ -5,7 +5,7 @@ const {
   createInvalidMemberWarning,
   validateObjectContainsRequiredKeys,
 } = require('../annotations');
-const { isObject, isExtension, hasKey } = require('../../predicates');
+const { isExtension, hasKey } = require('../../predicates');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
@@ -66,9 +66,8 @@ function parseReferenceObject(context, componentName, element) {
   ]);
 
   const parseReference = pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     object => object.get('$ref'),
     parseRef);
 
