@@ -1,13 +1,16 @@
 const R = require('ramda');
 const mediaTyper = require('media-typer');
 const pipeParseResult = require('../../pipeParseResult');
-const { isObject, isExtension, hasKey } = require('../../predicates');
+const {
+  isObject, isExtension, hasKey, getValue,
+} = require('../../predicates');
 const {
   createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
 } = require('../annotations');
 const parseObject = require('../parseObject');
+const parseSchemaObject = require('./parseSchemaObject');
 
 const name = 'Media Type Object';
 const unsupportedKeys = [
@@ -56,6 +59,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
 
   const parseMember = R.cond([
     [hasKey('example'), parseExample(namespace, mediaType)],
+    [hasKey('schema'), R.compose(parseSchemaObject(context), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -80,6 +84,13 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
       if (messageBody) {
         message.push(messageBody);
       }
+
+      const dataStructure = mediaTypeObject.get('schema');
+      if (dataStructure) {
+        message.push(dataStructure);
+      }
+
+      // FIXME: We should generate a JSON Schema from the schema
 
       return message;
     });

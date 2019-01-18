@@ -32,16 +32,6 @@ describe('Media Type Object', () => {
   });
 
   describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported schema key', () => {
-      const mediaType = new namespace.elements.Member('application/json', {
-        schema: {},
-      });
-
-      const result = parse(context, messageBodyClass, mediaType);
-
-      expect(result).to.contain.warning("'Media Type Object' contains unsupported key 'schema'");
-    });
-
     it('provides warning for unsupported examples key', () => {
       const mediaType = new namespace.elements.Member('application/json', {
         examples: {},
@@ -110,6 +100,23 @@ describe('Media Type Object', () => {
       expect(result).to.contain.warning(
         "'Media Type Object' 'example' is only supported for JSON media types"
       );
+    });
+  });
+
+  describe('#schema', () => {
+    it('parses a schema into a data structure', () => {
+      const mediaType = new namespace.elements.Member('application/json', {
+        schema: {
+          type: 'object',
+        },
+      });
+
+      const result = parse(context, messageBodyClass, mediaType);
+
+      const message = result.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.dataStructure).to.be.instanceof(namespace.elements.DataStructure);
+      expect(message.dataStructure.content).to.be.instanceof(namespace.elements.Object);
     });
   });
 });

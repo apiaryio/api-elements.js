@@ -542,7 +542,15 @@
                           "element": "string",
                           "content": "200"
                         }
-                      }
+                      },
+                      "content": [
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "array"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -611,66 +619,6 @@
         }
       },
       "content": "'Response Object' contains unsupported key 'description'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 17
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 15
-                        }
-                      },
-                      "content": 381
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 17
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 21
-                        }
-                      },
-                      "content": 6
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Media Type Object' contains unsupported key 'schema'"
     }
   ]
 }
