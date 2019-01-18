@@ -361,6 +361,55 @@
                           "content": {
                             "element": "Pets"
                           }
+                        },
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 26
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 24
+                                            }
+                                          },
+                                          "content": 529
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 26
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 45
+                                            }
+                                          },
+                                          "content": 21
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "A paged array of pets"
                         }
                       ]
                     }
@@ -535,7 +584,58 @@
                           "element": "string",
                           "content": "201"
                         }
-                      }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 49
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 24
+                                            }
+                                          },
+                                          "content": 1159
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 49
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 37
+                                            }
+                                          },
+                                          "content": 13
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Null response"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -910,6 +1010,55 @@
                           "content": {
                             "element": "Pets"
                           }
+                        },
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 71
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 24
+                                            }
+                                          },
+                                          "content": 1696
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 71
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 60
+                                            }
+                                          },
+                                          "content": 36
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Expected response to a valid request"
                         }
                       ]
                     }
@@ -1376,66 +1525,6 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 26
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 516
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 26
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 22
-                        }
-                      },
-                      "content": 11
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Response Object' contains unsupported key 'description'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
                           "content": 27
                         },
                         "column": {
@@ -1543,66 +1632,6 @@
         }
       },
       "content": "'Operation Object' contains unsupported key 'tags'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 49
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 1146
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 49
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 22
-                        }
-                      },
-                      "content": 11
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Response Object' contains unsupported key 'description'"
     },
     {
       "element": "annotation",
@@ -1739,66 +1768,6 @@
         }
       },
       "content": "'Operation Object' contains unsupported key 'tags'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 71
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 1683
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 71
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 22
-                        }
-                      },
-                      "content": 11
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Response Object' contains unsupported key 'description'"
     },
     {
       "element": "annotation",

@@ -18,6 +18,7 @@ describe('Response Object', () => {
     expect(result.length).to.equal(1);
     const httpResponse = result.get(0);
     expect(httpResponse).to.be.instanceof(namespace.elements.HttpResponse);
+    expect(httpResponse.attributes.get('statusCode').toValue()).to.be.equal('200');
   });
 
   describe('status code', () => {
@@ -36,16 +37,29 @@ describe('Response Object', () => {
       expect(result.length).to.equal(1);
       expect(result).to.contain.warning("'Response Object' response status code ranges are unsupported");
     });
+  });
 
-    it('exposes the status code', () => {
-      const response = new namespace.elements.Member('200', {});
+  describe('#description', () => {
+    it('exposes description of response', () => {
+      const response = new namespace.elements.Member('200', {
+        description: 'Example Response',
+      });
+
       const result = parse(context, response);
 
       expect(result.length).to.equal(1);
-      const httpResponse = result.get(0);
-      expect(httpResponse).to.be.instanceof(namespace.elements.HttpResponse);
+      expect(result).to.not.contain.annotations;
+      expect(result.get(0).copy.toValue()).to.deep.equal(['Example Response']);
+    });
 
-      expect(httpResponse.statusCode.toValue()).to.equal('200');
+    it('does not accept description if not string', () => {
+      const response = new namespace.elements.Member('200', {
+        description: [],
+      });
+
+      const result = parse(context, response);
+
+      expect(result).to.contain.warning("'Response Object' 'description' is not a string");
     });
   });
 
@@ -59,24 +73,24 @@ describe('Response Object', () => {
   });
 
   describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported description key', () => {
+    it('provides warning for unsupported headers key', () => {
       const response = new namespace.elements.Member('200', {
-        description: 'Example Response',
+        headers: 'dummy',
       });
 
       const result = parse(context, response);
 
-      expect(result).to.contain.warning("'Response Object' contains unsupported key 'description'");
+      expect(result).to.contain.warning("'Response Object' contains unsupported key 'headers'");
     });
 
-    it('provides warning for unsupported description key', () => {
+    it('provides warning for unsupported links key', () => {
       const response = new namespace.elements.Member('200', {
-        description: 'Example Response',
+        links: 'dummy',
       });
 
       const result = parse(context, response);
 
-      expect(result).to.contain.warning("'Response Object' contains unsupported key 'description'");
+      expect(result).to.contain.warning("'Response Object' contains unsupported key 'links'");
     });
 
     it('does not provide warning/errors for extensions', () => {

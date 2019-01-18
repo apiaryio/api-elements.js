@@ -127,7 +127,7 @@ HTTP Status Code ranges are not currently supported.
 
 | Field Name | Support |
 |:--|:--|
-| description | ✕ |
+| description | ✓ |
 | headers | ✕ |
 | content | [~](#media-type-object) |
 | links | ✕ |
