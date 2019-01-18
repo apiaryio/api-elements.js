@@ -31,9 +31,17 @@ function parseComponentsObject(context, element) {
   const validateIsObject = key => R.unless(isObject,
     createWarning(namespace, `'${name}' '${key}' is not an object`));
 
+  const parseSchemaMember = member => pipeParseResult(namespace,
+    R.compose(parseSchemaObject(context), getValue),
+    (dataStructure) => {
+      // eslint-disable-next-line no-param-reassign
+      dataStructure.content.id = member.key.clone();
+      return dataStructure;
+    })(member);
+
   const parseSchemasObject = pipeParseResult(namespace,
     validateIsObject('schemas'),
-    parseObject(context, R.compose(parseSchemaObject(context), getValue)));
+    parseObject(context, parseSchemaMember));
 
   const parseParametersObjectMember = (member) => {
     // Create a Member Element with `member.key` as the key
