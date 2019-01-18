@@ -33,6 +33,7 @@ jobs:
       - checkout
       - <<: *install
       - run: npm run lint
+      - run: npx commitlint --from origin/master
 
 workflows:
   version: 2
