@@ -118,5 +118,31 @@ describe('Media Type Object', () => {
       expect(message.dataStructure).to.be.instanceof(namespace.elements.DataStructure);
       expect(message.dataStructure.content).to.be.instanceof(namespace.elements.Object);
     });
+
+    it('parses a schema reference into as data structure', () => {
+      context.state.components = new namespace.elements.Object({
+        schemas: {
+          // Data Structure for an Object
+          User: new namespace.elements.DataStructure(
+            new namespace.elements.Object(undefined, {
+              id: 'User',
+            })
+          ),
+        },
+      });
+
+      const mediaType = new namespace.elements.Member('application/json', {
+        schema: {
+          $ref: '#/components/schemas/User',
+        },
+      });
+
+      const result = parse(context, messageBodyClass, mediaType);
+
+      const message = result.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.dataStructure).to.be.instanceof(namespace.elements.DataStructure);
+      expect(message.dataStructure.content.element).to.equal('User');
+    });
   });
 });

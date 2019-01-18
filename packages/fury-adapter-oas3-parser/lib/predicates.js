@@ -9,6 +9,7 @@ const isObject = element => element.element === 'object';
 const isParseResult = element => element.element === 'parseResult';
 const isString = element => element.element === 'string';
 const isBoolean = element => element.element === 'boolean';
+const isDataStructure = element => element.element === 'dataStructure';
 
 // Member
 
@@ -42,6 +43,7 @@ module.exports = {
   isParseResult,
   isString,
   isBoolean,
+  isDataStructure,
 
   hasKey: R.curry(hasKey),
   isExtension,

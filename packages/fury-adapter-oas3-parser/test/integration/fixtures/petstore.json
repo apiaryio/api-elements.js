@@ -354,7 +354,15 @@
                           "element": "string",
                           "content": "200"
                         }
-                      }
+                      },
+                      "content": [
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "Pets"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -895,7 +903,15 @@
                           "element": "string",
                           "content": "200"
                         }
-                      }
+                      },
+                      "content": [
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "Pets"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -1465,66 +1481,6 @@
           ]
         }
       },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 35
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 17
-                        }
-                      },
-                      "content": 796
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 35
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 21
-                        }
-                      },
-                      "content": 4
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Schema Object' contains invalid key '$ref'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
       "attributes": {},
       "content": "'Response Object' default responses unsupported"
     },
@@ -1843,66 +1799,6 @@
         }
       },
       "content": "'Response Object' contains unsupported key 'description'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 75
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 17
-                        }
-                      },
-                      "content": 1820
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 75
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 21
-                        }
-                      },
-                      "content": 4
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Schema Object' contains invalid key '$ref'"
     },
     {
       "element": "annotation",
