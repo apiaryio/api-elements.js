@@ -33,7 +33,7 @@ function parseComponentsObject(context, element) {
 
   const parseSchemasObject = pipeParseResult(namespace,
     validateIsObject('schemas'),
-    parseObject(context, parseSchemaObject(context)));
+    parseObject(context, R.compose(parseSchemaObject(context), getValue)));
 
   const parseParametersObjectMember = (member) => {
     // Create a Member Element with `member.key` as the key

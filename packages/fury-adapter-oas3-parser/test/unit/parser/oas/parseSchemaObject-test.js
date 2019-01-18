@@ -12,7 +12,7 @@ describe('Schema Object', () => {
   });
 
   it('provides a warning when schema is non-object', () => {
-    const schema = new namespace.elements.Member('User', 'my schema');
+    const schema = new namespace.elements.String('my schema');
     const result = parse(context, schema);
 
     expect(result.length).to.equal(1);
@@ -21,7 +21,7 @@ describe('Schema Object', () => {
 
   describe('#type', () => {
     it('warns when type is not a string', () => {
-      const schema = new namespace.elements.Member('User', {
+      const schema = new namespace.elements.Object({
         type: ['null'],
       });
       const result = parse(context, schema);
@@ -30,7 +30,7 @@ describe('Schema Object', () => {
     });
 
     it('warns when type is not a valid type', () => {
-      const schema = new namespace.elements.Member('User', {
+      const schema = new namespace.elements.Object({
         type: 'invalid',
       });
       const result = parse(context, schema);
@@ -41,7 +41,7 @@ describe('Schema Object', () => {
     });
 
     it('returns a null structure for null type', () => {
-      const schema = new namespace.elements.Member('User', {
+      const schema = new namespace.elements.Object({
         type: 'null',
       });
       const result = parse(context, schema);
@@ -52,11 +52,10 @@ describe('Schema Object', () => {
 
       const element = result.get(0).content;
       expect(element).to.be.instanceof(namespace.elements.Null);
-      expect(element.id.toValue()).to.equal('User');
     });
 
     it('returns a boolean structure for boolean type', () => {
-      const schema = new namespace.elements.Member('name', {
+      const schema = new namespace.elements.Object({
         type: 'boolean',
       });
       const result = parse(context, schema);
@@ -67,11 +66,10 @@ describe('Schema Object', () => {
 
       const string = result.get(0).content;
       expect(string).to.be.instanceof(namespace.elements.Boolean);
-      expect(string.id.toValue()).to.equal('name');
     });
 
     it('returns an object structure for object type', () => {
-      const schema = new namespace.elements.Member('User', {
+      const schema = new namespace.elements.Object({
         type: 'object',
       });
       const result = parse(context, schema);
@@ -82,11 +80,10 @@ describe('Schema Object', () => {
 
       const object = result.get(0).content;
       expect(object).to.be.instanceof(namespace.elements.Object);
-      expect(object.id.toValue()).to.equal('User');
     });
 
     it('returns an array structure for array type', () => {
-      const schema = new namespace.elements.Member('Users', {
+      const schema = new namespace.elements.Object({
         type: 'array',
       });
       const result = parse(context, schema);
@@ -97,11 +94,10 @@ describe('Schema Object', () => {
 
       const array = result.get(0).content;
       expect(array).to.be.instanceof(namespace.elements.Array);
-      expect(array.id.toValue()).to.equal('Users');
     });
 
     it('returns a number structure for number type', () => {
-      const schema = new namespace.elements.Member('id', {
+      const schema = new namespace.elements.Object({
         type: 'number',
       });
       const result = parse(context, schema);
@@ -112,11 +108,10 @@ describe('Schema Object', () => {
 
       const string = result.get(0).content;
       expect(string).to.be.instanceof(namespace.elements.Number);
-      expect(string.id.toValue()).to.equal('id');
     });
 
     it('returns a string structure for string type', () => {
-      const schema = new namespace.elements.Member('name', {
+      const schema = new namespace.elements.Object({
         type: 'string',
       });
       const result = parse(context, schema);
@@ -127,11 +122,10 @@ describe('Schema Object', () => {
 
       const string = result.get(0).content;
       expect(string).to.be.instanceof(namespace.elements.String);
-      expect(string.id.toValue()).to.equal('name');
     });
 
     it('returns a number structure for integer type', () => {
-      const schema = new namespace.elements.Member('id', {
+      const schema = new namespace.elements.Object({
         type: 'integer',
       });
       const result = parse(context, schema);
@@ -142,7 +136,6 @@ describe('Schema Object', () => {
 
       const string = result.get(0).content;
       expect(string).to.be.instanceof(namespace.elements.Number);
-      expect(string.id.toValue()).to.equal('id');
     });
   });
 });

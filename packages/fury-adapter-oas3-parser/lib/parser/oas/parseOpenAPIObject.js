@@ -78,7 +78,11 @@ function parseOASObject(context, object) {
         const schemas = components.get('schemas');
         if (schemas) {
           const dataStructures = new namespace.elements.Category(
-            schemas.content.map(getValue),
+            schemas.content.map((member) => {
+              const dataStructure = member.value.clone();
+              dataStructure.content.id = member.key.clone();
+              return dataStructure;
+            }),
             { classes: ['dataStructures'] }
           );
           api.push(dataStructures);
