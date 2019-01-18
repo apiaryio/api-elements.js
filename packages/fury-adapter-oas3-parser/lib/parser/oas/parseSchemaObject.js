@@ -36,12 +36,12 @@ const isValidType = R.anyPass(R.map(hasValue, types));
  * Parse Schema Object
  *
  * @param namespace {Namespace}
- * @param element {MemberElement}
+ * @param element {Element}
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject
  */
-function parseSchemaObject(context, member) {
+function parseSchemaObject(context, element) {
   const { namespace } = context;
 
   const ensureValidType = R.unless(isValidType, createWarning(namespace,
@@ -84,12 +84,10 @@ function parseSchemaObject(context, member) {
         return new namespace.elements.ParseResult();
       }
 
-      element.id = member.key.clone();
-
       return new namespace.elements.DataStructure(element);
     });
 
-  return parseSchema(member.value);
+  return parseSchema(element);
 }
 
 module.exports = R.curry(parseSchemaObject);
