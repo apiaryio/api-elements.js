@@ -1,6 +1,12 @@
 # Changelog
 
-## Master
+## 0.8.7 (2019-01-18)
+
+### Enhancements
+
+- OpenAPI 3 is now supported.
+
+## 0.8.6
 
 ### Breaking
 
