@@ -49,7 +49,7 @@ function parseInfo(context, info) {
   const parseInfo = pipeParseResult(namespace,
     R.unless(isObject, createError(namespace, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     (info) => {
       const api = new namespace.elements.Category();
       api.classes = ['api'];

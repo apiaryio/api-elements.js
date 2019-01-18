@@ -5,7 +5,7 @@ const {
   createInvalidMemberWarning,
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
-const { isObject, hasKey } = require('../../predicates');
+const { hasKey } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 
@@ -61,8 +61,7 @@ function parseSchemaObject(context, element) {
   ]);
 
   const parseSchema = pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     (schema) => {
       // FIXME: Return a dataStructure to represent the given schema
       let element;

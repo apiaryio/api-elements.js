@@ -1,5 +1,8 @@
 const R = require('ramda');
-const { isAnnotation, isMember, isParseResult } = require('../predicates');
+const {
+  isAnnotation, isMember, isParseResult, isObject,
+} = require('../predicates');
+const { createWarning } = require('./annotations');
 
 /*
  * Returns true iff the given element is either an annotation or member element
@@ -61,8 +64,14 @@ const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
  *
  * @returns ParseResult<ObjectElement>
  */
-function parseObject(context, parseMember, object) {
+function parseObject(context, name, parseMember, object) {
   const { namespace } = context;
+
+  if (!isObject(object)) {
+    return new namespace.elements.ParseResult([
+      createWarning(namespace, `'${name}' is not an object`, object),
+    ]);
+  }
 
   // Create a member from a key and value
   const createMember = R.constructN(2, namespace.elements.Member);

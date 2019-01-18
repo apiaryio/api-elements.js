@@ -1,8 +1,6 @@
 const R = require('ramda');
 const { isArray, hasKey } = require('../../predicates');
-const {
-  createWarning,
-} = require('../annotations');
+const { createWarning } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 
@@ -40,7 +38,7 @@ function parseParameterObjects(context, name, array) {
     R.compose(R.chain(parseParameterObjectOrRef(context)), ParseResult),
     (...parameters) => new namespace.elements.Object([...parameters]),
     R.groupBy(parameter => parameter.in),
-    parseObject(context, convertParameters));
+    parseObject(context, name, convertParameters));
 
   return parseParameters(array);
 }

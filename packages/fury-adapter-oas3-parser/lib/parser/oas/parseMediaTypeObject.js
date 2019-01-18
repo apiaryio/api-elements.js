@@ -1,9 +1,7 @@
 const R = require('ramda');
 const mediaTyper = require('media-typer');
 const pipeParseResult = require('../../pipeParseResult');
-const {
-  isObject, isExtension, hasKey, getValue,
-} = require('../../predicates');
+const { isExtension, hasKey, getValue } = require('../../predicates');
 const {
   createWarning,
   createUnsupportedMemberWarning,
@@ -74,8 +72,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
   ]);
 
   const parseMediaType = pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     (mediaTypeObject) => {
       const message = new MessageBodyClass();
 

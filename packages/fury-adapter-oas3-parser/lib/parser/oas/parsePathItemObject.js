@@ -1,13 +1,7 @@
 const R = require('ramda');
-const {
-  isObject,
-  isExtension,
-  hasKey,
-  getValue,
-} = require('../../predicates');
+const { isExtension, hasKey, getValue } = require('../../predicates');
 const {
   createError,
-  createWarning,
   createInvalidMemberWarning,
   createUnsupportedMemberWarning,
 } = require('../annotations');
@@ -118,7 +112,7 @@ function parseParameters(context, path, member) {
 
   const parseParameters = pipeParseResult(namespace,
     parseParameterObjects(context, name),
-    parseObject(context, parseParameter));
+    parseObject(context, name, parseParameter));
 
   return parseParameters(member.value);
 }
@@ -179,8 +173,7 @@ function parsePathItemObject(context, member) {
   ]);
 
   const parsePathItem = pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     R.curry(validatePathForMissingHrefVariables)(namespace, member.key),
     (pathItem) => {
       const resource = new namespace.elements.Resource();

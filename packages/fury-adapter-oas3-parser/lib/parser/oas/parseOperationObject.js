@@ -1,9 +1,6 @@
 const R = require('ramda');
+const { isExtension, hasKey, getValue } = require('../../predicates');
 const {
-  isObject, isExtension, hasKey, getValue,
-} = require('../../predicates');
-const {
-  createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
   validateObjectContainsRequiredKeys,
@@ -63,9 +60,8 @@ function parseOperationObject(context, member) {
   ]);
 
   const parseOperation = pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, parseMember),
+    parseObject(context, name, parseMember),
     (operation) => {
       const transition = new namespace.elements.Transition();
       transition.title = operation.get('summary');
