@@ -1,0 +1,2224 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "attributes": {
+                            "line": {
+                              "element": "number",
+                              "content": 4
+                            },
+                            "column": {
+                              "element": "number",
+                              "content": 10
+                            }
+                          },
+                          "content": 49
+                        },
+                        {
+                          "element": "number",
+                          "attributes": {
+                            "line": {
+                              "element": "number",
+                              "content": 4
+                            },
+                            "column": {
+                              "element": "number",
+                              "content": 26
+                            }
+                          },
+                          "content": 16
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "Swagger Petstore"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "attributes": {
+                            "line": {
+                              "element": "number",
+                              "content": 3
+                            },
+                            "column": {
+                              "element": "number",
+                              "content": 12
+                            }
+                          },
+                          "content": 34
+                        },
+                        {
+                          "element": "number",
+                          "attributes": {
+                            "line": {
+                              "element": "number",
+                              "content": 3
+                            },
+                            "column": {
+                              "element": "number",
+                              "content": 17
+                            }
+                          },
+                          "content": 5
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "1.0.0"
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "attributes": {
+                                "line": {
+                                  "element": "number",
+                                  "content": 10
+                                },
+                                "column": {
+                                  "element": "number",
+                                  "content": 3
+                                }
+                              },
+                              "content": 148
+                            },
+                            {
+                              "element": "number",
+                              "attributes": {
+                                "line": {
+                                  "element": "number",
+                                  "content": 10
+                                },
+                                "column": {
+                                  "element": "number",
+                                  "content": 8
+                                }
+                              },
+                              "content": 5
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": "/pets"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 12
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 16
+                                    }
+                                  },
+                                  "content": 179
+                                },
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 12
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 29
+                                    }
+                                  },
+                                  "content": 13
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "List all pets"
+                },
+                "id": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 13
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 20
+                                    }
+                                  },
+                                  "content": 212
+                                },
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 13
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 28
+                                    }
+                                  },
+                                  "content": 8
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "listPets"
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 11
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 5
+                                            }
+                                          },
+                                          "content": 159
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 11
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 8
+                                            }
+                                          },
+                                          "content": 3
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "GET"
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "transition",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 43
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 16
+                                    }
+                                  },
+                                  "content": 1034
+                                },
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 43
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 28
+                                    }
+                                  },
+                                  "content": 12
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "Create a pet"
+                },
+                "id": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 44
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 20
+                                    }
+                                  },
+                                  "content": 1066
+                                },
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 44
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 30
+                                    }
+                                  },
+                                  "content": 10
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "createPets"
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 42
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 5
+                                            }
+                                          },
+                                          "content": 1013
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 42
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 9
+                                            }
+                                          },
+                                          "content": 4
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "POST"
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "content": "201"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "attributes": {
+                                "line": {
+                                  "element": "number",
+                                  "content": 56
+                                },
+                                "column": {
+                                  "element": "number",
+                                  "content": 3
+                                }
+                              },
+                              "content": 1354
+                            },
+                            {
+                              "element": "number",
+                              "attributes": {
+                                "line": {
+                                  "element": "number",
+                                  "content": 56
+                                },
+                                "column": {
+                                  "element": "number",
+                                  "content": 16
+                                }
+                              },
+                              "content": 13
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": "/pets/{petId}"
+            },
+            "hrefVariables": {
+              "element": "hrefVariables",
+              "content": [
+                {
+                  "element": "member",
+                  "meta": {
+                    "description": {
+                      "element": "string",
+                      "attributes": {
+                        "sourceMap": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "sourceMap",
+                              "content": [
+                                {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "number",
+                                      "attributes": {
+                                        "line": {
+                                          "element": "number",
+                                          "content": 61
+                                        },
+                                        "column": {
+                                          "element": "number",
+                                          "content": 22
+                                        }
+                                      },
+                                      "content": 1466
+                                    },
+                                    {
+                                      "element": "number",
+                                      "attributes": {
+                                        "line": {
+                                          "element": "number",
+                                          "content": 61
+                                        },
+                                        "column": {
+                                          "element": "number",
+                                          "content": 51
+                                        }
+                                      },
+                                      "content": 29
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "content": "The id of the pet to retrieve"
+                    }
+                  },
+                  "attributes": {
+                    "typeAttributes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "string",
+                          "content": "required"
+                        }
+                      ]
+                    }
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "attributes": {
+                        "sourceMap": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "sourceMap",
+                              "content": [
+                                {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "number",
+                                      "attributes": {
+                                        "line": {
+                                          "element": "number",
+                                          "content": 58
+                                        },
+                                        "column": {
+                                          "element": "number",
+                                          "content": 15
+                                        }
+                                      },
+                                      "content": 1399
+                                    },
+                                    {
+                                      "element": "number",
+                                      "attributes": {
+                                        "line": {
+                                          "element": "number",
+                                          "content": 58
+                                        },
+                                        "column": {
+                                          "element": "number",
+                                          "content": 20
+                                        }
+                                      },
+                                      "content": 5
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "content": "petId"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 65
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 16
+                                    }
+                                  },
+                                  "content": 1559
+                                },
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 65
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 39
+                                    }
+                                  },
+                                  "content": 23
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "Info for a specific pet"
+                },
+                "id": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 66
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 20
+                                    }
+                                  },
+                                  "content": 1602
+                                },
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 66
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 31
+                                    }
+                                  },
+                                  "content": 11
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "showPetById"
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 64
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 5
+                                            }
+                                          },
+                                          "content": 1539
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 64
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 8
+                                            }
+                                          },
+                                          "content": 3
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "GET"
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "dataStructures"
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "dataStructure",
+              "content": {
+                "element": "object",
+                "meta": {
+                  "id": {
+                    "element": "string",
+                    "attributes": {
+                      "sourceMap": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "sourceMap",
+                            "content": [
+                              {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "number",
+                                    "attributes": {
+                                      "line": {
+                                        "element": "number",
+                                        "content": 84
+                                      },
+                                      "column": {
+                                        "element": "number",
+                                        "content": 5
+                                      }
+                                    },
+                                    "content": 2060
+                                  },
+                                  {
+                                    "element": "number",
+                                    "attributes": {
+                                      "line": {
+                                        "element": "number",
+                                        "content": 84
+                                      },
+                                      "column": {
+                                        "element": "number",
+                                        "content": 8
+                                      }
+                                    },
+                                    "content": 3
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "content": "Pet"
+                  }
+                }
+              }
+            },
+            {
+              "element": "dataStructure",
+              "content": {
+                "element": "array",
+                "meta": {
+                  "id": {
+                    "element": "string",
+                    "attributes": {
+                      "sourceMap": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "sourceMap",
+                            "content": [
+                              {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "number",
+                                    "attributes": {
+                                      "line": {
+                                        "element": "number",
+                                        "content": 97
+                                      },
+                                      "column": {
+                                        "element": "number",
+                                        "content": 5
+                                      }
+                                    },
+                                    "content": 2283
+                                  },
+                                  {
+                                    "element": "number",
+                                    "attributes": {
+                                      "line": {
+                                        "element": "number",
+                                        "content": 97
+                                      },
+                                      "column": {
+                                        "element": "number",
+                                        "content": 9
+                                      }
+                                    },
+                                    "content": 4
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "content": "Pets"
+                  }
+                }
+              }
+            },
+            {
+              "element": "dataStructure",
+              "content": {
+                "element": "object",
+                "meta": {
+                  "id": {
+                    "element": "string",
+                    "attributes": {
+                      "sourceMap": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "sourceMap",
+                            "content": [
+                              {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "number",
+                                    "attributes": {
+                                      "line": {
+                                        "element": "number",
+                                        "content": 101
+                                      },
+                                      "column": {
+                                        "element": "number",
+                                        "content": 5
+                                      }
+                                    },
+                                    "content": 2365
+                                  },
+                                  {
+                                    "element": "number",
+                                    "attributes": {
+                                      "line": {
+                                        "element": "number",
+                                        "content": 101
+                                      },
+                                      "column": {
+                                        "element": "number",
+                                        "content": 10
+                                      }
+                                    },
+                                    "content": 5
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "content": "Error"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 5
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 3
+                        }
+                      },
+                      "content": 68
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 5
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 10
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Info Object' contains unsupported key 'license'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 7
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 1
+                        }
+                      },
+                      "content": 91
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 7
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 8
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'OpenAPI Object' contains unsupported key 'servers'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 14
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 227
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 14
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 4
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Operation Object' contains unsupported key 'tags'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 16
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 254
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 16
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 17
+                        }
+                      },
+                      "content": 10
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Operation Object' contains unsupported key 'parameters'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 26
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 516
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 26
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 22
+                        }
+                      },
+                      "content": 11
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Response Object' contains unsupported key 'description'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 27
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 561
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 27
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 18
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Response Object' contains unsupported key 'headers'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 34
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 15
+                        }
+                      },
+                      "content": 772
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 34
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 21
+                        }
+                      },
+                      "content": 6
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Media Type Object' contains unsupported key 'schema'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {},
+      "content": "'Response Object' default responses unsupported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 45
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 1083
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 45
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 4
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Operation Object' contains unsupported key 'tags'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 49
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 1146
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 49
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 22
+                        }
+                      },
+                      "content": 11
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Response Object' contains unsupported key 'description'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {},
+      "content": "'Response Object' default responses unsupported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 62
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 9
+                        }
+                      },
+                      "content": 1504
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 62
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 15
+                        }
+                      },
+                      "content": 6
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Parameter Object' contains invalid key 'schema'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 67
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 1620
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 67
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 4
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Operation Object' contains unsupported key 'tags'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 71
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 1683
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 71
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 22
+                        }
+                      },
+                      "content": 11
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Response Object' contains unsupported key 'description'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 74
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 15
+                        }
+                      },
+                      "content": 1796
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 74
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 21
+                        }
+                      },
+                      "content": 6
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Media Type Object' contains unsupported key 'schema'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {},
+      "content": "'Response Object' default responses unsupported"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 86
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 2090
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 86
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 15
+                        }
+                      },
+                      "content": 8
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Schema Object' contains unsupported key 'required'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 89
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 2134
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 89
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 17
+                        }
+                      },
+                      "content": 10
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Schema Object' contains unsupported key 'properties'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 99
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 2313
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 99
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 12
+                        }
+                      },
+                      "content": 5
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Schema Object' contains unsupported key 'items'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 103
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 2397
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 103
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 15
+                        }
+                      },
+                      "content": 8
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Schema Object' contains unsupported key 'required'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 106
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 7
+                        }
+                      },
+                      "content": 2446
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 106
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 17
+                        }
+                      },
+                      "content": 10
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Schema Object' contains unsupported key 'properties'"
+    }
+  ]
+}
