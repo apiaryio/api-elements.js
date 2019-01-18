@@ -106,6 +106,14 @@ Key:
 | header | ✕ |
 | cookie | ✕ |
 
+## Request Body Object
+
+| Location | Support |
+|:--|:--|
+| description | ✕ |
+| content | ✕ |
+| required | ✕ |
+
 ## Responses Object
 
 | Field Name | Support |
