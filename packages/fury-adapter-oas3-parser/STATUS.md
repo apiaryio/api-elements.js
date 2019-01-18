@@ -128,7 +128,7 @@ HTTP Status Code ranges are not currently supported.
 
 | Field Name | Support |
 |:--|:--|
-| schema | ✕ |
+| schema | ✓ |
 | example | ✓ |
 | examples | ✕ |
 | encoding | ✕ |

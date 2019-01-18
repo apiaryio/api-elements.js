@@ -11,10 +11,11 @@ const {
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseSchemaObject = require('./parseSchemaObject');
+const parseReference = require('../parseReference');
 
 const name = 'Media Type Object';
 const unsupportedKeys = [
-  'schema', 'examples', 'encoding',
+  'examples', 'encoding',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -43,6 +44,8 @@ function parseExample(namespace, mediaType) {
     createExampleNotJSONWarning);
 }
 
+const parseSchema = parseReference('schemas', parseSchemaObject);
+
 /**
  * Parse Media Type Object
  *
@@ -59,7 +62,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
 
   const parseMember = R.cond([
     [hasKey('example'), parseExample(namespace, mediaType)],
-    [hasKey('schema'), R.compose(parseSchemaObject(context), getValue)],
+    [hasKey('schema'), R.compose(parseSchema(context), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
