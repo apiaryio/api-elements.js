@@ -1480,28 +1480,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 34
+                          "content": 35
                         },
                         "column": {
                           "element": "number",
-                          "content": 15
+                          "content": 17
                         }
                       },
-                      "content": 772
+                      "content": 796
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 34
+                          "content": 35
                         },
                         "column": {
                           "element": "number",
                           "content": 21
                         }
                       },
-                      "content": 6
+                      "content": 4
                     }
                   ]
                 }
@@ -1510,7 +1510,7 @@
           ]
         }
       },
-      "content": "'Media Type Object' contains unsupported key 'schema'"
+      "content": "'Schema Object' contains invalid key '$ref'"
     },
     {
       "element": "annotation",
@@ -1872,28 +1872,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 74
+                          "content": 75
                         },
                         "column": {
                           "element": "number",
-                          "content": 15
+                          "content": 17
                         }
                       },
-                      "content": 1796
+                      "content": 1820
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 74
+                          "content": 75
                         },
                         "column": {
                           "element": "number",
                           "content": 21
                         }
                       },
-                      "content": 6
+                      "content": 4
                     }
                   ]
                 }
@@ -1902,7 +1902,7 @@
           ]
         }
       },
-      "content": "'Media Type Object' contains unsupported key 'schema'"
+      "content": "'Schema Object' contains invalid key '$ref'"
     },
     {
       "element": "annotation",
