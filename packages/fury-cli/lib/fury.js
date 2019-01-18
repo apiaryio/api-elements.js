@@ -11,23 +11,26 @@ const { highlight } = require('cardinal');
 const theme = require('cardinal/themes/tomorrow-night');
 const { JSON06Serialiser } = require('minim');
 const fury = require('fury');
-const swagger = require('fury-adapter-swagger');
 const apiBlueprintParser = require('fury-adapter-apib-parser');
 const apiBlueprintSerializer = require('fury-adapter-apib-serializer');
 const apiaryBlueprintParser = require('fury-adapter-apiary-blueprint-parser');
+const oas2Parser = require('fury-adapter-swagger');
+const oas3Parser = require('fury-adapter-oas3-parser');
 const pkg = require('../package.json');
 
 const adapters = [
-  'fury-adapter-swagger',
   'fury-adapter-apib-parser',
   'fury-adapter-apib-serializer',
   'fury-adapter-apiary-blueprint-parser',
+  'fury-adapter-swagger',
+  'fury-adapter-oas3-parser',
 ];
 
-fury.use(swagger);
 fury.use(apiBlueprintParser);
 fury.use(apiBlueprintSerializer);
 fury.use(apiaryBlueprintParser);
+fury.use(oas2Parser);
+fury.use(oas3Parser);
 
 function isRefract(source) {
   let parseResult;
