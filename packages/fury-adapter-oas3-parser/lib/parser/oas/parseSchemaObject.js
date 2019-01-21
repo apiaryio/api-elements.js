@@ -5,7 +5,9 @@ const {
   createInvalidMemberWarning,
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
-const { hasKey } = require('../../predicates');
+const {
+  isArray, isNull, hasKey, getValue,
+} = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 
@@ -15,7 +17,6 @@ const unsupportedKeys = [
   'title', 'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum',
   'exclusiveMinimum', 'maxLength', 'minLength', 'pattern', 'maxItems',
   'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'required',
-  'enum',
 
   // JSON Schema + OAS 3 specific rules
   'allOf', 'oneOf', 'anyOf', 'not', 'items', 'properties',
@@ -31,6 +32,17 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 const types = ['null', 'boolean', 'object', 'array', 'number', 'string', 'integer'];
 const hasValue = R.curry((value, member) => member.value.toValue() === value);
 const isValidType = R.anyPass(R.map(hasValue, types));
+
+const parseEnum = context => pipeParseResult(context.namespace,
+  R.unless(isArray, createWarning(context.namespace, `'${name}' 'enum' is not an array`)),
+  (element) => {
+    const enumElement = new context.namespace.elements.Enum();
+    enumElement.enumerations = element;
+    enumElement.enumerations.forEach(
+      R.unless(isNull, value => value.attributes.set('typeAttributes', ['fixed']))
+    );
+    return enumElement;
+  });
 
 /**
  * Parse Schema Object
@@ -54,6 +66,8 @@ function parseSchemaObject(context, element) {
   const parseMember = R.cond([
     [hasKey('type'), parseType],
 
+    [hasKey('enum'), R.compose(parseEnum(context), getValue)],
+
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // Return a warning for additional properties
@@ -66,8 +80,12 @@ function parseSchemaObject(context, element) {
       // FIXME: Return a dataStructure to represent the given schema
       let element;
 
+      const enumerations = schema.get('enum');
       const type = schema.getValue('type');
-      if (type === 'object') {
+
+      if (enumerations) {
+        element = enumerations;
+      } else if (type === 'object') {
         element = new namespace.elements.Object();
       } else if (type === 'array') {
         element = new namespace.elements.Array();
