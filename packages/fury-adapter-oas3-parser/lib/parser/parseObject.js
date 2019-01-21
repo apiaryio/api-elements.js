@@ -2,7 +2,7 @@ const R = require('ramda');
 const {
   isAnnotation, isMember, isParseResult, isObject,
 } = require('../predicates');
-const { createWarning } = require('./annotations');
+const { createError, createWarning } = require('./annotations');
 const pipeParseResult = require('../pipeParseResult');
 
 /*
@@ -28,6 +28,26 @@ const chainParseResult = R.curry((transform, parseResult) => {
 });
 
 const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
+
+const validateObjectContainsRequiredKeys = R.curry((namespace, path, requiredKeys, object) => {
+  // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
+  const hasMember = (key) => {
+    const findKey = R.allPass([isMember, member => member.key.toValue() === key]);
+    const matchingMembers = object.content.filter(findKey);
+    return matchingMembers.length > 0;
+  };
+
+  const missingKeys = R.reject(hasMember, requiredKeys);
+  const errorFromKey = key => createError(namespace, `'${path}' is missing required property '${key}'`, object);
+
+  if (missingKeys.length > 0) {
+    return new namespace.elements.ParseResult(
+      R.map(errorFromKey, missingKeys)
+    );
+  }
+
+  return new namespace.elements.ParseResult([object]);
+});
 
 /**
  * A callback for transforming a member element
@@ -62,11 +82,12 @@ const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
  * @param namespace
  * @param name {string} - The human readable name of the element. Used for annotation messages.
  * @param transform {transformMember} - The callback to transform a member
+ * @param requiredKeys {string[]} - The callback to transform a member
  * @param object {ObjectElement} - The object containing members to transform
  *
  * @returns ParseResult<ObjectElement>
  */
-function parseObject(context, name, parseMember) {
+function parseObject(context, name, parseMember, requiredKeys) {
   const { namespace } = context;
 
   // Create a member from a key and value
@@ -110,6 +131,7 @@ function parseObject(context, name, parseMember) {
 
   return pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
+    validateObjectContainsRequiredKeys(namespace, name, requiredKeys || []),
     validateMembers);
 }
 

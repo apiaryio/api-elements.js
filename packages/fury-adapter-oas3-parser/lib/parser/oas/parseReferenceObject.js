@@ -3,7 +3,6 @@ const {
   createError,
   createWarning,
   createInvalidMemberWarning,
-  validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const { isExtension, hasKey } = require('../../predicates');
 const pipeParseResult = require('../../pipeParseResult');
@@ -66,8 +65,7 @@ function parseReferenceObject(context, componentName, element) {
   ]);
 
   const parseReference = pipeParseResult(namespace,
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, name, parseMember),
+    parseObject(context, name, parseMember, requiredKeys),
     object => object.get('$ref'),
     parseRef);
 

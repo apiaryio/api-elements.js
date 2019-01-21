@@ -3,7 +3,6 @@ const { createError } = require('../../elements');
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
-  validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const {
   isObject, hasKey, isExtension,
@@ -48,8 +47,7 @@ function parseInfo(context, info) {
 
   const parseInfo = pipeParseResult(namespace,
     R.unless(isObject, createError(namespace, `'${name}' is not an object`)),
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, name, parseMember),
+    parseObject(context, name, parseMember, requiredKeys),
     (info) => {
       const api = new namespace.elements.Category();
       api.classes = ['api'];

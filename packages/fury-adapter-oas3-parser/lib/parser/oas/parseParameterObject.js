@@ -4,7 +4,6 @@ const {
   createError,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
-  validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
@@ -80,8 +79,7 @@ function parseParameterObject(context, object) {
   ]);
 
   const parseParameter = pipeParseResult(namespace,
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, name, parseMember),
+    parseObject(context, name, parseMember, requiredKeys),
     (parameter) => {
       const member = new namespace.elements.Member(parameter.get('name'));
 

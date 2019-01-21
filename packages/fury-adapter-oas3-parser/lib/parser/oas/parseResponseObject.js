@@ -7,7 +7,6 @@ const {
   createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
-  validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseMediaTypeObject = require('./parseMediaTypeObject');
@@ -76,8 +75,7 @@ function parseResponseObject(context, element) {
   ]);
 
   const parseResponse = pipeParseResult(namespace,
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, name, parseMember),
+    parseObject(context, name, parseMember, requiredKeys),
     (responseObject) => {
       // Try to fecth responses from the media type parsing
       // if not, create empty HttpResponse

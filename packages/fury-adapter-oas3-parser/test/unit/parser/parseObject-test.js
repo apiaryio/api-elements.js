@@ -1,3 +1,4 @@
+const R = require('ramda');
 const { Fury } = require('fury');
 const { expect } = require('../chai');
 const parseObject = require('../../../lib/parser/parseObject');
@@ -129,5 +130,17 @@ describe('#parseObject', () => {
 
     expect(parseResult.warnings.get(0).toValue()).to.equal('name warning');
     expect(parseResult.warnings.get(1).toValue()).to.equal('message warning');
+  });
+
+  describe('required keys', () => {
+    it('validates that the object contains any required keys', () => {
+      const parseResult = parseObject(context, name, R.T, ['name', 'required1', 'required2'])(object);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.errors.toValue()).to.deep.equal([
+        "'Example Object' is missing required property 'required1'",
+        "'Example Object' is missing required property 'required2'",
+      ]);
+    });
   });
 });

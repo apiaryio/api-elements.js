@@ -1,5 +1,4 @@
 const R = require('ramda');
-const { isMember, isObject } = require('../predicates');
 
 function createAnnotation(annotationClass, namespace, message, element) {
   const annotation = new namespace.elements.Annotation(message);
@@ -41,30 +40,6 @@ function createMemberValueNotBooleanError(namespace, path, member) {
   return createError(namespace, `'${path}' '${member.key.toValue()}' is not a boolean`, member.value);
 }
 
-function validateObjectContainsRequiredKeys(namespace, path, requiredKeys, object) {
-  if (!isObject(object)) {
-    return new namespace.elements.ParseResult([object]);
-  }
-
-  // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
-  const hasMember = (key) => {
-    const findKey = R.allPass([isMember, member => member.key.toValue() === key]);
-    const matchingMembers = object.content.filter(findKey);
-    return matchingMembers.length > 0;
-  };
-
-  const missingKeys = R.reject(hasMember, requiredKeys);
-  const errorFromKey = key => createError(namespace, `'${path}' is missing required property '${key}'`, object);
-
-  if (missingKeys.length > 0) {
-    return new namespace.elements.ParseResult(
-      R.map(errorFromKey, missingKeys)
-    );
-  }
-
-  return new namespace.elements.ParseResult([object]);
-}
-
 module.exports = {
   createError,
   createWarning,
@@ -75,5 +50,4 @@ module.exports = {
   createMemberValueNotStringError: R.curry(createMemberValueNotStringError),
   createMemberValueNotBooleanWarning: R.curry(createMemberValueNotBooleanWarning),
   createMemberValueNotBooleanError: R.curry(createMemberValueNotBooleanError),
-  validateObjectContainsRequiredKeys: R.curry(validateObjectContainsRequiredKeys),
 };

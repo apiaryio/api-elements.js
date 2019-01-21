@@ -3,7 +3,6 @@ const { isExtension, hasKey, getValue } = require('../../predicates');
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
-  validateObjectContainsRequiredKeys,
   createIdentifierNotUniqueWarning,
 } = require('../annotations');
 const parseCopy = require('../parseCopy');
@@ -96,8 +95,7 @@ function parseOperationObject(context, path, member) {
   ]);
 
   const parseOperation = pipeParseResult(namespace,
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, name, parseMember),
+    parseObject(context, name, parseMember, requiredKeys),
     (operation) => {
       const transition = new namespace.elements.Transition();
       transition.title = operation.get('summary');
