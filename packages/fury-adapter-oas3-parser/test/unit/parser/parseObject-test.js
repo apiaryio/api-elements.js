@@ -23,14 +23,14 @@ describe('#parseObject', () => {
     const element = new namespace.elements.String();
 
     const parseMember = member => member;
-    const parseResult = parseObject(context, name, parseMember, element);
+    const parseResult = parseObject(context, name, parseMember)(element);
 
     expect(parseResult).to.contain.warning("'Example Object' is not an object");
   });
 
   it('can parse an object when the transform returns a member element', () => {
     const parseMember = member => member;
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -42,7 +42,7 @@ describe('#parseObject', () => {
 
   it('can parse an object when the transform returns a value to be wrapped in a member', () => {
     const parseMember = member => member.value;
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -54,7 +54,7 @@ describe('#parseObject', () => {
 
   it('can parse an object when the transform returns a parse result', () => {
     const parseMember = member => new namespace.elements.ParseResult([member]);
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -66,7 +66,7 @@ describe('#parseObject', () => {
 
   it('can parse an object when the transform returns a parse result containing a value to be wrapped in a member', () => {
     const parseMember = member => new namespace.elements.ParseResult([member.value]);
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -84,7 +84,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([member, warning]);
     };
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(3);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -106,7 +106,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([member, warning]);
     };
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(2);
     expect(parseResult.errors.get(0).toValue()).to.equal('name error');
@@ -121,7 +121,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([warning]);
     };
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(3);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
