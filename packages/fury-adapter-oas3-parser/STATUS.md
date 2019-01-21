@@ -157,3 +157,45 @@ support.
 | securitySchemes | ✕ |
 | links | ✕ |
 | callbacks | ✕ |
+
+## Schema Object
+
+| Field Name | Support |
+|:--|:--|
+| type | ✓ |
+| enum | ✓ |
+| examples | ✕ |
+| encoding | ✕ |
+| title | ✕ |
+| multipleOf | ✕ |
+| maximum | ✕ |
+| exclusiveMaximum | ✕ |
+| minimum | ✕ |
+| exclusiveMinimum | ✕ |
+| maxLength | ✕ |
+| minLength | ✕ |
+| pattern | ✕ |
+| maxItems | ✕ |
+| minItems | ✕ |
+| uniqueItems | ✕ |
+| maxProperties | ✕ |
+| minProperties | ✕ |
+| required | ✕ |
+| allOf | ✕ |
+| oneOf | ✕ |
+| anyOf | ✕ |
+| not | ✕ |
+| items | ✕ |
+| properties | ✕ |
+| additionalProperties | ✕ |
+| description | ✕ |
+| format | ✕ |
+| default | ✕ |
+| nullable | ✕ |
+| discriminator | ✕ |
+| readOnly | ✕ |
+| writeOnly | ✕ |
+| xml | ✕ |
+| externalDocs | ✕ |
+| example | ✕ |
+| deprecated | ✕ |
