@@ -30,7 +30,7 @@ function parseOpenAPI(context, openapi) {
   }
 
 
-  return new namespace.elements.ParseResult([]);
+  return new namespace.elements.ParseResult([openapi]);
 }
 
 module.exports = R.curry(parseOpenAPI);

@@ -142,5 +142,29 @@ describe('#parseObject', () => {
         "'Example Object' is missing required property 'required2'",
       ]);
     });
+
+    it('fails object parsing when member parse cannot parse required key', () => {
+      const parseMember = (member) => {
+        const warning = new namespace.elements.Annotation(
+          `${member.key.toValue()} warning`,
+          { classes: ['warning'] }
+        );
+        return new namespace.elements.ParseResult([warning]);
+      };
+      const parseResult = parseObject(context, name, parseMember, ['name'])(object);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.annotations.toValue()).to.deep.equal([
+        'name warning',
+        'message warning',
+      ]);
+    });
+
+    it('can parse object with required keys', () => {
+      const parseResult = parseObject(context, name, R.T, ['name'])(object);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
+    });
   });
 });

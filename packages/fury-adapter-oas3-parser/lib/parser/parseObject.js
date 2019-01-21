@@ -29,21 +29,31 @@ const chainParseResult = R.curry((transform, parseResult) => {
 
 const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
 
-const validateObjectContainsRequiredKeys = R.curry((namespace, path, requiredKeys, object) => {
-  // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
-  const hasMember = (key) => {
-    const findKey = R.allPass([isMember, member => member.key.toValue() === key]);
-    const matchingMembers = object.content.filter(findKey);
-    return matchingMembers.length > 0;
-  };
+// FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
+const hasMember = R.curry((object, key) => {
+  const findKey = R.allPass([isMember, member => member.key.toValue() === key]);
+  const matchingMembers = object.content.filter(findKey);
+  return matchingMembers.length > 0;
+});
 
-  const missingKeys = R.reject(hasMember, requiredKeys);
+const validateObjectContainsRequiredKeys = R.curry((namespace, path, requiredKeys, object) => {
+  const missingKeys = R.reject(hasMember(object), requiredKeys);
   const errorFromKey = key => createError(namespace, `'${path}' is missing required property '${key}'`, object);
 
   if (missingKeys.length > 0) {
     return new namespace.elements.ParseResult(
       R.map(errorFromKey, missingKeys)
     );
+  }
+
+  return new namespace.elements.ParseResult([object]);
+});
+
+const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKeys, object) => {
+  const missingKeys = R.reject(hasMember(object), requiredKeys);
+
+  if (missingKeys.length > 0) {
+    return new namespace.elements.ParseResult();
   }
 
   return new namespace.elements.ParseResult([object]);
@@ -132,7 +142,8 @@ function parseObject(context, name, parseMember, requiredKeys) {
   return pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
     validateObjectContainsRequiredKeys(namespace, name, requiredKeys || []),
-    validateMembers);
+    validateMembers,
+    validateObjectContainsRequiredKeysNoError(namespace, requiredKeys || []));
 }
 
 
