@@ -140,3 +140,20 @@ HTTP Status Code ranges are not currently supported.
 | example | ✓ |
 | examples | ✕ |
 | encoding | ✕ |
+
+## Components Object
+
+See https://github.com/apiaryio/api-elements.js/issues/81 to track referencing
+support.
+
+| Field Name | Support |
+|:--|:--|
+| schemas | ~ |
+| responses | ✕ |
+| parameters | ✓ |
+| examples | ✕ |
+| requestBodies | ✕ |
+| headers | ✕ |
+| securitySchemes | ✕ |
+| links | ✕ |
+| callbacks | ✕ |
