@@ -51,7 +51,9 @@ describe('Responses Object', () => {
 
   it('can parse a numerical status code', () => {
     const responses = new namespace.elements.Object({
-      200: {},
+      200: {
+        description: 'dummy',
+      },
     });
 
     const result = parse(context, responses);

@@ -25,7 +25,9 @@ describe('#parsePathItemObject', () => {
     const path = new namespace.elements.Member('/', {
       get: {
         responses: {
-          200: {},
+          200: {
+            description: 'dummy',
+          },
         },
       },
     });
