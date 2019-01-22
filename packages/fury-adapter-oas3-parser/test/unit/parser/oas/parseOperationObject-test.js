@@ -259,5 +259,34 @@ describe('Operation Object', () => {
       expect(transition).to.be.instanceof(namespace.elements.Transition);
       expect(transition.id.toValue()).to.equal('exampleId');
     });
+
+    it('warns when operationId is not unique', () => {
+      const operationA = new namespace.elements.Member('get', {
+        operationId: 'exampleId',
+        responses: {},
+      });
+
+      const operationB = new namespace.elements.Member('get', {
+        operationId: 'exampleId',
+        responses: {},
+      });
+
+      const resultA = parse(context, operationA);
+
+      {
+        expect(resultA.length).to.equal(1);
+        const transition = resultA.get(0);
+        expect(transition).to.be.instanceof(namespace.elements.Transition);
+        expect(transition.id.toValue()).to.equal('exampleId');
+      }
+
+      const resultB = parse(context, operationB);
+      {
+        expect(resultB.length).to.equal(2);
+        const transition = resultB.get(0);
+        expect(transition).to.be.instanceof(namespace.elements.Transition);
+        expect(resultB).to.contain.warning("'Operation Object' 'operationId' is not a unique identifier: 'exampleId'");
+      }
+    });
   });
 });
