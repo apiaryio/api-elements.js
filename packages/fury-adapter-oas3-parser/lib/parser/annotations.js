@@ -21,6 +21,10 @@ function createInvalidMemberWarning(namespace, path, member) {
   return createWarning(namespace, message, member.key);
 }
 
+function createIdentifierNotUniqueWarning(namespace, path, member) {
+  return createWarning(namespace, `'${path}' '${member.key.toValue()}' is not a unique identifier: '${member.value.toValue()}'`, member.value);
+}
+
 function createMemberValueNotStringWarning(namespace, path, member) {
   return createWarning(namespace, `'${path}' '${member.key.toValue()}' is not a string`, member.value);
 }
@@ -66,6 +70,7 @@ module.exports = {
   createWarning,
   createUnsupportedMemberWarning: R.curry(createUnsupportedMemberWarning),
   createInvalidMemberWarning: R.curry(createInvalidMemberWarning),
+  createIdentifierNotUniqueWarning: R.curry(createIdentifierNotUniqueWarning),
   createMemberValueNotStringWarning: R.curry(createMemberValueNotStringWarning),
   createMemberValueNotStringError: R.curry(createMemberValueNotStringError),
   createMemberValueNotBooleanWarning: R.curry(createMemberValueNotBooleanWarning),

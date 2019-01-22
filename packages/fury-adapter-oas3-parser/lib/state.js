@@ -4,7 +4,12 @@ class State {
   }
 
   registerId(id) {
-    return this.registeredIds.add(id);
+    if (this.registeredIds.has(id)) {
+      return false;
+    }
+
+    this.registeredIds.add(id);
+    return true;
   }
 }
 

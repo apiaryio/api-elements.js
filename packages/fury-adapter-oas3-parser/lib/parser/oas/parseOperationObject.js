@@ -4,6 +4,7 @@ const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
   validateObjectContainsRequiredKeys,
+  createIdentifierNotUniqueWarning,
 } = require('../annotations');
 const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
@@ -44,10 +45,20 @@ function createTransactions(namespace, member, operation) {
 function parseOperationObject(context, member) {
   const { namespace } = context;
 
+  const isUnique = element => context.registerId(element.toValue());
+
+  const parseOperationId = R.curry(member => new namespace.elements.ParseResult([
+    R.unless(
+      R.compose(isUnique, getValue),
+      createIdentifierNotUniqueWarning(namespace, name),
+      member
+    ),
+  ]));
+
   const parseMember = R.cond([
     [hasKey('summary'), parseString(context, name, false)],
     [hasKey('description'), parseCopy(context, name, false)],
-    [hasKey('operationId'), parseString(context, name, false)],
+    [hasKey('operationId'), pipeParseResult(namespace, parseString(context, name, false), parseOperationId)],
     [hasKey('responses'), R.compose(parseResponsesObject(context), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
