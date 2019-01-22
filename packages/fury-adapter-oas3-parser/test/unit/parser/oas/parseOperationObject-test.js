@@ -27,6 +27,7 @@ describe('Operation Object', () => {
     const operation = new namespace.elements.Member('get', {
       responses: {
         200: {
+          description: 'dummy',
         },
       },
     });

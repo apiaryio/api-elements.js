@@ -7,6 +7,7 @@ const {
   createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
+  validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseMediaTypeObject = require('./parseMediaTypeObject');
@@ -16,6 +17,9 @@ const parseCopy = require('../parseCopy');
 const name = 'Response Object';
 const unsupportedKeys = [
   'headers', 'links',
+];
+const requiredKeys = [
+  'description',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -72,6 +76,7 @@ function parseResponseObject(context, element) {
   ]);
 
   const parseResponse = pipeParseResult(namespace,
+    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
     parseObject(context, name, parseMember),
     (responseObject) => {
       // Try to fecth responses from the media type parsing
