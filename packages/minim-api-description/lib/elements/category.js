@@ -43,7 +43,7 @@ module.exports = (namespace) => {
     }
 
     /**
-     * @name authSchemes
+     * @name authSchemeGroups
      * @type ArraySlice
      * @memberof Category.prototype
      */
