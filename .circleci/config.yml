@@ -35,6 +35,22 @@ jobs:
       - run: npm run lint
       - run: npx commitlint --from origin/master
 
+  docs:
+    <<: *defaults
+    docker:
+      - image: circleci/python:3.6-node-browsers
+    steps:
+      - checkout
+      - <<: *install
+      - run:
+          working_directory: docs
+          command: pipenv install --dev
+      - run:
+          working_directory: docs
+          command: |
+            export PATH="$(yarn bin):$PATH"
+            pipenv run make html
+
 workflows:
   version: 2
   test-publish:
@@ -43,3 +59,4 @@ workflows:
       - test-node8
       - test-node10
       - lint
+      - docs
