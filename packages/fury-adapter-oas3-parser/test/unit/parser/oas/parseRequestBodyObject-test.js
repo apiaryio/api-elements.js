@@ -29,17 +29,21 @@ describe('Request Body Object', () => {
     expect(result).to.contain.warning("'Request Body Object' is not an object");
   });
 
-  describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported description key', () => {
+  describe('#description', () => {
+    it('it expose description in content', () => {
       const request = new namespace.elements.Object({
         description: 'Example Request Body',
       });
 
       const result = parse(context, request);
 
-      expect(result).to.contain.warning("'Request Body Object' contains unsupported key 'description'");
+      expect(result).to.not.contain.annotations;
+      expect(result.length).to.be.equal(1);
+      expect(result.get(0).copy.toValue()).to.deep.equal(['Example Request Body']);
     });
+  });
 
+  describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported content key', () => {
       const request = new namespace.elements.Object({
         content: 'Example Request Body',

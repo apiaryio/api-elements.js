@@ -6,10 +6,11 @@ const {
   createInvalidMemberWarning,
 } = require('../annotations');
 const parseObject = require('../parseObject');
+const parseCopy = require('../parseCopy');
 
 const name = 'Request Body Object';
 const unsupportedKeys = [
-  'description', 'content', 'required',
+  'content', 'required',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -26,6 +27,8 @@ function parseRequestBodyObject(context, element) {
   const { namespace } = context;
 
   const parseMember = R.cond([
+    [hasKey('description'), parseCopy(context, name, false)],
+
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
@@ -37,7 +40,16 @@ function parseRequestBodyObject(context, element) {
 
   const parseRequestBodyObject = pipeParseResult(namespace,
     parseObject(context, name, parseMember),
-    () => new namespace.elements.HttpRequest());
+    (requestBodyObject) => {
+      const request = new namespace.elements.HttpRequest();
+      const description = requestBodyObject.get('description');
+
+      if (description) {
+        request.push(description);
+      }
+
+      return request;
+    });
 
   return parseRequestBodyObject(element);
 }
