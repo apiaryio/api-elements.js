@@ -44,16 +44,6 @@ describe('Request Body Object', () => {
   });
 
   describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported content key', () => {
-      const request = new namespace.elements.Object({
-        content: 'Example Request Body',
-      });
-
-      const result = parse(context, request);
-
-      expect(result).to.contain.warning("'Request Body Object' contains unsupported key 'content'");
-    });
-
     it('provides warning for unsupported required key', () => {
       const request = new namespace.elements.Object({
         required: true,
@@ -83,5 +73,38 @@ describe('Request Body Object', () => {
     const result = parse(context, request);
 
     expect(result).to.contain.warning("'Request Body Object' contains invalid key 'invalid'");
+  });
+
+  describe('#content', () => {
+    it('warns when content is not an object', () => {
+      const response = new namespace.elements.Object({
+        content: '',
+      });
+
+      const result = parse(context, response);
+
+      expect(result).to.contain.warning("'Request Body Object' 'content' is not an object");
+    });
+
+    it('returns a HTTP request elements matching the media types', () => {
+      const response = new namespace.elements.Object({
+        content: {
+          'application/json': {},
+          'text/plain': {},
+        },
+      });
+
+      const result = parse(context, response);
+
+      expect(result.length).to.equal(2);
+
+      const jsonRequest = result.get(0);
+      expect(jsonRequest).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(jsonRequest.contentType.toValue()).to.equal('application/json');
+
+      const textRequest = result.get(1);
+      expect(textRequest).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(textRequest.contentType.toValue()).to.equal('text/plain');
+    });
   });
 });
