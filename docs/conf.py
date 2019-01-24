@@ -9,7 +9,8 @@ IS_READTHEDOCS = os.environ.get('READTHEDOCS') == 'True'
 if IS_READTHEDOCS:
     docs_dir = os.path.dirname(__file__)
     project_dir = os.path.join(docs_dir, '..')
-    subprocess.check_call('npm install', cwd=project_dir, shell=True)
+    subprocess.check_call('npm install --global yarn', cwd=project_dir, shell=True)
+    subprocess.check_call('yarn', cwd=project_dir, shell=True)
 
 # -- General configuration ------------------------------------------------
 
