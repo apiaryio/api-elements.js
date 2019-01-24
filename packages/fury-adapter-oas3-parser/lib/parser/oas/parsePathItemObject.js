@@ -14,7 +14,7 @@ const pipeParseResult = require('../../pipeParseResult');
 
 const name = 'Path Item Object';
 const httpMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
-const unsupportedKeys = ['$ref', 'description', 'servers'];
+const unsupportedKeys = ['$ref', 'servers'];
 
 const isHttpMethodKey = R.anyPass(R.map(hasKey, httpMethods));
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
