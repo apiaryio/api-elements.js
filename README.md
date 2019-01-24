@@ -8,7 +8,7 @@ languages.
 API Elements adapters:
 
 - [API Blueprint Parser](packages/fury-adapter-apib-parser)
-- [API Blueprint Serializer](packages/fury-adapter-apib-parser)
+- [API Blueprint Serializer](packages/fury-adapter-apib-serializer)
 - [OpenAPI 2 Parser](packages/fury-adapter-swagger)
 - [OpenAPI 3 Parser](packages/fury-adapter-oas3-parser)
 
