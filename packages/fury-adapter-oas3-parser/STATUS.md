@@ -111,7 +111,7 @@ Key:
 | Location | Support |
 |:--|:--|
 | description | ✓ |
-| content | ✕ |
+| content | ✓ |
 | required | ✕ |
 
 ## Responses Object
