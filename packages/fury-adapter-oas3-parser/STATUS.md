@@ -110,7 +110,7 @@ Key:
 
 | Location | Support |
 |:--|:--|
-| description | ✕ |
+| description | ✓ |
 | content | ✕ |
 | required | ✕ |
 
