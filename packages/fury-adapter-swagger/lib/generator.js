@@ -18,18 +18,32 @@ faker.option({
 const schemaIsArrayAndHasItems = schema => schema.type && schema.type === 'array' && schema.items;
 const isEmptyArray = value => value && Array.isArray(value) && value.length === 0;
 
+function generateBody(schema) {
+  if (schema.allOf && schema.allOf.length === 1 && schema.allOf[0].examples && schema.allOf[0].examples.length > 0) {
+    return schema.allOf[0].examples[0];
+  }
+
+  if (schema.examples && schema.examples.length > 0) {
+    return schema.examples[0];
+  }
+
+  const body = faker.generate(schema);
+
+  if (isEmptyArray(body) && schemaIsArrayAndHasItems(schema)) {
+    // Faker failed to generate array schema, pass it `items` and wrap in array ourselves
+    return [faker.generate(schema.items)];
+  }
+
+  return body;
+}
+
 const bodyFromSchema = (schema, payload, parser, contentType = 'application/json') => {
   const dereferencedSchema = dereference(schema, schema);
   const { Asset } = parser.minim.elements;
   let asset = null;
 
   try {
-    let body = faker.generate(dereferencedSchema);
-
-    if (isEmptyArray(body) && schemaIsArrayAndHasItems(dereferencedSchema)) {
-      // Faker failed to generate array schema, pass it `items` and wrap in array ourselves
-      body = [faker.generate(dereferencedSchema.items)];
-    }
+    let body = generateBody(dereferencedSchema);
 
     if (typeof body !== 'string') {
       if (isFormURLEncoded(contentType)) {
