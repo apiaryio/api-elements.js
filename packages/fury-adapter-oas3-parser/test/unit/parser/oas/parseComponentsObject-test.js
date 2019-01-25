@@ -213,7 +213,7 @@ describe('Components Object', () => {
       expect(parseResult).to.not.contain.annotations;
     });
 
-    it('provides warning when waders is non-object', () => {
+    it('provides warning when headers is non-object', () => {
       const components = new namespace.elements.Object({
         headers: 'dummy',
       });
@@ -269,6 +269,40 @@ describe('Components Object', () => {
     });
   });
 
+  describe('#securitySchemes', () => {
+    it('provides a warning when securitySchemes is not an object', () => {
+      const components = new namespace.elements.Object({
+        securitySchemes: '',
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult).to.contain.warning("'Components Object' 'securitySchemes' is not an object");
+    });
+
+    it('parses valid securitySchemes', () => {
+      const components = new namespace.elements.Object({
+        securitySchemes: {
+          token: {
+            type: 'apiKey',
+            name: 'example',
+            in: 'query',
+          },
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(1);
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const securitySchemes = parsedComponents.get('securitySchemes');
+      expect(securitySchemes).to.be.instanceof(namespace.elements.Array);
+      expect(securitySchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(securitySchemes.get(0).meta.id.toValue()).to.equal('example');
+    });
+  });
+
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported examples key', () => {
       const components = new namespace.elements.Object({
@@ -278,16 +312,6 @@ describe('Components Object', () => {
       const parseResult = parse(context, components);
 
       expect(parseResult).to.contain.warning("'Components Object' contains unsupported key 'examples'");
-    });
-
-    it('provides warning for unsupported securitySchemes key', () => {
-      const components = new namespace.elements.Object({
-        securitySchemes: {},
-      });
-
-      const parseResult = parse(context, components);
-
-      expect(parseResult).to.contain.warning("'Components Object' contains unsupported key 'securitySchemes'");
     });
 
     it('provides warning for unsupported links key', () => {

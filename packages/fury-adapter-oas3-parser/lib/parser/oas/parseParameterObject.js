@@ -21,13 +21,6 @@ const unsupportedKeys = [
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-const isValidInValue = R.anyPass([
-  hasValue('query'),
-  hasValue('header'),
-  hasValue('path'),
-  hasValue('cookie'),
-]);
-
 const unreservedCharacterRegex = /^[A-z0-9\\.\\_\\~\\-]+$/;
 function nameContainsReservedCharacter(member) {
   return !unreservedCharacterRegex.test(member.value.toValue());
@@ -65,13 +58,18 @@ function validateRequiredForPathParameter(context, object, parameter) {
 function parseParameterObject(context, object) {
   const { namespace } = context;
 
+  const isValidInValue = R.anyPass([
+    hasValue('query'), hasValue('header'), hasValue('path'), hasValue('cookie'),
+  ]);
   const createInvalidInWarning = R.compose(
-    createWarning(namespace, `'${name}' 'in' must be either 'query, 'header', 'path' or 'cookie'`),
+    createWarning(namespace, `'${name}' 'in' must be either 'query', 'header', 'path' or 'cookie'`),
     getValue
   );
   const validateIn = R.unless(isValidInValue, createInvalidInWarning);
 
-  const isSupportedIn = R.anyPass([hasValue('path'), hasValue('query')]);
+  const isSupportedIn = R.anyPass([
+      hasValue('path'), hasValue('query'),
+  ]);
   const createUnsupportedInWarning = member => createWarning(namespace,
     `'${name}' 'in' '${member.value.toValue()}' is unsupported`, member.value);
   const ensureSupportedIn = R.unless(isSupportedIn, createUnsupportedInWarning);

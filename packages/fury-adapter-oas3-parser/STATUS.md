@@ -154,7 +154,7 @@ support.
 | examples | ✕ |
 | requestBodies | ✓ |
 | headers | [~](#header-object) |
-| securitySchemes | ✕ |
+| securitySchemes | [~](#security-scheme-object) |
 | links | ✕ |
 | callbacks | ✕ |
 
@@ -208,3 +208,25 @@ support.
 | required | ✕ |
 | deprecated | ✕ |
 | allowEmptyValue | ✕ |
+
+## Security Scheme Object
+
+| Field Name | Support |
+|:--|:--|
+| type | [~](#security-scheme-type) |
+| description | ✓ |
+| name | ✓ |
+| in | ✓ |
+| scheme | ✕ |
+| bearerFormat | ✕ |
+| flows | ✕ |
+| openIdConnectUrl | ✕ |
+
+## Security Scheme Type
+
+| Field Name | Support |
+|:--|:--|
+| apiKey | ✓ |
+| http | ✕ |
+| oauth2 | ✕ |
+| openIdConnect | ✕ |

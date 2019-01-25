@@ -9,15 +9,16 @@ const {
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const pipeParseResult = require('../../pipeParseResult');
+const parseMap = require('../parseMap');
 const parseSchemaObject = require('./parseSchemaObject');
 const parseParameterObject = require('./parseParameterObject');
 const parseResponseObject = require('./parseResponseObject');
 const parseRequestBodyObject = require('./parseRequestBodyObject');
-const parseMap = require('../parseMap');
 const parseHeaderObject = require('./parseHeaderObject');
+const parseSecuritySchemeObject = require('./parseSecuritySchemeObject');
 
 const name = 'Components Object';
-const unsupportedKeys = ['examples', 'securitySchemes', 'links', 'callbacks'];
+const unsupportedKeys = ['examples', 'links', 'callbacks'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 const valueIsObject = R.compose(isObject, getValue);
@@ -123,12 +124,26 @@ function parseComponentsObject(context, element) {
       return object;
     });
 
+  const parseSecuritySchemes = pipeParseResult(namespace,
+    parseComponentObjectMember(parseSecuritySchemeObject),
+    (object) => {
+      const array = new namespace.elements.Array([]);
+
+      object.forEach((value, key) => {
+        array.push(value);
+      });
+
+      return array;
+    });
+
   const parseMember = R.cond([
     [hasKey('schemas'), parseSchemas],
     [hasKey('parameters'), parseComponentObjectMember(parseParameterObject)],
     [hasKey('responses'), parseComponentObjectMember(parseResponseObject)],
     [hasKey('requestBodies'), parseComponentObjectMember(parseRequestBodyObject)],
     [hasKey('headers'), parseMap(context, name, 'headers', parseHeaderObject)],
+    [hasKey('securitySchemes'), parseSecuritySchemes],
+
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
