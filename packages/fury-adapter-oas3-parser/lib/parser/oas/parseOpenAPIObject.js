@@ -27,6 +27,45 @@ const unsupportedKeys = ['servers', 'security', 'tags', 'externalDocs'];
  */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
+function filterSourceMaps(result) {
+  if (isAnnotation(result)) {
+    return result;
+  }
+  if (result) {
+    if (!result.element) {
+      return result;
+    }
+    if (result.attributes) {
+      result.attributes.remove('sourceMap');
+      result.attributes.forEach((value, key, member) => {
+        filterSourceMaps(member);
+      });
+    }
+    if (result.meta) {
+      result.meta.forEach((value, key, member) => {
+        filterSourceMaps(member);
+      });
+    }
+    if (result.content) {
+      if (Array.isArray(result.content)) {
+        result.content.forEach((value) => {
+          filterSourceMaps(value);
+        });
+      }
+      if (result.content.key) {
+        filterSourceMaps(result.content.key);
+        if (result.content.value) {
+          filterSourceMaps(result.content.value);
+        }
+      }
+      if (result.content.element) {
+        filterSourceMaps(result.content);
+      }
+    }
+  }
+  return result;
+}
+
 function parseOASObject(context, object) {
   const { namespace } = context;
 
@@ -88,7 +127,8 @@ function parseOASObject(context, object) {
       return api;
     });
 
-  return parseOASObject(object);
+
+  return context.options.generateSourceMap ? parseOASObject(object) : filterSourceMaps(parseOASObject(object));
 }
 
 module.exports = R.curry(parseOASObject);
