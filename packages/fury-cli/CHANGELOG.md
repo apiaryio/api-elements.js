@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.8 (2019-01-25)
+
+### Enhancements
+
+- This update now uses fury-adapter-oas3-parser 0.4.0. Please see
+  [fury-adapter-oas3-parser 0.4.0](https://github.com/apiaryio/api-elements.js/blob/db9bdb65d403832aa6d02d7f2f3babe7ad3bbd1a/packages/fury-adapter-oas3-parser/CHANGELOG.md)
+  for the list of changes.
+
 ## 0.8.7 (2019-01-18)
 
 ### Enhancements
