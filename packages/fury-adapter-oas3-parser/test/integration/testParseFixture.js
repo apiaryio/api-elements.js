@@ -22,10 +22,10 @@ fury.use(adapter);
 const { minim: namespace } = fury;
 const parse = promisify(fury.parse.bind(fury));
 
-function testParseFixture(file) {
+function testParseFixture(file, generateSourceMap = false) {
   const source = fs.readFileSync(`${file}.yaml`, 'utf-8');
 
-  return parse({ source }).then((parseResult) => {
+  return parse({ source, generateSourceMap }).then((parseResult) => {
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
 
     // freeze elements to ensure there is no duplicate elements in tree,
@@ -34,7 +34,7 @@ function testParseFixture(file) {
 
     const result = JSON.stringify(namespace.serialiser.serialise(parseResult), null, 2);
 
-    const expectedPath = `${file}.json`;
+    const expectedPath = `${file + (generateSourceMap ? '.sourcemap' : '')}.json`;
 
     if (process.env.GENERATE) {
       fs.writeFileSync(expectedPath, result);

@@ -15,102 +15,12 @@
         },
         "title": {
           "element": "string",
-          "attributes": {
-            "sourceMap": {
-              "element": "array",
-              "content": [
-                {
-                  "element": "sourceMap",
-                  "content": [
-                    {
-                      "element": "array",
-                      "content": [
-                        {
-                          "element": "number",
-                          "attributes": {
-                            "line": {
-                              "element": "number",
-                              "content": 4
-                            },
-                            "column": {
-                              "element": "number",
-                              "content": 10
-                            }
-                          },
-                          "content": 49
-                        },
-                        {
-                          "element": "number",
-                          "attributes": {
-                            "line": {
-                              "element": "number",
-                              "content": 4
-                            },
-                            "column": {
-                              "element": "number",
-                              "content": 30
-                            }
-                          },
-                          "content": 20
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          },
           "content": "Parameter Components"
         }
       },
       "attributes": {
         "version": {
           "element": "string",
-          "attributes": {
-            "sourceMap": {
-              "element": "array",
-              "content": [
-                {
-                  "element": "sourceMap",
-                  "content": [
-                    {
-                      "element": "array",
-                      "content": [
-                        {
-                          "element": "number",
-                          "attributes": {
-                            "line": {
-                              "element": "number",
-                              "content": 3
-                            },
-                            "column": {
-                              "element": "number",
-                              "content": 12
-                            }
-                          },
-                          "content": 34
-                        },
-                        {
-                          "element": "number",
-                          "attributes": {
-                            "line": {
-                              "element": "number",
-                              "content": 3
-                            },
-                            "column": {
-                              "element": "number",
-                              "content": 17
-                            }
-                          },
-                          "content": 5
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          },
           "content": "1.0.0"
         }
       },
@@ -120,51 +30,6 @@
           "attributes": {
             "href": {
               "element": "string",
-              "attributes": {
-                "sourceMap": {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "sourceMap",
-                      "content": [
-                        {
-                          "element": "array",
-                          "content": [
-                            {
-                              "element": "number",
-                              "attributes": {
-                                "line": {
-                                  "element": "number",
-                                  "content": 6
-                                },
-                                "column": {
-                                  "element": "number",
-                                  "content": 3
-                                }
-                              },
-                              "content": 79
-                            },
-                            {
-                              "element": "number",
-                              "attributes": {
-                                "line": {
-                                  "element": "number",
-                                  "content": 6
-                                },
-                                "column": {
-                                  "element": "number",
-                                  "content": 8
-                                }
-                              },
-                              "content": 5
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              },
               "content": "/pets{?skip,limit}"
             },
             "hrefVariables": {
@@ -175,51 +40,6 @@
                   "meta": {
                     "description": {
                       "element": "string",
-                      "attributes": {
-                        "sourceMap": {
-                          "element": "array",
-                          "content": [
-                            {
-                              "element": "sourceMap",
-                              "content": [
-                                {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 24
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 20
-                                        }
-                                      },
-                                      "content": 510
-                                    },
-                                    {
-                                      "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 24
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 43
-                                        }
-                                      },
-                                      "content": 23
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      },
                       "content": "number of items to skip"
                     }
                   },
@@ -237,51 +57,6 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "attributes": {
-                        "sourceMap": {
-                          "element": "array",
-                          "content": [
-                            {
-                              "element": "sourceMap",
-                              "content": [
-                                {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 22
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 13
-                                        }
-                                      },
-                                      "content": 470
-                                    },
-                                    {
-                                      "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 22
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 17
-                                        }
-                                      },
-                                      "content": 4
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      },
                       "content": "skip"
                     }
                   }
@@ -291,51 +66,6 @@
                   "meta": {
                     "description": {
                       "element": "string",
-                      "attributes": {
-                        "sourceMap": {
-                          "element": "array",
-                          "content": [
-                            {
-                              "element": "sourceMap",
-                              "content": [
-                                {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 29
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 20
-                                        }
-                                      },
-                                      "content": 624
-                                    },
-                                    {
-                                      "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 29
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 41
-                                        }
-                                      },
-                                      "content": 21
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      },
                       "content": "max records to return"
                     }
                   },
@@ -353,51 +83,6 @@
                   "content": {
                     "key": {
                       "element": "string",
-                      "attributes": {
-                        "sourceMap": {
-                          "element": "array",
-                          "content": [
-                            {
-                              "element": "sourceMap",
-                              "content": [
-                                {
-                                  "element": "array",
-                                  "content": [
-                                    {
-                                      "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 27
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 13
-                                        }
-                                      },
-                                      "content": 583
-                                    },
-                                    {
-                                      "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 27
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 18
-                                        }
-                                      },
-                                      "content": 5
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      },
                       "content": "limit"
                     }
                   }
@@ -411,51 +96,6 @@
               "meta": {
                 "title": {
                   "element": "string",
-                  "attributes": {
-                    "sourceMap": {
-                      "element": "array",
-                      "content": [
-                        {
-                          "element": "sourceMap",
-                          "content": [
-                            {
-                              "element": "array",
-                              "content": [
-                                {
-                                  "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 11
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 16
-                                    }
-                                  },
-                                  "content": 227
-                                },
-                                {
-                                  "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 11
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 29
-                                    }
-                                  },
-                                  "content": 13
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  },
                   "content": "List all pets"
                 }
               },
@@ -468,51 +108,6 @@
                       "attributes": {
                         "method": {
                           "element": "string",
-                          "attributes": {
-                            "sourceMap": {
-                              "element": "array",
-                              "content": [
-                                {
-                                  "element": "sourceMap",
-                                  "content": [
-                                    {
-                                      "element": "array",
-                                      "content": [
-                                        {
-                                          "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 10
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 5
-                                            }
-                                          },
-                                          "content": 207
-                                        },
-                                        {
-                                          "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 10
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 8
-                                            }
-                                          },
-                                          "content": 3
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          },
                           "content": "GET"
                         }
                       }
@@ -552,51 +147,6 @@
                         },
                         {
                           "element": "copy",
-                          "attributes": {
-                            "sourceMap": {
-                              "element": "array",
-                              "content": [
-                                {
-                                  "element": "sourceMap",
-                                  "content": [
-                                    {
-                                      "element": "array",
-                                      "content": [
-                                        {
-                                          "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 14
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 24
-                                            }
-                                          },
-                                          "content": 296
-                                        },
-                                        {
-                                          "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 14
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 45
-                                            }
-                                          },
-                                          "content": 21
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          },
                           "content": "A paged array of pets"
                         }
                       ]
