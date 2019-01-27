@@ -158,7 +158,7 @@ function parsePathItemObject(context, member) {
     [hasKey('summary'), parseString(context, name, false)],
     [hasKey('description'), parseCopy(context, name, false)],
     [hasKey('parameters'), R.curry(parseParameters)(context, member.key)],
-    [isHttpMethodKey, parseOperationObject(context)],
+    [isHttpMethodKey, parseOperationObject(context, member.key)],
 
     // FIXME Parse $ref
     // FIXME Parse servers

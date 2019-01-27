@@ -2,6 +2,10 @@
 
 ## Master
 
+### Enhancements
+
+- Path and query parameters are not supported in 'Operation Object'
+
 ### Bug Fixes
 
 - Unsupported properties in 'Parameter Object' will now emit an unsupported

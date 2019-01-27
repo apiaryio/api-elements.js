@@ -271,6 +271,178 @@
                   "content": "listPets"
                 }
               },
+              "attributes": {
+                "href": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 10
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 3
+                                    }
+                                  },
+                                  "content": 148
+                                },
+                                {
+                                  "element": "number",
+                                  "attributes": {
+                                    "line": {
+                                      "element": "number",
+                                      "content": 10
+                                    },
+                                    "column": {
+                                      "element": "number",
+                                      "content": 8
+                                    }
+                                  },
+                                  "content": 5
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "/pets{?limit}"
+                },
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 19
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 24
+                                            }
+                                          },
+                                          "content": 331
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 19
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 70
+                                            }
+                                          },
+                                          "content": 46
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "How many items to return at one time (max 100)"
+                        }
+                      },
+                      "attributes": {
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "required"
+                            }
+                          ]
+                        }
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 17
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 17
+                                            }
+                                          },
+                                          "content": 282
+                                        },
+                                        {
+                                          "element": "number",
+                                          "attributes": {
+                                            "line": {
+                                              "element": "number",
+                                              "content": 17
+                                            },
+                                            "column": {
+                                              "element": "number",
+                                              "content": 22
+                                            }
+                                          },
+                                          "content": 5
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "limit"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
               "content": [
                 {
                   "element": "httpTransaction",
@@ -1465,28 +1637,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 16
+                          "content": 21
                         },
                         "column": {
                           "element": "number",
-                          "content": 7
+                          "content": 11
                         }
                       },
-                      "content": 254
+                      "content": 414
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 16
+                          "content": 21
                         },
                         "column": {
                           "element": "number",
                           "content": 17
                         }
                       },
-                      "content": 10
+                      "content": 6
                     }
                   ]
                 }
@@ -1495,7 +1667,7 @@
           ]
         }
       },
-      "content": "'Operation Object' contains unsupported key 'parameters'"
+      "content": "'Parameter Object' contains unsupported key 'schema'"
     },
     {
       "element": "annotation",
@@ -1707,7 +1879,7 @@
           ]
         }
       },
-      "content": "'Parameter Object' contains invalid key 'schema'"
+      "content": "'Parameter Object' contains unsupported key 'schema'"
     },
     {
       "element": "annotation",

@@ -7,6 +7,8 @@ const { minim: namespace } = new Fury();
 
 describe('Operation Object', () => {
   let context;
+  const path = new namespace.elements.String('/');
+
   beforeEach(() => {
     context = new Context(namespace);
   });
@@ -16,7 +18,7 @@ describe('Operation Object', () => {
       responses: {},
     });
 
-    const result = parse(context, operation);
+    const result = parse(context, path, operation);
 
     expect(result.length).to.equal(1);
     const transition = result.get(0);
@@ -32,7 +34,7 @@ describe('Operation Object', () => {
       },
     });
 
-    const result = parse(context, operation);
+    const result = parse(context, path, operation);
 
     expect(result.length).to.equal(1);
 
@@ -52,7 +54,7 @@ describe('Operation Object', () => {
   it('provides warning when operation is non-object', () => {
     const operation = new namespace.elements.Member('get', null);
 
-    const result = parse(context, operation);
+    const result = parse(context, path, operation);
 
     expect(result.length).to.equal(1);
     expect(result).to.contain.warning("'Operation Object' is not an object");
@@ -65,7 +67,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'tags'");
     });
@@ -76,20 +78,9 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'externalDocs'");
-    });
-
-    it('provides warning for unsupported parameters key', () => {
-      const operation = new namespace.elements.Member('get', {
-        parameters: '',
-        responses: {},
-      });
-
-      const result = parse(context, operation);
-
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'parameters'");
     });
 
     it('provides warning for unsupported requestBody key', () => {
@@ -98,7 +89,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'requestBody'");
     });
@@ -109,7 +100,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'callbacks'");
     });
@@ -120,7 +111,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'deprecated'");
     });
@@ -131,7 +122,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'security'");
     });
@@ -142,7 +133,7 @@ describe('Operation Object', () => {
         'x-extension': '',
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result).to.not.contain.annotations;
     });
@@ -154,7 +145,7 @@ describe('Operation Object', () => {
       invalid: '',
     });
 
-    const result = parse(context, operation);
+    const result = parse(context, path, operation);
 
     expect(result).to.contain.warning("'Operation Object' contains invalid key 'invalid'");
   });
@@ -163,7 +154,7 @@ describe('Operation Object', () => {
     it('provides error for missing responses', () => {
       const operation = new namespace.elements.Member('get', {});
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("'Operation Object' is missing required property 'responses'");
@@ -178,7 +169,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
@@ -192,7 +183,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result.length).to.equal(1);
 
@@ -209,7 +200,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result.length).to.equal(1);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
@@ -222,7 +213,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
@@ -238,7 +229,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result.length).to.equal(2);
       expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
@@ -252,7 +243,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, operation);
+      const result = parse(context, path, operation);
 
       expect(result.length).to.equal(1);
 
@@ -272,7 +263,7 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const resultA = parse(context, operationA);
+      const resultA = parse(context, path, operationA);
 
       {
         expect(resultA.length).to.equal(1);
@@ -281,13 +272,121 @@ describe('Operation Object', () => {
         expect(transition.id.toValue()).to.equal('exampleId');
       }
 
-      const resultB = parse(context, operationB);
+      const resultB = parse(context, path, operationB);
       {
         expect(resultB.length).to.equal(2);
         const transition = resultB.get(0);
         expect(transition).to.be.instanceof(namespace.elements.Transition);
         expect(resultB).to.contain.warning("'Operation Object' 'operationId' is not a unique identifier: 'exampleId'");
       }
+    });
+  });
+
+  describe('#parameters', () => {
+    it('warns when parameters is not an array', () => {
+      const operation = new namespace.elements.Member('get', {
+        parameters: {},
+        responses: {},
+      });
+
+      const result = parse(context, path, operation);
+
+      expect(result.length).to.equal(2);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+      expect(result).to.contain.warning("'Operation Object' 'parameters' is not an array");
+    });
+
+    describe('path parameters', () => {
+      it('exposes parameter in hrefVariables', () => {
+        const operation = new namespace.elements.Member('get', {
+          parameters: [
+            {
+              name: 'resource',
+              in: 'path',
+            },
+          ],
+          responses: {},
+        });
+
+        const result = parse(context, path, operation);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+        const transition = result.get(0);
+        expect(transition.hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
+        expect(transition.hrefVariables.length).to.equal(1);
+        expect(transition.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);
+      });
+    });
+
+    describe('query parameters', () => {
+      it('exposes query parameter in href', () => {
+        const operation = new namespace.elements.Member('get', {
+          parameters: [
+            {
+              name: 'categories',
+              in: 'query',
+            },
+          ],
+          responses: {},
+        });
+
+        const result = parse(context, path, operation);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+        const transition = result.get(0);
+        expect(transition.href.toValue()).to.equal('/{?categories}');
+      });
+
+      it('exposes multiple query parameter in href', () => {
+        const operation = new namespace.elements.Member('get', {
+          parameters: [
+            {
+              name: 'categories',
+              in: 'query',
+            },
+            {
+              name: 'tags',
+              in: 'query',
+            },
+          ],
+          responses: {},
+        });
+
+        const result = parse(context, path, operation);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+        const transition = result.get(0);
+        expect(transition.href.toValue()).to.equal('/{?categories,tags}');
+      });
+
+      it('exposes query parameter in hrefVariables', () => {
+        const operation = new namespace.elements.Member('get', {
+          parameters: [
+            {
+              name: 'resource',
+              in: 'query',
+            },
+          ],
+          responses: {},
+        });
+
+        const result = parse(context, path, operation);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+        const transition = result.get(0);
+        expect(transition.hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
+        expect(transition.hrefVariables.length).to.equal(1);
+        expect(transition.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);
+      });
     });
   });
 });
