@@ -80,7 +80,7 @@ describe('Parameter Object', () => {
       const result = parse(context, parameter);
 
       expect(result.length).to.equal(1);
-      expect(result).to.contain.error("Only 'in' values of 'path' and 'query' are supported at the moment");
+      expect(result).to.contain.warning("Only 'in' values of 'path' and 'query' are supported at the moment");
     });
 
     it('provides an unsupported error for cookie parameters', () => {
@@ -92,7 +92,7 @@ describe('Parameter Object', () => {
       const result = parse(context, parameter);
 
       expect(result.length).to.equal(1);
-      expect(result).to.contain.error("Only 'in' values of 'path' and 'query' are supported at the moment");
+      expect(result).to.contain.warning("Only 'in' values of 'path' and 'query' are supported at the moment");
     });
   });
 

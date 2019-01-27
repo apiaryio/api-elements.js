@@ -2,6 +2,7 @@ const R = require('ramda');
 const { isExtension, hasKey } = require('../../predicates');
 const {
   createError,
+  createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
 } = require('../annotations');
@@ -46,9 +47,8 @@ function parseParameterObject(context, object) {
   const validateIn = R.unless(isValidInValue, createError(namespace,
     "'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'"));
 
-  // FIXME: The following should not be an error
   const isSupportedIn = R.anyPass([hasValue('path'), hasValue('query')]);
-  const ensureSupportedIn = R.unless(isSupportedIn, createError(namespace,
+  const ensureSupportedIn = R.unless(isSupportedIn, createWarning(namespace,
     "Only 'in' values of 'path' and 'query' are supported at the moment"));
 
   const parseIn = pipeParseResult(namespace,
