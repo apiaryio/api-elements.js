@@ -46,6 +46,43 @@
                   "content": "listPets"
                 }
               },
+              "attributes": {
+                "href": {
+                  "element": "string",
+                  "content": "/pets{?limit}"
+                },
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": {
+                          "element": "string",
+                          "content": "How many items to return at one time (max 100)"
+                        }
+                      },
+                      "attributes": {
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "required"
+                            }
+                          ]
+                        }
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "limit"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
               "content": [
                 {
                   "element": "httpTransaction",
@@ -520,28 +557,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 16
+                          "content": 21
                         },
                         "column": {
                           "element": "number",
-                          "content": 7
+                          "content": 11
                         }
                       },
-                      "content": 254
+                      "content": 414
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 16
+                          "content": 21
                         },
                         "column": {
                           "element": "number",
                           "content": 17
                         }
                       },
-                      "content": 10
+                      "content": 6
                     }
                   ]
                 }
@@ -550,7 +587,7 @@
           ]
         }
       },
-      "content": "'Operation Object' contains unsupported key 'parameters'"
+      "content": "'Parameter Object' contains unsupported key 'schema'"
     },
     {
       "element": "annotation",
