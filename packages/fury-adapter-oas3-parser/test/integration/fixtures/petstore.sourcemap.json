@@ -27,30 +27,10 @@
                       "content": [
                         {
                           "element": "number",
-                          "attributes": {
-                            "line": {
-                              "element": "number",
-                              "content": 4
-                            },
-                            "column": {
-                              "element": "number",
-                              "content": 10
-                            }
-                          },
                           "content": 49
                         },
                         {
                           "element": "number",
-                          "attributes": {
-                            "line": {
-                              "element": "number",
-                              "content": 4
-                            },
-                            "column": {
-                              "element": "number",
-                              "content": 26
-                            }
-                          },
                           "content": 16
                         }
                       ]
@@ -78,30 +58,10 @@
                       "content": [
                         {
                           "element": "number",
-                          "attributes": {
-                            "line": {
-                              "element": "number",
-                              "content": 3
-                            },
-                            "column": {
-                              "element": "number",
-                              "content": 12
-                            }
-                          },
                           "content": 34
                         },
                         {
                           "element": "number",
-                          "attributes": {
-                            "line": {
-                              "element": "number",
-                              "content": 3
-                            },
-                            "column": {
-                              "element": "number",
-                              "content": 17
-                            }
-                          },
                           "content": 5
                         }
                       ]
@@ -132,30 +92,10 @@
                           "content": [
                             {
                               "element": "number",
-                              "attributes": {
-                                "line": {
-                                  "element": "number",
-                                  "content": 10
-                                },
-                                "column": {
-                                  "element": "number",
-                                  "content": 3
-                                }
-                              },
                               "content": 148
                             },
                             {
                               "element": "number",
-                              "attributes": {
-                                "line": {
-                                  "element": "number",
-                                  "content": 10
-                                },
-                                "column": {
-                                  "element": "number",
-                                  "content": 8
-                                }
-                              },
                               "content": 5
                             }
                           ]
@@ -186,30 +126,10 @@
                               "content": [
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 12
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 16
-                                    }
-                                  },
                                   "content": 179
                                 },
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 12
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 29
-                                    }
-                                  },
                                   "content": 13
                                 }
                               ]
@@ -235,30 +155,10 @@
                               "content": [
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 13
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 20
-                                    }
-                                  },
                                   "content": 212
                                 },
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 13
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 28
-                                    }
-                                  },
                                   "content": 8
                                 }
                               ]
@@ -286,30 +186,10 @@
                               "content": [
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 10
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 3
-                                    }
-                                  },
                                   "content": 148
                                 },
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 10
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 8
-                                    }
-                                  },
                                   "content": 5
                                 }
                               ]
@@ -341,30 +221,10 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 19
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 24
-                                            }
-                                          },
                                           "content": 331
                                         },
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 19
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 70
-                                            }
-                                          },
                                           "content": 46
                                         }
                                       ]
@@ -403,30 +263,10 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 17
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 17
-                                            }
-                                          },
                                           "content": 282
                                         },
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 17
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 22
-                                            }
-                                          },
                                           "content": 5
                                         }
                                       ]
@@ -464,30 +304,10 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 11
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 5
-                                            }
-                                          },
                                           "content": 159
                                         },
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 11
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 8
-                                            }
-                                          },
                                           "content": 3
                                         }
                                       ]
@@ -548,30 +368,10 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 26
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 24
-                                            }
-                                          },
                                           "content": 529
                                         },
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 26
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 45
-                                            }
-                                          },
                                           "content": 21
                                         }
                                       ]
@@ -606,30 +406,10 @@
                               "content": [
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 43
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 16
-                                    }
-                                  },
                                   "content": 1034
                                 },
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 43
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 28
-                                    }
-                                  },
                                   "content": 12
                                 }
                               ]
@@ -655,30 +435,10 @@
                               "content": [
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 44
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 20
-                                    }
-                                  },
                                   "content": 1066
                                 },
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 44
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 30
-                                    }
-                                  },
                                   "content": 10
                                 }
                               ]
@@ -712,30 +472,10 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 42
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 5
-                                            }
-                                          },
                                           "content": 1013
                                         },
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 42
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 9
-                                            }
-                                          },
                                           "content": 4
                                         }
                                       ]
@@ -772,30 +512,10 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 49
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 24
-                                            }
-                                          },
                                           "content": 1159
                                         },
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 49
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 37
-                                            }
-                                          },
                                           "content": 13
                                         }
                                       ]
@@ -832,30 +552,10 @@
                           "content": [
                             {
                               "element": "number",
-                              "attributes": {
-                                "line": {
-                                  "element": "number",
-                                  "content": 56
-                                },
-                                "column": {
-                                  "element": "number",
-                                  "content": 3
-                                }
-                              },
                               "content": 1354
                             },
                             {
                               "element": "number",
-                              "attributes": {
-                                "line": {
-                                  "element": "number",
-                                  "content": 56
-                                },
-                                "column": {
-                                  "element": "number",
-                                  "content": 16
-                                }
-                              },
                               "content": 13
                             }
                           ]
@@ -887,30 +587,10 @@
                                   "content": [
                                     {
                                       "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 61
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 22
-                                        }
-                                      },
                                       "content": 1466
                                     },
                                     {
                                       "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 61
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 51
-                                        }
-                                      },
                                       "content": 29
                                     }
                                   ]
@@ -949,30 +629,10 @@
                                   "content": [
                                     {
                                       "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 58
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 15
-                                        }
-                                      },
                                       "content": 1399
                                     },
                                     {
                                       "element": "number",
-                                      "attributes": {
-                                        "line": {
-                                          "element": "number",
-                                          "content": 58
-                                        },
-                                        "column": {
-                                          "element": "number",
-                                          "content": 20
-                                        }
-                                      },
                                       "content": 5
                                     }
                                   ]
@@ -1007,30 +667,10 @@
                               "content": [
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 65
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 16
-                                    }
-                                  },
                                   "content": 1559
                                 },
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 65
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 39
-                                    }
-                                  },
                                   "content": 23
                                 }
                               ]
@@ -1056,30 +696,10 @@
                               "content": [
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 66
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 20
-                                    }
-                                  },
                                   "content": 1602
                                 },
                                 {
                                   "element": "number",
-                                  "attributes": {
-                                    "line": {
-                                      "element": "number",
-                                      "content": 66
-                                    },
-                                    "column": {
-                                      "element": "number",
-                                      "content": 31
-                                    }
-                                  },
                                   "content": 11
                                 }
                               ]
@@ -1113,30 +733,10 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 64
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 5
-                                            }
-                                          },
                                           "content": 1539
                                         },
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 64
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 8
-                                            }
-                                          },
                                           "content": 3
                                         }
                                       ]
@@ -1197,30 +797,10 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 71
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 24
-                                            }
-                                          },
                                           "content": 1696
                                         },
                                         {
                                           "element": "number",
-                                          "attributes": {
-                                            "line": {
-                                              "element": "number",
-                                              "content": 71
-                                            },
-                                            "column": {
-                                              "element": "number",
-                                              "content": 60
-                                            }
-                                          },
                                           "content": 36
                                         }
                                       ]
@@ -1273,30 +853,10 @@
                                 "content": [
                                   {
                                     "element": "number",
-                                    "attributes": {
-                                      "line": {
-                                        "element": "number",
-                                        "content": 84
-                                      },
-                                      "column": {
-                                        "element": "number",
-                                        "content": 5
-                                      }
-                                    },
                                     "content": 2060
                                   },
                                   {
                                     "element": "number",
-                                    "attributes": {
-                                      "line": {
-                                        "element": "number",
-                                        "content": 84
-                                      },
-                                      "column": {
-                                        "element": "number",
-                                        "content": 8
-                                      }
-                                    },
                                     "content": 3
                                   }
                                 ]
@@ -1338,30 +898,10 @@
                                     "content": [
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 90
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 9
-                                          }
-                                        },
                                         "content": 2154
                                       },
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 90
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 11
-                                          }
-                                        },
                                         "content": 2
                                       }
                                     ]
@@ -1406,30 +946,10 @@
                                     "content": [
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 93
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 9
-                                          }
-                                        },
                                         "content": 2214
                                       },
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 93
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 13
-                                          }
-                                        },
                                         "content": 4
                                       }
                                     ]
@@ -1463,30 +983,10 @@
                                     "content": [
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 95
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 9
-                                          }
-                                        },
                                         "content": 2251
                                       },
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 95
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 12
-                                          }
-                                        },
                                         "content": 3
                                       }
                                     ]
@@ -1525,30 +1025,10 @@
                                 "content": [
                                   {
                                     "element": "number",
-                                    "attributes": {
-                                      "line": {
-                                        "element": "number",
-                                        "content": 97
-                                      },
-                                      "column": {
-                                        "element": "number",
-                                        "content": 5
-                                      }
-                                    },
                                     "content": 2283
                                   },
                                   {
                                     "element": "number",
-                                    "attributes": {
-                                      "line": {
-                                        "element": "number",
-                                        "content": 97
-                                      },
-                                      "column": {
-                                        "element": "number",
-                                        "content": 9
-                                      }
-                                    },
                                     "content": 4
                                   }
                                 ]
@@ -1598,30 +1078,10 @@
                                 "content": [
                                   {
                                     "element": "number",
-                                    "attributes": {
-                                      "line": {
-                                        "element": "number",
-                                        "content": 101
-                                      },
-                                      "column": {
-                                        "element": "number",
-                                        "content": 5
-                                      }
-                                    },
                                     "content": 2365
                                   },
                                   {
                                     "element": "number",
-                                    "attributes": {
-                                      "line": {
-                                        "element": "number",
-                                        "content": 101
-                                      },
-                                      "column": {
-                                        "element": "number",
-                                        "content": 10
-                                      }
-                                    },
                                     "content": 5
                                   }
                                 ]
@@ -1663,30 +1123,10 @@
                                     "content": [
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 107
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 9
-                                          }
-                                        },
                                         "content": 2466
                                       },
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 107
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 13
-                                          }
-                                        },
                                         "content": 4
                                       }
                                     ]
@@ -1731,30 +1171,10 @@
                                     "content": [
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 110
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 9
-                                          }
-                                        },
                                         "content": 2528
                                       },
                                       {
                                         "element": "number",
-                                        "attributes": {
-                                          "line": {
-                                            "element": "number",
-                                            "content": 110
-                                          },
-                                          "column": {
-                                            "element": "number",
-                                            "content": 16
-                                          }
-                                        },
                                         "content": 7
                                       }
                                     ]
