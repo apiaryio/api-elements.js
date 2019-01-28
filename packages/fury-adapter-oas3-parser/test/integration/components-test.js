@@ -8,4 +8,9 @@ describe('components', () => {
     const file = path.join(fixtures, 'path-item-object-parameters');
     return testParseFixture(file);
   });
+
+  it("'Path Item Object' parameter referencing unsupported parameter", () => {
+    const file = path.join(fixtures, 'path-item-object-parameters-unsupported-parameter');
+    return testParseFixture(file);
+  });
 });

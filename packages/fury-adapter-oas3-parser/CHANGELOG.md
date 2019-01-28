@@ -18,6 +18,10 @@
 - Parameter names containing unreserved URI Template characters (`-`, `.`, `_`,
   and `~`) are now supported.
 
+- Referencing (`$ref`) a parameter that couldn't be parsed (due to the
+  parameter failing validation) will no longer cause a cryptic error that the
+  referenced object was not defined.
+
 ## 0.4.0 (25-01-19)
 
 ### Enhancements

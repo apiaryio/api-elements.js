@@ -83,6 +83,32 @@ describe('Components Object', () => {
       expect(parameters.get('limitParam')).to.be.instanceof(namespace.elements.Member);
       expect(parameters.get('limitParam').key.toValue()).to.equal('limit');
     });
+
+    it('parses unsupported parameters', () => {
+      const components = new namespace.elements.Object({
+        parameters: {
+          limitParam: {
+            name: 'limit',
+            in: 'cookie',
+          },
+        },
+      });
+
+      const result = parse(context, components);
+
+      expect(result).to.contain.warning("'Parameter Object' 'in' cookie is unsupported");
+
+      const parsedComponents = result.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const parameters = parsedComponents.get('parameters');
+      expect(parameters).to.be.instanceof(namespace.elements.Object);
+      expect(result.length).to.equal(2);
+
+      const parameter = parameters.getMember('limitParam');
+      expect(parameter).to.be.instanceof(namespace.elements.Member);
+      expect(parameter.value).to.be.undefined;
+    });
   });
 
   describe('warnings for unsupported properties', () => {
