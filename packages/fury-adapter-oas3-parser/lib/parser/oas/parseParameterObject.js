@@ -44,20 +44,28 @@ function nameContainsReservedCharacter(member) {
 function parseParameterObject(context, object) {
   const { namespace } = context;
 
-  const validateIn = R.unless(isValidInValue, createError(namespace,
-    "'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'"));
+  const createInvalidInError = R.compose(
+    createError(namespace, `'${name}' 'in' must be either 'query, 'header', 'path' or 'cookie'`),
+    getValue
+  );
+  const validateIn = R.unless(isValidInValue, createInvalidInError);
 
   const isSupportedIn = R.anyPass([hasValue('path'), hasValue('query')]);
-  const ensureSupportedIn = R.unless(isSupportedIn, createWarning(namespace,
-    "Only 'in' values of 'path' and 'query' are supported at the moment"));
+  const createUnsupportedInWarning = R.compose(
+    createWarning(namespace, "Only 'in' values of 'path' and 'query' are supported at the moment"),
+    getValue
+  );
+  const ensureSupportedIn = R.unless(isSupportedIn, createUnsupportedInWarning);
 
   const parseIn = pipeParseResult(namespace,
     parseString(context, name, true),
     validateIn,
     ensureSupportedIn);
 
-  const createUnsupportedNameError = createError(namespace,
-    `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`);
+  const createUnsupportedNameError = R.compose(
+    createError(namespace, `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`),
+    getValue
+  );
   const validateName = R.when(nameContainsReservedCharacter, createUnsupportedNameError);
   const parseName = pipeParseResult(namespace,
     parseString(context, name, true),
