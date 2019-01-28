@@ -14,8 +14,8 @@ const parseBoolean = require('../parseBoolean');
 const name = 'Parameter Object';
 const requiredKeys = ['name', 'in'];
 const unsupportedKeys = [
-  // FIXME Only contains "fixed" fields from spec
-  'deprecated', 'allowEmptyValue',
+  'deprecated', 'allowEmptyValue', 'style', 'explode', 'allowReserved',
+  'schema', 'example', 'examples', 'content',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 

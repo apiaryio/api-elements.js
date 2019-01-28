@@ -1707,7 +1707,7 @@
           ]
         }
       },
-      "content": "'Parameter Object' contains invalid key 'schema'"
+      "content": "'Parameter Object' contains unsupported key 'schema'"
     },
     {
       "element": "annotation",

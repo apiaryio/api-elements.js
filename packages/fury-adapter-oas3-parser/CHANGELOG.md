@@ -1,5 +1,13 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Unsupported properties in 'Parameter Object' will now emit an unsupported
+  warning, previously using unsupported properties was emitting a warning that
+  the properties were invalid.
+
 ## 0.4.0 (25-01-19)
 
 ### Enhancements
