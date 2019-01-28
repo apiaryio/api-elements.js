@@ -28,44 +28,73 @@ const unsupportedKeys = ['servers', 'security', 'tags', 'externalDocs'];
  */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-function filterSourceMaps(result) {
-  if (isAnnotation(result)) {
-    return result;
+const recurseSkippingAnnotations = R.curry((visitor, e) => {
+  if (isAnnotation(e)) {
+    return e;
   }
-  if (result) {
-    if (!result.element) {
-      return result;
+  if (e) {
+    if (!e.element) {
+      return e;
     }
-    if (result._attributes) {
-      result.attributes.remove('sourceMap');
-      result.attributes.forEach((value, key, member) => {
-        filterSourceMaps(member);
+
+    visitor(e);
+
+    if (e._attributes) {
+      e.attributes.forEach((value, key, member) => {
+        recurseSkippingAnnotations(visitor, member);
       });
     }
-    if (result._meta) {
-      result.meta.forEach((value, key, member) => {
-        filterSourceMaps(member);
+    if (e._meta) {
+      e.meta.forEach((value, key, member) => {
+        recurseSkippingAnnotations(visitor, member);
       });
     }
-    if (result.content) {
-      if (Array.isArray(result.content)) {
-        result.content.forEach((value) => {
-          filterSourceMaps(value);
+    if (e.content) {
+      if (Array.isArray(e.content)) {
+        e.content.forEach((value) => {
+          recurseSkippingAnnotations(visitor, value);
         });
       }
-      if (result.content.key) {
-        filterSourceMaps(result.content.key);
-        if (result.content.value) {
-          filterSourceMaps(result.content.value);
+      if (e.content.key) {
+        recurseSkippingAnnotations(visitor, e.content.key);
+        if (e.content.value) {
+          recurseSkippingAnnotations(visitor, e.content.value);
         }
       }
-      if (result.content.element) {
-        filterSourceMaps(result.content);
+      if (e.content.element) {
+        recurseSkippingAnnotations(visitor, e.content);
       }
     }
   }
-  return result;
+  return e;
+});
+
+function removeSourceMap(e) {
+  if (e._attributes) {
+    e.attributes.remove('sourceMap');
+  }
 }
+
+function removeColumnLine(result) {
+  if (result._attributes) {
+    const sourceMaps = result.attributes.get('sourceMap');
+    if (sourceMaps) {
+      sourceMaps.content.forEach((sourceMap) => {
+        sourceMap.content.forEach((sourcePoint) => {
+          sourcePoint.content.forEach((sourceCoordinate) => {
+            if (sourceCoordinate._attributes) {
+              sourceCoordinate.attributes.remove('line');
+              sourceCoordinate.attributes.remove('column');
+            }
+          });
+        });
+      });
+    }
+  }
+}
+
+const filterColumnLine = recurseSkippingAnnotations(removeColumnLine);
+const filterSourceMaps = recurseSkippingAnnotations(removeSourceMap);
 
 function parseOASObject(context, object) {
   const { namespace } = context;
@@ -128,7 +157,10 @@ function parseOASObject(context, object) {
     });
 
 
-  return context.options.generateSourceMap ? parseOASObject(object) : filterSourceMaps(parseOASObject(object));
+  if (context.options.generateSourceMap) {
+    return filterColumnLine(parseOASObject(object));
+  }
+  return filterSourceMaps(parseOASObject(object));
 }
 
 module.exports = R.curry(parseOASObject);
