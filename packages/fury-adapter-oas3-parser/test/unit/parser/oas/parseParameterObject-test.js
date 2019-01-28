@@ -184,7 +184,7 @@ describe('Parameter Object', () => {
   });
 
   describe('warnings for unsupported properties', () => {
-    it('provides warning for unknown deprecated property', () => {
+    it('provides warning for unsupported deprecated property', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
         in: 'path',
@@ -196,7 +196,7 @@ describe('Parameter Object', () => {
       expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'deprecated'");
     });
 
-    it('provides warning for unknown deprecated property', () => {
+    it('provides warning for unsupported allowEmptyValue property', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
         in: 'path',
@@ -206,6 +206,90 @@ describe('Parameter Object', () => {
       const result = parse(context, parameter);
 
       expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'allowEmptyValue'");
+    });
+
+    it('provides warning for unsupported style property', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'path',
+        style: 'simple',
+      });
+
+      const result = parse(context, parameter);
+
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'style'");
+    });
+
+    it('provides warning for unsupported explode property', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'path',
+        explode: true,
+      });
+
+      const result = parse(context, parameter);
+
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'explode'");
+    });
+
+    it('provides warning for unsupported allowReserved property', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'path',
+        allowReserved: true,
+      });
+
+      const result = parse(context, parameter);
+
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'allowReserved'");
+    });
+
+    it('provides warning for unsupported schema property', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'path',
+        schema: { type: 'string' },
+      });
+
+      const result = parse(context, parameter);
+
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'schema'");
+    });
+
+    it('provides warning for unsupported example property', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'direction',
+        in: 'path',
+        example: 'east',
+      });
+
+      const result = parse(context, parameter);
+
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'example'");
+    });
+
+    it('provides warning for unsupported examples property', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'direction',
+        in: 'path',
+        examples: {},
+      });
+
+      const result = parse(context, parameter);
+
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'examples'");
+    });
+
+    it('provides warning for unsupported content property', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'direction',
+        in: 'path',
+        content: {},
+      });
+
+      const result = parse(context, parameter);
+
+      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'content'");
     });
 
     it('does not provide warning/errors for extensions', () => {
