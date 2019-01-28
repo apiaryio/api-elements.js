@@ -1,5 +1,5 @@
 const R = require('ramda');
-const { isExtension, hasKey } = require('../../predicates');
+const { isExtension, hasKey, getValue } = require('../../predicates');
 const {
   createError,
   createWarning,
@@ -27,9 +27,9 @@ const isValidInValue = R.anyPass([
   hasValue('cookie'),
 ]);
 
-
+const unreservedCharacterRegex = /^[A-z0-9\\.\\_\\~\\-]+$/;
 function nameContainsReservedCharacter(member) {
-  return !/^[A-z0-9]+$/.test(member.value.toValue());
+  return !unreservedCharacterRegex.test(member.value.toValue());
 }
 
 /**

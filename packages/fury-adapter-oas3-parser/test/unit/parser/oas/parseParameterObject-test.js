@@ -44,6 +44,24 @@ describe('Parameter Object', () => {
       expect(result.length).to.equal(1);
       expect(result).to.contain.error("'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported");
     });
+
+    it('allows name to contain unreserved URI Template characters', () => {
+      // as per https://tools.ietf.org/html/rfc6570#section-1.5
+      const alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const digit = '0123456789';
+      const unreserved = `${alpha}${digit}-._~`;
+
+      const parameter = new namespace.elements.Object({
+        name: unreserved,
+        in: 'path',
+      });
+
+      const result = parse(context, parameter);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(result.get(0).key.toValue()).to.equal(unreserved);
+    });
   });
 
   describe('#in', () => {

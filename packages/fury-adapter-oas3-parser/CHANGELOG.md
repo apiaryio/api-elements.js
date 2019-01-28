@@ -15,6 +15,9 @@
 - The parser will no longer error out for unsupported parameter 'in' values,
   instead an unsupported warning will be emitted.
 
+- Parameter names containing unreserved URI Template characters (`-`, `.`, `_`,
+  and `~`) are now supported.
+
 ## 0.4.0 (25-01-19)
 
 ### Enhancements
