@@ -35,44 +35,8 @@ function extractPathVariables(path) {
   return [];
 }
 
-function createErrorForMissingPathParameter(namespace, path, variable) {
-  // FIXME: This shouldn't be an error
-  const message = `Path '${path.toValue()}' contains variable '${variable}' which is not declared in the parameters section of the '${name}'`;
-  return createError(namespace, message, path);
-}
-
 function createErrorForMissingPathVariable(namespace, path, variable) {
   return createError(namespace, `Path '${path.toValue()}' is missing path variable '${variable}'. Add '{${variable}}' to the path`, path);
-}
-
-/**
- * Validates that there is a href variable for each path variable in the given path
- * @param namespace
- * @param path {StringElement}
- * @param pathItem {ObjectElement}
- * @retuns ParseResult<ObjectElement>
- */
-function validatePathForMissingHrefVariables(namespace, path, pathItem) {
-  const pathVariables = extractPathVariables(path.toValue());
-
-  const parameters = pathItem.get('parameters')
-    ? pathItem.get('parameters')
-    : new namespace.elements.Object();
-
-  const hrefVariables = parameters.get('path')
-    ? parameters.get('path')
-    : new namespace.elements.HrefVariables();
-
-  const missingParameters = hrefVariables
-    ? pathVariables.filter(name => !hrefVariables.getMember(name))
-    : pathVariables;
-
-  if (missingParameters.length > 0) {
-    const toError = R.curry(createErrorForMissingPathParameter)(namespace, path);
-    return new namespace.elements.ParseResult(missingParameters.map(toError));
-  }
-
-  return new namespace.elements.ParseResult([pathItem]);
 }
 
 /**
@@ -174,7 +138,6 @@ function parsePathItemObject(context, member) {
 
   const parsePathItem = pipeParseResult(namespace,
     parseObject(context, name, parseMember),
-    R.curry(validatePathForMissingHrefVariables)(namespace, member.key),
     (pathItem) => {
       const resource = new namespace.elements.Resource();
 
