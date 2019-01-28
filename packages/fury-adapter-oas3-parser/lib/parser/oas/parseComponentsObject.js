@@ -48,7 +48,16 @@ function parseComponentsObject(context, element) {
     const Member = R.constructN(2, namespace.elements.Member)(member.key);
     const parseResult = parseParameterObject(context, member.value);
     // Wrap non-annotation elements in member element
-    return R.map(R.unless(isAnnotation, Member), parseResult);
+    const result = R.map(R.unless(isAnnotation, Member), parseResult);
+
+    if (result.annotations.length === result.length) {
+      // failed to parse parameter, let's store a member without a value
+      // in parameters components section so dereferencing can know if the
+      // parameter existing under the key name
+      result.unshift(new namespace.elements.Member(member.key));
+    }
+
+    return result;
   };
 
   const parseParametersObject = pipeParseResult(namespace,

@@ -1,0 +1,22 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Unsupported Parameter Components
+paths:
+  /pets:
+    parameters:
+      - $ref: '#/components/parameters/authParam'
+    get:
+      summary: List all pets
+      responses:
+        '200':
+          description: A paged array of pets
+          content:
+            application/json:
+              schema:
+                type: array
+components:
+  parameters:
+    authParam:
+      name: Authorization
+      in: header

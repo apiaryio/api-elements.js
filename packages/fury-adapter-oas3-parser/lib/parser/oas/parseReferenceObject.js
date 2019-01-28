@@ -18,7 +18,9 @@ const requiredKeys = ['$ref'];
  * @param namespace {Namespace}
  * @param componentName {string}
  * @param element {Element}
- * @returns ParseResult
+ * @returns ParseResult - A parse result containing error if the referenced
+ * object was not found, the referenced element, or if the referenced
+ * element was not successfully parsed, an empty parse result.
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#referenceObject
  */
@@ -50,12 +52,16 @@ function parseReferenceObject(context, componentName, element) {
       return createError(namespace, `'#/components/${componentName}' is not defined`, ref);
     }
 
-    const element = component.get(referenceParts[3]);
+    const element = component.getMember(referenceParts[3]);
     if (!element) {
       return createError(namespace, `'${ref.toValue()}' is not defined`, ref);
     }
 
-    return element;
+    if (element.value) {
+      return element.value;
+    }
+
+    return new namespace.elements.ParseResult([]);
   };
 
   const parseMember = R.cond([

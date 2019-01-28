@@ -43,6 +43,21 @@ describe('Reference Object', () => {
     expect(structure).to.equal(dataStructure);
   });
 
+  it('can parse a reference to a component that could not be parsed', () => {
+    context.state.components = new namespace.elements.Object({
+      schemas: {
+        Node: undefined,
+      },
+    });
+
+    const reference = new namespace.elements.Object({
+      $ref: '#/components/schemas/Node',
+    });
+    const result = parse(context, 'schemas', reference);
+
+    expect(result.length).to.equal(0);
+  });
+
   describe('invalid references', () => {
     it('errors when parsing a non-components reference', () => {
       const reference = new namespace.elements.Object({
