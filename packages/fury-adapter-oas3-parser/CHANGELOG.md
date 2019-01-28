@@ -12,6 +12,9 @@
   warning, previously using unsupported properties was emitting a warning that
   the properties were invalid.
 
+- The parser will no longer error out for unsupported parameter 'in' values,
+  instead an unsupported warning will be emitted.
+
 ## 0.4.0 (25-01-19)
 
 ### Enhancements

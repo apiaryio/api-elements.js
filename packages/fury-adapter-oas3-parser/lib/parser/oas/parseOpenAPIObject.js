@@ -8,7 +8,6 @@ const {
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
-  validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
@@ -104,8 +103,7 @@ function parseOASObject(context, object) {
   ]);
 
   const parseOASObject = pipeParseResult(namespace,
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, name, parseMember),
+    parseObject(context, name, parseMember, requiredKeys),
     (object) => {
       const api = object.get('info');
 

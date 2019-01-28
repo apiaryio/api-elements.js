@@ -2,7 +2,8 @@ const R = require('ramda');
 const {
   isAnnotation, isMember, isParseResult, isObject,
 } = require('../predicates');
-const { createWarning } = require('./annotations');
+const { createError, createWarning } = require('./annotations');
+const pipeParseResult = require('../pipeParseResult');
 
 /*
  * Returns true iff the given element is either an annotation or member element
@@ -27,6 +28,36 @@ const chainParseResult = R.curry((transform, parseResult) => {
 });
 
 const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
+
+// FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
+const hasMember = R.curry((object, key) => {
+  const findKey = R.allPass([isMember, member => member.key.toValue() === key]);
+  const matchingMembers = object.content.filter(findKey);
+  return matchingMembers.length > 0;
+});
+
+const validateObjectContainsRequiredKeys = R.curry((namespace, path, requiredKeys, object) => {
+  const missingKeys = R.reject(hasMember(object), requiredKeys);
+  const errorFromKey = key => createError(namespace, `'${path}' is missing required property '${key}'`, object);
+
+  if (missingKeys.length > 0) {
+    return new namespace.elements.ParseResult(
+      R.map(errorFromKey, missingKeys)
+    );
+  }
+
+  return new namespace.elements.ParseResult([object]);
+});
+
+const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKeys, object) => {
+  const missingKeys = R.reject(hasMember(object), requiredKeys);
+
+  if (missingKeys.length > 0) {
+    return new namespace.elements.ParseResult();
+  }
+
+  return new namespace.elements.ParseResult([object]);
+});
 
 /**
  * A callback for transforming a member element
@@ -59,19 +90,15 @@ const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
  * |-------->-------->--------------------->---------------------|
  *
  * @param namespace
+ * @param name {string} - The human readable name of the element. Used for annotation messages.
  * @param transform {transformMember} - The callback to transform a member
+ * @param requiredKeys {string[]} - The callback to transform a member
  * @param object {ObjectElement} - The object containing members to transform
  *
  * @returns ParseResult<ObjectElement>
  */
-function parseObject(context, name, parseMember, object) {
+function parseObject(context, name, parseMember, requiredKeys) {
   const { namespace } = context;
-
-  if (!isObject(object)) {
-    return new namespace.elements.ParseResult([
-      createWarning(namespace, `'${name}' is not an object`, object),
-    ]);
-  }
 
   // Create a member from a key and value
   const createMember = R.constructN(2, namespace.elements.Member);
@@ -112,8 +139,12 @@ function parseObject(context, name, parseMember, object) {
     R.unless(parseResultHasErrors, convertParseResultMembersToObject)
   );
 
-  return validateMembers(object);
+  return pipeParseResult(namespace,
+    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
+    validateObjectContainsRequiredKeys(namespace, name, requiredKeys || []),
+    validateMembers,
+    validateObjectContainsRequiredKeysNoError(namespace, requiredKeys || []));
 }
 
 
-module.exports = R.curry(parseObject);
+module.exports = parseObject;

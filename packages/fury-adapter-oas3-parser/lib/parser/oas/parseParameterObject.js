@@ -2,9 +2,9 @@ const R = require('ramda');
 const { isExtension, hasKey } = require('../../predicates');
 const {
   createError,
+  createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
-  validateObjectContainsRequiredKeys,
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
@@ -47,9 +47,8 @@ function parseParameterObject(context, object) {
   const validateIn = R.unless(isValidInValue, createError(namespace,
     "'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'"));
 
-  // FIXME: The following should not be an error
   const isSupportedIn = R.anyPass([hasValue('path'), hasValue('query')]);
-  const ensureSupportedIn = R.unless(isSupportedIn, createError(namespace,
+  const ensureSupportedIn = R.unless(isSupportedIn, createWarning(namespace,
     "Only 'in' values of 'path' and 'query' are supported at the moment"));
 
   const parseIn = pipeParseResult(namespace,
@@ -80,8 +79,7 @@ function parseParameterObject(context, object) {
   ]);
 
   const parseParameter = pipeParseResult(namespace,
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys),
-    parseObject(context, name, parseMember),
+    parseObject(context, name, parseMember, requiredKeys),
     (parameter) => {
       const member = new namespace.elements.Member(parameter.get('name'));
 

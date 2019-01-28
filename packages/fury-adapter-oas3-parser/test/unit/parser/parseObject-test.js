@@ -1,3 +1,4 @@
+const R = require('ramda');
 const { Fury } = require('fury');
 const { expect } = require('../chai');
 const parseObject = require('../../../lib/parser/parseObject');
@@ -23,14 +24,14 @@ describe('#parseObject', () => {
     const element = new namespace.elements.String();
 
     const parseMember = member => member;
-    const parseResult = parseObject(context, name, parseMember, element);
+    const parseResult = parseObject(context, name, parseMember)(element);
 
     expect(parseResult).to.contain.warning("'Example Object' is not an object");
   });
 
   it('can parse an object when the transform returns a member element', () => {
     const parseMember = member => member;
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -42,7 +43,7 @@ describe('#parseObject', () => {
 
   it('can parse an object when the transform returns a value to be wrapped in a member', () => {
     const parseMember = member => member.value;
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -54,7 +55,7 @@ describe('#parseObject', () => {
 
   it('can parse an object when the transform returns a parse result', () => {
     const parseMember = member => new namespace.elements.ParseResult([member]);
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -66,7 +67,7 @@ describe('#parseObject', () => {
 
   it('can parse an object when the transform returns a parse result containing a value to be wrapped in a member', () => {
     const parseMember = member => new namespace.elements.ParseResult([member.value]);
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -84,7 +85,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([member, warning]);
     };
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(3);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -106,7 +107,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([member, warning]);
     };
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(2);
     expect(parseResult.errors.get(0).toValue()).to.equal('name error');
@@ -121,7 +122,7 @@ describe('#parseObject', () => {
       );
       return new namespace.elements.ParseResult([warning]);
     };
-    const parseResult = parseObject(context, name, parseMember, object);
+    const parseResult = parseObject(context, name, parseMember)(object);
 
     expect(parseResult.length).to.equal(3);
     expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
@@ -129,5 +130,41 @@ describe('#parseObject', () => {
 
     expect(parseResult.warnings.get(0).toValue()).to.equal('name warning');
     expect(parseResult.warnings.get(1).toValue()).to.equal('message warning');
+  });
+
+  describe('required keys', () => {
+    it('validates that the object contains any required keys', () => {
+      const parseResult = parseObject(context, name, R.T, ['name', 'required1', 'required2'])(object);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.errors.toValue()).to.deep.equal([
+        "'Example Object' is missing required property 'required1'",
+        "'Example Object' is missing required property 'required2'",
+      ]);
+    });
+
+    it('fails object parsing when member parse cannot parse required key', () => {
+      const parseMember = (member) => {
+        const warning = new namespace.elements.Annotation(
+          `${member.key.toValue()} warning`,
+          { classes: ['warning'] }
+        );
+        return new namespace.elements.ParseResult([warning]);
+      };
+      const parseResult = parseObject(context, name, parseMember, ['name'])(object);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.annotations.toValue()).to.deep.equal([
+        'name warning',
+        'message warning',
+      ]);
+    });
+
+    it('can parse object with required keys', () => {
+      const parseResult = parseObject(context, name, R.T, ['name'])(object);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
+    });
   });
 });

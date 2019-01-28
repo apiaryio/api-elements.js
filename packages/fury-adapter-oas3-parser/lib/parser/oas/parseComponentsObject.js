@@ -67,7 +67,7 @@ function parseComponentsObject(context, element) {
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  return parseObject(context, name, parseMember, element);
+  return parseObject(context, name, parseMember)(element);
 }
 
 
