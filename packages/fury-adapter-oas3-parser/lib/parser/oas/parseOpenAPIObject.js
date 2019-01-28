@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 const R = require('ramda');
 
 const {
@@ -35,13 +37,13 @@ function filterSourceMaps(result) {
     if (!result.element) {
       return result;
     }
-    if (result.attributes) {
+    if (result._attributes) {
       result.attributes.remove('sourceMap');
       result.attributes.forEach((value, key, member) => {
         filterSourceMaps(member);
       });
     }
-    if (result.meta) {
+    if (result._meta) {
       result.meta.forEach((value, key, member) => {
         filterSourceMaps(member);
       });
