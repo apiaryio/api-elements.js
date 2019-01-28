@@ -216,15 +216,6 @@ describe('#parsePathItemObject', () => {
         expect(result.length).to.equal(1);
         expect(result).to.contain.error("Path '/' is missing path variable 'resource'. Add '{resource}' to the path");
       });
-
-      it('errors when path variable not defined in parameters', () => {
-        const path = new namespace.elements.Member('/{resource}', {});
-
-        const result = parse(context, path);
-
-        expect(result.length).to.equal(1);
-        expect(result).to.contain.error("Path '/{resource}' contains variable 'resource' which is not declared in the parameters section of the 'Path Item Object'");
-      });
     });
 
     describe('query parameters', () => {
