@@ -38,7 +38,8 @@ either be a `-` to accept stdin or a file path. The document can be any of the
 following formats:
 
 - API Blueprint
-- Swagger
+- OpenAPI 2 (Swagger)
+- OpenAPI 3
 - *Legacy* Apiary Blueprint
 
 Fury will detect the API format you have used from the input document.
@@ -53,7 +54,16 @@ Description format.
 - API Elements (YAML) `application/vnd.refract.parse-result+yaml`
 - API Blueprint `text/vnd.apiblueprint`
 
-### Converting Swagger to API Blueprint
+### Converting OpenAPI to API Blueprint
+
+As an example, you can use Fury to convert both OpenAPI 2 or OpenAPI 3 API
+Description Documents into API Blueprint.
+
+```shell
+$ fury --format text/vnd.apiblueprint openapi.json apiary.apib
+```
+
+### Converting OpenAPI 3 to API Blueprint
 
 As an example, you can use Fury to convert a Swagger API Description into API
 Blueprint.
