@@ -13,4 +13,9 @@ describe('components', () => {
     const file = path.join(fixtures, 'path-item-object-parameters-unsupported-parameter');
     return testParseFixture(file);
   });
+
+  it("'Media Type Object' schema references", () => {
+    const file = path.join(fixtures, 'media-type-object-schema');
+    return testParseFixture(file);
+  });
 });
