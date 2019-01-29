@@ -1,23 +1,21 @@
 const R = require('ramda');
-const { isObject, isDataStructure } = require('../predicates');
+const { isObject, isAnnotation } = require('../predicates');
 const parseReferenceObject = require('./oas/parseReferenceObject');
 
 function isReferenceObject(element) {
   return isObject(element) && element.get('$ref') !== undefined;
 }
 
-function parseReference(component, parser, context, element, returnReferenceElement) {
+function parseReference(component, parser, context, element, isInsideSchema) {
   if (isReferenceObject(element)) {
-    const result = parseReferenceObject(context, component, element, returnReferenceElement);
+    const result = parseReferenceObject(context, component, element, component === 'schemas');
 
-    if (component === 'schemas') {
-      const convertToReference = R.when(isDataStructure, (structure) => {
-        const element = new context.namespace.Element();
-        element.element = structure.content.id.toValue();
-        return new context.namespace.elements.DataStructure(element);
-      });
-
-      return R.map(convertToReference, result);
+    // If we're referencing a schema object and we're not inside a schema
+    // parser (subschema), then we want to wrap the object in a data structure element
+    if (!isInsideSchema && component === 'schemas') {
+      const DataStructure = R.constructN(1, context.namespace.elements.DataStructure);
+      const wrapInDataStructure = R.unless(isAnnotation, DataStructure);
+      return R.map(wrapInDataStructure, result);
     }
 
     return result;
