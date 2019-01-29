@@ -2076,7 +2076,7 @@
           ]
         }
       },
-      "content": "'Responses Object' default responses unsupported"
+      "content": "'Responses Object' default responses are unsupported"
     },
     {
       "element": "annotation",
@@ -2196,7 +2196,7 @@
           ]
         }
       },
-      "content": "'Responses Object' default responses unsupported"
+      "content": "'Responses Object' default responses are unsupported"
     },
     {
       "element": "annotation",
@@ -2376,7 +2376,7 @@
           ]
         }
       },
-      "content": "'Responses Object' default responses unsupported"
+      "content": "'Responses Object' default responses are unsupported"
     },
     {
       "element": "annotation",
