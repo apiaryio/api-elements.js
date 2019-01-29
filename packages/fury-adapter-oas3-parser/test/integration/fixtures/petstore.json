@@ -318,7 +318,45 @@
                     "element": "string",
                     "content": "Pet"
                   }
-                }
+                },
+                "content": [
+                  {
+                    "element": "member",
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "id"
+                      },
+                      "value": {
+                        "element": "number"
+                      }
+                    }
+                  },
+                  {
+                    "element": "member",
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "name"
+                      },
+                      "value": {
+                        "element": "string"
+                      }
+                    }
+                  },
+                  {
+                    "element": "member",
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "tag"
+                      },
+                      "value": {
+                        "element": "string"
+                      }
+                    }
+                  }
+                ]
               }
             },
             {
@@ -342,7 +380,33 @@
                     "element": "string",
                     "content": "Error"
                   }
-                }
+                },
+                "content": [
+                  {
+                    "element": "member",
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "code"
+                      },
+                      "value": {
+                        "element": "number"
+                      }
+                    }
+                  },
+                  {
+                    "element": "member",
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "message"
+                      },
+                      "value": {
+                        "element": "string"
+                      }
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -965,28 +1029,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 89
+                          "content": 92
                         },
                         "column": {
                           "element": "number",
-                          "content": 7
+                          "content": 11
                         }
                       },
-                      "content": 2134
+                      "content": 2192
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 89
+                          "content": 92
                         },
                         "column": {
                           "element": "number",
                           "content": 17
                         }
                       },
-                      "content": 10
+                      "content": 6
                     }
                   ]
                 }
@@ -995,7 +1059,7 @@
           ]
         }
       },
-      "content": "'Schema Object' contains unsupported key 'properties'"
+      "content": "'Schema Object' contains unsupported key 'format'"
     },
     {
       "element": "annotation",
@@ -1145,28 +1209,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 106
+                          "content": 109
                         },
                         "column": {
                           "element": "number",
-                          "content": 7
+                          "content": 11
                         }
                       },
-                      "content": 2446
+                      "content": 2506
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 106
+                          "content": 109
                         },
                         "column": {
                           "element": "number",
                           "content": 17
                         }
                       },
-                      "content": 10
+                      "content": 6
                     }
                   ]
                 }
@@ -1175,7 +1239,7 @@
           ]
         }
       },
-      "content": "'Schema Object' contains unsupported key 'properties'"
+      "content": "'Schema Object' contains unsupported key 'format'"
     }
   ]
 }
