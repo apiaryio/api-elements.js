@@ -11,9 +11,10 @@ const parseObject = require('../parseObject');
 const pipeParseResult = require('../../pipeParseResult');
 const parseSchemaObject = require('./parseSchemaObject');
 const parseParameterObject = require('./parseParameterObject');
+const parseResponseObject = require('./parseResponseObject');
 
 const name = 'Components Object';
-const unsupportedKeys = ['responses', 'examples', 'requestBodies', 'headers', 'securitySchemes', 'links', 'callbacks'];
+const unsupportedKeys = ['examples', 'requestBodies', 'headers', 'securitySchemes', 'links', 'callbacks'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 const valueIsObject = R.compose(isObject, getValue);
@@ -48,9 +49,10 @@ const parseComponentMember = R.curry((context, parser, member) => {
   // Create a Member Element with `member.key` as the key
   const Member = R.constructN(2, context.namespace.elements.Member)(member.key);
 
-  const parseResult = pipeParseResult(context.namespace,
-    parser(context),
-    Member)(member.value);
+  const parseResult = R.map(
+    R.unless(isAnnotation, Member),
+    parser(context, member.value)
+  );
 
   if (isParseResultEmpty(parseResult)) {
     // parse result does not contain a member, that's because parsing a
@@ -121,6 +123,7 @@ function parseComponentsObject(context, element) {
   const parseMember = R.cond([
     [hasKey('schemas'), parseSchemas],
     [hasKey('parameters'), parseComponentObjectMember(parseParameterObject)],
+    [hasKey('responses'), parseComponentObjectMember(parseResponseObject)],
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result

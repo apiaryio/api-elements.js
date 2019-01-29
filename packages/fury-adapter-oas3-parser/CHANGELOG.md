@@ -5,6 +5,7 @@
 ### Enhancements
 
 - Object properties in a Schema Object are now supported.
+- Referencing (`$ref`) a response object is now supported.
 
 ## 0.4.1 (28-01-19)
 
