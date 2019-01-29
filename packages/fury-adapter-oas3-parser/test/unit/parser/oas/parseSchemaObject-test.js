@@ -279,4 +279,42 @@ describe('Schema Object', () => {
       expect(enumeration.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     });
   });
+
+  describe('object type', () => {
+    describe('#properties', () => {
+      it('warns when properties is not an object', () => {
+        const schema = new namespace.elements.Object({
+          type: 'object',
+          properties: [],
+        });
+        const result = parse(context, schema);
+
+        expect(result.length).to.equal(2);
+
+        expect(result).to.contain.warning(
+          "'Schema Object' 'properties' is not an object"
+        );
+      });
+
+      it('returns an object with properties', () => {
+        const schema = new namespace.elements.Object({
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+          },
+        });
+        const result = parse(context, schema);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(result).to.not.contain.annotations;
+
+        const object = result.get(0).content;
+        expect(object).to.be.instanceof(namespace.elements.Object);
+
+        const name = object.get('name');
+        expect(name).to.be.instanceof(namespace.elements.String);
+      });
+    });
+  });
 });

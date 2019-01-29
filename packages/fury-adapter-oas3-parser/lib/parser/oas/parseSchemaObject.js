@@ -19,7 +19,7 @@ const unsupportedKeys = [
   'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'required',
 
   // JSON Schema + OAS 3 specific rules
-  'allOf', 'oneOf', 'anyOf', 'not', 'items', 'properties',
+  'allOf', 'oneOf', 'anyOf', 'not', 'items',
   'additionalProperties', 'description', 'format', 'default',
 
   // OAS 3 specific
@@ -44,16 +44,7 @@ const parseEnum = context => pipeParseResult(context.namespace,
     return enumElement;
   });
 
-/**
- * Parse Schema Object
- *
- * @param namespace {Namespace}
- * @param element {Element}
- * @returns ParseResult
- *
- * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject
- */
-function parseSchemaObject(context, element) {
+function parseSchema(context) {
   const { namespace } = context;
 
   const ensureValidType = R.unless(isValidType, createWarning(namespace,
@@ -63,10 +54,13 @@ function parseSchemaObject(context, element) {
     parseString(context, name, false),
     ensureValidType);
 
+  const recurse = element => parseSchema(context)(element);
+  const parseProperties = parseObject(context, `${name}' 'properties`, R.compose(recurse, getValue));
+
   const parseMember = R.cond([
     [hasKey('type'), parseType],
-
     [hasKey('enum'), R.compose(parseEnum(context), getValue)],
+    [hasKey('properties'), R.compose(parseProperties, getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -74,7 +68,7 @@ function parseSchemaObject(context, element) {
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const parseSchema = pipeParseResult(namespace,
+  return pipeParseResult(namespace,
     parseObject(context, name, parseMember),
     (schema) => {
       // FIXME: Return a dataStructure to represent the given schema
@@ -86,7 +80,11 @@ function parseSchemaObject(context, element) {
       if (enumerations) {
         element = enumerations;
       } else if (type === 'object') {
-        element = new namespace.elements.Object();
+        element = schema.get('properties');
+
+        if (!element) {
+          element = new namespace.elements.Object();
+        }
       } else if (type === 'array') {
         element = new namespace.elements.Array();
       } else if (type === 'string') {
@@ -101,10 +99,25 @@ function parseSchemaObject(context, element) {
         return new namespace.elements.ParseResult();
       }
 
-      return new namespace.elements.DataStructure(element);
+      return element;
     });
+}
 
-  return parseSchema(element);
+/**
+ * Parse Schema Object
+ *
+ * @param namespace {Namespace}
+ * @param element {Element}
+ * @returns ParseResult
+ *
+ * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject
+ */
+function parseSchemaObject(context, element) {
+  const DataStructure = R.constructN(1, context.namespace.elements.DataStructure);
+
+  return pipeParseResult(context.namespace,
+    parseSchema(context),
+    DataStructure)(element);
 }
 
 module.exports = R.curry(parseSchemaObject);
