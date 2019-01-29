@@ -34,23 +34,6 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 function parseResponseObject(context, element) {
   const { namespace } = context;
 
-  if (!element.key.toValue().match(/^\d\d\d$/)) {
-    // FIXME Add support for status code ranges
-    // https://github.com/apiaryio/fury-adapter-oas3-parser/issues/64
-
-    let message;
-
-    if (element.key.toValue() === 'default') {
-      message = `'${name}' default responses unsupported`;
-    } else {
-      message = `'${name}' response status code ranges are unsupported`;
-    }
-
-    return new namespace.elements.ParseResult([
-      createWarning(namespace, message, element),
-    ]);
-  }
-
   const validateIsObject = key => R.unless(isObject,
     createWarning(namespace, `'${name}' '${key}' is not an object`));
 
@@ -84,8 +67,6 @@ function parseResponseObject(context, element) {
       const description = responseObject.get('description');
 
       return new namespace.elements.ParseResult(responses.map((response) => {
-        response.statusCode = element.key.toValue();
-
         if (description) {
           response.push(description);
         }
@@ -94,7 +75,7 @@ function parseResponseObject(context, element) {
       }));
     });
 
-  return parseResponse(element.value);
+  return parseResponse(element);
 }
 
 module.exports = R.curry(parseResponseObject);

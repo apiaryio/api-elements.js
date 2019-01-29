@@ -12,7 +12,7 @@ describe('Response Object', () => {
   });
 
   it('returns an HTTP response element', () => {
-    const response = new namespace.elements.Member('200', {
+    const response = new namespace.elements.Object({
       description: 'response',
     });
     const result = parse(context, response);
@@ -20,30 +20,11 @@ describe('Response Object', () => {
     expect(result.length).to.equal(1);
     const httpResponse = result.get(0);
     expect(httpResponse).to.be.instanceof(namespace.elements.HttpResponse);
-    expect(httpResponse.attributes.get('statusCode').toValue()).to.be.equal('200');
-  });
-
-  describe('status code', () => {
-    it('provides a warning for default responses', () => {
-      const response = new namespace.elements.Member('default', {});
-      const result = parse(context, response);
-
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.warning("'Response Object' default responses unsupported");
-    });
-
-    it('provides a warning for range responses', () => {
-      const response = new namespace.elements.Member('2XX', {});
-      const result = parse(context, response);
-
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.warning("'Response Object' response status code ranges are unsupported");
-    });
   });
 
   describe('#description', () => {
     it('exposes description of response', () => {
-      const response = new namespace.elements.Member('200', {
+      const response = new namespace.elements.Object({
         description: 'Example Response',
       });
 
@@ -55,7 +36,7 @@ describe('Response Object', () => {
     });
 
     it('does not accept description if not string', () => {
-      const response = new namespace.elements.Member('200', {
+      const response = new namespace.elements.Object({
         description: [],
       });
 
@@ -65,7 +46,7 @@ describe('Response Object', () => {
     });
 
     it('provide warning if description is missing', () => {
-      const response = new namespace.elements.Member('200', {
+      const response = new namespace.elements.Object({
       });
 
       const result = parse(context, response);
@@ -85,7 +66,7 @@ describe('Response Object', () => {
 
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported headers key', () => {
-      const response = new namespace.elements.Member('200', {
+      const response = new namespace.elements.Object({
         description: 'response 200',
         headers: 'dummy',
       });
@@ -96,7 +77,7 @@ describe('Response Object', () => {
     });
 
     it('provides warning for unsupported links key', () => {
-      const response = new namespace.elements.Member('200', {
+      const response = new namespace.elements.Object({
         description: 'response 200',
         links: 'dummy',
       });
@@ -107,7 +88,7 @@ describe('Response Object', () => {
     });
 
     it('does not provide warning/errors for extensions', () => {
-      const response = new namespace.elements.Member('200', {
+      const response = new namespace.elements.Object({
         description: 'response 200',
         'x-extension': '',
       });
@@ -119,7 +100,7 @@ describe('Response Object', () => {
   });
 
   it('provides warning for invalid keys', () => {
-    const response = new namespace.elements.Member('200', {
+    const response = new namespace.elements.Object({
       description: 'response 200',
       invalid: '',
     });
@@ -131,7 +112,7 @@ describe('Response Object', () => {
 
   describe('#content', () => {
     it('warns when content is not an object', () => {
-      const response = new namespace.elements.Member('200', {
+      const response = new namespace.elements.Object({
         description: 'response 200',
         content: '',
       });
@@ -142,7 +123,7 @@ describe('Response Object', () => {
     });
 
     it('returns a HTTP response elements matching the media types', () => {
-      const response = new namespace.elements.Member('200', {
+      const response = new namespace.elements.Object({
         description: 'response 200',
         content: {
           'application/json': {},

@@ -726,8 +726,52 @@
           ]
         }
       },
-      "attributes": {},
-      "content": "'Response Object' default responses unsupported"
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 36
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 9
+                        }
+                      },
+                      "content": 838
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 36
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 16
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Responses Object' default responses unsupported"
     },
     {
       "element": "annotation",
@@ -802,8 +846,52 @@
           ]
         }
       },
-      "attributes": {},
-      "content": "'Response Object' default responses unsupported"
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 50
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 9
+                        }
+                      },
+                      "content": 1181
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 50
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 16
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Responses Object' default responses unsupported"
     },
     {
       "element": "annotation",
@@ -938,8 +1026,52 @@
           ]
         }
       },
-      "attributes": {},
-      "content": "'Response Object' default responses unsupported"
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 76
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 9
+                        }
+                      },
+                      "content": 1862
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 76
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 16
+                        }
+                      },
+                      "content": 7
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Responses Object' default responses unsupported"
     },
     {
       "element": "annotation",
