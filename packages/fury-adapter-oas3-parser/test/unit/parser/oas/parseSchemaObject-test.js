@@ -315,6 +315,32 @@ describe('Schema Object', () => {
         const name = object.get('name');
         expect(name).to.be.instanceof(namespace.elements.String);
       });
+
+      it('returns an object with properties including references', () => {
+        context.state.components = new namespace.elements.Object({
+          schemas: {
+            name: { type: 'object' },
+          },
+        });
+        const schema = new namespace.elements.Object({
+          type: 'object',
+          properties: {
+            name: { $ref: '#/components/schemas/name' },
+          },
+        });
+        const result = parse(context, schema);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(result).to.not.contain.annotations;
+
+        const object = result.get(0).content;
+        expect(object).to.be.instanceof(namespace.elements.Object);
+
+        const name = object.get('name');
+        expect(name).to.be.instanceof(namespace.elements.Element);
+        expect(name.element).to.equal('name');
+      });
     });
   });
 });

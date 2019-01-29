@@ -6,9 +6,9 @@ function isReferenceObject(element) {
   return isObject(element) && element.get('$ref') !== undefined;
 }
 
-function parseReference(component, parser, context, element) {
+function parseReference(component, parser, context, element, returnReferenceElement) {
   if (isReferenceObject(element)) {
-    const result = parseReferenceObject(context, component, element);
+    const result = parseReferenceObject(context, component, element, returnReferenceElement);
 
     if (component === 'schemas') {
       const convertToReference = R.when(isDataStructure, (structure) => {
@@ -26,4 +26,4 @@ function parseReference(component, parser, context, element) {
   return parser(context, element);
 }
 
-module.exports = R.curry(parseReference);
+module.exports = R.curryN(4, parseReference);
