@@ -74,7 +74,7 @@ describe('Responses Object', () => {
     });
 
     const result = parse(context, responses);
-    expect(result).to.contain.warning("'Responses Object' default responses unsupported");
+    expect(result).to.contain.warning("'Responses Object' default responses are unsupported");
   });
 
   it('parses a status code range as warning', () => {

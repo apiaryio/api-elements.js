@@ -38,7 +38,7 @@ function parseResponsesObject(context, element) {
     let message;
 
     if (member.key.toValue() === 'default') {
-      message = `'${name}' default responses unsupported`;
+      message = `'${name}' default responses are unsupported`;
     } else {
       message = `'${name}' response status code ranges are unsupported`;
     }
