@@ -24,7 +24,7 @@ const requiredKeys = ['$ref'];
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#referenceObject
  */
-function parseReferenceObject(context, componentName, element) {
+function parseReferenceObject(context, componentName, element, returnReferenceElement) {
   const { namespace } = context;
   const { components } = context.state;
 
@@ -57,6 +57,13 @@ function parseReferenceObject(context, componentName, element) {
       return createError(namespace, `'${ref.toValue()}' is not defined`, ref);
     }
 
+    if (returnReferenceElement) {
+      const element = new context.namespace.elements.Element();
+      const id = referenceParts[3];
+      element.element = id;
+      return element;
+    }
+
     if (element.value) {
       return element.value;
     }
@@ -78,4 +85,4 @@ function parseReferenceObject(context, componentName, element) {
   return parseReference(element);
 }
 
-module.exports = R.curry(parseReferenceObject);
+module.exports = R.curryN(3, parseReferenceObject);

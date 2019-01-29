@@ -17,3 +17,15 @@ components:
   schemas:
     User:
       type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/name'
+        company:
+          $ref: '#/components/schemas/Company'
+    Company:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/name'
+    name:
+      type: string

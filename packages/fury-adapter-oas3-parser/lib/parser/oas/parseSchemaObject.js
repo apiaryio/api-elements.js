@@ -10,6 +10,7 @@ const {
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
+const parseReference = require('../parseReference');
 
 const name = 'Schema Object';
 const unsupportedKeys = [
@@ -54,8 +55,8 @@ function parseSchema(context) {
     parseString(context, name, false),
     ensureValidType);
 
-  const recurse = element => parseSchema(context)(element);
-  const parseProperties = parseObject(context, `${name}' 'properties`, R.compose(recurse, getValue));
+  const parseSubSchema = element => parseReference('schemas', R.uncurryN(2, parseSchema), context, element, true);
+  const parseProperties = parseObject(context, `${name}' 'properties`, R.compose(parseSubSchema, getValue));
 
   const parseMember = R.cond([
     [hasKey('type'), parseType],

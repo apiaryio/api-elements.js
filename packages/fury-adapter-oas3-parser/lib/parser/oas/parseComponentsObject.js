@@ -75,6 +75,19 @@ const parseComponentMember = R.curry((context, parser, member) => {
 function parseComponentsObject(context, element) {
   const { namespace } = context;
 
+  // Schema Object supports recursive (and circular) references and thus we
+  // must know about all of the schema IDs upfront. Below we are putting
+  // in the unparsed schemas so we can keep the dereferencing logic simple,
+  // these are used during parsing the schema components and later on the
+  // components in our context is replaced by the final parsed result.
+  // eslint-disable-next-line no-param-reassign
+  context.state.components = new namespace.elements.Object();
+
+  if (isObject(element) && element.get('schemas') && isObject(element.get('schemas'))) {
+    const schemas = element.get('schemas');
+    context.state.components.set('schemas', schemas);
+  }
+
   const createMemberValueNotObjectWarning = member => createWarning(namespace,
     `'${name}' '${member.key.toValue()}' is not an object`, member.value);
   const validateIsObject = R.unless(valueIsObject, createMemberValueNotObjectWarning);
