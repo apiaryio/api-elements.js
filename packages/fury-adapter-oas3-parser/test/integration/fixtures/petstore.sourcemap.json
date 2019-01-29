@@ -1312,6 +1312,17 @@
                 "content": [
                   {
                     "element": "member",
+                    "attributes": {
+                      "typeAttributes": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "string",
+                            "content": "required"
+                          }
+                        ]
+                      }
+                    },
                     "content": {
                       "key": {
                         "element": "string",
@@ -1369,6 +1380,17 @@
                   },
                   {
                     "element": "member",
+                    "attributes": {
+                      "typeAttributes": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "string",
+                            "content": "required"
+                          }
+                        ]
+                      }
+                    },
                     "content": {
                       "key": {
                         "element": "string",
@@ -1615,6 +1637,17 @@
                 "content": [
                   {
                     "element": "member",
+                    "attributes": {
+                      "typeAttributes": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "string",
+                            "content": "required"
+                          }
+                        ]
+                      }
+                    },
                     "content": {
                       "key": {
                         "element": "string",
@@ -1672,6 +1705,17 @@
                   },
                   {
                     "element": "member",
+                    "attributes": {
+                      "typeAttributes": {
+                        "element": "array",
+                        "content": [
+                          {
+                            "element": "string",
+                            "content": "required"
+                          }
+                        ]
+                      }
+                    },
                     "content": {
                       "key": {
                         "element": "string",
@@ -2422,66 +2466,6 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 86
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 7
-                        }
-                      },
-                      "content": 2090
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 86
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 15
-                        }
-                      },
-                      "content": 8
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Schema Object' contains unsupported key 'required'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
                           "content": 92
                         },
                         "column": {
@@ -2513,66 +2497,6 @@
         }
       },
       "content": "'Schema Object' contains unsupported key 'format'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 103
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 7
-                        }
-                      },
-                      "content": 2397
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 103
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 15
-                        }
-                      },
-                      "content": 8
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Schema Object' contains unsupported key 'required'"
     },
     {
       "element": "annotation",

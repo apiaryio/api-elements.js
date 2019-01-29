@@ -6,7 +6,7 @@ const {
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const {
-  isArray, isNull, hasKey, getValue,
+  isArray, isNull, isString, hasKey, getValue,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
@@ -58,11 +58,25 @@ function parseSchema(context) {
   const parseSubSchema = element => parseReference('schemas', R.uncurryN(2, parseSchema), context, element, true);
   const parseProperties = parseObject(context, `${name}' 'properties`, R.compose(parseSubSchema, getValue));
 
+  const arrayElementToParseResult = array => new namespace.elements.ParseResult(array.content);
+  const parseArray = itemParser => pipeParseResult(namespace,
+    R.unless(isArray, createWarning(namespace, `'${name}' 'required' is not an array`)),
+    R.compose(
+      R.map(itemParser),
+      arrayElementToParseResult
+    ),
+    (...required) => new namespace.elements.Array([...required]));
+
+  const parseRequiredString = R.unless(isString,
+    createWarning(namespace, `'${name}' 'required' array value is not a string`));
+  const parseRequired = parseArray(parseRequiredString);
+
   const parseMember = R.cond([
     [hasKey('type'), parseType],
     [hasKey('enum'), R.compose(parseEnum(context), getValue)],
     [hasKey('properties'), R.compose(parseProperties, getValue)],
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
+    [hasKey('required'), R.compose(parseRequired, getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -86,6 +100,17 @@ function parseSchema(context) {
 
         if (!element) {
           element = new namespace.elements.Object();
+        }
+
+        const required = schema.get('required');
+        if (required) {
+          required.forEach((key) => {
+            const member = element.getMember(key.toValue());
+
+            if (member) {
+              member.attributes.set('typeAttributes', ['required']);
+            }
+          });
         }
       } else if (type === 'array') {
         element = new namespace.elements.Array();
