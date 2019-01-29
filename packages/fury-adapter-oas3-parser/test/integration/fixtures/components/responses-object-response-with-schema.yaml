@@ -1,0 +1,22 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Response Components With Schemas
+paths:
+  /user:
+    get:
+      summary: View the current User
+      responses:
+        '200':
+          $ref: '#/components/responses/UserResponse'
+components:
+  responses:
+    UserResponse:
+      description: A user
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserObject'
+  schemas:
+    UserObject:
+      type: object

@@ -24,6 +24,11 @@ describe('components', () => {
     return testParseFixture(file);
   });
 
+  it("'Responses Object' response references with schema", () => {
+    const file = path.join(fixtures, 'responses-object-response-with-schema');
+    return testParseFixture(file);
+  });
+
   it("'Schema Object' circular references", () => {
     const file = path.join(fixtures, 'schema-object-circular');
     return testParseFixture(file);
