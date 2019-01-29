@@ -74,7 +74,7 @@ describe('Responses Object', () => {
     });
 
     const result = parse(context, responses);
-    expect(result).to.contain.warning("'Response Object' default responses unsupported");
+    expect(result).to.contain.warning("'Responses Object' default responses unsupported");
   });
 
   it('parses a status code range as warning', () => {
@@ -83,6 +83,6 @@ describe('Responses Object', () => {
     });
 
     const result = parse(context, responses);
-    expect(result).to.contain.warning("'Response Object' response status code ranges are unsupported");
+    expect(result).to.contain.warning("'Responses Object' response status code ranges are unsupported");
   });
 });

@@ -1,7 +1,7 @@
 const R = require('ramda');
 const pipeParseResult = require('../../pipeParseResult');
 const { isExtension, hasKey, getValue } = require('../../predicates');
-const { createInvalidMemberWarning } = require('../annotations');
+const { createWarning, createInvalidMemberWarning } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseResponseObject = require('./parseResponseObject');
 
@@ -31,8 +31,26 @@ const isResponseField = R.anyPass([isStatusCode, isStatusCodeRange, hasKey('defa
 function parseResponsesObject(context, element) {
   const { namespace } = context;
 
+  const createUnsupportedStatusCodeWarning = (member) => {
+    let message;
+
+    if (member.key.toValue() === 'default') {
+      message = `'${name}' default responses unsupported`;
+    } else {
+      message = `'${name}' response status code ranges are unsupported`;
+    }
+
+    return createWarning(namespace, message, member.key);
+  };
+
+  // FIXME Add support for status code ranges
+  // https://github.com/apiaryio/fury-adapter-oas3-parser/issues/64
+  const parseResponse = pipeParseResult(namespace,
+    R.unless(isStatusCode, createUnsupportedStatusCodeWarning),
+    R.compose(parseResponseObject(context), getValue));
+
   const parseMember = R.cond([
-    [isResponseField, parseResponseObject(context)],
+    [isResponseField, parseResponse],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
@@ -43,7 +61,11 @@ function parseResponsesObject(context, element) {
 
   const parseResponses = pipeParseResult(namespace,
     parseObject(context, name, parseMember),
-    object => object.content.map(getValue));
+    object => object.content.map((member) => {
+      const response = member.value;
+      response.statusCode = member.key.toValue();
+      return response;
+    }));
 
   return parseResponses(element);
 }
