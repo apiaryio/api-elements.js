@@ -23,4 +23,9 @@ describe('components', () => {
     const file = path.join(fixtures, 'responses-object-response');
     return testParseFixture(file);
   });
+
+  it("'Schema Object' circular references", () => {
+    const file = path.join(fixtures, 'schema-object-circular');
+    return testParseFixture(file);
+  });
 });
