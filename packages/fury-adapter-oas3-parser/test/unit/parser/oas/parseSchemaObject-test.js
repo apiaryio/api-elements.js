@@ -343,4 +343,43 @@ describe('Schema Object', () => {
       });
     });
   });
+
+  describe('array type', () => {
+    describe('#items', () => {
+      it('warns when items is not an object', () => {
+        const schema = new namespace.elements.Object({
+          type: 'array',
+          items: [],
+        });
+        const result = parse(context, schema);
+
+        expect(result.length).to.equal(2);
+
+        expect(result).to.contain.warning(
+          "'Schema Object' is not an object"
+        );
+      });
+
+      it('returns an array with fixed-type items', () => {
+        const schema = new namespace.elements.Object({
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        });
+        const result = parse(context, schema);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(result).to.not.contain.annotations;
+
+        const array = result.get(0).content;
+        expect(array).to.be.instanceof(namespace.elements.Array);
+        expect(array.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+
+        const items = array.get(0);
+        expect(items).to.be.instanceof(namespace.elements.String);
+      });
+    });
+  });
 });
