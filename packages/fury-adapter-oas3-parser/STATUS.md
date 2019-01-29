@@ -148,7 +148,7 @@ support.
 
 | Field Name | Support |
 |:--|:--|
-| schemas | ~ |
+| schemas | ✓ |
 | responses | ✓ |
 | parameters | ✓ |
 | examples | ✕ |
