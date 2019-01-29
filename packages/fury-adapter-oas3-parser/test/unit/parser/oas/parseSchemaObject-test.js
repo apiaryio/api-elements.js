@@ -342,6 +342,59 @@ describe('Schema Object', () => {
         expect(name.element).to.equal('name');
       });
     });
+
+    describe('#required', () => {
+      it('warns when required is not an array', () => {
+        const schema = new namespace.elements.Object({
+          type: 'object',
+          required: {},
+        });
+        const result = parse(context, schema);
+
+        expect(result.length).to.equal(2);
+
+        expect(result).to.contain.warning(
+          "'Schema Object' 'required' is not an array"
+        );
+      });
+
+      it('warns when required is not an array of strings', () => {
+        const schema = new namespace.elements.Object({
+          type: 'object',
+          required: [1, true],
+        });
+        const result = parse(context, schema);
+
+        expect(result.length).to.equal(3);
+
+        expect(result.warnings.toValue()).to.deep.equal([
+          "'Schema Object' 'required' array value is not a string",
+          "'Schema Object' 'required' array value is not a string",
+        ]);
+      });
+
+      it('returns an object with required properties', () => {
+        const schema = new namespace.elements.Object({
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+          },
+          required: ['name'],
+        });
+        const result = parse(context, schema);
+
+        expect(result.length).to.equal(1);
+        expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(result).to.not.contain.annotations;
+
+        const object = result.get(0).content;
+        expect(object).to.be.instanceof(namespace.elements.Object);
+
+        const name = object.getMember('name');
+        expect(name.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
+        expect(name.value).to.be.instanceof(namespace.elements.String);
+      });
+    });
   });
 
   describe('array type', () => {
