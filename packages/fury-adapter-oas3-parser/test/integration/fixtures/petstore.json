@@ -368,7 +368,23 @@
                     "element": "string",
                     "content": "Pets"
                   }
-                }
+                },
+                "attributes": {
+                  "typeAttributes": {
+                    "element": "array",
+                    "content": [
+                      {
+                        "element": "string",
+                        "content": "fixedType"
+                      }
+                    ]
+                  }
+                },
+                "content": [
+                  {
+                    "element": "Pet"
+                  }
+                ]
               }
             },
             {
@@ -1192,66 +1208,6 @@
         }
       },
       "content": "'Schema Object' contains unsupported key 'format'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 99
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 7
-                        }
-                      },
-                      "content": 2313
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 99
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 12
-                        }
-                      },
-                      "content": 5
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Schema Object' contains unsupported key 'items'"
     },
     {
       "element": "annotation",

@@ -20,8 +20,8 @@ const unsupportedKeys = [
   'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'required',
 
   // JSON Schema + OAS 3 specific rules
-  'allOf', 'oneOf', 'anyOf', 'not', 'items',
-  'additionalProperties', 'description', 'format', 'default',
+  'allOf', 'oneOf', 'anyOf', 'not', 'additionalProperties', 'description',
+  'format', 'default',
 
   // OAS 3 specific
   'nullable', 'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs',
@@ -62,6 +62,7 @@ function parseSchema(context) {
     [hasKey('type'), parseType],
     [hasKey('enum'), R.compose(parseEnum(context), getValue)],
     [hasKey('properties'), R.compose(parseProperties, getValue)],
+    [hasKey('items'), R.compose(parseSubSchema, getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -88,6 +89,12 @@ function parseSchema(context) {
         }
       } else if (type === 'array') {
         element = new namespace.elements.Array();
+
+        const items = schema.get('items');
+        if (items) {
+          element.attributes.set('typeAttributes', ['fixedType']);
+          element.push(items);
+        }
       } else if (type === 'string') {
         element = new namespace.elements.String();
       } else if (type === 'number' || type === 'integer') {
