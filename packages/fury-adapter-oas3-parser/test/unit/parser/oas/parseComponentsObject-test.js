@@ -111,17 +111,52 @@ describe('Components Object', () => {
     });
   });
 
-  describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported responses key', () => {
+  describe('#responses', () => {
+    it('provides a warning when responses is non-object', () => {
       const components = new namespace.elements.Object({
-        responses: {},
+        responses: '',
       });
 
       const result = parse(context, components);
-
-      expect(result).to.contain.warning("'Components Object' contains unsupported key 'responses'");
+      expect(result).to.contain.warning("'Components Object' 'responses' is not an object");
     });
 
+    it('parses valid responses', () => {
+      const components = new namespace.elements.Object({
+        responses: {
+          ErrorResponse: {
+            description: 'an error response',
+            content: {
+              'application/json': {},
+              'application/xml': {},
+            },
+          },
+        },
+      });
+
+      const result = parse(context, components);
+      expect(result.length).to.equal(1);
+
+      const parsedComponents = result.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const responses = parsedComponents.get('responses');
+      expect(responses).to.be.instanceof(namespace.elements.Object);
+
+      expect(responses.length).to.equal(2);
+
+      const response1 = responses.content[0];
+      const response2 = responses.content[1];
+
+      expect(response1.key.toValue()).to.equal('ErrorResponse');
+      expect(response2.key.toValue()).to.equal('ErrorResponse');
+
+      expect(response1.value).to.be.instanceof(namespace.elements.HttpResponse);
+      expect(response2.value).to.be.instanceof(namespace.elements.HttpResponse);
+    });
+  });
+
+  describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported examples key', () => {
       const components = new namespace.elements.Object({
         examples: {},

@@ -18,4 +18,9 @@ describe('components', () => {
     const file = path.join(fixtures, 'media-type-object-schema');
     return testParseFixture(file);
   });
+
+  it("'Responses Object' response references", () => {
+    const file = path.join(fixtures, 'responses-object-response');
+    return testParseFixture(file);
+  });
 });

@@ -149,7 +149,7 @@ support.
 | Field Name | Support |
 |:--|:--|
 | schemas | ~ |
-| responses | ✕ |
+| responses | ✓ |
 | parameters | ✓ |
 | examples | ✕ |
 | requestBodies | ✕ |

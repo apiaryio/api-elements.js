@@ -4,6 +4,9 @@ const { isExtension, hasKey, getValue } = require('../../predicates');
 const { createWarning, createInvalidMemberWarning } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseResponseObject = require('./parseResponseObject');
+const parseReference = require('../parseReference');
+
+const parseResponseObjectOrRef = parseReference('responses', parseResponseObject);
 
 const name = 'Responses Object';
 
@@ -47,7 +50,7 @@ function parseResponsesObject(context, element) {
   // https://github.com/apiaryio/fury-adapter-oas3-parser/issues/64
   const parseResponse = pipeParseResult(namespace,
     R.unless(isStatusCode, createUnsupportedStatusCodeWarning),
-    R.compose(parseResponseObject(context), getValue));
+    R.compose(parseResponseObjectOrRef(context), getValue));
 
   const parseMember = R.cond([
     [isResponseField, parseResponse],
