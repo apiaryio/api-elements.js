@@ -33,4 +33,9 @@ describe('components', () => {
     const file = path.join(fixtures, 'schema-object-circular');
     return testParseFixture(file);
   });
+
+  it("'Operation Object' requestBody references", () => {
+    const file = path.join(fixtures, 'operation-object-requestBody');
+    return testParseFixture(file);
+  });
 });

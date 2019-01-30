@@ -1,5 +1,7 @@
 const R = require('ramda');
-const { isExtension, hasKey, getValue } = require('../../predicates');
+const {
+  isMember, isExtension, hasKey, getValue,
+} = require('../../predicates');
 const {
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
@@ -11,25 +13,46 @@ const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseResponsesObject = require('./parseResponsesObject');
 const parseParameterObjects = require('./parseParameterObjects');
+const parseRequestBodyObject = require('./parseRequestBodyObject');
+const parseReference = require('../parseReference');
+
+const parseRequestBodyObjectOrRef = parseReference('requestBodies', parseRequestBodyObject);
 
 const name = 'Operation Object';
 const requiredKeys = ['responses'];
 const unsupportedKeys = [
-  'tags', 'externalDocs', 'requestBody', 'callbacks', 'deprecated', 'security',
+  'tags', 'externalDocs', 'callbacks', 'deprecated', 'security',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
+const isRequestBody = R.allPass([isMember, hasKey('requestBody')]);
+
 function createTransactions(namespace, member, operation) {
+  const requests = R.map(getValue, R.filter(isRequestBody, operation.content));
   const responses = operation.get('responses');
 
-  return responses.map((response) => {
-    const request = new namespace.elements.HttpRequest();
-    const method = member.key.clone();
-    method.content = method.content.toUpperCase();
-    request.method = method;
+  if (requests.length === 0) {
+    requests.push(new namespace.elements.HttpRequest());
+  }
 
-    return new namespace.elements.HttpTransaction([request, response]);
+  const transactions = [];
+
+  requests.forEach((request) => {
+    responses.forEach((response) => {
+      const method = member.key.clone();
+      method.content = method.content.toUpperCase();
+
+      const clonedRequest = request.clone();
+      clonedRequest.method = method;
+
+      transactions.push(new namespace.elements.HttpTransaction([
+        clonedRequest,
+        response.clone(),
+      ]));
+    });
   });
+
+  return transactions;
 }
 
 function hrefVariablesFromParameters(namespace, parameters) {
@@ -83,6 +106,7 @@ function parseOperationObject(context, path, member) {
     [hasKey('description'), parseCopy(context, name, false)],
     [hasKey('operationId'), pipeParseResult(namespace, parseString(context, name, false), parseOperationId)],
     [hasKey('responses'), R.compose(parseResponsesObject(context), getValue)],
+    [hasKey('requestBody'), R.compose(parseRequestBodyObjectOrRef(context), getValue)],
     [hasKey('parameters'), R.compose(parseParameterObjects(context, name), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],

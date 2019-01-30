@@ -156,6 +156,52 @@ describe('Components Object', () => {
     });
   });
 
+  describe('#requestBodies', () => {
+    it('provides a warning when requestBodies is not an object', () => {
+      const components = new namespace.elements.Object({
+        requestBodies: '',
+      });
+
+      const result = parse(context, components);
+      expect(result).to.contain.warning("'Components Object' 'requestBodies' is not an object");
+    });
+
+    it('parses valid requestBodies', () => {
+      const components = new namespace.elements.Object({
+        requestBodies: {
+          ExampleRequest: {
+            content: {
+              'application/json': {},
+              'application/xml': {},
+            },
+          },
+        },
+      });
+
+      const result = parse(context, components);
+      expect(result.length).to.equal(1);
+
+      const parsedComponents = result.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const requests = parsedComponents.get('requestBodies');
+      expect(requests).to.be.instanceof(namespace.elements.Object);
+
+      expect(requests.length).to.equal(2);
+
+      const request1 = requests.content[0];
+      const request2 = requests.content[1];
+
+      expect(request1.key.toValue()).to.equal('ExampleRequest');
+      expect(request2.key.toValue()).to.equal('ExampleRequest');
+
+      expect(request1.value).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(request1.value.contentType.toValue()).to.equal('application/json');
+      expect(request2.value).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(request2.value.contentType.toValue()).to.equal('application/xml');
+    });
+  });
+
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported examples key', () => {
       const components = new namespace.elements.Object({
@@ -165,16 +211,6 @@ describe('Components Object', () => {
       const result = parse(context, components);
 
       expect(result).to.contain.warning("'Components Object' contains unsupported key 'examples'");
-    });
-
-    it('provides warning for unsupported requestBodies key', () => {
-      const components = new namespace.elements.Object({
-        requestBodies: {},
-      });
-
-      const result = parse(context, components);
-
-      expect(result).to.contain.warning("'Components Object' contains unsupported key 'requestBodies'");
     });
 
     it('provides warning for unsupported headers key', () => {

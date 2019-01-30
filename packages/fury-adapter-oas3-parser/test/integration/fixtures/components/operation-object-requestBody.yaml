@@ -1,0 +1,32 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Request Bodies Components
+paths:
+  /json:
+    post:
+      summary: Sending JSON
+      requestBody:
+        $ref: '#/components/requestBodies/exampleRequest'
+      responses:
+        '204':
+          description: Empty Response
+  /multi:
+    post:
+      summary: Sending JSON or XML
+      requestBody:
+        $ref: '#/components/requestBodies/multiExampleRequest'
+      responses:
+        '204':
+          description: Empty Response
+components:
+  requestBodies:
+    exampleRequest:
+      content:
+        application/json: {}
+    multiExampleRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+        application/xml: {}

@@ -83,17 +83,6 @@ describe('Operation Object', () => {
       expect(result).to.contain.warning("'Operation Object' contains unsupported key 'externalDocs'");
     });
 
-    it('provides warning for unsupported requestBody key', () => {
-      const operation = new namespace.elements.Member('get', {
-        requestBody: '',
-        responses: {},
-      });
-
-      const result = parse(context, path, operation);
-
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'requestBody'");
-    });
-
     it('provides warning for unsupported callbacks key', () => {
       const operation = new namespace.elements.Member('get', {
         callbacks: '',
@@ -387,6 +376,90 @@ describe('Operation Object', () => {
         expect(transition.hrefVariables.length).to.equal(1);
         expect(transition.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);
       });
+    });
+  });
+
+  describe('#responses', () => {
+    it('returns a transition including a transaction', () => {
+      const operation = new namespace.elements.Member('get', {
+        responses: {
+          200: {
+            description: 'example',
+            content: {
+              'application/json': {},
+              'application/xml': {},
+            },
+          },
+        },
+      });
+
+      const result = parse(context, path, operation);
+
+      expect(result.length).to.equal(1);
+
+      const transition = result.get(0);
+      expect(transition).to.be.instanceof(namespace.elements.Transition);
+      expect(transition.length).to.equal(2);
+
+      const transaction1 = transition.get(0);
+      expect(transaction1).to.be.instanceof(namespace.elements.HttpTransaction);
+      expect(transaction1.length).to.equal(2);
+
+      expect(transaction1.request).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(transaction1.response).to.be.instanceof(namespace.elements.HttpResponse);
+      expect(transaction1.response.contentType.toValue()).to.be.equal('application/json');
+
+      const transaction2 = transition.get(1);
+      expect(transaction2).to.be.instanceof(namespace.elements.HttpTransaction);
+      expect(transaction2.length).to.equal(2);
+
+      expect(transaction2.request).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(transaction2.response).to.be.instanceof(namespace.elements.HttpResponse);
+      expect(transaction2.response.contentType.toValue()).to.be.equal('application/xml');
+    });
+  });
+
+  describe('#requestBody', () => {
+    it('exposes request bodies in transaction pairs', () => {
+      const operation = new namespace.elements.Member('post', {
+        requestBody: {
+          content: {
+            'application/json': {},
+            'application/xml': {},
+          },
+        },
+        responses: {
+          204: {
+            description: 'empty response',
+          },
+        },
+      });
+
+      const result = parse(context, path, operation);
+
+      expect(result.length).to.equal(1);
+
+      const transition = result.get(0);
+      expect(transition).to.be.instanceof(namespace.elements.Transition);
+      expect(transition.length).to.equal(2);
+
+      const transaction1 = transition.get(0);
+      expect(transaction1).to.be.instanceof(namespace.elements.HttpTransaction);
+      expect(transaction1.length).to.equal(2);
+
+      expect(transaction1.request).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(transaction1.request.method.toValue()).to.equal('POST');
+      expect(transaction1.request.contentType.toValue()).to.equal('application/json');
+      expect(transaction1.response).to.be.instanceof(namespace.elements.HttpResponse);
+
+      const transaction2 = transition.get(1);
+      expect(transaction2).to.be.instanceof(namespace.elements.HttpTransaction);
+      expect(transaction2.length).to.equal(2);
+
+      expect(transaction2.request).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(transaction2.request.method.toValue()).to.equal('POST');
+      expect(transaction2.request.contentType.toValue()).to.equal('application/xml');
+      expect(transaction2.response).to.be.instanceof(namespace.elements.HttpResponse);
     });
   });
 });
