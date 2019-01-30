@@ -52,23 +52,22 @@ function parseReferenceObject(context, componentName, element, returnReferenceEl
       return createError(namespace, `'#/components/${componentName}' is not defined`, ref);
     }
 
-    const element = component.getMember(referenceParts[3]);
-    if (!element) {
+    const componentId = referenceParts[3];
+    if (!component.hasKey(componentId)) {
       return createError(namespace, `'${ref.toValue()}' is not defined`, ref);
     }
 
     if (returnReferenceElement) {
       const element = new context.namespace.elements.Element();
-      const id = referenceParts[3];
-      element.element = id;
+      element.element = componentId;
       return element;
     }
 
-    if (element.value) {
-      return element.value;
-    }
-
-    return new namespace.elements.ParseResult([]);
+    return new namespace.elements.ParseResult(
+      component
+        .filter((value, key) => key.toValue() === componentId && value)
+        .map(value => value)
+    );
   };
 
   const parseMember = R.cond([

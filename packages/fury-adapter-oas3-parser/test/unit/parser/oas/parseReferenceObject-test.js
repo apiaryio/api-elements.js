@@ -43,6 +43,23 @@ describe('Reference Object', () => {
     expect(structure).to.equal(dataStructure);
   });
 
+  it('can parse a reference to a component with multiple values', () => {
+    context.state.components.set('requestBodies', new namespace.elements.Object([
+      new namespace.elements.Member('Example', new namespace.elements.HttpRequest()),
+      new namespace.elements.Member('Example', new namespace.elements.HttpRequest()),
+    ]));
+
+    const reference = new namespace.elements.Object({
+      $ref: '#/components/requestBodies/Example',
+    });
+
+    const result = parse(context, 'requestBodies', reference);
+
+    expect(result.length).to.equal(2);
+    expect(result.get(0)).to.be.instanceof(namespace.elements.HttpRequest);
+    expect(result.get(1)).to.be.instanceof(namespace.elements.HttpRequest);
+  });
+
   it('can parse a reference to a component that could not be parsed', () => {
     context.state.components = new namespace.elements.Object({
       schemas: {
