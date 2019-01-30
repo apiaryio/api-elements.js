@@ -52,7 +52,19 @@ describe('Adapter', () => {
       expect(adapter.detect(source)).to.be.true;
     });
 
-    it('can detect OpenAPI 3.0.1 YAML document', () => {
+    it('can detect OpenAPI 3.0.0 YAML document without version quotes', () => {
+      expect(adapter.detect('openapi: 3.0.0')).to.be.true;
+      expect(adapter.detect('\'openapi\': 3.0.0')).to.be.true;
+      expect(adapter.detect('"openapi": 3.0.0')).to.be.true;
+      expect(adapter.detect('openapi: 3.1.0')).to.be.true;
+      expect(adapter.detect('\'openapi\': 3.1.0')).to.be.true;
+      expect(adapter.detect('"openapi": 3.1.0')).to.be.true;
+      expect(adapter.detect('openapi: 3.0.1')).to.be.true;
+      expect(adapter.detect('\'openapi\': 3.0.1')).to.be.true;
+      expect(adapter.detect('"openapi": 3.0.1')).to.be.true;
+    });
+
+    it('does not detect Swagger 2 YAML document', () => {
       const source = 'swagger: "2.0"';
 
       expect(adapter.detect(source)).to.be.false;

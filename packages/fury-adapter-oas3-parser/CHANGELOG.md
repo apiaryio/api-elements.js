@@ -10,6 +10,11 @@
 - Object required properties in a Schema Object are now supported.
 - Request bodies and request body references are now supported in operations.
 
+### Bug Fixes
+
+- Fixed detection of YAML OpenAPI 3 documents where the OpenAPI version was not
+  wrapped in quotes.
+
 ## 0.4.1 (28-01-19)
 
 ### Enhancements

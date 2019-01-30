@@ -10,7 +10,7 @@ const mediaTypes = [
 ];
 
 function detect(source) {
-  return !!source.match(/"?openapi"?\s*:\s*["']3\.(\d+)\.(\d+)["']/g);
+  return !!source.match(/(["']?)openapi\1\s*:\s*(["']?)3\.\d+\.\d+\2/g);
 }
 
 function parse(options, cb) {
