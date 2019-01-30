@@ -8,6 +8,7 @@
 - Referencing (`$ref`) a response object is now supported.
 - Array items in a Schema Object are now supported.
 - Object required properties in a Schema Object are now supported.
+- Request bodies and request body references are now supported in operations.
 
 ## 0.4.1 (28-01-19)
 
