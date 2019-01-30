@@ -45,6 +45,35 @@ const parseEnum = context => pipeParseResult(context.namespace,
     return enumElement;
   });
 
+function constructObjectStructure(namespace, schema) {
+  const element = R.or(schema.get('properties'), new namespace.elements.Object());
+
+  const required = schema.get('required');
+  if (required) {
+    required.forEach((key) => {
+      const member = element.getMember(key.toValue());
+
+      if (member) {
+        member.attributes.set('typeAttributes', ['required']);
+      }
+    });
+  }
+
+  return element;
+}
+
+function constructArrayStructure(namespace, schema) {
+  const element = new namespace.elements.Array();
+
+  const items = schema.get('items');
+  if (items) {
+    element.attributes.set('typeAttributes', ['fixedType']);
+    element.push(items);
+  }
+
+  return element;
+}
+
 function parseSchema(context) {
   const { namespace } = context;
 
@@ -87,7 +116,6 @@ function parseSchema(context) {
   return pipeParseResult(namespace,
     parseObject(context, name, parseMember),
     (schema) => {
-      // FIXME: Return a dataStructure to represent the given schema
       let element;
 
       const enumerations = schema.get('enum');
@@ -96,30 +124,9 @@ function parseSchema(context) {
       if (enumerations) {
         element = enumerations;
       } else if (type === 'object') {
-        element = schema.get('properties');
-
-        if (!element) {
-          element = new namespace.elements.Object();
-        }
-
-        const required = schema.get('required');
-        if (required) {
-          required.forEach((key) => {
-            const member = element.getMember(key.toValue());
-
-            if (member) {
-              member.attributes.set('typeAttributes', ['required']);
-            }
-          });
-        }
+        element = constructObjectStructure(namespace, schema);
       } else if (type === 'array') {
-        element = new namespace.elements.Array();
-
-        const items = schema.get('items');
-        if (items) {
-          element.attributes.set('typeAttributes', ['fixedType']);
-          element.push(items);
-        }
+        element = constructArrayStructure(namespace, schema);
       } else if (type === 'string') {
         element = new namespace.elements.String();
       } else if (type === 'number' || type === 'integer') {
@@ -129,7 +136,15 @@ function parseSchema(context) {
       } else if (type === 'null') {
         element = new namespace.elements.Null();
       } else {
-        return new namespace.elements.ParseResult();
+        element = new namespace.elements.Enum();
+        element.enumerations = [
+          new namespace.elements.String(),
+          new namespace.elements.Number(),
+          new namespace.elements.Boolean(),
+          new namespace.elements.Null(),
+          constructObjectStructure(namespace, schema),
+          constructArrayStructure(namespace, schema),
+        ];
       }
 
       return element;
