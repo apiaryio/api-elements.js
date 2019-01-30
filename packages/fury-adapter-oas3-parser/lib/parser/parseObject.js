@@ -5,10 +5,10 @@ const {
 const { createError, createWarning } = require('./annotations');
 const pipeParseResult = require('../pipeParseResult');
 
-/*
+/**
  * Returns true iff the given element is either an annotation or member element
  * @param element {Element}
- * @returns boolean
+ * @returns {boolean}
  */
 const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
 
@@ -36,13 +36,14 @@ const hasMember = R.curry((object, key) => {
   return matchingMembers.length > 0;
 });
 
-const validateObjectContainsRequiredKeys = R.curry((namespace, path, requiredKeys, object) => {
+const validateObjectContainsRequiredKeys = R.curry((namespace, path, requiredKeys, sendWarning, object) => {
   const missingKeys = R.reject(hasMember(object), requiredKeys);
-  const errorFromKey = key => createError(namespace, `'${path}' is missing required property '${key}'`, object);
+  const createAnnotation = sendWarning ? createWarning : createError;
+  const annotationFromKey = key => createAnnotation(namespace, `'${path}' is missing required property '${key}'`, object);
 
   if (missingKeys.length > 0) {
     return new namespace.elements.ParseResult(
-      R.map(errorFromKey, missingKeys)
+      R.map(annotationFromKey, missingKeys)
     );
   }
 
@@ -93,11 +94,12 @@ const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKe
  * @param name {string} - The human readable name of the element. Used for annotation messages.
  * @param transform {transformMember} - The callback to transform a member
  * @param requiredKeys {string[]} - The callback to transform a member
+ * @param sendWarning {boolean}
  * @param object {ObjectElement} - The object containing members to transform
  *
- * @returns ParseResult<ObjectElement>
+ * @returns {ParseResult<ObjectElement>}
  */
-function parseObject(context, name, parseMember, requiredKeys) {
+function parseObject(context, name, parseMember, requiredKeys = [], sendWarning = false) {
   const { namespace } = context;
 
   // Create a member from a key and value
@@ -141,9 +143,9 @@ function parseObject(context, name, parseMember, requiredKeys) {
 
   return pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys || []),
+    validateObjectContainsRequiredKeys(namespace, name, requiredKeys, sendWarning),
     validateMembers,
-    validateObjectContainsRequiredKeysNoError(namespace, requiredKeys || []));
+    validateObjectContainsRequiredKeysNoError(namespace, requiredKeys));
 }
 
 

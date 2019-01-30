@@ -20,7 +20,6 @@ describe('Security Scheme Object', () => {
     expect(parseResult).to.contain.warning("'Security Scheme Object' is not an object");
   });
 
-
   describe('#type', () => {
     it('provides an error when type is not a string', () => {
       const securityScheme = new namespace.elements.Object({
@@ -44,18 +43,7 @@ describe('Security Scheme Object', () => {
       expect(parseResult).to.contain.error("'Security Scheme Object' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'");
     });
 
-    it('provides an unsupported error for http type', () => {
-      const securityScheme = new namespace.elements.Object({
-        type: 'http',
-      });
-
-      const parseResult = parse(context, securityScheme);
-
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' 'http' is unsupported");
-    });
-
-    it('provides an unsupported error for oauth2 type', () => {
+    it('provides an unsupported warning for oauth2 type', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'oauth2',
       });
@@ -66,7 +54,7 @@ describe('Security Scheme Object', () => {
       expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' 'oauth2' is unsupported");
     });
 
-    it('provides an unsupported error for openIdConnect type', () => {
+    it('provides an unsupported warning for openIdConnect type', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'openIdConnect',
       });
@@ -79,7 +67,19 @@ describe('Security Scheme Object', () => {
   });
 
   describe('#name', () => {
-    it('provides an error when name is not a string', () => {
+    it('provides a warning when name does not exist', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'apiKey',
+        in: 'query',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' is missing required property 'name'");
+    });
+
+    it('provides a warning when name is not a string', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',
         name: 1,
@@ -89,12 +89,24 @@ describe('Security Scheme Object', () => {
       const parseResult = parse(context, securityScheme);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.error("'Security Scheme Object' 'name' is not a string");
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'name' is not a string");
     });
   });
 
   describe('#in', () => {
-    it('provides an error when value is not a string', () => {
+    it('provides a warning when in does not exist', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'apiKey',
+        name: 'example',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' is missing required property 'in'");
+    });
+
+    it('provides a warning when in is not a string', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',
         name: 'example',
@@ -104,10 +116,10 @@ describe('Security Scheme Object', () => {
       const parseResult = parse(context, securityScheme);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.error("'Security Scheme Object' 'in' is not a string");
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'in' is not a string");
     });
 
-    it('provides an error when value is not a permitted value', () => {
+    it('provides a warning when in is not a permitted value', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',
         name: 'example',
@@ -117,7 +129,32 @@ describe('Security Scheme Object', () => {
       const parseResult = parse(context, securityScheme);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.error("'Security Scheme Object' 'in' must be either 'query', 'header' or 'cookie'");
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'in' must be either 'query', 'header' or 'cookie'");
+    });
+  });
+
+  describe('#scheme', () => {
+    it('provides a warning when scheme does not exist', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'http',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' is missing required property 'scheme'");
+    });
+
+    it('provides a warning when scheme is not a string', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'http',
+        scheme: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'scheme' is not a string");
     });
   });
 
@@ -153,20 +190,105 @@ describe('Security Scheme Object', () => {
     });
   });
 
-  describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported scheme property', () => {
+  describe('when type is apiKey', () => {
+    it('parses correctly when in a header', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',
         name: 'example',
-        in: 'query',
-        scheme: '',
+        in: 'header',
       });
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult).to.contain.warning("'Security Scheme Object' contains unsupported key 'scheme'");
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(parseResult.get(0).element).to.equal('Token Authentication Scheme');
+
+      const { members } = parseResult.get(0);
+
+      expect(members.length).to.equal(1);
+      expect(members.get(0).key.toValue()).to.equal('httpHeaderName');
+      expect(members.get(0).value.toValue()).to.equal('example');
     });
 
+    it('parses correctly when in a query', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'apiKey',
+        name: 'example',
+        in: 'query',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(parseResult.get(0).element).to.equal('Token Authentication Scheme');
+
+      const { members } = parseResult.get(0);
+
+      expect(members.length).to.equal(1);
+      expect(members.get(0).key.toValue()).to.equal('queryParameterName');
+      expect(members.get(0).value.toValue()).to.equal('example');
+    });
+
+    it('does not complain about scheme', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'apiKey',
+        name: 'example',
+        in: 'query',
+        scheme: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+    });
+  });
+
+  describe('when type is http', () => {
+    it('parses correctly when scheme is basic', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'http',
+        scheme: 'basic',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(parseResult.get(0).element).to.equal('Basic Authentication Scheme');
+      expect(parseResult.get(0).members.length).to.equal(0);
+    });
+
+    it('does not complain about name', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'http',
+        scheme: 'basic',
+        name: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+    });
+
+    it('does not complain about in', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'http',
+        scheme: 'basic',
+        in: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+    });
+  });
+
+  describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported bearerFormat property', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',

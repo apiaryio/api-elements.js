@@ -299,7 +299,7 @@ describe('Components Object', () => {
       const securitySchemes = parsedComponents.get('securitySchemes');
       expect(securitySchemes).to.be.instanceof(namespace.elements.Array);
       expect(securitySchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
-      expect(securitySchemes.get(0).meta.id.toValue()).to.equal('example');
+      expect(securitySchemes.get(0).meta.id.toValue()).to.equal('token');
     });
   });
 

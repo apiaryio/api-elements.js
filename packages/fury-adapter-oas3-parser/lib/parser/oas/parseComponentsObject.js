@@ -130,6 +130,8 @@ function parseComponentsObject(context, element) {
       const array = new namespace.elements.Array([]);
 
       object.forEach((value, key) => {
+        // eslint-disable-next-line no-param-reassign
+        value.meta.id = key.clone();
         array.push(value);
       });
 

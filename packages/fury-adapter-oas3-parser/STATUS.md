@@ -216,8 +216,8 @@ support.
 | type | [~](#security-scheme-type) |
 | description | ✓ |
 | name | ✓ |
-| in | ✓ |
-| scheme | ✕ |
+| in | ~ |
+| scheme | ~ |
 | bearerFormat | ✕ |
 | flows | ✕ |
 | openIdConnectUrl | ✕ |
@@ -227,6 +227,6 @@ support.
 | Field Name | Support |
 |:--|:--|
 | apiKey | ✓ |
-| http | ✕ |
+| http | ✓ |
 | oauth2 | ✕ |
 | openIdConnect | ✕ |

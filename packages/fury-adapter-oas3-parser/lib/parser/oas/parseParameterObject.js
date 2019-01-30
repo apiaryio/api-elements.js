@@ -68,7 +68,7 @@ function parseParameterObject(context, object) {
   const validateIn = R.unless(isValidInValue, createInvalidInWarning);
 
   const isSupportedIn = R.anyPass([
-      hasValue('path'), hasValue('query'),
+    hasValue('path'), hasValue('query'),
   ]);
   const createUnsupportedInWarning = member => createWarning(namespace,
     `'${name}' 'in' '${member.value.toValue()}' is unsupported`, member.value);
