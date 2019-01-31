@@ -15,10 +15,10 @@ describe('Response Object', () => {
     const response = new namespace.elements.Object({
       description: 'response',
     });
-    const result = parse(context, response);
+    const parseResult = parse(context, response);
 
-    expect(result.length).to.equal(1);
-    const httpResponse = result.get(0);
+    expect(parseResult.length).to.equal(1);
+    const httpResponse = parseResult.get(0);
     expect(httpResponse).to.be.instanceof(namespace.elements.HttpResponse);
   });
 
@@ -28,11 +28,11 @@ describe('Response Object', () => {
         description: 'Example Response',
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result.length).to.equal(1);
-      expect(result).to.not.contain.annotations;
-      expect(result.get(0).copy.toValue()).to.deep.equal(['Example Response']);
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.get(0).copy.toValue()).to.deep.equal(['Example Response']);
     });
 
     it('does not accept description if not string', () => {
@@ -40,28 +40,28 @@ describe('Response Object', () => {
         description: [],
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result).to.contain.warning("'Response Object' 'description' is not a string");
+      expect(parseResult).to.contain.warning("'Response Object' 'description' is not a string");
     });
 
     it('provide warning if description is missing', () => {
       const response = new namespace.elements.Object({
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result).to.contain.error("'Response Object' is missing required property 'description'");
+      expect(parseResult).to.contain.error("'Response Object' is missing required property 'description'");
     });
   });
 
   it('provides warning when response is non-object', () => {
     const response = new namespace.elements.Member('200', null);
 
-    const result = parse(context, response);
+    const parseResult = parse(context, response);
 
-    expect(result.length).to.equal(1);
-    expect(result).to.contain.warning("'Response Object' is not an object");
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.warning("'Response Object' is not an object");
   });
 
   describe('warnings for unsupported properties', () => {
@@ -71,9 +71,9 @@ describe('Response Object', () => {
         headers: 'dummy',
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result).to.contain.warning("'Response Object' contains unsupported key 'headers'");
+      expect(parseResult).to.contain.warning("'Response Object' contains unsupported key 'headers'");
     });
 
     it('provides warning for unsupported links key', () => {
@@ -82,9 +82,9 @@ describe('Response Object', () => {
         links: 'dummy',
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result).to.contain.warning("'Response Object' contains unsupported key 'links'");
+      expect(parseResult).to.contain.warning("'Response Object' contains unsupported key 'links'");
     });
 
     it('does not provide warning/errors for extensions', () => {
@@ -93,9 +93,9 @@ describe('Response Object', () => {
         'x-extension': '',
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result).to.not.contain.annotations;
+      expect(parseResult).to.not.contain.annotations;
     });
   });
 
@@ -105,9 +105,9 @@ describe('Response Object', () => {
       invalid: '',
     });
 
-    const result = parse(context, response);
+    const parseResult = parse(context, response);
 
-    expect(result).to.contain.warning("'Response Object' contains invalid key 'invalid'");
+    expect(parseResult).to.contain.warning("'Response Object' contains invalid key 'invalid'");
   });
 
   describe('#content', () => {
@@ -117,9 +117,9 @@ describe('Response Object', () => {
         content: '',
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result).to.contain.warning("'Response Object' 'content' is not an object");
+      expect(parseResult).to.contain.warning("'Response Object' 'content' is not an object");
     });
 
     it('returns a HTTP response elements matching the media types', () => {
@@ -131,15 +131,15 @@ describe('Response Object', () => {
         },
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result.length).to.equal(2);
+      expect(parseResult.length).to.equal(2);
 
-      const jsonResponse = result.get(0);
+      const jsonResponse = parseResult.get(0);
       expect(jsonResponse).to.be.instanceof(namespace.elements.HttpResponse);
       expect(jsonResponse.contentType.toValue()).to.equal('application/json');
 
-      const halResponse = result.get(1);
+      const halResponse = parseResult.get(1);
       expect(halResponse).to.be.instanceof(namespace.elements.HttpResponse);
       expect(halResponse.contentType.toValue()).to.equal('application/hal+json');
     });

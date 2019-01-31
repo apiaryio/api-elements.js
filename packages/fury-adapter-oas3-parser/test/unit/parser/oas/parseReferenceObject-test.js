@@ -27,19 +27,19 @@ describe('Reference Object', () => {
     const reference = new namespace.elements.Object({
       $ref: true,
     });
-    const result = parse(context, 'schemas', reference);
+    const parseResult = parse(context, 'schemas', reference);
 
-    expect(result).to.contain.error("'Reference Object' '$ref' is not a string");
+    expect(parseResult).to.contain.error("'Reference Object' '$ref' is not a string");
   });
 
   it('can parse a reference', () => {
     const reference = new namespace.elements.Object({
       $ref: '#/components/schemas/Node',
     });
-    const result = parse(context, 'schemas', reference);
+    const parseResult = parse(context, 'schemas', reference);
 
-    expect(result.length).to.equal(1);
-    const structure = result.get(0);
+    expect(parseResult.length).to.equal(1);
+    const structure = parseResult.get(0);
     expect(structure).to.equal(dataStructure);
   });
 
@@ -53,11 +53,11 @@ describe('Reference Object', () => {
       $ref: '#/components/requestBodies/Example',
     });
 
-    const result = parse(context, 'requestBodies', reference);
+    const parseResult = parse(context, 'requestBodies', reference);
 
-    expect(result.length).to.equal(2);
-    expect(result.get(0)).to.be.instanceof(namespace.elements.HttpRequest);
-    expect(result.get(1)).to.be.instanceof(namespace.elements.HttpRequest);
+    expect(parseResult.length).to.equal(2);
+    expect(parseResult.get(0)).to.be.instanceof(namespace.elements.HttpRequest);
+    expect(parseResult.get(1)).to.be.instanceof(namespace.elements.HttpRequest);
   });
 
   it('can parse a reference to a component that could not be parsed', () => {
@@ -70,9 +70,9 @@ describe('Reference Object', () => {
     const reference = new namespace.elements.Object({
       $ref: '#/components/schemas/Node',
     });
-    const result = parse(context, 'schemas', reference);
+    const parseResult = parse(context, 'schemas', reference);
 
-    expect(result.length).to.equal(0);
+    expect(parseResult.length).to.equal(0);
   });
 
   describe('invalid references', () => {
@@ -80,45 +80,45 @@ describe('Reference Object', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/info/title',
       });
-      const result = parse(context, 'schemas', reference);
+      const parseResult = parse(context, 'schemas', reference);
 
-      expect(result).to.contain.error("Only local references to '#/components' within the same file are supported");
+      expect(parseResult).to.contain.error("Only local references to '#/components' within the same file are supported");
     });
 
     it('errors when parsing reference to a nonexistent component', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/parameters/Node',
       });
-      const result = parse(context, 'parameters', reference);
+      const parseResult = parse(context, 'parameters', reference);
 
-      expect(result).to.contain.error("'#/components/parameters' is not defined");
+      expect(parseResult).to.contain.error("'#/components/parameters' is not defined");
     });
 
     it('errors when parsing reference to incorrect component name', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/parameters/Node',
       });
-      const result = parse(context, 'schemas', reference);
+      const parseResult = parse(context, 'schemas', reference);
 
-      expect(result).to.contain.error("Only references to 'schemas' are permitted from this location");
+      expect(parseResult).to.contain.error("Only references to 'schemas' are permitted from this location");
     });
 
     it('errors when parsing reference to nonexistent property in component', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/schemas/BaseNode',
       });
-      const result = parse(context, 'schemas', reference);
+      const parseResult = parse(context, 'schemas', reference);
 
-      expect(result).to.contain.error("'#/components/schemas/BaseNode' is not defined");
+      expect(parseResult).to.contain.error("'#/components/schemas/BaseNode' is not defined");
     });
 
     it('errors when parsing reference thats too deep', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/schemas/Node/inside',
       });
-      const result = parse(context, 'schemas', reference);
+      const parseResult = parse(context, 'schemas', reference);
 
-      expect(result).to.contain.error(
+      expect(parseResult).to.contain.error(
         "Only references to a reusable component inside '#/components/schemas' are supported"
       );
     });
@@ -128,9 +128,9 @@ describe('Reference Object', () => {
       const reference = new namespace.elements.Object({
         $ref: '#/components/schemas/Node',
       });
-      const result = parse(context, 'schemas', reference);
+      const parseResult = parse(context, 'schemas', reference);
 
-      expect(result).to.contain.error("'#/components' is not defined");
+      expect(parseResult).to.contain.error("'#/components' is not defined");
     });
   });
 
@@ -141,9 +141,9 @@ describe('Reference Object', () => {
         invalid: {},
       });
 
-      const result = parse(context, 'schemas', reference);
+      const parseResult = parse(context, 'schemas', reference);
 
-      expect(result).to.contain.warning("'Reference Object' contains invalid key 'invalid'");
+      expect(parseResult).to.contain.warning("'Reference Object' contains invalid key 'invalid'");
     });
 
     it('provides warning for extensions', () => {
@@ -152,9 +152,9 @@ describe('Reference Object', () => {
         'x-extension': {},
       });
 
-      const result = parse(context, 'schemas', reference);
+      const parseResult = parse(context, 'schemas', reference);
 
-      expect(result).to.contain.warning("Extensions are not permitted in 'Reference Object'");
+      expect(parseResult).to.contain.warning("Extensions are not permitted in 'Reference Object'");
     });
   });
 });

@@ -18,10 +18,10 @@ describe('Operation Object', () => {
       responses: {},
     });
 
-    const result = parse(context, path, operation);
+    const parseResult = parse(context, path, operation);
 
-    expect(result.length).to.equal(1);
-    const transition = result.get(0);
+    expect(parseResult.length).to.equal(1);
+    const transition = parseResult.get(0);
     expect(transition).to.be.instanceof(namespace.elements.Transition);
   });
 
@@ -34,11 +34,11 @@ describe('Operation Object', () => {
       },
     });
 
-    const result = parse(context, path, operation);
+    const parseResult = parse(context, path, operation);
 
-    expect(result.length).to.equal(1);
+    expect(parseResult.length).to.equal(1);
 
-    const transition = result.get(0);
+    const transition = parseResult.get(0);
     expect(transition).to.be.instanceof(namespace.elements.Transition);
     expect(transition.length).to.equal(1);
 
@@ -54,10 +54,10 @@ describe('Operation Object', () => {
   it('provides warning when operation is non-object', () => {
     const operation = new namespace.elements.Member('get', null);
 
-    const result = parse(context, path, operation);
+    const parseResult = parse(context, path, operation);
 
-    expect(result.length).to.equal(1);
-    expect(result).to.contain.warning("'Operation Object' is not an object");
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.warning("'Operation Object' is not an object");
   });
 
   describe('warnings for unsupported properties', () => {
@@ -67,9 +67,9 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'tags'");
+      expect(parseResult).to.contain.warning("'Operation Object' contains unsupported key 'tags'");
     });
 
     it('provides warning for unsupported externalDocs key', () => {
@@ -78,9 +78,9 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'externalDocs'");
+      expect(parseResult).to.contain.warning("'Operation Object' contains unsupported key 'externalDocs'");
     });
 
     it('provides warning for unsupported callbacks key', () => {
@@ -89,9 +89,9 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'callbacks'");
+      expect(parseResult).to.contain.warning("'Operation Object' contains unsupported key 'callbacks'");
     });
 
     it('provides warning for unsupported deprecated key', () => {
@@ -100,9 +100,9 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'deprecated'");
+      expect(parseResult).to.contain.warning("'Operation Object' contains unsupported key 'deprecated'");
     });
 
     it('provides warning for unsupported security key', () => {
@@ -111,9 +111,9 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result).to.contain.warning("'Operation Object' contains unsupported key 'security'");
+      expect(parseResult).to.contain.warning("'Operation Object' contains unsupported key 'security'");
     });
 
     it('does not provide warning/errors for extensions', () => {
@@ -122,9 +122,9 @@ describe('Operation Object', () => {
         'x-extension': '',
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result).to.not.contain.annotations;
+      expect(parseResult).to.not.contain.annotations;
     });
   });
 
@@ -134,19 +134,19 @@ describe('Operation Object', () => {
       invalid: '',
     });
 
-    const result = parse(context, path, operation);
+    const parseResult = parse(context, path, operation);
 
-    expect(result).to.contain.warning("'Operation Object' contains invalid key 'invalid'");
+    expect(parseResult).to.contain.warning("'Operation Object' contains invalid key 'invalid'");
   });
 
   describe('missing required properties', () => {
     it('provides error for missing responses', () => {
       const operation = new namespace.elements.Member('get', {});
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.error("'Operation Object' is missing required property 'responses'");
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.error("'Operation Object' is missing required property 'responses'");
     });
   });
 
@@ -158,12 +158,12 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
 
-      expect(result).to.contain.warning("'Operation Object' 'summary' is not a string");
+      expect(parseResult).to.contain.warning("'Operation Object' 'summary' is not a string");
     });
 
     it('returns a transition with a summary', () => {
@@ -172,11 +172,11 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(1);
+      expect(parseResult.length).to.equal(1);
 
-      const transition = result.get(0);
+      const transition = parseResult.get(0);
       expect(transition).to.be.instanceof(namespace.elements.Transition);
       expect(transition.title.toValue()).to.equal('Example Summary');
     });
@@ -189,11 +189,11 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(1);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
-      expect(result.get(0).copy.toValue()).to.deep.equal(['This is a transition']);
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
+      expect(parseResult.get(0).copy.toValue()).to.deep.equal(['This is a transition']);
     });
 
     it('warns when description is not a string', () => {
@@ -202,12 +202,12 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
 
-      expect(result).to.contain.warning("'Operation Object' 'description' is not a string");
+      expect(parseResult).to.contain.warning("'Operation Object' 'description' is not a string");
     });
   });
 
@@ -218,12 +218,12 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
 
-      expect(result).to.contain.warning("'Operation Object' 'operationId' is not a string");
+      expect(parseResult).to.contain.warning("'Operation Object' 'operationId' is not a string");
     });
 
     it('returns a transition with an id', () => {
@@ -232,11 +232,11 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(1);
+      expect(parseResult.length).to.equal(1);
 
-      const transition = result.get(0);
+      const transition = parseResult.get(0);
       expect(transition).to.be.instanceof(namespace.elements.Transition);
       expect(transition.id.toValue()).to.equal('exampleId');
     });
@@ -252,21 +252,21 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const resultA = parse(context, path, operationA);
+      const parseResultA = parse(context, path, operationA);
 
       {
-        expect(resultA.length).to.equal(1);
-        const transition = resultA.get(0);
+        expect(parseResultA.length).to.equal(1);
+        const transition = parseResultA.get(0);
         expect(transition).to.be.instanceof(namespace.elements.Transition);
         expect(transition.id.toValue()).to.equal('exampleId');
       }
 
-      const resultB = parse(context, path, operationB);
+      const parseResultB = parse(context, path, operationB);
       {
-        expect(resultB.length).to.equal(2);
-        const transition = resultB.get(0);
+        expect(parseResultB.length).to.equal(2);
+        const transition = parseResultB.get(0);
         expect(transition).to.be.instanceof(namespace.elements.Transition);
-        expect(resultB).to.contain.warning("'Operation Object' 'operationId' is not a unique identifier: 'exampleId'");
+        expect(parseResultB).to.contain.warning("'Operation Object' 'operationId' is not a unique identifier: 'exampleId'");
       }
     });
   });
@@ -278,12 +278,12 @@ describe('Operation Object', () => {
         responses: {},
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
 
-      expect(result).to.contain.warning("'Operation Object' 'parameters' is not an array");
+      expect(parseResult).to.contain.warning("'Operation Object' 'parameters' is not an array");
     });
 
     describe('path parameters', () => {
@@ -298,12 +298,12 @@ describe('Operation Object', () => {
           responses: {},
         });
 
-        const result = parse(context, path, operation);
+        const parseResult = parse(context, path, operation);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
 
-        const transition = result.get(0);
+        const transition = parseResult.get(0);
         expect(transition.hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
         expect(transition.hrefVariables.length).to.equal(1);
         expect(transition.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);
@@ -322,12 +322,12 @@ describe('Operation Object', () => {
           responses: {},
         });
 
-        const result = parse(context, path, operation);
+        const parseResult = parse(context, path, operation);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
 
-        const transition = result.get(0);
+        const transition = parseResult.get(0);
         expect(transition.href.toValue()).to.equal('/{?categories}');
       });
 
@@ -346,12 +346,12 @@ describe('Operation Object', () => {
           responses: {},
         });
 
-        const result = parse(context, path, operation);
+        const parseResult = parse(context, path, operation);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
 
-        const transition = result.get(0);
+        const transition = parseResult.get(0);
         expect(transition.href.toValue()).to.equal('/{?categories,tags}');
       });
 
@@ -366,12 +366,12 @@ describe('Operation Object', () => {
           responses: {},
         });
 
-        const result = parse(context, path, operation);
+        const parseResult = parse(context, path, operation);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.Transition);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
 
-        const transition = result.get(0);
+        const transition = parseResult.get(0);
         expect(transition.hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
         expect(transition.hrefVariables.length).to.equal(1);
         expect(transition.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);
@@ -393,11 +393,11 @@ describe('Operation Object', () => {
         },
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(1);
+      expect(parseResult.length).to.equal(1);
 
-      const transition = result.get(0);
+      const transition = parseResult.get(0);
       expect(transition).to.be.instanceof(namespace.elements.Transition);
       expect(transition.length).to.equal(2);
 
@@ -435,11 +435,11 @@ describe('Operation Object', () => {
         },
       });
 
-      const result = parse(context, path, operation);
+      const parseResult = parse(context, path, operation);
 
-      expect(result.length).to.equal(1);
+      expect(parseResult.length).to.equal(1);
 
-      const transition = result.get(0);
+      const transition = parseResult.get(0);
       expect(transition).to.be.instanceof(namespace.elements.Transition);
       expect(transition.length).to.equal(2);
 

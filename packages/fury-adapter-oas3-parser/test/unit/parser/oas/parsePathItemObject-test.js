@@ -14,11 +14,11 @@ describe('#parsePathItemObject', () => {
 
   it('parses a path into a resource', () => {
     const path = new namespace.elements.Member('/', {});
-    const result = parse(context, path);
+    const parseResult = parse(context, path);
 
-    expect(result.length).to.equal(1);
-    expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-    expect(result.get(0).href.toValue()).to.equal('/');
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+    expect(parseResult.get(0).href.toValue()).to.equal('/');
   });
 
   it('parses a path methods into a resource and transactions', () => {
@@ -31,11 +31,11 @@ describe('#parsePathItemObject', () => {
         },
       },
     });
-    const result = parse(context, path);
+    const parseResult = parse(context, path);
 
-    expect(result.length).to.equal(1);
+    expect(parseResult.length).to.equal(1);
 
-    const resource = result.get(0);
+    const resource = parseResult.get(0);
     expect(resource).to.be.instanceof(namespace.elements.Resource);
     expect(resource.href.toValue()).to.equal('/');
     expect(resource.length).to.equal(1);
@@ -47,10 +47,10 @@ describe('#parsePathItemObject', () => {
 
   it('provides a warning when the path item object is non-object', () => {
     const path = new namespace.elements.Member('/', null);
-    const result = parse(context, path);
+    const parseResult = parse(context, path);
 
-    expect(result.length).to.equal(1);
-    expect(result).to.contain.warning("'Path Item Object' is not an object");
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.warning("'Path Item Object' is not an object");
   });
 
   describe('warnings for keys', () => {
@@ -59,13 +59,13 @@ describe('#parsePathItemObject', () => {
         $ref: '',
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(result.get(0).href.toValue()).to.equal('/');
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).href.toValue()).to.equal('/');
 
-      expect(result).to.contain.warning("'Path Item Object' contains unsupported key '$ref'");
+      expect(parseResult).to.contain.warning("'Path Item Object' contains unsupported key '$ref'");
     });
 
     it('warns for a servers', () => {
@@ -73,13 +73,13 @@ describe('#parsePathItemObject', () => {
         servers: '',
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(result.get(0).href.toValue()).to.equal('/');
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).href.toValue()).to.equal('/');
 
-      expect(result).to.contain.warning("'Path Item Object' contains unsupported key 'servers'");
+      expect(parseResult).to.contain.warning("'Path Item Object' contains unsupported key 'servers'");
     });
 
     it('does not provide warning for Info Object extensions', () => {
@@ -87,10 +87,10 @@ describe('#parsePathItemObject', () => {
         'x-extension': '',
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(1);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
     });
 
     it('provides warning for invalid keys', () => {
@@ -98,13 +98,13 @@ describe('#parsePathItemObject', () => {
         invalid: '',
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(result.get(0).href.toValue()).to.equal('/');
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).href.toValue()).to.equal('/');
 
-      expect(result).to.contain.warning("'Path Item Object' contains invalid key 'invalid'");
+      expect(parseResult).to.contain.warning("'Path Item Object' contains invalid key 'invalid'");
     });
   });
 
@@ -114,13 +114,13 @@ describe('#parsePathItemObject', () => {
         summary: 1,
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(result.get(0).href.toValue()).to.equal('/');
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).href.toValue()).to.equal('/');
 
-      expect(result).to.contain.warning("'Path Item Object' 'summary' is not a string");
+      expect(parseResult).to.contain.warning("'Path Item Object' 'summary' is not a string");
     });
 
     it('exposes summary as the title of the resource', () => {
@@ -128,11 +128,11 @@ describe('#parsePathItemObject', () => {
         summary: 'Root',
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(1);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(result.get(0).title.toValue()).to.equal('Root');
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).title.toValue()).to.equal('Root');
     });
   });
 
@@ -142,11 +142,11 @@ describe('#parsePathItemObject', () => {
         description: 'This is a resource',
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(1);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(result.get(0).copy.toValue()).to.deep.equal(['This is a resource']);
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).copy.toValue()).to.deep.equal(['This is a resource']);
     });
 
     it('warns when description is not a string', () => {
@@ -154,13 +154,13 @@ describe('#parsePathItemObject', () => {
         description: 1,
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(result.get(0).length).to.equal(0);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).length).to.equal(0);
 
-      expect(result).to.contain.warning("'Path Item Object' 'description' is not a string");
+      expect(parseResult).to.contain.warning("'Path Item Object' 'description' is not a string");
     });
   });
 
@@ -170,13 +170,13 @@ describe('#parsePathItemObject', () => {
         parameters: {},
       });
 
-      const result = parse(context, path);
+      const parseResult = parse(context, path);
 
-      expect(result.length).to.equal(2);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(result.get(0).href.toValue()).to.equal('/');
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).href.toValue()).to.equal('/');
 
-      expect(result).to.contain.warning("'Path Item Object' 'parameters' is not an array");
+      expect(parseResult).to.contain.warning("'Path Item Object' 'parameters' is not an array");
     });
 
     describe('path parameters', () => {
@@ -190,12 +190,12 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(context, path);
+        const parseResult = parse(context, path);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
 
-        const resource = result.get(0);
+        const resource = parseResult.get(0);
         expect(resource.hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
         expect(resource.hrefVariables.length).to.equal(1);
         expect(resource.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);
@@ -211,10 +211,10 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(context, path);
+        const parseResult = parse(context, path);
 
-        expect(result.length).to.equal(1);
-        expect(result).to.contain.error("Path '/' is missing path variable 'resource'. Add '{resource}' to the path");
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult).to.contain.error("Path '/' is missing path variable 'resource'. Add '{resource}' to the path");
       });
     });
 
@@ -229,12 +229,12 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(context, path);
+        const parseResult = parse(context, path);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
 
-        const resource = result.get(0);
+        const resource = parseResult.get(0);
         expect(resource.href.toValue()).to.equal('/{?categories}');
       });
 
@@ -252,12 +252,12 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(context, path);
+        const parseResult = parse(context, path);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
 
-        const resource = result.get(0);
+        const resource = parseResult.get(0);
         expect(resource.href.toValue()).to.equal('/{?categories,tags}');
       });
 
@@ -271,12 +271,12 @@ describe('#parsePathItemObject', () => {
           ],
         });
 
-        const result = parse(context, path);
+        const parseResult = parse(context, path);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
 
-        const resource = result.get(0);
+        const resource = parseResult.get(0);
         expect(resource.hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
         expect(resource.hrefVariables.length).to.equal(1);
         expect(resource.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);

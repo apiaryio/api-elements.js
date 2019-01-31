@@ -14,10 +14,10 @@ describe('Parameter Object', () => {
   it('provides warning when parameter is non-object', () => {
     const operation = new namespace.elements.String();
 
-    const result = parse(context, operation);
+    const parseResult = parse(context, operation);
 
-    expect(result.length).to.equal(1);
-    expect(result).to.contain.warning("'Parameter Object' is not an object");
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.warning("'Parameter Object' is not an object");
   });
 
   describe('#name', () => {
@@ -27,10 +27,10 @@ describe('Parameter Object', () => {
         in: 'path',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.error("'Parameter Object' 'name' is not a string");
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.error("'Parameter Object' 'name' is not a string");
     });
 
     it('provides an error when name contains unsupported characters', () => {
@@ -39,10 +39,10 @@ describe('Parameter Object', () => {
         in: 'path',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.error("'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported");
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.error("'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported");
     });
 
     it('allows name to contain unreserved URI Template characters', () => {
@@ -56,11 +56,11 @@ describe('Parameter Object', () => {
         in: 'path',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.length).to.equal(1);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Member);
-      expect(result.get(0).key.toValue()).to.equal(unreserved);
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).key.toValue()).to.equal(unreserved);
     });
   });
 
@@ -71,10 +71,10 @@ describe('Parameter Object', () => {
         in: 1,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.error("'Parameter Object' 'in' is not a string");
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.error("'Parameter Object' 'in' is not a string");
     });
 
     it('provides an error when value is not a permitted value', () => {
@@ -83,10 +83,10 @@ describe('Parameter Object', () => {
         in: 'space',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.error("'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'");
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.error("'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'");
     });
 
     it('provides an unsupported error for header parameters', () => {
@@ -95,10 +95,10 @@ describe('Parameter Object', () => {
         in: 'header',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.warning("'Parameter Object' 'in' header is unsupported");
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Parameter Object' 'in' header is unsupported");
     });
 
     it('provides an unsupported error for cookie parameters', () => {
@@ -107,10 +107,10 @@ describe('Parameter Object', () => {
         in: 'cookie',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.length).to.equal(1);
-      expect(result).to.contain.warning("'Parameter Object' 'in' cookie is unsupported");
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Parameter Object' 'in' cookie is unsupported");
     });
   });
 
@@ -122,12 +122,12 @@ describe('Parameter Object', () => {
         description: 'an example parameter',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.not.contain.annotations;
-      expect(result.length).to.equal(1);
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Member);
-      expect(result.get(0).description.toValue()).to.equal(
+      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).description.toValue()).to.equal(
         'an example parameter'
       );
     });
@@ -139,9 +139,9 @@ describe('Parameter Object', () => {
         description: true,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' 'description' is not a string");
+      expect(parseResult).to.contain.warning("'Parameter Object' 'description' is not a string");
     });
   });
 
@@ -153,14 +153,14 @@ describe('Parameter Object', () => {
         required: true,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.not.contain.annotations;
+      expect(parseResult).to.not.contain.annotations;
 
-      expect(result.length).to.be.equal(1);
+      expect(parseResult.length).to.be.equal(1);
 
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Member);
-      const typeAttributes = result.get(0).attributes.get('typeAttributes');
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      const typeAttributes = parseResult.get(0).attributes.get('typeAttributes');
 
       expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
       expect(typeAttributes.length).to.be.equal(1);
@@ -174,14 +174,14 @@ describe('Parameter Object', () => {
         required: false,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.warnings.length).to.be.equal(0);
+      expect(parseResult.warnings.length).to.be.equal(0);
 
-      expect(result.length).to.be.equal(1);
+      expect(parseResult.length).to.be.equal(1);
 
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Member);
-      expect(result.get(0).attributes.get('typeAttributes')).to.be.undefined;
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).attributes.get('typeAttributes')).to.be.undefined;
     });
 
     it('provide warning if required is not bool', () => {
@@ -191,13 +191,13 @@ describe('Parameter Object', () => {
         required: 1,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result.length).to.be.equal(2); // parameter && warning
-      expect(result.get(0)).to.be.instanceof(namespace.elements.Member);
-      expect(result.get(0).attributes.get('typeAttributes')).to.be.undefined;
+      expect(parseResult.length).to.be.equal(2); // parameter && warning
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).attributes.get('typeAttributes')).to.be.undefined;
 
-      expect(result).to.contain.warning("'Parameter Object' 'required' is not a boolean");
+      expect(parseResult).to.contain.warning("'Parameter Object' 'required' is not a boolean");
     });
   });
 
@@ -209,9 +209,9 @@ describe('Parameter Object', () => {
         deprecated: true,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'deprecated'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'deprecated'");
     });
 
     it('provides warning for unsupported allowEmptyValue property', () => {
@@ -221,9 +221,9 @@ describe('Parameter Object', () => {
         allowEmptyValue: true,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'allowEmptyValue'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'allowEmptyValue'");
     });
 
     it('provides warning for unsupported style property', () => {
@@ -233,9 +233,9 @@ describe('Parameter Object', () => {
         style: 'simple',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'style'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'style'");
     });
 
     it('provides warning for unsupported explode property', () => {
@@ -245,9 +245,9 @@ describe('Parameter Object', () => {
         explode: true,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'explode'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'explode'");
     });
 
     it('provides warning for unsupported allowReserved property', () => {
@@ -257,9 +257,9 @@ describe('Parameter Object', () => {
         allowReserved: true,
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'allowReserved'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'allowReserved'");
     });
 
     it('provides warning for unsupported schema property', () => {
@@ -269,9 +269,9 @@ describe('Parameter Object', () => {
         schema: { type: 'string' },
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'schema'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'schema'");
     });
 
     it('provides warning for unsupported example property', () => {
@@ -281,9 +281,9 @@ describe('Parameter Object', () => {
         example: 'east',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'example'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'example'");
     });
 
     it('provides warning for unsupported examples property', () => {
@@ -293,9 +293,9 @@ describe('Parameter Object', () => {
         examples: {},
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'examples'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'examples'");
     });
 
     it('provides warning for unsupported content property', () => {
@@ -305,9 +305,9 @@ describe('Parameter Object', () => {
         content: {},
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.contain.warning("'Parameter Object' contains unsupported key 'content'");
+      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'content'");
     });
 
     it('does not provide warning/errors for extensions', () => {
@@ -317,9 +317,9 @@ describe('Parameter Object', () => {
         'x-extension': '',
       });
 
-      const result = parse(context, parameter);
+      const parseResult = parse(context, parameter);
 
-      expect(result).to.not.contain.annotations;
+      expect(parseResult).to.not.contain.annotations;
     });
   });
 
@@ -330,8 +330,8 @@ describe('Parameter Object', () => {
       invalid: '',
     });
 
-    const result = parse(context, parameter);
+    const parseResult = parse(context, parameter);
 
-    expect(result).to.contain.warning("'Parameter Object' contains invalid key 'invalid'");
+    expect(parseResult).to.contain.warning("'Parameter Object' contains invalid key 'invalid'");
   });
 });

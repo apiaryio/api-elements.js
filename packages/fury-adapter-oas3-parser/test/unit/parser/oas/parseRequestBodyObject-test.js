@@ -13,20 +13,20 @@ describe('Request Body Object', () => {
 
   it('returns an HTTP request element', () => {
     const request = new namespace.elements.Object();
-    const result = parse(context, request);
+    const parseResult = parse(context, request);
 
-    expect(result.length).to.equal(1);
-    const httpRequest = result.get(0);
+    expect(parseResult.length).to.equal(1);
+    const httpRequest = parseResult.get(0);
     expect(httpRequest).to.be.instanceof(namespace.elements.HttpRequest);
   });
 
   it('provides warning when request body is non-object', () => {
     const request = new namespace.elements.String();
 
-    const result = parse(context, request);
+    const parseResult = parse(context, request);
 
-    expect(result.length).to.equal(1);
-    expect(result).to.contain.warning("'Request Body Object' is not an object");
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.warning("'Request Body Object' is not an object");
   });
 
   describe('#description', () => {
@@ -35,11 +35,11 @@ describe('Request Body Object', () => {
         description: 'Example Request Body',
       });
 
-      const result = parse(context, request);
+      const parseResult = parse(context, request);
 
-      expect(result).to.not.contain.annotations;
-      expect(result.length).to.be.equal(1);
-      expect(result.get(0).copy.toValue()).to.deep.equal(['Example Request Body']);
+      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.be.equal(1);
+      expect(parseResult.get(0).copy.toValue()).to.deep.equal(['Example Request Body']);
     });
   });
 
@@ -49,9 +49,9 @@ describe('Request Body Object', () => {
         required: true,
       });
 
-      const result = parse(context, request);
+      const parseResult = parse(context, request);
 
-      expect(result).to.contain.warning("'Request Body Object' contains unsupported key 'required'");
+      expect(parseResult).to.contain.warning("'Request Body Object' contains unsupported key 'required'");
     });
 
     it('does not provide warning/errors for extensions', () => {
@@ -59,9 +59,9 @@ describe('Request Body Object', () => {
         'x-extension': '',
       });
 
-      const result = parse(context, request);
+      const parseResult = parse(context, request);
 
-      expect(result).to.not.contain.annotations;
+      expect(parseResult).to.not.contain.annotations;
     });
   });
 
@@ -70,9 +70,9 @@ describe('Request Body Object', () => {
       invalid: '',
     });
 
-    const result = parse(context, request);
+    const parseResult = parse(context, request);
 
-    expect(result).to.contain.warning("'Request Body Object' contains invalid key 'invalid'");
+    expect(parseResult).to.contain.warning("'Request Body Object' contains invalid key 'invalid'");
   });
 
   describe('#content', () => {
@@ -81,9 +81,9 @@ describe('Request Body Object', () => {
         content: '',
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result).to.contain.warning("'Request Body Object' 'content' is not an object");
+      expect(parseResult).to.contain.warning("'Request Body Object' 'content' is not an object");
     });
 
     it('returns a HTTP request elements matching the media types', () => {
@@ -94,15 +94,15 @@ describe('Request Body Object', () => {
         },
       });
 
-      const result = parse(context, response);
+      const parseResult = parse(context, response);
 
-      expect(result.length).to.equal(2);
+      expect(parseResult.length).to.equal(2);
 
-      const jsonRequest = result.get(0);
+      const jsonRequest = parseResult.get(0);
       expect(jsonRequest).to.be.instanceof(namespace.elements.HttpRequest);
       expect(jsonRequest.contentType.toValue()).to.equal('application/json');
 
-      const textRequest = result.get(1);
+      const textRequest = parseResult.get(1);
       expect(textRequest).to.be.instanceof(namespace.elements.HttpRequest);
       expect(textRequest.contentType.toValue()).to.equal('text/plain');
     });

@@ -16,17 +16,17 @@ describe('Media Type Object', () => {
   it('provides warning when media type is non-object', () => {
     const mediaType = new namespace.elements.Member('application/json', null);
 
-    const result = parse(context, messageBodyClass, mediaType);
+    const parseResult = parse(context, messageBodyClass, mediaType);
 
-    expect(result).to.contain.warning("'Media Type Object' is not an object");
+    expect(parseResult).to.contain.warning("'Media Type Object' is not an object");
   });
 
   it('returns a HTTP message body', () => {
     const mediaType = new namespace.elements.Member('application/json', {});
 
-    const result = parse(context, messageBodyClass, mediaType);
+    const parseResult = parse(context, messageBodyClass, mediaType);
 
-    const message = result.get(0);
+    const message = parseResult.get(0);
     expect(message).to.be.instanceof(messageBodyClass);
     expect(message.contentType.toValue()).to.equal('application/json');
   });
@@ -37,9 +37,9 @@ describe('Media Type Object', () => {
         examples: {},
       });
 
-      const result = parse(context, messageBodyClass, mediaType);
+      const parseResult = parse(context, messageBodyClass, mediaType);
 
-      expect(result).to.contain.warning("'Media Type Object' contains unsupported key 'examples'");
+      expect(parseResult).to.contain.warning("'Media Type Object' contains unsupported key 'examples'");
     });
 
     it('provides warning for unsupported encoding key', () => {
@@ -47,9 +47,9 @@ describe('Media Type Object', () => {
         encoding: {},
       });
 
-      const result = parse(context, messageBodyClass, mediaType);
+      const parseResult = parse(context, messageBodyClass, mediaType);
 
-      expect(result).to.contain.warning("'Media Type Object' contains unsupported key 'encoding'");
+      expect(parseResult).to.contain.warning("'Media Type Object' contains unsupported key 'encoding'");
     });
   });
 
@@ -61,9 +61,9 @@ describe('Media Type Object', () => {
         },
       });
 
-      const result = parse(context, messageBodyClass, mediaType);
+      const parseResult = parse(context, messageBodyClass, mediaType);
 
-      const message = result.get(0);
+      const message = parseResult.get(0);
       expect(message).to.be.instanceof(messageBodyClass);
       expect(message.messageBody.toValue()).to.equal('{"message":"Hello World"}');
       expect(message.messageBody.contentType.toValue()).to.equal('application/json');
@@ -76,9 +76,9 @@ describe('Media Type Object', () => {
         },
       });
 
-      const result = parse(context, messageBodyClass, mediaType);
+      const parseResult = parse(context, messageBodyClass, mediaType);
 
-      const message = result.get(0);
+      const message = parseResult.get(0);
       expect(message).to.be.instanceof(messageBodyClass);
       expect(message.messageBody.toValue()).to.equal('{"message":"Hello World"}');
       expect(message.messageBody.contentType.toValue()).to.equal('application/hal+json');
@@ -91,13 +91,13 @@ describe('Media Type Object', () => {
         },
       });
 
-      const result = parse(context, messageBodyClass, mediaType);
+      const parseResult = parse(context, messageBodyClass, mediaType);
 
-      const message = result.get(0);
+      const message = parseResult.get(0);
       expect(message).to.be.instanceof(messageBodyClass);
       expect(message.messageBody).to.be.undefined;
 
-      expect(result).to.contain.warning(
+      expect(parseResult).to.contain.warning(
         "'Media Type Object' 'example' is only supported for JSON media types"
       );
     });
@@ -111,9 +111,9 @@ describe('Media Type Object', () => {
         },
       });
 
-      const result = parse(context, messageBodyClass, mediaType);
+      const parseResult = parse(context, messageBodyClass, mediaType);
 
-      const message = result.get(0);
+      const message = parseResult.get(0);
       expect(message).to.be.instanceof(messageBodyClass);
       expect(message.dataStructure).to.be.instanceof(namespace.elements.DataStructure);
       expect(message.dataStructure.content).to.be.instanceof(namespace.elements.Object);
@@ -137,9 +137,9 @@ describe('Media Type Object', () => {
         },
       });
 
-      const result = parse(context, messageBodyClass, mediaType);
+      const parseResult = parse(context, messageBodyClass, mediaType);
 
-      const message = result.get(0);
+      const message = parseResult.get(0);
       expect(message).to.be.instanceof(messageBodyClass);
       expect(message.dataStructure).to.be.instanceof(namespace.elements.DataStructure);
       expect(message.dataStructure.content.element).to.equal('User');

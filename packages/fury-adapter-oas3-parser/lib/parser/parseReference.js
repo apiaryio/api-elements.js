@@ -8,17 +8,17 @@ function isReferenceObject(element) {
 
 function parseReference(component, parser, context, element, isInsideSchema) {
   if (isReferenceObject(element)) {
-    const result = parseReferenceObject(context, component, element, component === 'schemas');
+    const parseResult = parseReferenceObject(context, component, element, component === 'schemas');
 
     // If we're referencing a schema object and we're not inside a schema
     // parser (subschema), then we want to wrap the object in a data structure element
     if (!isInsideSchema && component === 'schemas') {
       const DataStructure = R.constructN(1, context.namespace.elements.DataStructure);
       const wrapInDataStructure = R.unless(isAnnotation, DataStructure);
-      return R.map(wrapInDataStructure, result);
+      return R.map(wrapInDataStructure, parseResult);
     }
 
-    return result;
+    return parseResult;
   }
 
   return parser(context, element);

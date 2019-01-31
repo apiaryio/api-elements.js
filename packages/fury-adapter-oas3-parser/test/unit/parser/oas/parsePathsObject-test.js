@@ -15,17 +15,17 @@ describe('#parsePathsObject', () => {
   it('provides error when paths is non-object', () => {
     const paths = new namespace.elements.String();
 
-    const result = parse(context, paths);
+    const parseResult = parse(context, paths);
 
-    expect(result.length).to.equal(1);
-    expect(result).to.contain.error("'Paths Object' is not an object");
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.error("'Paths Object' is not an object");
   });
 
-  it('returns empty parse result when paths is empty', () => {
+  it('returns empty parse parseResult when paths is empty', () => {
     const paths = new namespace.elements.Object();
-    const result = parse(context, paths);
+    const parseResult = parse(context, paths);
 
-    expect(result.isEmpty).to.be.true;
+    expect(parseResult.isEmpty).to.be.true;
   });
 
   it('provides a warning when paths contains non-path field pattern', () => {
@@ -33,10 +33,10 @@ describe('#parsePathsObject', () => {
       test: {},
     });
 
-    const result = parse(context, paths);
+    const parseResult = parse(context, paths);
 
-    expect(result.length).to.equal(1);
-    expect(result).to.contain.warning("'Paths Object' contains invalid key 'test'");
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.warning("'Paths Object' contains invalid key 'test'");
   });
 
   it('ignores extension objects', () => {
@@ -44,9 +44,9 @@ describe('#parsePathsObject', () => {
       'x-extension': {},
     });
 
-    const result = parse(context, paths);
+    const parseResult = parse(context, paths);
 
-    expect(result.isEmpty).to.be.true;
+    expect(parseResult.isEmpty).to.be.true;
   });
 
   it('parses multiple path items into resources in defined order', () => {
@@ -56,16 +56,16 @@ describe('#parsePathsObject', () => {
       '/2': new namespace.elements.Object(),
     });
 
-    const result = parse(context, paths);
+    const parseResult = parse(context, paths);
 
-    expect(result.length).to.equal(3);
-    expect(result.get(0)).to.be.instanceof(namespace.elements.Resource);
-    expect(result.get(0).href.toValue()).to.equal('/3');
+    expect(parseResult.length).to.equal(3);
+    expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+    expect(parseResult.get(0).href.toValue()).to.equal('/3');
 
-    expect(result.get(1)).to.be.instanceof(namespace.elements.Resource);
-    expect(result.get(1).href.toValue()).to.equal('/1');
+    expect(parseResult.get(1)).to.be.instanceof(namespace.elements.Resource);
+    expect(parseResult.get(1).href.toValue()).to.equal('/1');
 
-    expect(result.get(2)).to.be.instanceof(namespace.elements.Resource);
-    expect(result.get(2).href.toValue()).to.equal('/2');
+    expect(parseResult.get(2)).to.be.instanceof(namespace.elements.Resource);
+    expect(parseResult.get(2).href.toValue()).to.equal('/2');
   });
 });
