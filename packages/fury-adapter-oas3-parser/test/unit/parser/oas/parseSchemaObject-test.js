@@ -2,6 +2,7 @@ const { Fury } = require('fury');
 const { expect } = require('../../chai');
 const parse = require('../../../../lib/parser/oas/parseSchemaObject');
 const Context = require('../../../../lib/context');
+const { isArray, isObject } = require('../../../../lib/predicates');
 
 const { minim: namespace } = new Fury();
 
@@ -38,6 +39,26 @@ describe('Schema Object', () => {
       expect(result).to.contain.warning(
         "'Schema Object' 'type' must be either null, boolean, object, array, number, string, integer"
       );
+    });
+
+    it('returns a data structure representing all types for no type limitations', () => {
+      const schema = new namespace.elements.Object({});
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const element = result.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+
+      expect(element.enumerations.length).to.equal(6);
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+      expect(element.enumerations.get(2)).to.be.instanceof(namespace.elements.Boolean);
+      expect(element.enumerations.get(3)).to.be.instanceof(namespace.elements.Null);
+      expect(element.enumerations.get(4)).to.be.instanceof(namespace.elements.Object);
+      expect(element.enumerations.get(5)).to.be.instanceof(namespace.elements.Array);
     });
 
     it('returns a null structure for null type', () => {
@@ -145,8 +166,6 @@ describe('Schema Object', () => {
         enum: 1,
       });
       const result = parse(context, schema);
-
-      expect(result.length).to.equal(1);
 
       expect(result).to.contain.warning(
         "'Schema Object' 'enum' is not an array"
@@ -281,68 +300,6 @@ describe('Schema Object', () => {
   });
 
   describe('object type', () => {
-    describe('#properties', () => {
-      it('warns when properties is not an object', () => {
-        const schema = new namespace.elements.Object({
-          type: 'object',
-          properties: [],
-        });
-        const result = parse(context, schema);
-
-        expect(result.length).to.equal(2);
-
-        expect(result).to.contain.warning(
-          "'Schema Object' 'properties' is not an object"
-        );
-      });
-
-      it('returns an object with properties', () => {
-        const schema = new namespace.elements.Object({
-          type: 'object',
-          properties: {
-            name: { type: 'string' },
-          },
-        });
-        const result = parse(context, schema);
-
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-        expect(result).to.not.contain.annotations;
-
-        const object = result.get(0).content;
-        expect(object).to.be.instanceof(namespace.elements.Object);
-
-        const name = object.get('name');
-        expect(name).to.be.instanceof(namespace.elements.String);
-      });
-
-      it('returns an object with properties including references', () => {
-        context.state.components = new namespace.elements.Object({
-          schemas: {
-            name: { type: 'object' },
-          },
-        });
-        const schema = new namespace.elements.Object({
-          type: 'object',
-          properties: {
-            name: { $ref: '#/components/schemas/name' },
-          },
-        });
-        const result = parse(context, schema);
-
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-        expect(result).to.not.contain.annotations;
-
-        const object = result.get(0).content;
-        expect(object).to.be.instanceof(namespace.elements.Object);
-
-        const name = object.get('name');
-        expect(name).to.be.instanceof(namespace.elements.Element);
-        expect(name.element).to.equal('name');
-      });
-    });
-
     describe('#required', () => {
       it('warns when required is not an array', () => {
         const schema = new namespace.elements.Object({
@@ -397,42 +354,151 @@ describe('Schema Object', () => {
     });
   });
 
-  describe('array type', () => {
-    describe('#items', () => {
-      it('warns when items is not an object', () => {
-        const schema = new namespace.elements.Object({
-          type: 'array',
-          items: [],
-        });
-        const result = parse(context, schema);
-
-        expect(result.length).to.equal(2);
-
-        expect(result).to.contain.warning(
-          "'Schema Object' is not an object"
-        );
+  describe('#properties', () => {
+    it('warns when properties is not an object', () => {
+      const schema = new namespace.elements.Object({
+        properties: [],
       });
+      const result = parse(context, schema);
 
-      it('returns an array with fixed-type items', () => {
-        const schema = new namespace.elements.Object({
-          type: 'array',
-          items: {
-            type: 'string',
-          },
-        });
-        const result = parse(context, schema);
+      expect(result.length).to.equal(2);
 
-        expect(result.length).to.equal(1);
-        expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-        expect(result).to.not.contain.annotations;
+      expect(result).to.contain.warning(
+        "'Schema Object' 'properties' is not an object"
+      );
+    });
 
-        const array = result.get(0).content;
-        expect(array).to.be.instanceof(namespace.elements.Array);
-        expect(array.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
-
-        const items = array.get(0);
-        expect(items).to.be.instanceof(namespace.elements.String);
+    it('returns an object with properties when type is object', () => {
+      const schema = new namespace.elements.Object({
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+        },
       });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const object = result.get(0).content;
+      expect(object).to.be.instanceof(namespace.elements.Object);
+
+      const name = object.get('name');
+      expect(name).to.be.instanceof(namespace.elements.String);
+    });
+
+    it('returns an enum including an object of properties without type object', () => {
+      const schema = new namespace.elements.Object({
+        properties: {
+          name: { type: 'string' },
+        },
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const enumeration = result.get(0).content;
+      expect(enumeration).to.be.instanceof(namespace.elements.Enum);
+
+      const objects = enumeration.enumerations.filter(isObject);
+      expect(objects.length).to.equal(1);
+
+      const object = objects.get(0);
+      expect(object).to.be.instanceof(namespace.elements.Object);
+
+      const name = object.get('name');
+      expect(name).to.be.instanceof(namespace.elements.String);
+    });
+
+    it('returns an object with properties including references', () => {
+      context.state.components = new namespace.elements.Object({
+        schemas: {
+          name: { type: 'object' },
+        },
+      });
+      const schema = new namespace.elements.Object({
+        type: 'object',
+        properties: {
+          name: { $ref: '#/components/schemas/name' },
+        },
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const object = result.get(0).content;
+      expect(object).to.be.instanceof(namespace.elements.Object);
+
+      const name = object.get('name');
+      expect(name).to.be.instanceof(namespace.elements.Element);
+      expect(name.element).to.equal('name');
+    });
+  });
+
+  describe('#items', () => {
+    it('warns when items is not an object', () => {
+      const schema = new namespace.elements.Object({
+        items: [],
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(2);
+
+      expect(result).to.contain.warning(
+        "'Schema Object' is not an object"
+      );
+    });
+
+    it('returns an array with fixed-type items when type is array', () => {
+      const schema = new namespace.elements.Object({
+        type: 'array',
+        items: {
+          type: 'string',
+        },
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const array = result.get(0).content;
+      expect(array).to.be.instanceof(namespace.elements.Array);
+      expect(array.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+
+      const items = array.get(0);
+      expect(items).to.be.instanceof(namespace.elements.String);
+    });
+
+    it('returns an enum including the fixed array without type array', () => {
+      const schema = new namespace.elements.Object({
+        items: {
+          type: 'string',
+        },
+      });
+      const result = parse(context, schema);
+
+      expect(result.length).to.equal(1);
+      expect(result.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(result).to.not.contain.annotations;
+
+      const enumeration = result.get(0).content;
+      expect(enumeration).to.be.instanceof(namespace.elements.Enum);
+
+      const arrays = enumeration.enumerations.filter(isArray);
+      expect(arrays.length).to.equal(1);
+
+      const array = arrays.get(0);
+      expect(array).to.be.instanceof(namespace.elements.Array);
+      expect(array.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+
+      const items = array.get(0);
+      expect(items).to.be.instanceof(namespace.elements.String);
     });
   });
 });

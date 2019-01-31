@@ -1,5 +1,11 @@
 # Fury OAS3 Parser Changelog
 
+## 0.5.1 (30-01-19)
+
+### Bug Fixes
+
+- Fixes support for schema objects which do not declare a type.
+
 ## 0.5.0 (30-01-19)
 
 ### Enhancements
