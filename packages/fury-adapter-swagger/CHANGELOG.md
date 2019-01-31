@@ -1,5 +1,12 @@
 # Fury Swagger Parser Changelog
 
+## 0.23.2 (2019-01-25)
+
+### Bug Fixes
+
+- Fix cases where example values in schema definitions are not used in request
+  or response bodies.
+
 ## 0.23.1 (2019-01-10)
 
 ### Bug Fixes
