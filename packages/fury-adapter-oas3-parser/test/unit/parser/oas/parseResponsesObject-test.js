@@ -13,10 +13,10 @@ describe('Responses Object', () => {
 
   it('provides warning when responses is non-object', () => {
     const responses = new namespace.elements.String('');
-    const result = parse(context, responses);
+    const parseResult = parse(context, responses);
 
-    expect(result.length).to.equal(1);
-    expect(result).to.contain.warning("'Responses Object' is not an object");
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.warning("'Responses Object' is not an object");
   });
 
   it('does not provide warning/errors for extensions', () => {
@@ -24,9 +24,9 @@ describe('Responses Object', () => {
       'x-extension': '',
     });
 
-    const result = parse(context, responses);
+    const parseResult = parse(context, responses);
 
-    expect(result).to.not.contain.annotations;
+    expect(parseResult).to.not.contain.annotations;
   });
 
   it('provides warning for invalid keys', () => {
@@ -34,9 +34,9 @@ describe('Responses Object', () => {
       invalid: '',
     });
 
-    const result = parse(context, responses);
+    const parseResult = parse(context, responses);
 
-    expect(result).to.contain.warning("'Responses Object' contains invalid key 'invalid'");
+    expect(parseResult).to.contain.warning("'Responses Object' contains invalid key 'invalid'");
   });
 
   it('provides warning for response range', () => {
@@ -44,9 +44,9 @@ describe('Responses Object', () => {
       invalid: '',
     });
 
-    const result = parse(context, responses);
+    const parseResult = parse(context, responses);
 
-    expect(result).to.contain.warning("'Responses Object' contains invalid key 'invalid'");
+    expect(parseResult).to.contain.warning("'Responses Object' contains invalid key 'invalid'");
   });
 
   it('can parse a numerical status code', () => {
@@ -56,10 +56,10 @@ describe('Responses Object', () => {
       },
     });
 
-    const result = parse(context, responses);
-    expect(result.length).to.equal(1);
+    const parseResult = parse(context, responses);
+    expect(parseResult.length).to.equal(1);
 
-    const array = result.get(0);
+    const array = parseResult.get(0);
     expect(array).to.be.instanceof(namespace.elements.Array);
     expect(array.length).to.equal(1);
 
@@ -73,8 +73,8 @@ describe('Responses Object', () => {
       default: {},
     });
 
-    const result = parse(context, responses);
-    expect(result).to.contain.warning("'Responses Object' default responses are unsupported");
+    const parseResult = parse(context, responses);
+    expect(parseResult).to.contain.warning("'Responses Object' default responses are unsupported");
   });
 
   it('parses a status code range as warning', () => {
@@ -82,7 +82,7 @@ describe('Responses Object', () => {
       '2XX': {},
     });
 
-    const result = parse(context, responses);
-    expect(result).to.contain.warning("'Responses Object' response status code ranges are unsupported");
+    const parseResult = parse(context, responses);
+    expect(parseResult).to.contain.warning("'Responses Object' response status code ranges are unsupported");
   });
 });

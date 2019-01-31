@@ -14,9 +14,9 @@ describe('Parameter Objects', () => {
   it('provides warning when parameter is non-array', () => {
     const parameters = new namespace.elements.String();
 
-    const result = parse(context, 'Operation Object', parameters);
+    const parseResult = parse(context, 'Operation Object', parameters);
 
-    expect(result).to.contain.warning("'Operation Object' 'parameters' is not an array");
+    expect(parseResult).to.contain.warning("'Operation Object' 'parameters' is not an array");
   });
 
   it('can parse parameters into groups', () => {
@@ -35,10 +35,10 @@ describe('Parameter Objects', () => {
       },
     ]);
 
-    const result = parse(context, 'Operation Object', parameters);
+    const parseResult = parse(context, 'Operation Object', parameters);
 
-    expect(result.length).to.equal(1);
-    const parametersElement = result.get(0);
+    expect(parseResult.length).to.equal(1);
+    const parametersElement = parseResult.get(0);
     expect(parametersElement).to.be.instanceof(namespace.elements.Object);
 
     const pathParameters = parametersElement.get('path');
@@ -67,10 +67,10 @@ describe('Parameter Objects', () => {
       parameters: { tags },
     });
 
-    const result = parse(context, 'Operation Object', parameters);
+    const parseResult = parse(context, 'Operation Object', parameters);
 
-    expect(result.length).to.equal(1);
-    const parametersElement = result.get(0);
+    expect(parseResult.length).to.equal(1);
+    const parametersElement = parseResult.get(0);
     expect(parametersElement).to.be.instanceof(namespace.elements.Object);
 
     const queryParameters = parametersElement.get('query');
