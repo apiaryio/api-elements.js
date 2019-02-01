@@ -2,6 +2,10 @@
 
 ## Master
 
+### Enhancements
+
+- Added support for the `nullable` Schema Object property.
+
 ### Bug Fixes
 
 - Removed `null` as a valid type for a Schema Object, `null` is not supported
