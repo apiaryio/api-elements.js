@@ -486,4 +486,51 @@ describe('Schema Object', () => {
       expect(items).to.be.instanceof(namespace.elements.String);
     });
   });
+
+  describe('#nullable', () => {
+    it('warns when nullable is not boolean', () => {
+      const schema = new namespace.elements.Object({
+        nullable: 1,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'nullable' is not a boolean"
+      );
+    });
+
+    it('adds nullable type attribute to element', () => {
+      const schema = new namespace.elements.Object({
+        nullable: true,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('typeAttributes').toValue()).to.deep.equal(['nullable']);
+    });
+
+    it('adds nullable type attribute to element with other typeAttributes', () => {
+      const schema = new namespace.elements.Object({
+        type: 'array',
+        items: {
+          type: 'string',
+        },
+        nullable: true,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('typeAttributes').toValue()).to.deep.equal(['fixedType', 'nullable']);
+    });
+  });
 });

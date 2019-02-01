@@ -10,6 +10,7 @@ const {
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
+const parseBoolean = require('../parseBoolean');
 const parseReference = require('../parseReference');
 
 const name = 'Schema Object';
@@ -106,6 +107,7 @@ function parseSchema(context) {
     [hasKey('properties'), R.compose(parseProperties, getValue)],
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
     [hasKey('required'), R.compose(parseRequired, getValue)],
+    [hasKey('nullable'), parseBoolean(context, name, false)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -142,6 +144,13 @@ function parseSchema(context) {
           constructObjectStructure(namespace, schema),
           constructArrayStructure(namespace, schema),
         ];
+      }
+
+      const nullable = schema.getValue('nullable');
+      if (nullable) {
+        const typeAttributes = element.attributes.get('typeAttributes') || new namespace.elements.Array();
+        typeAttributes.push('nullable');
+        element.attributes.set('typeAttributes', typeAttributes);
       }
 
       return element;
