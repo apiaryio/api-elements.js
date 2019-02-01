@@ -30,7 +30,7 @@ const unsupportedKeys = [
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 // purposely in the order defined in the JSON Schema spec, integer is an OAS 3 specific addition and thus is at the end
-const types = ['null', 'boolean', 'object', 'array', 'number', 'string', 'integer'];
+const types = ['boolean', 'object', 'array', 'number', 'string', 'integer'];
 const hasValue = R.curry((value, member) => member.value.toValue() === value);
 const isValidType = R.anyPass(R.map(hasValue, types));
 
@@ -133,15 +133,12 @@ function parseSchema(context) {
         element = new namespace.elements.Number();
       } else if (type === 'boolean') {
         element = new namespace.elements.Boolean();
-      } else if (type === 'null') {
-        element = new namespace.elements.Null();
       } else {
         element = new namespace.elements.Enum();
         element.enumerations = [
           new namespace.elements.String(),
           new namespace.elements.Number(),
           new namespace.elements.Boolean(),
-          new namespace.elements.Null(),
           constructObjectStructure(namespace, schema),
           constructArrayStructure(namespace, schema),
         ];

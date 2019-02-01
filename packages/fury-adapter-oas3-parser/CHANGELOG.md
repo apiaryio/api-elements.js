@@ -1,5 +1,12 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Removed `null` as a valid type for a Schema Object, `null` is not supported
+  as a type in OpenAPI 3 Schema Object. `nullable` should be used instead.
+
 ## 0.5.1 (30-01-19)
 
 ### Bug Fixes
