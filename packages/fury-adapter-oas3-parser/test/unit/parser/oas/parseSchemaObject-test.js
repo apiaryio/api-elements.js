@@ -37,7 +37,7 @@ describe('Schema Object', () => {
       const parseResult = parse(context, schema);
 
       expect(parseResult).to.contain.warning(
-        "'Schema Object' 'type' must be either null, boolean, object, array, number, string, integer"
+        "'Schema Object' 'type' must be either boolean, object, array, number, string, integer"
       );
     });
 
@@ -52,27 +52,12 @@ describe('Schema Object', () => {
       const element = parseResult.get(0).content;
       expect(element).to.be.instanceof(namespace.elements.Enum);
 
-      expect(element.enumerations.length).to.equal(6);
+      expect(element.enumerations.length).to.equal(5);
       expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
       expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
       expect(element.enumerations.get(2)).to.be.instanceof(namespace.elements.Boolean);
-      expect(element.enumerations.get(3)).to.be.instanceof(namespace.elements.Null);
-      expect(element.enumerations.get(4)).to.be.instanceof(namespace.elements.Object);
-      expect(element.enumerations.get(5)).to.be.instanceof(namespace.elements.Array);
-    });
-
-    it('returns a null structure for null type', () => {
-      const schema = new namespace.elements.Object({
-        type: 'null',
-      });
-      const parseResult = parse(context, schema);
-
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-      expect(parseResult).to.not.contain.annotations;
-
-      const element = parseResult.get(0).content;
-      expect(element).to.be.instanceof(namespace.elements.Null);
+      expect(element.enumerations.get(3)).to.be.instanceof(namespace.elements.Object);
+      expect(element.enumerations.get(4)).to.be.instanceof(namespace.elements.Array);
     });
 
     it('returns a boolean structure for boolean type', () => {
