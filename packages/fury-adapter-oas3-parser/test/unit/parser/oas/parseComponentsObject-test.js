@@ -202,6 +202,63 @@ describe('Components Object', () => {
     });
   });
 
+  describe('#headers', () => {
+    it('parses empty headers', () => {
+      const components = new namespace.elements.Object({
+        headers: {},
+      });
+
+      const parseResult = parse(context, components);
+
+      expect(parseResult).to.not.contain.annotations;
+    });
+
+    it('it provide warning, if headers is not map', () => {
+      const components = new namespace.elements.Object({
+        headers: 'dummy',
+      });
+
+      const parseResult = parse(context, components);
+
+      expect(parseResult).to.contain.warning("'Components Object' value of key 'headers' is not an object");
+    });
+
+    it('provide warning if header is not HeaderObject', () => {
+      const components = new namespace.elements.Object({
+        headers: {
+          header: 'dummy',
+        },
+      });
+
+      const parseResult = parse(context, components);
+
+      expect(parseResult).to.contain.warning("'Header Object' is not an object");
+    });
+
+    it('parses headers', () => {
+      const components = new namespace.elements.Object({
+        headers: {
+          header1: {},
+          header2: {},
+        },
+      });
+
+      const parseResult = parse(context, components);
+
+      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).is.equal(1)
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const headers = parsedComponents.get('headers');
+      expect(headers).to.be.instanceof(namespace.elements.Object);
+      expect(headers.length).to.be.equal(2);
+
+      console.dir(headers)
+    });
+  });
+
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported examples key', () => {
       const components = new namespace.elements.Object({
@@ -211,16 +268,6 @@ describe('Components Object', () => {
       const parseResult = parse(context, components);
 
       expect(parseResult).to.contain.warning("'Components Object' contains unsupported key 'examples'");
-    });
-
-    it('provides warning for unsupported headers key', () => {
-      const components = new namespace.elements.Object({
-        headers: {},
-      });
-
-      const parseResult = parse(context, components);
-
-      expect(parseResult).to.contain.warning("'Components Object' contains unsupported key 'headers'");
     });
 
     it('provides warning for unsupported securitySchemes key', () => {

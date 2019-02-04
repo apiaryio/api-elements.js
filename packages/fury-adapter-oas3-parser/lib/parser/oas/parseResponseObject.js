@@ -10,12 +10,14 @@ const {
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseMediaTypeObject = require('./parseMediaTypeObject');
-
+const parseHeaderObject = require('./parseHeaderObject');
 const parseCopy = require('../parseCopy');
+const parseReference = require('../parseReference');
+const parseMap = require('../parseMap');
 
 const name = 'Response Object';
 const unsupportedKeys = [
-  'headers', 'links',
+  'links',
 ];
 const requiredKeys = [
   'description',
@@ -37,6 +39,8 @@ function parseResponseObject(context, element) {
   const validateIsObject = key => R.unless(isObject,
     createWarning(namespace, `'${name}' '${key}' is not an object`));
 
+  const parseHeaderObjectOrRef = parseReference('headers', parseHeaderObject);
+
   const parseContent = pipeParseResult(namespace,
     validateIsObject('content'),
     parseObject(context, name, parseMediaTypeObject(context, namespace.elements.HttpResponse)),
@@ -47,6 +51,8 @@ function parseResponseObject(context, element) {
   const parseMember = R.cond([
     [hasKey('content'), R.compose(parseContent, getValue)],
     [hasKey('description'), parseCopy(context, name, false)],
+
+    [hasKey('headers'), parseMap(context, name, 'headers', parseHeaderObjectOrRef)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -60,20 +66,29 @@ function parseResponseObject(context, element) {
   const parseResponse = pipeParseResult(namespace,
     parseObject(context, name, parseMember, requiredKeys),
     (responseObject) => {
-      // Try to fecth responses from the media type parsing
+      // Try to fetch responses from the media type parsing
       // if not, create empty HttpResponse
       const responses = R.or(responseObject.get('content'), [new namespace.elements.HttpResponse()]);
 
       const description = responseObject.get('description');
+
+      const headers = responseObject.get('headers');
 
       return new namespace.elements.ParseResult(responses.map((response) => {
         if (description) {
           response.push(description);
         }
 
+        if (headers && headers.length > 0) {
+          const httpHeaders = new namespace.elements.HttpHeaders();
+          headers.forEach((key, value, member) => httpHeaders.push(member));
+          response.headers = httpHeaders;
+        }
+
         return response;
       }));
     });
+
 
   return parseResponse(element);
 }
