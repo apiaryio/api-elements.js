@@ -24,8 +24,7 @@ const unsupportedKeys = [
   'allOf', 'oneOf', 'anyOf', 'not', 'additionalProperties', 'format',
 
   // OAS 3 specific
-  'nullable', 'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs',
-  'example', 'deprecated',
+  'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs', 'deprecated',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -109,6 +108,7 @@ function parseSchema(context) {
     [hasKey('nullable'), parseBoolean(context, name, false)],
     [hasKey('description'), parseString(context, name, false)],
     [hasKey('default'), R.compose(e => e.clone(), getValue)],
+    [hasKey('example'), R.compose(e => e.clone(), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -162,6 +162,11 @@ function parseSchema(context) {
       const defaultValue = schema.getValue('default');
       if (defaultValue) {
         element.attributes.set('default', defaultValue);
+      }
+
+      const example = schema.getValue('example');
+      if (example) {
+        element.attributes.set('samples', [example]);
       }
 
       return element;

@@ -197,5 +197,5 @@ support.
 | writeOnly | ✕ |
 | xml | ✕ |
 | externalDocs | ✕ |
-| example | ✕ |
+| example | ✓ |
 | deprecated | ✕ |
