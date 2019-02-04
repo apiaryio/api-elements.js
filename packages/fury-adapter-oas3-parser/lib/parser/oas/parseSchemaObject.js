@@ -21,8 +21,7 @@ const unsupportedKeys = [
   'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'required',
 
   // JSON Schema + OAS 3 specific rules
-  'allOf', 'oneOf', 'anyOf', 'not', 'additionalProperties',
-  'format', 'default',
+  'allOf', 'oneOf', 'anyOf', 'not', 'additionalProperties', 'format',
 
   // OAS 3 specific
   'nullable', 'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs',
@@ -109,6 +108,7 @@ function parseSchema(context) {
     [hasKey('required'), R.compose(parseRequired, getValue)],
     [hasKey('nullable'), parseBoolean(context, name, false)],
     [hasKey('description'), parseString(context, name, false)],
+    [hasKey('default'), R.compose(e => e.clone(), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -157,6 +157,11 @@ function parseSchema(context) {
         const typeAttributes = element.attributes.get('typeAttributes') || new namespace.elements.Array();
         typeAttributes.push('nullable');
         element.attributes.set('typeAttributes', typeAttributes);
+      }
+
+      const defaultValue = schema.getValue('default');
+      if (defaultValue) {
+        element.attributes.set('default', defaultValue);
       }
 
       return element;

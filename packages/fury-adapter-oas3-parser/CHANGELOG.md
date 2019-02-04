@@ -6,6 +6,7 @@
 
 - Added support for the `nullable` Schema Object property.
 - Added support for the `description` Schema Object property.
+- Added support for the `default` Schema Object property.
 
 ### Bug Fixes
 
