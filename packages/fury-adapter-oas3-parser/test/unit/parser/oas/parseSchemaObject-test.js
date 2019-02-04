@@ -561,4 +561,19 @@ describe('Schema Object', () => {
       expect(element.description.toValue()).to.equal('an example schema');
     });
   });
+
+  describe('#default', () => {
+    it('adds a default value to the returned element', () => {
+      const schema = new namespace.elements.Object({
+        default: 'my default',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('default').toValue()).to.equal('my default');
+    });
+  });
 });
