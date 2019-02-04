@@ -13,9 +13,11 @@ const parseSchemaObject = require('./parseSchemaObject');
 const parseParameterObject = require('./parseParameterObject');
 const parseResponseObject = require('./parseResponseObject');
 const parseRequestBodyObject = require('./parseRequestBodyObject');
+const parseMap = require('../parseMap');
+const parseHeaderObject = require('./parseHeaderObject');
 
 const name = 'Components Object';
-const unsupportedKeys = ['examples', 'headers', 'securitySchemes', 'links', 'callbacks'];
+const unsupportedKeys = ['examples', 'securitySchemes', 'links', 'callbacks'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 const valueIsObject = R.compose(isObject, getValue);
@@ -126,6 +128,7 @@ function parseComponentsObject(context, element) {
     [hasKey('parameters'), parseComponentObjectMember(parseParameterObject)],
     [hasKey('responses'), parseComponentObjectMember(parseResponseObject)],
     [hasKey('requestBodies'), parseComponentObjectMember(parseRequestBodyObject)],
+    [hasKey('headers'), parseMap(context, name, 'headers', parseHeaderObject)],
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result

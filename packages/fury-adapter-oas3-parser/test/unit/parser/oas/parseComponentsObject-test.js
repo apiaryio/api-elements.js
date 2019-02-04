@@ -246,7 +246,7 @@ describe('Components Object', () => {
       const parseResult = parse(context, components);
 
       expect(parseResult).to.not.contain.annotations;
-      expect(parseResult.length).is.equal(1)
+      expect(parseResult.length).is.equal(1);
 
       const parsedComponents = parseResult.get(0);
       expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
@@ -255,7 +255,17 @@ describe('Components Object', () => {
       expect(headers).to.be.instanceof(namespace.elements.Object);
       expect(headers.length).to.be.equal(2);
 
-      console.dir(headers)
+      const header1 = headers.content[0];
+      const header2 = headers.content[1];
+
+      expect(header1.key.toValue()).to.equal('header1');
+      expect(header2.key.toValue()).to.equal('header2');
+
+      expect(header1.value).to.be.instanceof(namespace.elements.String);
+      expect(header1.value.toValue()).to.be.undefined;
+
+      expect(header2.value).to.be.instanceof(namespace.elements.String);
+      expect(header2.value.toValue()).to.be.undefined;
     });
   });
 
