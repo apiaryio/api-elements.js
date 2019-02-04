@@ -21,7 +21,7 @@ const unsupportedKeys = [
   'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'required',
 
   // JSON Schema + OAS 3 specific rules
-  'allOf', 'oneOf', 'anyOf', 'not', 'additionalProperties', 'description',
+  'allOf', 'oneOf', 'anyOf', 'not', 'additionalProperties',
   'format', 'default',
 
   // OAS 3 specific
@@ -108,6 +108,7 @@ function parseSchema(context) {
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
     [hasKey('required'), R.compose(parseRequired, getValue)],
     [hasKey('nullable'), parseBoolean(context, name, false)],
+    [hasKey('description'), parseString(context, name, false)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -144,6 +145,11 @@ function parseSchema(context) {
           constructObjectStructure(namespace, schema),
           constructArrayStructure(namespace, schema),
         ];
+      }
+
+      const description = schema.getValue('description');
+      if (description) {
+        element.description = description;
       }
 
       const nullable = schema.getValue('nullable');

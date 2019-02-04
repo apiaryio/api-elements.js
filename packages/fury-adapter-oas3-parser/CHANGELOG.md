@@ -5,6 +5,7 @@
 ### Enhancements
 
 - Added support for the `nullable` Schema Object property.
+- Added support for the `description` Schema Object property.
 
 ### Bug Fixes
 
