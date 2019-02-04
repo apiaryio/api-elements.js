@@ -73,6 +73,61 @@ function constructArrayStructure(namespace, schema) {
   return element;
 }
 
+const typeToElementNameMap = {
+  array: 'array',
+  boolean: 'boolean',
+  integer: 'number',
+  null: 'null',
+  number: 'number',
+  object: 'object',
+  string: 'string',
+};
+
+// Returns whether the given element value matches the provided schema type
+const valueMatchesType = (type, value) => {
+  const expectedElementType = typeToElementNameMap[type];
+  return value.element === expectedElementType;
+};
+
+// Returns whether the given element value matches an enumeration of fixed values
+const valueMatchesEnumerationValues = (enumeration, value) => {
+  const permittedValues = enumeration.attributes.getValue('enumerations');
+  return permittedValues.includes(value.toValue());
+};
+
+function validateValuesMatchSchema(context, object) {
+  const { namespace } = context;
+
+  const validate = (member) => {
+    const nullable = object.getValue('nullable');
+    if (nullable && member.value.element === 'null') {
+      return member;
+    }
+
+    const enumeration = object.get('enum');
+    if (enumeration && !valueMatchesEnumerationValues(enumeration, member.value)) {
+      return createWarning(namespace,
+        `'${name}' '${member.key.toValue()}' is not included in 'enum'`, member.value);
+    }
+
+    const type = object.getValue('type');
+    if (type && !valueMatchesType(type, member.value)) {
+      return createWarning(namespace,
+        `'${name}' '${member.key.toValue()}' does not match expected type '${type}'`, member.value);
+    }
+
+    return member;
+  };
+
+  const isDefaultOrExample = R.anyPass([hasKey('example'), hasKey('default')]);
+  const parseMember = R.cond([
+    [isDefaultOrExample, validate],
+    [R.T, e => e],
+  ]);
+
+  return parseObject(context, name, parseMember)(object);
+}
+
 function parseSchema(context) {
   const { namespace } = context;
 
@@ -118,6 +173,7 @@ function parseSchema(context) {
 
   return pipeParseResult(namespace,
     parseObject(context, name, parseMember),
+    R.curry(validateValuesMatchSchema)(context),
     (schema) => {
       let element;
 
@@ -159,12 +215,12 @@ function parseSchema(context) {
         element.attributes.set('typeAttributes', typeAttributes);
       }
 
-      const defaultValue = schema.getValue('default');
+      const defaultValue = schema.get('default');
       if (defaultValue) {
         element.attributes.set('default', defaultValue);
       }
 
-      const example = schema.getValue('example');
+      const example = schema.get('example');
       if (example) {
         element.attributes.set('samples', [example]);
       }

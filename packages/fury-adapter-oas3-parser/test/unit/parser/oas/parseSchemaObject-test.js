@@ -575,6 +575,105 @@ describe('Schema Object', () => {
       const element = parseResult.get(0).content;
       expect(element.attributes.get('default').toValue()).to.equal('my default');
     });
+
+    it('adds a default value to the returned element when matching type', () => {
+      const schema = new namespace.elements.Object({
+        type: 'string',
+        default: 'my default',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('default').toValue()).to.equal('my default');
+    });
+
+    it('adds a default value to the returned element when matching enum', () => {
+      const schema = new namespace.elements.Object({
+        enum: ['my default'],
+        default: 'my default',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('default').toValue()).to.equal('my default');
+    });
+
+    it('allows a null default value when nullable is enabled without type', () => {
+      const schema = new namespace.elements.Object({
+        nullable: true,
+        default: null,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('default').toValue()).to.equal(null);
+    });
+
+    it('allows a null default value when nullable is enabled with type', () => {
+      const schema = new namespace.elements.Object({
+        type: 'string',
+        nullable: true,
+        default: null,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('default').toValue()).to.equal(null);
+    });
+
+    it('allows a null default value when nullable is enabled with enum', () => {
+      const schema = new namespace.elements.Object({
+        enum: ['my default'],
+        nullable: true,
+        default: null,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('default').toValue()).to.equal(null);
+    });
+
+    it('warns when default does not match expected type', () => {
+      const schema = new namespace.elements.Object({
+        type: 'number',
+        default: 'my default',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'default' does not match expected type 'number'"
+      );
+    });
+
+    it('warns when default does not match enumeration value', () => {
+      const schema = new namespace.elements.Object({
+        type: 'string',
+        enum: ['n', 'e', 's', 'w'],
+        default: 'my default',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'default' is not included in 'enum'"
+      );
+    });
   });
 
   describe('#example', () => {
@@ -590,5 +689,119 @@ describe('Schema Object', () => {
       const element = parseResult.get(0).content;
       expect(element.attributes.get('samples').toValue()).to.deep.equal(['an example']);
     });
+
+    it('adds an example value to the returned element when matching type', () => {
+      const schema = new namespace.elements.Object({
+        type: 'string',
+        example: 'an example',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('samples').toValue()).to.deep.equal(['an example']);
+    });
+
+    it('adds an example value to the returned element when matching enum', () => {
+      const schema = new namespace.elements.Object({
+        enum: ['an example'],
+        example: 'an example',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('samples').toValue()).to.deep.equal(['an example']);
+    });
+
+    it('allows a null example value when nullable is enabled without type', () => {
+      const schema = new namespace.elements.Object({
+        nullable: true,
+        example: null,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('samples').toValue()).to.deep.equal([null]);
+    });
+
+    it('allows a null example value when nullable is enabled with type', () => {
+      const schema = new namespace.elements.Object({
+        type: 'string',
+        nullable: true,
+        example: null,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('samples').toValue()).to.deep.equal([null]);
+    });
+
+    it('allows a null example value when nullable is enabled with enum', () => {
+      const schema = new namespace.elements.Object({
+        enum: ['n', 's', 'e', 'w'],
+        nullable: true,
+        example: null,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('samples').toValue()).to.deep.equal([null]);
+    });
+
+    it('warns when example does not match expected type', () => {
+      const schema = new namespace.elements.Object({
+        type: 'string',
+        example: true,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'example' does not match expected type 'string'"
+      );
+    });
+
+    it('warns when example does not match enumeration value', () => {
+      const schema = new namespace.elements.Object({
+        type: 'number',
+        enum: [1, 2, 3],
+        example: 'north',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'example' is not included in 'enum'"
+      );
+    });
+  });
+
+  it('validates example and default values', () => {
+    const schema = new namespace.elements.Object({
+      type: 'number',
+      example: 'north',
+      default: 'east',
+    });
+    const parseResult = parse(context, schema);
+
+    expect(parseResult.length).to.equal(3);
+    expect(parseResult.warnings.toValue()).to.deep.equal([
+      "'Schema Object' 'example' does not match expected type 'number'",
+      "'Schema Object' 'default' does not match expected type 'number'",
+    ]);
   });
 });
