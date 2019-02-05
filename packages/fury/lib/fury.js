@@ -36,7 +36,6 @@ class Fury {
   /*
    * Load serialized refract elements into Javascript objects.
    */
-  // eslint-disable-next-line class-methods-use-this
   load(elements) {
     return this.minim.fromRefract(elements);
   }

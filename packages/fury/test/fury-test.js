@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 const { assert } = require('chai');
 const fury = require('../lib/fury');
 
@@ -268,7 +267,7 @@ const refractedApi = {
 
 describe('Nodes.js require', () => {
   it('should work without needing to use `.default`', () => {
-    assert(require('../lib/fury').parse);
+    assert(fury.parse);
   });
 });
 
