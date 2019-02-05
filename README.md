@@ -3,7 +3,8 @@
 [API Elements](https://apielements.org/) is a uniform interface for dealing
 with API description formats ([API Blueprint](https://apiblueprint.org/), [OpenAPI](https://github.com/OAI/OpenAPI-Specification), ...). This repository contains tooling for handling API
 Elements in JavaScript along with parsers and serializers for API description
-languages.
+languages. [fury-cli](packages/fury-cli) provides a command line interface to
+API Elements which can be used to validate API Description Documents.
 
 API Elements adapters:
 
