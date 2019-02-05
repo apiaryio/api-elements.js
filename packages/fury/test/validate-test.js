@@ -1,4 +1,3 @@
-/* eslint-disable no-empty-pattern */
 const { expect } = require('chai');
 const { Fury } = require('../lib/fury');
 
@@ -13,7 +12,7 @@ describe('Validation', () => {
       name: 'passthrough',
       mediaTypes: ['text/vnd.passthrough'],
       detect: () => shouldDetect,
-      validate: ({}, done) => done(null, result),
+      validate: (options, done) => done(null, result),
     });
 
     beforeEach(() => {
@@ -118,8 +117,8 @@ describe('Validation', () => {
     fury.use({
       name: 'passthrough',
       mediaTypes: ['text/vnd.passthrough'],
-      detect: ({}) => true,
-      parse: ({}, done) => done(null, result),
+      detect: () => true,
+      parse: (options, done) => done(null, result),
     });
 
     before(() => {

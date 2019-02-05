@@ -238,7 +238,6 @@ describe('Parse result namespace', () => {
     });
 
     it('should contain a sourceMap attribute with one item', () => {
-      // eslint-disable-next-line no-unused-expressions
       expect(sourceMaps).to.exist;
       expect(sourceMaps).to.have.length(1);
     });
