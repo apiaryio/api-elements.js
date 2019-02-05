@@ -252,14 +252,14 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'body'));
       source.paths['/'].get.parameters.push(makeParameter('foo', 'body'));
 
-      doParse(
-        source,
-        (err) => {
-          expect(err.message).to.equal('Validation failed. /paths//get has 2 body parameters. Only one is allowed.');
-          done();
-        },
-        () => {}
-      );
+      fury.parse({ source }, (err, parseResult) => {
+        expect(err).to.be.null;
+        expect(parseResult.errors.toValue()).to.deep.equal([
+          'Validation failed. /paths//get has 2 body parameters. Only one is allowed.',
+        ]);
+
+        done();
+      });
     });
 
     it('on Path and Operation is same Parameter', (done) => {

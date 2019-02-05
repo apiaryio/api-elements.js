@@ -28,7 +28,7 @@ class Parser {
         ]);
       }
 
-      return done(err, this.result);
+      return done(null, this.result);
     }
 
     this.api = new Category();

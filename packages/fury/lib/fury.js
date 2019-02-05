@@ -57,14 +57,17 @@ class Fury {
     const adapter = this.findAdapter(source, mediaType, 'validate');
 
     if (!adapter) {
-      return this.parse({ source, mediaType, adapterOptions }, (err, result) => {
-        if (result && result.annotations.length > 0) {
-          const { ParseResult } = this.minim.elements;
-          const parseResult = new ParseResult(result.annotations);
-          done(err, parseResult);
-        } else {
-          done(err, null);
+      return this.parse({ source, mediaType, adapterOptions }, (err, parseResult) => {
+        if (err) {
+          return done(err);
         }
+
+        if (parseResult.annotations.length > 0) {
+          const { ParseResult } = this.minim.elements;
+          return done(null, new ParseResult(parseResult.annotations));
+        }
+
+        return done(null, null);
       });
     }
 
@@ -74,12 +77,16 @@ class Fury {
       options = Object.assign(options, adapterOptions);
     }
 
-    return adapter.validate(options, (err, elements) => {
-      if (!elements || elements instanceof this.minim.Element) {
-        done(err, elements);
-      } else {
-        done(err, this.load(elements));
+    return adapter.validate(options, (err, parseResult) => {
+      if (err) {
+        return done(err);
       }
+
+      if (parseResult && !(parseResult instanceof this.minim.Element)) {
+        return done(null, this.load(parseResult));
+      }
+
+      return done(null, parseResult);
     });
   }
 
@@ -105,12 +112,16 @@ class Fury {
         options = Object.assign(options, adapterOptions);
       }
 
-      return adapter.parse(options, (err, elements) => {
-        if (!elements || elements instanceof this.minim.Element) {
-          done(err, elements);
-        } else {
-          done(err, this.load(elements));
+      return adapter.parse(options, (err, parseResult) => {
+        if (err) {
+          return done(err);
         }
+
+        if (!(parseResult instanceof this.minim.Element)) {
+          return done(null, this.load(parseResult));
+        }
+
+        return done(null, parseResult);
       });
     } catch (err) {
       return done(err);

@@ -77,7 +77,7 @@ class Parser {
       }
 
       this.generateSourceMap = generateSourceMap;
-      return done(new Error(err.message), this.result);
+      return done(null, this.result);
     }
 
     if (!_.isObject(loaded)) {
@@ -144,7 +144,7 @@ class Parser {
             queue.shift();
           }
 
-          return done(new Error(err.message), this.result);
+          return done(null, this.result);
         }
 
         // Maybe there is some information in the error itself? Let's check
@@ -167,7 +167,7 @@ class Parser {
           ]);
         }
 
-        return done(new Error(err.message), this.result);
+        return done(null, this.result);
       }
 
       try {

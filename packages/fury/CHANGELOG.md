@@ -1,5 +1,15 @@
 # Fury Changelog
 
+## Master
+
+### Breaking
+
+- Fury asynchronous APIs will no longer include both an error and a result
+  value. The APIs will now contain an error if the method could not proceed, or
+  a result. In the case of the `validate` and `parse` functions, these will
+  return a parse result with any error annotations upon a validation error and
+  will no longer include an error in the asynchronous callback.
+
 ## 3.0.0-beta.8 (2018-12-21)
 
 ### Breaking

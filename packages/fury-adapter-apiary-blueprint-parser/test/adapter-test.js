@@ -128,8 +128,10 @@ Test Section 1
       expect(annotation).to.eql(expectedAnnotation);
     });
 
-    it('has an error', () => {
-      expect(parseError).to.exist;
+    it('has an error element', () => {
+      expect(parseError).to.be.null;
+      expect(parseResult).to.exist;
+      expect(parseResult.errors.isEmpty).to.be.false;
     });
   });
 });
