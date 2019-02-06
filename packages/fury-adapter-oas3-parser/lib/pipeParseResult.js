@@ -16,11 +16,11 @@ const hasNoErrors = parseResult => parseResult.errors.isEmpty;
 const hasValue = parseResult => !R.reject(isAnnotation, parseResult).isEmpty;
 
 /*
- * Returns true if the parse result contains an error or does not contain any non-annotation values.
+ * Returns true if the parse result contains no errors and contains non-annotation values.
  * @param parseResult {ParseResult}
  * @returns boolean
  */
-const hasNoErrorsOrValue = R.allPass([hasNoErrors, hasValue]);
+const hasNoErrorsAndHasValue = R.allPass([hasNoErrors, hasValue]);
 
 /**
  * Concatate the lhs and rhs array into a parse result
@@ -64,7 +64,7 @@ function pipeParseResult(namespace, ...functions) {
       return concatParseResult(namespace, parseResult.content, accumulator.annotations.elements);
     };
 
-    return R.reduceWhile(hasNoErrorsOrValue, run, new namespace.elements.ParseResult([element]), functions);
+    return R.reduceWhile(hasNoErrorsAndHasValue, run, new namespace.elements.ParseResult([element]), functions);
   };
 }
 
