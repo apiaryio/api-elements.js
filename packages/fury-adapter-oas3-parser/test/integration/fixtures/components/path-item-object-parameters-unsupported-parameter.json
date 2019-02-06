@@ -160,7 +160,7 @@
           ]
         }
       },
-      "content": "'Parameter Object' 'in' header is unsupported"
+      "content": "'Parameter Object' 'in' 'cookie' is unsupported"
     }
   ]
 }
