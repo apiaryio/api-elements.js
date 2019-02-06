@@ -1882,19 +1882,19 @@ dot-prop@^4.2.0:
   dependencies:
     is-obj "^1.0.0"
 
-drafter.js@^2.6.0:
-  version "2.6.7"
-  resolved "https://registry.yarnpkg.com/drafter.js/-/drafter.js-2.6.7.tgz#59c43a8586527340cb35bddc54180559faeef001"
-  integrity sha1-WcQ6hYZSc0DLNb3cVBgFWfru8AE=
+drafter.js@^3.0.0-pre.2:
+  version "3.0.0-pre.2"
+  resolved "https://registry.yarnpkg.com/drafter.js/-/drafter.js-3.0.0-pre.2.tgz#8e380f16abf3dc1b9198c8708ccfb4f691c9b410"
+  integrity sha512-w3AwtCWvrhxs2oYAwA5zXTdRH0dvIrylUjfI4LOlhI4TOND1mss8f3B4YFd3SQOP19KbT5VaB7AcirWcXjB8ew==
 
-drafter@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/drafter/-/drafter-1.2.0.tgz#f4d11e8dee1f27f9a40485b8740c44361e9cf859"
-  integrity sha1-9NEeje4fJ/mkBIW4dAxENh6c+Fk=
+drafter@2.0.0-pre.1:
+  version "2.0.0-pre.1"
+  resolved "https://registry.yarnpkg.com/drafter/-/drafter-2.0.0-pre.1.tgz#757e213feb5295b345c92b64c7eb437c507c4e70"
+  integrity sha512-6iiQwW7vZy5WDtWtg77JnPYyUn02DoaOyApLk1FkQWmuG9zRO44skWIfvRqe6CSoj7lI8s1h8HIvdz4XsEsZlA==
   dependencies:
-    drafter.js "^2.6.0"
+    drafter.js "^3.0.0-pre.2"
   optionalDependencies:
-    protagonist "^1.6.0"
+    protagonist "^2.0.0-pre.2"
 
 drange@^1.0.2:
   version "1.1.1"
@@ -3975,7 +3975,12 @@ mute-stream@0.0.7, mute-stream@~0.0.4:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   integrity sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
 
-nan@^2.6.2, nan@^2.9.2:
+nan@^2.11.0:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.12.1.tgz#7b1aa193e9aa86057e3c7bbd0ac448e770925552"
+  integrity sha512-JY7V6lRkStKcKTvHO5NVSQRv+RV+FIL5pvDoLiAtSL9pKlC5x9PKQcZDsq7m4FO4d57mkhC6Z+QhAh3Jdk5JFw==
+
+nan@^2.9.2:
   version "2.11.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
   integrity sha512-iji6k87OSXa0CcrLl9z+ZiYSuR2o+c0bGuNmXdrhTQTakxytAFsC56SArGYoiHlJlFoHSnvmhpceZJaXkVuOtA==
@@ -4663,12 +4668,13 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-protagonist@^1.6.0:
-  version "1.6.8"
-  resolved "https://registry.yarnpkg.com/protagonist/-/protagonist-1.6.8.tgz#16d5d6316f1b6d4e493ec9450639dbc35503be6e"
-  integrity sha1-FtXWMW8bbU5JPslFBjnbw1UDvm4=
+protagonist@^2.0.0-pre.2:
+  version "2.0.0-pre.3"
+  resolved "https://registry.yarnpkg.com/protagonist/-/protagonist-2.0.0-pre.3.tgz#0d9c0f1849b13dec9edd996fd39a3fc850138978"
+  integrity sha512-Ui7nTwyNwejs+Au10wuJF5mdln4AQxPPulQwzTPuXC4KQZCGNrMSXZ8DAOmcJiBmu1sqsZjEyhxNL287oOSeEA==
   dependencies:
-    nan "^2.6.2"
+    nan "^2.11.0"
+    node-gyp "^3.8.0"
 
 proto-list@~1.2.1:
   version "1.2.4"
