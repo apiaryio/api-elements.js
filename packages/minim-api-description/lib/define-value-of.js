@@ -5,6 +5,7 @@ const isFlag = (mask, options) => (options & mask) !== 0;
 
 const FIXED_FLAG = 1 << 0;
 const NULLABLE_FLAG = 1 << 1;
+const SOURCE_FLAG = 1 << 2;
 
 function findDefault(e) {
   if (undefined !== e._attributes) {
@@ -38,6 +39,13 @@ function updateTypeAttributes(e, options) {
     result = setFlag(NULLABLE_FLAG, result);
   }
   return result;
+}
+
+function wrapResult(value, source, options) {
+  if (isFlag(SOURCE_FLAG, options)) {
+    return [value, source];
+  }
+  return value;
 }
 
 module.exports = (namespace) => {
@@ -82,39 +90,44 @@ module.exports = (namespace) => {
   }
 
   // Create instance of leaf element (Boolean, String, Number, Null)
-  function instantiateLeaf(e, options) {
+  function valueOfLeaf(e, options) {
     const opts = updateTypeAttributes(e, options);
     if (e.content) {
-      return [e.content, 'content'];
+      return wrapResult(e.content, 'content', opts);
     }
     const sample = findFirstSample(e);
     if (sample) {
-      return [sample.content, 'sample'];
+      return wrapResult(sample.content, 'sample', opts);
     }
     const dflt = findDefault(e);
     if (dflt) {
-      return [dflt.content, 'default'];
+      return wrapResult(dflt.content, 'default', opts);
     }
     if (isFlag(NULLABLE_FLAG, opts)) {
-      return [null, 'content'];
+      return wrapResult(null, 'content', opts);
     }
 
-    return [generateValue(e), 'generated'];
+    return wrapResult(generateValue(e), 'generated', opts);
   }
 
-  function instantiate(e, options) {
+  function valueOf(e, options) {
     if (isPrimitive(e) === true) {
-      return instantiateLeaf(e, options);
+      return valueOfLeaf(e, options);
     }
     if (e instanceof NullElement) {
-      return instantiateLeaf(e, options);
+      return valueOfLeaf(e, options);
     }
     return undefined;
   }
 
-  if (!Object.getOwnPropertyNames(Element.prototype).includes('instantiate')) {
-    Object.defineProperty(Element.prototype, 'instantiate', {
-      value() { return instantiate(this, 0); },
+  if (!Object.getOwnPropertyNames(Element.prototype).includes('valueOf')) {
+    Object.defineProperty(Element.prototype, 'valueOf', {
+      value(flags) {
+        if (flags !== undefined && flags.source) {
+          return valueOf(this, SOURCE_FLAG);
+        }
+        return valueOf(this, 0);
+      },
     });
   }
 };
