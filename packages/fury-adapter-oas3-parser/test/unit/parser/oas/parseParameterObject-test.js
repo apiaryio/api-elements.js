@@ -98,7 +98,7 @@ describe('Parameter Object', () => {
       const parseResult = parse(context, parameter);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Parameter Object' 'in' header is unsupported");
+      expect(parseResult).to.contain.warning("'Parameter Object' 'in' 'header' is unsupported");
     });
 
     it('provides an unsupported error for cookie parameters', () => {
@@ -110,7 +110,7 @@ describe('Parameter Object', () => {
       const parseResult = parse(context, parameter);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Parameter Object' 'in' cookie is unsupported");
+      expect(parseResult).to.contain.warning("'Parameter Object' 'in' 'cookie' is unsupported");
     });
   });
 

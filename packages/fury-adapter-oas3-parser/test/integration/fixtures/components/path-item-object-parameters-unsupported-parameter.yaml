@@ -19,4 +19,4 @@ components:
   parameters:
     authParam:
       name: Authorization
-      in: header
+      in: cookie

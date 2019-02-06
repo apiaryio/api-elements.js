@@ -96,7 +96,7 @@ describe('Components Object', () => {
 
       const parseResult = parse(context, components);
 
-      expect(parseResult).to.contain.warning("'Parameter Object' 'in' cookie is unsupported");
+      expect(parseResult).to.contain.warning("'Parameter Object' 'in' 'cookie' is unsupported");
 
       const parsedComponents = parseResult.get(0);
       expect(parsedComponents).to.be.instanceof(namespace.elements.Object);

@@ -72,7 +72,7 @@ function parseParameterObject(context, object) {
 
   const isSupportedIn = R.anyPass([hasValue('path'), hasValue('query')]);
   const createUnsupportedInWarning = member => createWarning(namespace,
-    `'${name}' 'in' ${member.value.toValue()} is unsupported`, member.value);
+    `'${name}' 'in' '${member.value.toValue()}' is unsupported`, member.value);
   const ensureSupportedIn = R.unless(isSupportedIn, createUnsupportedInWarning);
 
   const parseIn = pipeParseResult(namespace,
