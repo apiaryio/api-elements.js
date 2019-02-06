@@ -115,6 +115,6 @@ describe('valueOf StringElement with source', () => {
     ]));
     const value = element.valueOf({ source: true });
 
-    expect(value).to.deep.equal([null, 'content']);
+    expect(value).to.deep.equal([null, 'nullable']);
   });
 });

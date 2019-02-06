@@ -104,7 +104,7 @@ module.exports = (namespace) => {
       return wrapResult(dflt.content, 'default', opts);
     }
     if (isFlag(NULLABLE_FLAG, opts)) {
-      return wrapResult(null, 'content', opts);
+      return wrapResult(null, 'nullable', opts);
     }
 
     return wrapResult(generateValue(e), 'generated', opts);
