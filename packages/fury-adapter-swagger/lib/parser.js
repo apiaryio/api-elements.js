@@ -19,17 +19,6 @@ const {
   FORM_CONTENT_TYPE, isValidContentType, isJsonContentType, isTextContentType, isMultiPartFormData, isFormURLEncoded, hasBoundary, parseBoundary,
 } = require('./media-type');
 
-
-// Provide a `nextTick` function that either is Node's nextTick or a fallback
-// for browsers
-function nextTick(cb) {
-  if (process && process.nextTick) {
-    process.nextTick(cb);
-  } else {
-    cb();
-  }
-}
-
 // The parser holds state about the current parsing environment and converts
 // the input Swagger into Refract elements. The `parse` function is its main
 // interface.
@@ -201,41 +190,21 @@ class Parser {
 
         this.definitions = convertSchemaDefinitions(referencedSwagger.definitions);
 
-        const complete = () => {
-          this.handleSwaggerVendorExtensions(this.api, swagger.paths);
-
-          if (this.definitions) {
-            this.withPath('definitions', () => {
-              this.handleSwaggerDefinitions(referencedSwagger.definitions);
-            });
-          }
-
-          return done(null, this.result);
-        };
-
-        // Swagger has a paths object to loop through that describes resources
-        // We will run each path on it's own tick since it may take some time
-        // and we want to ensure that other events in the event queue are not
-        // held up.
         const paths = _.omitBy(swagger.paths, isExtension);
-        let pendingPaths = Object.keys(paths).length;
 
-        if (pendingPaths === 0) {
-          // If there are no paths, let's go ahead and call the callback.
-          return complete();
+        _.forEach(paths, (pathValue, href) => {
+          this.handleSwaggerPath(pathValue, href);
+        });
+
+        this.handleSwaggerVendorExtensions(this.api, swagger.paths);
+
+        if (this.definitions) {
+          this.withPath('definitions', () => {
+            this.handleSwaggerDefinitions(referencedSwagger.definitions);
+          });
         }
 
-        return _.forEach(paths, (pathValue, href) => {
-          nextTick(() => {
-            this.handleSwaggerPath(pathValue, href);
-            pendingPaths -= 1;
-
-            if (pendingPaths === 0) {
-              // Last path, let's call the completion callback.
-              complete();
-            }
-          });
-        });
+        return done(null, this.result);
       } catch (exception) {
         this.createAnnotation(
           annotations.UNCAUGHT_ERROR, null,

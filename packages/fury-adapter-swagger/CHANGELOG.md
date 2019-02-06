@@ -1,5 +1,13 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Removed uses of `process.nextTick` which could cause any exceptions raised by
+  the Fury adapter to be uncaught exceptions in Node JS.
+  https://github.com/apiaryio/fury-adapter-swagger/issues/169
+
 ## 0.23.2 (2019-01-25)
 
 ### Bug Fixes
