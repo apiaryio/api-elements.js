@@ -1,5 +1,7 @@
 const R = require('ramda');
-const { isExtension, hasKey, getValue } = require('../../predicates');
+const {
+  isExtension, hasKey, hasValue, getValue,
+} = require('../../predicates');
 const {
   createError,
   createWarning,
@@ -19,7 +21,6 @@ const unsupportedKeys = [
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-const hasValue = R.curry((value, member) => member.value.toValue() === value);
 const isValidInValue = R.anyPass([
   hasValue('query'),
   hasValue('header'),
