@@ -32,6 +32,26 @@ function nameContainsReservedCharacter(member) {
   return !unreservedCharacterRegex.test(member.value.toValue());
 }
 
+function validateRequiredForPathParameter(context, object, parameter) {
+  const parseResult = new context.namespace.elements.ParseResult([
+    parameter,
+  ]);
+
+  const required = parameter.get('required');
+
+  if (!required && !object.get('required')) {
+    parseResult.push(createWarning(context.namespace,
+      "'Parameter Object' 'required' must exist when 'in' is set to 'path'", parameter));
+  } else if (required && required.toValue() !== true) {
+    parseResult.push(createWarning(context.namespace,
+      "'Parameter Object' 'required' must be 'true' when 'in' is set to 'path'", required));
+  }
+
+  parameter.set('required', true);
+
+  return parseResult;
+}
+
 /**
  * Parse Parameter Object
  *
@@ -84,8 +104,11 @@ function parseParameterObject(context, object) {
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
+  const isPathParameter = parameter => parameter.getValue('in') === 'path';
+
   const parseParameter = pipeParseResult(namespace,
     parseObject(context, name, parseMember, requiredKeys),
+    R.when(isPathParameter, R.curry(validateRequiredForPathParameter)(context, object)),
     (parameter) => {
       const member = new namespace.elements.Member(parameter.get('name'));
 

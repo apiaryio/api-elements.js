@@ -24,7 +24,7 @@ describe('Parameter Object', () => {
     it('provides an error when name is not a string', () => {
       const parameter = new namespace.elements.Object({
         name: 1,
-        in: 'path',
+        in: 'query',
       });
 
       const parseResult = parse(context, parameter);
@@ -36,7 +36,7 @@ describe('Parameter Object', () => {
     it('provides an error when name contains unsupported characters', () => {
       const parameter = new namespace.elements.Object({
         name: 'hello!',
-        in: 'path',
+        in: 'query',
       });
 
       const parseResult = parse(context, parameter);
@@ -53,7 +53,7 @@ describe('Parameter Object', () => {
 
       const parameter = new namespace.elements.Object({
         name: unreserved,
-        in: 'path',
+        in: 'query',
       });
 
       const parseResult = parse(context, parameter);
@@ -118,13 +118,12 @@ describe('Parameter Object', () => {
     it('attaches description to member', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         description: 'an example parameter',
       });
 
       const parseResult = parse(context, parameter);
 
-      expect(parseResult).to.not.contain.annotations;
       expect(parseResult.length).to.equal(1);
       expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
       expect(parseResult.get(0).description.toValue()).to.equal(
@@ -135,7 +134,7 @@ describe('Parameter Object', () => {
     it('provides a warning when description is not a string', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         description: true,
       });
 
@@ -149,17 +148,15 @@ describe('Parameter Object', () => {
     it('create typeAttribute required', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         required: true,
       });
 
       const parseResult = parse(context, parameter);
 
-      expect(parseResult).to.not.contain.annotations;
-
       expect(parseResult.length).to.be.equal(1);
-
       expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+
       const typeAttributes = parseResult.get(0).attributes.get('typeAttributes');
 
       expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
@@ -170,16 +167,13 @@ describe('Parameter Object', () => {
     it('ignore required param if it is `false`', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         required: false,
       });
 
       const parseResult = parse(context, parameter);
 
-      expect(parseResult.warnings.length).to.be.equal(0);
-
       expect(parseResult.length).to.be.equal(1);
-
       expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
       expect(parseResult.get(0).attributes.get('typeAttributes')).to.be.undefined;
     });
@@ -187,7 +181,7 @@ describe('Parameter Object', () => {
     it('provide warning if required is not bool', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         required: 1,
       });
 
@@ -199,13 +193,75 @@ describe('Parameter Object', () => {
 
       expect(parseResult).to.contain.warning("'Parameter Object' 'required' is not a boolean");
     });
+
+    it('provide warning if required does not exist for path parameter', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'path',
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.be.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+
+      const typeAttributes = parseResult.get(0).attributes.get('typeAttributes');
+
+      expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
+      expect(typeAttributes.length).to.be.equal(1);
+      expect(typeAttributes.contains('required')).to.be.true;
+
+      expect(parseResult).to.contain.warning("'Parameter Object' 'required' must exist when 'in' is set to 'path'");
+    });
+
+    it('provide warning if required is `false` for path parameter', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'path',
+        required: false,
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.be.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+
+      const typeAttributes = parseResult.get(0).attributes.get('typeAttributes');
+
+      expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
+      expect(typeAttributes.length).to.be.equal(1);
+      expect(typeAttributes.contains('required')).to.be.true;
+
+      expect(parseResult).to.contain.warning("'Parameter Object' 'required' must be 'true' when 'in' is set to 'path'");
+    });
+
+    it('provide warning if required is not bool for path parameter', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'path',
+        required: 1,
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.be.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+
+      const typeAttributes = parseResult.get(0).attributes.get('typeAttributes');
+
+      expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
+      expect(typeAttributes.length).to.be.equal(1);
+      expect(typeAttributes.contains('required')).to.be.true;
+
+      expect(parseResult).to.contain.warning("'Parameter Object' 'required' is not a boolean");
+    });
   });
 
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported deprecated property', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         deprecated: true,
       });
 
@@ -217,7 +273,7 @@ describe('Parameter Object', () => {
     it('provides warning for unsupported allowEmptyValue property', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         allowEmptyValue: true,
       });
 
@@ -229,7 +285,7 @@ describe('Parameter Object', () => {
     it('provides warning for unsupported style property', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         style: 'simple',
       });
 
@@ -241,7 +297,7 @@ describe('Parameter Object', () => {
     it('provides warning for unsupported explode property', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         explode: true,
       });
 
@@ -253,7 +309,7 @@ describe('Parameter Object', () => {
     it('provides warning for unsupported allowReserved property', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         allowReserved: true,
       });
 
@@ -265,7 +321,7 @@ describe('Parameter Object', () => {
     it('provides warning for unsupported schema property', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         schema: { type: 'string' },
       });
 
@@ -277,7 +333,7 @@ describe('Parameter Object', () => {
     it('provides warning for unsupported example property', () => {
       const parameter = new namespace.elements.Object({
         name: 'direction',
-        in: 'path',
+        in: 'query',
         example: 'east',
       });
 
@@ -289,7 +345,7 @@ describe('Parameter Object', () => {
     it('provides warning for unsupported examples property', () => {
       const parameter = new namespace.elements.Object({
         name: 'direction',
-        in: 'path',
+        in: 'query',
         examples: {},
       });
 
@@ -301,7 +357,7 @@ describe('Parameter Object', () => {
     it('provides warning for unsupported content property', () => {
       const parameter = new namespace.elements.Object({
         name: 'direction',
-        in: 'path',
+        in: 'query',
         content: {},
       });
 
@@ -313,7 +369,7 @@ describe('Parameter Object', () => {
     it('does not provide warning/errors for extensions', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
-        in: 'path',
+        in: 'query',
         'x-extension': '',
       });
 
@@ -326,7 +382,7 @@ describe('Parameter Object', () => {
   it('provides warning for invalid keys', () => {
     const parameter = new namespace.elements.Object({
       name: 'example',
-      in: 'path',
+      in: 'query',
       invalid: '',
     });
 

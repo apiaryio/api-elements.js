@@ -186,6 +186,7 @@ describe('#parsePathItemObject', () => {
             {
               name: 'resource',
               in: 'path',
+              required: true,
             },
           ],
         });
@@ -207,6 +208,7 @@ describe('#parsePathItemObject', () => {
             {
               name: 'resource',
               in: 'path',
+              required: true,
             },
           ],
         });
