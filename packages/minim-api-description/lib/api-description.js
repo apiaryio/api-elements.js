@@ -34,10 +34,10 @@ const copy = require('./elements/copy');
 const category = require('./elements/category');
 const extension = require('./elements/extension');
 const enumeration = require('./elements/enum');
-const definevalueOf = require('./define-value-of');
+const defineValueOf = require('./define-value-of');
 
 const namespace = (options) => {
-  definevalueOf(options.base);
+  defineValueOf(options.base);
   httpHeaders(options.base);
   hrefVariables(options.base);
   asset(options.base);

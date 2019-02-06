@@ -72,8 +72,7 @@ module.exports = (namespace) => {
 
   const isPrimitive = e => (e instanceof StringElement) || (e instanceof NumberElement) || (e instanceof BooleanElement);
 
-  // Generate default value for leaf elements (Boolean, String, Number, Null)
-  function generateValue(e) {
+  function generateTrivialValue(e) {
     if (e instanceof BooleanElement) {
       return false;
     }
@@ -107,7 +106,7 @@ module.exports = (namespace) => {
       return wrapResult(null, 'nullable', opts);
     }
 
-    return wrapResult(generateValue(e), 'generated', opts);
+    return wrapResult(generateTrivialValue(e), 'generated', opts);
   }
 
   function valueOf(e, options) {
