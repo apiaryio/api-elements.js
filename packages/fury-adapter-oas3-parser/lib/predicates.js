@@ -23,6 +23,14 @@ const isDataStructure = element => element.element === 'dataStructure';
 const hasKey = (key, member) => member.key.toValue() === key;
 
 /**
+ * Returns whether the given member matches the given value
+ * @param value {string}
+ * @param member {MemberElement}
+ * @returns {boolean}
+ */
+const hasValue = (value, member) => member.value.toValue() === value;
+
+/**
  * Returns whether the given member element is a an OpenAPI extension.
  * @param member {MemberElement}
  * @returns {boolean}
@@ -48,6 +56,7 @@ module.exports = {
   isDataStructure,
 
   hasKey: R.curry(hasKey),
+  hasValue: R.curry(hasValue),
   isExtension,
   getValue,
 };

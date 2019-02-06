@@ -6,7 +6,7 @@ const {
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const {
-  isArray, isNull, isString, hasKey, getValue,
+  isArray, isNull, isString, hasKey, hasValue, getValue,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
@@ -30,7 +30,6 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 // purposely in the order defined in the JSON Schema spec, integer is an OAS 3 specific addition and thus is at the end
 const types = ['boolean', 'object', 'array', 'number', 'string', 'integer'];
-const hasValue = R.curry((value, member) => member.value.toValue() === value);
 const isValidType = R.anyPass(R.map(hasValue, types));
 
 const parseEnum = context => pipeParseResult(context.namespace,
