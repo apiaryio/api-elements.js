@@ -24,10 +24,12 @@ describe('Parameter Objects', () => {
       {
         name: 'id',
         in: 'path',
+        required: true,
       },
       {
         name: 'slug',
         in: 'path',
+        required: true,
       },
       {
         name: 'tags',

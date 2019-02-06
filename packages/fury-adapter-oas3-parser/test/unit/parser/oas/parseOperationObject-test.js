@@ -293,6 +293,7 @@ describe('Operation Object', () => {
             {
               name: 'resource',
               in: 'path',
+              required: true,
             },
           ],
           responses: {},

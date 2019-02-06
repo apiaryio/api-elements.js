@@ -11,6 +11,7 @@
 
 - Removed `null` as a valid type for a Schema Object, `null` is not supported
   as a type in OpenAPI 3 Schema Object. `nullable` should be used instead.
+- Added check for `required` in a Path Parameter.
 
 ## 0.5.1 (30-01-19)
 
@@ -37,7 +38,7 @@
 
 ### Enhancements
 
-- Path and query parameters are not supported in 'Operation Object'
+- Path and query parameters are supported in 'Operation Object'
 
 ### Bug Fixes
 
