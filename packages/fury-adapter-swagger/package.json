@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.23.2",
+  "version": "0.23.3",
   "description": "Swagger 2.0 parser for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -32,10 +32,10 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^5.9.0",
-    "fury": "3.0.0-beta.8",
+    "fury": "^3.0.0",
     "glob": "^7.1.2",
     "mocha": "^5.0.2",
-    "swagger-zoo": "2.20.0"
+    "swagger-zoo": "^2.20.1"
   },
   "engines": {
     "node": ">=6"

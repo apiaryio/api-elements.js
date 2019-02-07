@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apib-serializer",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "API Blueprint serializer for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -24,7 +24,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^5.9.0",
-    "fury": "3.0.0-beta.8",
+    "fury": "^3.0.0",
     "glob": "^7.1.2",
     "mocha": "^5.0.2"
   },
