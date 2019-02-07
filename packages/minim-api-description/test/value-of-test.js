@@ -6,6 +6,7 @@ const namespace = minim.namespace().use(apiDescription);
 
 const ArrayElement = namespace.elements.Array;
 const BooleanElement = namespace.elements.Boolean;
+const EnumElement = namespace.elements.Enum;
 const NullElement = namespace.elements.Null;
 const NumberElement = namespace.elements.Number;
 const StringElement = namespace.elements.String;
@@ -405,6 +406,215 @@ describe('valueOf StringElement with source', () => {
 
   it('generates null if no content, default, samples and nullable', () => {
     const element = new StringElement();
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([null, 'nullable']);
+  });
+});
+
+describe('valueOf EnumElement', () => {
+  it('returns content', () => {
+    const element = new EnumElement(new StringElement('hello'));
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    const value = element.valueOf();
+
+    expect(value).to.equal('hello');
+  });
+
+  it('returns content on a nested element', () => {
+    const element = new EnumElement(new EnumElement(new EnumElement(new StringElement('hello'))));
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    const value = element.valueOf();
+
+    expect(value).to.equal('hello');
+  });
+
+  it('prefers content over default and samples', () => {
+    const element = new EnumElement('hello');
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    element.attributes.set('default', new EnumElement('moin'));
+    element.attributes.set('samples', new ArrayElement(
+      new EnumElement('zdravicko')
+    ));
+    const value = element.valueOf();
+
+    expect(value).to.equal('hello');
+  });
+
+  it('prefers a sample over a default', () => {
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    element.attributes.set('default', new EnumElement('moin'));
+    element.attributes.set('samples', new ArrayElement([
+      new EnumElement(new EnumElement('zdravicko')),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.equal('zdravicko');
+  });
+
+  it('prefers default over generating a value', () => {
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    element.attributes.set('default', new EnumElement('moin'));
+    const value = element.valueOf();
+
+    expect(value).to.equal('moin');
+  });
+
+  it('generates the first enumerations entry if no content, default, samples and not nullable', () => {
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    const value = element.valueOf();
+
+    expect(value).to.equal(false);
+  });
+
+  it('generates undefined if no content, default, samples, enumerations and not nullable', () => {
+    const element = new EnumElement();
+    const value = element.valueOf();
+
+    expect(value).to.equal(undefined);
+  });
+
+  it('generates null if no content, default, samples and nullable', () => {
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.equal(null);
+  });
+});
+
+describe('valueOf EnumElement with source', () => {
+  it('returns content', () => {
+    const element = new EnumElement('hello');
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(['hello', 'content']);
+  });
+
+  it('returns content on a nested element', () => {
+    const element = new EnumElement(new EnumElement(new EnumElement(new StringElement('hello'))));
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(['hello', 'content']);
+  });
+
+  it('prefers content over default and samples', () => {
+    const element = new EnumElement('hello');
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    element.attributes.set('default', new EnumElement('moin'));
+    element.attributes.set('samples', new ArrayElement(
+      new EnumElement(new EnumElement('zdravicko'))
+    )); const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(['hello', 'content']);
+  });
+
+  it('prefers a sample over a default', () => {
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    element.attributes.set('default', new EnumElement('moin'));
+    element.attributes.set('samples', new ArrayElement([
+      new EnumElement('zdravicko'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(['zdravicko', 'sample']);
+  });
+
+  it('prefers default over generating a value', () => {
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    element.attributes.set('default', new EnumElement('moin'));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(['moin', 'default']);
+  });
+
+  it('generates the first enumerations entry if no content, default, samples and not nullable', () => {
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([false, 'generated']);
+  });
+
+  it('generates undefined if no content, default, samples, enumerations and not nullable', () => {
+    const element = new EnumElement();
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([undefined, 'generated']);
+  });
+
+  it('generates null if no content, default, samples and nullable', () => {
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      new BooleanElement(),
+      new NumberElement(),
+      new StringElement(),
+    ]);
     element.attributes.set('typeAttributes', new ArrayElement([
       new StringElement('nullable'),
     ]));
