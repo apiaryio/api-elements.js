@@ -107,11 +107,10 @@
                               "content": {
                                 "key": {
                                   "element": "string",
-                                  "content": "Content-Type"
+                                  "content": "x-next"
                                 },
                                 "value": {
-                                  "element": "string",
-                                  "content": "application/json"
+                                  "element": "string"
                                 }
                               }
                             }
@@ -741,28 +740,28 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 27
+                          "content": 29
                         },
                         "column": {
                           "element": "number",
-                          "content": 11
+                          "content": 15
                         }
                       },
-                      "content": 561
+                      "content": 604
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 27
+                          "content": 29
                         },
                         "column": {
                           "element": "number",
-                          "content": 18
+                          "content": 26
                         }
                       },
-                      "content": 7
+                      "content": 11
                     }
                   ]
                 }
@@ -771,7 +770,67 @@
           ]
         }
       },
-      "content": "'Response Object' contains unsupported key 'headers'"
+      "content": "'Header Object' contains unsupported key 'description'"
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 30
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 15
+                        }
+                      },
+                      "content": 668
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 30
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 21
+                        }
+                      },
+                      "content": 6
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'Header Object' contains invalid key 'schema'"
     },
     {
       "element": "annotation",
