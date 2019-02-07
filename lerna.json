@@ -4,7 +4,7 @@
   "registry": "https://registry.npmjs.org",
   "command": {
     "publish": {
-      "allowBranch": "master",
+      "allowBranch": "release",
       "ignoreChanges": [
         "*.md"
       ],
