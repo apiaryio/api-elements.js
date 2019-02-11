@@ -29,7 +29,7 @@ describe('#parseMap', () => {
 
     const result = parseMap(context, 'dummy', 'key', parseDummy)(member);
 
-    expect(result).to.contain.warning("'dummy' value of key 'key' is not an object");
+    expect(result).to.contain.warning("'dummy' 'key' is not an object");
   });
 
   it('can parse empty map', () => {

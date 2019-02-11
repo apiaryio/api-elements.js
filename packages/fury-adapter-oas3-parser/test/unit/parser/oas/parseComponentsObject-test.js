@@ -220,7 +220,7 @@ describe('Components Object', () => {
 
       const parseResult = parse(context, components);
 
-      expect(parseResult).to.contain.warning("'Components Object' value of key 'headers' is not an object");
+      expect(parseResult).to.contain.warning("'Components Object' 'headers' is not an object");
     });
 
     it('provide warning if header is not HeaderObject', () => {

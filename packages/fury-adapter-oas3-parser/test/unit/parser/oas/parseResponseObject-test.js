@@ -65,7 +65,7 @@ describe('Response Object', () => {
   });
 
   describe('#headers', () => {
-    it('provides warning, if headers is not object', () => {
+    it('provides warning when headers is not an object', () => {
       const response = new namespace.elements.Object({
         description: 'response 200',
         headers: 'dummy',
@@ -73,7 +73,7 @@ describe('Response Object', () => {
 
       const parseResult = parse(context, response);
 
-      expect(parseResult).to.contain.warning("'Response Object' value of key 'headers' is not an object");
+      expect(parseResult).to.contain.warning("'Response Object' 'headers' is not an object");
     });
 
     it('doesn\'t contain HTTP Headers if headers are empty ', () => {

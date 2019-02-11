@@ -204,7 +204,7 @@ support.
 
 | Field Name | Support |
 |:--|:--|
-| desctiption | ✕ |
+| description | ✕ |
 | required | ✕ |
 | deprecated | ✕ |
 | allowEmptyValue | ✕ |

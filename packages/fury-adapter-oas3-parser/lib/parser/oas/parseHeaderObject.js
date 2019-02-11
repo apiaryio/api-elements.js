@@ -13,7 +13,6 @@ const unsupportedKeys = [
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-
 /**
  * Parse Header Object
  *
