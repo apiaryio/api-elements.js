@@ -213,7 +213,7 @@ describe('Components Object', () => {
       expect(parseResult).to.not.contain.annotations;
     });
 
-    it('it provide warning, if headers is not map', () => {
+    it('provides warning when waders is non-object', () => {
       const components = new namespace.elements.Object({
         headers: 'dummy',
       });
@@ -223,7 +223,7 @@ describe('Components Object', () => {
       expect(parseResult).to.contain.warning("'Components Object' 'headers' is not an object");
     });
 
-    it('provide warning if header is not HeaderObject', () => {
+    it('provide warning when header is non-object', () => {
       const components = new namespace.elements.Object({
         headers: {
           header: 'dummy',
