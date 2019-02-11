@@ -332,6 +332,19 @@
                               "content": {
                                 "key": {
                                   "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
                                   "attributes": {
                                     "sourceMap": {
                                       "element": "array",

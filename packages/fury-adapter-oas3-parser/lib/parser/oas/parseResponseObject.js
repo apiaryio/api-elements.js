@@ -80,7 +80,7 @@ function parseResponseObject(context, element) {
         }
 
         if (headers && headers.length > 0) {
-          const httpHeaders = new namespace.elements.HttpHeaders();
+          const httpHeaders = R.defaultTo(new namespace.elements.HttpHeaders())(response.headers);
           headers.forEach((key, value, member) => httpHeaders.push(member));
           response.headers = httpHeaders;
         }

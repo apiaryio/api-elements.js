@@ -154,6 +154,56 @@ describe('Response Object', () => {
       expect(headers).is.instanceof(namespace.elements.HttpHeaders);
       expect(headers.length).to.be.equal(1);
     });
+
+    it('headers do not override content', () => {
+      const response = new namespace.elements.Object({
+        description: 'response 200',
+        headers: {
+          'x-next': {
+            description: 'A link to the next page of responses',
+            schema: {
+              type: 'string',
+            },
+          },
+        },
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/Pets',
+            },
+          },
+        },
+      });
+
+      const dataStructure = new namespace.elements.DataStructure();
+      dataStructure.id = 'Node';
+
+      context.state.components = new namespace.elements.Object({
+        schemas: {
+          Node: dataStructure,
+        },
+      });
+
+      context.state.components.set('schemas', new namespace.elements.Object([
+        new namespace.elements.Member('Pets', new namespace.elements.Array()),
+      ]));
+
+      const parseResult = parse(context, response);
+
+      expect(parseResult.get(0).headers.length).to.be.equal(2);
+
+      const header1 = parseResult.get(0).headers.get(0);
+      expect(header1).is.instanceof(namespace.elements.Member);
+      expect(header1.key.toValue()).to.be.equal('Content-Type');
+      expect(header1.value).to.be.instanceof(namespace.elements.String);
+      expect(header1.value.toValue()).to.be.equal('application/json');
+
+      const header2 = parseResult.get(0).headers.get(1);
+      expect(header2).is.instanceof(namespace.elements.Member);
+      expect(header2.key.toValue()).to.be.equal('x-next');
+      expect(header2.value).to.be.instanceof(namespace.elements.String);
+      expect(header2.value.toValue()).to.be.undefined;
+    });
   });
 
   describe('warnings for unsupported properties', () => {
