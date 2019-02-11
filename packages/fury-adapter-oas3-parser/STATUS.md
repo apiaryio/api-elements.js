@@ -128,7 +128,7 @@ HTTP Status Code ranges are not currently supported.
 | Field Name | Support |
 |:--|:--|
 | description | ✓ |
-| headers | ✕ |
+| headers | [~](#header-object) |
 | content | [~](#media-type-object) |
 | links | ✕ |
 
@@ -153,7 +153,7 @@ support.
 | parameters | ✓ |
 | examples | ✕ |
 | requestBodies | ✓ |
-| headers | ✕ |
+| headers | [~](#header-object) |
 | securitySchemes | ✕ |
 | links | ✕ |
 | callbacks | ✕ |
@@ -199,3 +199,12 @@ support.
 | externalDocs | ✕ |
 | example | ✓ |
 | deprecated | ✕ |
+
+## Header Object
+
+| Field Name | Support |
+|:--|:--|
+| description | ✕ |
+| required | ✕ |
+| deprecated | ✕ |
+| allowEmptyValue | ✕ |
