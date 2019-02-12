@@ -8,7 +8,8 @@
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-swagger",
   "repository": {
     "type": "git",
-    "url": "https://github.com/apiaryio/api-elements.js.git"
+    "url": "https://github.com/apiaryio/api-elements.js.git",
+    "directory": "packages/fury-adapter-swagger"
   },
   "scripts": {
     "lint": "eslint .",

@@ -10,7 +10,8 @@
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-cli",
   "repository": {
     "type": "git",
-    "url": "https://github.com/apiaryio/api-elements.js.git"
+    "url": "https://github.com/apiaryio/api-elements.js.git",
+    "directory": "packages/fury-cli"
   },
   "scripts": {
     "lint": "eslint .",
