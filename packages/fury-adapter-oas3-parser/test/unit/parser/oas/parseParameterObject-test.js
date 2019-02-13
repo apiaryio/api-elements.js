@@ -144,6 +144,84 @@ describe('Parameter Object', () => {
     });
   });
 
+  describe('#example', () => {
+    it('attaches string example to member', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        example: 'example_value',
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).value.toValue()).to.equal('example_value');
+    });
+
+    it('attaches number example to member', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        example: 42,
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).value.toValue()).to.equal(42);
+    });
+
+    it('attaches boolean example to member', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        example: false,
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).value.toValue()).to.equal(false);
+    });
+
+    it('attaches array example to member', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        example: [1, 3, 4],
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).value.toValue()).to.deep.equal([1, 3, 4]);
+    });
+
+    it('attaches object example to member', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        example: {
+          foo: 1,
+          bar: 'tada',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).value.toValue()).to.deep.equal({
+        foo: 1,
+        bar: 'tada',
+      });
+    });
+  });
+
   describe('#required', () => {
     it('create typeAttribute required', () => {
       const parameter = new namespace.elements.Object({
@@ -328,18 +406,6 @@ describe('Parameter Object', () => {
       const parseResult = parse(context, parameter);
 
       expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'schema'");
-    });
-
-    it('provides warning for unsupported example property', () => {
-      const parameter = new namespace.elements.Object({
-        name: 'direction',
-        in: 'query',
-        example: 'east',
-      });
-
-      const parseResult = parse(context, parameter);
-
-      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'example'");
     });
 
     it('provides warning for unsupported examples property', () => {

@@ -7,6 +7,7 @@
 - Added support for the `nullable`, `description`, `default` and `example`
   Schema Object properties.
 - Added support for response headers.
+- Added support for Parameter Object `example`
 
 ### Bug Fixes
 
