@@ -77,7 +77,7 @@ describe('Parameter Object', () => {
       expect(parseResult).to.contain.error("'Parameter Object' 'in' is not a string");
     });
 
-    it('provides an error when value is not a permitted value', () => {
+    it('provides a warning when value is not a permitted value', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',
         in: 'space',
@@ -86,7 +86,7 @@ describe('Parameter Object', () => {
       const parseResult = parse(context, parameter);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.error("'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'");
+      expect(parseResult).to.contain.warning("'Parameter Object' 'in' must be either 'query, 'header', 'path' or 'cookie'");
     });
 
     it('provides an unsupported error for header parameters', () => {

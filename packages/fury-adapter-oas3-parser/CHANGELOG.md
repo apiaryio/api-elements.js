@@ -8,6 +8,8 @@
   Schema Object properties.
 - Added support for response headers.
 - Added partial support for the `example` in Parameter Object
+- A warning will now be emitted when an invalid 'Parameter Object' 'in' value
+  is set, previously this would cause an error.
 
 ### Bug Fixes
 
