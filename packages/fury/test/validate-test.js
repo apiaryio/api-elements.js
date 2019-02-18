@@ -41,7 +41,7 @@ describe('Validation', () => {
     it('should error when validating with no matching validator', (done) => {
       fury.validate({ source: 'dummy' }, (err, res) => {
         expect(err).not.to.be.null;
-        expect(res).to.be.null;
+        expect(res).to.be.undefined;
         done();
       });
     });
