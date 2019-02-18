@@ -38,6 +38,13 @@ const hasValue = (value, member) => member.value.toValue() === value;
 const isExtension = member => member.key.toValue().startsWith('x-');
 
 /**
+ * Returns the key for the given member element
+ * @param member {MemberElement}
+ * @returns {Element}
+ */
+const getKey = member => member.key;
+
+/**
  * Returns the value for the given member element
  * @param member {MemberElement}
  * @returns {Element}
@@ -58,5 +65,7 @@ module.exports = {
   hasKey: R.curry(hasKey),
   hasValue: R.curry(hasValue),
   isExtension,
+
+  getKey,
   getValue,
 };

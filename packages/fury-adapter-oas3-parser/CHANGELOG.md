@@ -13,6 +13,10 @@
 - Removed `null` as a valid type for a Schema Object, `null` is not supported
   as a type in OpenAPI 3 Schema Object. `nullable` should be used instead.
 - Added check for `required` in a Path Parameter.
+- The parser will now handle Responses Object which contains status codes that
+  are not strings. Previously the parser would throw an error, we will now
+  coerce number status codes to a string and emit a warning when a status code
+  is not a string.
 
 ## 0.5.1 (30-01-19)
 

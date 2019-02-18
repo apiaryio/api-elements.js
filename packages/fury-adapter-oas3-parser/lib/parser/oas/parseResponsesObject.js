@@ -1,6 +1,8 @@
 const R = require('ramda');
 const pipeParseResult = require('../../pipeParseResult');
-const { isExtension, hasKey, getValue } = require('../../predicates');
+const {
+  isString, isExtension, hasKey, getKey, getValue,
+} = require('../../predicates');
 const { createWarning, createInvalidMemberWarning } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseResponseObject = require('./parseResponseObject');
@@ -12,7 +14,7 @@ const name = 'Responses Object';
 
 // Returns if member has key that is 3 digit HTTP status code
 function isStatusCode(member) {
-  return member.key.toValue().match(/^\d\d\d$/);
+  return String(member.key.toValue()).match(/^\d\d\d$/);
 }
 
 // Returns if member has key that is 3 digit HTTP status code with X to represent range
@@ -21,6 +23,7 @@ function isStatusCodeRange(member) {
 }
 
 const isResponseField = R.anyPass([isStatusCode, isStatusCodeRange, hasKey('default')]);
+const isKeyString = R.compose(isString, getKey);
 
 /**
  * Parse Responses Object
@@ -46,10 +49,19 @@ function parseResponsesObject(context, element) {
     return createWarning(namespace, message, member.key);
   };
 
+  const attachStatusCodeNotStringWarning = member => new namespace.elements.ParseResult([
+    member,
+    createWarning(namespace, `'${name}' response status code must be a string and should be wrapped in quotes`, member.key),
+  ]);
+
   // FIXME Add support for status code ranges
   // https://github.com/apiaryio/fury-adapter-oas3-parser/issues/64
-  const parseResponse = pipeParseResult(namespace,
+  const validateStatusCode = pipeParseResult(namespace,
     R.unless(isStatusCode, createUnsupportedStatusCodeWarning),
+    R.unless(isKeyString, attachStatusCodeNotStringWarning));
+
+  const parseResponse = pipeParseResult(namespace,
+    validateStatusCode,
     R.compose(parseResponseObjectOrRef(context), getValue));
 
   const parseMember = R.cond([
@@ -66,7 +78,7 @@ function parseResponsesObject(context, element) {
     parseObject(context, name, parseMember),
     object => object.content.map((member) => {
       const response = member.value;
-      response.statusCode = member.key.toValue();
+      response.statusCode = String(member.key.toValue());
       return response;
     }));
 
