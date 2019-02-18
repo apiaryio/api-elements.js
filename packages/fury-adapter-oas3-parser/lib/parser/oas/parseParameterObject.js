@@ -65,11 +65,11 @@ function validateRequiredForPathParameter(context, object, parameter) {
 function parseParameterObject(context, object) {
   const { namespace } = context;
 
-  const createInvalidInError = R.compose(
-    createError(namespace, `'${name}' 'in' must be either 'query, 'header', 'path' or 'cookie'`),
+  const createInvalidInWarning = R.compose(
+    createWarning(namespace, `'${name}' 'in' must be either 'query, 'header', 'path' or 'cookie'`),
     getValue
   );
-  const validateIn = R.unless(isValidInValue, createInvalidInError);
+  const validateIn = R.unless(isValidInValue, createInvalidInWarning);
 
   const isSupportedIn = R.anyPass([hasValue('path'), hasValue('query')]);
   const createUnsupportedInWarning = member => createWarning(namespace,
