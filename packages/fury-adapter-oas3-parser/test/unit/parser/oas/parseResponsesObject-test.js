@@ -39,6 +39,20 @@ describe('Responses Object', () => {
     expect(parseResult).to.contain.warning("'Responses Object' contains invalid key 'invalid'");
   });
 
+  it('provides warning for invalid numerical keys', () => {
+    const statusCode = new namespace.elements.Number(20);
+    const responses = new namespace.elements.Object([
+      new namespace.elements.Member(statusCode, {}),
+    ]);
+
+    const parseResult = parse(context, responses);
+    expect(parseResult.length).to.equal(2);
+
+    expect(parseResult).to.contain.warning(
+      "'Responses Object' contains invalid key '20'"
+    );
+  });
+
   it('provides warning for response range', () => {
     const responses = new namespace.elements.Object({
       invalid: '',
@@ -66,6 +80,29 @@ describe('Responses Object', () => {
     const response = array.get(0);
     expect(response).to.be.instanceof(namespace.elements.HttpResponse);
     expect(response.statusCode.toValue()).to.equal('200');
+  });
+
+  it('can parse a number status code with warning', () => {
+    const statusCode = new namespace.elements.Number(200);
+    const responses = new namespace.elements.Object([
+      new namespace.elements.Member(statusCode, {
+        description: 'dummy',
+      }),
+    ]);
+
+    const parseResult = parse(context, responses);
+
+    const array = parseResult.get(0);
+    expect(array).to.be.instanceof(namespace.elements.Array);
+    expect(array.length).to.equal(1);
+
+    const response = array.get(0);
+    expect(response).to.be.instanceof(namespace.elements.HttpResponse);
+    expect(response.statusCode.toValue()).to.equal('200');
+
+    expect(parseResult).to.contain.warning(
+      "'Responses Object' response status code must be a string and should be wrapped in quotes"
+    );
   });
 
   it('parses default response as warning', () => {
