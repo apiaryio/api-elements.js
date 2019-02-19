@@ -95,7 +95,7 @@ function parseParameterObject(context, object) {
     [hasKey('in'), parseIn],
     [hasKey('description'), parseString(context, name, false)],
     [hasKey('required'), parseBoolean(context, name, false)],
-    [hasKey('example'), (e => e)],
+    [hasKey('example'), e => e.clone()],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 

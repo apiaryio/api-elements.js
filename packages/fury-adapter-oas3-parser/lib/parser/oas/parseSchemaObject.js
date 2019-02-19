@@ -94,22 +94,22 @@ const valueMatchesEnumerationValues = (enumeration, value) => {
   return permittedValues.includes(value.toValue());
 };
 
-function validateValuesMatchSchema(context, object) {
+function validateValuesMatchSchema(context, schema) {
   const { namespace } = context;
 
   const validate = (member) => {
-    const nullable = object.getValue('nullable');
+    const nullable = schema.getValue('nullable');
     if (nullable && member.value.element === 'null') {
       return member;
     }
 
-    const enumeration = object.get('enum');
+    const enumeration = schema.get('enum');
     if (enumeration && !valueMatchesEnumerationValues(enumeration, member.value)) {
       return createWarning(namespace,
         `'${name}' '${member.key.toValue()}' is not included in 'enum'`, member.value);
     }
 
-    const type = object.getValue('type');
+    const type = schema.getValue('type');
     if (type && !valueMatchesType(type, member.value)) {
       return createWarning(namespace,
         `'${name}' '${member.key.toValue()}' does not match expected type '${type}'`, member.value);
@@ -124,7 +124,7 @@ function validateValuesMatchSchema(context, object) {
     [R.T, e => e],
   ]);
 
-  return parseObject(context, name, parseMember)(object);
+  return parseObject(context, name, parseMember)(schema);
 }
 
 function parseSchema(context) {
@@ -161,8 +161,8 @@ function parseSchema(context) {
     [hasKey('required'), R.compose(parseRequired, getValue)],
     [hasKey('nullable'), parseBoolean(context, name, false)],
     [hasKey('description'), parseString(context, name, false)],
-    [hasKey('default'), R.compose(e => e.clone(), getValue)],
-    [hasKey('example'), R.compose(e => e.clone(), getValue)],
+    [hasKey('default'), e => e.clone()],
+    [hasKey('example'), e => e.clone()],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
