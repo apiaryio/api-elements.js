@@ -9,6 +9,7 @@
 ### Enhancements
 
 - Update minim to 0.22.1.
+- Introduced .valueOf method reducing an API Element from its type to a normalised value.
 
 ## 0.8.1
 

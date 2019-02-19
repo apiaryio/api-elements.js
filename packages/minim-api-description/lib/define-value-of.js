@@ -1,6 +1,7 @@
 /* eslint-disable no-bitwise, no-underscore-dangle */
 
 const setFlag = (mask, options) => (options | mask);
+const clearFlag = (mask, options) => (options & ~mask);
 const isFlag = (mask, options) => (options & mask) !== 0;
 
 const FIXED_FLAG = 1 << 0;
@@ -56,6 +57,7 @@ module.exports = (namespace) => {
     Boolean: BooleanElement,
     Number: NumberElement,
     Null: NullElement,
+    Enum: EnumElement,
   } = namespace.elements;
 
   function findFirstSample(e) {
@@ -88,22 +90,31 @@ module.exports = (namespace) => {
     return undefined;
   }
 
-  // Create instance of leaf element (Boolean, String, Number, Null)
-  function valueOfLeaf(e, options) {
+  // TODO e instanceof EnumElement fails because of dependency injection
+  // checking for e.element === 'enum' as a temporary  walkaround
+  const isEnumElement = e => (e.element === 'enum' || e instanceof EnumElement);
+
+  function valueOfAny(e, options, recurse) {
     const opts = updateTypeAttributes(e, options);
     if (e.content) {
-      return wrapResult(e.content, 'content', opts);
+      return wrapResult(recurse(e.content, clearFlag(SOURCE_FLAG, opts)), 'content', opts);
     }
     const sample = findFirstSample(e);
     if (sample) {
-      return wrapResult(sample.content, 'sample', opts);
+      return wrapResult(recurse(sample.content, clearFlag(SOURCE_FLAG, opts)), 'sample', opts);
     }
     const dflt = findDefault(e);
     if (dflt) {
-      return wrapResult(dflt.content, 'default', opts);
+      return wrapResult(recurse(dflt.content, clearFlag(SOURCE_FLAG, opts)), 'default', opts);
     }
     if (isFlag(NULLABLE_FLAG, opts)) {
       return wrapResult(null, 'nullable', opts);
+    }
+    if (isEnumElement(e)) {
+      const enums = e.enumerations;
+      if (enums && enums.content && enums.content[0]) {
+        return wrapResult(recurse(enums.content[0], clearFlag(SOURCE_FLAG, opts)), 'generated', opts);
+      }
     }
 
     return wrapResult(generateTrivialValue(e), 'generated', opts);
@@ -111,10 +122,13 @@ module.exports = (namespace) => {
 
   function valueOf(e, options) {
     if (isPrimitive(e) === true) {
-      return valueOfLeaf(e, options);
+      return valueOfAny(e, options, e => e);
     }
     if (e instanceof NullElement) {
-      return valueOfLeaf(e, options);
+      return valueOfAny(e, options, e => e);
+    }
+    if (isEnumElement(e)) {
+      return valueOfAny(e, options, valueOf);
     }
     return undefined;
   }

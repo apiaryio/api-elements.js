@@ -37,6 +37,7 @@ const enumeration = require('./elements/enum');
 const defineValueOf = require('./define-value-of');
 
 const namespace = (options) => {
+  enumeration(options.base);
   defineValueOf(options.base);
   httpHeaders(options.base);
   hrefVariables(options.base);
@@ -50,7 +51,6 @@ const namespace = (options) => {
   copy(options.base);
   category(options.base);
   extension(options.base);
-  enumeration(options.base);
 };
 
 module.exports = { namespace };
