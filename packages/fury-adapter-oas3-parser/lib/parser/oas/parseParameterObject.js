@@ -17,7 +17,7 @@ const name = 'Parameter Object';
 const requiredKeys = ['name', 'in'];
 const unsupportedKeys = [
   'deprecated', 'allowEmptyValue', 'style', 'explode', 'allowReserved',
-  'schema', 'example', 'examples', 'content',
+  'schema', 'examples', 'content',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -95,6 +95,7 @@ function parseParameterObject(context, object) {
     [hasKey('in'), parseIn],
     [hasKey('description'), parseString(context, name, false)],
     [hasKey('required'), parseBoolean(context, name, false)],
+    [hasKey('example'), (e => e)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -111,7 +112,8 @@ function parseParameterObject(context, object) {
     parseObject(context, name, parseMember, requiredKeys),
     R.when(isPathParameter, R.curry(validateRequiredForPathParameter)(context, object)),
     (parameter) => {
-      const member = new namespace.elements.Member(parameter.get('name'));
+      const example = parameter.get('example');
+      const member = new namespace.elements.Member(parameter.get('name'), example);
 
       const description = parameter.get('description');
       if (description) {
