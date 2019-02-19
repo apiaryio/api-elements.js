@@ -13,7 +13,7 @@ const {
 const isValueString = R.compose(isString, getValue);
 
 /**
- * Ensures that the given member value is a string, or return error
+ * Ensures that the given member value is a string, or return warning
  *
  * @param member {MemberElement}
  *
