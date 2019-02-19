@@ -19,7 +19,7 @@ function isStatusCode(member) {
 
 // Returns if member has key that is 3 digit HTTP status code with X to represent range
 function isStatusCodeRange(member) {
-  return member.key.toValue().match(/^[\dX]{3}$/);
+  return String(member.key.toValue()).match(/^[\dX]{3}$/);
 }
 
 const isResponseField = R.anyPass([isStatusCode, isStatusCodeRange, hasKey('default')]);

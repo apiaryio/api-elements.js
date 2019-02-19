@@ -35,7 +35,7 @@ const hasValue = (value, member) => member.value.toValue() === value;
  * @param member {MemberElement}
  * @returns {boolean}
  */
-const isExtension = member => member.key.toValue().startsWith('x-');
+const isExtension = member => member.key && isString(member.key) && member.key.toValue().startsWith('x-');
 
 /**
  * Returns the key for the given member element

@@ -39,6 +39,20 @@ describe('Responses Object', () => {
     expect(parseResult).to.contain.warning("'Responses Object' contains invalid key 'invalid'");
   });
 
+  it('provides warning for invalid numerical keys', () => {
+    const statusCode = new namespace.elements.Number(20);
+    const responses = new namespace.elements.Object([
+      new namespace.elements.Member(statusCode, {}),
+    ]);
+
+    const parseResult = parse(context, responses);
+    expect(parseResult.length).to.equal(2);
+
+    expect(parseResult).to.contain.warning(
+      "'Responses Object' contains invalid key '20'"
+    );
+  });
+
   it('provides warning for response range', () => {
     const responses = new namespace.elements.Object({
       invalid: '',
