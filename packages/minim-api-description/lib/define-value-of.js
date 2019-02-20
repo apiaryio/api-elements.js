@@ -31,6 +31,7 @@ function hasTypeAttribute(e, attribute) {
 const hasFixedTypeAttribute = e => hasTypeAttribute(e, 'fixed');
 const hasFixedTypeTypeAttribute = e => hasTypeAttribute(e, 'fixedType');
 const hasNullableTypeAttribute = e => hasTypeAttribute(e, 'nullable');
+const hasOptionalTypeAttribute = e => hasTypeAttribute(e, 'optional');
 
 function updateTypeAttributes(e, options) {
   let result = options;
@@ -46,10 +47,15 @@ function updateTypeAttributes(e, options) {
   return result;
 }
 
+function inheritFlags(options) {
+  return clearFlag(clearFlag(FIXED_TYPE_FLAG | NULLABLE_FLAG, options));
+}
+
 module.exports = (namespace) => {
   const { Element } = namespace.elements;
   const {
     Array: ArrayElement,
+    Object: ObjectElement,
     String: StringElement,
     Boolean: BooleanElement,
     Number: NumberElement,
@@ -90,13 +96,10 @@ module.exports = (namespace) => {
   // TODO e instanceof EnumElement fails because of dependency injection
   // checking for e.element === 'enum' as a temporary  walkaround
   const isEnumElement = e => (e.element === 'enum' || e instanceof EnumElement);
-  const isPlural = e => (e instanceof ArrayElement);
+  const isPlural = e => (e instanceof ArrayElement) || (e instanceof ObjectElement);
 
   function mapValue(e, options, f) {
     const opts = updateTypeAttributes(e, options);
-    var reduced;
-    // TODO: working around minim not distinguishing empty Array Element from
-    // Array Element with empty content
     if (e.content && (!isPlural(e) || e.content.length > 0)) {
       const result = f(e, opts, 'content');
       if (undefined !== result) {
@@ -133,39 +136,71 @@ module.exports = (namespace) => {
       }
     }
     const trivial = trivialValue(e);
-    if(trivial) {
+    if (trivial) {
       const result = f(trivial, opts, 'generated');
       if (undefined !== result) {
         return result;
       }
     }
-    if ((e instanceof ArrayElement) && e.content.length == 0) {
+    if (isPlural(e) && e.content.length === 0) {
       return f(e, opts, 'generated');
     }
 
     return undefined;
   }
 
-  function reduceValue(e, options, src_) {
+  function reduceValue(e, options) {
     const opts = updateTypeAttributes(e, options);
-    if(undefined === e.content) {
+    if (undefined === e.content) {
       return mapValue(e, opts, e => e.content);
     }
-    if(isPrimitive(e)) {
+    if (isPrimitive(e)) {
       return e.content;
     }
-    if(e instanceof NullElement) {
+    if (e instanceof NullElement) {
       return null;
     }
-    if(isEnumElement(e)) {
-      return mapValue(e.content, opts, reduceValue);
+    if (isEnumElement(e)) {
+      return mapValue(e.content, inheritFlags(opts), reduceValue);
     }
-    if(e instanceof ArrayElement) {
-      const result = e.map(item => mapValue(item, opts, reduceValue));
-      if(!isFlag(FIXED_FLAG, opts) && !isFlag(FIXED_TYPE_FLAG, opts)) {
+    if (e instanceof ObjectElement) {
+      let result = {};
+      e.content.some((item) => {
+        const skippable = hasOptionalTypeAttribute(item)
+              || (!isFlag(FIXED_FLAG, opts)
+            && !isFlag(FIXED_TYPE_FLAG, opts)
+            && !hasTypeAttribute(item, 'required'));
+
+        const k = mapValue(item.key, inheritFlags(opts), reduceValue);
+
+        if (undefined === k) {
+          if (skippable) {
+            return false;
+          }
+          result = undefined;
+          return true;
+        }
+
+        const v = mapValue(item.value, inheritFlags(opts), reduceValue);
+        if (undefined === v) {
+          if (skippable) {
+            return false;
+          }
+          result = undefined;
+          return true;
+        }
+
+        result[k] = v;
+        return false;
+      });
+      return result;
+    }
+    if (e instanceof ArrayElement) {
+      const result = e.map(item => mapValue(item, inheritFlags(opts), reduceValue));
+      if (!isFlag(FIXED_FLAG, opts) && !isFlag(FIXED_TYPE_FLAG, opts)) {
         return result.filter(item => item !== undefined);
       }
-      if(result.includes(undefined)) {
+      if (result.includes(undefined)) {
         return undefined;
       }
       return result;
@@ -179,15 +214,13 @@ module.exports = (namespace) => {
         if (flags !== undefined && flags.source) {
           return mapValue(this, 0, (value, opts, source) => {
             const result = reduceValue(value, opts);
-            if(undefined === result) {
+            if (undefined === result) {
               return undefined;
             }
             return [reduceValue(value, opts), source];
           });
         }
-        return mapValue(this, 0, (value, opts, source) => {
-          return reduceValue(value, opts);
-        });
+        return mapValue(this, 0, (value, opts) => reduceValue(value, opts));
       },
     });
   }
