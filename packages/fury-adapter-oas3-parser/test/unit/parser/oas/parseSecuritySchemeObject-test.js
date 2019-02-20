@@ -21,7 +21,7 @@ describe('Security Scheme Object', () => {
   });
 
   describe('#type', () => {
-    it('provides an error when type is not a string', () => {
+    it('provides an warning when type is not a string', () => {
       const securityScheme = new namespace.elements.Object({
         type: 1,
       });
@@ -29,10 +29,10 @@ describe('Security Scheme Object', () => {
       const parseResult = parse(context, securityScheme);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.error("'Security Scheme Object' 'type' is not a string");
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' is not a string");
     });
 
-    it('provides an error when value is not a permitted value', () => {
+    it('provides an warning when value is not a permitted value', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'space',
       });
@@ -40,7 +40,7 @@ describe('Security Scheme Object', () => {
       const parseResult = parse(context, securityScheme);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.error("'Security Scheme Object' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'");
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'");
     });
 
     it('provides an unsupported warning for oauth2 type', () => {
@@ -186,6 +186,7 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
+      expect(parseResult.length).to.equal(2);
       expect(parseResult).to.contain.warning("'Security Scheme Object' 'description' is not a string");
     });
   });

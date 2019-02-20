@@ -18,22 +18,33 @@ const unsupportedKeys = [
   'bearerFormat', 'flows', 'openIdConnectUrl',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
+const passThrough = R.anyPass(R.map(hasKey, ['name', 'in', 'scheme']));
+
+const isApiKeyScheme = securityScheme => securityScheme.getValue('type') === 'apiKey';
+const isHttpScheme = securityScheme => securityScheme.getValue('type') === 'http';
+
+const isValidTypeValue = R.anyPass([
+  hasValue('apiKey'), hasValue('http'), hasValue('oauth2'), hasValue('openIdConnect'),
+]);
+const isSupportedType = R.anyPass([
+  hasValue('apiKey'), hasValue('http'),
+]);
+const isValidInValue = R.anyPass([
+  hasValue('query'), hasValue('header'), hasValue('cookie'),
+]);
+const isSupportedIn = R.anyPass([
+  hasValue('query'), hasValue('header'),
+]);
 
 function validateApiKeyScheme(context, securityScheme) {
   const { namespace } = context;
 
-  const isValidInValue = R.anyPass([
-    hasValue('query'), hasValue('header'), hasValue('cookie'),
-  ]);
   const createInvalidInWarning = R.compose(
     createWarning(namespace, `'${name}' 'in' must be either 'query', 'header' or 'cookie'`),
     getValue
   );
   const validateIn = R.unless(isValidInValue, createInvalidInWarning);
 
-  const isSupportedIn = R.anyPass([
-    hasValue('query'), hasValue('header'),
-  ]);
   const createUnsupportedInWarning = member => createWarning(namespace,
     `'${name}' 'in' '${member.value.toValue()}' is unsupported`, member.value);
   const ensureSupportedIn = R.unless(isSupportedIn, createUnsupportedInWarning);
@@ -75,33 +86,25 @@ function validateHttpScheme(context, securityScheme) {
 function parseSecuritySchemeObject(context, object) {
   const { namespace } = context;
 
-  const isValidTypeValue = R.anyPass([
-    hasValue('apiKey'), hasValue('http'), hasValue('oauth2'), hasValue('openIdConnect'),
-  ]);
-  const createInvalidTypeError = R.compose(
-    createError(namespace, `'${name}' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'`),
+  const createInvalidTypeWarning = R.compose(
+    createWarning(namespace, `'${name}' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'`),
     getValue
   );
-  const validateType = R.unless(isValidTypeValue, createInvalidTypeError);
+  const validateType = R.unless(isValidTypeValue, createInvalidTypeWarning);
 
-  const isSupportedType = R.anyPass([
-    hasValue('apiKey'), hasValue('http'),
-  ]);
   const createUnsupportedTypeWarning = member => createWarning(namespace,
     `'${name}' 'type' '${member.value.toValue()}' is unsupported`, member.value);
   const ensureSupportedType = R.unless(isSupportedType, createUnsupportedTypeWarning);
 
   const parseType = pipeParseResult(namespace,
-    parseString(context, name, true),
+    parseString(context, name, false),
     validateType,
     ensureSupportedType);
 
   const parseMember = R.cond([
     [hasKey('type'), parseType],
     [hasKey('description'), parseString(context, name, false)],
-    [hasKey('name'), e => e.clone()],
-    [hasKey('in'), e => e.clone()],
-    [hasKey('scheme'), e => e.clone()],
+    [passThrough, e => e],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -112,11 +115,8 @@ function parseSecuritySchemeObject(context, object) {
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const isApiKeyScheme = securityScheme => securityScheme.getValue('type') === 'apiKey';
-  const isHttpScheme = securityScheme => securityScheme.getValue('type') === 'http';
-
   const parseSecurityScheme = pipeParseResult(namespace,
-    parseObject(context, name, parseMember, requiredKeys),
+    parseObject(context, name, parseMember, requiredKeys, true),
     R.when(isApiKeyScheme, R.curry(validateApiKeyScheme)(context)),
     R.when(isHttpScheme, R.curry(validateHttpScheme)(context)),
     (securityScheme) => {
