@@ -6,7 +6,7 @@ const isFlag = (mask, options) => (options & mask) !== 0;
 
 const FIXED_FLAG = 1 << 0;
 const NULLABLE_FLAG = 1 << 1;
-const SOURCE_FLAG = 1 << 2;
+const FIXED_TYPE_FLAG = 1 << 2;
 
 function findDefault(e) {
   if (undefined !== e._attributes) {
@@ -29,6 +29,7 @@ function hasTypeAttribute(e, attribute) {
 }
 
 const hasFixedTypeAttribute = e => hasTypeAttribute(e, 'fixed');
+const hasFixedTypeTypeAttribute = e => hasTypeAttribute(e, 'fixedType');
 const hasNullableTypeAttribute = e => hasTypeAttribute(e, 'nullable');
 
 function updateTypeAttributes(e, options) {
@@ -36,17 +37,13 @@ function updateTypeAttributes(e, options) {
   if (hasFixedTypeAttribute(e)) {
     result = setFlag(FIXED_FLAG, result);
   }
+  if (hasFixedTypeTypeAttribute(e)) {
+    result = setFlag(FIXED_TYPE_FLAG, result);
+  }
   if (hasNullableTypeAttribute(e)) {
     result = setFlag(NULLABLE_FLAG, result);
   }
   return result;
-}
-
-function wrapResult(value, source, options) {
-  if (isFlag(SOURCE_FLAG, options)) {
-    return [value, source];
-  }
-  return value;
 }
 
 module.exports = (namespace) => {
@@ -74,18 +71,18 @@ module.exports = (namespace) => {
 
   const isPrimitive = e => (e instanceof StringElement) || (e instanceof NumberElement) || (e instanceof BooleanElement);
 
-  function generateTrivialValue(e) {
+  function trivialValue(e) {
     if (e instanceof BooleanElement) {
-      return false;
+      return new BooleanElement(false);
     }
     if (e instanceof NumberElement) {
-      return 0;
+      return new NumberElement(0);
     }
     if (e instanceof StringElement) {
-      return '';
+      return new StringElement('');
     }
     if (e instanceof NullElement) {
-      return null;
+      return new NullElement();
     }
     return undefined;
   }
@@ -93,42 +90,85 @@ module.exports = (namespace) => {
   // TODO e instanceof EnumElement fails because of dependency injection
   // checking for e.element === 'enum' as a temporary  walkaround
   const isEnumElement = e => (e.element === 'enum' || e instanceof EnumElement);
+  const isPlural = e => (e instanceof ArrayElement);
 
-  function valueOfAny(e, options, recurse) {
+  function mapValue(e, options, f) {
     const opts = updateTypeAttributes(e, options);
-    if (e.content) {
-      return wrapResult(recurse(e.content, clearFlag(SOURCE_FLAG, opts)), 'content', opts);
+    var reduced;
+    // TODO: working around minim not distinguishing empty Array Element from
+    // Array Element with empty content
+    if (e.content && (!isPlural(e) || e.content.length > 0)) {
+      const result = f(e, opts, 'content');
+      if (undefined !== result) {
+        return result;
+      }
     }
     const sample = findFirstSample(e);
     if (sample) {
-      return wrapResult(recurse(sample.content, clearFlag(SOURCE_FLAG, opts)), 'sample', opts);
+      const result = f(sample, opts, 'sample');
+      if (undefined !== result) {
+        return result;
+      }
     }
     const dflt = findDefault(e);
     if (dflt) {
-      return wrapResult(recurse(dflt.content, clearFlag(SOURCE_FLAG, opts)), 'default', opts);
+      const result = f(dflt, opts, 'default');
+      if (undefined !== result) {
+        return result;
+      }
     }
     if (isFlag(NULLABLE_FLAG, opts)) {
-      return wrapResult(null, 'nullable', opts);
+      const result = f(new NullElement(), opts, 'nullable');
+      if (undefined !== result) {
+        return result;
+      }
     }
     if (isEnumElement(e)) {
       const enums = e.enumerations;
       if (enums && enums.content && enums.content[0]) {
-        return wrapResult(recurse(enums.content[0], clearFlag(SOURCE_FLAG, opts)), 'generated', opts);
+        const result = f(enums.content[0], opts, 'generated');
+        if (undefined !== result) {
+          return result;
+        }
       }
     }
+    const trivial = trivialValue(e);
+    if(trivial) {
+      const result = f(trivial, opts, 'generated');
+      if (undefined !== result) {
+        return result;
+      }
+    }
+    if ((e instanceof ArrayElement) && e.content.length == 0) {
+      return f(e, opts, 'generated');
+    }
 
-    return wrapResult(generateTrivialValue(e), 'generated', opts);
+    return undefined;
   }
 
-  function valueOf(e, options) {
-    if (isPrimitive(e) === true) {
-      return valueOfAny(e, options, e => e);
+  function reduceValue(e, options, src_) {
+    const opts = updateTypeAttributes(e, options);
+    if(undefined === e.content) {
+      return mapValue(e, opts, e => e.content);
     }
-    if (e instanceof NullElement) {
-      return valueOfAny(e, options, e => e);
+    if(isPrimitive(e)) {
+      return e.content;
     }
-    if (isEnumElement(e)) {
-      return valueOfAny(e, options, valueOf);
+    if(e instanceof NullElement) {
+      return null;
+    }
+    if(isEnumElement(e)) {
+      return mapValue(e.content, opts, reduceValue);
+    }
+    if(e instanceof ArrayElement) {
+      const result = e.map(item => mapValue(item, opts, reduceValue));
+      if(!isFlag(FIXED_FLAG, opts) && !isFlag(FIXED_TYPE_FLAG, opts)) {
+        return result.filter(item => item !== undefined);
+      }
+      if(result.includes(undefined)) {
+        return undefined;
+      }
+      return result;
     }
     return undefined;
   }
@@ -137,9 +177,17 @@ module.exports = (namespace) => {
     Object.defineProperty(Element.prototype, 'valueOf', {
       value(flags) {
         if (flags !== undefined && flags.source) {
-          return valueOf(this, SOURCE_FLAG);
+          return mapValue(this, 0, (value, opts, source) => {
+            const result = reduceValue(value, opts);
+            if(undefined === result) {
+              return undefined;
+            }
+            return [reduceValue(value, opts), source];
+          });
         }
-        return valueOf(this, 0);
+        return mapValue(this, 0, (value, opts, source) => {
+          return reduceValue(value, opts);
+        });
       },
     });
   }

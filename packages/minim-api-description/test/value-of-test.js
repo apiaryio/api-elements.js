@@ -605,7 +605,7 @@ describe('valueOf EnumElement with source', () => {
     const element = new EnumElement();
     const value = element.valueOf({ source: true });
 
-    expect(value).to.deep.equal([undefined, 'generated']);
+    expect(value).to.deep.equal(undefined);
   });
 
   it('generates null if no content, default, samples and nullable', () => {
@@ -623,3 +623,188 @@ describe('valueOf EnumElement with source', () => {
     expect(value).to.deep.equal([null, 'nullable']);
   });
 });
+
+describe('valueOf ArrayElement', () => {
+  it('returns content', () => {
+    const element = new ArrayElement([1,2,3]);
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([1,2,3]);
+  });
+
+  it('returns complex content', () => {
+    const innerSampled = new ArrayElement();
+    innerSampled.attributes.set('samples', [[8,3]]);
+    const element = new ArrayElement([[3, innerSampled, 'test'],2,3]);
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([[3,[8,3],'test'],2,3]);
+  });
+
+  it('skips items without value if not fixed or fixedType', () => {
+    const element = new ArrayElement([8,4,new EnumElement(),42]);
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([8,4,42]);
+  });
+
+  it('returns undefined when fixedType and with item without value', () => {
+    const element = new ArrayElement([8,4,new EnumElement(),42]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixedType'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal(undefined);
+  });
+
+  it('returns undefined when fixed and with item without value', () => {
+    const element = new ArrayElement([8,4,new EnumElement(),42]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixed'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal(undefined);
+  });
+
+  it('prefers content over default and samples', () => {
+    const element = new ArrayElement([1,2,3]);
+    element.attributes.set('default', new ArrayElement([4,2]));
+    element.attributes.set('samples', new ArrayElement(
+      new ArrayElement([2,'hello'])
+    ));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([1,2,3]);
+  });
+
+  it('prefers a sample over a default', () => {
+    const element = new ArrayElement();
+    element.attributes.set('default', new ArrayElement([4,2]));
+    element.attributes.set('samples', new ArrayElement([
+      new ArrayElement([2,'hello']),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([2,'hello']);
+  });
+
+  it('prefers default over generating a value', () => {
+    const element = new ArrayElement();
+    element.attributes.set('default', new ArrayElement([4,2]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([4,2]);
+  });
+
+  it('generates [] if no content, default, samples and not nullable', () => {
+    const element = new ArrayElement();
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([]);
+  });
+
+  it('generates null if no content, default, samples and nullable', () => {
+    const element = new ArrayElement();
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal(null);
+  });
+});
+
+describe('valueOf ArrayElement with source', () => {
+  it('returns content', () => {
+    const element = new ArrayElement([1,2,3]);
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[1,2,3], 'content']);
+  });
+
+  it('returns complex content', () => {
+    const innerSampled = new ArrayElement();
+    innerSampled.attributes.set('samples', [[8,3]]);
+    const element = new ArrayElement([[3, innerSampled, 'test'],2,3]);
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[[3,[8,3],'test'],2,3], 'content']);
+  });
+
+  it('skips items without value if not fixed or fixedType', () => {
+    const element = new ArrayElement([8,4,new EnumElement(),42]);
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[8,4,42], 'content']);
+  });
+
+  it('returns undefined when fixedType and with item without value', () => {
+    const element = new ArrayElement([8,4,new EnumElement(),42]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixedType'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(undefined);
+  });
+
+  it('returns undefined when fixed and with item without value', () => {
+    const element = new ArrayElement([8,4,new EnumElement(),42]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixed'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(undefined);
+  });
+
+  it('prefers content over default and samples', () => {
+    const element = new ArrayElement([1,2,3]);
+    element.attributes.set('default', new ArrayElement([4,2]));
+    element.attributes.set('samples', new ArrayElement(
+      new ArrayElement([2,'hello'])
+    ));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[1,2,3], 'content']);
+  });
+
+  it('prefers a sample over a default', () => {
+    const element = new ArrayElement();
+    element.attributes.set('default', new ArrayElement([4,2]));
+    element.attributes.set('samples', new ArrayElement([
+      new ArrayElement([2,'hello']),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[2,'hello'], 'sample']);
+  });
+
+  it('prefers default over generating a value', () => {
+    const element = new ArrayElement();
+    element.attributes.set('default', new ArrayElement([4,2]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[4,2], 'default']);
+  });
+
+  it('generates [] if no content, default, samples and not nullable', () => {
+    const element = new ArrayElement();
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[], 'generated']);
+  });
+
+  it('generates null if no content, default, samples and nullable', () => {
+    const element = new ArrayElement();
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([null, 'nullable']);
+  });
+});
+
