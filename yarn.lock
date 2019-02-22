@@ -3730,7 +3730,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.17.11, lodash@^4.14.2, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.5, lodash@^4.2.1:
+lodash@4.17.11, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.5, lodash@^4.2.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -3946,13 +3946,12 @@ mimic-fn@^1.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
-minim@^0.22.1:
-  version "0.22.1"
-  resolved "https://registry.yarnpkg.com/minim/-/minim-0.22.1.tgz#8f57ed7bcab770b764a37e2056188a222b80d94a"
-  integrity sha512-wi52rk6Kbzr+OATkLJH3aCqkpFRV1w/CyniDcDAJ5fOFKdeORzfE6FI2Kg/XET9VHiIobLroBaa34DhnEs6+yQ==
+minim@^0.23.1:
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/minim/-/minim-0.23.1.tgz#7820c03140048183223e9a1c394fd1c638d77839"
+  integrity sha512-Oi2B/L8w6Ufd9820N9UV1T3b91Qmmn5h2J+hv2dQ2ZTcCrIyDF8EzHFBYZO/WnlX9L/N9TLFS0x8lS2uzNhODQ==
   dependencies:
     lodash "^4.15.0"
-    uptown "^1.1.0"
 
 minimatch@3.0.4, minimatch@^3.0.0, minimatch@^3.0.4:
   version "3.0.4"
@@ -5944,13 +5943,6 @@ unset-value@^1.0.0:
   dependencies:
     has-value "^0.3.1"
     isobject "^3.0.0"
-
-uptown@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/uptown/-/uptown-1.1.0.tgz#e3a4a91e52188ab7f6b8c35bde181bd4cb3759b7"
-  integrity sha512-8CVRVG6jNECwHMVl/i4AjmRemtNp/JwQVENdj6DLWXCk0agxY2sBNXqGEyIRhr22fLPj1AD98TK+88i+U1JsWA==
-  dependencies:
-    lodash "^4.14.2"
 
 uri-js@^4.2.2:
   version "4.2.2"
