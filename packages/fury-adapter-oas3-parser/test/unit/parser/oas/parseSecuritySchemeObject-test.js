@@ -12,9 +12,9 @@ describe('Security Scheme Object', () => {
   });
 
   it('provides warning when security scheme is not an object', () => {
-    const operation = new namespace.elements.String();
+    const securityScheme = new namespace.elements.String();
 
-    const parseResult = parse(context, operation);
+    const parseResult = parse(context, securityScheme);
 
     expect(parseResult.length).to.equal(1);
     expect(parseResult).to.contain.warning("'Security Scheme Object' is not an object");

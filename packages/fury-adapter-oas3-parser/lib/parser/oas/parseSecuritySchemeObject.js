@@ -3,7 +3,6 @@ const {
   isExtension, hasKey, hasValue, getValue,
 } = require('../../predicates');
 const {
-  createError,
   createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
