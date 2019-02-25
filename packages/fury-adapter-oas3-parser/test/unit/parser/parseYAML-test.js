@@ -128,44 +128,104 @@ describe('#parseYAML', () => {
     expect(array.first).to.have.sourceMapEndColumn(9);
   });
 
-  it('can parse a dictionary into an object element', () => {
-    const element = parseYAML('key: value', context);
+  describe('map', () => {
+    it('can parse a dictionary into an object element', () => {
+      const element = parseYAML('key: value', context);
 
-    expect(element).to.be.instanceof(namespace.elements.ParseResult);
-    expect(element.length).to.equal(1);
+      expect(element).to.be.instanceof(namespace.elements.ParseResult);
+      expect(element.length).to.equal(1);
 
-    const object = element.first;
+      const object = element.first;
 
-    expect(object).to.be.instanceof(namespace.elements.Object);
-    expect(object.toValue()).to.deep.equal({ key: 'value' });
-    expect(object).to.have.sourceMapStart(0);
-    expect(object).to.have.sourceMapOffset(10);
-    expect(object).to.have.sourceMapStartLine(1);
-    expect(object).to.have.sourceMapStartColumn(1);
-    expect(object).to.have.sourceMapEndLine(1);
-    expect(object).to.have.sourceMapEndColumn(11);
+      expect(object).to.be.instanceof(namespace.elements.Object);
+      expect(object.toValue()).to.deep.equal({ key: 'value' });
+      expect(object).to.have.sourceMapStart(0);
+      expect(object).to.have.sourceMapOffset(10);
+      expect(object).to.have.sourceMapStartLine(1);
+      expect(object).to.have.sourceMapStartColumn(1);
+      expect(object).to.have.sourceMapEndLine(1);
+      expect(object).to.have.sourceMapEndColumn(11);
 
-    const member = object.first;
+      const member = object.first;
 
-    expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member).to.be.instanceof(namespace.elements.Member);
 
-    expect(member.key).to.be.instanceof(namespace.elements.String);
-    expect(member.key.toValue()).to.equal('key');
-    expect(member.key).to.have.sourceMapStart(0);
-    expect(member.key).to.have.sourceMapOffset(3);
-    expect(member.key).to.have.sourceMapStartLine(1);
-    expect(member.key).to.have.sourceMapStartColumn(1);
-    expect(member.key).to.have.sourceMapEndLine(1);
-    expect(member.key).to.have.sourceMapEndColumn(4);
+      expect(member.key).to.be.instanceof(namespace.elements.String);
+      expect(member.key.toValue()).to.equal('key');
+      expect(member.key).to.have.sourceMapStart(0);
+      expect(member.key).to.have.sourceMapOffset(3);
+      expect(member.key).to.have.sourceMapStartLine(1);
+      expect(member.key).to.have.sourceMapStartColumn(1);
+      expect(member.key).to.have.sourceMapEndLine(1);
+      expect(member.key).to.have.sourceMapEndColumn(4);
 
-    expect(member.value).to.be.instanceof(namespace.elements.String);
-    expect(member.value.toValue()).to.equal('value');
-    expect(member.value).to.have.sourceMapStart(5);
-    expect(member.value).to.have.sourceMapOffset(5);
-    expect(member.value).to.have.sourceMapStartLine(1);
-    expect(member.value).to.have.sourceMapStartColumn(6);
-    expect(member.value).to.have.sourceMapEndLine(1);
-    expect(member.value).to.have.sourceMapEndColumn(11);
+      expect(member.value).to.be.instanceof(namespace.elements.String);
+      expect(member.value.toValue()).to.equal('value');
+      expect(member.value).to.have.sourceMapStart(5);
+      expect(member.value).to.have.sourceMapOffset(5);
+      expect(member.value).to.have.sourceMapStartLine(1);
+      expect(member.value).to.have.sourceMapStartColumn(6);
+      expect(member.value).to.have.sourceMapEndLine(1);
+      expect(member.value).to.have.sourceMapEndColumn(11);
+    });
+
+    it('can parse a map into an object element', () => {
+      const parseResult = parseYAML('!!map\n  key : value', context);
+
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+      expect(parseResult.length).to.equal(1);
+
+      const object = parseResult.first;
+
+      expect(object).to.be.instanceof(namespace.elements.Object);
+      expect(object.toValue()).to.deep.equal({ key: 'value' });
+      expect(object).to.have.sourceMapStart(0);
+      expect(object).to.have.sourceMapOffset(19);
+      expect(object).to.have.sourceMapStartLine(1);
+      expect(object).to.have.sourceMapStartColumn(1);
+      expect(object).to.have.sourceMapEndLine(2);
+      expect(object).to.have.sourceMapEndColumn(14);
+
+      const member = object.first;
+
+      expect(member).to.be.instanceof(namespace.elements.Member);
+
+      expect(member.key).to.be.instanceof(namespace.elements.String);
+      expect(member.key.toValue()).to.equal('key');
+      expect(member.key).to.have.sourceMapStart(8);
+      expect(member.key).to.have.sourceMapOffset(3);
+      expect(member.key).to.have.sourceMapStartLine(2);
+      expect(member.key).to.have.sourceMapStartColumn(3);
+      expect(member.key).to.have.sourceMapEndLine(2);
+      expect(member.key).to.have.sourceMapEndColumn(6);
+
+      expect(member.value).to.be.instanceof(namespace.elements.String);
+      expect(member.value.toValue()).to.equal('value');
+      expect(member.value).to.have.sourceMapStart(14);
+      expect(member.value).to.have.sourceMapOffset(5);
+      expect(member.value).to.have.sourceMapStartLine(2);
+      expect(member.value).to.have.sourceMapStartColumn(9);
+      expect(member.value).to.have.sourceMapEndLine(2);
+      expect(member.value).to.have.sourceMapEndColumn(14);
+    });
+
+    it('can parse an empty map into an object element', () => {
+      const parseResult = parseYAML('!!map', context);
+
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+      expect(parseResult.length).to.equal(1);
+
+      const object = parseResult.first;
+
+      expect(object).to.be.instanceof(namespace.elements.Object);
+      expect(object.length).to.equal(0);
+      expect(object).to.have.sourceMapStart(0);
+      expect(object).to.have.sourceMapOffset(5);
+      expect(object).to.have.sourceMapStartLine(1);
+      expect(object).to.have.sourceMapStartColumn(1);
+      expect(object).to.have.sourceMapEndLine(1);
+      expect(object).to.have.sourceMapEndColumn(6);
+    });
   });
 
   it('can parse a binary into a string element', () => {
