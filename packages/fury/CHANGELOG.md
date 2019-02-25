@@ -10,6 +10,10 @@
   return a parse result with any error annotations upon a validation error and
   will no longer include an error in the asynchronous callback.
 
+### Enhancements
+
+- Update minim to [0.23.0](https://github.com/refractproject/minim/releases/tag/v0.23.0).
+
 ## 3.0.0-beta.8 (2018-12-21)
 
 ### Breaking

@@ -19,7 +19,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^5.9.0",
-    "minim": "^0.22.1",
+    "minim": "^0.23.1",
     "mocha": "^5.0.2"
   },
   "engines": {
