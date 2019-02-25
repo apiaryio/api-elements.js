@@ -318,54 +318,73 @@ describe('#parseYAML', () => {
     expect(warning).to.have.sourceMapEndColumn(13);
   });
 
-  it('can parse a set into an array element', () => {
-    const element = parseYAML('!!set\n  - one\n  - two', context);
+  describe('set', () => {
+    it('can parse a set into an array element', () => {
+      const parseResult = parseYAML('!!set\n  - one\n  - two', context);
 
-    expect(element).to.be.instanceof(namespace.elements.ParseResult);
-    expect(element.length).to.equal(2);
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+      expect(parseResult.length).to.equal(2);
 
-    const arry = element.first;
+      const array = parseResult.first;
 
-    expect(arry).to.be.instanceof(namespace.elements.Array);
-    expect(arry.toValue()).to.deep.equal(['one', 'two']);
-    expect(arry).to.have.sourceMapStart(0);
-    expect(arry).to.have.sourceMapOffset(21);
-    expect(arry).to.have.sourceMapStartLine(1);
-    expect(arry).to.have.sourceMapStartColumn(1);
-    expect(arry).to.have.sourceMapEndLine(3);
-    expect(arry).to.have.sourceMapEndColumn(8);
+      expect(array).to.be.instanceof(namespace.elements.Array);
+      expect(array.toValue()).to.deep.equal(['one', 'two']);
+      expect(array).to.have.sourceMapStart(0);
+      expect(array).to.have.sourceMapOffset(21);
+      expect(array).to.have.sourceMapStartLine(1);
+      expect(array).to.have.sourceMapStartColumn(1);
+      expect(array).to.have.sourceMapEndLine(3);
+      expect(array).to.have.sourceMapEndColumn(8);
 
-    const entryOne = arry.get(0);
+      const entryOne = array.get(0);
+      expect(entryOne).to.be.instanceof(namespace.elements.String);
+      expect(entryOne.toValue()).to.equal('one');
+      expect(entryOne).to.have.sourceMapStart(10);
+      expect(entryOne).to.have.sourceMapOffset(3);
+      expect(entryOne).to.have.sourceMapStartLine(2);
+      expect(entryOne).to.have.sourceMapStartColumn(5);
+      expect(entryOne).to.have.sourceMapEndLine(2);
+      expect(entryOne).to.have.sourceMapEndColumn(8);
 
-    expect(entryOne).to.be.instanceof(namespace.elements.String);
-    expect(entryOne.toValue()).to.equal('one');
-    expect(entryOne).to.have.sourceMapStart(10);
-    expect(entryOne).to.have.sourceMapOffset(3);
-    expect(entryOne).to.have.sourceMapStartLine(2);
-    expect(entryOne).to.have.sourceMapStartColumn(5);
-    expect(entryOne).to.have.sourceMapEndLine(2);
-    expect(entryOne).to.have.sourceMapEndColumn(8);
+      const entryTwo = array.get(1);
+      expect(entryTwo).to.be.instanceof(namespace.elements.String);
+      expect(entryTwo.toValue()).to.equal('two');
+      expect(entryTwo).to.have.sourceMapStart(18);
+      expect(entryTwo).to.have.sourceMapOffset(3);
+      expect(entryTwo).to.have.sourceMapStartLine(3);
+      expect(entryTwo).to.have.sourceMapStartColumn(5);
+      expect(entryTwo).to.have.sourceMapEndLine(3);
+      expect(entryTwo).to.have.sourceMapEndColumn(8);
 
-    const entryTwo = arry.get(1);
+      const warning = parseResult.second;
+      expect(warning).to.be.instanceof(namespace.elements.Annotation);
+      expect(warning.toValue()).to.equal('Interpreting YAML !!set as array');
+      expect(warning).to.have.sourceMapStart(0);
+      expect(warning).to.have.sourceMapOffset(21);
+      expect(warning).to.have.sourceMapStartLine(1);
+      expect(warning).to.have.sourceMapStartColumn(1);
+      expect(warning).to.have.sourceMapEndLine(3);
+      expect(warning).to.have.sourceMapEndColumn(8);
+    });
 
-    expect(entryTwo).to.be.instanceof(namespace.elements.String);
-    expect(entryTwo.toValue()).to.equal('two');
-    expect(entryTwo).to.have.sourceMapStart(18);
-    expect(entryTwo).to.have.sourceMapOffset(3);
-    expect(entryTwo).to.have.sourceMapStartLine(3);
-    expect(entryTwo).to.have.sourceMapStartColumn(5);
-    expect(entryTwo).to.have.sourceMapEndLine(3);
-    expect(entryTwo).to.have.sourceMapEndColumn(8);
+    it('can parse empty set into an array element', () => {
+      const parseResult = parseYAML('!!set', context);
 
-    const warning = element.second;
-    expect(warning).to.be.instanceof(namespace.elements.Annotation);
-    expect(warning.toValue()).to.equal('Interpreting YAML !!set as array');
-    expect(warning).to.have.sourceMapStart(0);
-    expect(warning).to.have.sourceMapOffset(21);
-    expect(warning).to.have.sourceMapStartLine(1);
-    expect(warning).to.have.sourceMapStartColumn(1);
-    expect(warning).to.have.sourceMapEndLine(3);
-    expect(warning).to.have.sourceMapEndColumn(8);
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+      expect(parseResult.length).to.equal(2);
+
+      const array = parseResult.first;
+      expect(array).to.be.instanceof(namespace.elements.Array);
+      expect(array.length).to.equal(0);
+      expect(array).to.have.sourceMapStart(0);
+      expect(array).to.have.sourceMapOffset(5);
+      expect(array).to.have.sourceMapStartLine(1);
+      expect(array).to.have.sourceMapStartColumn(1);
+      expect(array).to.have.sourceMapEndLine(1);
+      expect(array).to.have.sourceMapEndColumn(6);
+
+      expect(parseResult).to.contain.warning('Interpreting YAML !!set as array');
+    });
   });
 
   it('can accumulate annotations during YAML translation', () => {
