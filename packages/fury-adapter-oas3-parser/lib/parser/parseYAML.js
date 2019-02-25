@@ -37,7 +37,11 @@ function yamlToObject(node, annotations, context) {
 }
 
 function yamlToArray(node, annotations, context) {
-  return new context.namespace.elements.Array(node.value.map(nodes => convert(nodes, annotations, context)));
+  if (node.value) {
+    return new context.namespace.elements.Array(node.value.map(nodes => convert(nodes, annotations, context)));
+  }
+
+  return new context.namespace.elements.Array();
 }
 
 function convert(node, annotations, context) {
