@@ -29,11 +29,15 @@ function copySourceMap(startMark, endMark, element, namespace) {
 }
 
 function yamlToObject(node, annotations, context) {
-  return new context.namespace.elements.Object(node.value.map((nodes) => {
-    const key = convert(nodes[0], annotations, context);
-    const value = convert(nodes[1], annotations, context);
-    return new context.namespace.elements.Member(key, value);
-  }));
+  if (node.value) {
+    return new context.namespace.elements.Object(node.value.map((nodes) => {
+      const key = convert(nodes[0], annotations, context);
+      const value = convert(nodes[1], annotations, context);
+      return new context.namespace.elements.Member(key, value);
+    }));
+  }
+
+  return new context.namespace.elements.Object();
 }
 
 function yamlToArray(node, annotations, context) {

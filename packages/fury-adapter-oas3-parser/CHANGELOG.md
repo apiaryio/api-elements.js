@@ -1,5 +1,11 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fix handling of empty `!!set` and `!!map` in YAML parsing.
+
 ## 0.5.2 (19-02-19)
 
 ### Enhancements
