@@ -1,6 +1,6 @@
 # Fury API Blueprint Serializer
 
-## Master
+## 0.9.0 (2019-02-26)
 
 ### Enhancements
 
