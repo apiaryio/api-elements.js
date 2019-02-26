@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apib-parser",
-  "version": "0.13.0-beta",
+  "version": "0.13.0",
   "description": "API Blueprint parser for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",

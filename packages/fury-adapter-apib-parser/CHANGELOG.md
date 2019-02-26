@@ -1,6 +1,6 @@
 # Fury API Blueprint Parser Changelog
 
-## Master
+## 0.13.0 (2019-02-26)
 
 ### Enhancements
 
