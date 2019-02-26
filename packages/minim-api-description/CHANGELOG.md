@@ -1,10 +1,11 @@
 # Minim API Description
 
-## Master
+## 0.9.0 (26-02-19)
 
 ### Breaking
 
-- Node 4 is not supported anymore
+- Node 4 is no longer supported.
+- The package no longer contains a browser bundle of minim-api-description.
 
 ### Enhancements
 
