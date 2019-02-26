@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-oas3-parser",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Open API Specification 3 API Elements Parser",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -25,12 +25,12 @@
     "yaml-js": "^0.2.3"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.8"
+    "fury": "3.0.0-beta.9"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^5.9.0",
-    "fury": "3.0.0-beta.8",
+    "fury": "3.0.0-beta.9",
     "mocha": "^5.0.2"
   },
   "engines": {

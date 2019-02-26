@@ -1,5 +1,11 @@
 # Fury API Blueprint Parser Changelog
 
+## 0.13.0 (2019-02-26)
+
+### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 9](https://github.com/apiaryio/api-elements.js/releases/tag/fury-3.0.0-beta.9).
+
 ## 0.13.0-beta (2019-01-10)
 
 This update now uses drafter-npm 2.0.0-pre.1. Please see [drafter-npm

@@ -1,6 +1,10 @@
 # Fury OAS3 Parser Changelog
 
-## Master
+## 0.6.0 (26-02-19)
+
+### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 9](https://github.com/apiaryio/api-elements.js/releases/tag/fury-3.0.0-beta.9).
 
 ### Bug Fixes
 
