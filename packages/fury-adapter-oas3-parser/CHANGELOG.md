@@ -2,6 +2,10 @@
 
 ## Master
 
+### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 9](https://github.com/apiaryio/api-elements.js/releases/tag/fury-3.0.0-beta.9).
+
 ### Bug Fixes
 
 - Fix handling of empty `!!set` and `!!map` in YAML parsing.
