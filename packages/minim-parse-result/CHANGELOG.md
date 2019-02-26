@@ -1,10 +1,11 @@
 # Minim Parse Result
 
-## Master
+## 0.11.0 (26-02-19)
 
 ### Breaking
 
-- Node 4 is not supported anymore.
+- Node 4 is no longer supported.
+- The package no longer contains a browser bundle of minim-parse-result.
 
 ### Enhancements
 
