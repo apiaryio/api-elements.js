@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 3.0.0-beta.6 (2019-02-26)
 
 ### Enhancements
 
