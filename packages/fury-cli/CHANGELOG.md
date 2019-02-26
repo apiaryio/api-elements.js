@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 0.9.10 (2019-02-26)
 
 This update uses [Fury 3.0.0 Beta
 9](https://github.com/apiaryio/api-elements.js/releases/tag/fury-3.0.0-beta.9)
