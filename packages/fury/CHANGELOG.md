@@ -1,5 +1,13 @@
 # Fury Changelog
 
+## Master
+
+### Breaking
+
+- Fury will no longer catch exceptions thrown by an adapter during a
+  `parse`, or `serialize`.  
+  [#158](https://github.com/apiaryio/api-elements.js/issues/158)
+
 ## 3.0.0-beta.9 (2019-02-26)
 
 ### Breaking
