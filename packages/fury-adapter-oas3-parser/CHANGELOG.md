@@ -1,6 +1,6 @@
 # Fury OAS3 Parser Changelog
 
-## 0.6.0 (26-02-19)
+## 0.6.0 (2019-02-26)
 
 ### Enhancements
 
@@ -10,7 +10,7 @@
 
 - Fix handling of empty `!!set` and `!!map` in YAML parsing.
 
-## 0.5.2 (19-02-19)
+## 0.5.2 (2019-02-19)
 
 ### Enhancements
 
@@ -31,13 +31,13 @@
   coerce number status codes to a string and emit a warning when a status code
   is not a string.
 
-## 0.5.1 (30-01-19)
+## 0.5.1 (2019-01-30)
 
 ### Bug Fixes
 
 - Fixes support for schema objects which do not declare a type.
 
-## 0.5.0 (30-01-19)
+## 0.5.0 (2019-01-30)
 
 ### Enhancements
 
@@ -52,7 +52,7 @@
 - Fixed detection of YAML OpenAPI 3 documents where the OpenAPI version was not
   wrapped in quotes.
 
-## 0.4.1 (28-01-19)
+## 0.4.1 (2019-01-28)
 
 ### Enhancements
 
@@ -74,7 +74,7 @@
   parameter failing validation) will no longer cause a cryptic error that the
   referenced object was not defined.
 
-## 0.4.0 (25-01-19)
+## 0.4.0 (2019-01-25)
 
 ### Enhancements
 
