@@ -4,6 +4,7 @@ const R = require('ramda');
 
 const isArray = element => element.element === 'array';
 const isAnnotation = element => element.element === 'annotation';
+const isNotAnnotation = element => element.element !== 'annotation';
 const isMember = element => element.element === 'member';
 const isObject = element => element.element === 'object';
 const isParseResult = element => element.element === 'parseResult';
@@ -54,6 +55,7 @@ const getValue = member => member.value;
 module.exports = {
   isArray,
   isAnnotation,
+  isNotAnnotation,
   isMember,
   isObject,
   isParseResult,

@@ -78,7 +78,7 @@ const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKe
  * ParseResult only containing errors.
  *
  * If the transform callback returns a parse result without any non-annotation
- * elements then the member will be removed from the resultant object return int he parse result.
+ * elements then the member will be removed from the resultant object return in the parse result.
  *
  * Splits up each member from an object, invokes the given parseMember
  * transformation and then reconstructs a parse result containing all

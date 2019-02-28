@@ -9,6 +9,7 @@ const {
   isArray, isNull, isString, hasKey, hasValue, getValue,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
+const parseArray = require('../parseArray');
 const parseString = require('../parseString');
 const parseBoolean = require('../parseBoolean');
 const parseReference = require('../parseReference');
@@ -140,18 +141,9 @@ function parseSchema(context) {
   const parseSubSchema = element => parseReference('schemas', R.uncurryN(2, parseSchema), context, element, true);
   const parseProperties = parseObject(context, `${name}' 'properties`, R.compose(parseSubSchema, getValue));
 
-  const arrayElementToParseResult = array => new namespace.elements.ParseResult(array.content);
-  const parseArray = itemParser => pipeParseResult(namespace,
-    R.unless(isArray, createWarning(namespace, `'${name}' 'required' is not an array`)),
-    R.compose(
-      R.map(itemParser),
-      arrayElementToParseResult
-    ),
-    (...required) => new namespace.elements.Array([...required]));
-
   const parseRequiredString = R.unless(isString,
     createWarning(namespace, `'${name}' 'required' array value is not a string`));
-  const parseRequired = parseArray(parseRequiredString);
+  const parseRequired = parseArray(context, `${name}' 'required`, parseRequiredString);
 
   const parseMember = R.cond([
     [hasKey('type'), parseType],
