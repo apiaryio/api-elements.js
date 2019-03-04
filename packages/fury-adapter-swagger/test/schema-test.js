@@ -384,9 +384,9 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(ObjectElement);
 
-      expect(dataStructure.content.content[0].description.toValue()).to.equal('Name');
       const value = dataStructure.content.get('name');
       expect(value.element).to.equal('string');
+      expect(value.description.toValue()).to.equal('Name');
     });
 
     it('produces object members from required schema properties', () => {
