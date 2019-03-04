@@ -34,18 +34,11 @@ const indent = (input, spaces, options = { first: false }) => {
   * use a shorthand syntax in the template.
   */
 const bodyOnly = (payload) => {
-  let headers;
+  // Headers, excluding content-type as that goes outside payload
+  // (e.g. `+ Response (application/json)`)
+  const hasHeaders = payload.headers && payload.headers.exclude('Content-Type').length > 0;
 
-  // First, we need to filter out the content-type header. This is handled
-  // outside of the payload (e.g. `+ Response (application/json)`)
-  if (payload.headers) {
-    headers = payload.headers.exclude('Content-Type');
-  }
-
-  return payload.messageBody && !(
-    headers.length || payload.dataStructure || payload.messageBodySchema
-     || payload.children.filter(item => item.element === 'copy').length
-  );
+  return payload.content.length === 1 && payload.messageBody !== undefined && !hasHeaders;
 };
 
 /*
