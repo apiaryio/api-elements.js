@@ -5,6 +5,7 @@ const { DataStructureGenerator } = require('../lib/schema');
 const namespace = new Fury().minim;
 
 const {
+  Element,
   String: StringElement,
   Number: NumberElement,
   Boolean: BooleanElement,
@@ -942,5 +943,80 @@ describe('JSON Schema to Data Structure', () => {
     expect(dataStructure.element).to.equal('dataStructure');
     expect(dataStructure.content).to.be.instanceof(StringElement);
     expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['nullable']);
+  });
+
+  describe('referencing', () => {
+    it('produces element from reference', () => {
+      const schema = { $ref: '#/definitions/User' };
+
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+          },
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema, root);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(Element);
+      expect(dataStructure.content.element).to.equal('definitions/User');
+    });
+
+    it('produces element from object containing reference', () => {
+      const schema = {
+        type: 'object',
+        properties: {
+          user: { $ref: '#/definitions/User' },
+        },
+      };
+
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+          },
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema, root);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      const user = dataStructure.content.get('user');
+      expect(user.element).to.equal('definitions/User');
+    });
+
+    it('produces element from object containing reference to another element property', () => {
+      const schema = {
+        type: 'object',
+        properties: {
+          name: { $ref: '#/definitions/User/properties/name' },
+        },
+      };
+
+      const root = {
+        definitions: {
+          User: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              },
+            },
+          },
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema, root);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      const name = dataStructure.content.get('name');
+      expect(name).to.be.instanceof(StringElement);
+    });
   });
 });

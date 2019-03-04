@@ -1,5 +1,12 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Supports data structure generation for references for a value inside another
+  definition. For example a reference to `#/definitions/User/properties/name`.
+
 ## 0.24.0 (2019-02-26)
 
 ### Enhancements

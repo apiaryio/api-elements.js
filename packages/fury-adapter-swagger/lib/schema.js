@@ -253,7 +253,18 @@ class DataStructureGenerator {
     if (schema.$ref) {
       // element = new RefElement(idForDataStructure(schema.$ref));
       element = new this.minim.elements.Element();
-      element.element = idForDataStructure(schema.$ref);
+
+      try {
+        element.element = idForDataStructure(schema.$ref);
+      } catch (error) {
+        // Cannot find ID for reference, let's attempt to dereference the value
+        // and provide element dereferenced.
+        // This may be because we cannot express a reference in API Elements,
+        // for example a reference to `#/definitions/User/properties/name`
+        const ref = lookupReference(schema.$ref, this.root);
+        return this.generateElement(ref.referenced);
+      }
+
       return element;
     } if (schema.enum) {
       element = this.generateEnum(schema);
