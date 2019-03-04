@@ -74,7 +74,7 @@ describe('#parseArray', () => {
     expect(parseResult.warnings.get(1).toValue()).to.equal('Hello warning');
   });
 
-  it('discards any members when the transform returns a parse result which includes an error', () => {
+  it('discards any values when the transform returns a parse result which includes an error', () => {
     const parseValue = (value) => {
       const warning = new namespace.elements.Annotation(
         `${value.toValue()} error`,
@@ -89,7 +89,7 @@ describe('#parseArray', () => {
     expect(parseResult.errors.get(1).toValue()).to.equal('Hello error');
   });
 
-  it('discards any members when the transform returns a parse result which includes a warning and no value', () => {
+  it('discards any values when the transform returns a parse result which includes a warning and no value', () => {
     const parseValue = (value) => {
       const warning = new namespace.elements.Annotation(
         `${value.toValue()} warning`,

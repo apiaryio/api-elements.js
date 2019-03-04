@@ -1,6 +1,6 @@
 const R = require('ramda');
 const {
-  isAnnotation, isNotAnnotation, isParseResult, isArray,
+  isAnnotation, isParseResult, isArray,
 } = require('../predicates');
 const { createWarning } = require('./annotations');
 const pipeParseResult = require('../pipeParseResult');
@@ -23,10 +23,10 @@ const chainParseResult = R.curry((transform, parseResult) => {
 });
 
 /**
- * A callback for transforming a member element
+ * A callback for transforming an element
  *
- * @callback transformMember
- * @param member {MemberElement}
+ * @callback transformValue
+ * @param element {Element}
  * @returns {Element} Either a ParseResult to be unwrapped, or an element
  */
 
@@ -52,8 +52,10 @@ const chainParseResult = R.curry((transform, parseResult) => {
  * |       > value > parseValue(value) >                    |
  * |------->------->------------------->--------------------|
  *
- * @param namespace
+ * @param context
  * @param name {string} - The human readable name of the element. Used for annotation messages.
+ * @param transform {transformValue} - The callback to transform an element
+ * @param array {ArrayElement} - The array containing values to transform
  *
  * @returns {ParseResult<ArrayElement>}
  */
@@ -70,10 +72,10 @@ function parseArray(context, name, parseValue) {
   /**
    * Converts the given parse result of values into parse result of an array
    * @param parseResult {ParseResult<Element>}
-   * @returns ParseResult<Array>
+   * @returns {ParseResult<Array>}
    */
   const convertParseResultMembersToArray = (parseResult) => {
-    const values = R.filter(isNotAnnotation, parseResult);
+    const values = R.reject(isAnnotation, parseResult);
     const annotations = R.filter(isAnnotation, parseResult);
     const array = new namespace.elements.Array(values);
     return new namespace.elements.ParseResult([array].concat(annotations.elements));
