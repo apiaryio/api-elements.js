@@ -1,5 +1,12 @@
 # Fury API Blueprint Serializer
 
+## Master
+
+### Bug Fixes
+
+- Fixes an issue where the serialiser would raise an exception when dealing
+  with message body payloads which do not contain headers.
+
 ## 0.9.0 (2019-02-26)
 
 ### Enhancements
