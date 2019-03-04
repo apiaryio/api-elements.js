@@ -78,7 +78,7 @@ const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKe
  * ParseResult only containing errors.
  *
  * If the transform callback returns a parse result without any non-annotation
- * elements then the member will be removed from the resultant object return int he parse result.
+ * elements then the member will be removed from the resultant object return in the parse result.
  *
  * Splits up each member from an object, invokes the given parseMember
  * transformation and then reconstructs a parse result containing all
@@ -90,7 +90,7 @@ const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKe
  * |        > member > parseMember(member) >                     |
  * |-------->-------->--------------------->---------------------|
  *
- * @param namespace
+ * @param context
  * @param name {string} - The human readable name of the element. Used for annotation messages.
  * @param transform {transformMember} - The callback to transform a member
  * @param requiredKeys {string[]} - The callback to transform a member
@@ -123,7 +123,7 @@ function parseObject(context, name, parseMember, requiredKeys = [], sendWarning 
   /**
    * Converts the given parse result of members into parse result of an object
    * @param parseResult {ParseResult<Member>}
-   * @returns ParseResult<Object>
+   * @returns {ParseResult<Object>}
    */
   const convertParseResultMembersToObject = (parseResult) => {
     const members = R.filter(isMember, parseResult);

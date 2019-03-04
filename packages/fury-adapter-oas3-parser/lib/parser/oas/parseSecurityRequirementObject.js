@@ -1,14 +1,11 @@
 const R = require('ramda');
-const {
-  isArray,
-} = require('../../predicates');
+const { isString } = require('../../predicates');
 const { createWarning } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
+const parseArray = require('../parseArray');
 
 const name = 'Security Requirement Object';
-
-const isArrayValue = member => isArray(member.value);
 
 /**
  * Parse Security Requirement Object
@@ -22,15 +19,21 @@ const isArrayValue = member => isArray(member.value);
 function parseSecurityRequirementObject(context, object) {
   const { namespace } = context;
 
-  const createNonArrayWarning = member => createWarning(namespace,
-    `'${name}' '${member.key.toValue()}' is not an array`, member.value);
+  const parseScopes = (member) => {
+    const key = member.key.toValue();
 
-  const parseValue = pipeParseResult(namespace,
-    R.unless(isArrayValue, createNonArrayWarning),
-    member => member);
+    const createScopeNotStringWarning = createWarning(namespace,
+      `'${name}' '${key}' array value is not a string`);
+
+    const parseScope = pipeParseResult(namespace,
+      R.unless(isString, createScopeNotStringWarning),
+      value => value);
+
+    return parseArray(context, `${name}' '${key}`, parseScope)(member.value);
+  };
 
   const parseMember = R.cond([
-    [R.T, parseValue],
+    [R.T, parseScopes],
   ]);
 
   const parseSecurityRequirement = pipeParseResult(namespace,
