@@ -7,6 +7,9 @@
 - Supports data structure generation for references for a value inside another
   definition. For example a reference to `#/definitions/User/properties/name`.
 
+- Removes duplicate description values placed on members for data structure
+  properties.
+
 ## 0.24.0 (2019-02-26)
 
 ### Enhancements

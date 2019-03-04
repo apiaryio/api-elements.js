@@ -43,11 +43,6 @@ class DataStructureGenerator {
     const member = new MemberElement();
     member.key = new StringElement(name);
     member.value = this.generateElement(property);
-
-    if (property.description) {
-      member.description = property.description;
-    }
-
     return member;
   }
 

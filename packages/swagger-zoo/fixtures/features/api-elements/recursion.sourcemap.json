@@ -620,12 +620,6 @@
                   },
                   {
                     "element": "member",
-                    "meta": {
-                      "description": {
-                        "element": "string",
-                        "content": "A list of categories"
-                      }
-                    },
                     "attributes": {
                       "typeAttributes": {
                         "element": "array",
