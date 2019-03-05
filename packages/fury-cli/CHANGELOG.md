@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.11 (2019-03-05)
+
+This update incorporates changes from Fury Adapters:
+
+- fury-adapter-swagger 0.24.1
+- fury-adapter-apib-serializer 0.9.1
+
 ## 0.9.10 (2019-02-26)
 
 This update uses [Fury 3.0.0 Beta
