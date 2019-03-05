@@ -21,6 +21,7 @@ const unsupportedKeys = ['termsOfService', 'contact', 'license'];
  * @param member {MemberElement}
  * @returns {boolean}
  * @see unsupportedKeys
+ * @private
  */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -28,6 +29,7 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * Parse the OpenAPI 'Info Object' (`#/info`)
  * @see https://github.com/OAI/OpenAPI-Specification/blob/50c152549263cda0f05608d514ba78546b390d0e/versions/3.0.0.md#infoObject
  * @returns ParseResult<Category>
+ * @private
  */
 function parseInfo(context, info) {
   const { namespace } = context;

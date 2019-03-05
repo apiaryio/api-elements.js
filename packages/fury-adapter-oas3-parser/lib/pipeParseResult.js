@@ -5,6 +5,7 @@ const { isAnnotation, isParseResult } = require('./predicates');
  * Returns true iff the parse result does not contain errors
  * @param parseResult {ParseResult}
  * @returns boolean
+ * @private
  */
 const hasNoErrors = parseResult => parseResult.errors.isEmpty;
 
@@ -12,6 +13,7 @@ const hasNoErrors = parseResult => parseResult.errors.isEmpty;
  * Returns true iff the parse result contains non-annotation values
  * @param parseResult {ParseResult}
  * @returns boolean
+ * @private
  */
 const hasValue = parseResult => !R.reject(isAnnotation, parseResult).isEmpty;
 
@@ -27,6 +29,7 @@ const hasNoErrorsAndHasValue = R.allPass([hasNoErrors, hasValue]);
  * @param lhs {Element[]}
  * @param rhs {Element[]}
  * @returns {ParseResult}
+ * @private
  */
 function concatParseResult(namespace, lhs, rhs) {
   return new namespace.elements.ParseResult(lhs.concat(rhs));
@@ -47,6 +50,7 @@ function concatParseResult(namespace, lhs, rhs) {
  * @param {...Function} functions
  * @return {Function}
  * @see R.pipe
+ * @private
  */
 function pipeParseResult(namespace, ...functions) {
   // Return a closure that takes the element to pipe

@@ -37,6 +37,7 @@ const parseMapMember = R.curry((context, parser, member) => {
  * @param member {Member}
  *
  * @returns ParseResult
+ * @private
  */
 const parseMap = (context, name, key, valueParser) => pipeParseResult(context.namespace,
   validateMapValueIsObject(context.namespace, name, key),

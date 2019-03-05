@@ -53,6 +53,7 @@ const parseSchema = parseReference('schemas', parseSchemaObject);
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/50c152549263cda0f05608d514ba78546b390d0e/versions/3.0.0.md#media-type-object
+ * @private
  */
 function parseMediaTypeObject(context, MessageBodyClass, element) {
   const { namespace } = context;

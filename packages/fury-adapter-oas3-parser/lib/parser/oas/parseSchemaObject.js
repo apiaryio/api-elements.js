@@ -228,6 +228,7 @@ function parseSchema(context) {
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject
+ * @private
  */
 function parseSchemaObject(context, element) {
   const DataStructure = R.constructN(1, context.namespace.elements.DataStructure);

@@ -15,6 +15,7 @@ const createCopy = R.curry((namespace, element) => {
  * @pram required {boolean} - Whether the member is required, indicates if we return a warning or an error
  * @pram member {MemberElement}
  * @returns {ParseResult<MemberElement<Copy>>}
+ * @private
  */
 function parseCopy(context, name, required, member) {
   const parseResult = parseString(context, name, required, member);

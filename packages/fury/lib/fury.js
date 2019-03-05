@@ -19,14 +19,67 @@ const findAdapter = (adapters, mediaType, method) => {
   return null;
 };
 
+/**
+ * @interface FuryAdapter
+ *
+ * @property name {string}
+ * @property mediaTypes {string[]}
+ */
+
+/**
+ * @function detect
+ *
+ * @param source {string}
+ * @returns {boolean}
+ *
+ * @memberof FuryAdapter
+ */
+
+/**
+ * @function validate
+ *
+ * @param {Object} options
+ * @param {string} options.source
+ * @param {Namespace} options.minim
+ * @param {ParseCallback} callback
+ *
+ * @memberof FuryAdapter
+ */
+
+/**
+ * @function parse
+ *
+ * @param {Object} options
+ * @param {string} options.source
+ * @param {Namespace} options.minim
+ * @param {ParseCallback} callback
+ *
+ * @memberof FuryAdapter
+ */
+
+/**
+ * @function serialize
+ *
+ * @param {Object} options
+ * @param {Category} options.api
+ * @param {Namespace} options.minim
+ * @param {SerializeCallback} callback
+ *
+ * @memberof FuryAdapter
+ */
+
+/**
+ */
 class Fury {
   constructor() {
     this.minim = minim;
     this.adapters = [];
   }
 
-  /*
+  /**
    * Register to use an adapter with this Fury instance.
+   *
+   * @param {FuryAdapter}
    */
   use(adapter) {
     this.adapters.push(adapter);
@@ -40,7 +93,13 @@ class Fury {
     return this.minim.fromRefract(elements);
   }
 
-  // Returns an array of adapters which can handle the given API Description Source
+  /**
+   * Returns an array of adapters which can handle the given API Description Source
+   *
+   * @param source {string}
+   *
+   * @return {FuryAdapter}
+   */
   detect(source) {
     return this.adapters.filter(adapter => adapter.detect && adapter.detect(source));
   }
@@ -53,6 +112,22 @@ class Fury {
     return this.detect(source).filter(adapter => adapter[method])[0];
   }
 
+  /**
+   * @callback ParseCallback
+   *
+   * @param {Error} error
+   * @param {ParseResult} parseResult
+   */
+
+  /**
+   * Validate an API Description Document
+   *
+   * @param {Object} options
+   * @param {string} options.source
+   * @param {string} [options.mediaType]
+   * @param {Object} [options.adapterOptions]
+   * @param callback {ParseCallback}
+   */
   validate({ source, mediaType, adapterOptions }, done) {
     const adapter = this.findAdapter(source, mediaType, 'validate');
 
@@ -90,11 +165,18 @@ class Fury {
     });
   }
 
-  /*
-   * Parse an input document into Javascript objects. This method uses
-   * the registered adapters to automatically detect the input format,
-   * then uses the adapter to convert into refract elements and loads
-   * these into objects.
+  /**
+   * Parse an API Description Document
+   *
+   * This method uses the registered adapters to automatically detect the
+   * input format, then uses the adapter to convert into refract elements
+   * and loads these into objects.
+   *
+   * @param {Object} options
+   * @param {string} options.source
+   * @param {string} [options.mediaType]
+   * @param {Object} [options.adapterOptions]
+   * @param callback {ParseCallback}
    */
   parse({
     source, mediaType, generateSourceMap = false, adapterOptions,
@@ -128,8 +210,20 @@ class Fury {
     }
   }
 
-  /*
-   * Serialize a parsed API into the given output format.
+  /**
+   * @callback SerializeCallback
+   *
+   * @param {Error} error
+   * @param {string} source
+   */
+
+  /**
+   * Serialize an API Description into the given output format.
+   *
+   * @param {Object} options
+   * @param {Category} options.api
+   * @param {string} [options.mediaType]
+   * @param callback {SerializeCallback}
    */
   serialize({ api, mediaType = 'text/vnd.apiblueprint' }, done) {
     const adapter = findAdapter(this.adapters, mediaType, 'serialize');

@@ -24,6 +24,7 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * For example `/{resource}` would return `['resource']`
  * @param path {string}
  * @return array
+ * @private
  */
 function extractPathVariables(path) {
   const matches = path.match(/({.*?})/gm);
@@ -45,6 +46,7 @@ function createErrorForMissingPathVariable(namespace, path, variable) {
  * @param path {StringElement}
  * @param hrefVariables {HrefVariables}
  * @retuns ParseResult<HrefVariables>
+ * @private
  */
 const validateHrefVariablesInPath = R.curry((namespace, path, hrefVariables) => {
   const pathVariables = extractPathVariables(path.toValue());
@@ -65,6 +67,7 @@ const validateHrefVariablesInPath = R.curry((namespace, path, hrefVariables) => 
  * @param namespace
  * @param path {StringElement}
  * @param member {MemberElement} parameters member from an object element
+ * @private
  */
 function parseParameters(context, path, member) {
   const { namespace } = context;
@@ -114,6 +117,7 @@ function hrefFromParameters(path, parameters) {
  * Parse Path Item Object
  * @returns Resource
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#path-item-object
+ * @private
  */
 function parsePathItemObject(context, member) {
   const { namespace } = context;

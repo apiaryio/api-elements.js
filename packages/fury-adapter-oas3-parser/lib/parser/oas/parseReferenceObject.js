@@ -23,6 +23,7 @@ const requiredKeys = ['$ref'];
  * element was not successfully parsed, an empty parse result.
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#referenceObject
+ * @private
  */
 function parseReferenceObject(context, componentName, element, returnReferenceElement) {
   const { namespace } = context;

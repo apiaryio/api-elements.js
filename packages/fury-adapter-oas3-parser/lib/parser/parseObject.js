@@ -9,6 +9,7 @@ const pipeParseResult = require('../pipeParseResult');
  * Returns true iff the given element is either an annotation or member element
  * @param element {Element}
  * @returns {boolean}
+ * @private
  */
 const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
 
@@ -16,6 +17,7 @@ const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
  * Transform every non-annotation element in the parse result and then flatten all of the results into a parse result
  * @param transform {function}
  * @param parseResult {ParseResult}
+ * @private
  */
 const chainParseResult = R.curry((transform, parseResult) => {
   const result = R.chain(transform, parseResult);
@@ -66,6 +68,7 @@ const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKe
  * @callback transformMember
  * @param member {MemberElement}
  * @returns {Element} Either a ParseResult to be unwrapped, or an element
+ * @private
  */
 
 /**
@@ -98,6 +101,7 @@ const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKe
  * @param object {ObjectElement} - The object containing members to transform
  *
  * @returns {ParseResult<ObjectElement>}
+ * @private
  */
 function parseObject(context, name, parseMember, requiredKeys = [], sendWarning = false) {
   const { namespace } = context;
@@ -124,6 +128,7 @@ function parseObject(context, name, parseMember, requiredKeys = [], sendWarning 
    * Converts the given parse result of members into parse result of an object
    * @param parseResult {ParseResult<Member>}
    * @returns {ParseResult<Object>}
+   * @private
    */
   const convertParseResultMembersToObject = (parseResult) => {
     const members = R.filter(isMember, parseResult);

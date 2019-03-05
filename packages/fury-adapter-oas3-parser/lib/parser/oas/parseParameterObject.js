@@ -61,6 +61,7 @@ function validateRequiredForPathParameter(context, object, parameter) {
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject
+ * @private
  */
 function parseParameterObject(context, object) {
   const { namespace } = context;

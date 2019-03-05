@@ -81,6 +81,7 @@ function validateHttpScheme(context, securityScheme) {
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#securitySchemeObject
+ * @private
  */
 function parseSecuritySchemeObject(context, object) {
   const { namespace } = context;

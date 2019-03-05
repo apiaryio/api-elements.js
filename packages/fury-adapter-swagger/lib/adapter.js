@@ -21,6 +21,9 @@ const parse = (options, done) => {
   parser.parse(done);
 };
 
+/**
+ * @implements {FuryAdapter}
+ */
 module.exports = {
   name, mediaTypes, detect, parse,
 };

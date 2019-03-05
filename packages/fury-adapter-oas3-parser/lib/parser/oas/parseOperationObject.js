@@ -87,6 +87,7 @@ function hrefFromParameters(path, queryParameters) {
  * @returns ParseResult<Transition>
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject
+ * @private
  */
 function parseOperationObject(context, path, member) {
   const { namespace } = context;

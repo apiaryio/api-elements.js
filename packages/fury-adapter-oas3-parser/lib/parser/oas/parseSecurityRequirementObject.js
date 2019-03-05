@@ -15,6 +15,7 @@ const name = 'Security Requirement Object';
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#securityRequirementObject
+ * @private
  */
 function parseSecurityRequirementObject(context, object) {
   const { namespace } = context;

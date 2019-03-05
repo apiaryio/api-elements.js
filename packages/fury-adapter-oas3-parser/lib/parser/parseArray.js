@@ -11,6 +11,7 @@ const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
  * Transform every non-annotation element in the parse result and then flatten all of the results into a parse result
  * @param transform {function}
  * @param parseResult {ParseResult}
+ * @private
  */
 const chainParseResult = R.curry((transform, parseResult) => {
   const result = R.chain(transform, parseResult);
@@ -28,6 +29,7 @@ const chainParseResult = R.curry((transform, parseResult) => {
  * @callback transformValue
  * @param element {Element}
  * @returns {Element} Either a ParseResult to be unwrapped, or an element
+ * @private
  */
 
 /**
@@ -58,6 +60,7 @@ const chainParseResult = R.curry((transform, parseResult) => {
  * @param array {ArrayElement} - The array containing values to transform
  *
  * @returns {ParseResult<ArrayElement>}
+ * @private
  */
 function parseArray(context, name, parseValue) {
   const { namespace } = context;
@@ -73,6 +76,7 @@ function parseArray(context, name, parseValue) {
    * Converts the given parse result of values into parse result of an array
    * @param parseResult {ParseResult<Element>}
    * @returns {ParseResult<Array>}
+   * @private
    */
   const convertParseResultMembersToArray = (parseResult) => {
     const values = R.reject(isAnnotation, parseResult);
