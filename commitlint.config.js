@@ -9,6 +9,7 @@ module.exports = {
       'oas2',
       'apib',
       'apiaryb',
+      'remote',
     ]],
     'scope-empty': [2, 'never'],
   },
