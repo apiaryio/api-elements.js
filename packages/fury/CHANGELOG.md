@@ -8,6 +8,10 @@
   `parse`, or `serialize`.  
   [#158](https://github.com/apiaryio/api-elements.js/issues/158)
 
+### Enhancement
+
+- Fury now pass into operations parse(), validate(), serialize() mediaType as one of adapter options
+
 ## 3.0.0-beta.9 (2019-02-26)
 
 ### Breaking

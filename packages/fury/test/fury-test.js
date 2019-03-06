@@ -312,6 +312,42 @@ describe('Fury class', () => {
       assert.equal(localFury.detect('none').length, 0);
     });
   });
+
+  describe('pass mediaType into adapter operations', () => {
+    const fury = new Fury();
+
+    function test(first) {
+      return function impl(second) { assert.equal(first, second); };
+    }
+
+    before(() => {
+      fury.use({
+        name: 'AssertionAdapter',
+        mediaTypes: ['text/vnd.parse', 'text/vnd.validate', 'text/vnd.serialize'],
+        parse({ mediaType }, test) {
+          test(mediaType);
+        },
+        validate({ mediaType }, test) {
+          test(mediaType);
+        },
+        serialize({ mediaType }, test) {
+          test(mediaType);
+        },
+      });
+    });
+
+    it('into parse', () => {
+      fury.parse({ mediaType: 'text/vnd.parse' }, test('text/vnd.parse'));
+    });
+
+    it('into validate', () => {
+      fury.parse({ mediaType: 'text/vnd.validate' }, test('text/vnd.validate'));
+    });
+
+    it('into serialize', () => {
+      fury.parse({ mediaType: 'text/vnd.serialize' }, test('text/vnd.serialize'));
+    });
+  });
 });
 
 describe('Parser', () => {
