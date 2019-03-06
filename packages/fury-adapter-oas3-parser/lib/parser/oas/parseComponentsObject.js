@@ -28,6 +28,7 @@ const valueIsObject = R.compose(isObject, getValue);
  *
  * @param parseResult {ParseResult}
  * @returns boolean
+ * @private
  */
 const isParseResultEmpty = parseResult => R.reject(isAnnotation, parseResult).isEmpty;
 
@@ -48,6 +49,7 @@ const isParseResultEmpty = parseResult => R.reject(isAnnotation, parseResult).is
  *   the reusable component
  *
  * @returns ParseResult
+ * @private
  */
 const parseComponentMember = R.curry((context, parser, member) => {
   // Create a Member Element with `member.key` as the key
@@ -77,6 +79,7 @@ const parseComponentMember = R.curry((context, parser, member) => {
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject
+ * @private
  */
 function parseComponentsObject(context, element) {
   const { namespace } = context;
@@ -106,6 +109,7 @@ function parseComponentsObject(context, element) {
    * @param member {Member}
    *
    * @returns ParseResult
+   * @private
    */
   const parseComponentObjectMember = (parser) => {
     const parseMember = parseComponentMember(context, parser);

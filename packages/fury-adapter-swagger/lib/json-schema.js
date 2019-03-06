@@ -36,6 +36,8 @@ const parseReference = (reference) => {
  * @param reference {string} - Example: #/definitions/User/properties/name
  * @param root {object} - The object to resolve the given reference
  * @param depth {number} - A limit to resolving the depth
+ *
+ * @private
  */
 const lookupReference = (reference, root, depth) => {
   const parts = reference.split('/').reverse();
@@ -210,7 +212,10 @@ const convertSubSchema = (schema, references, swagger) => {
   return actualSchema;
 };
 
-/** Returns true if the given schema contains any references
+/**
+ * Returns true if the given schema contains any references
+ *
+ * @private
  */
 const checkSchemaHasReferences = (schema) => {
   if (!schema) {
@@ -234,8 +239,10 @@ const checkSchemaHasReferences = (schema) => {
   });
 };
 
-/** Traverses the entire schema to find all of the references
+/**
+ * Traverses the entire schema to find all of the references
  * @returns array of each reference that is found in the schema
+ * @private
  */
 const findReferences = (schema) => {
   if (schema.$ref) {
@@ -295,11 +302,13 @@ const findReferences = (schema) => {
   return references;
 };
 
-/** Convert Swagger schema to JSON Schema
+/**
+ * Convert Swagger schema to JSON Schema
  * @param schema - The Swagger schema to convert
  * @param root - The document root (this contains the JSON schema definitions)
  * @param swagger - The swagger document root (this contains the Swagger schema definitions)
  * @param copyDefinitins - Whether to copy the referenced definitions to the resulted schema
+ * @private
  */
 const convertSchema = (schema, root, swagger, copyDefinitions = true) => {
   let references = [];

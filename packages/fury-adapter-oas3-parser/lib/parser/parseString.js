@@ -9,6 +9,7 @@ const {
  * Returns true iff the given member elements value is a string
  * @param member {MemberElement}
  * @returns {boolean}
+ * @private
  */
 const isValueString = R.compose(isString, getValue);
 
@@ -18,6 +19,7 @@ const isValueString = R.compose(isString, getValue);
  * @param member {MemberElement}
  *
  * @returns {ParseResult<MemberElement<StringElement>>}
+ * @private
  */
 const parseOptionalString = (namespace, name, member) => new namespace.elements.ParseResult([
   R.unless(
@@ -33,6 +35,7 @@ const parseOptionalString = (namespace, name, member) => new namespace.elements.
  * @param member {MemberElement}
  *
  * @returns {ParseResult<MemberElement<StringElement>>}
+ * @private
  */
 const parseRequiredString = (namespace, name, member) => new namespace.elements.ParseResult([
   R.unless(
@@ -49,6 +52,7 @@ const parseRequiredString = (namespace, name, member) => new namespace.elements.
  * @pram required {boolean} - Whether the member is required, indicates if we return a warning or an error
  * @pram member {MemberElement}
  * @returns {ParseResult<MemberElement<StringElement>>}
+ * @private
  */
 function parseString(context, name, required, member) {
   const { namespace } = context;

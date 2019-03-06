@@ -1,6 +1,9 @@
 const R = require('ramda');
 
-/** @module predicates */
+/**
+ * @module predicates
+ * @private
+ */
 
 const isArray = element => element.element === 'array';
 const isAnnotation = element => element.element === 'annotation';
@@ -19,6 +22,7 @@ const isDataStructure = element => element.element === 'dataStructure';
  * @param key {string}
  * @param member {MemberElement}
  * @returns {boolean}
+ * @private
  */
 const hasKey = (key, member) => member.key.toValue() === key;
 
@@ -27,6 +31,7 @@ const hasKey = (key, member) => member.key.toValue() === key;
  * @param value {string}
  * @param member {MemberElement}
  * @returns {boolean}
+ * @private
  */
 const hasValue = (value, member) => member.value.toValue() === value;
 
@@ -34,6 +39,7 @@ const hasValue = (value, member) => member.value.toValue() === value;
  * Returns whether the given member element is a an OpenAPI extension.
  * @param member {MemberElement}
  * @returns {boolean}
+ * @private
  */
 const isExtension = member => member.key && isString(member.key) && member.key.toValue().startsWith('x-');
 
@@ -41,6 +47,7 @@ const isExtension = member => member.key && isString(member.key) && member.key.t
  * Returns the key for the given member element
  * @param member {MemberElement}
  * @returns {Element}
+ * @private
  */
 const getKey = member => member.key;
 
@@ -48,6 +55,7 @@ const getKey = member => member.key;
  * Returns the value for the given member element
  * @param member {MemberElement}
  * @returns {Element}
+ * @private
  */
 const getValue = member => member.value;
 

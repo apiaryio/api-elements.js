@@ -33,6 +33,7 @@ const isKeyString = R.compose(isString, getKey);
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responsesObject
+ * @private
  */
 function parseResponsesObject(context, element) {
   const { namespace } = context;

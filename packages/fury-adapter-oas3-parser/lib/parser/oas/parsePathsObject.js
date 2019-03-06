@@ -13,6 +13,7 @@ const isPathField = member => member.key.toValue().startsWith('/');
  * Parse Paths Object
  * @returns ParseResult<Resource>
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject
+ * @private
  */
 function parsePaths(context, paths) {
   const { namespace } = context;

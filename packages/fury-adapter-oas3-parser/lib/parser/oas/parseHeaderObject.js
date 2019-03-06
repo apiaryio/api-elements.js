@@ -21,6 +21,7 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
  * @returns ParseResult
  *
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#headerObject
+ * @private
  */
 function parseHeaderObject(context, object) {
   const { namespace } = context;

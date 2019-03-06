@@ -25,6 +25,7 @@ const unsupportedKeys = ['servers', 'security', 'tags', 'externalDocs'];
  * @param member {MemberElement}
  * @returns {boolean}
  * @see unsupportedKeys
+ * @private
  */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 

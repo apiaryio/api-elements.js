@@ -20,6 +20,7 @@ const isPathOrQuery = R.anyPass([hasKey('path'), hasKey('query')]);
  * @return {ParseResult<ObjectElement>} An object containing parameters grouped
  *   by their `in` value (`path`, `query` etc) as members. The object can
  *   be treated as a "named tuple".
+ * @private
  */
 function parseParameterObjects(context, name, array) {
   const { namespace } = context;
