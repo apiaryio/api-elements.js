@@ -129,7 +129,7 @@ export function detect(source) {
   return source.match(/some-test/i) !== null;
 }
 
-export function parse({minim, generateSourceMap, source}, done) {
+export function parse({minim, generateSourceMap, mediaType, source}, done) {
   // Here you convert the source into refract elements. Use the `minim`
   // variable to access refract element classes.
   const Resource = minim.getElementByClass('resource');
@@ -137,7 +137,7 @@ export function parse({minim, generateSourceMap, source}, done) {
   done(null, elements);
 }
 
-export function validate({minim, source}, done) {
+export function validate({minim, mediaType, source}, done) {
   // Here you validate the source and return a parse result for any warnings or
   // errors.
   //
@@ -146,7 +146,7 @@ export function validate({minim, source}, done) {
   done(null, null);
 }
 
-export function serialize({api, minim}, done) {
+export function serialize({api, mediaType, minim}, done) {
   // Here you convert `api` from javascript element objects to the serialized
   // source format.
   // ...
