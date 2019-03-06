@@ -3,6 +3,7 @@ module.exports = {
   rules: {
     'scope-enum': [2, 'always', [
       'project',
+      'core',
       'cli',
       'oas3',
       'oas2',

@@ -105,27 +105,23 @@ class Fury {
       return done(new Error('Document did not match any registered parsers!'));
     }
 
-    try {
-      let options = { generateSourceMap, minim: this.minim, source };
+    let options = { generateSourceMap, minim: this.minim, source };
 
-      if (adapterOptions) {
-        options = Object.assign(options, adapterOptions);
+    if (adapterOptions) {
+      options = Object.assign(options, adapterOptions);
+    }
+
+    return adapter.parse(options, (err, parseResult) => {
+      if (err) {
+        return done(err);
       }
 
-      return adapter.parse(options, (err, parseResult) => {
-        if (err) {
-          return done(err);
-        }
+      if (!(parseResult instanceof this.minim.Element)) {
+        return done(null, this.load(parseResult));
+      }
 
-        if (!(parseResult instanceof this.minim.Element)) {
-          return done(null, this.load(parseResult));
-        }
-
-        return done(null, parseResult);
-      });
-    } catch (err) {
-      return done(err);
-    }
+      return done(null, parseResult);
+    });
   }
 
   /*
@@ -135,14 +131,10 @@ class Fury {
     const adapter = findAdapter(this.adapters, mediaType, 'serialize');
 
     if (adapter) {
-      try {
-        return adapter.serialize({ api, minim: this.minim }, done);
-      } catch (err) {
-        return done(err);
-      }
-    } else {
-      return done(new Error('Media type did not match any registered serializer!'));
+      return adapter.serialize({ api, minim: this.minim }, done);
     }
+
+    return done(new Error('Media type did not match any registered serializer!'));
   }
 }
 

@@ -381,18 +381,6 @@ describe('Parser', () => {
       });
     });
 
-    it('should error on parser exception', (done) => {
-      const expected = new Error();
-      fury.adapters[fury.adapters.length - 1].parse = () => {
-        throw expected;
-      };
-
-      fury.parse({ source: 'dummy' }, (err) => {
-        assert.equal(err, expected);
-        done();
-      });
-    });
-
     it('should error on parser error', (done) => {
       const expectedError = new Error();
       fury.adapters[fury.adapters.length - 1].parse = (options, done2) => {
@@ -410,18 +398,6 @@ describe('Parser', () => {
       fury.adapters[fury.adapters.length - 1].parse = undefined;
       fury.parse({ source: 'dummy' }, (err) => {
         assert.instanceOf(err, Error);
-        done();
-      });
-    });
-
-    it('should error on serializer exception', (done) => {
-      const expected = new Error();
-      fury.adapters[fury.adapters.length - 1].serialize = () => {
-        throw expected;
-      };
-
-      fury.serialize({ api: 'dummy', mediaType: 'text/vnd.passthrough' }, (err) => {
-        assert.equal(err, expected);
         done();
       });
     });
