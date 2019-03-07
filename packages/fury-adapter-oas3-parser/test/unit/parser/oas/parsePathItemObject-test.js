@@ -6,7 +6,7 @@ const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
-describe('#parsePathItemObject', () => {
+describe('Path Item Object', () => {
   let context;
   beforeEach(() => {
     context = new Context(namespace);
