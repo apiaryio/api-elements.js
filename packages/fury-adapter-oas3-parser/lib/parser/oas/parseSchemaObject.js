@@ -58,6 +58,19 @@ function constructObjectStructure(namespace, schema) {
     });
   }
 
+  const sampleObject = {};
+
+  schema.get('properties').keys().forEach((key) => {
+    const member = element.getMember(key);
+    const example = member.value.attributes.get('samples')
+    if (member && example) {
+      sampleObject[key] = example.toValue()[0];
+    }
+  });
+
+  element.attributes.set('samples', [sampleObject]);
+  element.example = sampleObject;
+
   return element;
 }
 
@@ -68,6 +81,13 @@ function constructArrayStructure(namespace, schema) {
   if (items) {
     element.attributes.set('typeAttributes', ['fixedType']);
     element.push(items);
+
+    const sampleArray = [];
+    if (items.attributes && items.attributes.get('samples')) {
+      sampleArray.push(items.attributes.get('samples').toValue());
+    }
+
+    element.attributes.set('samples', sampleArray);
   }
 
   return element;

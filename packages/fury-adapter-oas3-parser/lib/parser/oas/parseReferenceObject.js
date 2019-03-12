@@ -58,9 +58,19 @@ function parseReferenceObject(context, componentName, element, returnReferenceEl
       return createError(namespace, `'${ref.toValue()}' is not defined`, ref);
     }
 
+    const derefComponent = component
+      .filter((value, key) => key.toValue() === componentId && value)
+
     if (returnReferenceElement) {
       const element = new context.namespace.elements.Element();
       element.element = componentId;
+      if (derefComponent) {
+        derefComponent.forEach(component => {
+          if (component.newAttributes) {
+            element.attributes = component.newAttributes;
+          }
+        });
+      }
       return element;
     }
 
