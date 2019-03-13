@@ -16,9 +16,6 @@ module.exports = (namespace) => {
       if (this.content !== undefined) {
         this.content = namespace.toElement(this.content);
       }
-      if (args[0] && args[0].attributes) {
-        this.newAttributes = args[0].attributes;
-      }
     }
   }
 

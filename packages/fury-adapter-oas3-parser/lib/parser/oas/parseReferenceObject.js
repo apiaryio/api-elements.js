@@ -66,8 +66,10 @@ function parseReferenceObject(context, componentName, element, returnReferenceEl
       element.element = componentId;
       if (derefComponent) {
         derefComponent.forEach(component => {
-          if (component.newAttributes) {
-            element.attributes = component.newAttributes;
+          if (component.content) {
+            if (component.element === 'dataStructure') {
+              element.attributes = component.content.attributes;
+            }
           }
         });
       }

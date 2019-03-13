@@ -89,8 +89,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
       const dataStructure = mediaTypeObject.get('schema');
       if (dataStructure) {
         message.push(dataStructure);
-
-        const samples = dataStructure.newAttributes.get('samples');
+        const samples = dataStructure.content.attributes.get('samples');
         if (samples) {
           const body = JSON.stringify(samples.toValue()[0]);
           const asset = new namespace.elements.Asset(body);
