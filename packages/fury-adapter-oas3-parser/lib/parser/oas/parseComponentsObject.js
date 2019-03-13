@@ -60,6 +60,17 @@ const parseComponentMember = R.curry((context, parser, member) => {
     parser(context, member.value)
   );
 
+  // If there's a sample on the parseResult then add it to the component for future usef
+  const { components } = context.state;
+  const schemas = components.get('schemas');
+  const schemaId = parseResult.content[0].key.toValue();
+  const dataStructure = parseResult.content[0].value.content;
+  const samples = dataStructure.attributes.get('samples');
+
+  if (schemas.hasKey(schemaId) && samples) {
+    schemas.get(schemaId).attributes.set('samples', samples.toValue());
+  }
+
   if (isParseResultEmpty(parseResult)) {
     // parse result does not contain a member, that's because parsing a
     // component has failed. We want to store the member without value in
