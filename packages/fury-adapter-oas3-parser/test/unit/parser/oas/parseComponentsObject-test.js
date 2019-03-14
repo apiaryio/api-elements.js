@@ -303,17 +303,36 @@ describe('Components Object', () => {
     });
   });
 
-  describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported examples key', () => {
+  describe('#examples', () => {
+    it('provides a warning when parameters is non-object', () => {
       const components = new namespace.elements.Object({
-        examples: {},
+        examples: '',
       });
 
       const parseResult = parse(context, components);
-
-      expect(parseResult).to.contain.warning("'Components Object' contains unsupported key 'examples'");
+      expect(parseResult).to.contain.warning("'Components Object' 'examples' is not an object");
     });
 
+    it('parses examples', () => {
+      const components = new namespace.elements.Object({
+        examples: {
+          foo: {},
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(1);
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const examples = parsedComponents.get('examples');
+      expect(examples).to.be.instanceof(namespace.elements.Object);
+      expect(examples.getMember('foo')).to.be.instanceof(namespace.elements.Member);
+    });
+  });
+
+  describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported links key', () => {
       const components = new namespace.elements.Object({
         links: {},

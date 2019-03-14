@@ -15,10 +15,11 @@ const parseParameterObject = require('./parseParameterObject');
 const parseResponseObject = require('./parseResponseObject');
 const parseRequestBodyObject = require('./parseRequestBodyObject');
 const parseHeaderObject = require('./parseHeaderObject');
+const parseExampleObject = require('./parseExampleObject');
 const parseSecuritySchemeObject = require('./parseSecuritySchemeObject');
 
 const name = 'Components Object';
-const unsupportedKeys = ['examples', 'links', 'callbacks'];
+const unsupportedKeys = ['links', 'callbacks'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 const valueIsObject = R.compose(isObject, getValue);
@@ -147,6 +148,7 @@ function parseComponentsObject(context, element) {
     [hasKey('parameters'), parseComponentObjectMember(parseParameterObject)],
     [hasKey('responses'), parseComponentObjectMember(parseResponseObject)],
     [hasKey('requestBodies'), parseComponentObjectMember(parseRequestBodyObject)],
+    [hasKey('examples'), parseComponentObjectMember(parseExampleObject)],
     [hasKey('headers'), parseMap(context, name, 'headers', parseHeaderObject)],
     [hasKey('securitySchemes'), parseSecuritySchemes],
 
