@@ -230,3 +230,12 @@ support.
 | http | ✓ |
 | oauth2 | ✕ |
 | openIdConnect | ✕ |
+
+## Example Object
+
+| Field Name | Support |
+|:--|:--|
+| summary | ✕ |
+| description | ✕ |
+| value | ✕ |
+| externalValue | ✕ |
