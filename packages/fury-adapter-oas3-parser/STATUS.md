@@ -237,5 +237,5 @@ support.
 |:--|:--|
 | summary | ✕ |
 | description | ✕ |
-| value | ✕ |
+| value | ✓ |
 | externalValue | ✕ |

@@ -20,6 +20,23 @@ describe('Example Object', () => {
     expect(parseResult).to.contain.warning("'Example Object' is not an object");
   });
 
+  it('returns an object with value', () => {
+    const example = new namespace.elements.Object({
+      value: { message: 'hello world' },
+    });
+
+    const parseResult = parse(context, example);
+
+    expect(parseResult.length).to.equal(1);
+
+    const object = parseResult.get(0);
+    expect(object).to.be.instanceof(namespace.elements.Object);
+
+    expect(object.get('value').toValue()).to.deep.equal({
+      message: 'hello world',
+    });
+  });
+
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported summary key', () => {
       const example = new namespace.elements.Object({
@@ -39,16 +56,6 @@ describe('Example Object', () => {
       const parseResult = parse(context, example);
 
       expect(parseResult).to.contain.warning("'Example Object' contains unsupported key 'description'");
-    });
-
-    it('provides warning for unsupported value key', () => {
-      const example = new namespace.elements.Object({
-        value: 'value',
-      });
-
-      const parseResult = parse(context, example);
-
-      expect(parseResult).to.contain.warning("'Example Object' contains unsupported key 'value'");
     });
 
     it('provides warning for unsupported externalValue key', () => {

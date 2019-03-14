@@ -9,7 +9,7 @@ const parseObject = require('../parseObject');
 
 const name = 'Example Object';
 const unsupportedKeys = [
-  'summary', 'description', 'value', 'externalValue',
+  'summary', 'description', 'externalValue',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -27,6 +27,8 @@ function parseExampleObject(context, element) {
   const { namespace } = context;
 
   const parseMember = R.cond([
+    [hasKey('value'), R.identity],
+
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
