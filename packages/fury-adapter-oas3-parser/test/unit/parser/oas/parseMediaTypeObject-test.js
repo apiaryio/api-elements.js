@@ -32,16 +32,6 @@ describe('Media Type Object', () => {
   });
 
   describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported examples key', () => {
-      const mediaType = new namespace.elements.Member('application/json', {
-        examples: {},
-      });
-
-      const parseResult = parse(context, messageBodyClass, mediaType);
-
-      expect(parseResult).to.contain.warning("'Media Type Object' contains unsupported key 'examples'");
-    });
-
     it('provides warning for unsupported encoding key', () => {
       const mediaType = new namespace.elements.Member('application/json', {
         encoding: {},
@@ -99,6 +89,111 @@ describe('Media Type Object', () => {
 
       expect(parseResult).to.contain.warning(
         "'Media Type Object' 'example' is only supported for JSON media types"
+      );
+    });
+  });
+
+  describe('#examples', () => {
+    it('provides warning when examples is non-object', () => {
+      const mediaType = new namespace.elements.Member('application/json', {
+        examples: null,
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      expect(parseResult).to.contain.warning("'Media Type Object' 'examples' is not an object");
+    });
+
+    it('ignores empty examples', () => {
+      const mediaType = new namespace.elements.Member('application/json', {
+        examples: {},
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody).to.be.undefined;
+    });
+
+    it('ignores empty example', () => {
+      const mediaType = new namespace.elements.Member('application/json', {
+        examples: {
+          cat: {},
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody).to.be.undefined;
+    });
+
+    it('creates an messageBody asset from an example for JSON type', () => {
+      const mediaType = new namespace.elements.Member('application/json', {
+        examples: {
+          cat: {
+            value: {
+              message: 'Hello World',
+            },
+          },
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody.toValue()).to.equal('{"message":"Hello World"}');
+      expect(message.messageBody.contentType.toValue()).to.equal('application/json');
+    });
+
+    it('warns for examples without JSON type', () => {
+      const mediaType = new namespace.elements.Member('application/xml', {
+        examples: {
+          cat: {
+            value: {
+              message: 'Hello World',
+            },
+          },
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody).to.be.undefined;
+
+      expect(parseResult).to.contain.warning(
+        "'Media Type Object' 'examples' is only supported for JSON media types"
+      );
+    });
+
+    it('warns for unsupported multiple examples', () => {
+      const mediaType = new namespace.elements.Member('application/json', {
+        examples: {
+          cat: {
+            value: {
+              message: 'Hello World',
+            },
+          },
+          dog: {
+            value: {
+              message: 'Hello World',
+            },
+          },
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+
+      expect(parseResult).to.contain.warning(
+        "'Media Type Object' 'examples' only one example is supported, other examples have been ignored"
       );
     });
   });

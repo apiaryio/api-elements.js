@@ -9,36 +9,35 @@ const {
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const parseSchemaObject = require('./parseSchemaObject');
+const parseExampleObject = require('./parseExampleObject');
 const parseReference = require('../parseReference');
 
 const name = 'Media Type Object';
-const unsupportedKeys = [
-  'examples', 'encoding',
-];
+const unsupportedKeys = ['encoding'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
+function isJSONMediaType(mediaType) {
+  const type = mediaTyper.parse(mediaType);
+  return (
+    type.type === 'application'
+    && (type.subtype === 'json' || type.suffix === 'json')
+  );
+}
+
+const createJSONMessageBodyAsset = R.curry((namespace, mediaType, value) => {
+  const body = JSON.stringify(value.toValue());
+  const asset = new namespace.elements.Asset(body);
+  asset.classes.push('messageBody');
+  asset.contentType = mediaType;
+  return asset;
+});
+
 function parseExample(namespace, mediaType) {
-  const isJSONMediaType = () => {
-    const type = mediaTyper.parse(mediaType);
-    return (
-      type.type === 'application'
-      && (type.subtype === 'json' || type.suffix === 'json')
-    );
-  };
-
-  const parseJSONExample = (example) => {
-    const body = JSON.stringify(example.value.toValue());
-    const asset = new namespace.elements.Asset(body);
-    asset.classes.push('messageBody');
-    asset.contentType = mediaType;
-    return asset;
-  };
-
   const createExampleNotJSONWarning = createWarning(namespace,
     "'Media Type Object' 'example' is only supported for JSON media types");
 
-  return R.ifElse(isJSONMediaType,
-    parseJSONExample,
+  return R.ifElse(() => isJSONMediaType(mediaType),
+    R.compose(createJSONMessageBodyAsset(namespace, mediaType), getValue),
     createExampleNotJSONWarning);
 }
 
@@ -59,8 +58,34 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
   const { namespace } = context;
   const mediaType = element.key.toValue();
 
+  const createExamplesNotJSONWarning = createWarning(namespace,
+    `'${name}' 'examples' is only supported for JSON media types`);
+
+  const parseExamples = pipeParseResult(namespace,
+    R.unless(() => isJSONMediaType(mediaType), createExamplesNotJSONWarning),
+    parseObject(context, `${name}' 'examples`, R.compose(parseExampleObject(context), getValue)),
+    (examples) => {
+      const parseResult = new namespace.elements.ParseResult();
+
+      if (!examples.isEmpty) {
+        const firstExample = examples.first.value;
+        const value = firstExample.get('value');
+        if (value) {
+          parseResult.push(value);
+        }
+      }
+
+      if (examples.length > 1) {
+        parseResult.push(createWarning(namespace, `'${name}' 'examples' only one example is supported, other examples have been ignored`, examples));
+      }
+
+      return parseResult;
+    },
+    createJSONMessageBodyAsset(namespace, mediaType));
+
   const parseMember = R.cond([
     [hasKey('example'), parseExample(namespace, mediaType)],
+    [hasKey('examples'), R.compose(parseExamples, getValue)],
     [hasKey('schema'), R.compose(parseSchema(context), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
@@ -81,7 +106,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
         new namespace.elements.Member('Content-Type', mediaType),
       ]);
 
-      const messageBody = mediaTypeObject.get('example');
+      const messageBody = mediaTypeObject.get('example') || mediaTypeObject.get('examples');
       if (messageBody) {
         message.push(messageBody);
       }

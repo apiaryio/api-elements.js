@@ -138,7 +138,7 @@ HTTP Status Code ranges are not currently supported.
 |:--|:--|
 | schema | ✓ |
 | example | ✓ |
-| examples | ✕ |
+| examples | ~ |
 | encoding | ✕ |
 
 ## Components Object
