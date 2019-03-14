@@ -41,7 +41,8 @@ function parseExample(namespace, mediaType) {
     createExampleNotJSONWarning);
 }
 
-const parseSchema = parseReference('schemas', parseSchemaObject);
+const parseSchemaObjectOrRef = parseReference('schemas', parseSchemaObject);
+const parseExampleObjectOrRef = parseReference('examples', parseExampleObject);
 
 /**
  * Parse Media Type Object
@@ -63,7 +64,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
 
   const parseExamples = pipeParseResult(namespace,
     R.unless(() => isJSONMediaType(mediaType), createExamplesNotJSONWarning),
-    parseObject(context, `${name}' 'examples`, R.compose(parseExampleObject(context), getValue)),
+    parseObject(context, `${name}' 'examples`, R.compose(parseExampleObjectOrRef(context), getValue)),
     (examples) => {
       const parseResult = new namespace.elements.ParseResult();
 
@@ -86,7 +87,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
   const parseMember = R.cond([
     [hasKey('example'), parseExample(namespace, mediaType)],
     [hasKey('examples'), R.compose(parseExamples, getValue)],
-    [hasKey('schema'), R.compose(parseSchema(context), getValue)],
+    [hasKey('schema'), R.compose(parseSchemaObjectOrRef(context), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
