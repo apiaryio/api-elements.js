@@ -23,12 +23,12 @@
     "deckardcain": "^0.4.1"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.8"
+    "fury": "3.0.0-beta.9"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.15.1",
-    "fury": "3.0.0-beta.8",
+    "fury": "3.0.0-beta.9",
     "mocha": "^5.2.0"
   }
 }
