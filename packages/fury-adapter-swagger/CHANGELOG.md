@@ -1,5 +1,14 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Support JSON Body generation when a schema contains an unknown "format".
+  Previously this would cause a warning:
+
+  > Unable to generate application/json example message body out of JSON Schema
+
 ## 0.24.1 (2019-03-05)
 
 ### Bug Fixes

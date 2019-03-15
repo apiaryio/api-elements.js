@@ -43,6 +43,19 @@ describe('bodyFromSchema', () => {
     expect(asset.content).to.match(/^(19|20)[0-9]{2}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]/);
   });
 
+  it('can generate a JSON value for unknown format', () => {
+    const schema = {
+      type: 'string',
+      format: 'unknown',
+    };
+
+    const payload = { content: [] };
+    const asset = bodyFromSchema(schema, payload, parser, 'application/json');
+
+    expect(typeof asset.content).to.equal('string');
+    expect(asset.content.length).to.be.above(0);
+  });
+
   it('limits a strings min/max length to 256', () => {
     const schema = {
       type: 'string',

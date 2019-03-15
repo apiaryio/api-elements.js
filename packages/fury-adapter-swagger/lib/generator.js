@@ -7,6 +7,7 @@ const { inferred } = require('./link');
 const { isFormURLEncoded, isMultiPartFormData, parseBoundary } = require('./media-type');
 
 faker.option({
+  failOnInvalidFormat: false,
   fixedProbabilities: true,
   optionalsProbability: 1.0,
   useExamplesValue: true,
