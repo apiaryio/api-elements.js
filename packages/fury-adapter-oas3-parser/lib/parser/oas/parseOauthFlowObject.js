@@ -30,8 +30,18 @@ function parseOauthFlowObject(context, object) {
     [R.T, parseString(context, scopesName, false)],
   ]);
 
+  const parseScopes = pipeParseResult(namespace,
+    parseObject(context, scopesName, parseScopeMember, [], true),
+    scopes => new namespace.elements.Array(scopes.content),
+    R.map((member) => {
+      const scope = member.key.clone();
+      scope.description = member.value;
+
+      return scope;
+    }));
+
   const parseMember = R.cond([
-    [hasKey('scopes'), R.compose(parseObject(context, scopesName, parseScopeMember, [], true), getValue)],
+    [hasKey('scopes'), R.compose(parseScopes, getValue)],
     [hasKey('refreshUrl'), parseString(context, name, false)],
     [hasKey('authorizationUrl'), parseString(context, name, false)],
     [hasKey('tokenUrl'), parseString(context, name, false)],
@@ -44,22 +54,7 @@ function parseOauthFlowObject(context, object) {
   ]);
 
   const parseOauthFlow = pipeParseResult(namespace,
-    parseObject(context, name, parseMember, requiredKeys, true),
-    (oauthFlow) => {
-      const arr = new namespace.elements.Array([]);
-      const scopes = oauthFlow.get('scopes');
-
-      scopes.forEach((value, key) => {
-        const k = key.clone();
-
-        k.description = value;
-        arr.push(k);
-      });
-
-      oauthFlow.set('scopes', arr);
-
-      return oauthFlow;
-    });
+    parseObject(context, name, parseMember, requiredKeys, true));
 
   return parseOauthFlow(object);
 }

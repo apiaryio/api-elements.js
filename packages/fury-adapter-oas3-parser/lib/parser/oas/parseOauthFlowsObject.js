@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 const R = require('ramda');
 const {
-  isAnnotation, isExtension, hasKey,
+  isExtension, hasKey, getValue,
 } = require('../../predicates');
 const {
   createWarning,
@@ -12,7 +13,7 @@ const parseOauthFlowObject = require('./parseOauthFlowObject');
 
 const name = 'Oauth Flows Object';
 
-const validFlow = R.anyPass(R.map(hasKey, ['implicit', 'password', 'clientCredentials', 'authorizationCode']));
+const isValidFlow = R.anyPass(R.map(hasKey, ['implicit', 'password', 'clientCredentials', 'authorizationCode']));
 const grantTypes = {
   implicit: 'implicit',
   password: 'resource owner password credentials',
@@ -35,27 +36,25 @@ function parseOauthFlowsObject(context, object) {
 
   const parseFlow = (member) => {
     const key = member.key.toValue();
-    const flow = parseOauthFlowObject(context, member.value);
 
-    if (flow.length === 0 || isAnnotation(flow.get(0))) {
-      return flow;
-    }
+    const needAuthorizationUrl = flow => R.includes(key, ['implicit', 'authorizationCode']);
+    const needTokenUrl = flow => R.includes(key, ['password', 'clientCredentials', 'authorizationCode']);
 
-    if (['implicit', 'authorizationCode'].includes(key) && !flow.get(0).get('authorizationUrl')) {
-      return createWarning(namespace,
-        `'${name}' '${key}' is missing required property 'authorizationUrl'`, member);
-    }
+    const hasAuthorizationUrl = flow => flow.get('authorizationUrl');
+    const hasTokenUrl = flow => flow.get('tokenUrl');
 
-    if (['password', 'clientCredentials', 'authorizationCode'].includes(key) && !flow.get(0).get('tokenUrl')) {
-      return createWarning(namespace,
-        `'${name}' '${key}' is missing required property 'tokenUrl'`, member);
-    }
+    const parse = pipeParseResult(namespace,
+      R.compose(parseOauthFlowObject(context), getValue),
+      R.when(R.allPass([R.complement(hasAuthorizationUrl), needAuthorizationUrl]), flow => createWarning(namespace,
+        `'${name}' '${key}' is missing required property 'authorizationUrl'`, member)),
+      R.when(R.allPass([R.complement(hasTokenUrl), needTokenUrl]), flow => createWarning(namespace,
+        `'${name}' '${key}' is missing required property 'tokenUrl'`, member)));
 
-    return flow;
+    return parse(member);
   };
 
   const parseMember = R.cond([
-    [validFlow, parseFlow],
+    [isValidFlow, parseFlow],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
@@ -66,21 +65,16 @@ function parseOauthFlowsObject(context, object) {
 
   const parseOauthFlows = pipeParseResult(namespace,
     parseObject(context, name, parseMember),
-    (oauthFlows) => {
-      const arr = new namespace.elements.Array();
+    flows => new namespace.elements.Array(flows.content),
+    R.map((member) => {
+      const authScheme = new namespace.elements.AuthScheme();
 
-      oauthFlows.forEach((value, key) => {
-        const authScheme = new namespace.elements.AuthScheme();
+      authScheme.element = 'Oauth2 Scheme';
+      authScheme.push(new namespace.elements.Member('grantType', grantTypes[member.key.toValue()]));
+      authScheme.push(member.value.getMember('scopes'));
 
-        authScheme.element = 'Oauth2 Scheme';
-        authScheme.push(new namespace.elements.Member('grantType', grantTypes[key.toValue()]));
-        authScheme.push(value.getMember('scopes'));
-
-        arr.push(authScheme);
-      });
-
-      return arr;
-    });
+      return authScheme;
+    }));
 
   return parseOauthFlows(object);
 }

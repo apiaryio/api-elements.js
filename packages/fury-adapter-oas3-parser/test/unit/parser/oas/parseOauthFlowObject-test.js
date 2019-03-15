@@ -31,7 +31,7 @@ describe('Oauth Flow Object', () => {
       expect(parseResult).to.contain.warning("'Oauth Flow Object' is missing required property 'scopes'");
     });
 
-    it('provides a  warning when scopes is not an object', () => {
+    it('provides a warning when scopes is not an object', () => {
       const oauthFlow = new namespace.elements.Object({
         scopes: 1,
       });
@@ -147,5 +147,16 @@ describe('Oauth Flow Object', () => {
 
     expect(parseResult.length).to.equal(2);
     expect(parseResult).to.contain.warning("'Oauth Flow Object' contains invalid key 'invalid'");
+  });
+
+  it('does not provide warning/errors for extensions', () => {
+    const oauthFlow = new namespace.elements.Object({
+      scopes: {},
+      'x-extension': '',
+    });
+
+    const parseResult = parse(context, oauthFlow);
+
+    expect(parseResult).to.not.contain.annotations;
   });
 });

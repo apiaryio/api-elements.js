@@ -129,4 +129,14 @@ describe('Oauth Flows Object', () => {
     expect(parseResult.length).to.equal(2);
     expect(parseResult).to.contain.warning("'Oauth Flows Object' contains invalid key 'invalid'");
   });
+
+  it('does not provide warning/errors for extensions', () => {
+    const oauthFlows = new namespace.elements.Object({
+      'x-extension': '',
+    });
+
+    const parseResult = parse(context, oauthFlows);
+
+    expect(parseResult).to.not.contain.annotations;
+  });
 });
