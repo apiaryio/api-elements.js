@@ -5,7 +5,7 @@
 
 This adapter provides support for parsing, validation and serialization via [Public API Service](http://api.apielements.org/) in [Fury](https://github.com/apiaryio/api-elements.js/tree/master/packages/fury).
 
-In adpter is cofigurable and can be cofigured to work with any public API service compatible with [API BlueprintAPI Service](https://apiblueprintapi.docs.apiary.io)
+In adapter is configurable and can be configured to work with any public API service compatible with [API BlueprintAPI Service](https://apiblueprintapi.docs.apiary.io)
 It provide default configuration connected to [Public API Service](http://api.apielements.org/) to working "out of the box"
 
 ```js
