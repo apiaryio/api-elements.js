@@ -311,6 +311,72 @@ describe('Fury class', () => {
     it('returns empty array when the type cannot be detected', () => {
       assert.equal(localFury.detect('none').length, 0);
     });
+
+    describe('detecting based on method', () => {
+      const adapter = {
+        name: 'detection',
+        mediaTypes: ['text/vnd.test', 'text/vnd.testing'],
+        detect: (source, method) => source === 'test' || method === 'parse',
+        parse: () => {},
+      };
+      let fury;
+
+      before(() => {
+        fury = new Fury();
+        fury.use(adapter);
+      });
+
+      it('detect without method', () => {
+        assert.deepEqual(fury.detect('test'), [adapter]);
+      });
+
+      it('detect with valid method', () => {
+        assert.deepEqual(fury.detect('something different', 'parse'), [adapter]);
+      });
+
+      it('detect without with valid method', () => {
+        assert.deepEqual(fury.detect('test', 'serialize'), []);
+      });
+    });
+
+    describe('find adapter with different kinds of mediaTypes', () => {
+      const adapterWithArrayMediaTypes = {
+        name: 'adapterWithArrayMediaTypes',
+        mediaTypes: ['text/vnd.array'],
+        parse: () => {},
+        serialize: () => {},
+      };
+
+      const adapterWithObjectMediaTypes = {
+        name: 'adapterWithObjectMediaTypes',
+        mediaTypes: {
+          parse: ['text/vnd.test', 'text/vnd.testing'],
+          serialize: ['application/vnd.refract+json'],
+        },
+        parse: () => {},
+        serialize: () => {},
+      };
+      let fury;
+
+      before(() => {
+        fury = new Fury();
+        fury.use(adapterWithArrayMediaTypes);
+        fury.use(adapterWithObjectMediaTypes);
+      });
+
+      it('find on array MediaTypes', () => {
+        assert.deepEqual(fury.findAdapter('', 'text/vnd.array', 'serialize'), adapterWithArrayMediaTypes);
+        assert.deepEqual(fury.findAdapter('', 'text/vnd.array', 'parse'), adapterWithArrayMediaTypes);
+        assert.deepEqual(fury.findAdapter('', 'text/vnd.dummy', 'parse'), null);
+      });
+
+      it('find on array MediaTypes', () => {
+        assert.deepEqual(fury.findAdapter('', 'text/vnd.test', 'parse'), adapterWithObjectMediaTypes);
+        assert.deepEqual(fury.findAdapter('', 'text/vnd.test', 'serialize'), null);
+        assert.deepEqual(fury.findAdapter('', 'application/vnd.refract+json', 'serialize'), adapterWithObjectMediaTypes);
+        assert.deepEqual(fury.findAdapter('', 'application/vnd.refract+json', 'parse'), null);
+      });
+    });
   });
 
   describe('pass mediaType into adapter operations', () => {

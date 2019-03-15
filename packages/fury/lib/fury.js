@@ -11,8 +11,11 @@ const minim = minimModule.namespace()
  */
 const findAdapter = (adapters, mediaType, method) => {
   for (let i = 0; i < adapters.length; i += 1) {
-    if (adapters[i].mediaTypes.indexOf(mediaType) !== -1 && adapters[i][method]) {
-      return adapters[i];
+    const adapter = adapters[i];
+    if (Array.isArray(adapter.mediaTypes) && adapter.mediaTypes.includes(mediaType) && adapter[method]) {
+      return adapter;
+    } if (typeof adapter.mediaTypes === 'object' && adapter.mediaTypes[method] && adapter.mediaTypes[method].includes(mediaType) && adapter[method]) {
+      return adapter;
     }
   }
 
@@ -95,13 +98,17 @@ class Fury {
 
   /**
    * Returns an array of adapters which can handle the given API Description Source
+   * it is internali invoked while `mediaType` is not sent
+   * into methods `parse()`, `validate()` or `serialized()`
    *
    * @param source {string}
+   * @param method {string} - optional
    *
    * @return {FuryAdapter}
    */
-  detect(source) {
-    return this.adapters.filter(adapter => adapter.detect && adapter.detect(source));
+  detect(source, method) {
+    const adapters = this.adapters.filter(adapter => (adapter.detect && adapter.detect(source, method)) && (method === undefined || adapter[method]));
+    return adapters;
   }
 
   findAdapter(source, mediaType, method) {
