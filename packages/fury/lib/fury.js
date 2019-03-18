@@ -98,7 +98,7 @@ class Fury {
 
   /**
    * Returns an array of adapters which can handle the given API Description Source
-   * it is internali invoked while `mediaType` is not sent
+   * it is internally invoked while `mediaType` is not sent
    * into methods `parse()`, `validate()` or `serialized()`
    *
    * @param source {string}

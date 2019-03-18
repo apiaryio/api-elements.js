@@ -134,7 +134,7 @@ If you need to distinguish among supported input Media Types for methods use:
 
 ```js
 export const mediaTypes = {
-  parse: ['text/vnd.my-parsing', 'text/vnd.another-supported-parsing],
+  parse: ['text/vnd.my-parsing', 'text/vnd.another-supported-parsing'],
   serialize: ['text/vnd.my-serialization'],
   };
 ```
