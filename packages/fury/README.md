@@ -117,15 +117,41 @@ fury1.parse(...);
 
 Adapters convert from an input format such as API Blueprint into refract elements. This allows a single, consistent interface to be used to interact with multiple input API description formats. Writing your own adapter allows you to add support for new input formats.
 
+Note about `mediaTypes`: it allows two kinds of definitions. First one is **array** type. It is intended to "catch all" implementation.
+It is useful if your adapter implements only one of fury methods, or if all methods accepts same types of Media Type.
+
+Another possible option is to use object with mapping name of method to array of MediaTypes. It allows better granularity for detection.
+
+Examples:
+
+If your adapter support just one method or all methods supports same kind of input Media Type:
+
+```js
+export const mediaTypes = ['text/vnd.my-adapter'];
+```
+
+If you need to distinguish among supported input Media Types for methods use:
+
+```js
+export const mediaTypes = {
+  parse: ['text/vnd.my-parsing', 'text/vnd.another-supported-parsing],
+  serialize: ['text/vnd.my-serialization'],
+  };
+```
+
+
 Adapters are made up of a name, a list of media types, and up to three optional public functions: `detect`, `parse`, and `serialize`. A simple example might look like this:
 
 ```js
 export const name = 'my-adapter';
 export const mediaTypes = ['text/vnd.my-adapter'];
 
-export function detect(source) {
+export function detect(source[, method]) {
   // If no media type is know, then we fall back to auto-detection. Here you
   // can check the source and see if you think you can parse it.
+  // 
+  // optional parmeter `method` give you hint about caller is going to invoke
+  // note that value can be undefined
   return source.match(/some-test/i) !== null;
 }
 

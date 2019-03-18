@@ -11,6 +11,7 @@
 ### Enhancement
 
 - Fury now pass into operations parse(), validate(), serialize() mediaType as one of adapter options
+- Fury now allows distinguish among Media Types for individual oprations (for more info see README)
 
 ## 3.0.0-beta.9 (2019-02-26)
 
