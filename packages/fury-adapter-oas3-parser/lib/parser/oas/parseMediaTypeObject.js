@@ -113,6 +113,19 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
       }
 
       const dataStructure = mediaTypeObject.get('schema');
+
+      if (!messageBody && dataStructure && isJSONMediaType(mediaType)) {
+        const value = dataStructure.content.valueOf();
+
+        if (value) {
+          const body = JSON.stringify(value);
+          const asset = new namespace.elements.Asset(body);
+          asset.classes.push('messageBody');
+          asset.contentType = mediaType;
+          message.push(asset);
+        }
+      }
+
       if (dataStructure) {
         message.push(dataStructure);
       }
