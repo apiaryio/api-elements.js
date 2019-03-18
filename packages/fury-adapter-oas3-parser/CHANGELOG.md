@@ -7,6 +7,9 @@
 - Added primitive support for 'examples' in 'Media Type Object'. The first
   example value is used for JSON media types.
 
+- Added primitive support for generating a JSON message body from a schema for
+  JSON media types. Referencing is not supported for this feature.
+
 ## 0.6.0 (2019-02-26)
 
 ### Enhancements

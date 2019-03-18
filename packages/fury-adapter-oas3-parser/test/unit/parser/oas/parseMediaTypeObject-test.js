@@ -239,5 +239,26 @@ describe('Media Type Object', () => {
       expect(message.dataStructure).to.be.instanceof(namespace.elements.DataStructure);
       expect(message.dataStructure.content.element).to.equal('User');
     });
+
+    it('generates an messageBody asset for JSON type with no examples', () => {
+      const mediaType = new namespace.elements.Member('application/json', {
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              example: 'doe',
+            },
+          },
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody.toValue()).to.equal('{"name":"doe"}');
+      expect(message.messageBody.contentType.toValue()).to.equal('application/json');
+    });
   });
 });
