@@ -138,7 +138,7 @@ HTTP Status Code ranges are not currently supported.
 |:--|:--|
 | schema | ✓ |
 | example | ✓ |
-| examples | ✕ |
+| examples | ~ |
 | encoding | ✕ |
 
 ## Components Object
@@ -151,7 +151,7 @@ support.
 | schemas | ✓ |
 | responses | ✓ |
 | parameters | ✓ |
-| examples | ✕ |
+| examples | ✓ |
 | requestBodies | ✓ |
 | headers | [~](#header-object) |
 | securitySchemes | [~](#security-scheme-object) |
@@ -230,3 +230,12 @@ support.
 | http | ✓ |
 | oauth2 | ✕ |
 | openIdConnect | ✕ |
+
+## Example Object
+
+| Field Name | Support |
+|:--|:--|
+| summary | ✕ |
+| description | ✕ |
+| value | ✓ |
+| externalValue | ✕ |

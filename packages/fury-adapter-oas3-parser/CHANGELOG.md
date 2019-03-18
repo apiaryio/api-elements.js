@@ -1,5 +1,12 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Enhancements
+
+- Added primitive support for 'examples' in 'Media Type Object'. The first
+  example value is used for JSON media types.
+
 ## 0.6.0 (2019-02-26)
 
 ### Enhancements
