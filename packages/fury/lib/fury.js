@@ -116,7 +116,7 @@ class Fury {
       return findAdapter(this.adapters, mediaType, method);
     }
 
-    return this.detect(source).filter(adapter => adapter[method])[0];
+    return this.detect(source, method).filter(adapter => adapter[method])[0];
   }
 
   /**
