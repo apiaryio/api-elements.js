@@ -50,6 +50,27 @@ describe('Components Object', () => {
       expect(schemas).to.be.instanceof(namespace.elements.Object);
       expect(schemas.get('User')).to.be.instanceof(namespace.elements.DataStructure);
     });
+
+    it('parses invalid schema into empty member', () => {
+      const components = new namespace.elements.Object({
+        schemas: {
+          User: null,
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(2);
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const schemas = parsedComponents.get('schemas');
+      expect(schemas).to.be.instanceof(namespace.elements.Object);
+
+      const member = schemas.getMember('User');
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.undefined;
+    });
   });
 
   describe('#parameters', () => {

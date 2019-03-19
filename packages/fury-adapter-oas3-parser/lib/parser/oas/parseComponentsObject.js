@@ -120,8 +120,12 @@ function parseComponentsObject(context, element) {
       R.compose(parseObject(context, name, parseMember), getValue));
   };
 
-  // eslint-disable-next-line no-param-reassign
-  const setDataStructureId = (dataStructure, key) => { dataStructure.content.id = key.clone(); };
+  const setDataStructureId = (dataStructure, key) => {
+    if (dataStructure) {
+      // eslint-disable-next-line no-param-reassign
+      dataStructure.content.id = key.clone();
+    }
+  };
   const parseSchemas = pipeParseResult(namespace,
     parseComponentObjectMember(parseSchemaObject),
     (object) => {

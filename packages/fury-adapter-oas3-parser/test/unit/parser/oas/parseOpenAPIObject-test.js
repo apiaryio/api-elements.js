@@ -47,36 +47,59 @@ describe('#parseOpenAPIObject', () => {
     expect(parseResult.api.get(0).href.toValue()).to.equal('/');
   });
 
-  it('can parse a document with schema components into data structures', () => {
-    const object = new namespace.elements.Object({
-      openapi: '3.0.0',
-      info: {
-        title: 'My API',
-        version: '1.0.0',
-      },
-      paths: {},
-      components: {
-        schemas: {
-          User: {
-            type: 'object',
+  describe('with schema components', () => {
+    it('can parse a document with schema components into data structures', () => {
+      const object = new namespace.elements.Object({
+        openapi: '3.0.0',
+        info: {
+          title: 'My API',
+          version: '1.0.0',
+        },
+        paths: {},
+        components: {
+          schemas: {
+            User: {
+              type: 'object',
+            },
           },
         },
-      },
+      });
+
+      const parseResult = parse(context, object);
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.api.title.toValue()).to.equal('My API');
+      expect(parseResult.api.length).to.equal(1);
+
+      const dataStructures = parseResult.api.get(0);
+      expect(dataStructures).to.be.instanceof(namespace.elements.Category);
+      expect(dataStructures.classes.toValue()).to.deep.equal(['dataStructures']);
+      expect(dataStructures.length).to.equal(1);
+
+      const userStructure = dataStructures.get(0);
+      expect(userStructure).to.be.instanceof(namespace.elements.DataStructure);
+      expect(userStructure.content.id.toValue()).to.equal('User');
     });
 
-    const parseResult = parse(context, object);
-    expect(parseResult.length).to.equal(1);
-    expect(parseResult.api.title.toValue()).to.equal('My API');
-    expect(parseResult.api.length).to.equal(1);
+    it('can parse a document with invalid schema component', () => {
+      const object = new namespace.elements.Object({
+        openapi: '3.0.0',
+        info: {
+          title: 'My API',
+          version: '1.0.0',
+        },
+        paths: {},
+        components: {
+          schemas: {
+            User: null,
+          },
+        },
+      });
 
-    const dataStructures = parseResult.api.get(0);
-    expect(dataStructures).to.be.instanceof(namespace.elements.Category);
-    expect(dataStructures.classes.toValue()).to.deep.equal(['dataStructures']);
-    expect(dataStructures.length).to.equal(1);
-
-    const userStructure = dataStructures.get(0);
-    expect(userStructure).to.be.instanceof(namespace.elements.DataStructure);
-    expect(userStructure.content.id.toValue()).to.equal('User');
+      const parseResult = parse(context, object);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.api.title.toValue()).to.equal('My API');
+      expect(parseResult.api.isEmpty).to.be.true;
+    });
   });
 
   it('provides error for missing openapi version', () => {
