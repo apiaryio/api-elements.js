@@ -13,13 +13,24 @@ describe('#parseYAML', () => {
     context = new Context(namespace, { generateSourceMap: true });
   });
 
-  it('fails to parse an OAS3 document with invalid YAML', () => {
-    const parseResult = parseYAML('{}{}', context);
+  describe('error handling', () => {
+    it('fails to parse an OAS3 document with invalid YAML', () => {
+      const parseResult = parseYAML('{}{}', context);
 
-    expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
-    expect(parseResult.errors.length).to.equal(1);
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+      expect(parseResult.errors.length).to.equal(1);
 
-    expect(parseResult).contain.error("YAML Syntax: expected '<document start>', but found {").with.sourceMap([[2, 0]]);
+      expect(parseResult).contain.error("YAML Syntax: expected '<document start>', but found {").with.sourceMap([[2, 0]]);
+    });
+
+    it('fails to parse an OAS3 document while scanning for next token', () => {
+      const parseResult = parseYAML('openapi: 3.0.0\t', context);
+
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+      expect(parseResult.errors.length).to.equal(1);
+
+      expect(parseResult).contain.error('YAML Syntax: while scanning for the next token').with.sourceMap([[14, 0]]);
+    });
   });
 
   it('can parse a string into a string element', () => {
