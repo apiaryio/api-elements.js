@@ -312,6 +312,32 @@ describe('Fury class', () => {
       assert.equal(localFury.detect('none').length, 0);
     });
 
+    describe('method is propagated from fury to adapter while detection', () => {
+      const detectingAdapter = {
+        detect: (source, method) => method === 'parse',
+        parse: () => {},
+        serialize: () => {},
+      };
+
+      let fury;
+      before(() => {
+        fury = new Fury();
+        fury.use(detectingAdapter);
+      });
+
+      it('detect with supported method', () => {
+        assert.deepEqual(fury.detect('test', 'parse'), [detectingAdapter]);
+      });
+
+      it('does not detect without method', () => {
+        assert.deepEqual(fury.detect('test'), []);
+      });
+
+      it('does not detect with unsupported method', () => {
+        assert.deepEqual(fury.detect('test', 'seriailize'), []);
+      });
+    });
+
     describe('detecting based on method', () => {
       const adapter = {
         name: 'detection',
@@ -319,6 +345,7 @@ describe('Fury class', () => {
         detect: (source, method) => source === 'test' || method === 'parse',
         parse: () => {},
       };
+
       let fury;
 
       before(() => {
