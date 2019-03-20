@@ -329,11 +329,11 @@ describe('Fury class', () => {
         assert.deepEqual(fury.detect('test', 'parse'), [detectingAdapter]);
       });
 
-      it('do not detect without method', () => {
+      it('does not detect without method', () => {
         assert.deepEqual(fury.detect('test'), []);
       });
 
-      it('do not detect with unsupported method', () => {
+      it('does not detect with unsupported method', () => {
         assert.deepEqual(fury.detect('test', 'seriailize'), []);
       });
     });
