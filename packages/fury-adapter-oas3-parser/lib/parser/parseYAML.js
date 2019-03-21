@@ -110,12 +110,15 @@ function parse(source, context) {
       `YAML Syntax: ${error.context}`,
       { classes: ['error'] }
     );
+
+    const marker = error.context_mark || error.problem_mark;
     copySourceMap(
-      error.context_mark,
-      error.context_mark,
+      marker,
+      marker,
       annotation,
       namespace
     );
+
     parseResult.push(annotation);
     return parseResult;
   }
