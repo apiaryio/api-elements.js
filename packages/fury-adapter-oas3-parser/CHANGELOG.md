@@ -10,6 +10,11 @@
 - Added primitive support for generating a JSON message body from a schema for
   JSON media types. Referencing is not supported for this feature.
 
+### Bug Fixes
+
+- Prevents an exception being raised due to improper handling of invalid
+  schemas found in the reusable components section of an OpenAPI 3 document.
+
 ## 0.6.0 (2019-02-26)
 
 ### Enhancements

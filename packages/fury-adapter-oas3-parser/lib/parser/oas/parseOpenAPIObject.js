@@ -144,11 +144,14 @@ function parseOASObject(context, object) {
 
       const components = object.get('components');
       if (components) {
-        const schemas = components.get('schemas');
-        if (schemas) {
+        const schemas = R.or(components.get('schemas'), new namespace.elements.Array())
+          .content
+          .filter(member => member.value)
+          .map(getValue);
+
+        if (schemas.length > 0) {
           const dataStructures = new namespace.elements.Category(
-            schemas.content.map(getValue),
-            { classes: ['dataStructures'] }
+            schemas, { classes: ['dataStructures'] }
           );
           api.push(dataStructures);
         }
@@ -156,7 +159,6 @@ function parseOASObject(context, object) {
 
       return api;
     });
-
 
   if (context.options.generateSourceMap) {
     return filterColumnLine(parseOASObject(object));
