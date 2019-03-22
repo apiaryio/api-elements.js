@@ -4,6 +4,7 @@ const axios = require('axios');
 const name = 'remote';
 
 const outputMediaType = 'application/vnd.refract.parse-result+json; version=1.0';
+const defaultInputMediaType = 'text/vnd.apiblueprint';
 
 const defaultOptions = {
   // the default value, but consumers should be able to override to use their own deployment
@@ -13,28 +14,33 @@ const defaultOptions = {
   validateEndpoint: '/validate',
   serializeEndpoint: '/composer',
 
-  // the collection of "parse", media types we want this
-  // instance of the adapter to handle.
-  // NOTE, this allows you to use the API for one media type but
-  // another local adapter for another.
-  parseMediaTypes: [
-    'text/vnd.apiblueprint',
-    'application/swagger+json',
-    'application/swagger+yaml',
-    'application/vnd.oai.openapi',
-    'application/vnd.oai.openapi+json',
-  ],
+  mediaTypes: {
+    // the collection of "parse", media types we want this
+    // instance of the adapter to handle.
+    // NOTE, this allows you to use the API for one media type but
+    // another local adapter for another.
+    parse: [
+      'text/vnd.apiblueprint',
+      'application/swagger+json',
+      'application/swagger+yaml',
+      'application/vnd.oai.openapi',
+      'application/vnd.oai.openapi+json',
+    ],
 
-  // the collection of "serialize", media types we want this
-  // instance of the adapter to handle.
-  serializeMediaTypes: [
-    'application/vnd.refract+json',
-    'application/vnd.refract.parse-result+json',
-  ],
+    validate: [
+      'text/vnd.apiblueprint',
+      'application/swagger+json',
+      'application/swagger+yaml',
+      'application/vnd.oai.openapi',
+      'application/vnd.oai.openapi+json',
+    ],
 
-  // fallback to try send input, if not indentified by deckardcain
-  defaultParseMediaType: 'text/vnd.apiblueprint',
-  defaultSerializeMediaType: 'application/vnd.refract+json',
+    // the collection of "serialize", media types we want this
+    // instance of the adapter to handle.
+    serialize: [
+      'text/vnd.apiblueprint',
+    ],
+  },
 };
 
 const detectMediaType = (source, defaultMediaType) => {
@@ -46,18 +52,28 @@ class FuryRemoteAdapter {
   constructor(options) {
     this.name = name;
     this.options = options || defaultOptions;
-    const parseMediaTypes = this.options.parseMediaTypes || [];
-    const serializeMediaTypes = this.options.serializeMediaTypes || [];
-
-    this.mediaTypes = parseMediaTypes.concat(serializeMediaTypes);
+    this.mediaTypes = this.options.mediaTypes || [];
   }
 
-  detect(source) {
-    return this.mediaTypes.includes(deckardcain.identify(source));
+  detect(source, method) {
+    const mediaType = deckardcain.identify(source);
+    if (Array.isArray(this.mediaTypes) && this.mediaTypes.includes(mediaType) && (method === undefined || this[method])) {
+      return true;
+    } if (typeof this.mediaTypes === 'object') {
+      if (method !== undefined) {
+        return (this.mediaTypes[method] && this.mediaTypes[method].includes(mediaType) && this[method]);
+      }
+      const mediaTypes = [];
+      Object.keys(this.mediaTypes).forEach((key) => {
+        mediaTypes.concat(this.mediaTypes[key]); // the value of the current key.
+      });
+      return mediaTypes.includes(mediaType);
+    }
+    return false;
   }
 
-  parse({ source, minim }, cb) {
-    const inputMediaType = detectMediaType(source, this.options.defaultInputMediaType);
+  parse({ source, minim, mediaType }, cb) {
+    const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
 
     axios({
       method: 'post',
@@ -78,8 +94,8 @@ class FuryRemoteAdapter {
       });
   }
 
-  validate({ source, minim }, cb) {
-    const inputMediaType = detectMediaType(source, this.options.defaultInputMediaType);
+  validate({ source, minim, mediaType }, cb) {
+    const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
 
     axios({
       method: 'post',
@@ -102,13 +118,9 @@ class FuryRemoteAdapter {
       });
   }
 
-  serialize({ api, minim }, cb) {
-    let inputMediaType = this.options.defaultSerializeMediaType;
+  serialize({ api, minim, mediaType }, cb) {
     const content = minim.serialiser.serialise(api);
-
-    if (content.element && content.element === 'parseResult') {
-      inputMediaType = 'application/vnd.refract.parse-result+json';
-    }
+    const inputMediaType = (content.element && content.element === 'parseResult') ? 'application/vnd.refract+json' : 'application/vnd.refract.parse-result+json';
 
     axios({
       method: 'post',
@@ -117,7 +129,7 @@ class FuryRemoteAdapter {
       data: content,
       headers: {
         'Content-Type': inputMediaType,
-        Accept: 'text/vnd.apiblueprint',
+        Accept: mediaType,
       },
     })
       .then((response) => {

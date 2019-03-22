@@ -10,34 +10,40 @@ By default the [API Elements Web Service](http://api.apielements.org/) is used.
 
 ```js
 const defaultOptions = {
+  // the default value, but consumers should be able to override to use their own deployment
   url: 'https://api.apielements.org',
 
   parseEndpoint: '/parser',
   validateEndpoint: '/validate',
   serializeEndpoint: '/composer',
 
-  // the collection of "parse", media types we want this
-  // instance of the adapter to handle.
-  // NOTE, this allows you to use the API for one media type but
-  // another local adapter for another.
-  parseMediaTypes: [
-    'text/vnd.apiblueprint',
-    'application/swagger+json',
-    'application/swagger+yaml',
-    'application/vnd.oai.openapi',
-    'application/vnd.oai.openapi+json',
-  ],
+  mediaTypes: {
+    // the collection of "parse", media types we want this
+    // instance of the adapter to handle.
+    // NOTE, this allows you to use the API for one media type but
+    // another local adapter for another.
+    parse: [
+      'text/vnd.apiblueprint',
+      'application/swagger+json',
+      'application/swagger+yaml',
+      'application/vnd.oai.openapi',
+      'application/vnd.oai.openapi+json',
+    ],
 
-  // the collection of "serialize", media types we want this
-  // instance of the adapter to handle.
-  serializeMediaTypes: [
-    'application/vnd.refract+json',
-    'application/vnd.refract.parse-result+json',
-  ],
+    validate: [
+      'text/vnd.apiblueprint',
+      'application/swagger+json',
+      'application/swagger+yaml',
+      'application/vnd.oai.openapi',
+      'application/vnd.oai.openapi+json',
+    ],
 
-  // fallback to try send input, if not indentified by deckardcain
-  defaultParseMediaType: 'text/vnd.apiblueprint',
-  defaultSerializeMediaType: 'application/vnd.refract+json',
+    // the collection of "serialize", media types we want this
+    // instance of the adapter to handle.
+    serialize: [
+      'text/vnd.apiblueprint',
+    ],
+  }
 };
 ```
 
