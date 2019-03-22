@@ -167,10 +167,9 @@ describe('Adapter works with Fury interface', () => {
       fury.use(new FuryRemoteAdapter({
         url: 'https://api.apielements.org',
         parseEndpoint: '/parser',
-        parseMediaTypes: [
+        mediaTypes: [
           'text/vnd.apiblueprint',
         ],
-        defaultInputMediaType: 'text/vnd.apiblueprint',
       }));
     });
 
@@ -197,6 +196,33 @@ describe('Adapter works with Fury interface', () => {
     });
   });
 
+  describe('#detect', () => {
+    const fury = new Fury();
+    const defaultAdapater = new FuryRemoteAdapter();
+    const arrayMediaTypesAdapater = new FuryRemoteAdapter({
+      mediaTypes: ['text/vnd.apiblueprint'],
+    });
+    const objectMediaTypesAdapater = new FuryRemoteAdapter({
+      mediaTypes: {
+        parse: ['text/vnd.apiblueprint'],
+        validate: ['application/swagger+json'],
+      },
+    });
+
+    before(() => {
+      fury.use(defaultAdapater);
+      fury.use(arrayMediaTypesAdapater);
+      fury.use(objectMediaTypesAdapater);
+    });
+
+    it('works with different mediaTypes configurations', () => {
+      expect(fury.detect(blueprintSource, 'parse')).to.be.deep.equal([defaultAdapater, arrayMediaTypesAdapater, objectMediaTypesAdapater]);
+      expect(fury.detect(swaggerSource, 'parse')).to.be.deep.equal([defaultAdapater]);
+      expect(fury.detect(blueprintSource, 'validate')).to.be.deep.equal([defaultAdapater, arrayMediaTypesAdapater]);
+      expect(fury.detect(swaggerSource, 'validate')).to.be.deep.equal([defaultAdapater, objectMediaTypesAdapater]);
+    });
+  });
+
   describe('with nonexisting domain', () => {
     const fury = new Fury();
 
@@ -204,10 +230,9 @@ describe('Adapter works with Fury interface', () => {
       fury.use(new FuryRemoteAdapter({
         url: 'http://some.stupid.non.existing.domain',
         parseEndpoint: '/parser',
-        parseMediaTypes: [
+        mediaTypes: [
           'text/vnd.apiblueprint',
         ],
-        defaultInputMediaType: 'text/vnd.apiblueprint',
       }));
     });
 
@@ -227,10 +252,9 @@ describe('Adapter works with Fury interface', () => {
       fury.use(new FuryRemoteAdapter({
         url: 'https://api.apielements.org',
         parseEndpoint: '/some.weird.endpoint',
-        parseMediaTypes: [
+        mediaTypes: [
           'text/vnd.apiblueprint',
         ],
-        defaultInputMediaType: 'text/vnd.apiblueprint',
       }));
     });
 
@@ -238,7 +262,7 @@ describe('Adapter works with Fury interface', () => {
       fury.parse({ source: blueprintSource, mediaType: 'text/vnd.apiblueprint' }, (err, result) => {
         expect(result).to.be.undefined;
         expect(err).to.be.instanceof(Error);
-        expect(err).to.have.property('message', 'Request failed with status code 500');
+        expect(err).to.have.property('message', 'Request failed with status code 415');
       });
     });
   });
