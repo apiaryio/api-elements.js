@@ -119,7 +119,14 @@ function parseComponentsObject(context, element) {
       validateIsObject,
       R.compose(parseObject(context, name, parseMember), getValue),
       (object) => {
-        context.state.components.push(new namespace.elements.Member(member.key, object));
+        const contextMember = context.state.components.getMember(member.key.toValue());
+
+        if (contextMember) {
+          contextMember.value = object;
+        } else {
+          context.state.components.push(new namespace.elements.Member(member.key, object));
+        }
+
         return object;
       })(member);
   };
@@ -169,7 +176,8 @@ function parseComponentsObject(context, element) {
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  return parseObject(context, name, parseMember)(element);
+  const order = ['schemas'];
+  return parseObject(context, name, parseMember, [], order)(element);
 }
 
 

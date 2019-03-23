@@ -136,6 +136,27 @@
                       },
                       "content": [
                         {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/json"
+                            }
+                          },
+                          "content": "[{\"id\":0,\"name\":\"\",\"tag\":\"\"}]"
+                        },
+                        {
                           "element": "dataStructure",
                           "content": {
                             "element": "Pets"
@@ -289,6 +310,27 @@
                         }
                       },
                       "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/json"
+                            }
+                          },
+                          "content": "[{\"id\":0,\"name\":\"\",\"tag\":\"\"}]"
+                        },
                         {
                           "element": "dataStructure",
                           "content": {

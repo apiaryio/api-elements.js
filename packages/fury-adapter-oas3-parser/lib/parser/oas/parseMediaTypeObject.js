@@ -115,7 +115,18 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
       const dataStructure = mediaTypeObject.get('schema');
 
       if (!messageBody && dataStructure && isJSONMediaType(mediaType)) {
-        const value = dataStructure.content.valueOf();
+        let elements = [];
+        const { components } = context.state;
+        if (components) {
+          const schemas = components.get('schemas');
+          if (schemas) {
+            elements = schemas.content
+              .filter(e => e.value && e.value.content)
+              .map(e => e.value.content);
+          }
+        }
+
+        const value = dataStructure.content.valueOf(undefined, elements);
 
         if (value) {
           const body = JSON.stringify(value);

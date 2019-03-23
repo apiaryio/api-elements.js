@@ -260,5 +260,75 @@ describe('Media Type Object', () => {
       expect(message.messageBody.toValue()).to.equal('{"name":"doe"}');
       expect(message.messageBody.contentType.toValue()).to.equal('application/json');
     });
+
+    it('generates a messageBody asset for JSON type with referenced schema with no examples', () => {
+      context.state.components = new namespace.elements.Object({
+        schemas: {
+          Name: new namespace.elements.DataStructure(
+            new namespace.elements.String('doe', {
+              id: 'Name',
+            })
+          ),
+        },
+      });
+
+      const mediaType = new namespace.elements.Member('application/json', {
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              $ref: '#/components/schemas/Name',
+            },
+          },
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody.toValue()).to.equal('{"name":"doe"}');
+      expect(message.messageBody.contentType.toValue()).to.equal('application/json');
+    });
+
+    it('generates a messageBody asset for JSON type with circular referenced schema with no examples', () => {
+      const node = new namespace.Element();
+      node.element = 'Node';
+
+      const nodes = new namespace.Element();
+      nodes.element = 'Nodes';
+
+      context.state.components = new namespace.elements.Object({
+        schemas: {
+          Nodes: new namespace.elements.DataStructure(
+            new namespace.elements.Array({
+              node,
+            }, {
+              id: 'Nodes',
+            })
+          ),
+          Node: new namespace.elements.DataStructure(
+            new namespace.elements.Object({
+              parents: nodes,
+            }, {
+              id: 'Node',
+            })
+          ),
+        },
+      });
+
+      const mediaType = new namespace.elements.Member('application/json', {
+        schema: {
+          $ref: '#/components/schemas/Node',
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody.toValue()).to.equal('{"parents":[]}');
+      expect(message.messageBody.contentType.toValue()).to.equal('application/json');
+    });
   });
 });

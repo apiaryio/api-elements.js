@@ -83,6 +83,27 @@
                       },
                       "content": [
                         {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/json"
+                            }
+                          },
+                          "content": "{\"name\":\"\",\"company\":{\"name\":\"\"}}"
+                        },
+                        {
                           "element": "dataStructure",
                           "content": {
                             "element": "User"

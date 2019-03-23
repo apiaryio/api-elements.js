@@ -175,18 +175,13 @@ describe('Response Object', () => {
         },
       });
 
-      const dataStructure = new namespace.elements.DataStructure();
-      dataStructure.id = 'Node';
-
+      const pets = new namespace.elements.Array();
+      pets.id = 'Pets';
       context.state.components = new namespace.elements.Object({
         schemas: {
-          Node: dataStructure,
+          Pets: new namespace.elements.DataStructure(pets),
         },
       });
-
-      context.state.components.set('schemas', new namespace.elements.Object([
-        new namespace.elements.Member('Pets', new namespace.elements.Array()),
-      ]));
 
       const parseResult = parse(context, response);
 
