@@ -154,7 +154,7 @@
                               "content": "application/json"
                             }
                           },
-                          "content": "[]"
+                          "content": "[{\"id\":0,\"name\":\"\",\"tag\":\"\"}]"
                         },
                         {
                           "element": "dataStructure",
@@ -329,7 +329,7 @@
                               "content": "application/json"
                             }
                           },
-                          "content": "[]"
+                          "content": "[{\"id\":0,\"name\":\"\",\"tag\":\"\"}]"
                         },
                         {
                           "element": "dataStructure",
