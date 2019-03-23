@@ -98,38 +98,58 @@ module.exports = (namespace) => {
   const isEnumElement = e => (e.element === 'enum' || e instanceof EnumElement);
   const isPlural = e => (e instanceof ArrayElement) || (e instanceof ObjectElement);
 
-  function mapValue(e, options, f) {
+  function mapValue(e, options, f, elements) {
     const opts = updateTypeAttributes(e, options);
     if (e.content && (!isPlural(e) || e.content.length > 0)) {
-      const result = f(e, opts, 'content');
+      const result = f(e, opts, elements, 'content');
       if (undefined !== result) {
         return result;
       }
     }
     const sample = findFirstSample(e);
     if (sample) {
-      const result = f(sample, opts, 'sample');
+      const result = f(sample, opts, elements, 'sample');
       if (undefined !== result) {
         return result;
       }
     }
     const dflt = findDefault(e);
     if (dflt) {
-      const result = f(dflt, opts, 'default');
+      const result = f(dflt, opts, elements, 'default');
       if (undefined !== result) {
         return result;
       }
     }
     if (isFlag(NULLABLE_FLAG, opts)) {
-      const result = f(new NullElement(), opts, 'nullable');
+      const result = f(new NullElement(), opts, elements, 'nullable');
       if (undefined !== result) {
         return result;
       }
     }
+
+    if (elements) {
+      if (e.element === 'ref') {
+        const result = elements.filter(el => el.id.equals(e.content))[0];
+        const inheritedElements = elements.filter(el => !el.id.equals(e.content));
+
+        if (e.path && e.path.toValue() === 'content') {
+          return mapValue(result.content, opts, f, inheritedElements);
+        }
+
+        return mapValue(result, opts, f, inheritedElements);
+      }
+
+      const result = elements.filter(el => el.id.equals(e.element))[0];
+      if (result) {
+        const inheritedElements = elements.filter(el => !el.id.equals(e.element));
+        return mapValue(result, opts, f, inheritedElements);
+      }
+    }
+
     if (isEnumElement(e)) {
       const enums = e.enumerations;
       if (enums && enums.content && enums.content[0]) {
-        const result = f(enums.content[0], opts, 'generated');
+        const result = f(enums.content[0], opts, elements, 'generated');
         if (undefined !== result) {
           return result;
         }
@@ -137,22 +157,22 @@ module.exports = (namespace) => {
     }
     const trivial = trivialValue(e);
     if (trivial) {
-      const result = f(trivial, opts, 'generated');
+      const result = f(trivial, opts, elements, 'generated');
       if (undefined !== result) {
         return result;
       }
     }
     if (isPlural(e) && e.content.length === 0) {
-      return f(e, opts, 'generated');
+      return f(e, opts, elements, 'generated');
     }
 
     return undefined;
   }
 
-  function reduceValue(e, options) {
+  function reduceValue(e, options, elements) {
     const opts = updateTypeAttributes(e, options);
     if (undefined === e.content) {
-      return mapValue(e, opts, e => e.content);
+      return mapValue(e, opts, e => e.content, elements);
     }
     if (isPrimitive(e)) {
       return e.content;
@@ -161,7 +181,7 @@ module.exports = (namespace) => {
       return null;
     }
     if (isEnumElement(e)) {
-      return mapValue(e.content, inheritFlags(opts), reduceValue);
+      return mapValue(e.content, inheritFlags(opts), reduceValue, elements);
     }
     if (e instanceof ObjectElement) {
       let result = {};
@@ -171,7 +191,7 @@ module.exports = (namespace) => {
             && !isFlag(FIXED_TYPE_FLAG, opts)
             && !hasTypeAttribute(item, 'required'));
 
-        const k = mapValue(item.key, inheritFlags(opts), reduceValue);
+        const k = mapValue(item.key, inheritFlags(opts), reduceValue, elements);
 
         if (undefined === k) {
           if (skippable) {
@@ -181,7 +201,7 @@ module.exports = (namespace) => {
           return true;
         }
 
-        const v = mapValue(item.value, inheritFlags(opts), reduceValue);
+        const v = mapValue(item.value, inheritFlags(opts), reduceValue, elements);
         if (undefined === v) {
           if (skippable) {
             return false;
@@ -196,7 +216,7 @@ module.exports = (namespace) => {
       return result;
     }
     if (e instanceof ArrayElement) {
-      const result = e.map(item => mapValue(item, inheritFlags(opts), reduceValue));
+      const result = e.map(item => mapValue(item, inheritFlags(opts), reduceValue, elements));
       if (!isFlag(FIXED_FLAG, opts) && !isFlag(FIXED_TYPE_FLAG, opts)) {
         return result.filter(item => item !== undefined);
       }
@@ -210,17 +230,17 @@ module.exports = (namespace) => {
 
   if (!Object.getOwnPropertyNames(Element.prototype).includes('valueOf')) {
     Object.defineProperty(Element.prototype, 'valueOf', {
-      value(flags) {
+      value(flags, elements) {
         if (flags !== undefined && flags.source) {
-          return mapValue(this, 0, (value, opts, source) => {
-            const result = reduceValue(value, opts);
+          return mapValue(this, 0, (value, opts, elements, source) => {
+            const result = reduceValue(value, opts, elements);
             if (undefined === result) {
               return undefined;
             }
-            return [reduceValue(value, opts), source];
-          });
+            return [reduceValue(value, opts, elements), source];
+          }, elements);
         }
-        return mapValue(this, 0, (value, opts) => reduceValue(value, opts));
+        return mapValue(this, 0, (value, opts) => reduceValue(value, opts, elements), elements);
       },
     });
   }

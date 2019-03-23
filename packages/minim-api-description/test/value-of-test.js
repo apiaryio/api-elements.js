@@ -4,6 +4,7 @@ const apiDescription = require('../lib/api-description');
 
 const namespace = minim.namespace().use(apiDescription);
 
+const { Element } = namespace;
 const ArrayElement = namespace.elements.Array;
 const ObjectElement = namespace.elements.Object;
 const BooleanElement = namespace.elements.Boolean;
@@ -1104,5 +1105,102 @@ describe('valueOf ObjectElement with source', () => {
     const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal([null, 'nullable']);
+  });
+});
+
+
+describe('valueOf RefElement', () => {
+  it('returns value from referenced element', () => {
+    const name = new StringElement('doe');
+    name.id = 'name';
+
+    const element = name.toRef('element');
+    const value = element.valueOf(undefined, [name]);
+
+    expect(value).to.equal('doe');
+  });
+
+  it('returns value from referenced elements content', () => {
+    const name = new StringElement('doe');
+    const container = new Element(name);
+    container.id = 'name';
+
+    const element = container.toRef('content');
+    const value = element.valueOf(undefined, [container]);
+
+    expect(value).to.equal('doe');
+  });
+
+  it('returns value from referenced element recursively', () => {
+    const name = new StringElement('doe');
+    name.id = 'name';
+
+    const names = new ArrayElement([name.toRef()]);
+
+    const value = names.valueOf(undefined, [name]);
+
+    expect(value).to.deep.equal(['doe']);
+  });
+});
+
+describe('valueOf RefElement with source', () => {
+  it('returns value from referenced element', () => {
+    const name = new StringElement('doe');
+    name.id = 'name';
+
+    const element = name.toRef('element');
+    const value = element.valueOf({ source: true }, [name]);
+
+    expect(value).to.deep.equal(['doe', 'content']);
+  });
+
+  it('returns value from referenced elements content', () => {
+    const name = new StringElement('doe');
+    const container = new Element(name);
+    container.id = 'name';
+
+    const element = container.toRef('content');
+    const value = element.valueOf({ source: true }, [container]);
+
+    expect(value).to.deep.equal(['doe', 'content']);
+  });
+
+  it('returns value from referenced element recursively', () => {
+    const name = new StringElement('doe');
+    name.id = 'name';
+
+    const names = new ArrayElement([name.toRef()]);
+
+    const value = names.valueOf({ source: true }, [name]);
+
+    expect(value).to.deep.equal([['doe'], 'content']);
+  });
+});
+
+describe('valueOf referenced element', () => {
+  it('returns value from dereferenced element', () => {
+    const name = new StringElement('doe');
+    name.id = 'name';
+
+    const element = new Element();
+    element.element = 'name';
+
+    const value = element.valueOf(undefined, [name]);
+
+    expect(value).to.equal('doe');
+  });
+});
+
+describe('valueOf referenced element with source', () => {
+  it('returns value from dereferenced element', () => {
+    const name = new StringElement('doe');
+    name.id = 'name';
+
+    const element = new Element();
+    element.element = 'name';
+
+    const value = element.valueOf({ source: true }, [name]);
+
+    expect(value).to.deep.equal(['doe', 'content']);
   });
 });
