@@ -59,7 +59,16 @@ function parseReferenceObject(context, componentName, element, returnReferenceEl
     }
 
     if (returnReferenceElement) {
-      const element = new context.namespace.elements.Element();
+      let Element;
+
+      const referenced = component.get(componentId);
+      if (referenced instanceof context.namespace.elements.DataStructure) {
+        Element = referenced.content.constructor;
+      } else {
+        ({ Element } = context.namespace.elements);
+      }
+
+      const element = new Element();
       element.element = componentId;
       return element;
     }

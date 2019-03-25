@@ -12,6 +12,13 @@
 
 - Added support for header parameters.
 
+- Instances of referenced data structures will now be instances of the
+  referenced type.
+
+  For example, given a schema named 'username' contains `type: string`.
+  When another data structure references the 'username' schema, it's instance
+  will be a `StringElement`.
+
 ### Bug Fixes
 
 - Prevents an exception being raised due to improper handling of invalid
