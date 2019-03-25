@@ -10,6 +10,8 @@
 - Added primitive support for generating a JSON message body from a schema for
   JSON media types. Referencing is not supported for this feature.
 
+- Added support for header parameters.
+
 ### Bug Fixes
 
 - Prevents an exception being raised due to improper handling of invalid

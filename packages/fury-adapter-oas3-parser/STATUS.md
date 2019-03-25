@@ -103,7 +103,7 @@ Key:
 |:--|:--|
 | path | ✓ |
 | query | ✓ |
-| header | ✕ |
+| header | ✓ |
 | cookie | ✕ |
 
 ## Request Body Object

@@ -75,6 +75,7 @@ function parseParameters(context, path, member) {
   const parseParameter = R.cond([
     [hasKey('path'), R.compose(validateHrefVariablesInPath(namespace, path), getValue)],
     [hasKey('query'), member => member],
+    [hasKey('header'), member => member],
   ]);
 
   const parseParameters = pipeParseResult(namespace,
@@ -163,6 +164,23 @@ function parsePathItemObject(context, member) {
         .filter(isHttpMethodKey)
         .map(getValue);
       resource.content = resource.content.concat(methods);
+
+      if (parameters && parameters.get('header')) {
+        const headerParameters = parameters.get('header');
+
+        const transactions = R.chain(method => method.transactions.elements, methods);
+        const requests = R.map(transaction => transaction.request, transactions);
+
+        requests.forEach((request) => {
+          const headers = R.or(request.headers, new namespace.elements.HttpHeaders());
+
+          headers.content = headers.content.concat(
+            R.reject(member => !headers.include(member.key.toValue()).isEmpty, headerParameters.content)
+          );
+
+          request.headers = headers;
+        });
+      }
 
       return resource;
     });
