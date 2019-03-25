@@ -1,6 +1,6 @@
 const R = require('ramda');
 const {
-  isAnnotation, isMember, isParseResult, isObject,
+  isAnnotation, isMember, isParseResult, isObject, getValue,
 } = require('../predicates');
 const { createError, createWarning } = require('./annotations');
 const pipeParseResult = require('../pipeParseResult');
@@ -97,13 +97,13 @@ const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKe
  * @param name {string} - The human readable name of the element. Used for annotation messages.
  * @param transform {transformMember} - The callback to transform a member
  * @param requiredKeys {string[]} - The callback to transform a member
+ * @param orderedKeys {string[]} - An ordered list of keys which should be parsed first - This is useful when some keys depend on others. All non-ordered keys past last in user-defined order.
  * @param sendWarning {boolean}
  * @param object {ObjectElement} - The object containing members to transform
- *
  * @returns {ParseResult<ObjectElement>}
  * @private
  */
-function parseObject(context, name, parseMember, requiredKeys = [], sendWarning = false) {
+function parseObject(context, name, parseMember, requiredKeys = [], orderedKeys = [], sendWarning = false) {
   const { namespace } = context;
 
   // Create a member from a key and value
@@ -120,8 +120,9 @@ function parseObject(context, name, parseMember, requiredKeys = [], sendWarning 
   // values in the parse result that are not annotations or a member
   // into a member using the same key as provided
   const transformMember = (member) => {
+    const transformUnlessParseResult = R.ifElse(R.compose(isParseResult, getValue), getValue, transform);
     const coerceMember = (R.unless(isAnnotationOrMember, createMember(member.key)));
-    return R.map(coerceMember, transform(member));
+    return R.map(coerceMember, transformUnlessParseResult(member));
   };
 
   /**
@@ -140,11 +141,22 @@ function parseObject(context, name, parseMember, requiredKeys = [], sendWarning 
   // Create a parse result from an object using all of the members
   const wrapObjectInParseResult = object => new namespace.elements.ParseResult(object.content);
 
-  const validateMembers = R.pipe(
+  const validateMembers = object => R.pipe(
     wrapObjectInParseResult,
+    (value) => {
+      // pre-parse the ordered keys in order
+      orderedKeys.forEach((key) => {
+        const isOrderedKey = R.allPass([isMember, m => m.key.equals(key)]);
+        const member = R.filter(isOrderedKey, value).get(0);
+        if (member) {
+          member.value = parseMember(member);
+        }
+      });
+      return value;
+    },
     chainParseResult(transformMember),
     R.unless(parseResultHasErrors, convertParseResultMembersToObject)
-  );
+  )(object);
 
   return pipeParseResult(namespace,
     R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
