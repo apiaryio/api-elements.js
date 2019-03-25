@@ -31,7 +31,7 @@ function parseOauthFlowObject(context, object) {
   ]);
 
   const parseScopes = pipeParseResult(namespace,
-    parseObject(context, scopesName, parseScopeMember, [], true),
+    parseObject(context, scopesName, parseScopeMember, [], [], true),
     scopes => new namespace.elements.Array(scopes.content),
     R.map((member) => {
       const scope = member.key.clone();
@@ -54,7 +54,7 @@ function parseOauthFlowObject(context, object) {
   ]);
 
   const parseOauthFlow = pipeParseResult(namespace,
-    parseObject(context, name, parseMember, requiredKeys, true));
+    parseObject(context, name, parseMember, requiredKeys, [], true));
 
   return parseOauthFlow(object);
 }

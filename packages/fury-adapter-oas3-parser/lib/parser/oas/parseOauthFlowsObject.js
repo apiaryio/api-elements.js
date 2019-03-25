@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const R = require('ramda');
 const {
   isExtension, hasKey, getValue,
@@ -37,17 +36,17 @@ function parseOauthFlowsObject(context, object) {
   const parseFlow = (member) => {
     const key = member.key.toValue();
 
-    const needAuthorizationUrl = flow => R.includes(key, ['implicit', 'authorizationCode']);
-    const needTokenUrl = flow => R.includes(key, ['password', 'clientCredentials', 'authorizationCode']);
+    const needAuthorizationUrl = () => R.includes(key, ['implicit', 'authorizationCode']);
+    const needTokenUrl = () => R.includes(key, ['password', 'clientCredentials', 'authorizationCode']);
 
     const hasAuthorizationUrl = flow => flow.get('authorizationUrl');
     const hasTokenUrl = flow => flow.get('tokenUrl');
 
     const parse = pipeParseResult(namespace,
       R.compose(parseOauthFlowObject(context), getValue),
-      R.when(R.allPass([R.complement(hasAuthorizationUrl), needAuthorizationUrl]), flow => createWarning(namespace,
+      R.when(R.allPass([R.complement(hasAuthorizationUrl), needAuthorizationUrl]), () => createWarning(namespace,
         `'${name}' '${key}' is missing required property 'authorizationUrl'`, member)),
-      R.when(R.allPass([R.complement(hasTokenUrl), needTokenUrl]), flow => createWarning(namespace,
+      R.when(R.allPass([R.complement(hasTokenUrl), needTokenUrl]), () => createWarning(namespace,
         `'${name}' '${key}' is missing required property 'tokenUrl'`, member)));
 
     return parse(member);
