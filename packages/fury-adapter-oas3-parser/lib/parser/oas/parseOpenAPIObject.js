@@ -112,9 +112,6 @@ function parseOASObject(context, object) {
   if (components) {
     components = parseComponentsObject(context, components);
     object.set('components', components);
-
-    // eslint-disable-next-line no-param-reassign
-    context.state.components = components.reject(isAnnotation).get(0);
   }
 
   const parseMember = R.cond([
