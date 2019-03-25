@@ -14,6 +14,7 @@ describe('Reference Object', () => {
 
     dataStructure = new namespace.elements.DataStructure();
     dataStructure.id = 'Node';
+    dataStructure.content = new namespace.elements.Object();
 
     context.state.components = new namespace.elements.Object({
       schemas: {
@@ -21,7 +22,6 @@ describe('Reference Object', () => {
       },
     });
   });
-
 
   it('errors when parsing non-string $ref', () => {
     const reference = new namespace.elements.Object({
@@ -41,6 +41,19 @@ describe('Reference Object', () => {
     expect(parseResult.length).to.equal(1);
     const structure = parseResult.get(0);
     expect(structure).to.equal(dataStructure);
+  });
+
+  it('can parse a reference and return reference', () => {
+    const reference = new namespace.elements.Object({
+      $ref: '#/components/schemas/Node',
+    });
+    const parseResult = parse(context, 'schemas', reference, true);
+
+    expect(parseResult.length).to.equal(1);
+
+    const structure = parseResult.get(0);
+    expect(structure.element).to.equal('Node');
+    expect(structure).to.be.instanceof(namespace.elements.Object);
   });
 
   it('can parse a reference to a component with multiple values', () => {
