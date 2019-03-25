@@ -128,6 +128,4 @@ class FuryRemoteAdapter {
   }
 }
 
-module.exports = {
-  FuryRemoteAdapter,
-};
+module.exports = FuryRemoteAdapter;
