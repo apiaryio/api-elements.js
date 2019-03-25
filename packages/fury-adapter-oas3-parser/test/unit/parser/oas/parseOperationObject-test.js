@@ -378,6 +378,133 @@ describe('Operation Object', () => {
         expect(transition.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);
       });
     });
+
+    describe('header parameters', () => {
+      it('exposes header parameter in request headers', () => {
+        const operation = new namespace.elements.Member('get', {
+          parameters: [
+            {
+              name: 'Accept',
+              in: 'header',
+              example: 'application/json',
+            },
+          ],
+          responses: {
+            200: {
+              description: 'dummy',
+            },
+          },
+        });
+
+        const parseResult = parse(context, path, operation);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+        const transition = parseResult.get(0);
+        expect(transition.transactions.length).to.equal(1);
+
+        const transaction = transition.transactions.get(0);
+        const { request } = transaction;
+
+        expect(request.headers).to.be.instanceof(namespace.elements.HttpHeaders);
+        expect(request.headers.toValue()).to.deep.equal([
+          {
+            key: 'Accept',
+            value: 'application/json',
+          },
+        ]);
+      });
+
+      it('does not override request body content type header', () => {
+        const operation = new namespace.elements.Member('post', {
+          parameters: [
+            {
+              name: 'Content-Type',
+              in: 'header',
+              example: 'application/json',
+            },
+          ],
+          requestBody: {
+            content: {
+              'application/xml': {},
+            },
+          },
+          responses: {
+            204: {
+              description: 'empty response',
+            },
+          },
+        });
+
+        const parseResult = parse(context, path, operation);
+
+        expect(parseResult.length).to.equal(1);
+
+        const transition = parseResult.get(0);
+        expect(transition).to.be.instanceof(namespace.elements.Transition);
+
+        const transaction = transition.get(0);
+        expect(transaction).to.be.instanceof(namespace.elements.HttpTransaction);
+
+        expect(transaction.request).to.be.instanceof(namespace.elements.HttpRequest);
+        expect(transaction.request.headers.toValue()).to.deep.equal([
+          {
+            key: 'Content-Type',
+            value: 'application/xml',
+          },
+        ]);
+      });
+
+      it('merges headers with operation headers', () => {
+        const operation = new namespace.elements.Member('post', {
+          parameters: [
+            {
+              name: 'Content-Type',
+              in: 'header',
+              example: 'application/json',
+            },
+            {
+              name: 'Link',
+              in: 'header',
+              example: '<https://api.github.com/user/repos?page=3&per_page=100>; rel="next"',
+            },
+          ],
+          requestBody: {
+            content: {
+              'application/xml': {},
+            },
+          },
+          responses: {
+            204: {
+              description: 'empty response',
+            },
+          },
+        });
+
+        const parseResult = parse(context, path, operation);
+
+        expect(parseResult.length).to.equal(1);
+
+        const transition = parseResult.get(0);
+        expect(transition).to.be.instanceof(namespace.elements.Transition);
+
+        const transaction = transition.get(0);
+        expect(transaction).to.be.instanceof(namespace.elements.HttpTransaction);
+
+        expect(transaction.request).to.be.instanceof(namespace.elements.HttpRequest);
+        expect(transaction.request.headers.toValue()).to.deep.equal([
+          {
+            key: 'Content-Type',
+            value: 'application/xml',
+          },
+          {
+            key: 'Link',
+            value: '<https://api.github.com/user/repos?page=3&per_page=100>; rel="next"',
+          },
+        ]);
+      });
+    });
   });
 
   describe('#responses', () => {

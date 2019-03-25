@@ -89,18 +89,6 @@ describe('Parameter Object', () => {
       expect(parseResult).to.contain.warning("'Parameter Object' 'in' must be either 'query', 'header', 'path' or 'cookie'");
     });
 
-    it('provides an unsupported error for header parameters', () => {
-      const parameter = new namespace.elements.Object({
-        name: 'example',
-        in: 'header',
-      });
-
-      const parseResult = parse(context, parameter);
-
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Parameter Object' 'in' 'header' is unsupported");
-    });
-
     it('provides an unsupported error for cookie parameters', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',

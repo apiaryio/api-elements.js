@@ -284,5 +284,139 @@ describe('#parsePathItemObject', () => {
         expect(resource.hrefVariables.getMember('resource')).to.be.instanceof(namespace.elements.Member);
       });
     });
+
+    describe('header parameters', () => {
+      it('exposes header parameter in operation requests', () => {
+        const path = new namespace.elements.Member('/', {
+          parameters: [
+            {
+              name: 'Accept',
+              in: 'header',
+              example: 'application/json',
+            },
+          ],
+          get: {
+            responses: {
+              200: {
+                description: 'dummy',
+              },
+            },
+          },
+        });
+
+        const parseResult = parse(context, path);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+
+        const resource = parseResult.get(0);
+
+        const transition = resource.transitions.get(0);
+        const transaction = transition.transactions.get(0);
+        const { request } = transaction;
+
+        expect(request.headers).to.be.instanceof(namespace.elements.HttpHeaders);
+        expect(request.headers.toValue()).to.deep.equal([
+          {
+            key: 'Accept',
+            value: 'application/json',
+          },
+        ]);
+      });
+
+      it('prefers headers defined by operation', () => {
+        const path = new namespace.elements.Member('/', {
+          parameters: [
+            {
+              name: 'Accept',
+              in: 'header',
+              example: 'application/json',
+            },
+          ],
+          get: {
+            parameters: [
+              {
+                name: 'Accept',
+                in: 'header',
+                example: 'application/problem+json',
+              },
+            ],
+            responses: {
+              404: {
+                description: 'dummy',
+              },
+            },
+          },
+        });
+
+        const parseResult = parse(context, path);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+
+        const resource = parseResult.get(0);
+
+        const transition = resource.transitions.get(0);
+        const transaction = transition.transactions.get(0);
+        const { request } = transaction;
+
+        expect(request.headers).to.be.instanceof(namespace.elements.HttpHeaders);
+        expect(request.headers.toValue()).to.deep.equal([
+          {
+            key: 'Accept',
+            value: 'application/problem+json',
+          },
+        ]);
+      });
+
+      it('merges headers with operation headers', () => {
+        const path = new namespace.elements.Member('/', {
+          parameters: [
+            {
+              name: 'Accept',
+              in: 'header',
+              example: 'application/json',
+            },
+          ],
+          get: {
+            parameters: [
+              {
+                name: 'Link',
+                in: 'header',
+                example: '<https://api.github.com/user/repos?page=3&per_page=100>; rel="next"',
+              },
+            ],
+            responses: {
+              404: {
+                description: 'dummy',
+              },
+            },
+          },
+        });
+
+        const parseResult = parse(context, path);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+
+        const resource = parseResult.get(0);
+
+        const transition = resource.transitions.get(0);
+        const transaction = transition.transactions.get(0);
+        const { request } = transaction;
+
+        expect(request.headers).to.be.instanceof(namespace.elements.HttpHeaders);
+        expect(request.headers.toValue()).to.deep.equal([
+          {
+            key: 'Link',
+            value: '<https://api.github.com/user/repos?page=3&per_page=100>; rel="next"',
+          },
+          {
+            key: 'Accept',
+            value: 'application/json',
+          },
+        ]);
+      });
+    });
   });
 });

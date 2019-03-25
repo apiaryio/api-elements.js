@@ -135,6 +135,9 @@ function parseOperationObject(context, path, member) {
         transition.push(description);
       }
 
+      const transactions = createTransactions(namespace, member, operation);
+      transition.content = transition.content.concat(transactions);
+
       const parameters = operation.get('parameters');
       if (parameters) {
         const queryParameters = parameters.get('query');
@@ -143,10 +146,20 @@ function parseOperationObject(context, path, member) {
         }
 
         transition.hrefVariables = hrefVariablesFromParameters(namespace, parameters);
-      }
 
-      const transactions = createTransactions(namespace, member, operation);
-      transition.content = transition.content.concat(transactions);
+        const headerParameters = parameters.get('header');
+        if (headerParameters) {
+          transactions.map(transaction => transaction.request).forEach((request) => {
+            const headers = R.or(request.headers, new namespace.elements.HttpHeaders());
+
+            headers.content = headers.content.concat(
+              R.reject(member => !headers.include(member.key.toValue()).isEmpty, headerParameters.content)
+            );
+
+            request.headers = headers;
+          });
+        }
+      }
 
       return transition;
     });

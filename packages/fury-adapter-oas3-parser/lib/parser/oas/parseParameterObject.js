@@ -25,7 +25,7 @@ const isValidInValue = R.anyPass([
   hasValue('query'), hasValue('header'), hasValue('path'), hasValue('cookie'),
 ]);
 const isSupportedIn = R.anyPass([
-  hasValue('path'), hasValue('query'),
+  hasValue('path'), hasValue('query'), hasValue('header'),
 ]);
 
 const unreservedCharacterRegex = /^[A-z0-9\\.\\_\\~\\-]+$/;
