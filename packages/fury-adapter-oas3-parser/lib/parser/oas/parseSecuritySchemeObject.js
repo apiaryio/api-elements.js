@@ -24,7 +24,6 @@ const isHttpScheme = securityScheme => securityScheme.getValue('type') === 'http
 const isValidTypeValue = R.anyPass(R.map(hasValue, ['apiKey', 'http', 'oauth2', 'openIdConnect']));
 const isSupportedType = R.anyPass(R.map(hasValue, ['apiKey', 'http', 'oauth2']));
 const isValidInValue = R.anyPass(R.map(hasValue, ['query', 'header', 'cookie']));
-const isSupportedIn = R.anyPass(R.map(hasValue, ['query', 'header']));
 
 function validateApiKeyScheme(context, securityScheme) {
   const { namespace } = context;
@@ -35,14 +34,9 @@ function validateApiKeyScheme(context, securityScheme) {
   );
   const validateIn = R.unless(isValidInValue, createInvalidInWarning);
 
-  const createUnsupportedInWarning = member => createWarning(namespace,
-    `'${name}' 'in' '${member.value.toValue()}' is unsupported`, member.value);
-  const ensureSupportedIn = R.unless(isSupportedIn, createUnsupportedInWarning);
-
   const parseIn = pipeParseResult(namespace,
     parseString(context, name, false),
-    validateIn,
-    ensureSupportedIn);
+    validateIn);
 
   const parseMember = R.cond([
     [hasKey('name'), parseString(context, name, false)],
@@ -136,6 +130,8 @@ function parseSecuritySchemeObject(context, object) {
           key = 'httpHeaderName';
         } else if (inValue === 'query') {
           key = 'queryParameterName';
+        } else if (inValue === 'cookie') {
+          key = 'cookieName';
         }
 
         authScheme.push(new namespace.elements.Member(key, securityScheme.get('name')));

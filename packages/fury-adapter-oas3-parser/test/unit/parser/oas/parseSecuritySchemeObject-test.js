@@ -221,7 +221,7 @@ describe('Security Scheme Object', () => {
       expect(members.get(0).value.toValue()).to.equal('example');
     });
 
-    it('provides warning about unsupported cookie', () => {
+    it('parses correctly when in a cookie', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',
         name: 'example',
@@ -231,7 +231,14 @@ describe('Security Scheme Object', () => {
       const parseResult = parse(context, securityScheme);
 
       expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Security Scheme Object' 'in' 'cookie' is unsupported");
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(parseResult.get(0).element).to.equal('Token Authentication Scheme');
+
+      const { members } = parseResult.get(0);
+
+      expect(members.length).to.equal(1);
+      expect(members.get(0).key.toValue()).to.equal('cookieName');
+      expect(members.get(0).value.toValue()).to.equal('example');
     });
 
     it('does not complain about scheme', () => {
