@@ -60,7 +60,7 @@ function validateApiKeyScheme(context, securityScheme) {
     [R.T, e => e],
   ]);
 
-  return parseObject(context, name, parseMember, ['name', 'in'], true)(securityScheme);
+  return parseObject(context, name, parseMember, ['name', 'in'], [], true)(securityScheme);
 }
 
 function validateHttpScheme(context, securityScheme) {
@@ -70,7 +70,7 @@ function validateHttpScheme(context, securityScheme) {
     [R.T, e => e],
   ]);
 
-  return parseObject(context, name, parseMember, ['scheme'], true)(securityScheme);
+  return parseObject(context, name, parseMember, ['scheme'], [], true)(securityScheme);
 }
 
 /**
@@ -116,7 +116,7 @@ function parseSecuritySchemeObject(context, object) {
   ]);
 
   const parseSecurityScheme = pipeParseResult(namespace,
-    parseObject(context, name, parseMember, requiredKeys, true),
+    parseObject(context, name, parseMember, requiredKeys, [], true),
     R.when(isApiKeyScheme, R.curry(validateApiKeyScheme)(context)),
     R.when(isHttpScheme, R.curry(validateHttpScheme)(context)),
     (securityScheme) => {

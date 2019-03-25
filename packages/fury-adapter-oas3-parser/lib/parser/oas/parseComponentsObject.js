@@ -109,15 +109,19 @@ function parseComponentsObject(context, element) {
    * @param parser {function}
    * @param member {Member}
    *
-   * @returns ParseResult
+   * @returns ParseResult<ObjectElement>
    * @private
    */
   const parseComponentObjectMember = (parser) => {
     const parseMember = parseComponentMember(context, parser);
 
-    return pipeParseResult(context.namespace,
+    return member => pipeParseResult(context.namespace,
       validateIsObject,
-      R.compose(parseObject(context, name, parseMember), getValue));
+      R.compose(parseObject(context, name, parseMember), getValue),
+      (object) => {
+        context.state.components.push(new namespace.elements.Member(member.key, object));
+        return object;
+      })(member);
   };
 
   const setDataStructureId = (dataStructure, key) => {
