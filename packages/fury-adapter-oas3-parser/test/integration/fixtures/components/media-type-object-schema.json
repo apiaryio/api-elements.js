@@ -101,7 +101,7 @@
                               "content": "application/json"
                             }
                           },
-                          "content": "{}"
+                          "content": "{\"name\":\"\",\"company\":{\"name\":\"\"}}"
                         },
                         {
                           "element": "dataStructure",
