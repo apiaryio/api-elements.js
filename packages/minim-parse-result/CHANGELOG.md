@@ -1,6 +1,12 @@
 # Minim Parse Result
 
-## 0.11.0 (26-02-19)
+## 0.11.1 (2019-03-26)
+
+### Enhancements
+
+- Update minim-api-description to 0.9.1.
+
+## 0.11.0 (2019-02-26)
 
 ### Breaking
 

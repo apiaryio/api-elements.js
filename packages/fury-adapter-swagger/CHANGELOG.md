@@ -1,5 +1,11 @@
 # Fury Swagger Parser Changelog
 
+## 0.25.0 (2019-03-26)
+
+### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 10](https://github.com/apiaryio/api-elements.js/releases/tag/fury@3.0.0-beta.10).
+
 ## 0.24.2 (2019-03-15)
 
 ### Bug Fixes

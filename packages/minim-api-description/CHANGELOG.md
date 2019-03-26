@@ -1,6 +1,13 @@
 # Minim API Description
 
-## 0.9.0 (26-02-19)
+## 0.9.1 (2019-03-26)
+
+### Enhancements
+
+- `Element.prototype.valueOf` can now accept an array of elements to be used
+  for handling references.
+
+## 0.9.0 (2019-02-26)
 
 ### Breaking
 

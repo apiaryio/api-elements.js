@@ -1,6 +1,6 @@
 # Fury Changelog
 
-## Master
+## 3.0.0-beta.10 (2019-03-26)
 
 ### Breaking
 
