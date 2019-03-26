@@ -1,6 +1,6 @@
 {
   "name": "minim-parse-result",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Minim Parse Result Namespace",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "minim-api-description": "^0.9.0"
+    "minim-api-description": "^0.9.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",

@@ -1,13 +1,19 @@
 # Changelog
 
-## 0.9.11 (2019-03-05)
+## 0.8.12 (2019-03-26)
+
+This update incorporates changes from Fury Adapters:
+
+- fury-adapter-oas3-parser 0.7.0
+
+## 0.8.11 (2019-03-05)
 
 This update incorporates changes from Fury Adapters:
 
 - fury-adapter-swagger 0.24.1
 - fury-adapter-apib-serializer 0.9.1
 
-## 0.9.10 (2019-02-26)
+## 0.8.10 (2019-02-26)
 
 This update uses [Fury 3.0.0 Beta
 9](https://github.com/apiaryio/api-elements.js/releases/tag/fury-3.0.0-beta.9)

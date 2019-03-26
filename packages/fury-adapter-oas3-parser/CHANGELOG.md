@@ -1,8 +1,10 @@
 # Fury OAS3 Parser Changelog
 
-## Master
+## 0.7.0 (2019-03-26)
 
 ### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 10](https://github.com/apiaryio/api-elements.js/releases/tag/fury@3.0.0-beta.10).
 
 - Added primitive support for 'examples' in 'Media Type Object'. The first
   example value is used for JSON media types.
