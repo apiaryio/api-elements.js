@@ -17,7 +17,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "nunjucks": "^2.0.0"
+    "nunjucks": "^3.1.3"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.10"
