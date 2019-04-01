@@ -1,5 +1,12 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Added validation of media types, previously we would throw an error while
+  handling invalid media types.
+
 ## 0.7.0 (2019-03-26)
 
 ### Enhancements

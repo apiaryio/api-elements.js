@@ -21,6 +21,14 @@ describe('Media Type Object', () => {
     expect(parseResult).to.contain.warning("'Media Type Object' is not an object");
   });
 
+  it('provides warning when media type is invalid', () => {
+    const mediaType = new namespace.elements.Member('foo', {});
+
+    const parseResult = parse(context, messageBodyClass, mediaType);
+
+    expect(parseResult).to.contain.warning("'Media Type Object' media type 'foo' is invalid");
+  });
+
   it('returns a HTTP message body', () => {
     const mediaType = new namespace.elements.Member('application/json', {});
 

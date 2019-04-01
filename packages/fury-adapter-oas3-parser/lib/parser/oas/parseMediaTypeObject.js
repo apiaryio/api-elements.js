@@ -1,7 +1,9 @@
 const R = require('ramda');
 const mediaTyper = require('media-typer');
 const pipeParseResult = require('../../pipeParseResult');
-const { isExtension, hasKey, getValue } = require('../../predicates');
+const {
+  isExtension, hasKey, getKey, getValue,
+} = require('../../predicates');
 const {
   createWarning,
   createUnsupportedMemberWarning,
@@ -44,6 +46,15 @@ function parseExample(namespace, mediaType) {
 const parseSchemaObjectOrRef = parseReference('schemas', parseSchemaObject);
 const parseExampleObjectOrRef = parseReference('examples', parseExampleObject);
 
+const isValidMediaType = (mediaType) => {
+  try {
+    mediaTyper.parse(mediaType.toValue());
+  } catch (error) {
+    return false;
+  }
+  return true;
+};
+
 /**
  * Parse Media Type Object
  *
@@ -58,6 +69,14 @@ const parseExampleObjectOrRef = parseReference('examples', parseExampleObject);
 function parseMediaTypeObject(context, MessageBodyClass, element) {
   const { namespace } = context;
   const mediaType = element.key.toValue();
+
+  const createInvalidMediaTypeWarning = mediaType => createWarning(namespace,
+    `'${name}' media type '${mediaType.toValue()}' is invalid`, mediaType);
+
+  const validateMediaType = R.unless(
+    R.compose(isValidMediaType, getKey),
+    R.compose(createInvalidMediaTypeWarning, getKey)
+  );
 
   const createExamplesNotJSONWarning = createWarning(namespace,
     `'${name}' 'examples' is only supported for JSON media types`);
@@ -99,6 +118,8 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
   ]);
 
   const parseMediaType = pipeParseResult(namespace,
+    validateMediaType,
+    getValue,
     parseObject(context, name, parseMember),
     (mediaTypeObject) => {
       const message = new MessageBodyClass();
@@ -146,7 +167,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
       return message;
     });
 
-  return parseMediaType(element.value);
+  return parseMediaType(element);
 }
 
 module.exports = R.curry(parseMediaTypeObject);
