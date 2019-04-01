@@ -1,6 +1,6 @@
 # Fury OAS3 Parser Changelog
 
-## Master
+## 0.7.1 (2019-04-01)
 
 ### Bug Fixes
 
