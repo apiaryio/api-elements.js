@@ -43,17 +43,6 @@ describe('Security Scheme Object', () => {
       expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'");
     });
 
-    it('provides an unsupported warning for oauth2 type', () => {
-      const securityScheme = new namespace.elements.Object({
-        type: 'oauth2',
-      });
-
-      const parseResult = parse(context, securityScheme);
-
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' 'oauth2' is unsupported");
-    });
-
     it('provides an unsupported warning for openIdConnect type', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'openIdConnect',
@@ -232,6 +221,19 @@ describe('Security Scheme Object', () => {
       expect(members.get(0).value.toValue()).to.equal('example');
     });
 
+    it('provides warning about unsupported cookie', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'apiKey',
+        name: 'example',
+        in: 'cookie',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'in' 'cookie' is unsupported");
+    });
+
     it('does not complain about scheme', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',
@@ -301,19 +303,6 @@ describe('Security Scheme Object', () => {
       const parseResult = parse(context, securityScheme);
 
       expect(parseResult).to.contain.warning("'Security Scheme Object' contains unsupported key 'bearerFormat'");
-    });
-
-    it('provides warning for unsupported flows property', () => {
-      const securityScheme = new namespace.elements.Object({
-        type: 'apiKey',
-        name: 'example',
-        in: 'query',
-        flows: {},
-      });
-
-      const parseResult = parse(context, securityScheme);
-
-      expect(parseResult).to.contain.warning("'Security Scheme Object' contains unsupported key 'flows'");
     });
 
     it('provides warning for unsupported openIdConnectUrl property', () => {

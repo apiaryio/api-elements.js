@@ -13,27 +13,18 @@ const parseString = require('../parseString');
 
 const name = 'Security Scheme Object';
 const requiredKeys = ['type'];
-const unsupportedKeys = [
-  'bearerFormat', 'flows', 'openIdConnectUrl',
-];
+const unsupportedKeys = ['bearerFormat', 'openIdConnectUrl'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
-const passThrough = R.anyPass(R.map(hasKey, ['name', 'in', 'scheme']));
+const passThrough = R.anyPass(R.map(hasKey, ['name', 'in', 'scheme', 'flows']));
 
 const isApiKeyScheme = securityScheme => securityScheme.getValue('type') === 'apiKey';
 const isHttpScheme = securityScheme => securityScheme.getValue('type') === 'http';
+// const isOauth2Scheme = securityScheme => securityScheme.getValue('type') === 'oauth2';
 
-const isValidTypeValue = R.anyPass([
-  hasValue('apiKey'), hasValue('http'), hasValue('oauth2'), hasValue('openIdConnect'),
-]);
-const isSupportedType = R.anyPass([
-  hasValue('apiKey'), hasValue('http'),
-]);
-const isValidInValue = R.anyPass([
-  hasValue('query'), hasValue('header'), hasValue('cookie'),
-]);
-const isSupportedIn = R.anyPass([
-  hasValue('query'), hasValue('header'),
-]);
+const isValidTypeValue = R.anyPass(R.map(hasValue, ['apiKey', 'http', 'oauth2', 'openIdConnect']));
+const isSupportedType = R.anyPass(R.map(hasValue, ['apiKey', 'http', 'oauth2']));
+const isValidInValue = R.anyPass(R.map(hasValue, ['query', 'header', 'cookie']));
+const isSupportedIn = R.anyPass(R.map(hasValue, ['query', 'header']));
 
 function validateApiKeyScheme(context, securityScheme) {
   const { namespace } = context;
@@ -119,6 +110,7 @@ function parseSecuritySchemeObject(context, object) {
     parseObject(context, name, parseMember, requiredKeys, [], true),
     R.when(isApiKeyScheme, R.curry(validateApiKeyScheme)(context)),
     R.when(isHttpScheme, R.curry(validateHttpScheme)(context)),
+    // R.when(isOauth2Scheme, parseSecuritySchemeFlowsObject),
     (securityScheme) => {
       const authScheme = new namespace.elements.AuthScheme();
 
