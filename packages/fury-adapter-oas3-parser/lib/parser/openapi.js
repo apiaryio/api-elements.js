@@ -26,7 +26,7 @@ function parseOpenAPI(context, openapi) {
   }
 
   if (parseInt(versionInfo[2], 10) > supportedMinorVersion) {
-    return new namespace.elements.ParseResult([createWarning(namespace, `Version '${openapi.value.toValue()}' is not fully supported`, openapi.value)]);
+    return new namespace.elements.ParseResult([openapi, createWarning(namespace, `Version '${openapi.value.toValue()}' is not fully supported`, openapi.value)]);
   }
 
 
