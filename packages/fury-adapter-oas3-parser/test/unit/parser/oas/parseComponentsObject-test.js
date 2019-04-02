@@ -322,6 +322,24 @@ describe('Components Object', () => {
       expect(securitySchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
       expect(securitySchemes.get(0).meta.id.toValue()).to.equal('token');
     });
+
+    it('handles invalid security scheme', () => {
+      const components = new namespace.elements.Object({
+        securitySchemes: {
+          Basic: null,
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(2);
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const schemes = parsedComponents.get('securitySchemes');
+      expect(schemes).to.be.instanceof(namespace.elements.Array);
+      expect(schemes.isEmpty).to.be.true;
+    });
   });
 
   describe('#examples', () => {

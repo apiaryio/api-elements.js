@@ -7,6 +7,9 @@
 - Fixes a bug where parsing an OpenAPI 3.1.0 or higher document will result in
   an parse result containing only a warning and missing the API Category.
 
+- Fixes the parser from throwing an error while handling invalid or unsupported
+  security scheme components.
+
 ## 0.7.2 (2019-04-01)
 
 ### Bug Fixes
