@@ -34,6 +34,11 @@ describe('components', () => {
     return testParseFixture(file);
   });
 
+  it("'Response Object' headers references", () => {
+    const file = path.join(fixtures, 'response-object-headers');
+    return testParseFixture(file);
+  });
+
   it("'Schema Object' circular references", () => {
     const file = path.join(fixtures, 'schema-object-circular');
     return testParseFixture(file);
