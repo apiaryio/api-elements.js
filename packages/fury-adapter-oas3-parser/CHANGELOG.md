@@ -1,5 +1,12 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixes a bug where parsing an OpenAPI 3.1.0 or higher document will result in
+  an parse result containing only a warning and missing the API Category.
+
 ## 0.7.2 (2019-04-01)
 
 ### Bug Fixes
