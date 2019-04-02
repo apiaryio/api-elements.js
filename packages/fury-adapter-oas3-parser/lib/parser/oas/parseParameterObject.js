@@ -29,8 +29,15 @@ const isSupportedIn = R.anyPass([
 ]);
 
 const unreservedCharacterRegex = /^[A-z0-9\\.\\_\\~\\-]+$/;
-function nameContainsReservedCharacter(member) {
-  return !unreservedCharacterRegex.test(member.value.toValue());
+const reservedHeaderNamesRegex = /Accept|Content-Type|Authorization/i;
+
+const encodeQueryName = name => encodeURIComponent(name)
+  .replace(/[!'()*]/g, c => `%${c.charCodeAt(0).toString(16).toUpperCase()}`) //  as sugested by https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent#Description
+  .replace(/%25([0-9a-f]{2})/gi, (match, hex) => `%${hex}`); // revert double encoded sequences
+
+
+function nameContainsReservedCharacter(parameter) {
+  return !unreservedCharacterRegex.test(parameter.get('name').toValue());
 }
 
 function validateRequiredForPathParameter(context, object, parameter) {
@@ -81,14 +88,7 @@ function parseParameterObject(context, object) {
     validateIn,
     ensureSupportedIn);
 
-  const createUnsupportedNameError = R.compose(
-    createError(namespace, `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`),
-    getValue
-  );
-  const validateName = R.when(nameContainsReservedCharacter, createUnsupportedNameError);
-  const parseName = pipeParseResult(namespace,
-    parseString(context, name, true),
-    validateName);
+  const parseName = pipeParseResult(namespace, parseString(context, name, true));
 
   const parseMember = R.cond([
     [hasKey('name'), parseName],
@@ -106,11 +106,33 @@ function parseParameterObject(context, object) {
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const isPathParameter = parameter => parameter.getValue('in') === 'path';
+  const createUnsupportedNameError = createError(namespace, `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`);
+
+  const createReservedHeaderNamesWarning = createWarning(namespace, `'${name}' 'name' in location 'header' ignore keywords 'Accept', 'Content-Type' and 'Authorization'`);
+
+  const hasLocation = R.curry((location, parameter) => parameter.getValue('in') === location);
+
+  const validatePathName = R.when(nameContainsReservedCharacter, createUnsupportedNameError);
+
+  const nameContainsReservedHeaderName = parameter => parameter.get('name')
+    .toValue()
+    .match(reservedHeaderNamesRegex);
+
+  const sanitizeQueryName = (parameter) => {
+    parameter.set('name', encodeQueryName(parameter.get('name').toValue()));
+    return parameter;
+  };
+
+  const validateHeaderName = pipeParseResult(namespace,
+    R.when(nameContainsReservedCharacter, createUnsupportedNameError),
+    R.when(nameContainsReservedHeaderName, createReservedHeaderNamesWarning));
 
   const parseParameter = pipeParseResult(namespace,
     parseObject(context, name, parseMember, requiredKeys),
-    R.when(isPathParameter, R.curry(validateRequiredForPathParameter)(context, object)),
+    R.when(hasLocation('path'), R.curry(validateRequiredForPathParameter)(context, object)),
+    R.when(hasLocation('path'), validatePathName),
+    R.when(hasLocation('query'), sanitizeQueryName),
+    R.when(hasLocation('header'), validateHeaderName),
     (parameter) => {
       const example = parameter.get('example');
       const member = new namespace.elements.Member(parameter.get('name'), example);
