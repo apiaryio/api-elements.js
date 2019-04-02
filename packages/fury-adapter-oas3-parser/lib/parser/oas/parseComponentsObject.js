@@ -177,7 +177,7 @@ function parseComponentsObject(context, element) {
     [R.T, createInvalidMemberWarning(namespace, name)],
   ]);
 
-  const order = ['schemas'];
+  const order = ['schemas', 'headers'];
   return parseObject(context, name, parseMember, [], order)(element);
 }
 
