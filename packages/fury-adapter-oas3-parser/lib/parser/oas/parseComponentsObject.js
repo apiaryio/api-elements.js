@@ -9,7 +9,6 @@ const {
 } = require('../annotations');
 const parseObject = require('../parseObject');
 const pipeParseResult = require('../../pipeParseResult');
-const parseMap = require('../parseMap');
 const parseSchemaObject = require('./parseSchemaObject');
 const parseParameterObject = require('./parseParameterObject');
 const parseResponseObject = require('./parseResponseObject');
@@ -166,7 +165,7 @@ function parseComponentsObject(context, element) {
     [hasKey('responses'), parseComponentObjectMember(parseResponseObject)],
     [hasKey('requestBodies'), parseComponentObjectMember(parseRequestBodyObject)],
     [hasKey('examples'), parseComponentObjectMember(parseExampleObject)],
-    [hasKey('headers'), parseMap(context, name, 'headers', parseHeaderObject)],
+    [hasKey('headers'), parseComponentObjectMember(parseHeaderObject)],
     [hasKey('securitySchemes'), parseSecuritySchemes],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],

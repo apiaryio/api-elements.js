@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Headers Components
+paths:
+  /user:
+    get:
+      summary: View the current User
+      responses:
+        '200':
+          description: hi
+          headers:
+            X-Rate-Limit-Limit:
+              $ref: '#/components/headers/X-Rate-Limit-Limit'
+components:
+  headers:
+    X-Rate-Limit-Limit:
+      description: The number of allowed requests in the current period

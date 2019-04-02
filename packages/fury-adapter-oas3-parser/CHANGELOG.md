@@ -13,6 +13,9 @@
 - Added additional information to YAML parsing errors where available to make
   the errors more understandable.
 
+- Fix referencing a headers component. Previously this would return an error
+  that the headers components was undefined.
+
 ## 0.7.2 (2019-04-01)
 
 ### Bug Fixes
