@@ -34,6 +34,11 @@ describe('components', () => {
     return testParseFixture(file);
   });
 
+  it("'Responses Object' respomnse references with headers", () => {
+    const file = path.join(fixtures, 'responses-object-response-with-headers');
+    return testParseFixture(file);
+  });
+
   it("'Response Object' headers references", () => {
     const file = path.join(fixtures, 'response-object-headers');
     return testParseFixture(file);
