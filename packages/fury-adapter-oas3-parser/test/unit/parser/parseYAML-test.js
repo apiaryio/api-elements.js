@@ -29,7 +29,7 @@ describe('#parseYAML', () => {
       expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
       expect(parseResult.errors.length).to.equal(1);
 
-      expect(parseResult).contain.error('YAML Syntax: while scanning for the next token').with.sourceMap([[14, 0]]);
+      expect(parseResult).contain.error('YAML Syntax: found character \\t that cannot start any token, while scanning for the next token').with.sourceMap([[14, 0]]);
     });
   });
 
