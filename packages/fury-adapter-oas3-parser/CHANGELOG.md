@@ -10,6 +10,9 @@
 - Fixes the parser from throwing an error while handling invalid or unsupported
   security scheme components.
 
+- Added additional information to YAML parsing errors where available to make
+  the errors more understandable.
+
 ## 0.7.2 (2019-04-01)
 
 ### Bug Fixes

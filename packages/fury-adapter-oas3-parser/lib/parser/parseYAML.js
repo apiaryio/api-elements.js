@@ -106,8 +106,17 @@ function parse(source, context) {
   try {
     ast = yaml.compose(source);
   } catch (error) {
+    let message;
+
+    if (error.problem) {
+      const problem = error.problem.replace('\t', '\\t');
+      message = `${problem}, ${error.context}`;
+    } else {
+      message = error.context;
+    }
+
     const annotation = new namespace.elements.Annotation(
-      `YAML Syntax: ${error.context}`,
+      `YAML Syntax: ${message}`,
       { classes: ['error'] }
     );
 
