@@ -36,12 +36,11 @@ describe('Parameter Object', () => {
     it('provides an error when name contains unsupported characters', () => {
       const parameter = new namespace.elements.Object({
         name: 'hello!',
-        in: 'query',
+        in: 'path',
       });
 
       const parseResult = parse(context, parameter);
 
-      expect(parseResult.length).to.equal(1);
       expect(parseResult).to.contain.error("'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported");
     });
 
@@ -61,6 +60,92 @@ describe('Parameter Object', () => {
       expect(parseResult.length).to.equal(1);
       expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
       expect(parseResult.get(0).key.toValue()).to.equal(unreserved);
+    });
+
+    it('auto pct-encode reserved chars in query name', () => {
+      const reserved = '!*\'();:@&=+$,?%#[]';
+      const encoded = '%21%2A%27%28%29%3B%3A%40%26%3D%2B%24%2C%3F%25%23%5B%5D';
+
+      const parameter = new namespace.elements.Object({
+        name: reserved,
+        in: 'query',
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).key.toValue()).to.equal(encoded);
+    });
+
+    it('avoid double encoding pct-encode in query name', () => {
+      const input = 'user%5bname%5d';
+
+      const parameter = new namespace.elements.Object({
+        name: input,
+        in: 'query',
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).key.toValue()).to.equal(input);
+    });
+
+    it('allows header name to contain unreserved characters', () => {
+      const alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const digit = '0123456789';
+      const unreserved = `${alpha}${digit}-._~`;
+
+      const parameter = new namespace.elements.Object({
+        name: unreserved,
+        in: 'header',
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).key.toValue()).to.equal(unreserved);
+    });
+
+    describe('headers name do not allows reserved words', () => {
+      it('does not allow `Accept`', () => {
+        const parameter = new namespace.elements.Object({
+          name: 'accept',
+          in: 'header',
+        });
+
+        const parseResult = parse(context, parameter);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' should not be \'Accept\', \'Content-Type\' or \'Authorization\'');
+      });
+
+      it('does not allow `Content-Type`', () => {
+        const parameter = new namespace.elements.Object({
+          name: 'Content-Type',
+          in: 'header',
+        });
+
+        const parseResult = parse(context, parameter);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' should not be \'Accept\', \'Content-Type\' or \'Authorization\'');
+      });
+
+      it('does not allow `Authorization', () => {
+        const parameter = new namespace.elements.Object({
+          name: 'AUTHORIZATION',
+          in: 'header',
+        });
+
+        const parseResult = parse(context, parameter);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' should not be \'Accept\', \'Content-Type\' or \'Authorization\'');
+      });
     });
   });
 

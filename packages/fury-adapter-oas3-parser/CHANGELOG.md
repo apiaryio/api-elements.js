@@ -1,5 +1,11 @@
 # Fury OAS3 Parser Changelog
 
+## master
+
+### Enhancements
+
+- validate 'Parameter object' 'name' according to location ('in' parmaeter)
+
 ## 0.7.3 (2019-04-05)
 
 ### Bug Fixes
