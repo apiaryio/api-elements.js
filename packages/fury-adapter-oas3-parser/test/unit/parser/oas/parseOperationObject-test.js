@@ -384,9 +384,9 @@ describe('Operation Object', () => {
         const operation = new namespace.elements.Member('get', {
           parameters: [
             {
-              name: 'Accept',
+              name: 'X-RateLimit-Limit',
               in: 'header',
-              example: 'application/json',
+              example: 3,
             },
           ],
           responses: {
@@ -410,8 +410,8 @@ describe('Operation Object', () => {
         expect(request.headers).to.be.instanceof(namespace.elements.HttpHeaders);
         expect(request.headers.toValue()).to.deep.equal([
           {
-            key: 'Accept',
-            value: 'application/json',
+            key: 'X-RateLimit-Limit',
+            value: 3,
           },
         ]);
       });
@@ -439,7 +439,9 @@ describe('Operation Object', () => {
 
         const parseResult = parse(context, path, operation);
 
-        expect(parseResult.length).to.equal(1);
+        expect(parseResult.length).to.equal(2);
+
+        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' ignore keywords \'Accept\', \'Content-Type\' and \'Authorization\'');
 
         const transition = parseResult.get(0);
         expect(transition).to.be.instanceof(namespace.elements.Transition);
@@ -459,11 +461,6 @@ describe('Operation Object', () => {
       it('merges headers with operation headers', () => {
         const operation = new namespace.elements.Member('post', {
           parameters: [
-            {
-              name: 'Content-Type',
-              in: 'header',
-              example: 'application/json',
-            },
             {
               name: 'Link',
               in: 'header',

@@ -290,9 +290,9 @@ describe('Path Item Object', () => {
         const path = new namespace.elements.Member('/', {
           parameters: [
             {
-              name: 'Accept',
+              name: 'X-RateLimit-Limit',
               in: 'header',
-              example: 'application/json',
+              example: 3,
             },
           ],
           get: {
@@ -318,8 +318,8 @@ describe('Path Item Object', () => {
         expect(request.headers).to.be.instanceof(namespace.elements.HttpHeaders);
         expect(request.headers.toValue()).to.deep.equal([
           {
-            key: 'Accept',
-            value: 'application/json',
+            key: 'X-RateLimit-Limit',
+            value: 3,
           },
         ]);
       });
@@ -328,17 +328,17 @@ describe('Path Item Object', () => {
         const path = new namespace.elements.Member('/', {
           parameters: [
             {
-              name: 'Accept',
+              name: 'X-RateLimit-Limit',
               in: 'header',
-              example: 'application/json',
+              example: 3,
             },
           ],
           get: {
             parameters: [
               {
-                name: 'Accept',
+                name: 'X-RateLimit-Limit',
                 in: 'header',
-                example: 'application/problem+json',
+                example: 5,
               },
             ],
             responses: {
@@ -363,8 +363,8 @@ describe('Path Item Object', () => {
         expect(request.headers).to.be.instanceof(namespace.elements.HttpHeaders);
         expect(request.headers.toValue()).to.deep.equal([
           {
-            key: 'Accept',
-            value: 'application/problem+json',
+            key: 'X-RateLimit-Limit',
+            value: 5,
           },
         ]);
       });
@@ -373,9 +373,9 @@ describe('Path Item Object', () => {
         const path = new namespace.elements.Member('/', {
           parameters: [
             {
-              name: 'Accept',
+              name: 'X-RateLimit-Limit',
               in: 'header',
-              example: 'application/json',
+              example: 3,
             },
           ],
           get: {
@@ -412,8 +412,8 @@ describe('Path Item Object', () => {
             value: '<https://api.github.com/user/repos?page=3&per_page=100>; rel="next"',
           },
           {
-            key: 'Accept',
-            value: 'application/json',
+            key: 'X-RateLimit-Limit',
+            value: 3,
           },
         ]);
       });
