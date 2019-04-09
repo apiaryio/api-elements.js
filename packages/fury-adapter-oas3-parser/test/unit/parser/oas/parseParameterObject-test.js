@@ -101,7 +101,7 @@ describe('Parameter Object', () => {
 
       const parseResult = parse(context, parameter);
 
-      expect(parseResult).to.contain.error('\'Parameter Object\' \'name\' in location \'query\' contains URI malformed cahracters');
+      expect(parseResult).to.contain.error('\'Parameter Object\' \'name\' in location \'query\' contains URI malformed characters');
     });
 
     it('allows header name to contain unreserved characters', () => {

@@ -110,7 +110,7 @@ function parseParameterObject(context, object) {
 
   const createReservedHeaderNamesWarning = createWarning(namespace, `'${name}' 'name' in location 'header' should not be 'Accept', 'Content-Type' or 'Authorization'`);
 
-  const createMalformedUriCharacterError = createError(namespace, `'${name}' 'name' in location 'query' contains URI malformed cahracters`);
+  const createMalformedUriCharacterError = createError(namespace, `'${name}' 'name' in location 'query' contains URI malformed characters`);
 
   const hasLocation = R.curry((location, parameter) => parameter.getValue('in') === location);
 
