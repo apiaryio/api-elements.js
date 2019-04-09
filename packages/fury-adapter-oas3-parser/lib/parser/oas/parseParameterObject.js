@@ -110,6 +110,8 @@ function parseParameterObject(context, object) {
 
   const createReservedHeaderNamesWarning = createWarning(namespace, `'${name}' 'name' in location 'header' should not be 'Accept', 'Content-Type' or 'Authorization'`);
 
+  const createMalformedUriCharacterError = createError(namespace, `'${name}' 'name' in location 'query' contains URI malformed cahracters`);
+
   const hasLocation = R.curry((location, parameter) => parameter.getValue('in') === location);
 
   const validatePathName = R.when(nameContainsReservedCharacter, createUnsupportedNameError);
@@ -118,11 +120,12 @@ function parseParameterObject(context, object) {
     .toValue()
     .match(reservedHeaderNamesRegex);
 
-  const sanitizeQueryName = (parameter) => {
+  const sanitizeQueryName = R.tryCatch((parameter) => {
     const name = parameter.get('name');
     name.content = encodeQueryName(name.toValue());
     return parameter;
-  };
+  },
+  (err, parameter) => createMalformedUriCharacterError(parameter.get('name')));
 
   const validateHeaderName = pipeParseResult(namespace,
     R.when(nameContainsReservedCharacter, createUnsupportedNameError),

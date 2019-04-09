@@ -93,6 +93,17 @@ describe('Parameter Object', () => {
       expect(parseResult.get(0).key.toValue()).to.equal(input);
     });
 
+    it('handle throw while encoding query', () => {
+      const parameter = new namespace.elements.Object({
+        name: '\uD800',
+        in: 'query',
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult).to.contain.error('\'Parameter Object\' \'name\' in location \'query\' contains URI malformed cahracters');
+    });
+
     it('allows header name to contain unreserved characters', () => {
       const alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       const digit = '0123456789';
