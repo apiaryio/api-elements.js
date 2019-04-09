@@ -108,7 +108,7 @@ function parseParameterObject(context, object) {
 
   const createUnsupportedNameError = createError(namespace, `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`);
 
-  const createReservedHeaderNamesWarning = createWarning(namespace, `'${name}' 'name' in location 'header' ignore keywords 'Accept', 'Content-Type' and 'Authorization'`);
+  const createReservedHeaderNamesWarning = createWarning(namespace, `'${name}' 'name' in location 'header' should not be 'Accept', 'Content-Type' or 'Authorization'`);
 
   const hasLocation = R.curry((location, parameter) => parameter.getValue('in') === location);
 
@@ -119,7 +119,8 @@ function parseParameterObject(context, object) {
     .match(reservedHeaderNamesRegex);
 
   const sanitizeQueryName = (parameter) => {
-    parameter.set('name', encodeQueryName(parameter.get('name').toValue()));
+    const name = parameter.get('name');
+    name.content = encodeQueryName(name.toValue());
     return parameter;
   };
 

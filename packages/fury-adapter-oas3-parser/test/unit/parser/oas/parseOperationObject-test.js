@@ -441,7 +441,7 @@ describe('Operation Object', () => {
 
         expect(parseResult.length).to.equal(2);
 
-        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' ignore keywords \'Accept\', \'Content-Type\' and \'Authorization\'');
+        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' should not be \'Accept\', \'Content-Type\' or \'Authorization\'');
 
         const transition = parseResult.get(0);
         expect(transition).to.be.instanceof(namespace.elements.Transition);

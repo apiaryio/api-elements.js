@@ -110,28 +110,42 @@ describe('Parameter Object', () => {
       expect(parseResult.get(0).key.toValue()).to.equal(unreserved);
     });
 
-    it('does not allow header name to contain reserved keyword `Accept`', () => {
-      const parameter = new namespace.elements.Object({
-        name: 'accept',
-        in: 'header',
+    describe('headers name do not allows reserved words', () => {
+      it('does not allow `Accept`', () => {
+        const parameter = new namespace.elements.Object({
+          name: 'accept',
+          in: 'header',
+        });
+
+        const parseResult = parse(context, parameter);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' should not be \'Accept\', \'Content-Type\' or \'Authorization\'');
       });
 
-      const parseResult = parse(context, parameter);
+      it('does not allow `Content-Type`', () => {
+        const parameter = new namespace.elements.Object({
+          name: 'Content-Type',
+          in: 'header',
+        });
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' ignore keywords \'Accept\', \'Content-Type\' and \'Authorization\'');
-    });
+        const parseResult = parse(context, parameter);
 
-    it('does not allow header name to contain reserved keyword `Content-Type`', () => {
-      const parameter = new namespace.elements.Object({
-        name: 'Content-Type',
-        in: 'header',
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' should not be \'Accept\', \'Content-Type\' or \'Authorization\'');
       });
 
-      const parseResult = parse(context, parameter);
+      it('does not allow `Authorization', () => {
+        const parameter = new namespace.elements.Object({
+          name: 'AUTHORIZATION',
+          in: 'header',
+        });
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' ignore keywords \'Accept\', \'Content-Type\' and \'Authorization\'');
+        const parseResult = parse(context, parameter);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult).to.contain.warning('\'Parameter Object\' \'name\' in location \'header\' should not be \'Accept\', \'Content-Type\' or \'Authorization\'');
+      });
     });
   });
 
