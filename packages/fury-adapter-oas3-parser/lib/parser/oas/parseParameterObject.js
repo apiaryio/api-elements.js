@@ -30,11 +30,11 @@ const isSupportedIn = R.anyPass([
 
 const unreservedCharacterRegex = /^[A-z0-9\\.\\_\\~\\-]+$/;
 const reservedHeaderNamesRegex = /Accept|Content-Type|Authorization/i;
+const pathNameAllowedRegex = /^[A-z0-9._]+$/;
 
 const encodeQueryName = name => encodeURIComponent(name)
   .replace(/[!'()*]/g, c => `%${c.charCodeAt(0).toString(16).toUpperCase()}`) //  as sugested by https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent#Description
   .replace(/%25([0-9a-f]{2})/gi, (match, hex) => `%${hex}`); // revert double encoded sequences
-
 
 function nameContainsReservedCharacter(parameter) {
   return !unreservedCharacterRegex.test(parameter.get('name').toValue());
@@ -114,7 +114,13 @@ function parseParameterObject(context, object) {
 
   const hasLocation = R.curry((location, parameter) => parameter.getValue('in') === location);
 
-  const validatePathName = R.when(nameContainsReservedCharacter, createUnsupportedNameError);
+  const validatePathName = R.when(
+    R.pipe(R.invoker(1, 'get')('name'),
+      R.invoker(0, 'toValue'),
+      R.test(pathNameAllowedRegex),
+      R.not),
+    createUnsupportedNameError
+  );
 
   const nameContainsReservedHeaderName = parameter => parameter.get('name')
     .toValue()

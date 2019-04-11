@@ -44,6 +44,17 @@ describe('Parameter Object', () => {
       expect(parseResult).to.contain.error("'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported");
     });
 
+    it('does not allow character `-` in path name', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'not-allowed',
+        in: 'path',
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult).to.contain.error("'Parameter Object' 'name' contains unsupported characters. Only alphanumeric characters are currently supported");
+    });
+
     it('allows name to contain unreserved URI Template characters', () => {
       // as per https://tools.ietf.org/html/rfc6570#section-1.5
       const alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
