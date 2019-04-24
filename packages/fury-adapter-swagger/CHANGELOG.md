@@ -1,5 +1,12 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixes a potential parser crash while handling an example value for a 'Schema
+  Object' which contains an invalid reference.
+
 ## 0.25.0 (2019-03-26)
 
 ### Enhancements
