@@ -9,10 +9,10 @@ const mediaTypes = [
 
 const detect = source => mediaTypes.indexOf(deckardcain.identify(source)) !== -1;
 
-const parse = (options, done) => {
+function parse(options) {
   const parser = new Parser(options);
-  parser.parse(done);
-};
+  return Promise.resolve(parser.parse());
+}
 
 module.exports = {
   name, mediaTypes, detect, parse,

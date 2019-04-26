@@ -78,11 +78,13 @@ describe('Adapter', () => {
   });
 
   it('parses a valid OAS3 document', (done) => {
-    const { minim: namespace } = new Fury();
+    const fury = new Fury();
+    fury.use(adapter);
+
     const source = 'openapi: "3.0.0"\ninfo: {title: My API, version: 1.0.0}\npaths: {}\n';
 
-    adapter.parse({ source, minim: namespace }, (err, parseResult) => {
-      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+    fury.parse({ source }, (err, parseResult) => {
+      expect(parseResult).to.be.instanceof(fury.minim.elements.ParseResult);
       expect(parseResult.length).to.equal(1);
       expect(parseResult.api.title.toValue()).to.equal('My API');
       done();

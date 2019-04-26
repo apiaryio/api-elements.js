@@ -13,15 +13,26 @@ function detect(source) {
   return !!source.match(/(["']?)openapi\1\s*:\s*(["']?)3\.\d+\.\d+\2/g);
 }
 
-function parse(options, cb) {
+function parse(options) {
   const context = new Context(
     options.minim,
     {
       generateSourceMap: options.generateSourceMap,
     }
   );
-  const parseResult = parser(options.source, context);
-  cb(null, parseResult);
+
+  return new Promise((resolve, reject) => {
+    let parseResult;
+
+    try {
+      parseResult = parser(options.source, context);
+    } catch (error) {
+      reject(error);
+      return;
+    }
+
+    resolve(parseResult);
+  });
 }
 
 module.exports = {

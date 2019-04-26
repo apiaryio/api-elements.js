@@ -29,15 +29,17 @@ const mediaTypes = [
 /*
  * Serialize an API into API Blueprint.
  */
-const serialize = ({ api }, done) => {
-  nunjucks.render('template.nunjucks', { api }, (err, apib) => {
-    if (err) {
-      return done(err);
-    }
+function serialize({ api }) {
+  return new Promise((resolve, reject) => {
+    nunjucks.render('template.nunjucks', { api }, (err, apib) => {
+      if (err) {
+        return reject(err);
+      }
 
-    // Attempt to filter out extra spacing
-    return done(null, apib.replace(/\n\s*\n\s*\n/g, '\n\n'));
+      // Attempt to filter out extra spacing
+      return resolve(apib.replace(/\n\s*\n\s*\n/g, '\n\n'));
+    });
   });
-};
+}
 
 module.exports = { name, mediaTypes, serialize };

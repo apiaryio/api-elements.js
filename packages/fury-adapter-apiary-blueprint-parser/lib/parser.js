@@ -7,7 +7,7 @@ class Parser {
     this.source = source;
   }
 
-  parse(done) {
+  parse() {
     const {
       Annotation, Category, Copy, ParseResult,
     } = this.minim.elements;
@@ -28,7 +28,7 @@ class Parser {
         ]);
       }
 
-      return done(null, this.result);
+      return this.result;
     }
 
     this.api = new Category();
@@ -53,7 +53,7 @@ class Parser {
     });
 
     this.result.push(this.api);
-    return done(null, this.result);
+    return this.result;
   }
 
   // Parses a URL from the Apiary Blueprint AST

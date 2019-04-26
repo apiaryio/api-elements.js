@@ -72,10 +72,10 @@ class FuryRemoteAdapter {
     return false;
   }
 
-  parse({ source, minim, mediaType }, cb) {
+  parse({ source, minim, mediaType }) {
     const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
 
-    axios({
+    return axios({
       method: 'post',
       url: this.options.parseEndpoint,
       baseURL: this.options.url,
@@ -86,18 +86,13 @@ class FuryRemoteAdapter {
       },
       // allow code 422 to be identified as valid response
       validateStatus: status => ((status >= 200 && status < 300) || status === 422),
-    })
-      .then((response) => {
-        cb(null, minim.serialiser.deserialise(response.data));
-      }, (err) => {
-        cb(err, undefined);
-      });
+    }).then(response => minim.serialiser.deserialise(response.data));
   }
 
-  validate({ source, minim, mediaType }, cb) {
+  validate({ source, minim, mediaType }) {
     const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
 
-    axios({
+    return axios({
       method: 'post',
       url: this.options.validateEndpoint,
       baseURL: this.options.url,
@@ -110,19 +105,14 @@ class FuryRemoteAdapter {
         'Content-Type': 'application/json',
         Accept: outputMediaType,
       },
-    })
-      .then((response) => {
-        cb(null, minim.serialiser.deserialise(response.data));
-      }, (err) => {
-        cb(err, undefined);
-      });
+    }).then(response => minim.serialiser.deserialise(response.data));
   }
 
-  serialize({ api, minim, mediaType }, cb) {
+  serialize({ api, minim, mediaType }) {
     const content = minim.serialiser.serialise(api);
     const inputMediaType = (content.element && content.element === 'parseResult') ? 'application/vnd.refract+json' : 'application/vnd.refract.parse-result+json';
 
-    axios({
+    return axios({
       method: 'post',
       url: this.options.serializeEndpoint,
       baseURL: this.options.url,
@@ -131,12 +121,7 @@ class FuryRemoteAdapter {
         'Content-Type': inputMediaType,
         Accept: mediaType,
       },
-    })
-      .then((response) => {
-        cb(null, response.data);
-      }, (err) => {
-        cb(err, undefined);
-      });
+    }).then(response => response.data);
   }
 }
 

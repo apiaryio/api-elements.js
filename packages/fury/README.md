@@ -136,7 +136,7 @@ If you need to distinguish among supported input Media Types for methods use:
 export const mediaTypes = {
   parse: ['text/vnd.my-parsing', 'text/vnd.another-supported-parsing'],
   serialize: ['text/vnd.my-serialization'],
-  };
+};
 ```
 
 
@@ -155,28 +155,28 @@ export function detect(source[, method]) {
   return source.match(/some-test/i) !== null;
 }
 
-export function parse({minim, generateSourceMap, mediaType, source}, done) {
+export async function parse({minim, generateSourceMap, mediaType, source}) {
   // Here you convert the source into refract elements. Use the `minim`
   // variable to access refract element classes.
   const Resource = minim.getElementByClass('resource');
   // ...
-  done(null, elements);
+  return elements;
 }
 
-export function validate({minim, mediaType, source}, done) {
+export async function validate({minim, mediaType, source}) {
   // Here you validate the source and return a parse result for any warnings or
   // errors.
   //
   // NOTE: Implementing `validate` is optional, Fury will fallback to using
   // `parse` to find warnings or errors.
-  done(null, null);
+  return null;
 }
 
-export function serialize({api, mediaType, minim}, done) {
+export async function serialize({api, mediaType, minim}) {
   // Here you convert `api` from javascript element objects to the serialized
   // source format.
   // ...
-  done(null, outputString);
+  return outputString;
 }
 
 export default {name, mediaTypes, detect, parse, serialize};

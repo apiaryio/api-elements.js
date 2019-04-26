@@ -12,7 +12,7 @@ describe('Validation', () => {
       name: 'passthrough',
       mediaTypes: ['text/vnd.passthrough'],
       detect: () => shouldDetect,
-      validate: (options, done) => done(null, result),
+      validate: () => Promise.resolve(result),
     });
 
     beforeEach(() => {
@@ -97,9 +97,9 @@ describe('Validation', () => {
 
     it('should pass adapter options during validation', (done) => {
       shouldDetect = true;
-      fury.adapters[0].validate = ({ minim, testOption = false }, cb) => {
+      fury.adapters[0].validate = ({ minim, testOption = false }) => {
         const BooleanElement = minim.getElementClass('boolean');
-        return cb(null, new BooleanElement(testOption));
+        return Promise.resolve(new BooleanElement(testOption));
       };
 
       fury.validate({ source: 'dummy', adapterOptions: { testOption: true } }, (err, res) => {
@@ -118,7 +118,7 @@ describe('Validation', () => {
       name: 'passthrough',
       mediaTypes: ['text/vnd.passthrough'],
       detect: () => true,
-      parse: (options, done) => done(null, result),
+      parse: () => Promise.resolve(result),
     });
 
     before(() => {

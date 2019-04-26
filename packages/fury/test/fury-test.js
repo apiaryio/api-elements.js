@@ -409,22 +409,24 @@ describe('Fury class', () => {
   describe('pass mediaType into adapter operations', () => {
     const fury = new Fury();
 
-    function test(first) {
-      return function impl(second) { assert.equal(first, second); };
+    function test(expectedMediaType) {
+      return function impl(err, mediaType) { assert.equal(expectedMediaType, mediaType.toValue()); };
     }
+
+    const { ParseResult } = fury.minim.elements;
 
     before(() => {
       fury.use({
         name: 'AssertionAdapter',
         mediaTypes: ['text/vnd.parse', 'text/vnd.validate', 'text/vnd.serialize'],
-        parse({ mediaType }, test) {
-          test(mediaType);
+        parse({ mediaType }) {
+          return Promise.resolve(new ParseResult(mediaType));
         },
-        validate({ mediaType }, test) {
-          test(mediaType);
+        validate({ mediaType }) {
+          return Promise.resolve(new ParseResult(mediaType));
         },
-        serialize({ mediaType }, test) {
-          test(mediaType);
+        serialize({ mediaType }) {
+          return Promise.resolve(new ParseResult(mediaType));
         },
       });
     });
@@ -450,8 +452,8 @@ describe('Parser', () => {
         name: 'passthrough',
         mediaTypes: ['text/vnd.passthrough'],
         detect: () => true,
-        parse: ({ source }, done) => done(null, { element: 'string', content: source }),
-        serialize: ({ api }, done) => done(null, api),
+        parse: ({ source }) => Promise.resolve({ element: 'string', content: source }),
+        serialize: ({ api }) => Promise.resolve(api),
       };
 
       fury.use(adapter);
@@ -477,13 +479,13 @@ describe('Parser', () => {
 
     it('should parse when returning element instances', (done) => {
       // Modify the parse method to return an element instance
-      fury.adapters[fury.adapters.length - 1].parse = ({ minim, source }, cb) => {
-        const StringElement = minim.getElementClass('string');
-        cb(null, new StringElement(source));
+      fury.adapters[fury.adapters.length - 1].parse = ({ minim, source }) => {
+        const { ParseResult } = minim.elements;
+        return Promise.resolve(new ParseResult(source));
       };
 
       fury.parse({ source: 'dummy' }, (err, result) => {
-        assert.equal(result.content, 'dummy');
+        assert.equal(result.toValue(), 'dummy');
         done(err);
       });
     });
@@ -491,9 +493,9 @@ describe('Parser', () => {
     it('should pass adapter options during parsing', (done) => {
       const { length } = fury.adapters;
 
-      fury.adapters[length - 1].parse = ({ minim, testOption = false }, cb) => {
+      fury.adapters[length - 1].parse = ({ minim, testOption = false }) => {
         const BooleanElement = minim.getElementClass('boolean');
-        return cb(null, new BooleanElement(testOption));
+        return Promise.resolve(new BooleanElement(testOption));
       };
 
       fury.parse({ source: 'dummy', adapterOptions: { testOption: true } }, (err, result) => {
@@ -512,9 +514,7 @@ describe('Parser', () => {
 
     it('should error on parser error', (done) => {
       const expectedError = new Error();
-      fury.adapters[fury.adapters.length - 1].parse = (options, done2) => {
-        done2(expectedError);
-      };
+      fury.adapters[fury.adapters.length - 1].parse = () => Promise.reject(expectedError);
 
       fury.parse({ source: 'dummy' }, (err, parseResult) => {
         assert.equal(err, expectedError);
@@ -533,9 +533,7 @@ describe('Parser', () => {
 
     it('should error on serializer error', (done) => {
       const expected = new Error();
-      fury.adapters[fury.adapters.length - 1].serialize = (options, done2) => {
-        done2(expected);
-      };
+      fury.adapters[fury.adapters.length - 1].serialize = () => Promise.reject(expected);
 
       fury.serialize({ api: 'dummy', mediaType: 'text/vnd.passthrough' }, (err) => {
         assert.equal(err, expected);
