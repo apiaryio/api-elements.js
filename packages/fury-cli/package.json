@@ -26,7 +26,7 @@
     "fury-adapter-apib-parser": "^0.14.0",
     "fury-adapter-apib-serializer": "^0.10.0",
     "fury-adapter-oas3-parser": "^0.7.4",
-    "fury-adapter-swagger": "^0.25.0",
+    "fury-adapter-swagger": "^0.25.1",
     "js-yaml": "^3.12.0",
     "minim": "^0.23.1"
   },
