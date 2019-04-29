@@ -6,6 +6,8 @@ if (!Object.values) {
   values.shim();
 }
 
+class ReferenceError extends Error {}
+
 // Test whether a key is a special Swagger extension.
 const isExtension = (value, key) => _.startsWith(key, 'x-');
 
@@ -13,11 +15,11 @@ const parseReference = (reference) => {
   const parts = reference.split('/');
 
   if (parts[0] !== '#') {
-    throw new Error('Schema reference must start with document root (#)');
+    throw new ReferenceError('Schema reference must start with document root (#)');
   }
 
   if (parts[1] !== 'definitions' || parts.length !== 3) {
-    throw new Error('Schema reference must be reference to #/definitions');
+    throw new ReferenceError('Schema reference must be reference to #/definitions');
   }
 
   const id = parts[2];
@@ -43,11 +45,11 @@ const lookupReference = (reference, root, depth) => {
   const parts = reference.split('/').reverse();
 
   if (parts.pop() !== '#') {
-    throw new Error('Schema reference must start with document root (#)');
+    throw new ReferenceError('Schema reference must start with document root (#)');
   }
 
   if (parts.pop() !== 'definitions') {
-    throw new Error('Schema reference must be reference to #/definitions');
+    throw new ReferenceError('Schema reference must be reference to #/definitions');
   }
 
   const id = parts[parts.length - 1];
@@ -67,7 +69,7 @@ const lookupReference = (reference, root, depth) => {
   }
 
   if (value === undefined) {
-    throw new Error(`Reference to ${reference} does not exist`);
+    throw new ReferenceError(`Reference to ${reference} does not exist`);
   }
 
   return {
@@ -93,6 +95,20 @@ const pathHasCircularReference = (paths, path, reference) => {
 };
 
 const dereference = (example, root, paths, path) => {
+  // We shouldn't even be dereferencing examples, but given how swagger-parser
+  // works it had been doing this from the start (which was caught later).
+  //
+  // See https://github.com/apiaryio/api-elements.js/issues/220
+  //
+  // At thsi point, changing that behaviour would be a significant breaking
+  // change and it will affect some of our larger users. Not to mention that
+  // swagger-parser will still dereference the examples in cases where our code
+  // path doesn't, it won't be easy to solve.
+  //
+  // The below code attemps to dereference an example, but if we can't we
+  // will just return the example (possibly a "reference object") to be
+  // the example value.
+
   if (example === null || example === undefined) {
     return example;
   }
@@ -105,7 +121,18 @@ const dereference = (example, root, paths, path) => {
       return null;
     }
 
-    const ref = lookupReference(example.$ref, root);
+    let ref;
+
+    try {
+      ref = lookupReference(example.$ref, root);
+    } catch (error) {
+      if (error instanceof ReferenceError) {
+        // Cannot find the reference, use example
+        return example;
+      }
+
+      throw error;
+    }
 
     const newPaths = (paths || []).concat([currentPath]);
     return dereference(ref.referenced, root, newPaths, refPath);
