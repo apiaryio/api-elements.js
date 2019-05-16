@@ -31,19 +31,26 @@ describe('components', () => {
     return testParseFixture(file);
   });
 
-  it("'Responses Object' response references", () => {
-    const file = path.join(fixtures, 'responses-object-response');
-    return testParseFixture(file);
-  });
+  describe('Responses Object', () => {
+    it('handles response references', () => {
+      const file = path.join(fixtures, 'responses-object-response');
+      return testParseFixture(file);
+    });
 
-  it("'Responses Object' response references with schema", () => {
-    const file = path.join(fixtures, 'responses-object-response-with-schema');
-    return testParseFixture(file);
-  });
+    it('handles multiple references to same response', () => {
+      const file = path.join(fixtures, 'responses-object-response-multiple');
+      return testParseFixture(file);
+    });
 
-  it("'Responses Object' respomnse references with headers", () => {
-    const file = path.join(fixtures, 'responses-object-response-with-headers');
-    return testParseFixture(file);
+    it('handles response references with schema', () => {
+      const file = path.join(fixtures, 'responses-object-response-with-schema');
+      return testParseFixture(file);
+    });
+
+    it('handles responses references with headers', () => {
+      const file = path.join(fixtures, 'responses-object-response-with-headers');
+      return testParseFixture(file);
+    });
   });
 
   describe('Response Object', () => {
