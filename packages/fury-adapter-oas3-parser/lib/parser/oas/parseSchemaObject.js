@@ -131,8 +131,13 @@ function validateValuesMatchSchema(context, schema) {
 function parseSchema(context) {
   const { namespace } = context;
 
-  const ensureValidType = R.unless(isValidType, createWarning(namespace,
-    `'Schema Object' 'type' must be either ${types.join(', ')}`));
+  const ensureValidType = R.unless(
+    isValidType,
+    R.compose(
+      createWarning(namespace, `'Schema Object' 'type' must be either ${types.join(', ')}`),
+      getValue
+    )
+  );
 
   const parseType = pipeParseResult(namespace,
     parseString(context, name, false),
