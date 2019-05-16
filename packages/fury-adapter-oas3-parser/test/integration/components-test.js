@@ -46,9 +46,16 @@ describe('components', () => {
     return testParseFixture(file);
   });
 
-  it("'Response Object' headers references", () => {
-    const file = path.join(fixtures, 'response-object-headers');
-    return testParseFixture(file);
+  describe('Response Object', () => {
+    it('handles headers references', () => {
+      const file = path.join(fixtures, 'response-object-headers');
+      return testParseFixture(file);
+    });
+
+    it('handles multiple references to same header', () => {
+      const file = path.join(fixtures, 'response-object-headers-multiple');
+      return testParseFixture(file);
+    });
   });
 
   it("'Schema Object' circular references", () => {
