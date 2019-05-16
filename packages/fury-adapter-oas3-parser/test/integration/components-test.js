@@ -21,14 +21,21 @@ describe('components', () => {
     });
   });
 
-  it("'Media Type Object' schema references", () => {
-    const file = path.join(fixtures, 'media-type-object-schema');
-    return testParseFixture(file);
-  });
+  describe('Media Type Object', () => {
+    it('handles schema references', () => {
+      const file = path.join(fixtures, 'media-type-object-schema');
+      return testParseFixture(file);
+    });
 
-  it("'Media Type Object' examples references", () => {
-    const file = path.join(fixtures, 'media-type-object-examples');
-    return testParseFixture(file);
+    it('handles multiple references to same schema', () => {
+      const file = path.join(fixtures, 'media-type-object-schema-multiple');
+      return testParseFixture(file);
+    });
+
+    it('handles examples references', () => {
+      const file = path.join(fixtures, 'media-type-object-examples');
+      return testParseFixture(file);
+    });
   });
 
   describe('Responses Object', () => {
