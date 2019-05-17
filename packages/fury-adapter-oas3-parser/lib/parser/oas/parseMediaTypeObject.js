@@ -96,7 +96,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
       }
 
       if (examples.length > 1) {
-        parseResult.push(createWarning(namespace, `'${name}' 'examples' only one example is supported, other examples have been ignored`, examples));
+        parseResult.push(createWarning(namespace, `'${name}' 'examples' only one example is supported, other examples have been ignored`, examples.content[1]));
       }
 
       return parseResult;
