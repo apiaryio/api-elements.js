@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Response Components with Headers
+paths:
+  /user:
+    get:
+      summary: View the current User
+      responses:
+        '200':
+          $ref: '#/components/responses/UserResponse'
+        '226':
+          $ref: '#/components/responses/UserResponse'
+components:
+  responses:
+    UserResponse:
+      description: A user
+      headers:
+        X-Rate-Limit-Limit:
+          $ref: '#/components/headers/X-Rate-Limit-Limit'
+  headers:
+    X-Rate-Limit-Limit:
+      description: The number of allowed requests in the current period

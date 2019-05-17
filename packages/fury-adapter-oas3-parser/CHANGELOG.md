@@ -1,5 +1,13 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Prevents an exception being raised when using `freeze()` on the parse result
+  returned by the parser when you reference a parameter component multiple
+  times in an OpenAPI Document.
+
 ## 0.7.4 (2019-04-12)
 
 ### Enhancements

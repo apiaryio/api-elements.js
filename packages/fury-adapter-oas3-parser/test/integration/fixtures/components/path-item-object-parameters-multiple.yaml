@@ -1,0 +1,35 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Parameter Components
+paths:
+  /1:
+    parameters:
+      - $ref: '#/components/parameters/skipParam'
+      - $ref: '#/components/parameters/limitParam'
+    get:
+      summary: List all pets
+      responses:
+        '204':
+          description: no content
+  /2:
+    parameters:
+      - $ref: '#/components/parameters/skipParam'
+      - $ref: '#/components/parameters/limitParam'
+    get:
+      summary: retrieve
+      responses:
+        '204':
+          description: no content
+components:
+  parameters:
+    skipParam:
+      name: skip
+      in: query
+      description: number of items to skip
+      required: true
+    limitParam:
+      name: limit
+      in: query
+      description: max records to return
+      required: true

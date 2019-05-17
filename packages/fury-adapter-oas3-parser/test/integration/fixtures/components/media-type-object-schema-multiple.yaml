@@ -1,0 +1,34 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Schemas Components
+paths:
+  /user:
+    get:
+      summary: View the current User
+      responses:
+        '200':
+          description: A user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/name'
+        company:
+          $ref: '#/components/schemas/Company'
+    Company:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/name'
+    name:
+      type: string

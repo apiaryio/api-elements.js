@@ -29,9 +29,9 @@ function parseParameterObjects(context, name, array) {
 
   // Convert an array of parameters into the correct types
   const convertParameters = R.cond([
-    [isPathOrQuery, member => new namespace.elements.HrefVariables(member.value.content)],
+    [isPathOrQuery, member => new namespace.elements.HrefVariables(member.value.clone().content)],
     // FIXME when headers and cookies are supported these should be converted
-    [R.T, member => member],
+    [R.T, member => member.clone()],
   ]);
 
   const parseParameters = pipeParseResult(namespace,

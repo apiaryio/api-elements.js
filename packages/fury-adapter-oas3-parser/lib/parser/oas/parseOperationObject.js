@@ -156,7 +156,7 @@ function parseOperationObject(context, path, member) {
               R.reject(member => !headers.include(member.key.toValue()).isEmpty, headerParameters.content)
             );
 
-            request.headers = headers;
+            request.headers = headers.clone();
           });
         }
       }
