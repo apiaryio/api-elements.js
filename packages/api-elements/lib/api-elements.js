@@ -1,5 +1,5 @@
 const minim = require('minim');
-const minimParseResult = require('minim-parse-result');
+const minimParseResult = require('./parse-result');
 
 
 class Namespace extends minim.Namespace {
