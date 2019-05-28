@@ -97,8 +97,6 @@ api.find(filterFunc).forEach(function (request) {
 Reference:
 
 * [Minim](https://github.com/refractproject/minim)
-* [API description elements](https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-api-description)
-* [Parse result elements](https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-parse-result)
 
 #### Multiple Fury Instances
 

@@ -5,8 +5,8 @@
       "../node_modules/minim/lib/primitives",
       "../node_modules/minim/lib/elements",
       "../node_modules/minim/lib/serialisers",
-      "../packages/minim-api-description/lib/elements",
-      "../packages/api-elements/lib"
+      "../packages/api-elements/lib",
+      "../packages/api-elements/lib/elements"
     ]
   }
 }
