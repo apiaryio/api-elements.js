@@ -7,7 +7,7 @@
  *   + Annotation
  */
 
-const apiDescription = require('minim-api-description');
+const apiDescription = require('./api-description');
 
 const namespace = (options) => {
   const minim = options.base;
