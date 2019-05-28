@@ -1,8 +1,6 @@
-const minimModule = require('minim');
-const minimParseResult = require('minim-parse-result');
+const { Namespace } = require('api-elements');
 
-const minim = minimModule.namespace()
-  .use(minimParseResult);
+const minim = new Namespace();
 
 /*
  * Find an adapter by a given media type and method name, which should be
