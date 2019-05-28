@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "minim": "^0.23.1",
-    "minim-parse-result": "^0.11.1"
+    "minim-api-description": "^0.9.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
