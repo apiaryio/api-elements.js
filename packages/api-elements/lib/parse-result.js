@@ -11,35 +11,15 @@ const apiDescription = require('./api-description');
 const parseResult = require('./elements/parse-result');
 const annotation = require('./elements/annotation');
 const sourceMap = require('./elements/source-map');
+const defineSourceMapValue = require('./define-source-map-value');
 
 const namespace = (options) => {
-  const namespace = options.base;
-  const { Element } = namespace;
-
-  parseResult(namespace);
+  parseResult(options.base);
   annotation(options.base);
   sourceMap(options.base);
+  defineSourceMapValue(options.base);
 
-  /**
-   * @name sourceMapValue
-   * @type Array
-   * @memberof Element.prototype
-   */
-  if (!Object.getOwnPropertyNames(Element.prototype).includes('sourceMapValue')) {
-    Object.defineProperty(Element.prototype, 'sourceMapValue', {
-      get() {
-        const sourceMap = this.attributes.get('sourceMap');
-
-        if (sourceMap) {
-          return sourceMap.first.toValue();
-        }
-
-        return undefined;
-      },
-    });
-  }
-
-  namespace.use(apiDescription);
+  options.base.use(apiDescription);
 };
 
 module.exports = { namespace };
