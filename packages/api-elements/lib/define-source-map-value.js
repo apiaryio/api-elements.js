@@ -1,0 +1,22 @@
+module.exports = (namespace) => {
+  const { Element } = namespace;
+
+  /**
+   * @name sourceMapValue
+   * @type Array
+   * @memberof Element.prototype
+   */
+  if (!Object.getOwnPropertyNames(Element.prototype).includes('sourceMapValue')) {
+    Object.defineProperty(Element.prototype, 'sourceMapValue', {
+      get() {
+        const sourceMap = this.attributes.get('sourceMap');
+
+        if (sourceMap) {
+          return sourceMap.first.toValue();
+        }
+
+        return undefined;
+      },
+    });
+  }
+};
