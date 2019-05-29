@@ -9,38 +9,16 @@
 
 const apiDescription = require('./api-description');
 const parseResult = require('./elements/parse-result');
+const annotation = require('./elements/annotation');
 
 const namespace = (options) => {
   parseResult(options.base);
+  annotation(options.base);
 
   const minim = options.base;
   const { Element } = minim;
   const StringElement = minim.getElementClass('string');
   const ArrayElement = minim.getElementClass('array');
-
-  /**
-   * @class Annotation
-   *
-   * @param {string} content
-   * @param meta
-   * @param attributes
-   *
-   * @extends StringElement
-   */
-  class Annotation extends StringElement {
-    constructor(...args) {
-      super(...args);
-      this.element = 'annotation';
-    }
-
-    get code() {
-      return this.attributes.get('code');
-    }
-
-    set code(value) {
-      this.attributes.set('code', value);
-    }
-  }
 
   /**
    * @class SourceMap
@@ -86,7 +64,6 @@ const namespace = (options) => {
 
   minim
     .use(apiDescription)
-    .register('annotation', Annotation)
     .register('sourceMap', SourceMap);
 };
 
