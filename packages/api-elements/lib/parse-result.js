@@ -10,38 +10,15 @@
 const apiDescription = require('./api-description');
 const parseResult = require('./elements/parse-result');
 const annotation = require('./elements/annotation');
+const sourceMap = require('./elements/source-map');
 
 const namespace = (options) => {
-  parseResult(options.base);
+  const namespace = options.base;
+  const { Element } = namespace;
+
+  parseResult(namespace);
   annotation(options.base);
-
-  const minim = options.base;
-  const { Element } = minim;
-  const StringElement = minim.getElementClass('string');
-  const ArrayElement = minim.getElementClass('array');
-
-  /**
-   * @class SourceMap
-   *
-   * @param {Array} content
-   * @param meta
-   * @param attributes
-   *
-   * @extends ArrayElement
-   */
-  class SourceMap extends minim.elements.Array {
-    constructor(...args) {
-      super(...args);
-      this.element = 'sourceMap';
-    }
-
-    // Override toValue because until Refract 1.0
-    // sourceMap is special element that contains array of array
-    // TODO Remove in next minor release
-    toValue() {
-      return this.content.map(value => value.map(element => element.toValue()));
-    }
-  }
+  sourceMap(options.base);
 
   /**
    * @name sourceMapValue
@@ -62,9 +39,7 @@ const namespace = (options) => {
     });
   }
 
-  minim
-    .use(apiDescription)
-    .register('sourceMap', SourceMap);
+  namespace.use(apiDescription);
 };
 
 module.exports = { namespace };
