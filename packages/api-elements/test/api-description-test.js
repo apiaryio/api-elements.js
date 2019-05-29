@@ -4,12 +4,11 @@
  */
 
 const chai = require('chai');
-const minim = require('minim');
-const apiDescription = require('../lib/api-description');
+const { Namespace } = require('../lib/api-elements');
 
 const { Assertion, expect } = chai;
 
-const namespace = minim.namespace().use(apiDescription);
+const namespace = new Namespace();
 
 const ObjectElement = namespace.getElementClass('object');
 const Category = namespace.getElementClass('category');
