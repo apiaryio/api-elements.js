@@ -1,11 +1,22 @@
 const minim = require('minim');
-const minimParseResult = require('./parse-result');
 
+const apiDescription = require('./api-description');
+const ParseResult = require('./elements/ParseResult');
+const Annotation = require('./elements/Annotation');
+const SourceMap = require('./elements/SourceMap');
+const defineSourceMapValue = require('./define-source-map-value');
 
 class Namespace extends minim.Namespace {
   constructor() {
     super();
-    this.use(minimParseResult);
+
+    this.use(apiDescription);
+
+    this.register('parseResult', ParseResult)
+    this.register('annotation', Annotation)
+    this.register('sourceMap', SourceMap);
+
+    defineSourceMapValue(this);
   }
 }
 

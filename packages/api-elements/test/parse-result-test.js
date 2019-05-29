@@ -3,13 +3,11 @@
  * convenience properties and methods.
  */
 const chai = require('chai');
-const minim = require('minim');
-const minimParseResult = require('../lib/parse-result');
+const { Namespace } = require('../lib/api-elements');
 
 const { Assertion, expect } = chai;
 
-const namespace = minim.namespace()
-  .use(minimParseResult);
+const namespace = new Namespace();
 
 const Annotation = namespace.getElementClass('annotation');
 const Category = namespace.getElementClass('category');
