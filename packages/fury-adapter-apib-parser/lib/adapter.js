@@ -11,27 +11,25 @@ const mediaTypes = [
 
 const detect = source => mediaTypes.indexOf(deckardcain.identify(source)) !== -1;
 
-const validate = ({ source, requireBlueprintName }, done) => {
+function validate({ source, requireBlueprintName }) {
   const options = {
     requireBlueprintName,
   };
 
-  drafter.validate(source, options, done);
-};
+  return drafter.validate(source, options);
+}
 
 /*
  * Parse an API Blueprint into refract elements.
  */
-const parse = ({
-  source, generateSourceMap, requireBlueprintName,
-}, done) => {
+function parse({ source, generateSourceMap, requireBlueprintName }) {
   const options = {
     exportSourcemap: !!generateSourceMap,
     requireBlueprintName,
   };
 
-  drafter.parse(source, options, done);
-};
+  return drafter.parse(source, options);
+}
 
 module.exports = {
   name, mediaTypes, detect, validate, parse,

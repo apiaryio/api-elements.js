@@ -1,5 +1,12 @@
 # Fury Changelog
 
+## Master
+
+### Breaking
+
+- The interface between Fury and adapters now uses promises. Any adapters need
+  to be updated to use a promise interface.
+
 ## 3.0.0-beta.10 (2019-03-26)
 
 ### Breaking

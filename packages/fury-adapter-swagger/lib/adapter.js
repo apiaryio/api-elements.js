@@ -16,10 +16,18 @@ const detect = source => !!(_.isString(source)
 /*
  * Parse Swagger 2.0 into Refract elements
  */
-const parse = (options, done) => {
-  const parser = new Parser(options);
-  parser.parse(done);
-};
+function parse(options) {
+  return new Promise((fulfil, reject) => {
+    const parser = new Parser(options);
+    parser.parse((error, parseResult) => {
+      if (error) {
+        reject(error);
+      } else {
+        fulfil(parseResult);
+      }
+    });
+  });
+}
 
 /**
  * @implements {FuryAdapter}

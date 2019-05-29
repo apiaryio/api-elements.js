@@ -42,7 +42,8 @@ const findAdapter = (adapters, mediaType, method) => {
  * @param {Object} options
  * @param {string} options.source
  * @param {Namespace} options.minim
- * @param {ParseCallback} callback
+ *
+ * @returns {Promise}
  *
  * @memberof FuryAdapter
  */
@@ -53,7 +54,8 @@ const findAdapter = (adapters, mediaType, method) => {
  * @param {Object} options
  * @param {string} options.source
  * @param {Namespace} options.minim
- * @param {ParseCallback} callback
+ *
+ * @returns {Promise}
  *
  * @memberof FuryAdapter
  */
@@ -64,7 +66,8 @@ const findAdapter = (adapters, mediaType, method) => {
  * @param {Object} options
  * @param {Category} options.api
  * @param {Namespace} options.minim
- * @param {SerializeCallback} callback
+ *
+ * @returns {Promise}
  *
  * @memberof FuryAdapter
  */
@@ -137,7 +140,7 @@ class Fury {
     const adapter = this.findAdapter(source, mediaType, 'validate');
 
     if (!adapter) {
-      return this.parse({ source, mediaType, adapterOptions }, (err, parseResult) => {
+      this.parse({ source, mediaType, adapterOptions }, (err, parseResult) => {
         if (err) {
           return done(err);
         }
@@ -149,6 +152,7 @@ class Fury {
 
         return done(null, null);
       });
+      return;
     }
 
     let options = { minim: this.minim, mediaType, source };
@@ -157,17 +161,14 @@ class Fury {
       options = Object.assign(options, adapterOptions);
     }
 
-    return adapter.validate(options, (err, parseResult) => {
-      if (err) {
-        return done(err);
-      }
-
-      if (parseResult && !(parseResult instanceof this.minim.Element)) {
-        return done(null, this.load(parseResult));
-      }
-
-      return done(null, parseResult);
-    });
+    adapter.validate(options)
+      .then((parseResult) => {
+        if (parseResult && !(parseResult instanceof this.minim.Element)) {
+          done(null, this.load(parseResult));
+        } else {
+          done(null, parseResult);
+        }
+      }, done);
   }
 
   /**
@@ -189,7 +190,8 @@ class Fury {
     const adapter = this.findAdapter(source, mediaType, 'parse');
 
     if (!adapter) {
-      return done(new Error('Document did not match any registered parsers!'));
+      done(new Error('Document did not match any registered parsers!'));
+      return;
     }
 
     let options = {
@@ -200,17 +202,14 @@ class Fury {
       options = Object.assign(options, adapterOptions);
     }
 
-    return adapter.parse(options, (err, parseResult) => {
-      if (err) {
-        return done(err);
-      }
-
-      if (!(parseResult instanceof this.minim.Element)) {
-        return done(null, this.load(parseResult));
-      }
-
-      return done(null, parseResult);
-    });
+    adapter.parse(options)
+      .then((parseResult) => {
+        if (parseResult instanceof this.minim.Element) {
+          done(null, parseResult);
+        } else {
+          done(null, this.load(parseResult));
+        }
+      }, done);
   }
 
   /**
@@ -231,11 +230,14 @@ class Fury {
   serialize({ api, mediaType = 'text/vnd.apiblueprint' }, done) {
     const adapter = findAdapter(this.adapters, mediaType, 'serialize');
 
-    if (adapter) {
-      return adapter.serialize({ api, minim: this.minim, mediaType }, done);
+    if (!adapter) {
+      done(new Error('Media type did not match any registered serializer!'));
+      return;
     }
 
-    return done(new Error('Media type did not match any registered serializer!'));
+    adapter
+      .serialize({ api, minim: this.minim, mediaType })
+      .then(result => done(null, result), done);
   }
 }
 

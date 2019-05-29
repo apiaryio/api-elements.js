@@ -6,13 +6,16 @@
 
 const { expect } = require('chai');
 const fs = require('fs');
-const fury = require('fury');
+const { Fury } = require('fury');
 const glob = require('glob');
 const path = require('path');
-const { serialize } = require('../lib/adapter');
+const adapter = require('../lib/adapter');
 const { indent } = require('../lib/filters');
 
 const base = path.join(__dirname, 'fixtures');
+
+const fury = new Fury();
+fury.use(adapter);
 
 describe('API Blueprint serializer adapter', () => {
   const files = glob.sync(path.join(base, '*.json'));
@@ -35,7 +38,7 @@ describe('API Blueprint serializer adapter', () => {
         return done(loadErr);
       }
 
-      return serialize({ api }, (serializeErr, serialized) => {
+      return fury.serialize({ api }, (serializeErr, serialized) => {
         if (serializeErr) {
           return done(serializeErr);
         }
