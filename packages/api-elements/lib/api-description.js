@@ -21,36 +21,43 @@
  *     + Enumeration
  */
 
-const httpHeaders = require('./elements/http-headers');
-const hrefVariables = require('./elements/href-variables');
-const asset = require('./elements/asset');
-const httpMessagePayload = require('./elements/http-message-payload');
-const authScheme = require('./elements/auth-scheme');
-const httpTransaction = require('./elements/http-transaction');
-const transition = require('./elements/transition');
-const resource = require('./elements/resource');
-const dataStructure = require('./elements/data-structure');
-const copy = require('./elements/copy');
-const category = require('./elements/category');
-const extension = require('./elements/extension');
-const enumeration = require('./elements/enum');
+const HttpHeaders = require('./elements/HttpHeaders');
+const HrefVariables = require('./elements/HrefVariables');
+const Asset = require('./elements/Asset');
+const HttpRequest = require('./elements/HttpRequest');
+const HttpResponse = require('./elements/HttpResponse');
+const AuthScheme = require('./elements/AuthScheme');
+const HttpTransaction = require('./elements/HttpTransaction');
+const Transition = require('./elements/Transition');
+const Resource = require('./elements/Resource');
+const DataStructure = require('./elements/DataStructure');
+const Copy = require('./elements/Copy');
+const Category = require('./elements/Category');
+const Extension = require('./elements/Extension');
+const Enum = require('./elements/Enum');
 const defineValueOf = require('./define-value-of');
 
 const namespace = (options) => {
-  enumeration(options.base);
+  options.base
+    .register('enum', Enum)
+    .register('httpHeaders', HttpHeaders)
+    .register('hrefVariables', HrefVariables)
+    .register('asset', Asset)
+    .register('httpRequest', HttpRequest)
+    .register('httpResponse', HttpResponse)
+    .register('authScheme', AuthScheme)
+    .register('Basic Authentication Scheme', AuthScheme)
+    .register('Token Authentication Scheme', AuthScheme)
+    .register('OAuth2 Scheme', AuthScheme)
+    .register('httpTransaction', HttpTransaction)
+    .register('transition', Transition)
+    .register('resource', Resource)
+    .register('dataStructure', DataStructure)
+    .register('copy', Copy)
+    .register('category', Category)
+    .register('extension', Extension);
+
   defineValueOf(options.base);
-  httpHeaders(options.base);
-  hrefVariables(options.base);
-  asset(options.base);
-  httpMessagePayload(options.base);
-  authScheme(options.base);
-  httpTransaction(options.base);
-  transition(options.base);
-  resource(options.base);
-  dataStructure(options.base);
-  copy(options.base);
-  category(options.base);
-  extension(options.base);
 };
 
 module.exports = { namespace };
