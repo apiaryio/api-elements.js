@@ -1,5 +1,10 @@
 # Fury OAS3 Parser Changelog
 
+## 0.7.6 (2019-05-31)
+
+fury-adapter-oas3-parser 0.7.6 is a re-release of 0.7.5 due to a packaging
+error with 0.7.5 which caused the package to be unpublished.
+
 ## 0.7.5 (2019-05-23)
 
 ### Bug Fixes
