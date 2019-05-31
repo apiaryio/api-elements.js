@@ -1,10 +1,11 @@
 {
   "name": "fury-adapter-oas3-parser",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "Open API Specification 3 API Elements Parser",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/adapter.js",
+  "files": ["lib/"],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-oas3-parser",
   "repository": {
     "type": "git",
