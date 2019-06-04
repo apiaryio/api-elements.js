@@ -1,5 +1,27 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- JSON value generation will now support schemas which contain an array of objects.
+  For example, the following schema:
+
+  ```yaml
+  type: array
+  items:
+    type: object
+    properties:
+      name:
+        type: string
+        example: doe
+  ```
+
+  Will now emit a JSON value of `[{ "name": "doe" }]`, whereas before it would
+  emit an empty array `[]`.
+
+  [#236](https://github.com/apiaryio/api-elements.js/issues/236)
+
 ## 0.25.1 (2019-04-26)
 
 ### Bug Fixes

@@ -14,6 +14,7 @@ faker.option({
   useDefaultValue: true,
   maxItems: 5,
   maxLength: 256,
+  random: () => 0,
 });
 
 const schemaIsArrayAndHasItems = schema => schema.type && schema.type === 'array' && schema.items;

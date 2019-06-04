@@ -1,0 +1,50 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: "JSON Body Generation with Array of Object"
+produces:
+- application/json
+paths:
+  /questions:
+    get:
+      summary: List All Questions
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Question'
+definitions:
+  Question:
+    title: Question
+    type: object
+    properties:
+      question:
+        type: string
+        example: hi
+      published_at:
+        type: string
+        example: 2019
+      choices:
+        type: array
+        items:
+          $ref: '#/definitions/Choice'
+    required:
+      - question
+      - published_at
+      - choices
+  Choice:
+    title: Choice
+    type: object
+    properties:
+      votes:
+        type: integer
+        format: int32
+        example: 512
+      choice:
+        type: string
+        example: Swift
+    required:
+      - votes
+      - choice
