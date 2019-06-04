@@ -181,7 +181,7 @@
                               "content": "application/json"
                             }
                           },
-                          "content": "[\n  {\n    \"question\": \"hi\",\n    \"published_at\": \"2019\",\n    \"choices\": []\n  }\n]"
+                          "content": "[\n  {\n    \"question\": \"hi\",\n    \"published_at\": \"2019\",\n    \"choices\": [\n      {\n        \"votes\": 512,\n        \"choice\": \"Swift\"\n      }\n    ]\n  }\n]"
                         },
                         {
                           "element": "asset",

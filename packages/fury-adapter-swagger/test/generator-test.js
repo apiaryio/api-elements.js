@@ -53,7 +53,7 @@ describe('bodyFromSchema', () => {
     const asset = bodyFromSchema(schema, payload, parser, 'application/json');
 
     expect(typeof asset.content).to.equal('string');
-    expect(asset.content.length).to.be.above(0);
+    expect(asset.content.length).to.equal(0);
   });
 
   it('limits a strings min/max length to 256', () => {
