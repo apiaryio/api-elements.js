@@ -97,8 +97,8 @@ describe('Validation', () => {
 
     it('should pass adapter options during validation', (done) => {
       shouldDetect = true;
-      fury.adapters[0].validate = ({ minim, testOption = false }) => {
-        const BooleanElement = minim.getElementClass('boolean');
+      fury.adapters[0].validate = ({ namespace, testOption = false }) => {
+        const BooleanElement = namespace.getElementClass('boolean');
         return Promise.resolve(new BooleanElement(testOption));
       };
 

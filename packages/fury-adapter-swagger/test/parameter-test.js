@@ -2,12 +2,12 @@ const { expect } = require('chai');
 const { Fury } = require('fury');
 const Parser = require('../lib/parser');
 
-const { minim } = new Fury();
-const { Annotation } = minim.elements;
+const { minim: namespace } = new Fury();
+const { Annotation } = namespace.elements;
 
 describe('Parameter to Member converter', () => {
   it('can convert a parameter to a member with x-example', () => {
-    const parser = new Parser({ minim, source: '' });
+    const parser = new Parser({ namespace, source: '' });
     const parameter = {
       in: 'query',
       name: 'tags',
@@ -16,12 +16,12 @@ describe('Parameter to Member converter', () => {
     };
     const member = parser.convertParameterToMember(parameter);
 
-    expect(member.value).to.be.instanceof(minim.elements.String);
+    expect(member.value).to.be.instanceof(namespace.elements.String);
     expect(member.value.toValue()).to.equal('hello');
   });
 
   it('can convert a parameter to a member with array x-example', () => {
-    const parser = new Parser({ minim, source: '' });
+    const parser = new Parser({ namespace, source: '' });
     const parameter = {
       in: 'query',
       name: 'tags',
@@ -30,12 +30,12 @@ describe('Parameter to Member converter', () => {
     };
     const member = parser.convertParameterToMember(parameter);
 
-    expect(member.value).to.be.instanceof(minim.elements.Array);
+    expect(member.value).to.be.instanceof(namespace.elements.Array);
     expect(member.value.toValue()).to.deep.equal(['one', 'two']);
   });
 
   it('can convert a parameter to a member with array x-example and items', () => {
-    const parser = new Parser({ minim, source: '' });
+    const parser = new Parser({ namespace, source: '' });
     const parameter = {
       in: 'query',
       name: 'tags',
@@ -47,12 +47,12 @@ describe('Parameter to Member converter', () => {
     };
     const member = parser.convertParameterToMember(parameter);
 
-    expect(member.value).to.be.instanceof(minim.elements.Array);
+    expect(member.value).to.be.instanceof(namespace.elements.Array);
     expect(member.value.toValue()).to.deep.equal(['one', 'two']);
   });
 
   it('can convert a parameter to a member with array empty items', () => {
-    const parser = new Parser({ minim, source: '' });
+    const parser = new Parser({ namespace, source: '' });
     const parameter = {
       in: 'query',
       name: 'tags',
@@ -62,12 +62,12 @@ describe('Parameter to Member converter', () => {
     };
     const member = parser.convertParameterToMember(parameter);
 
-    expect(member.value).to.be.instanceof(minim.elements.Array);
+    expect(member.value).to.be.instanceof(namespace.elements.Array);
     expect(member.value.toValue()).to.deep.equal([]);
   });
 
   it('can convert a parameter to a member with array x-example and items but with string example', () => {
-    const parser = new Parser({ minim, source: '' });
+    const parser = new Parser({ namespace, source: '' });
     const parameter = {
       in: 'query',
       name: 'tags',
@@ -78,21 +78,21 @@ describe('Parameter to Member converter', () => {
       'x-example': "['one', 'two']",
     };
 
-    parser.result = new minim.elements.ParseResult();
+    parser.result = new namespace.elements.ParseResult();
 
     const member = parser.convertParameterToMember(parameter);
 
-    expect(member.value).to.be.instanceof(minim.elements.Array);
+    expect(member.value).to.be.instanceof(namespace.elements.Array);
 
     expect(member.value.length).to.equal(1);
-    expect(member.value.get(0)).to.be.instanceof(minim.elements.String);
+    expect(member.value.get(0)).to.be.instanceof(namespace.elements.String);
     expect(member.value.get(0).toValue()).to.be.undefined;
 
     expect(parser.result.toValue()).to.deep.equal(['Expected type array but found type string']);
   });
 
   it('can convert a parameter with enum values to a member with enumerations', () => {
-    const parser = new Parser({ minim, source: '' });
+    const parser = new Parser({ namespace, source: '' });
     const parameter = {
       in: 'query',
       name: 'order',
@@ -101,15 +101,15 @@ describe('Parameter to Member converter', () => {
     };
     const member = parser.convertParameterToMember(parameter);
 
-    expect(member.value).to.be.instanceof(minim.elements.Element);
+    expect(member.value).to.be.instanceof(namespace.elements.Element);
     const enumerations = member.value.attributes.get('enumerations');
 
-    expect(enumerations).to.be.instanceof(minim.elements.Array);
+    expect(enumerations).to.be.instanceof(namespace.elements.Array);
     expect(enumerations.toValue()).to.deep.equal(['ascending', 'descending']);
   });
 
   it('can convert a parameter with array enum values to a member with enumerations', () => {
-    const parser = new Parser({ minim, source: '' });
+    const parser = new Parser({ namespace, source: '' });
     const parameter = {
       in: 'query',
       name: 'tags',
@@ -123,16 +123,16 @@ describe('Parameter to Member converter', () => {
     };
     const member = parser.convertParameterToMember(parameter);
 
-    expect(member.value).to.be.instanceof(minim.elements.Element);
+    expect(member.value).to.be.instanceof(namespace.elements.Element);
     const enumerations = member.value.attributes.get('enumerations');
 
-    expect(enumerations).to.be.instanceof(minim.elements.Array);
+    expect(enumerations).to.be.instanceof(namespace.elements.Array);
     expect(enumerations.toValue()).to.deep.equal([['hello']]);
   });
 
   it('creates a warning when example does not match parameter type', () => {
-    const parser = new Parser({ minim, source: '' });
-    parser.result = new minim.elements.ParseResult();
+    const parser = new Parser({ namespace, source: '' });
+    parser.result = new namespace.elements.ParseResult();
     parser.convertParameterToMember({
       type: 'string',
       'x-example': 5,
@@ -143,8 +143,8 @@ describe('Parameter to Member converter', () => {
   });
 
   it('creates a warning when default does not match parameter type', () => {
-    const parser = new Parser({ minim, source: '' });
-    parser.result = new minim.elements.ParseResult();
+    const parser = new Parser({ namespace, source: '' });
+    parser.result = new namespace.elements.ParseResult();
     parser.convertParameterToMember({
       type: 'string',
       default: 5,
@@ -155,8 +155,8 @@ describe('Parameter to Member converter', () => {
   });
 
   it('creates a warning when enum type does not match parameter type', () => {
-    const parser = new Parser({ minim, source: '' });
-    parser.result = new minim.elements.ParseResult();
+    const parser = new Parser({ namespace, source: '' });
+    parser.result = new namespace.elements.ParseResult();
     parser.convertParameterToMember({
       type: 'string',
       enum: [5],
@@ -167,8 +167,8 @@ describe('Parameter to Member converter', () => {
   });
 
   it('discards invalid parameter enumerations', () => {
-    const parser = new Parser({ minim, source: '' });
-    parser.result = new minim.elements.ParseResult();
+    const parser = new Parser({ namespace, source: '' });
+    parser.result = new namespace.elements.ParseResult();
 
     const parameter = {
       in: 'query',
@@ -182,8 +182,8 @@ describe('Parameter to Member converter', () => {
     };
     const member = parser.convertParameterToMember(parameter);
 
-    expect(member.value).to.be.instanceof(minim.elements.Array);
-    expect(member.value.get(0)).to.be.instanceof(minim.elements.Enum);
+    expect(member.value).to.be.instanceof(namespace.elements.Array);
+    expect(member.value.get(0)).to.be.instanceof(namespace.elements.Enum);
     expect(member.value.get(0).enumerations.toValue()).to.deep.equal(['red']);
 
     expect(parser.result.warnings.get(0)).to.be.instanceof(Annotation);
@@ -191,8 +191,8 @@ describe('Parameter to Member converter', () => {
   });
 
   it('creates a warning when example does not match items parameter type', () => {
-    const parser = new Parser({ minim, source: '' });
-    parser.result = new minim.elements.ParseResult();
+    const parser = new Parser({ namespace, source: '' });
+    parser.result = new namespace.elements.ParseResult();
     parser.convertParameterToMember({
       type: 'array',
       items: {
@@ -206,8 +206,8 @@ describe('Parameter to Member converter', () => {
   });
 
   it('coerces an integer value that does not match string parameter type', () => {
-    const parser = new Parser({ minim, source: '' });
-    parser.result = new minim.elements.ParseResult();
+    const parser = new Parser({ namespace, source: '' });
+    parser.result = new namespace.elements.ParseResult();
     const parameter = parser.convertParameterToElement({
       type: 'string',
       'x-example': 5,
@@ -218,8 +218,8 @@ describe('Parameter to Member converter', () => {
   });
 
   it('coerces an boolean value that does not match string parameter type', () => {
-    const parser = new Parser({ minim, source: '' });
-    parser.result = new minim.elements.ParseResult();
+    const parser = new Parser({ namespace, source: '' });
+    parser.result = new namespace.elements.ParseResult();
     const parameter = parser.convertParameterToElement({
       type: 'string',
       'x-example': true,

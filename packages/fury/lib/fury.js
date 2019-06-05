@@ -41,7 +41,7 @@ const findAdapter = (adapters, mediaType, method) => {
  *
  * @param {Object} options
  * @param {string} options.source
- * @param {Namespace} options.minim
+ * @param {Namespace} options.namespace
  *
  * @returns {Promise}
  *
@@ -53,7 +53,7 @@ const findAdapter = (adapters, mediaType, method) => {
  *
  * @param {Object} options
  * @param {string} options.source
- * @param {Namespace} options.minim
+ * @param {Namespace} options.namespace
  *
  * @returns {Promise}
  *
@@ -65,7 +65,7 @@ const findAdapter = (adapters, mediaType, method) => {
  *
  * @param {Object} options
  * @param {Category} options.api
- * @param {Namespace} options.minim
+ * @param {Namespace} options.namespace
  *
  * @returns {Promise}
  *
@@ -155,7 +155,7 @@ class Fury {
       return;
     }
 
-    let options = { minim: this.minim, mediaType, source };
+    let options = { namespace: this.minim, mediaType, source };
 
     if (adapterOptions) {
       options = Object.assign(options, adapterOptions);
@@ -195,7 +195,7 @@ class Fury {
     }
 
     let options = {
-      generateSourceMap, minim: this.minim, mediaType, source,
+      generateSourceMap, namespace: this.minim, mediaType, source,
     };
 
     if (adapterOptions) {
@@ -236,7 +236,7 @@ class Fury {
     }
 
     adapter
-      .serialize({ api, minim: this.minim, mediaType })
+      .serialize({ api, namespace: this.minim, mediaType })
       .then(result => done(null, result), done);
   }
 }

@@ -41,7 +41,7 @@ function generateBody(schema) {
 
 const bodyFromSchema = (schema, payload, parser, contentType = 'application/json') => {
   const dereferencedSchema = dereference(schema, schema);
-  const { Asset } = parser.minim.elements;
+  const { Asset } = parser.namespace.elements;
   let asset = null;
 
   try {

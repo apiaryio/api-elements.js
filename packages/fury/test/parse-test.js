@@ -33,8 +33,8 @@ describe('Parser', () => {
 
   it('should parse when returning element instances', (done) => {
     // Modify the parse method to return an element instance
-    fury.adapters[fury.adapters.length - 1].parse = ({ minim, source }) => {
-      const { ParseResult } = minim.elements;
+    fury.adapters[fury.adapters.length - 1].parse = ({ namespace, source }) => {
+      const { ParseResult } = namespace.elements;
       return Promise.resolve(new ParseResult(source));
     };
 
@@ -47,8 +47,8 @@ describe('Parser', () => {
   it('should pass adapter options during parsing', (done) => {
     const { length } = fury.adapters;
 
-    fury.adapters[length - 1].parse = ({ minim, testOption = false }) => {
-      const BooleanElement = minim.getElementClass('boolean');
+    fury.adapters[length - 1].parse = ({ namespace, testOption = false }) => {
+      const BooleanElement = namespace.getElementClass('boolean');
       return Promise.resolve(new BooleanElement(testOption));
     };
 

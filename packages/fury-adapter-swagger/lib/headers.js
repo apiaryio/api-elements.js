@@ -2,7 +2,7 @@ const { inferred } = require('./link');
 const annotations = require('./annotations');
 
 const createHeaders = (payload, parser) => {
-  const { HttpHeaders } = parser.minim.elements;
+  const { HttpHeaders } = parser.namespace.elements;
 
   const headers = new HttpHeaders();
 
@@ -11,7 +11,7 @@ const createHeaders = (payload, parser) => {
 };
 
 const pushHeader = (key, value, payload, parser, fragment) => {
-  const { Member: MemberElement } = parser.minim.elements;
+  const { Member: MemberElement } = parser.namespace.elements;
   let header;
 
   createHeaders(payload, parser);
@@ -29,7 +29,7 @@ const pushHeader = (key, value, payload, parser, fragment) => {
     inferred(fragment, header, parser);
   } else {
     // eslint-disable-next-line no-underscore-dangle
-    header._meta = parser.minim.toElement({});
+    header._meta = parser.namespace.toElement({});
   }
 
   if (fragment === undefined && parser.generateSourceMap) {

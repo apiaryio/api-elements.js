@@ -2,10 +2,10 @@ const { expect } = require('chai');
 const { Fury } = require('fury');
 const { bodyFromSchema } = require('../lib/generator');
 
-const { minim } = new Fury();
+const { minim: namespace } = new Fury();
 
 describe('bodyFromSchema', () => {
-  const parser = { minim };
+  const parser = { namespace };
 
   it('can generate a JSON body', () => {
     const schema = {
