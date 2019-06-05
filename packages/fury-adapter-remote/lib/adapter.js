@@ -72,7 +72,7 @@ class FuryRemoteAdapter {
     return false;
   }
 
-  parse({ source, minim, mediaType }) {
+  parse({ source, namespace, mediaType }) {
     const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
 
     return axios({
@@ -86,10 +86,10 @@ class FuryRemoteAdapter {
       },
       // allow code 422 to be identified as valid response
       validateStatus: status => ((status >= 200 && status < 300) || status === 422),
-    }).then(response => minim.serialiser.deserialise(response.data));
+    }).then(response => namespace.serialiser.deserialise(response.data));
   }
 
-  validate({ source, minim, mediaType }) {
+  validate({ source, namespace, mediaType }) {
     const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
 
     return axios({
@@ -105,11 +105,11 @@ class FuryRemoteAdapter {
         'Content-Type': 'application/json',
         Accept: outputMediaType,
       },
-    }).then(response => minim.serialiser.deserialise(response.data));
+    }).then(response => namespace.serialiser.deserialise(response.data));
   }
 
-  serialize({ api, minim, mediaType }) {
-    const content = minim.serialiser.serialise(api);
+  serialize({ api, namespace, mediaType }) {
+    const content = namespace.serialiser.serialise(api);
     const inputMediaType = (content.element && content.element === 'parseResult') ? 'application/vnd.refract+json' : 'application/vnd.refract.parse-result+json';
 
     return axios({

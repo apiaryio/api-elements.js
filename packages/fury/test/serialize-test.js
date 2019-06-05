@@ -35,7 +35,7 @@ describe('Serialize', () => {
     fury.use({
       name: 'json',
       mediaTypes: ['application/json'],
-      serialize: ({ api, minim }) => Promise.resolve(JSON.stringify(minim.serialiser.serialise(api))),
+      serialize: ({ api, namespace }) => Promise.resolve(JSON.stringify(namespace.serialiser.serialise(api))),
     });
 
     const api = new fury.minim.elements.Category();

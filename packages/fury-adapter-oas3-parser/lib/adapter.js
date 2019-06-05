@@ -15,7 +15,7 @@ function detect(source) {
 
 function parse(options) {
   const context = new Context(
-    options.minim,
+    options.namespace,
     {
       generateSourceMap: options.generateSourceMap,
     }

@@ -23,9 +23,9 @@ const {
 // the input Swagger into Refract elements. The `parse` function is its main
 // interface.
 class Parser {
-  constructor({ minim, source, generateSourceMap }) {
+  constructor({ namespace, source, generateSourceMap }) {
     // Parser options
-    this.minim = minim;
+    this.namespace = namespace;
     this.source = source;
     this.generateSourceMap = generateSourceMap;
 
@@ -47,7 +47,7 @@ class Parser {
   parse(done) {
     const {
       Category, ParseResult, SourceMap,
-    } = this.minim.elements;
+    } = this.namespace.elements;
     const swaggerParser = new SwaggerParser();
 
     this.result = new ParseResult();
@@ -244,7 +244,7 @@ class Parser {
         const annotation = this.createAnnotation(annotations.AST_UNAVAILABLE, null, message);
 
         if (err.problem_mark && err.problem_mark.pointer) {
-          const SourceMap = this.minim.getElementClass('sourceMap');
+          const SourceMap = this.namespace.getElementClass('sourceMap');
           const position = err.problem_mark.pointer;
 
           annotation.attributes.set('sourceMap', [
@@ -309,7 +309,7 @@ class Parser {
 
   // Converts the Swagger title and description
   handleSwaggerInfo() {
-    const { Copy } = this.minim.elements;
+    const { Copy } = this.namespace.elements;
 
     if (this.swagger.info) {
       this.withPath('info', () => {
@@ -357,7 +357,7 @@ class Parser {
 
   // Converts the Swagger hostname and schemes to a Refract host metadata entry.
   handleSwaggerHost() {
-    const { Member: MemberElement } = this.minim.elements;
+    const { Member: MemberElement } = this.namespace.elements;
 
     if (this.swagger.host) {
       this.withPath('host', () => {
@@ -393,7 +393,7 @@ class Parser {
 
   // Conver api key name into Refract elements
   apiKeyName(element, apiKey) {
-    const { Member: MemberElement } = this.minim.elements;
+    const { Member: MemberElement } = this.namespace.elements;
     let config;
 
     if (apiKey.in === 'query') {
@@ -413,7 +413,7 @@ class Parser {
 
   // Convert Oauth2 flow into Refract elements
   oauthGrantType(element, flow) {
-    const { Member: MemberElement } = this.minim.elements;
+    const { Member: MemberElement } = this.namespace.elements;
     let grantType = flow;
 
     if (flow === 'password') {
@@ -439,7 +439,7 @@ class Parser {
       Member: MemberElement,
       Array: ArrayElement,
       String: StringElement,
-    } = this.minim.elements;
+    } = this.namespace.elements;
 
     const scopes = new ArrayElement();
     let descriptions = null;
@@ -477,7 +477,7 @@ class Parser {
 
   // Conver OAuth2 transition information into Refract elements
   oauthTransitions(element, oauth) {
-    const { Transition } = this.minim.elements;
+    const { Transition } = this.namespace.elements;
 
     if (oauth.authorizationUrl) {
       const transition = new Transition();
@@ -510,7 +510,7 @@ class Parser {
 
   // Convert a Swagger auth object into Refract elements.
   handleSwaggerAuth() {
-    const { Category, AuthScheme } = this.minim.elements;
+    const { Category, AuthScheme } = this.namespace.elements;
     const schemes = [];
 
     if (this.swagger.securityDefinitions) {
@@ -592,7 +592,7 @@ class Parser {
   }
 
   handleSwaggerSecurity(security, schemes) {
-    const { AuthScheme } = this.minim.elements;
+    const { AuthScheme } = this.namespace.elements;
 
     _.forEach(security, (item, index) => {
       _.keys(item).forEach((name) => {
@@ -626,8 +626,8 @@ class Parser {
   }
 
   handleSwaggerDefinitions(definitions) {
-    const { Category } = this.minim.elements;
-    const generator = new DataStructureGenerator(this.minim, this.referencedSwagger);
+    const { Category } = this.namespace.elements;
+    const generator = new DataStructureGenerator(this.namespace, this.referencedSwagger);
     const dataStructures = new Category();
     dataStructures.classes.push('dataStructures');
 
@@ -658,7 +658,7 @@ class Parser {
 
   // Convert a Swagger path into a Refract resource.
   handleSwaggerPath(pathValue, href) {
-    const { Copy, Resource } = this.minim.elements;
+    const { Copy, Resource } = this.namespace.elements;
     const resource = new Resource();
 
     this.withPath('paths', href, () => {
@@ -736,7 +736,7 @@ class Parser {
       .value();
 
     if (Object.keys(extensions).length > 0) {
-      const { Link, Extension } = this.minim.elements;
+      const { Link, Extension } = this.namespace.elements;
 
       const profileLink = new Link();
       profileLink.relation = 'profile';
@@ -750,7 +750,7 @@ class Parser {
 
   // Convert a Swagger method into a Refract transition.
   handleSwaggerMethod(resource, href, resourceParams, methodValue, method) {
-    const { Copy, Transition } = this.minim.elements;
+    const { Copy, Transition } = this.namespace.elements;
     const transition = new Transition();
 
     resource.content.push(transition);
@@ -1039,7 +1039,7 @@ class Parser {
       return;
     }
 
-    const { DataStructure, Object: ObjectElement } = this.minim.elements;
+    const { DataStructure, Object: ObjectElement } = this.namespace.elements;
 
     if (!contentType) {
       // No content type was provided, lets default to first form
@@ -1087,7 +1087,7 @@ class Parser {
     transaction, methodValue, responseValue,
     statusCode, responseBody, contentType
   ) {
-    const { Asset, Copy } = this.minim.elements;
+    const { Asset, Copy } = this.namespace.elements;
     const { response } = transaction;
 
     this.withPath('responses', statusCode, () => {
@@ -1228,7 +1228,7 @@ class Parser {
 
   // Update the current group by either selecting or creating it.
   updateResourceGroup(name) {
-    const { Category, Copy } = this.minim.elements;
+    const { Category, Copy } = this.namespace.elements;
 
     if (name) {
       this.group = this.api.find(el => el.element === 'category' && el.classes.contains('resourceGroup') && el.title.toValue() === name).first;
@@ -1277,7 +1277,7 @@ class Parser {
     const {
       Array: ArrayElement, Boolean: BooleanElement, Number: NumberElement,
       String: StringElement,
-    } = this.minim.elements;
+    } = this.namespace.elements;
 
     const types = {
       string: StringElement,
@@ -1297,11 +1297,11 @@ class Parser {
 
     if (schema.type === 'file') {
       // files don't have types
-      return this.minim.toElement(value);
+      return this.namespace.toElement(value);
     }
 
     if (validator.validate(value, schema)) {
-      element = this.minim.toElement(value);
+      element = this.namespace.toElement(value);
 
       if (this.generateSourceMap) {
         this.createSourceMap(element, this.path);
@@ -1314,7 +1314,7 @@ class Parser {
       // Coerce parameter to correct type
       if (schema.type === 'string') {
         if (typeof value === 'number' || typeof value === 'boolean') {
-          element = new this.minim.elements.String(String(value));
+          element = new this.namespace.elements.String(String(value));
         }
       }
     }
@@ -1324,7 +1324,7 @@ class Parser {
 
   // Convert a Swagger parameter into a Refract element.
   convertParameterToElement(parameter, setAttributes = false) {
-    const { Array: ArrayElement, Enum: EnumElement } = this.minim.elements;
+    const { Array: ArrayElement, Enum: EnumElement } = this.namespace.elements;
 
     const Type = this.typeForParameter(parameter);
     const schema = this.schemaForParameterValue(parameter);
@@ -1422,7 +1422,7 @@ class Parser {
   // Convert a Swagger parameter into a Refract member element for use in an
   // object element (or subclass).
   convertParameterToMember(parameter) {
-    const MemberElement = this.minim.getElementClass('member');
+    const MemberElement = this.namespace.getElementClass('member');
     const memberValue = this.convertParameterToElement(parameter);
     const member = new MemberElement(parameter.name, memberValue);
 
@@ -1448,8 +1448,8 @@ class Parser {
   // Make a new source map for the given element
   createSourceMap(element, path, produceLineColumnAttributes) {
     if (this.ast) {
-      const NumberElement = this.minim.elements.Number;
-      const SourceMap = this.minim.getElementClass('sourceMap');
+      const NumberElement = this.namespace.elements.Number;
+      const SourceMap = this.namespace.getElementClass('sourceMap');
       const position = this.ast.getPosition(path);
 
       if (position && position.start && position.end
@@ -1471,7 +1471,7 @@ class Parser {
 
   // Make a new annotation for the given path and message
   createAnnotation(info, path, message) {
-    const { Annotation } = this.minim.elements;
+    const { Annotation } = this.namespace.elements;
 
     const annotation = new Annotation(message);
     annotation.classes.push(info.type);
@@ -1493,7 +1493,7 @@ class Parser {
   // Create a new HrefVariables element from a parameter list. Returns either
   // the new HrefVariables element or `undefined`.
   createHrefVariables(params) {
-    const { HrefVariables } = this.minim.elements;
+    const { HrefVariables } = this.namespace.elements;
     const hrefVariables = new HrefVariables();
 
     _.forEach(params, (parameter, index) => {
@@ -1544,7 +1544,7 @@ class Parser {
 
   // Create a Refract asset element containing JSON Schema and push into payload
   pushSchemaAsset(schema, jsonSchema, payload, path) {
-    const Asset = this.minim.getElementClass('asset');
+    const Asset = this.namespace.getElementClass('asset');
     const schemaAsset = new Asset(JSON.stringify(jsonSchema));
 
     schemaAsset.classes.push('messageBodySchema');
@@ -1577,7 +1577,7 @@ class Parser {
 
   pushDataStructureAsset(schema, payload) {
     try {
-      const generator = new DataStructureGenerator(this.minim, this.referencedSwagger);
+      const generator = new DataStructureGenerator(this.namespace, this.referencedSwagger);
       const dataStructure = generator.generateDataStructure(schema);
       if (dataStructure) {
         payload.content.push(dataStructure);
@@ -1589,7 +1589,7 @@ class Parser {
 
   // Create a new Refract transition element with a blank request and response.
   createTransaction(transition, method, schemes) {
-    const { HttpRequest, HttpResponse, HttpTransaction } = this.minim.elements;
+    const { HttpRequest, HttpResponse, HttpTransaction } = this.namespace.elements;
     const transaction = new HttpTransaction();
     transaction.content = [new HttpRequest(), new HttpResponse()];
 

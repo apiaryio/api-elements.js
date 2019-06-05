@@ -7,6 +7,9 @@
 - The interface between Fury and adapters now uses promises. Any adapters need
   to be updated to use a promise interface.
 
+- The `minim` option passed down to adapters has been renamed to `namespace`.
+  The underlying value is a namespace from minim.
+
 ## 3.0.0-beta.10 (2019-03-26)
 
 ### Breaking

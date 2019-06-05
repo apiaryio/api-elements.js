@@ -1,5 +1,5 @@
 const baseLink = (element, parser, relation, options = {}) => {
-  const { String: StringElement, Link } = parser.minim.elements;
+  const { String: StringElement, Link } = parser.namespace.elements;
 
   const opts = {
     path: options.path || [],

@@ -2,15 +2,15 @@ const url = require('url');
 const ApiaryBlueprintParser = require('apiary-blueprint-parser');
 
 class Parser {
-  constructor({ minim, source }) {
-    this.minim = minim;
+  constructor({ namespace, source }) {
+    this.namespace = namespace;
     this.source = source;
   }
 
   parse() {
     const {
       Annotation, Category, Copy, ParseResult,
-    } = this.minim.elements;
+    } = this.namespace.elements;
 
     this.result = new ParseResult();
 
@@ -22,7 +22,7 @@ class Parser {
       this.result.push(annotation);
 
       if (err.offset) {
-        const { SourceMap } = this.minim.elements;
+        const { SourceMap } = this.namespace.elements;
         annotation.attributes.set('sourceMap', [
           new SourceMap([[err.offset, 1]]),
         ]);
@@ -36,7 +36,7 @@ class Parser {
     this.api.title = this.blueprint.name;
 
     if (this.blueprint.location) {
-      const { Member: MemberElement } = this.minim.elements;
+      const { Member: MemberElement } = this.namespace.elements;
       const member = new MemberElement('HOST', this.blueprint.location);
       member.meta.set('classes', ['user']);
       this.api.attributes.set('metadata', [member]);
@@ -80,7 +80,7 @@ class Parser {
     // A "resource" in Apiary blueprint isn't the same as a "resource" in API
     // Elements. It maps closer to an "action".
 
-    const { Copy, Category, Resource } = this.minim.elements;
+    const { Copy, Category, Resource } = this.namespace.elements;
 
     const group = new Category();
     group.title = section.name;
@@ -114,7 +114,7 @@ class Parser {
   }
 
   handleResource(resource) {
-    const { Copy, Transition, HttpTransaction } = this.minim.elements;
+    const { Copy, Transition, HttpTransaction } = this.namespace.elements;
     const transition = new Transition();
     transition.title = resource.method;
 
@@ -137,7 +137,7 @@ class Parser {
   }
 
   handleRequest(resource, request, schema) {
-    const { Asset, HttpRequest } = this.minim.elements;
+    const { Asset, HttpRequest } = this.namespace.elements;
     const httpRequest = new HttpRequest();
     httpRequest.method = resource.method;
     const headers = this.handleHeaders(request.headers);
@@ -159,7 +159,7 @@ class Parser {
   }
 
   handleResponse(response, schema) {
-    const { Asset, HttpResponse } = this.minim.elements;
+    const { Asset, HttpResponse } = this.namespace.elements;
     const httpResponse = new HttpResponse();
 
     httpResponse.statusCode = response.status;
@@ -186,8 +186,8 @@ class Parser {
       return null;
     }
 
-    const { HttpHeaders } = this.minim.elements;
-    const { Member: MemberElement } = this.minim.elements;
+    const { HttpHeaders } = this.namespace.elements;
+    const { Member: MemberElement } = this.namespace.elements;
 
     const httpHeaders = new HttpHeaders();
 
@@ -200,7 +200,7 @@ class Parser {
 
   // Create schema asset
   handleSchema(body) {
-    const { Asset } = this.minim.elements;
+    const { Asset } = this.namespace.elements;
     const asset = new Asset(body);
     asset.classes.push('messageBodySchema');
     asset.contentType = 'application/schema+json';

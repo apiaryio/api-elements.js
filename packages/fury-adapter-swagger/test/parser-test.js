@@ -6,7 +6,7 @@ describe('Parser', () => {
   let parser;
 
   before(() => {
-    parser = new Parser({ minim: fury.minim });
+    parser = new Parser({ namespace: fury.minim });
     parser.swagger = {
       consumes: [],
       produces: [],
