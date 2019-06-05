@@ -7,7 +7,9 @@ const swaggerSource = '{ "swagger": "2.0", "info": { "version": "1.0.0", "title"
 const invalidSwaggerSource = '{ "swagger": "2.0", "info": { "version": 1, "title": "swg" } }';
 
 
-describe('Adapter works with Fury interface (with default config)', () => {
+describe('Adapter works with Fury interface (with default config)', function remoteAdapterTests() {
+  this.timeout(4000);
+
   const fury = new Fury();
 
   before(() => {
