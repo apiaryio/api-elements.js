@@ -5,7 +5,7 @@
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "lib/api-elements.js",
-  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/minim-api-description",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/api-elements",
   "repository": {
     "type": "git",
     "url": "https://github.com/apiaryio/api-elements.js.git",
@@ -17,8 +17,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "minim": "^0.23.1",
-    "minim-api-description": "^0.9.1"
+    "minim": "^0.23.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
