@@ -14,83 +14,93 @@ describe('Adapter works with Fury interface (with default config)', () => {
     fury.use(new FuryRemoteAdapter()); // with predefined options
   });
   describe('#parse', () => {
-    it('blueprint with mediaType', () => {
+    it('blueprint with mediaType', (done) => {
       fury.parse({ source: blueprintSource, mediaType: 'text/vnd.apiblueprint' }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.api.title.toValue()).to.equal('API');
+        done();
       });
     });
 
-    it('blueprint with autodetect', () => {
+    it('blueprint with autodetect', (done) => {
       fury.parse({ source: blueprintSource }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.api.title.toValue()).to.equal('API');
+        done();
       });
     });
 
-    it('valid swagger with mediaType', () => {
+    it('valid swagger with mediaType', (done) => {
       fury.parse({ source: swaggerSource, mediaType: 'application/swagger+json' }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.api.title.toValue()).to.equal('swg');
+        done();
       });
     });
 
-    it('valid swagger with autodetect', () => {
+    it('valid swagger with autodetect', (done) => {
       fury.parse({ source: swaggerSource }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.api.title.toValue()).to.equal('swg');
+        done();
       });
     });
 
-    it('invalid swagger with mediaType', () => {
+    it('invalid swagger with mediaType', (done) => {
       fury.parse({ source: invalidSwaggerSource, mediaType: 'application/swagger+json' }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.length).to.be.equal(1);
         expect(result.annotations.length).to.be.equal(1);
         expect(result.annotations.get(0).content).to.be.equal('API version number must be a string (e.g. "1.0.0") not a number.');
+        done();
       });
     });
   });
 
   describe('#validate', () => {
-    it('blueprint with mediaType', () => {
+    it('blueprint with mediaType', (done) => {
       fury.validate({ source: blueprintSource, mediaType: 'text/vnd.apiblueprint' }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.length).to.be.equal(0);
         expect(result.annotations.length).to.be.equal(0);
+        done();
       });
     });
 
-    it('blueprint with autodetect', () => {
+    it('blueprint with autodetect', (done) => {
       fury.validate({ source: blueprintSource }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.length).to.be.equal(0);
         expect(result.annotations.length).to.be.equal(0);
+        done();
       });
     });
 
-    it('valid swagger with mediaType', () => {
+    it('valid swagger with mediaType', (done) => {
       fury.validate({ source: swaggerSource, mediaType: 'application/swagger+json' }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.length).to.be.equal(0);
         expect(result.annotations.length).to.be.equal(0);
+        done();
       });
     });
 
-    it('valid swagger with autodetect', () => {
+    it('valid swagger with autodetect', (done) => {
       fury.validate({ source: swaggerSource }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.length).to.be.equal(0);
         expect(result.annotations.length).to.be.equal(0);
+        done();
       });
     });
 
-    it('invalid swagger with mediaType', () => {
+    it('invalid swagger with mediaType', (done) => {
       fury.parse({ source: invalidSwaggerSource, mediaType: 'application/swagger+json' }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.length).to.be.equal(1);
         expect(result.annotations.length).to.be.equal(1);
         expect(result.annotations.get(0).content).to.be.equal('API version number must be a string (e.g. "1.0.0") not a number.');
+        done();
       });
     });
   });
@@ -116,11 +126,12 @@ describe('Adapter works with Fury interface (with default config)', () => {
       content: [],
     });
 
-    it('ApiElements to blueprint', () => {
+    it('ApiElements to blueprint', (done) => {
       fury.serialize({ api: blueprintApi }, (err, result) => {
         expect(err).to.be.null;
         expect(result).to.be.string;
         expect(result).to.be.equal(blueprintSource);
+        done();
       });
     });
 
@@ -149,11 +160,12 @@ describe('Adapter works with Fury interface (with default config)', () => {
       ],
     });
 
-    it('ParseResult to blueprint', () => {
+    it('ParseResult to blueprint', (done) => {
       fury.serialize({ api: parseResultApi }, (err, result) => {
         expect(err).to.be.null;
         expect(result).to.be.string;
         expect(result).to.be.equal(blueprintSource);
+        done();
       });
     });
   });
@@ -173,10 +185,11 @@ describe('Adapter works with Fury interface', () => {
       }));
     });
 
-    it('parses blueprint with mediaType', () => {
+    it('parses blueprint with mediaType', (done) => {
       fury.parse({ source: blueprintSource, mediaType: 'text/vnd.apiblueprint' }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
         expect(result.api.title.toValue()).to.equal('API');
+        done();
       });
     });
 
@@ -187,11 +200,12 @@ describe('Adapter works with Fury interface', () => {
       });
     });
 
-    it('do not parse swagger because swagger is not in supported mediaTypes', () => {
+    it('do not parse swagger because swagger is not in supported mediaTypes', (done) => {
       fury.parse({ source: swaggerSource, mediaType: 'application/swagger+json' }, (err, result) => {
         expect(result).to.be.undefined;
         expect(err).to.be.instanceof(Error);
         expect(err).to.have.property('message', 'Document did not match any registered parsers!');
+        done();
       });
     });
   });
@@ -236,11 +250,12 @@ describe('Adapter works with Fury interface', () => {
       }));
     });
 
-    it('parses blueprint with mediaType', () => {
+    it('parses blueprint with mediaType', (done) => {
       fury.parse({ source: blueprintSource, mediaType: 'text/vnd.apiblueprint' }, (err, result) => {
         expect(result).to.be.undefined;
         expect(err).to.be.instanceof(Error);
         expect(err).to.have.property('message', 'getaddrinfo ENOTFOUND some.stupid.non.existing.domain some.stupid.non.existing.domain:80');
+        done();
       });
     });
   });
@@ -258,11 +273,12 @@ describe('Adapter works with Fury interface', () => {
       }));
     });
 
-    it('parses blueprint with mediaType', () => {
+    it('parses blueprint with mediaType', (done) => {
       fury.parse({ source: blueprintSource, mediaType: 'text/vnd.apiblueprint' }, (err, result) => {
         expect(result).to.be.undefined;
         expect(err).to.be.instanceof(Error);
-        expect(err).to.have.property('message', 'Request failed with status code 415');
+        expect(err).to.have.property('message', 'Request failed with status code 404');
+        done();
       });
     });
   });
