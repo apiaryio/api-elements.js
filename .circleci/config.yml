@@ -15,17 +15,22 @@ defaults: &defaults
 
 jobs:
   test-node6:
+    <<: *defaults
     docker:
       - image: circleci/node:6
-    <<: *defaults
 
   test-node8:
+    <<: *defaults
     docker:
       - image: circleci/node:8
-    <<: *defaults
 
   test-node10:
     <<: *defaults
+
+  test-node12:
+    <<: *defaults
+    docker:
+      - image: circleci/node:12
 
   lint:
     <<: *defaults
