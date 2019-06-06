@@ -190,8 +190,14 @@ class Fury {
     const adapter = this.findAdapter(source, mediaType, 'parse');
 
     if (!adapter) {
-      done(new Error('Document did not match any registered parsers!'));
-      return;
+      const error = new Error('Document did not match any registered parsers!');
+
+      if (done) {
+        done(error);
+        return;
+      }
+
+      return Promise.reject(error);
     }
 
     let options = {
@@ -202,14 +208,21 @@ class Fury {
       options = Object.assign(options, adapterOptions);
     }
 
-    adapter.parse(options)
+    const promise = adapter.parse(options)
       .then((parseResult) => {
         if (parseResult instanceof this.minim.Element) {
-          done(null, parseResult);
+          return parseResult;
         } else {
-          done(null, this.load(parseResult));
+          return this.load(parseResult);
         }
-      }, done);
+      });
+
+    if (done) {
+      promise.then(result => done(null, result), done);
+      return;
+    }
+
+    return promise;
   }
 
   /**
