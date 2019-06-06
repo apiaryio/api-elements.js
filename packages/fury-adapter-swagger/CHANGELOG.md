@@ -2,6 +2,11 @@
 
 ## Master
 
+### Breaking
+
+- Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
+  recommended.
+
 ### Bug Fixes
 
 - JSON value generation will now support schemas which contain an array of objects.

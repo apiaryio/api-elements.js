@@ -1,5 +1,12 @@
 # Changelog
 
+## Master
+
+### Breaking
+
+- Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
+  recommended.
+
 ## 3.0.0-beta.7 (2019-03-26)
 
 ### Enhancements

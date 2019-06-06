@@ -1,5 +1,12 @@
 # Changelog
 
+## Master
+
+### Breaking
+
+- Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
+  recommended.
+
 ## 0.8.12 (2019-03-26)
 
 This update incorporates changes from Fury Adapters:

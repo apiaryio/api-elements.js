@@ -1,5 +1,12 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Breaking
+
+- Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
+  recommended.
+
 ## 0.7.7 (2019-05-31)
 
 fury-adapter-oas3-parser 0.7.7 is a re-release of 0.7.5 due to a packaging

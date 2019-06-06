@@ -10,6 +10,9 @@
 - The `minim` option passed down to adapters has been renamed to `namespace`.
   The underlying value is a namespace from minim.
 
+- Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
+  recommended.
+
 ## 3.0.0-beta.10 (2019-03-26)
 
 ### Breaking

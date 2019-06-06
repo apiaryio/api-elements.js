@@ -1,5 +1,12 @@
 # Fury API Blueprint Serializer
 
+## Master
+
+### Breaking
+
+- Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
+  recommended.
+
 ## 0.10.0 (2019-03-26)
 
 ### Enhancements

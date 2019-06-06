@@ -1,5 +1,12 @@
 # API Elements (JavaScript) CHANGELOG
 
+## Master
+
+### Breaking
+
+- Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
+  recommended.
+
 ## 0.1.1 (2019-03-26)
 
 ### Enhancements
