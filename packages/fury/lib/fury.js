@@ -140,19 +140,22 @@ class Fury {
     const adapter = this.findAdapter(source, mediaType, 'validate');
 
     if (!adapter) {
-      this.parse({ source, mediaType, adapterOptions }, (err, parseResult) => {
-        if (err) {
-          return done(err);
-        }
+      const promise = this.parse({ source, mediaType, adapterOptions })
+        .then((parseResult) => {
+          if (parseResult.annotations.length > 0) {
+            const { ParseResult } = this.minim.elements;
+            return new ParseResult(parseResult.annotations);
+          }
 
-        if (parseResult.annotations.length > 0) {
-          const { ParseResult } = this.minim.elements;
-          return done(null, new ParseResult(parseResult.annotations));
-        }
+          return null;
+        });
 
-        return done(null, null);
-      });
-      return;
+      if (done) {
+        promise.then(result => done(null, result), done);
+        return;
+      }
+
+      return promise;
     }
 
     let options = { namespace: this.minim, mediaType, source };
@@ -161,14 +164,22 @@ class Fury {
       options = Object.assign(options, adapterOptions);
     }
 
-    adapter.validate(options)
+    const promise = adapter
+      .validate(options)
       .then((parseResult) => {
         if (parseResult && !(parseResult instanceof this.minim.Element)) {
-          done(null, this.load(parseResult));
+          return this.load(parseResult);
         } else {
-          done(null, parseResult);
+          return parseResult;
         }
-      }, done);
+      });
+
+    if (done) {
+      promise.then(result => done(null, result), done);
+      return;
+    }
+
+    return promise;
   }
 
   /**

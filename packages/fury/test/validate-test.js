@@ -1,12 +1,14 @@
 const { expect } = require('chai');
 const { Fury } = require('../lib/fury');
+const assert = require('./assert');
 
 describe('Validation', () => {
-  context('with a validate adapter', () => {
-    let shouldDetect;
-    let result;
+  let fury;
+  let shouldDetect;
+  let result;
 
-    const fury = new Fury();
+  beforeEach(() => {
+    fury = new Fury();
 
     fury.use({
       name: 'passthrough',
@@ -15,11 +17,11 @@ describe('Validation', () => {
       validate: () => Promise.resolve(result),
     });
 
-    beforeEach(() => {
-      shouldDetect = false;
-      result = null;
-    });
+    shouldDetect = false;
+    result = null;
+  });
 
+  context('with a validate adapter', () => {
     it('should validate through mediatype', (done) => {
       fury.validate({ source: 'dummy', mediaType: 'text/vnd.passthrough' }, (err, res) => {
         expect(err).to.be.null;
@@ -216,6 +218,70 @@ describe('Validation', () => {
 
         done();
       });
+    });
+  });
+
+  describe('using async/await', () => {
+    beforeEach(() => {
+      shouldDetect = true;
+      result = {
+        element: 'parseResult',
+        content: [
+          {
+            element: 'annotation',
+            meta: {
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
+                    content: 'warning',
+                  },
+                ],
+              },
+            },
+            content: 'a wild warning appeared',
+          },
+        ],
+      };
+    });
+
+    it('errors with matching erroring adapter', async () => {
+      const expectedError = new Error('failed to parse');
+      fury.adapters[fury.adapters.length - 1].parse = () => Promise.reject(expectedError);
+
+      await assert.rejects(
+        async () => {
+          await fury.parse({ source: '' });
+        },
+        'failed to parse'
+      );
+    });
+
+    it('can validate with matching validate adapter', async () => {
+      const parseResult = await fury.validate({ source: 'doc' });
+
+      expect(parseResult).to.be.instanceof(fury.minim.elements.ParseResult);
+      expect(parseResult.toValue()).to.deep.equal([
+        'a wild warning appeared',
+      ]);
+    });
+
+    it('can validate with matching parse adapter', async () => {
+      fury = new Fury();
+      fury.use({
+        name: 'passthrough',
+        mediaTypes: ['text/vnd.passthrough'],
+        detect: () => true,
+        parse: () => Promise.resolve(result),
+      });
+
+      const parseResult = await fury.validate({ source: 'doc' });
+
+      expect(parseResult).to.be.instanceof(fury.minim.elements.ParseResult);
+      expect(parseResult.toValue()).to.deep.equal([
+        'a wild warning appeared',
+      ]);
     });
   });
 });
