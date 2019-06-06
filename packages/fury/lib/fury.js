@@ -231,13 +231,24 @@ class Fury {
     const adapter = findAdapter(this.adapters, mediaType, 'serialize');
 
     if (!adapter) {
-      done(new Error('Media type did not match any registered serializer!'));
+      const error = new Error('Media type did not match any registered serializer!');
+
+      if (done) {
+        done(error);
+        return;
+      }
+
+      return Promise.reject(error);
+    }
+
+    const promise = adapter.serialize({ api, namespace: this.minim, mediaType })
+
+    if (done) {
+      promise.then(result => done(null, result), done);
       return;
     }
 
-    adapter
-      .serialize({ api, namespace: this.minim, mediaType })
-      .then(result => done(null, result), done);
+    return promise;
   }
 }
 
