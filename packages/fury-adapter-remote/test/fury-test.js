@@ -256,7 +256,7 @@ describe('Adapter works with Fury interface', () => {
       fury.parse({ source: blueprintSource, mediaType: 'text/vnd.apiblueprint' }, (err, result) => {
         expect(result).to.be.undefined;
         expect(err).to.be.instanceof(Error);
-        expect(err).to.have.property('message', 'getaddrinfo ENOTFOUND some.stupid.non.existing.domain some.stupid.non.existing.domain:80');
+        expect(err.message).to.match(/ENOTFOUND some\.stupid\.non\.existing\.domain/);
         done();
       });
     });
