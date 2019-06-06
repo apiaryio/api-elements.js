@@ -152,7 +152,7 @@ class Fury {
 
       if (done) {
         promise.then(result => done(null, result), done);
-        return;
+        return null;
       }
 
       return promise;
@@ -169,14 +169,14 @@ class Fury {
       .then((parseResult) => {
         if (parseResult && !(parseResult instanceof this.minim.Element)) {
           return this.load(parseResult);
-        } else {
-          return parseResult;
         }
+
+        return parseResult;
       });
 
     if (done) {
       promise.then(result => done(null, result), done);
-      return;
+      return null;
     }
 
     return promise;
@@ -205,7 +205,7 @@ class Fury {
 
       if (done) {
         done(error);
-        return;
+        return null;
       }
 
       return Promise.reject(error);
@@ -223,14 +223,14 @@ class Fury {
       .then((parseResult) => {
         if (parseResult instanceof this.minim.Element) {
           return parseResult;
-        } else {
-          return this.load(parseResult);
         }
+
+        return this.load(parseResult);
       });
 
     if (done) {
       promise.then(result => done(null, result), done);
-      return;
+      return null;
     }
 
     return promise;
@@ -259,17 +259,17 @@ class Fury {
 
       if (done) {
         done(error);
-        return;
+        return null;
       }
 
       return Promise.reject(error);
     }
 
-    const promise = adapter.serialize({ api, namespace: this.minim, mediaType })
+    const promise = adapter.serialize({ api, namespace: this.minim, mediaType });
 
     if (done) {
       promise.then(result => done(null, result), done);
-      return;
+      return null;
     }
 
     return promise;
