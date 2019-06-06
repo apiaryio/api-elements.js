@@ -7,6 +7,10 @@
 - Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
   recommended.
 
+### Enhancements
+
+- Added the `hrefVariables` property to `HttpRequest` element.
+
 ## 0.1.1 (2019-03-26)
 
 ### Enhancements
