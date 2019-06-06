@@ -63,5 +63,6 @@ workflows:
       - test-node6
       - test-node8
       - test-node10
+      - test-node12
       - lint
       - docs
