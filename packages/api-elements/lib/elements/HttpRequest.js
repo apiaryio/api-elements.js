@@ -40,6 +40,19 @@ class HttpRequest extends HttpMessagePayload {
   set href(value) {
     this.attributes.set('href', value);
   }
+
+  /**
+   * @name hrefVariables
+   * @type ObjectElement
+   * @memberof HttpRequest.prototype
+   */
+  get hrefVariables() {
+    return this.attributes.get('hrefVariables');
+  }
+
+  set hrefVariables(value) {
+    this.attributes.set('hrefVariables', value);
+  }
 }
 
 module.exports = HttpRequest;

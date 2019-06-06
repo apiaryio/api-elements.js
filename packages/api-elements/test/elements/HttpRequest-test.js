@@ -45,4 +45,32 @@ describe('HttpRequest', () => {
       assert.equal(method.toValue(), '/');
     });
   });
+
+  describe('#hrefVariables', () => {
+    it('can access hrefVariables attribute via property', () => {
+      const request = new HttpRequest();
+      request.attributes.set('hrefVariables', {
+        limit: 5,
+      });
+
+      assert(request.hrefVariables instanceof namespace.elements.Object);
+      assert.deepEqual(request.hrefVariables.valueOf(), {
+        limit: 5,
+      });
+    });
+
+    it('can set href attribute via property', () => {
+      const request = new HttpRequest();
+
+      request.hrefVariables = {
+        limit: 5,
+      };
+
+      const hrefVariables = request.attributes.get('hrefVariables');
+      assert(hrefVariables instanceof namespace.elements.Object);
+      assert.deepEqual(hrefVariables.valueOf(), {
+        limit: 5,
+      });
+    });
+  });
 });
