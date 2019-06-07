@@ -1,5 +1,5 @@
 const R = require('ramda');
-const mediaTyper = require('media-typer');
+const contentType = require('content-type');
 const pipeParseResult = require('../../pipeParseResult');
 const {
   isExtension, hasKey, getKey, getValue,
@@ -19,11 +19,9 @@ const unsupportedKeys = ['encoding'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 function isJSONMediaType(mediaType) {
-  const type = mediaTyper.parse(mediaType);
-  return (
-    type.type === 'application'
-    && (type.subtype === 'json' || type.suffix === 'json')
-  );
+  const type = contentType.parse(mediaType);
+  const jsonMediaType = /^application\/\S*json$/i;
+  return jsonMediaType.test(type.type);
 }
 
 const createJSONMessageBodyAsset = R.curry((namespace, mediaType, value) => {
@@ -48,7 +46,7 @@ const parseExampleObjectOrRef = parseReference('examples', parseExampleObject);
 
 const isValidMediaType = (mediaType) => {
   try {
-    mediaTyper.parse(mediaType.toValue());
+    contentType.parse(mediaType.toValue());
   } catch (error) {
     return false;
   }
