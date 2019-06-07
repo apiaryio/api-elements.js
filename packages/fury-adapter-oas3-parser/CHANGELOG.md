@@ -2,6 +2,10 @@
 
 ## Master
 
+### Enhancements
+
+- support parameters in media types
+
 ### Breaking
 
 - Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is

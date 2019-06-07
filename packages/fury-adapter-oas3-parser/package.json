@@ -5,7 +5,9 @@
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/adapter.js",
-  "files": ["lib/"],
+  "files": [
+    "lib/"
+  ],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-oas3-parser",
   "repository": {
     "type": "git",
@@ -21,7 +23,7 @@
     "test:integration:fix": "env GENERATE=1 mocha test/integration"
   },
   "dependencies": {
-    "media-typer": "^1.0.1",
+    "content-type": "^1.0.4",
     "ramda": "0.26.1",
     "yaml-js": "^0.2.3"
   },

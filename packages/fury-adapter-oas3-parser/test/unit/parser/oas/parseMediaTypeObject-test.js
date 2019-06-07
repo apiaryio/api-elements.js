@@ -29,6 +29,16 @@ describe('Media Type Object', () => {
     expect(parseResult).to.contain.warning("'Media Type Object' media type 'foo' is invalid");
   });
 
+  it('permits media type with parameters', () => {
+    const mediaType = new namespace.elements.Member('application/json; charset=utf-8', {});
+
+    const parseResult = parse(context, messageBodyClass, mediaType);
+
+    const message = parseResult.get(0);
+    expect(message).to.be.instanceof(messageBodyClass);
+    expect(message.contentType.toValue()).to.equal('application/json; charset=utf-8');
+  });
+
   it('returns a HTTP message body', () => {
     const mediaType = new namespace.elements.Member('application/json', {});
 
