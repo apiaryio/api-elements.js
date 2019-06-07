@@ -37,15 +37,14 @@ const source = 'FORMAT: 1A\n# My API\n...';
 fury.use(apibParser);
 
 // Parse the input and print 'My API'
-fury.parse({source}, function(err, result) {
-  console.log(result.api.title);
-});
+const parseResult = await fury.parse({ source });
+console.log(parseResult.api.title);
 ```
 
 Once you have a parsed API it is easy to traverse:
 
 ```js
-api.resourceGroups.forEach(function (resourceGroup) {
+parseResult.api.resourceGroups.forEach(function (resourceGroup) {
   console.log(resourceGroup.title);
 
   resourceGroup.resources.forEach(function (resource) {
@@ -108,7 +107,7 @@ import {Fury} from 'fury';
 const fury1 = new Fury();
 const fury2 = new Fury();
 
-fury1.parse(...);
+await fury1.parse(...);
 ```
 
 #### Writing an Adapter
@@ -190,7 +189,6 @@ import myAdapter from './my-adapter';
 fury.use(myAdapter);
 
 // Now parse my custom input format!
-fury.parse({source: 'some-test\n...'}, function (err, api) {
-  console.log(api.title);
-});
+const parseResult = await fury.parse({ source: 'some-test\n...' });
+console.log(parseResult.api.title);
 ```

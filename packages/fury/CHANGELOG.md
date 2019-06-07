@@ -11,7 +11,14 @@
   The underlying value is a namespace from minim.
 
 - Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
-  recommended.
+
+### Enhancements
+
+- Fury can now be used with promises or async/await. For example:
+
+  ```js
+  const parseResult = await fury.parse({ source: '# Hello World' });
+  ```
 
 ## 3.0.0-beta.10 (2019-03-26)
 
