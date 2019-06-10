@@ -145,7 +145,7 @@ const dereference = (example, root, paths, path) => {
   if (_.isObject(example)) {
     const result = {};
 
-    _.forEach(example, (value, key) => {
+    _.forOwn(example, (value, key) => {
       result[key] = dereference(value, root, paths, (path || []).concat([key]));
     });
 
