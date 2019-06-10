@@ -27,6 +27,23 @@
 
   [#236](https://github.com/apiaryio/api-elements.js/issues/236)
 
+- While parsing an 'Example Object' (found in a 'Schema Object') which contains
+  an object with a property `length` anywhere in the example tree. The example
+  object will be interpreted as an array of the given length. If the value of
+  `length` property of an 'Example Object' is a large number, then the parser
+  may utilise a lot of memory while producing a result and subsequently may
+  cause out of memory failures.
+
+  For example:
+
+  ```yaml
+  definitions:
+    User:
+      type: object
+      example:
+        length: 50000
+  ```
+
 ## 0.25.1 (2019-04-26)
 
 ### Bug Fixes

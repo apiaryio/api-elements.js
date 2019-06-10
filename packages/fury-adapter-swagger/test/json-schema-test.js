@@ -50,6 +50,17 @@ describe('Swagger Schema to JSON Schema', () => {
       });
     });
 
+    it('translates Swagger example extension to examples where example has property length', () => {
+      const schema = convertSchema({ type: 'object', example: { length: 2 } });
+
+      expect(schema).to.deep.equal({
+        type: 'object',
+        examples: [
+          { length: 2 },
+        ],
+      });
+    });
+
     it('dereferences Swagger example extension to examples', () => {
       const root = {
         definitions: {
