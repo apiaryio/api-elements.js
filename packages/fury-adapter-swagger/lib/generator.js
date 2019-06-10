@@ -56,7 +56,7 @@ const bodyFromSchema = (schema, payload, parser, contentType = 'application/json
         const boundary = parseBoundary(contentType);
         let content = '';
 
-        _.forEach(body, (value, key) => {
+        _.forOwn(body, (value, key) => {
           content += `--${boundary}\r\n`;
           content += `Content-Disposition: form-data; name="${key}"\r\n\r\n`;
           content += `${value}\r\n`;
