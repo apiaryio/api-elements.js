@@ -379,7 +379,7 @@ const convertSchemaDefinitions = (definitions) => {
   const jsonSchemaDefinitions = {};
 
   if (definitions) {
-    _.forEach(definitions, (schema, key) => {
+    _.forOwn(definitions, (schema, key) => {
       jsonSchemaDefinitions[key] = convertSchema(schema, { definitions }, { definitions }, false);
     });
   }

@@ -192,7 +192,7 @@ class Parser {
 
         const paths = _.omitBy(swagger.paths, isExtension);
 
-        _.forEach(paths, (pathValue, href) => {
+        _.forOwn(paths, (pathValue, href) => {
           this.handleSwaggerPath(pathValue, href);
         });
 
@@ -631,7 +631,7 @@ class Parser {
     const dataStructures = new Category();
     dataStructures.classes.push('dataStructures');
 
-    _.forEach(definitions, (schema, key) => {
+    _.forOwn(definitions, (schema, key) => {
       this.withPath(key, () => {
         try {
           const dataStructure = generator.generateDataStructure(schema);
@@ -718,7 +718,7 @@ class Parser {
         .value();
 
       // Each path is an object with methods as properties
-      _.forEach(relevantMethods, (methodValue, method) => {
+      _.forOwn(relevantMethods, (methodValue, method) => {
         this.handleSwaggerMethod(resource, href, pathObjectParameters, methodValue, method);
       });
 
@@ -839,7 +839,7 @@ class Parser {
       }
 
       // Transactions are created for each response in the document
-      _.forEach(relevantResponses, (responseValue, statusCode) => {
+      _.forOwn(relevantResponses, (responseValue, statusCode) => {
         this.handleSwaggerResponse(
           transition, method, methodValue,
           transitionParams, responseValue, statusCode,
