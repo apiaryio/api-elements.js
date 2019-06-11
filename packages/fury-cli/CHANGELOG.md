@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 0.9.0 (2019-06-11)
 
 ### Breaking
 

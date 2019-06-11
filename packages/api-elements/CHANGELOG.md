@@ -1,6 +1,6 @@
 # API Elements (JavaScript) CHANGELOG
 
-## Master
+## 0.2.0 (2019-06-11)
 
 ### Breaking
 
