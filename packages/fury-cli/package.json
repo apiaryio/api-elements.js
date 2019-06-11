@@ -28,7 +28,7 @@
     "fury-adapter-oas3-parser": "^0.7.5",
     "fury-adapter-swagger": "^0.25.1",
     "js-yaml": "^3.12.0",
-    "minim": "^0.23.1"
+    "minim": "^0.23.4"
   },
   "devDependencies": {
     "eslint": "^5.9.0"
