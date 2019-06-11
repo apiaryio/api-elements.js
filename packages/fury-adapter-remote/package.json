@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-remote",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Provide adapter for Element API based on callin remote API site",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -23,12 +23,12 @@
     "deckardcain": "^0.4.1"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.10"
+    "fury": "3.0.0-beta.11"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.15.1",
-    "fury": "3.0.0-beta.10",
+    "fury": "3.0.0-beta.11",
     "mocha": "^5.2.0"
   }
 }

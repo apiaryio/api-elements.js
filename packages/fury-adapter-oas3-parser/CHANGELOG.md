@@ -1,15 +1,15 @@
 # Fury OAS3 Parser Changelog
 
-## Master
-
-### Enhancements
-
-- support parameters in media types
+## 0.8.0 (2019-06-11)
 
 ### Breaking
 
 - Support for NodeJS 6 has been removed, upgrading to NodeJS 8 or newer is
   recommended.
+
+### Enhancements
+
+- Support parameters in media types, for example `application/json; charset=UTF-8`.
 
 ## 0.7.7 (2019-05-31)
 

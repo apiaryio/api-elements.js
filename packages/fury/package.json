@@ -1,6 +1,6 @@
 {
   "name": "fury",
-  "version": "3.0.0-beta.10",
+  "version": "3.0.0-beta.11",
   "description": "API Description SDK",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "api-elements": "^0.1.1"
+    "api-elements": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
