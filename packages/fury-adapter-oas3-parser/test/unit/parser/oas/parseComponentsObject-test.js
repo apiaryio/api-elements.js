@@ -71,6 +71,26 @@ describe('Components Object', () => {
       expect(member).to.be.instanceof(namespace.elements.Member);
       expect(member.value).to.be.undefined;
     });
+
+    it('parses invalid schema into empty member and leaves schemas state', () => {
+      const components = new namespace.elements.Object({
+        schemas: {
+          User: { type: 'array', items: { $ref: '#/foo' } },
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(1);
+
+      expect(parseResult).to.contain.error(
+        "Only local references to '#/components' within the same file are supported"
+      );
+
+      const schemasState = context.state.components.get('schemas');
+      const userState = schemasState.getMember('User');
+      expect(userState).to.be.instanceof(namespace.elements.Member);
+      expect(userState.value).to.be.undefined;
+    });
   });
 
   describe('#parameters', () => {

@@ -1,5 +1,13 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixed handling of OpenAPI 3 documents which included invalid 'Schema Object'
+  in reusable components. Under some circumstances these could cause the parser
+  to throw an exception.
+
 ## 0.8.0 (2019-06-11)
 
 ### Breaking
