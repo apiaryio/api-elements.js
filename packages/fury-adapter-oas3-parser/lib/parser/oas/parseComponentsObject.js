@@ -93,7 +93,13 @@ function parseComponentsObject(context, element) {
   context.state.components = new namespace.elements.Object();
 
   if (isObject(element) && element.get('schemas') && isObject(element.get('schemas'))) {
-    const schemas = element.get('schemas');
+    // Take schemas and convert to object with members for each key (discarding value)
+    // We don't want the value making it into final parse results under any circumstance,
+    // for example if the parse errors out and we leave bad state
+    const schemas = new namespace.elements.Object(
+      element.get('schemas').map((value, key) => new namespace.elements.Member(key))
+    );
+
     context.state.components.set('schemas', schemas);
   }
 
