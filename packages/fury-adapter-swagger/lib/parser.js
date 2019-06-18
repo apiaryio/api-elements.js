@@ -357,7 +357,31 @@ class Parser {
 
   // Converts the Swagger hostname and schemes to a Refract host metadata entry.
   handleSwaggerHost() {
-    const { Member: MemberElement } = this.namespace.elements;
+    const { Member, HrefVariables, Enum } = this.namespace.elements;
+    const Server = this.namespace.getElementClass('server');
+
+    const server = new Server();
+    server.element = 'server';
+    server.attributes.set('href', '{scheme}://{host}{basePath}');
+    const hrefVariables = new HrefVariables();
+    const scheme = new Member('scheme');
+    hrefVariables.push(scheme);
+    hrefVariables.push(new Member('host', this.swagger.host));
+    hrefVariables.push(new Member('basePath', this.basePath));
+    server.attributes.set('hrefVariables', hrefVariables);
+
+    if (this.swagger.schemes) {
+      if (this.swagger.schemes.length > 1) {
+        scheme.value = new Enum();
+        scheme.value.enumerations = this.swagger.schemes;
+      } else {
+        scheme.value = this.swagger.schemes[0];
+      }
+    }
+
+    this.api.push(server);
+
+    return
 
     if (this.swagger.host) {
       this.withPath('host', () => {
@@ -706,7 +730,7 @@ class Parser {
       // by individual transition URI templates. When creating a transition
       // below, we *only* set the transition URI template if it differs from
       // the one we've generated here.
-      resource.href = uriTemplate(this.basePath, href, pathObjectParameters);
+      resource.href = uriTemplate(href, pathObjectParameters);
 
       if (this.generateSourceMap) {
         this.createSourceMap(resource.attributes.get('href'), this.path);
@@ -770,7 +794,7 @@ class Parser {
       // Here we generate a URI template specific to this transition. If it
       // is different from the resource URI template, then we set the
       // transition's `href` attribute.
-      const hrefForTransition = uriTemplate(this.basePath, href, resourceParams, queryParams);
+      const hrefForTransition = uriTemplate(href, resourceParams, queryParams);
 
       if (hrefForTransition !== resource.href.toValue()) {
         transition.href = hrefForTransition;

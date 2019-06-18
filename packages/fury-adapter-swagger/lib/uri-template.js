@@ -3,7 +3,7 @@ const _ = require('lodash');
 const escapeUriTemplateVariable = variable => encodeURIComponent(variable)
   .replace(/[-.!~*'()]/g, c => `%${c.charCodeAt(0).toString(16)}`);
 
-module.exports = (basePath, href, pathObjectParams = [], queryParams = []) => {
+module.exports = (href, pathObjectParams = [], queryParams = []) => {
   const parameterNames = _.chain(pathObjectParams)
     .concat(queryParams)
     .filter(parameter => parameter.in === 'query')
@@ -21,8 +21,8 @@ module.exports = (basePath, href, pathObjectParams = [], queryParams = []) => {
 
   if (parameterNames.length > 0) {
     const queryString = parameterNames.join(',');
-    return `${basePath}${href}{?${queryString}}`;
+    return `${href}{?${queryString}}`;
   }
 
-  return basePath + href;
+  return href;
 };
