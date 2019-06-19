@@ -22,7 +22,7 @@ function hasTypeAttribute(e, attribute) {
   if (undefined !== e._attributes) {
     const attrs = e.attributes.get('typeAttributes');
     if (undefined !== attrs && undefined !== attrs.content) {
-      return undefined !== attrs.content.find(attr => attr.content === attribute);
+      return attrs.content.some(attr => attr.content === attribute);
     }
   }
   return false;
@@ -93,10 +93,8 @@ module.exports = (namespace) => {
     return undefined;
   }
 
-  // TODO e instanceof EnumElement fails because of dependency injection
-  // checking for e.element === 'enum' as a temporary  walkaround
-  const isEnumElement = e => (e.element === 'enum' || e instanceof EnumElement);
-  const isPlural = e => (e instanceof ArrayElement) || (e instanceof ObjectElement);
+  const isEnumElement = e => e instanceof EnumElement;
+  const isPlural = e => e instanceof ArrayElement;
 
   function mapValue(e, options, f, elements) {
     const opts = updateTypeAttributes(e, options);
