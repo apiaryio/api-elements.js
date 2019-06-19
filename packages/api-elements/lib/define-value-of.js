@@ -129,7 +129,7 @@ module.exports = (namespace) => {
 
     if (elements) {
       if (e.element === 'ref') {
-        const result = elements.filter(el => el.id.equals(e.content))[0];
+        const result = elements.find(el => el.id.equals(e.content));
         const inheritedElements = elements.filter(el => !el.id.equals(e.content));
 
         if (e.path && e.path.toValue() === 'content') {
@@ -139,7 +139,7 @@ module.exports = (namespace) => {
         return mapValue(result, opts, f, inheritedElements);
       }
 
-      const result = elements.filter(el => el.id.equals(e.element))[0];
+      const result = elements.find(el => el.id.equals(e.element));
       if (result) {
         const inheritedElements = elements.filter(el => !el.id.equals(e.element));
         return mapValue(result, opts, f, inheritedElements);
