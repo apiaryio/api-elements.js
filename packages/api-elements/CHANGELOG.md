@@ -1,5 +1,11 @@
 # API Elements (JavaScript) CHANGELOG
 
+## Master
+
+### Enhancements
+
+- Performance of the `valueOf` has been improved under certain cases.
+
 ## 0.2.0 (2019-06-11)
 
 ### Breaking
