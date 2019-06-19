@@ -1,6 +1,6 @@
 # API Elements (JavaScript) CHANGELOG
 
-## Master
+## 0.2.1 (2019-06-19)
 
 ### Enhancements
 
