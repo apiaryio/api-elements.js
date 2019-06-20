@@ -134,14 +134,17 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
       const dataStructure = mediaTypeObject.get('schema');
 
       if (!messageBody && dataStructure && isJSONMediaType(mediaType)) {
-        let elements = [];
+        const elements = {};
         const { components } = context.state;
         if (components) {
           const schemas = components.get('schemas');
           if (schemas) {
-            elements = schemas.content
+            schemas.content
               .filter(e => e.value && e.value.content)
-              .map(e => e.value.content);
+              .forEach((e) => {
+                const element = e.value.content;
+                elements[element.id.toValue()] = element;
+              });
           }
         }
 

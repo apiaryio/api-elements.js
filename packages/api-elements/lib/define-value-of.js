@@ -1,5 +1,7 @@
 /* eslint-disable no-bitwise, no-underscore-dangle */
 
+const R = require('ramda');
+
 const {
   Element,
   ArrayElement,
@@ -139,8 +141,8 @@ function mapValue(e, options, f, elements) {
 
   if (elements) {
     if (e.element === 'ref') {
-      const result = elements.find(el => el.id.equals(e.content));
-      const inheritedElements = elements.filter(el => !el.id.equals(e.content));
+      const result = elements[e.content];
+      const inheritedElements = R.filter(el => !el.id.equals(e.content), elements);
 
       if (e.path && e.path.toValue() === 'content') {
         return mapValue(result.content, opts, f, inheritedElements);
@@ -149,9 +151,9 @@ function mapValue(e, options, f, elements) {
       return mapValue(result, opts, f, inheritedElements);
     }
 
-    const result = elements.find(el => el.id.equals(e.element));
+    const result = elements[e.element];
     if (result) {
-      const inheritedElements = elements.filter(el => !el.id.equals(e.element));
+      const inheritedElements = R.filter(el => !el.id.equals(e.element), elements);
       return mapValue(result, opts, f, inheritedElements);
     }
   }
