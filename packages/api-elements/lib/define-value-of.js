@@ -20,11 +20,12 @@ function findDefault(e) {
 
 function hasTypeAttribute(e, attribute) {
   if (undefined !== e._attributes) {
-    const attrs = e.attributes.get('typeAttributes');
-    if (undefined !== attrs && undefined !== attrs.content) {
-      return attrs.content.some(attr => attr.content === attribute);
+    const typeAttributes = e.attributes.get('typeAttributes');
+    if (typeAttributes) {
+      return typeAttributes.contains(attribute);
     }
   }
+
   return false;
 }
 
@@ -35,15 +36,19 @@ const hasOptionalTypeAttribute = e => hasTypeAttribute(e, 'optional');
 
 function updateTypeAttributes(e, options) {
   let result = options;
+
   if (hasFixedTypeAttribute(e)) {
     result = setFlag(FIXED_FLAG, result);
   }
+
   if (hasFixedTypeTypeAttribute(e)) {
     result = setFlag(FIXED_TYPE_FLAG, result);
   }
+
   if (hasNullableTypeAttribute(e)) {
     result = setFlag(NULLABLE_FLAG, result);
   }
+
   return result;
 }
 
@@ -72,38 +77,43 @@ module.exports = (namespace) => {
         }
       }
     }
+
     return null;
   }
 
   const isPrimitive = e => (e instanceof StringElement) || (e instanceof NumberElement) || (e instanceof BooleanElement);
+  const isEnumElement = e => e instanceof EnumElement;
+  const isPlural = e => e instanceof ArrayElement;
 
   function trivialValue(e) {
     if (e instanceof BooleanElement) {
       return new BooleanElement(false);
     }
+
     if (e instanceof NumberElement) {
       return new NumberElement(0);
     }
+
     if (e instanceof StringElement) {
       return new StringElement('');
     }
+
     if (e instanceof NullElement) {
       return new NullElement();
     }
+
     return undefined;
   }
 
-  const isEnumElement = e => e instanceof EnumElement;
-  const isPlural = e => e instanceof ArrayElement;
-
   function mapValue(e, options, f, elements) {
     const opts = updateTypeAttributes(e, options);
-    if (e.content && (!isPlural(e) || e.content.length > 0)) {
+    if (e.content && (!isPlural(e) || !e.isEmpty)) {
       const result = f(e, opts, elements, 'content');
       if (undefined !== result) {
         return result;
       }
     }
+
     const sample = findFirstSample(e);
     if (sample) {
       const result = f(sample, opts, elements, 'sample');
@@ -111,6 +121,7 @@ module.exports = (namespace) => {
         return result;
       }
     }
+
     const dflt = findDefault(e);
     if (dflt) {
       const result = f(dflt, opts, elements, 'default');
@@ -118,6 +129,7 @@ module.exports = (namespace) => {
         return result;
       }
     }
+
     if (isFlag(NULLABLE_FLAG, opts)) {
       const result = f(new NullElement(), opts, elements, 'nullable');
       if (undefined !== result) {
@@ -153,6 +165,7 @@ module.exports = (namespace) => {
         }
       }
     }
+
     const trivial = trivialValue(e);
     if (trivial) {
       const result = f(trivial, opts, elements, 'generated');
@@ -160,7 +173,8 @@ module.exports = (namespace) => {
         return result;
       }
     }
-    if (isPlural(e) && e.content.length === 0) {
+
+    if (isPlural(e) && e.isEmpty) {
       return f(e, opts, elements, 'generated');
     }
 
@@ -169,60 +183,73 @@ module.exports = (namespace) => {
 
   function reduceValue(e, options, elements) {
     const opts = updateTypeAttributes(e, options);
-    if (undefined === e.content) {
+
+    if (e.content === undefined) {
       return mapValue(e, opts, e => e.content, elements);
     }
+
     if (isPrimitive(e)) {
       return e.content;
     }
+
     if (e instanceof NullElement) {
       return null;
     }
+
     if (isEnumElement(e)) {
       return mapValue(e.content, inheritFlags(opts), reduceValue, elements);
     }
+
     if (e instanceof ObjectElement) {
       let result = {};
+
+      const isFixed = isFlag(FIXED_FLAG, opts);
+      const isFixedType = isFlag(FIXED_TYPE_FLAG, opts);
+
       e.content.some((item) => {
-        const skippable = hasOptionalTypeAttribute(item)
-              || (!isFlag(FIXED_FLAG, opts)
-            && !isFlag(FIXED_TYPE_FLAG, opts)
-            && !hasTypeAttribute(item, 'required'));
+        const skippable = hasOptionalTypeAttribute(item) || (!isFixed && !isFixedType && !hasTypeAttribute(item, 'required'));
 
-        const k = mapValue(item.key, inheritFlags(opts), reduceValue, elements);
-
-        if (undefined === k) {
+        const key = mapValue(item.key, inheritFlags(opts), reduceValue, elements);
+        if (key === undefined) {
           if (skippable) {
             return false;
           }
+
           result = undefined;
           return true;
         }
 
-        const v = mapValue(item.value, inheritFlags(opts), reduceValue, elements);
-        if (undefined === v) {
+        const value = mapValue(item.value, inheritFlags(opts), reduceValue, elements);
+        if (value === undefined) {
           if (skippable) {
             return false;
           }
+
           result = undefined;
           return true;
         }
 
-        result[k] = v;
+        result[key] = value;
         return false;
       });
+
       return result;
     }
+
     if (e instanceof ArrayElement) {
       const result = e.map(item => mapValue(item, inheritFlags(opts), reduceValue, elements));
+
       if (!isFlag(FIXED_FLAG, opts) && !isFlag(FIXED_TYPE_FLAG, opts)) {
         return result.filter(item => item !== undefined);
       }
+
       if (result.includes(undefined)) {
         return undefined;
       }
+
       return result;
     }
+
     return undefined;
   }
 
