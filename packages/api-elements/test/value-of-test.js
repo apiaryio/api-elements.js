@@ -1114,7 +1114,7 @@ describe('valueOf RefElement', () => {
     name.id = 'name';
 
     const element = name.toRef('element');
-    const value = element.valueOf(undefined, [name]);
+    const value = element.valueOf(undefined, { name });
 
     expect(value).to.equal('doe');
   });
@@ -1125,7 +1125,7 @@ describe('valueOf RefElement', () => {
     container.id = 'name';
 
     const element = container.toRef('content');
-    const value = element.valueOf(undefined, [container]);
+    const value = element.valueOf(undefined, { name: container });
 
     expect(value).to.equal('doe');
   });
@@ -1136,7 +1136,7 @@ describe('valueOf RefElement', () => {
 
     const names = new ArrayElement([name.toRef()]);
 
-    const value = names.valueOf(undefined, [name]);
+    const value = names.valueOf(undefined, { name });
 
     expect(value).to.deep.equal(['doe']);
   });
@@ -1148,7 +1148,7 @@ describe('valueOf RefElement with source', () => {
     name.id = 'name';
 
     const element = name.toRef('element');
-    const value = element.valueOf({ source: true }, [name]);
+    const value = element.valueOf({ source: true }, { name });
 
     expect(value).to.deep.equal(['doe', 'content']);
   });
@@ -1159,7 +1159,7 @@ describe('valueOf RefElement with source', () => {
     container.id = 'name';
 
     const element = container.toRef('content');
-    const value = element.valueOf({ source: true }, [container]);
+    const value = element.valueOf({ source: true }, { name: container });
 
     expect(value).to.deep.equal(['doe', 'content']);
   });
@@ -1170,7 +1170,7 @@ describe('valueOf RefElement with source', () => {
 
     const names = new ArrayElement([name.toRef()]);
 
-    const value = names.valueOf({ source: true }, [name]);
+    const value = names.valueOf({ source: true }, { name });
 
     expect(value).to.deep.equal([['doe'], 'content']);
   });
@@ -1184,7 +1184,7 @@ describe('valueOf referenced element', () => {
     const element = new Element();
     element.element = 'name';
 
-    const value = element.valueOf(undefined, [name]);
+    const value = element.valueOf(undefined, { name });
 
     expect(value).to.equal('doe');
   });
@@ -1198,7 +1198,7 @@ describe('valueOf referenced element with source', () => {
     const element = new Element();
     element.element = 'name';
 
-    const value = element.valueOf({ source: true }, [name]);
+    const value = element.valueOf({ source: true }, { name });
 
     expect(value).to.deep.equal(['doe', 'content']);
   });

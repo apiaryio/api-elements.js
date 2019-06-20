@@ -17,7 +17,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "minim": "^0.23.4"
+    "minim": "^0.23.4",
+    "ramda": "^0.26.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
