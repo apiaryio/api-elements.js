@@ -1,1 +1,4 @@
 test
+lib/apiary-blueprint-parser.pegjs
+.gitignore
+.eslintignore

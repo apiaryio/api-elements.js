@@ -1,5 +1,8 @@
 const url = require('url');
-const ApiaryBlueprintParser = require('apiary-blueprint-parser');
+// eslint-disable-next-line import/no-unresolved
+const ApiaryBlueprintParser = require('./apiary-blueprint-parser');
+
+ApiaryBlueprintParser.ast = require('./ast');
 
 class Parser {
   constructor({ namespace, source }) {
