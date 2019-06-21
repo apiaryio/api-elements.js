@@ -20,7 +20,7 @@
     "minim": "^0.23.4"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "eslint": "^5.9.0",
     "mocha": "^5.0.2"
   },
