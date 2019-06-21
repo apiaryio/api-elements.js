@@ -27,11 +27,11 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^5.9.0",
+    "eslint": "^5.16.0",
     "fury": "3.0.0-beta.11",
     "glob": "^7.1.2",
     "pegjs": "git://github.com/dmajda/pegjs.git#02af83f9b416778878e52e2cbbc22d96e312164e",
-    "mocha": "^5.0.2"
+    "mocha": "^5.2.0"
   },
   "engines": {
     "node": ">=8"
