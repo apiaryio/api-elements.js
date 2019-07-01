@@ -1,4 +1,7 @@
-version: 2
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@1.0.2
 
 aliases:
   - &install
@@ -11,7 +14,10 @@ defaults: &defaults
   steps:
     - checkout
     - <<: *install
-    - run: npm test
+    - run: npm run cover
+    - run: npx nyc report --reporter=text-lcov > codecov.txt
+    - codecov/upload:
+        file: codecov.txt
 
 jobs:
   test-node8:
