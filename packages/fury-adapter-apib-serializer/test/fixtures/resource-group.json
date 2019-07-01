@@ -15,7 +15,7 @@
         },
         "title": {
           "element": "string",
-          "content": "My API"
+          "content": "API name"
         }
       },
       "attributes": {
@@ -51,55 +51,26 @@
       },
       "content": [
         {
-          "element": "resource",
+          "element": "category",
           "meta": {
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            },
             "title": {
               "element": "string",
-              "content": ""
-            }
-          },
-          "attributes": {
-            "href": {
-              "element": "string",
-              "content": "/message"
+              "content": "Users"
             }
           },
           "content": [
             {
-              "element": "transition",
-              "meta": {
-                "title": {
-                  "element": "string",
-                  "content": ""
-                }
-              },
-              "content": [
-                {
-                  "element": "httpTransaction",
-                  "content": [
-                    {
-                      "element": "httpRequest",
-                      "attributes": {
-                        "method": {
-                          "element": "string",
-                          "content": "GET"
-                        }
-                      },
-                      "content": []
-                    },
-                    {
-                      "element": "httpResponse",
-                      "attributes": {
-                        "statusCode": {
-                          "element": "string",
-                          "content": "204"
-                        }
-                      },
-                      "content": []
-                    }
-                  ]
-                }
-              ]
+              "element": "copy",
+              "content": "User related endpoints"
             }
           ]
         }

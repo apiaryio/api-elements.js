@@ -55,51 +55,19 @@
           "meta": {
             "title": {
               "element": "string",
-              "content": ""
+              "content": "Users"
             }
           },
           "attributes": {
             "href": {
               "element": "string",
-              "content": "/message"
+              "content": "/users"
             }
           },
           "content": [
             {
-              "element": "transition",
-              "meta": {
-                "title": {
-                  "element": "string",
-                  "content": ""
-                }
-              },
-              "content": [
-                {
-                  "element": "httpTransaction",
-                  "content": [
-                    {
-                      "element": "httpRequest",
-                      "attributes": {
-                        "method": {
-                          "element": "string",
-                          "content": "GET"
-                        }
-                      },
-                      "content": []
-                    },
-                    {
-                      "element": "httpResponse",
-                      "attributes": {
-                        "statusCode": {
-                          "element": "string",
-                          "content": "204"
-                        }
-                      },
-                      "content": []
-                    }
-                  ]
-                }
-              ]
+              "element": "copy",
+              "content": "Users resource"
             }
           ]
         }

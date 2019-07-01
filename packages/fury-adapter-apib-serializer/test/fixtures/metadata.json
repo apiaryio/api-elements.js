@@ -45,65 +45,59 @@
                   "content": "1A"
                 }
               }
+            },
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "https://example.com"
+                }
+              }
+            },
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "ANOTHER"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "this too?"
+                }
+              }
             }
           ]
         }
       },
-      "content": [
-        {
-          "element": "resource",
-          "meta": {
-            "title": {
-              "element": "string",
-              "content": ""
-            }
-          },
-          "attributes": {
-            "href": {
-              "element": "string",
-              "content": "/message"
-            }
-          },
-          "content": [
-            {
-              "element": "transition",
-              "meta": {
-                "title": {
-                  "element": "string",
-                  "content": ""
-                }
-              },
-              "content": [
-                {
-                  "element": "httpTransaction",
-                  "content": [
-                    {
-                      "element": "httpRequest",
-                      "attributes": {
-                        "method": {
-                          "element": "string",
-                          "content": "GET"
-                        }
-                      },
-                      "content": []
-                    },
-                    {
-                      "element": "httpResponse",
-                      "attributes": {
-                        "statusCode": {
-                          "element": "string",
-                          "content": "204"
-                        }
-                      },
-                      "content": []
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "content": []
     }
   ]
 }
