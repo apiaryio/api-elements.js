@@ -1,5 +1,6 @@
 FORMAT: 1A
-{% set host = api.metadata('HOST') %}{% if host and host.toValue() %}HOST: {{ host.toValue() }}{% endif %}
+{% for item in api.attributes.get('metadata') %}{% if item.key.toValue() != 'FORMAT' %}{{ item.key.toValue() }}: {{ item.value.toValue() }}
+{% endif %}{% endfor %}
 
 
 
@@ -24,7 +25,7 @@ FORMAT: 1A
   {% if example.dataStructure %}
     {{ example.dataStructure.content|mson|indent(4) }}
   {% endif %}
-  {% if example.messageBody or example|getCopy %}
+  {% if example.messageBody %}
     + Body
 
             {{ example.messageBody.content|default('', true)|pretty|indent(12) }}
@@ -77,9 +78,9 @@ FORMAT: 1A
 
 {% macro renderTransition(transition, href) %}
 {% if transition.title and transition.title.toValue() %}
-#### {{ transition.title.toValue() }} [{{ transition.method.toValue() }}{% if href %} {{ href }}{% elif transition.computedHref and transition.computedHref.toValue() %} {{ transition.computedHref.toValue() }}{% endif %}]
+#### {{ transition.title.toValue() }} [{% if transition.method %}{{ transition.method.toValue() }}{% endif %}{% if href %} {{ href }}{% elif transition.computedHref and transition.computedHref.toValue() %} {{ transition.computedHref.toValue() }}{% endif %}]
 {% else %}
-#### {{ transition.method.toValue() }}{% if href %} {{ href }}{% elif transition.computedHref and transition.computedHref.toValue() %} {{ transition.computedHref.toValue() }}{% endif %}
+#### {% if transition.method %}{{ transition.method.toValue() }}{% endif %}{% if href %} {{ href }}{% elif transition.computedHref and transition.computedHref.toValue() %} {{ transition.computedHref.toValue() }}{% endif %}
 {% endif %}
 
 {% for copy in transition|getCopy %}
