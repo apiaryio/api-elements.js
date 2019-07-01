@@ -47,8 +47,8 @@ class Namespace extends minim.Namespace {
     this.register('category', Category);
     this.register('extension', Extension);
 
-    defineValueOf(this);
-    defineSourceMapValue(this);
+    defineValueOf();
+    defineSourceMapValue();
   }
 }
 

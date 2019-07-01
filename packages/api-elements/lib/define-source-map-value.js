@@ -1,6 +1,6 @@
-module.exports = (namespace) => {
-  const { Element } = namespace;
+const { Element } = require('minim');
 
+module.exports = () => {
   /**
    * @name sourceMapValue
    * @type Array
