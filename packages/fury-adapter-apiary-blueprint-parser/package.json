@@ -15,7 +15,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "pegjs": "pegjs lib/apiary-blueprint-parser.pegjs lib/apiary-blueprint-parser.js",
-    "prepublishOnly": "npm run pegjs",
+    "prepack": "npm run pegjs",
     "pretest": "npm run pegjs",
     "test": "mocha"
   },
