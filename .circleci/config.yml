@@ -27,6 +27,13 @@ jobs:
     docker:
       - image: circleci/node:12
 
+  test-smoke:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *install
+      - run: ./.circleci/smoke.sh
+
   lint:
     <<: *defaults
     steps:
@@ -58,5 +65,6 @@ workflows:
       - test-node8
       - test-node10
       - test-node12
+      - test-smoke
       - lint
       - docs
