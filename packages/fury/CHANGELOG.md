@@ -1,5 +1,10 @@
 # Fury Changelog
 
+## 3.0.0-beta.12 (2019-07-02)
+
+This release contains internal changes needed to improve the performance for
+parsing OpenAPI 3.0 documents.
+
 ## 3.0.0-beta.11 (2019-06-11)
 
 ### Breaking

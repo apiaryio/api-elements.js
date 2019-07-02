@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-apiary-blueprint-parser",
-  "version": "3.0.0-beta.8",
+  "version": "3.0.0-beta.9",
   "description": "Parser for Fury.js for the deprecated Apiary Blueprint language",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -23,15 +23,15 @@
     "deckardcain": "^0.4.0"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.11"
+    "fury": "3.0.0-beta.12"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
-    "fury": "3.0.0-beta.11",
+    "fury": "3.0.0-beta.12",
     "glob": "^7.1.2",
-    "pegjs": "git://github.com/dmajda/pegjs.git#02af83f9b416778878e52e2cbbc22d96e312164e",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "pegjs": "git://github.com/dmajda/pegjs.git#02af83f9b416778878e52e2cbbc22d96e312164e"
   },
   "engines": {
     "node": ">=8"

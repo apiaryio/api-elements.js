@@ -3869,6 +3869,13 @@ minim@^0.23.4:
   dependencies:
     lodash "^4.15.0"
 
+minim@^0.23.5:
+  version "0.23.5"
+  resolved "https://registry.yarnpkg.com/minim/-/minim-0.23.5.tgz#3724d4448a4247209921e38e73631a6e1543e663"
+  integrity sha512-OIdemwR6621loY0hgStoecAgZghgWpFSVutXct8+dkVw6xZpltvpvU4yhCtitfNEDvu1AD0yoIrXVrQFVJ9M8w==
+  dependencies:
+    lodash "^4.15.0"
+
 minimatch@3.0.4, minimatch@^3.0.0, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
@@ -4792,7 +4799,7 @@ quick-lru@^1.0.0:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
   integrity sha1-Q2CxfGETatOAeDl/8RQW4Ybc+7g=
 
-ramda@0.26.1:
+ramda@0.26.1, ramda@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
   integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==

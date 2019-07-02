@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1 (2019-07-02)
+
+This update incorporates changes from Fury Adapters:
+
+- fury-adapter-oas3-parser 0.8.0
+
 ## 0.9.0 (2019-06-11)
 
 ### Breaking
