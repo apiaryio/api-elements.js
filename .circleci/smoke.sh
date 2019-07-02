@@ -12,7 +12,7 @@ create_package() {
 install() {
   PACKAGE="$1"
 
-  TARBALL="$(cd packages/$PACKAGE && npm pack)"
+  TARBALL="$(cd packages/$PACKAGE && npm pack | tail -n1)"
   mv "packages/$PACKAGE/$TARBALL" "$TMPDIR"
 
   cd "$TMPDIR" && npm install "$TARBALL" && cd "$API_ELEMENTS"
