@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-beta.9 (2019-07-02)
+
+### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 12](https://github.com/apiaryio/api-elements.js/releases/tag/fury@3.0.0-beta.12).
+
 ## 3.0.0-beta.8 (2019-06-11)
 
 ### Breaking

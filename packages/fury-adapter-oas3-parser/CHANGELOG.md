@@ -1,5 +1,10 @@
 # Fury OAS3 Parser Changelog
 
+## 0.9.0 (2019-07-02)
+
+This release brings significant performance improvement to parsing large
+OpenAPI 3.0 documents.
+
 ## 0.8.1 (2019-06-12)
 
 ### Bug Fixes
