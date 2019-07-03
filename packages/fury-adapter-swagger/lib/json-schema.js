@@ -166,6 +166,15 @@ const convertSubSchema = (schema, references, swagger) => {
     actualSchema.type = 'string';
   }
 
+  if (schema.pattern && schema.minLength && schema.pattern.startsWith('^[') && schema.pattern.endsWith(']*$')) {
+    // If a schema has a minimal length (minLength) > 0 AND there is a regex
+    // such as: `^[A-z]*$`, the schema can resolve to an empty string which
+    // doesn't match minLength.
+    //
+    // JSON Schema Faker will fail in that case and get into an infinite loop.
+    actualSchema.pattern = schema.pattern.replace('*$', '+$');
+  }
+
   if (schema.example) {
     actualSchema.examples = [dereference(schema.example, swagger)];
   }

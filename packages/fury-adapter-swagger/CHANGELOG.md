@@ -1,5 +1,17 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Fixes a problem while parsing a document which contains a Swagger Schema for
+  a string which contains both a `minLength` and a `pattern` property which are
+  incompatible. For example, the following pattern: `^[A-z]*$` which is making
+  use of `*` which means that it allows strings that are zero length or more.
+  If there is a property `minLength` which is incompatible with the pattern
+  such as if `minLength` is set to 1. Previously this would cause the parser to
+  get into an infinite loop.
+
 ## 0.26.0 (2019-06-11)
 
 ### Breaking
