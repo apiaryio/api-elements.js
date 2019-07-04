@@ -2,11 +2,11 @@
 
 set -e
 
-TMPDIR="$(mktemp -d 2>/dev/null || mktemp -d -t 'apiejs-smoketest')"
-API_ELEMENTS="$(pwd)"
+TMPDIR="$(mktemp -d)"
+PROJECT_DIR="$(pwd)"
 
 create_package() {
-  cd "$TMPDIR" && npm init --yes && cd "$API_ELEMENTS"
+  cd "$TMPDIR" && npm init --yes && cd "$PROJECT_DIR"
 }
 
 install() {
@@ -15,7 +15,7 @@ install() {
   TARBALL="$(cd packages/$PACKAGE && npm pack | tail -n1)"
   mv "packages/$PACKAGE/$TARBALL" "$TMPDIR"
 
-  cd "$TMPDIR" && npm install "$TARBALL" && cd "$API_ELEMENTS"
+  cd "$TMPDIR" && npm install "$TARBALL" && cd "$PROJECT_DIR"
 }
 
 echo "Setting up Fury in $TMPDIR"
