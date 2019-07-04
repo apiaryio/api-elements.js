@@ -14,7 +14,9 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "mocha"
+    "test": "mocha",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "content-type": "^1.0.4",
@@ -24,7 +26,8 @@
     "media-typer": "^1.0.1",
     "swagger-parser": "^6.0.2",
     "yaml-js": "^0.2.3",
-    "z-schema": "^3.24.2"
+    "z-schema": "^3.24.2",
+    "snyk": "^1.189.0"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.12"
@@ -39,5 +42,6 @@
   },
   "engines": {
     "node": ">=8"
-  }
+  },
+  "snyk": true
 }
