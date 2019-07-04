@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.27.0",
+  "version": "0.27.1",
   "description": "Swagger 2.0 parser for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
