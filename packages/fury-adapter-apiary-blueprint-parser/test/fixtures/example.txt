@@ -1,4 +1,4 @@
-HOST: http://www.google.com/
+HOST: http://example.com/
 
 --- Sample API v2 ---
 ---
