@@ -34,7 +34,7 @@ npx fury --version
 
 # Parse Apiary Blueprint
 cat << EOF | npx fury -
-HOST: http://www.google.com/
+HOST: http://example.com/
 
 --- Sample API v2 ---
 ---

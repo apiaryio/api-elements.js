@@ -42,7 +42,7 @@
                 },
                 "value": {
                   "element": "string",
-                  "content": "http://www.google.com/"
+                  "content": "http://example.com/"
                 }
               }
             }
