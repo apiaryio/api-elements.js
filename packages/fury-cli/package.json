@@ -16,7 +16,9 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "exit 0"
+    "test": "exit 0",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "cardinal": "^2.1.1",
@@ -28,12 +30,14 @@
     "fury-adapter-oas3-parser": "^0.9.0",
     "fury-adapter-swagger": "^0.27.0",
     "js-yaml": "^3.12.0",
-    "minim": "^0.23.4"
+    "minim": "^0.23.4",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0"
   },
   "engines": {
     "node": ">=8"
-  }
+  },
+  "snyk": true
 }
