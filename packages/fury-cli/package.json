@@ -7,6 +7,7 @@
   "bin": {
     "fury": "lib/fury.js"
   },
+  "files": ["lib/fury.js"],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-cli",
   "repository": {
     "type": "git",

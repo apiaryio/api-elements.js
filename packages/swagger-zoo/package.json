@@ -5,6 +5,7 @@
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "index.js",
+  "files": ["index.js", "fixtures/**/*.json", "fixtures/**/*.yaml"],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/swagger-zoo",
   "repository": {
     "type": "git",

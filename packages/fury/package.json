@@ -5,6 +5,7 @@
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/fury.js",
+  "files": ["lib/fury.js"],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury",
   "repository": {
     "type": "git",

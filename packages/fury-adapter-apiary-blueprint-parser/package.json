@@ -5,6 +5,7 @@
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/adapter.js",
+  "files": ["lib/*.js"],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-apiary-blueprint-parser",
   "repository": {
     "type": "git",

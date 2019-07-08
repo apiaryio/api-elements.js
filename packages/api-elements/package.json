@@ -5,6 +5,7 @@
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "lib/api-elements.js",
+  "files": ["lib/*.js", "lib/elements/*.js"],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/api-elements",
   "repository": {
     "type": "git",
