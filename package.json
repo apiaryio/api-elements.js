@@ -11,15 +11,18 @@
     "lint": "lerna exec --scope='*' --concurrency 1 --no-bail -- npm run lint",
     "lint:fix": "lerna exec --scope='*' --concurrency 1 --no-bail -- npm run lint:fix",
     "test": "lerna exec --scope='*' --concurrency 1 --no-bail -- npm run test",
-    "cover": "exit 0"
+    "cover": "nyc npm test",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
     "@commitlint/cli": "7.3.2",
     "@commitlint/config-conventional": "7.3.1",
+    "coveralls": "^3.0.4",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "jsdoc": "^3.5.5",
-    "lerna": "^3.4.0"
+    "lerna": "^3.4.0",
+    "nyc": "^14.1.1"
   }
 }

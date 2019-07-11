@@ -3,15 +3,14 @@ version: 2
 aliases:
   - &install
     run: sudo npm install -g yarn && yarn install --frozen-lockfile --ignore-optional
-
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: circleci/node:10
-  steps:
-    - checkout
-    - <<: *install
-    - run: npm test
+  - &defaults
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - <<: *install
+      - run: npm test
 
 jobs:
   test-node8:
@@ -58,6 +57,14 @@ jobs:
             export PATH="$(yarn bin):$PATH"
             pipenv run make html
 
+  cover:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *install
+      - run: npm run cover
+      - run: npm run coveralls
+
 workflows:
   version: 2
   test-publish:
@@ -68,3 +75,7 @@ workflows:
       - test-smoke
       - lint
       - docs
+      - cover:
+          requires:
+            - test-node12
+
