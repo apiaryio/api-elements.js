@@ -5,6 +5,7 @@
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/adapter.js",
+  "files": ["lib/*.js", "template.nunjucks"],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-apib-serializer",
   "repository": {
     "type": "git",
