@@ -1,5 +1,12 @@
 # Fury API Blueprint Serializer
 
+## Master
+
+### Bug Fixes
+
+- Prevent double new lines being appended to the end of serialized API
+  Blueprints.
+
 ## 0.12.0 (2019-07-02)
 
 ### Enhancements
