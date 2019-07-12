@@ -43,7 +43,7 @@ describe('API Blueprint serializer adapter', () => {
           return done(serializeErr);
         }
 
-        expect(serialized.trim()).to.deep.equal(expectedBlueprint.trim());
+        expect(serialized).to.deep.equal(expectedBlueprint);
         return done();
       });
     });

@@ -37,7 +37,8 @@ function serialize({ api }) {
       }
 
       // Attempt to filter out extra spacing
-      return resolve(apib.replace(/\n\s*\n\s*\n/g, '\n\n'));
+      const result = apib.trim().replace(/\n\s*\n\s*\n/g, '\n\n');
+      return resolve(`${result}\n`);
     });
   });
 }
