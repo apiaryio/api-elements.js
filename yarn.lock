@@ -5167,9 +5167,10 @@ pathval@^1.1.0:
   resolved "https://registry.yarnpkg.com/pathval/-/pathval-1.1.0.tgz#b942e6d4bde653005ef6b71361def8727d0645e0"
   integrity sha1-uULm1L3mUwBe9rcTYd74cn0GReA=
 
-"pegjs@git://github.com/dmajda/pegjs.git#02af83f9b416778878e52e2cbbc22d96e312164e":
-  version "0.7.0"
-  resolved "git://github.com/dmajda/pegjs.git#02af83f9b416778878e52e2cbbc22d96e312164e"
+pegjs@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/pegjs/-/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
+  integrity sha1-z4uvrm7d/0tafvsYUmnqr0YQ3b0=
 
 performance-now@^2.1.0:
   version "2.1.0"
