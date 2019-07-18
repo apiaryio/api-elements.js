@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { Fury } = require('fury');
 const FuryRemoteAdapter = require('../lib/adapter');
 
-const blueprintSource = 'FORMAT: 1A\n\n# API\n\n';
+const blueprintSource = 'FORMAT: 1A\n\n# API\n';
 const swaggerSource = '{ "swagger": "2.0", "info": { "version": "1.0.0", "title": "swg" } }';
 const invalidSwaggerSource = '{ "swagger": "2.0", "info": { "version": 1, "title": "swg" } }';
 
