@@ -10,6 +10,8 @@ module.exports = {
       'apib',
       'apiaryb',
       'remote',
+      'deps',
+      'deps-dev',
     ]],
     'scope-empty': [2, 'never'],
   },
