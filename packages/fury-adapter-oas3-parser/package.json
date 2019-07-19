@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "content-type": "^1.0.4",
+    "media-typer": "^1.0.1",
     "ramda": "0.26.1",
     "yaml-js": "^0.2.3"
   },
