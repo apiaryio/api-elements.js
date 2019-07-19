@@ -348,5 +348,36 @@ describe('Media Type Object', () => {
       expect(message.messageBody.toValue()).to.equal('{"parents":[]}');
       expect(message.messageBody.contentType.toValue()).to.equal('application/json');
     });
+
+    it('generates an messageBody asset for text type with string schema', () => {
+      const mediaType = new namespace.elements.Member('text/plain', {
+        schema: {
+          type: 'string',
+          example: 'hello world',
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody.toValue()).to.equal('hello world');
+      expect(message.messageBody.contentType.toValue()).to.equal('text/plain');
+    });
+
+    it('does not generates an messageBody asset for text type with non string type', () => {
+      const mediaType = new namespace.elements.Member('text/plain', {
+        schema: {
+          type: 'number',
+          example: 5,
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody).to.be.undefined;
+    });
   });
 });

@@ -1,5 +1,6 @@
 const R = require('ramda');
-const contentType = require('content-type');
+const contentTyper = require('content-type');
+const mediaTyper = require('media-typer');
 const pipeParseResult = require('../../pipeParseResult');
 const {
   isExtension, hasKey, getKey, getValue,
@@ -19,9 +20,52 @@ const unsupportedKeys = ['encoding'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 function isJSONMediaType(mediaType) {
-  const type = contentType.parse(mediaType);
-  const jsonMediaType = /^application\/\S*json$/i;
-  return jsonMediaType.test(type.type);
+  const contentType = contentTyper.parse(mediaType);
+  const { type, suffix, subtype } = mediaTyper.parse(contentType.type);
+  return type === 'application' && (suffix === 'json' || subtype === 'json');
+}
+
+function isTextMediaType(mediaType) {
+  const contentType = contentTyper.parse(mediaType);
+  const { type } = mediaTyper.parse(contentType.type);
+  return type === 'text';
+}
+
+const canGenerateMessageBodyForMediaType = R.anyPass([isJSONMediaType, isTextMediaType]);
+
+function generateMessageBody(context, mediaType, dataStructure) {
+  const elements = {};
+  const { components } = context.state;
+  if (components) {
+    const schemas = components.get('schemas');
+    if (schemas) {
+      schemas.content
+        .filter(e => e.value && e.value.content)
+        .forEach((e) => {
+          const element = e.value.content;
+          elements[element.id.toValue()] = element;
+        });
+    }
+  }
+
+  const value = dataStructure.content.valueOf(undefined, elements);
+  if (!value) {
+    return undefined;
+  }
+
+  let body;
+  if (isJSONMediaType(mediaType)) {
+    body = JSON.stringify(value);
+  } else if (isTextMediaType(mediaType) && typeof value === 'string') {
+    body = value;
+  } else {
+    return undefined;
+  }
+
+  const asset = new context.namespace.elements.Asset(body);
+  asset.classes.push('messageBody');
+  asset.contentType = mediaType;
+  return asset;
 }
 
 const createJSONMessageBodyAsset = R.curry((namespace, mediaType, value) => {
@@ -46,7 +90,7 @@ const parseExampleObjectOrRef = parseReference('examples', parseExampleObject);
 
 const isValidMediaType = (mediaType) => {
   try {
-    contentType.parse(mediaType.toValue());
+    contentTyper.parse(mediaType.toValue());
   } catch (error) {
     return false;
   }
@@ -133,28 +177,9 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
 
       const dataStructure = mediaTypeObject.get('schema');
 
-      if (!messageBody && dataStructure && isJSONMediaType(mediaType)) {
-        const elements = {};
-        const { components } = context.state;
-        if (components) {
-          const schemas = components.get('schemas');
-          if (schemas) {
-            schemas.content
-              .filter(e => e.value && e.value.content)
-              .forEach((e) => {
-                const element = e.value.content;
-                elements[element.id.toValue()] = element;
-              });
-          }
-        }
-
-        const value = dataStructure.content.valueOf(undefined, elements);
-
-        if (value) {
-          const body = JSON.stringify(value);
-          const asset = new namespace.elements.Asset(body);
-          asset.classes.push('messageBody');
-          asset.contentType = mediaType;
+      if (!messageBody && dataStructure && canGenerateMessageBodyForMediaType(mediaType)) {
+        const asset = generateMessageBody(context, mediaType, dataStructure);
+        if (asset) {
           message.push(asset);
         }
       }
