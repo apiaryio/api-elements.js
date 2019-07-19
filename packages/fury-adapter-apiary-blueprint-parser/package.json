@@ -21,7 +21,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "deckardcain": "^0.4.0"
+    "deckardcain": "^1.0.0"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.12"

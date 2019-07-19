@@ -18,7 +18,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "deckardcain": "^0.4.0",
+    "deckardcain": "^1.0.0",
     "drafter": "2.0.0-pre.1"
   },
   "peerDependencies": {
