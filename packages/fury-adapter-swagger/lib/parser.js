@@ -1629,12 +1629,11 @@ class Parser {
   }
 
   validateContentTypes(contentTypes) {
-    contentTypes.forEach((contentType) => {
+    contentTypes.forEach((contentType, index) => {
       try {
         const { type } = contentTypeModule.parse(contentType);
         mediaTyper.parse(type);
       } catch (e) {
-        const index = contentTypes.indexOf(contentType);
         this.withPath(index, () => {
           this.createAnnotation(
             annotations.VALIDATION_WARNING, this.path,
