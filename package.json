@@ -15,7 +15,7 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
-    "@commitlint/cli": "7.3.2",
+    "@commitlint/cli": "8.1.0",
     "@commitlint/config-conventional": "8.1.0",
     "coveralls": "^3.0.4",
     "eslint": "^5.9.0",
