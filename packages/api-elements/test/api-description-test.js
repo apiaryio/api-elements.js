@@ -1004,6 +1004,19 @@ describe('API description namespace', () => {
             },
           },
           {
+            element: 'member',
+            content: {
+              key: {
+                element: 'string',
+                content: 'grantType',
+              },
+              value: {
+                element: 'string',
+                content: 'token',
+              },
+            },
+          },
+          {
             element: 'transition',
             attributes: {
               relation: {
@@ -1039,7 +1052,7 @@ describe('API description namespace', () => {
 
     it('should contain members', () => {
       const { members } = authScheme;
-      expect(members).to.have.length(1);
+      expect(members).to.have.length(2);
       members.forEach((item) => {
         expect(item).to.be.an.instanceof(MemberElement);
       });
@@ -1051,6 +1064,56 @@ describe('API description namespace', () => {
       transitions.forEach((item) => {
         expect(item).to.be.an.instanceof(Transition);
       });
+    });
+
+    it('should retrieve grant type', () => {
+      expect(authScheme.grantTypeValue).to.equal('token');
+    });
+
+    it('without grant type should return undefined', () => {
+      const refracted = {
+        element: 'Token Auth Scheme',
+        meta: {
+          id: {
+            element: 'string',
+            content: 'Custom Token Auth',
+          },
+        },
+        content: [],
+      };
+
+      const element = namespace.fromRefract(refracted);
+      const authScheme = new AuthScheme(element.content, element.meta, element.attributes);
+
+      expect(authScheme.grantTypeValue).to.be.undefined;
+    });
+
+    it('without grant type value should return undefined', () => {
+      const refracted = {
+        element: 'Token Auth Scheme',
+        meta: {
+          id: {
+            element: 'string',
+            content: 'Custom Token Auth',
+          },
+        },
+        content: [
+          {
+            element: 'member',
+            content: {
+              key: {
+                element: 'string',
+                content: 'grantType',
+              },
+            },
+          },
+        ],
+      };
+
+      const element = namespace.fromRefract(refracted);
+      const authScheme = new AuthScheme(element.content, element.meta, element.attributes);
+
+      expect(authScheme.grantTypeValue).to.be.undefined;
     });
   });
 

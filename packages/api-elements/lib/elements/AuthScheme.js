@@ -18,7 +18,7 @@ class AuthScheme extends ArrayElement {
   /**
    * @name transitions
    * @type ArraySlice
-   * @memberof HttpMessagePayload.prototype
+   * @memberof AuthScheme.prototype
    */
   get transitions() {
     return this.children.filter(item => item.element === 'transition');
@@ -27,10 +27,24 @@ class AuthScheme extends ArrayElement {
   /**
    * @name members
    * @type ArraySlice
-   * @memberof HttpMessagePayload.prototype
+   * @memberof AuthScheme.prototype
    */
   get members() {
     return this.children.filter(item => item.element === 'member');
+  }
+
+  /**
+   * @name grantTypeValue
+   * @memberof AuthScheme.prototype
+   */
+  get grantTypeValue() {
+    const grantType = this.members.find(item => item.key.toValue() === 'grantType');
+
+    if (grantType && grantType.value) {
+      return grantType.value.toValue();
+    }
+
+    return undefined;
   }
 }
 
