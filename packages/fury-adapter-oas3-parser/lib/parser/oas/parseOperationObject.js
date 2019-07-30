@@ -1,8 +1,9 @@
 const R = require('ramda');
 const {
-  isMember, isExtension, hasKey, getValue,
+  isArray, isMember, isExtension, hasKey, getValue,
 } = require('../../predicates');
 const {
+  createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
   createIdentifierNotUniqueWarning,
@@ -13,6 +14,7 @@ const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseResponsesObject = require('./parseResponsesObject');
 const parseParameterObjects = require('./parseParameterObjects');
+const parseSecurityRequirementObject = require('./parseSecurityRequirementObject');
 const parseRequestBodyObject = require('./parseRequestBodyObject');
 const parseReference = require('../parseReference');
 
@@ -21,7 +23,7 @@ const parseRequestBodyObjectOrRef = parseReference('requestBodies', parseRequest
 const name = 'Operation Object';
 const requiredKeys = ['responses'];
 const unsupportedKeys = [
-  'tags', 'externalDocs', 'callbacks', 'deprecated', 'security',
+  'tags', 'externalDocs', 'callbacks', 'deprecated',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -102,6 +104,20 @@ function parseOperationObject(context, path, member) {
     ),
   ]));
 
+  const parseSecurity = pipeParseResult(namespace,
+    R.unless(isArray, createWarning(namespace, `'${name}' 'security' is not an array`)),
+    R.compose(R.chain(parseSecurityRequirementObject(context)), R.constructN(1, namespace.elements.Array)),
+    requirements => requirements.map((requirement) => {
+      if (requirement.length === 1) {
+        return requirement.get(0);
+      }
+
+      const allOf = new namespace.elements.Array(requirement.content);
+      allOf.element = 'allOf';
+
+      return allOf;
+    }));
+
   const parseMember = R.cond([
     [hasKey('summary'), parseString(context, name, false)],
     [hasKey('description'), parseCopy(context, name, false)],
@@ -109,6 +125,7 @@ function parseOperationObject(context, path, member) {
     [hasKey('responses'), R.compose(parseResponsesObject(context), getValue)],
     [hasKey('requestBody'), R.compose(parseRequestBodyObjectOrRef(context), getValue)],
     [hasKey('parameters'), R.compose(parseParameterObjects(context, name), getValue)],
+    [hasKey('security'), R.compose(parseSecurity, getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -159,6 +176,13 @@ function parseOperationObject(context, path, member) {
             request.headers = headers.clone();
           });
         }
+      }
+
+      const security = operation.get('security');
+      if (security) {
+        transactions.forEach((transaction) => {
+          transaction.attributes.set('authSchemes', security.clone());
+        });
       }
 
       return transition;

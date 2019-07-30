@@ -254,6 +254,110 @@ describe('Security Scheme Object', () => {
       expect(parseResult.length).to.equal(1);
       expect(parseResult).to.not.contain.annotations;
     });
+
+    it('does not complain about flows', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'apiKey',
+        name: 'example',
+        in: 'query',
+        flows: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+    });
+  });
+
+  describe('when type is oauth2', () => {
+    it('parses correctly when single flow', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'oauth2',
+        flows: {
+          password: {
+            tokenUrl: '/token',
+            scopes: {},
+          },
+        },
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Array);
+      expect(parseResult.get(0).length).to.equal(1);
+      expect(parseResult.get(0).get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(parseResult.get(0).get(0).element).to.equal('Oauth2 Scheme');
+    });
+
+    it('parses correctly when multiple flows', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'oauth2',
+        description: 'oauth2 implementation',
+        flows: {
+          password: {
+            tokenUrl: '/token',
+            scopes: {},
+          },
+          implicit: {
+            authorizationUrl: '/authorization',
+            scopes: {},
+          },
+        },
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Array);
+      expect(parseResult.get(0).length).to.equal(2);
+      expect(parseResult.get(0).get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(parseResult.get(0).get(0).element).to.equal('Oauth2 Scheme');
+      expect(parseResult.get(0).get(0).description.toValue()).to.equal('oauth2 implementation');
+      expect(parseResult.get(0).get(1)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(parseResult.get(0).get(1).element).to.equal('Oauth2 Scheme');
+      expect(parseResult.get(0).get(1).description.toValue()).to.equal('oauth2 implementation');
+    });
+
+    it('does not complain about name', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'oauth2',
+        flows: {},
+        name: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+    });
+
+    it('does not complain about in', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'oauth2',
+        flows: {},
+        in: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+    });
+
+    it('does not complain about scheme', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'oauth2',
+        flows: {},
+        scheme: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+    });
   });
 
   describe('when type is http', () => {
@@ -289,6 +393,19 @@ describe('Security Scheme Object', () => {
         type: 'http',
         scheme: 'basic',
         in: 1,
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.not.contain.annotations;
+    });
+
+    it('does not complain about flows', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'http',
+        scheme: 'basic',
+        flows: 1,
       });
 
       const parseResult = parse(context, securityScheme);

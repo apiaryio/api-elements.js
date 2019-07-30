@@ -70,7 +70,7 @@ describe('Security Requirement Object', () => {
     expect(arr.get(0).element).to.equal('customOauth2');
     expect(arr.get(0).length).to.equal(1);
 
-    const scopes = arr.get(0).get('scopes');
+    const scopes = arr.get(0).get(0).value;
 
     expect(scopes).to.be.instanceof(namespace.elements.Array);
     expect(scopes.length).to.equal(2);
@@ -97,7 +97,7 @@ describe('Security Requirement Object', () => {
     expect(arr.get(0).element).to.equal('customOauth2');
     expect(arr.get(0).length).to.equal(1);
 
-    const scopes = arr.get(0).get('scopes');
+    const scopes = arr.get(0).get(0).value;
 
     expect(scopes).to.be.instanceof(namespace.elements.Array);
     expect(scopes.length).to.equal(1);

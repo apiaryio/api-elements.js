@@ -99,6 +99,24 @@ describe('Oauth Flow Object', () => {
       expect(parseResult.get(0).get('scopes')).to.be.instanceof(namespace.elements.Array);
       expect(parseResult.get(0).get('scopes').length).to.equal(0);
     });
+
+    it('parses it correctly', () => {
+      const oauthFlow = new namespace.elements.Object({
+        scopes: {},
+        refreshUrl: '/refresh',
+      });
+
+      const parseResult = parse(context, oauthFlow);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
+
+      const refreshUrl = parseResult.get(0).get('refreshUrl');
+
+      expect(refreshUrl).to.be.instanceof(namespace.elements.Transition);
+      expect(refreshUrl.relation.toValue()).to.equal('refresh');
+      expect(refreshUrl.href.toValue()).to.equal('/refresh');
+    });
   });
 
   describe('#tokenUrl', () => {
@@ -117,6 +135,24 @@ describe('Oauth Flow Object', () => {
       expect(parseResult.get(0).get('scopes')).to.be.instanceof(namespace.elements.Array);
       expect(parseResult.get(0).get('scopes').length).to.equal(0);
     });
+
+    it('parses it correctly', () => {
+      const oauthFlow = new namespace.elements.Object({
+        scopes: {},
+        tokenUrl: '/token',
+      });
+
+      const parseResult = parse(context, oauthFlow);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
+
+      const tokenUrl = parseResult.get(0).get('tokenUrl');
+
+      expect(tokenUrl).to.be.instanceof(namespace.elements.Transition);
+      expect(tokenUrl.relation.toValue()).to.equal('token');
+      expect(tokenUrl.href.toValue()).to.equal('/token');
+    });
   });
 
   describe('#authorizationUrl', () => {
@@ -134,6 +170,24 @@ describe('Oauth Flow Object', () => {
       expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
       expect(parseResult.get(0).get('scopes')).to.be.instanceof(namespace.elements.Array);
       expect(parseResult.get(0).get('scopes').length).to.equal(0);
+    });
+
+    it('parses it correctly', () => {
+      const oauthFlow = new namespace.elements.Object({
+        scopes: {},
+        authorizationUrl: '/authorization',
+      });
+
+      const parseResult = parse(context, oauthFlow);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Object);
+
+      const authorizationUrl = parseResult.get(0).get('authorizationUrl');
+
+      expect(authorizationUrl).to.be.instanceof(namespace.elements.Transition);
+      expect(authorizationUrl.relation.toValue()).to.equal('authorization');
+      expect(authorizationUrl.href.toValue()).to.equal('/authorization');
     });
   });
 
