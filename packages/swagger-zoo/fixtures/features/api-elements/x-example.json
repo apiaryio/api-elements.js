@@ -57,6 +57,17 @@
                 },
                 {
                   "element": "member",
+                  "attributes": {
+                    "typeAttributes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "string",
+                          "content": "optional"
+                        }
+                      ]
+                    }
+                  },
                   "content": {
                     "key": {
                       "element": "string",

@@ -3,7 +3,7 @@ const { Fury } = require('fury');
 const Parser = require('../lib/parser');
 
 const { minim: namespace } = new Fury();
-const { Annotation } = namespace.elements;
+const { Annotation, Member } = namespace.elements;
 
 describe('Parameter to Member converter', () => {
   it('can convert a parameter to a member with x-example', () => {
@@ -227,5 +227,35 @@ describe('Parameter to Member converter', () => {
 
     expect(parser.result.get(0)).to.be.instanceof(Annotation);
     expect(parameter.toValue()).to.equal('true');
+  });
+
+  describe('#typeAttributes', () => {
+    it('adds required typeAttribute for required as truthy', () => {
+      const parser = new Parser({ namespace, source: '' });
+      parser.result = new namespace.elements.ParseResult();
+      const parameter = parser.convertParameterToMember({
+        type: 'string',
+        required: true,
+      });
+
+      expect(parameter).to.be.instanceof(Member);
+
+      const typeAttributes = parameter.attributes.getValue('typeAttributes');
+      expect(typeAttributes).to.deep.equal(['required']);
+    });
+
+    it('adds required typeAttribute for required as truthy', () => {
+      const parser = new Parser({ namespace, source: '' });
+      parser.result = new namespace.elements.ParseResult();
+      const parameter = parser.convertParameterToMember({
+        type: 'string',
+        required: false,
+      });
+
+      expect(parameter).to.be.instanceof(Member);
+
+      const typeAttributes = parameter.attributes.getValue('typeAttributes');
+      expect(typeAttributes).to.deep.equal(['optional']);
+    });
   });
 });

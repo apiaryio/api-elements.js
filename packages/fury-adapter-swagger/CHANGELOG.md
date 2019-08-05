@@ -7,6 +7,10 @@
 - Prevents a 'Path Item Object' from being included in a Resource Group created
   by an 'Operation Object' in a previously defined 'Path Item Object'.
 
+- Optional parameters will now include an optional typeAttribute in the parse
+  result. This will fix conversion to API Blueprint with fury-cli where
+  optional parameters have shown up as required in the generated API Blueprint.
+
 ## 0.27.1 (2019-06-03)
 
 ### Bug Fixes
