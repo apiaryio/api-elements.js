@@ -1,0 +1,42 @@
+swagger: '2.0'
+info:
+  version: v1
+  title: Tags on some of the operations
+paths:
+  /one:
+    get:
+      summary: first resource
+      tags:
+      - MyRG1
+      responses:
+        200:
+          description: ""
+  /two:
+    get:
+      summary: second resource
+      responses:
+        200:
+          description: ""
+  /three:
+    get:
+      summary: third resource
+      tags:
+      - MyRG1
+      responses:
+        200:
+          description: ""
+  /four:
+    get:
+      summary: fourth resource
+      tags:
+      - MyRG2
+      responses:
+        200:
+          description: ""
+  /five:
+    get:
+      summary: fith resource
+      tags: []
+      responses:
+        200:
+          description: ""

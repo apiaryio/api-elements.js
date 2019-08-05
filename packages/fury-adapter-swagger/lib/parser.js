@@ -689,12 +689,6 @@ class Parser {
         });
       }
 
-      if (this.useResourceGroups()) {
-        this.updateResourceGroup(pathValue['x-group-name']);
-      }
-
-      this.group.content.push(resource);
-
       const pathObjectParameters = pathValue.parameters || [];
       const resourceHrefVariables = this.createHrefVariables(pathObjectParameters);
 
@@ -723,6 +717,17 @@ class Parser {
       });
 
       this.handleSwaggerVendorExtensions(resource, pathValue);
+
+      const operationsHaveTags = Object.values(relevantMethods).some(method => method.tags !== undefined && method.tags.length > 0);
+      if (operationsHaveTags) {
+        if (this.useResourceGroups()) {
+          this.updateResourceGroup(pathValue['x-group-name']);
+        }
+
+        this.group.content.push(resource);
+      } else {
+        this.api.push(resource);
+      }
 
       return resource;
     });
