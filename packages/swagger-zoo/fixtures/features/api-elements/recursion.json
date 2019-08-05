@@ -113,6 +113,17 @@
                               "content": "Test 1 2"
                             }
                           },
+                          "attributes": {
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "optional"
+                                }
+                              ]
+                            }
+                          },
                           "content": {
                             "key": {
                               "element": "string",

@@ -1445,6 +1445,8 @@ class Parser {
 
     if (parameter.required) {
       member.attributes.set('typeAttributes', ['required']);
+    } else {
+      member.attributes.set('typeAttributes', ['optional']);
     }
 
     return member;
