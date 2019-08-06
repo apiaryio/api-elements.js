@@ -31,6 +31,12 @@ function isTextMediaType(mediaType) {
   return type === 'text';
 }
 
+function isXMLMediaType(mediaType) {
+  const contentType = contentTyper.parse(mediaType);
+  const { type, suffix, subtype } = mediaTyper.parse(contentType.type);
+  return type === 'application' && (suffix === 'xml' || subtype === 'xml');
+}
+
 const canGenerateMessageBodyForMediaType = R.anyPass([isJSONMediaType, isTextMediaType]);
 
 function generateMessageBody(context, mediaType, dataStructure) {
@@ -76,13 +82,27 @@ const createJSONMessageBodyAsset = R.curry((namespace, mediaType, value) => {
   return asset;
 });
 
+const createTextMessageBodyAsset = R.curry((namespace, mediaType, value) => {
+  const asset = new namespace.elements.Asset(value.toValue());
+  asset.classes.push('messageBody');
+  asset.contentType = mediaType;
+  return asset;
+});
+
 function parseExample(namespace, mediaType) {
   const createExampleNotJSONWarning = createWarning(namespace,
-    "'Media Type Object' 'example' is only supported for JSON media types");
+    `'${name}' 'example' is not supported for media type '${mediaType}'`);
 
-  return R.ifElse(() => isJSONMediaType(mediaType),
-    R.compose(createJSONMessageBodyAsset(namespace, mediaType), getValue),
-    createExampleNotJSONWarning);
+  const isTextBasedType = R.anyPass([
+    () => isTextMediaType(mediaType),
+    () => isXMLMediaType(mediaType),
+  ]);
+
+  return R.compose(R.cond([
+    [() => isJSONMediaType(mediaType), createJSONMessageBodyAsset(namespace, mediaType)],
+    [() => isTextBasedType(mediaType), createTextMessageBodyAsset(namespace, mediaType)],
+    [R.T, createExampleNotJSONWarning],
+  ]), getValue);
 }
 
 const parseSchemaObjectOrRef = parseReference('schemas', parseSchemaObject);
