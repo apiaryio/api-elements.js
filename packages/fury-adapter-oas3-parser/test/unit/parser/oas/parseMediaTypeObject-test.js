@@ -92,8 +92,34 @@ describe('Media Type Object', () => {
       expect(message.messageBody.contentType.toValue()).to.equal('application/hal+json');
     });
 
-    it('warns for example without JSON type', () => {
+    it('creates an messageBody asset for text type with text example', () => {
+      const mediaType = new namespace.elements.Member('text/plain', {
+        example: 'Hello World',
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody.toValue()).to.equal('Hello World');
+      expect(message.messageBody.contentType.toValue()).to.equal('text/plain');
+    });
+
+    it('creates an messageBody asset for text type with xml example', () => {
       const mediaType = new namespace.elements.Member('application/xml', {
+        example: '<?xml version="1.0" encoding="UTF-8"?>',
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody.toValue()).to.equal('<?xml version="1.0" encoding="UTF-8"?>');
+      expect(message.messageBody.contentType.toValue()).to.equal('application/xml');
+    });
+
+    it('warns for example without supported media type', () => {
+      const mediaType = new namespace.elements.Member('application/plist', {
         example: {
           message: 'Hello World',
         },
@@ -106,7 +132,7 @@ describe('Media Type Object', () => {
       expect(message.messageBody).to.be.undefined;
 
       expect(parseResult).to.contain.warning(
-        "'Media Type Object' 'example' is only supported for JSON media types"
+        "'Media Type Object' 'example' is not supported for media type 'application/plist'"
       );
     });
   });
