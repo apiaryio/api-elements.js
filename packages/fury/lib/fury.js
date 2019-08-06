@@ -265,6 +265,11 @@ class Fury {
       return Promise.reject(error);
     }
 
+    if (!api) {
+      // eslint-disable-next-line no-param-reassign
+      api = new this.minim.elements.Category();
+    }
+
     const promise = adapter.serialize({ api, namespace: this.minim, mediaType });
 
     if (done) {

@@ -4,6 +4,12 @@ const assert = require('./assert');
 
 describe('Serialize', () => {
   describe('using callback', () => {
+    const JSONSerializeAdapter = {
+      name: 'json',
+      mediaTypes: ['application/json'],
+      serialize: ({ api, namespace }) => Promise.resolve(JSON.stringify(namespace.serialiser.serialise(api))),
+    };
+
     it('errors with unknown mediaType', (done) => {
       const fury = new Fury();
       const api = new fury.minim.elements.Category();
@@ -34,15 +40,22 @@ describe('Serialize', () => {
 
     it('can serialize with matching adapter', (done) => {
       const fury = new Fury();
-      fury.use({
-        name: 'json',
-        mediaTypes: ['application/json'],
-        serialize: ({ api, namespace }) => Promise.resolve(JSON.stringify(namespace.serialiser.serialise(api))),
-      });
+      fury.use(JSONSerializeAdapter);
 
       const api = new fury.minim.elements.Category();
 
       fury.serialize({ api, mediaType: 'application/json' }, (error, result) => {
+        expect(error).to.be.null;
+        expect(result).to.equal('{"element":"category"}');
+        done();
+      });
+    });
+
+    it('can serialize undefined `api` by creating default category', (done) => {
+      const fury = new Fury();
+      fury.use(JSONSerializeAdapter);
+
+      fury.serialize({ api: undefined, mediaType: 'application/json' }, (error, result) => {
         expect(error).to.be.null;
         expect(result).to.equal('{"element":"category"}');
         done();
