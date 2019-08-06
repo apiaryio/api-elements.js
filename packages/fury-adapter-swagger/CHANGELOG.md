@@ -1,5 +1,12 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Prevents a 'Path Item Object' from being included in a Resource Group created
+  by an 'Operation Object' in a previously defined 'Path Item Object'.
+
 ## 0.27.1 (2019-06-03)
 
 ### Bug Fixes
