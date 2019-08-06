@@ -158,7 +158,7 @@ function parseComponentsObject(context, element) {
         if (value) {
           if (value instanceof namespace.elements.AuthScheme) {
             // eslint-disable-next-line no-param-reassign
-            value.meta.id = key.clone();
+            value.id = key.clone();
             array.push(value);
 
             return;
@@ -167,7 +167,7 @@ function parseComponentsObject(context, element) {
           // append oauth2 flow names
           value.forEach((flow) => {
             // eslint-disable-next-line no-param-reassign
-            flow.meta.id = `${key.toValue()} ${flow.grantTypeValue}`;
+            flow.id = `${key.toValue()} ${flow.grantTypeValue}`;
             array.push(flow);
           });
         }

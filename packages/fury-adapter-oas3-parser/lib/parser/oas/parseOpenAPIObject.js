@@ -125,13 +125,23 @@ function parseOASObject(context, object) {
     parseObject(context, name, parseMember, requiredKeys, ['components']),
     (object) => {
       const api = object.get('info');
+      const components = object.get('components');
+
+      if (components) {
+        const schemes = R.or(components.get('securitySchemes'), new namespace.elements.Array());
+
+        if (schemes.length > 0) {
+          api.push(new namespace.elements.Category(
+            schemes.content, { classes: ['authSchemes'] }
+          ));
+        }
+      }
 
       const resources = object.get('paths');
       if (resources) {
         api.content = api.content.concat(resources.content);
       }
 
-      const components = object.get('components');
       if (components) {
         const schemas = R.or(components.get('schemas'), new namespace.elements.Array())
           .content
