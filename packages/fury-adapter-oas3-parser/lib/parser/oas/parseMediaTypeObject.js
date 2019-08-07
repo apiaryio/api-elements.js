@@ -110,7 +110,8 @@ const parseExampleObjectOrRef = parseReference('examples', parseExampleObject);
 
 const isValidMediaType = (mediaType) => {
   try {
-    contentTyper.parse(mediaType.toValue());
+    const { type } = contentTyper.parse(mediaType.toValue());
+    mediaTyper.parse(type);
   } catch (error) {
     return false;
   }

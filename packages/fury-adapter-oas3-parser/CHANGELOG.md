@@ -7,6 +7,11 @@
 - Adds support for example values for text based media types such as
   `text/*` and `application/xml`.
 
+### Bug Fixes
+
+- Prevents the parser from throwing an exception when encountering an invalid
+  media type.
+
 ## 0.9.0 (2019-07-02)
 
 This release brings significant performance improvement to parsing large
