@@ -11,6 +11,11 @@
   result. This will fix conversion to API Blueprint with fury-cli where
   optional parameters have shown up as required in the generated API Blueprint.
 
+- Allows generating of JSON bodies for schemas which make use of `allOf` and
+  include circular references. Under some circumstances this would previously
+  fail, and a warning may have been emitted "Unable to generate
+  application/json example message body out of JSON Schema"
+
 ## 0.27.1 (2019-06-03)
 
 ### Bug Fixes

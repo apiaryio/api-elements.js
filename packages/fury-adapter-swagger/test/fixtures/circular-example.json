@@ -204,7 +204,7 @@
                               "content": "application/json"
                             }
                           },
-                          "content": "{\n  \"id\": \"ORCL\"\n}"
+                          "content": "{\n  \"id\": \"ORCL\",\n  \"user\": {\n    \"data\": {\n      \"name\": \"doe\",\n      \"company\": {\n        \"data\": {\n          \"is_owner\": false\n        }\n      }\n    }\n  }\n}"
                         },
                         {
                           "element": "asset",
@@ -225,7 +225,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"allOf\":[{\"$ref\":\"#/definitions/Company\"}],\"definitions\":{\"Company\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"default\":\"ORCL\"},\"user\":{\"type\":\"object\",\"properties\":{\"data\":{\"$ref\":\"#/definitions/User\"}}}},\"default\":{\"id\":\"ORCL\"}},\"User\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\",\"default\":\"doe\"},\"company\":{\"properties\":{\"data\":{\"$ref\":\"#/definitions/Company\"}}}}}}}"
+                          "content": "{\"allOf\":[{\"$ref\":\"#/definitions/Company\"}],\"definitions\":{\"Company\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"default\":\"ORCL\"},\"user\":{\"type\":\"object\",\"properties\":{\"data\":{\"$ref\":\"#/definitions/User\"}}}}},\"User\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\",\"default\":\"doe\"},\"company\":{\"properties\":{\"data\":{\"allOf\":[{\"$ref\":\"#/definitions/Company\"},{\"type\":\"object\",\"properties\":{\"is_owner\":{\"type\":\"boolean\",\"default\":false}}}]}}}}}}}"
                         },
                         {
                           "element": "dataStructure",
@@ -426,7 +426,38 @@
                                 "content": "data"
                               },
                               "value": {
-                                "element": "definitions/Company"
+                                "element": "definitions/Company",
+                                "content": [
+                                  {
+                                    "element": "member",
+                                    "attributes": {
+                                      "typeAttributes": {
+                                        "element": "array",
+                                        "content": [
+                                          {
+                                            "element": "string",
+                                            "content": "optional"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "content": {
+                                      "key": {
+                                        "element": "string",
+                                        "content": "is_owner"
+                                      },
+                                      "value": {
+                                        "element": "boolean",
+                                        "attributes": {
+                                          "default": {
+                                            "element": "boolean",
+                                            "content": false
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
                               }
                             }
                           }
