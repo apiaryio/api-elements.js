@@ -7,7 +7,9 @@
   "bin": {
     "fury": "lib/fury.js"
   },
-  "files": ["lib/fury.js"],
+  "files": [
+    "lib/fury.js"
+  ],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-cli",
   "repository": {
     "type": "git",
@@ -26,8 +28,8 @@
     "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.9",
     "fury-adapter-apib-parser": "^0.16.0",
     "fury-adapter-apib-serializer": "^0.12.0",
-    "fury-adapter-oas3-parser": "^0.9.0",
-    "fury-adapter-swagger": "^0.27.1",
+    "fury-adapter-oas3-parser": "^0.9.1",
+    "fury-adapter-swagger": "^0.27.2",
     "js-yaml": "^3.12.0",
     "minim": "^0.23.4"
   },
