@@ -1,11 +1,15 @@
 {
   "name": "swagger-zoo",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Swagger example files for testing",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "index.js",
-  "files": ["index.js", "fixtures/**/*.json", "fixtures/**/*.yaml"],
+  "files": [
+    "index.js",
+    "fixtures/**/*.json",
+    "fixtures/**/*.yaml"
+  ],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/swagger-zoo",
   "repository": {
     "type": "git",

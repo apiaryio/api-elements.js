@@ -1,11 +1,13 @@
 {
   "name": "fury-adapter-swagger",
-  "version": "0.27.1",
+  "version": "0.27.2",
   "description": "Swagger 2.0 parser for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/adapter.js",
-  "files": ["lib/*.js"],
+  "files": [
+    "lib/*.js"
+  ],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-swagger",
   "repository": {
     "type": "git",
@@ -36,7 +38,7 @@
     "fury": "3.0.0-beta.12",
     "glob": "^7.1.2",
     "mocha": "^5.2.0",
-    "swagger-zoo": "^3.1.0"
+    "swagger-zoo": "^3.1.1"
   },
   "engines": {
     "node": ">=8"
