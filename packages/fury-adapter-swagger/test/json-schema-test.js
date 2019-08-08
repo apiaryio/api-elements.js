@@ -754,7 +754,7 @@ describe('Dereferencing', () => {
 
     expect(result).to.deep.equal({
       name: 'Doe',
-      parent: null,
+      parent: {},
     });
   });
 
@@ -778,7 +778,7 @@ describe('Dereferencing', () => {
     expect(result).to.deep.equal({
       name: 'Doe',
       company: {
-        owner: null,
+        owner: {},
       },
     });
   });

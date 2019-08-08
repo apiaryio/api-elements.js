@@ -112,7 +112,7 @@ const dereference = (example, root, paths, path) => {
     const currentPath = (path || []).join('/');
 
     if (path && pathHasCircularReference(paths, path, example.$ref)) {
-      return null;
+      return {};
     }
 
     let ref;

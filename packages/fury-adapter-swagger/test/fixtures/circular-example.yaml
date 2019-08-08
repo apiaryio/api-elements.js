@@ -26,8 +26,6 @@ definitions:
         properties:
           data:
             $ref: '#/definitions/User'
-    default:
-      id: ORCL
 
   User:
     type: object
@@ -38,5 +36,10 @@ definitions:
       company:
         properties:
           data:
-            $ref: '#/definitions/Company'
-
+            allOf:
+              - $ref: '#/definitions/Company'
+              - type: object
+                properties:
+                  is_owner:
+                    type: boolean
+                    default: false
