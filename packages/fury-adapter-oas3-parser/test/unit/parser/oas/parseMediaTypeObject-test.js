@@ -21,12 +21,20 @@ describe('Media Type Object', () => {
     expect(parseResult).to.contain.warning("'Media Type Object' is not an object");
   });
 
-  it('provides warning when media type is invalid', () => {
+  it('provides warning when content type is invalid', () => {
     const mediaType = new namespace.elements.Member('foo', {});
 
     const parseResult = parse(context, messageBodyClass, mediaType);
 
     expect(parseResult).to.contain.warning("'Media Type Object' media type 'foo' is invalid");
+  });
+
+  it('provides warning when media type is invalid', () => {
+    const mediaType = new namespace.elements.Member('*/*', {});
+
+    const parseResult = parse(context, messageBodyClass, mediaType);
+
+    expect(parseResult).to.contain.warning("'Media Type Object' media type '*/*' is invalid");
   });
 
   it('permits media type with parameters', () => {
