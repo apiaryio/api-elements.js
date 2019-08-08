@@ -23,6 +23,7 @@ echo "Setting up Fury in $TMPDIR"
 create_package
 install fury
 install fury-adapter-apib-parser
+install fury-adapter-swagger
 install fury-adapter-oas3-parser
 install fury-adapter-apiary-blueprint-parser
 install fury-adapter-apib-serializer
