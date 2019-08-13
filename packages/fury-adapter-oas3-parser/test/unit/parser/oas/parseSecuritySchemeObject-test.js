@@ -241,7 +241,7 @@ describe('Security Scheme Object', () => {
       expect(members.get(0).value.toValue()).to.equal('example');
     });
 
-    it('does not complain about scheme', () => {
+    it('provides warning for invalid scheme', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',
         name: 'example',
@@ -251,11 +251,11 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'apiKey' contains invalid key 'scheme'");
     });
 
-    it('does not complain about flows', () => {
+    it('provides warning for invalid flows', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'apiKey',
         name: 'example',
@@ -265,8 +265,8 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'apiKey' contains invalid key 'flows'");
     });
   });
 
@@ -320,7 +320,7 @@ describe('Security Scheme Object', () => {
       expect(parseResult.get(0).get(1).description.toValue()).to.equal('oauth2 implementation');
     });
 
-    it('does not complain about name', () => {
+    it('provides warning for invalid name', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'oauth2',
         flows: {},
@@ -329,11 +329,11 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'oauth2' contains invalid key 'name'");
     });
 
-    it('does not complain about in', () => {
+    it('provides warning for invalid in', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'oauth2',
         flows: {},
@@ -342,11 +342,11 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'oauth2' contains invalid key 'in'");
     });
 
-    it('does not complain about scheme', () => {
+    it('provides warning for invalid scheme', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'oauth2',
         flows: {},
@@ -355,8 +355,8 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'oauth2' contains invalid key 'scheme'");
     });
   });
 
@@ -375,7 +375,7 @@ describe('Security Scheme Object', () => {
       expect(parseResult.get(0).members.length).to.equal(0);
     });
 
-    it('does not complain about name', () => {
+    it('provides warning for invalid name', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'http',
         scheme: 'basic',
@@ -384,11 +384,11 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'http' contains invalid key 'name'");
     });
 
-    it('does not complain about in', () => {
+    it('provides warning for invalid in', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'http',
         scheme: 'basic',
@@ -397,11 +397,11 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'http' contains invalid key 'in'");
     });
 
-    it('does not complain about flows', () => {
+    it('provides warning for invalid flows', () => {
       const securityScheme = new namespace.elements.Object({
         type: 'http',
         scheme: 'basic',
@@ -410,8 +410,8 @@ describe('Security Scheme Object', () => {
 
       const parseResult = parse(context, securityScheme);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'http' contains invalid key 'flows'");
     });
   });
 

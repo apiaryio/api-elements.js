@@ -112,8 +112,12 @@ function parseOperationObject(context, path, member) {
         return requirement.get(0);
       }
 
-      const allOf = new namespace.elements.Array(requirement.content);
-      allOf.element = 'allOf';
+      const link = new namespace.elements.Link();
+      link.relation = 'profile';
+      link.href = 'https://github.com/refractproject/rfcs/issues/39';
+
+      const allOf = new namespace.elements.Extension(requirement.content);
+      allOf.meta.set('links', new namespace.elements.Array([link]));
 
       return allOf;
     }));

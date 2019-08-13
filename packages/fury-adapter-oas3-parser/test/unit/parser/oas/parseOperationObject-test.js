@@ -574,13 +574,13 @@ describe('Operation Object', () => {
       expect(authSchemes.length).to.equal(2);
       expect(authSchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
       expect(authSchemes.get(0).element).to.equal('apiKey');
-      expect(authSchemes.get(1)).to.be.instanceof(namespace.elements.Array);
-      expect(authSchemes.get(1).element).to.equal('allOf');
-      expect(authSchemes.get(1).length).to.equal(2);
-      expect(authSchemes.get(1).get(0)).to.be.instanceof(namespace.elements.AuthScheme);
-      expect(authSchemes.get(1).get(0).element).to.equal('custom1');
-      expect(authSchemes.get(1).get(1)).to.be.instanceof(namespace.elements.AuthScheme);
-      expect(authSchemes.get(1).get(1).element).to.equal('custom2');
+      expect(authSchemes.get(1)).to.be.instanceof(namespace.elements.Extension);
+      expect(authSchemes.get(1).content.length).to.equal(2);
+      // TODO: Remove content[n] and use get(n) when moved to allOf element
+      expect(authSchemes.get(1).content[0]).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(authSchemes.get(1).content[0].element).to.equal('custom1');
+      expect(authSchemes.get(1).content[1]).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(authSchemes.get(1).content[1].element).to.equal('custom2');
     });
   });
 

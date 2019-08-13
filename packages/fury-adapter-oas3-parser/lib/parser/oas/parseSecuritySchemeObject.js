@@ -16,7 +16,8 @@ const name = 'Security Scheme Object';
 const requiredKeys = ['type'];
 const unsupportedKeys = ['bearerFormat', 'openIdConnectUrl'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
-const passThrough = R.anyPass(R.map(hasKey, ['name', 'in', 'scheme', 'flows']));
+const outerPassThrough = R.anyPass(R.map(hasKey, ['name', 'in', 'scheme', 'flows']));
+const innerPassThrough = R.anyPass(R.map(hasKey, ['type', 'description']));
 
 const isApiKeyScheme = securityScheme => securityScheme.getValue('type') === 'apiKey';
 const isHttpScheme = securityScheme => securityScheme.getValue('type') === 'http';
@@ -43,27 +44,43 @@ function validateApiKeyScheme(context, securityScheme) {
     [hasKey('name'), parseString(context, name, false)],
     [hasKey('in'), parseIn],
 
-    [R.T, e => e],
+    [innerPassThrough, e => e],
+    [isUnsupportedKey, e => e],
+    [isExtension, e => e],
+
+    [R.T, createInvalidMemberWarning(namespace, `${name}' 'apiKey`)],
   ]);
 
   return parseObject(context, name, parseMember, ['name', 'in'], [], true)(securityScheme);
 }
 
 function validateHttpScheme(context, securityScheme) {
+  const { namespace } = context;
+
   const parseMember = R.cond([
     [hasKey('scheme'), parseString(context, name, false)],
 
-    [R.T, e => e],
+    [innerPassThrough, e => e],
+    [isUnsupportedKey, e => e],
+    [isExtension, e => e],
+
+    [R.T, createInvalidMemberWarning(namespace, `${name}' 'http`)],
   ]);
 
   return parseObject(context, name, parseMember, ['scheme'], [], true)(securityScheme);
 }
 
 function validateOauth2Scheme(context, securityScheme) {
+  const { namespace } = context;
+
   const parseMember = R.cond([
     [hasKey('flows'), R.compose(parseOauthFlowsObject(context), getValue)],
 
-    [R.T, e => e],
+    [innerPassThrough, e => e],
+    [isUnsupportedKey, e => e],
+    [isExtension, e => e],
+
+    [R.T, createInvalidMemberWarning(namespace, `${name}' 'oauth2`)],
   ]);
 
   return parseObject(context, name, parseMember, ['flows'], [], true)(securityScheme);
@@ -100,7 +117,7 @@ function parseSecuritySchemeObject(context, object) {
   const parseMember = R.cond([
     [hasKey('type'), parseType],
     [hasKey('description'), parseString(context, name, false)],
-    [passThrough, e => e],
+    [outerPassThrough, e => e],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -129,7 +146,7 @@ function parseSecuritySchemeObject(context, object) {
         if (description) {
           flows.forEach((flow) => {
             // eslint-disable-next-line no-param-reassign
-            flow.description = description;
+            flow.description = description.clone();
           });
         }
 

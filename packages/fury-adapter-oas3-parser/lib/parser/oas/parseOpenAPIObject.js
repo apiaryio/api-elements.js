@@ -130,7 +130,7 @@ function parseOASObject(context, object) {
       if (components) {
         const schemes = R.or(components.get('securitySchemes'), new namespace.elements.Array());
 
-        if (schemes.length > 0) {
+        if (!schemes.isEmpty) {
           api.push(new namespace.elements.Category(
             schemes.content, { classes: ['authSchemes'] }
           ));
