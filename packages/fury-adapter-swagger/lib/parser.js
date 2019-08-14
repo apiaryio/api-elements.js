@@ -24,7 +24,7 @@ const {
 // interface.
 class Parser {
   constructor({
-    namespace, source, generateSourceMap, generateMessageBody,
+    namespace, source, generateSourceMap, generateMessageBody, generateMessageBodySchema,
   }) {
     // Parser options
     this.namespace = namespace;
@@ -35,6 +35,12 @@ class Parser {
       this.generateMessageBody = true;
     } else {
       this.generateMessageBody = generateMessageBody;
+    }
+
+    if (generateMessageBodySchema === undefined) {
+      this.generateMessageBodySchema = true;
+    } else {
+      this.generateMessageBodySchema = generateMessageBodySchema;
     }
 
     // Global scheme requirements
@@ -1598,8 +1604,6 @@ class Parser {
   }
 
   pushAssets(schema, payload, contentType, pushBody) {
-    let jsonSchema;
-
     if (this.bodyCache === undefined) {
       this.bodyCache = {};
     }
@@ -1610,28 +1614,34 @@ class Parser {
       cacheKey = `${referencedPathValue.$ref};${contentType}`;
     }
 
-    try {
-      const root = { definitions: this.definitions };
-      jsonSchema = convertSchema(referencedPathValue || schema, root,
-        this.referencedSwagger);
-    } catch (error) {
-      this.createAnnotation(annotations.VALIDATION_ERROR, this.path, error.message);
-      return;
-    }
+    if (this.generateMessageBody || this.generateMessageBodySchema) {
+      let jsonSchema;
+      try {
+        const root = { definitions: this.definitions };
+        jsonSchema = convertSchema(referencedPathValue || schema, root,
+          this.referencedSwagger);
+      } catch (error) {
+        this.createAnnotation(annotations.VALIDATION_ERROR, this.path, error.message);
+        return;
+      }
 
-    if (pushBody && this.generateMessageBody) {
-      if (cacheKey && this.bodyCache[cacheKey]) {
-        const asset = this.bodyCache[cacheKey];
-        payload.push(asset.clone());
-      } else {
-        const asset = bodyFromSchema(jsonSchema, payload, this, contentType);
-        if (cacheKey) {
-          this.bodyCache[cacheKey] = asset;
+      if (pushBody && this.generateMessageBody) {
+        if (cacheKey && this.bodyCache[cacheKey]) {
+          const asset = this.bodyCache[cacheKey];
+          payload.push(asset.clone());
+        } else {
+          const asset = bodyFromSchema(jsonSchema, payload, this, contentType);
+          if (cacheKey) {
+            this.bodyCache[cacheKey] = asset;
+          }
         }
+      }
+
+      if (this.generateMessageBodySchema) {
+        this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
       }
     }
 
-    this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
     this.pushDataStructureAsset(referencedPathValue || schema, payload);
   }
 

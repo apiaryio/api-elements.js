@@ -220,5 +220,22 @@ describe('Swagger 2.0 adapter', () => {
         path.join(__dirname, 'fixtures', 'options', 'generateMessageBody-false.json')
       ), { generateMessageBody: false });
     });
+
+    describe('#generateMessageBodySchema', () => {
+      testFixture('generates message body schema by default', testFixtureOptions(
+        path.join(__dirname, 'fixtures', 'json-body-generation.yaml'),
+        path.join(__dirname, 'fixtures', 'options', 'generateMessageBodySchema-true.json')
+      ));
+
+      testFixture('generates message body schema when generateMessageBodySchema is true', testFixtureOptions(
+        path.join(__dirname, 'fixtures', 'json-body-generation.yaml'),
+        path.join(__dirname, 'fixtures', 'options', 'generateMessageBodySchema-true.json')
+      ), { generateMessageBodySchema: true });
+
+      testFixture('disables generating message body schema when requested', testFixtureOptions(
+        path.join(__dirname, 'fixtures', 'json-body-generation.yaml'),
+        path.join(__dirname, 'fixtures', 'options', 'generateMessageBodySchema-false.json')
+      ), { generateMessageBodySchema: false });
+    });
   });
 });
