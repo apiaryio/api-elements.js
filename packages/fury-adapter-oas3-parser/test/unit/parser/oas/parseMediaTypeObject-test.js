@@ -413,5 +413,27 @@ describe('Media Type Object', () => {
       expect(message).to.be.instanceof(messageBodyClass);
       expect(message.messageBody).to.be.undefined;
     });
+
+    it('does not generate a messageBody asset when generateMessageBody is disabled', () => {
+      context.options.generateMessageBody = false;
+
+      const mediaType = new namespace.elements.Member('application/json', {
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              example: 'doe',
+            },
+          },
+        },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody).to.be.undefined;
+    });
   });
 });
