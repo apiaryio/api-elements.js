@@ -16,12 +16,12 @@ const { detect } = adapter;
 
 fury.adapters = [adapter];
 
-function testFixture(description, fixture, generateSourceMap = false) {
+function testFixture(description, fixture, adapterOptions) {
   it(description, (done) => {
     const source = fixture.swagger;
     let expected;
 
-    if (generateSourceMap) {
+    if (adapterOptions && adapterOptions.generateSourceMap) {
       expected = fixture.apiElementsSourceMap;
     } else {
       expected = fixture.apiElements;
@@ -29,7 +29,7 @@ function testFixture(description, fixture, generateSourceMap = false) {
 
     const mediaType = 'application/swagger+yaml';
 
-    fury.parse({ source, mediaType, generateSourceMap }, (err, output) => {
+    fury.parse({ source, mediaType, adapterOptions }, (err, output) => {
       if (err && !output) {
         return done(err);
       }
@@ -40,7 +40,7 @@ function testFixture(description, fixture, generateSourceMap = false) {
       if (process.env.GENERATE) {
         expected = fury.minim.toRefract(output);
 
-        if (generateSourceMap) {
+        if (adapterOptions && adapterOptions.generateSourceMap) {
           // eslint-disable-next-line no-param-reassign
           fixture.apiElementsSourceMap = expected;
         } else {
@@ -53,6 +53,24 @@ function testFixture(description, fixture, generateSourceMap = false) {
       return done();
     });
   });
+}
+
+function testFixtureOptions(swaggerPath, apiElementsPath) {
+  const swagger = fs.readFileSync(swaggerPath, 'utf-8');
+  const options = { swagger };
+
+  Object.defineProperty(options, 'apiElements', {
+    get() {
+      return require(apiElementsPath);
+    },
+
+    set(value) {
+      fs.writeFileSync(apiElementsPath, JSON.stringify(value, null, 2));
+      return value;
+    },
+  });
+
+  return options;
 }
 
 describe('Swagger 2.0 adapter', () => {
@@ -141,17 +159,17 @@ describe('Swagger 2.0 adapter', () => {
     const fixtures = swaggerZoo.features();
     fixtures.forEach((fixture) => {
       testFixture(`Parses ${fixture.name}`, fixture);
-      testFixture(`Parses ${fixture.name} with source maps`, fixture, true);
+      testFixture(`Parses ${fixture.name} with source maps`, fixture, { generateSourceMap: true });
     });
   });
 
   describe('can parse regression fixtures', () => {
     const files = glob.sync(path.join(__dirname, 'fixtures', '*.yaml'));
 
-    files.forEach((file) => {
-      const name = path.basename(file, path.extname(file));
+    files.forEach((swaggerPath) => {
+      const name = path.basename(swaggerPath, path.extname(swaggerPath));
 
-      const swagger = fs.readFileSync(file, 'utf-8');
+      const swagger = fs.readFileSync(swaggerPath, 'utf-8');
       const apiElementsPath = path.join(__dirname, 'fixtures', `${name}.json`);
       const apiElementsSourceMapPath = path.join(__dirname, 'fixtures', `${name}.sourcemap.json`);
 
@@ -181,6 +199,26 @@ describe('Swagger 2.0 adapter', () => {
 
       testFixture(`Parses ${name}`, options);
       testFixture(`Parses ${name} with source maps`, options, true);
+      testFixture(`Parses ${name}`, testFixtureOptions(swaggerPath, apiElementsPath));
+    });
+  });
+
+  describe('#adapterOptions', () => {
+    describe('#generateMessageBody', () => {
+      testFixture('generates message body by default', testFixtureOptions(
+        path.join(__dirname, 'fixtures', 'json-body-generation.yaml'),
+        path.join(__dirname, 'fixtures', 'options', 'generateMessageBody-true.json')
+      ));
+
+      testFixture('generates message body when generateMessageBody is true', testFixtureOptions(
+        path.join(__dirname, 'fixtures', 'json-body-generation.yaml'),
+        path.join(__dirname, 'fixtures', 'options', 'generateMessageBody-true.json')
+      ), { generateMessageBody: true });
+
+      testFixture('disables generating message body when requested', testFixtureOptions(
+        path.join(__dirname, 'fixtures', 'json-body-generation.yaml'),
+        path.join(__dirname, 'fixtures', 'options', 'generateMessageBody-false.json')
+      ), { generateMessageBody: false });
     });
   });
 });
