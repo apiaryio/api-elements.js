@@ -8,6 +8,10 @@
 
 - Support for `Server Object` and `Server Variable Object`
 
+- The parser can now be configured to disable generation of example message
+  bodies by providing an adapter option `generateMessageBody` as `false` during
+  parse.
+
 ## 0.10.2 (2020-03-16)
 
 ### Enhancements

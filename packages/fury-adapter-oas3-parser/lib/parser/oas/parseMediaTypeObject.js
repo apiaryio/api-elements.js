@@ -198,7 +198,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
 
       const dataStructure = mediaTypeObject.get('schema');
 
-      if (!messageBody && dataStructure && canGenerateMessageBodyForMediaType(mediaType)) {
+      if (!messageBody && dataStructure && context.options.generateMessageBody && canGenerateMessageBodyForMediaType(mediaType)) {
         const asset = generateMessageBody(context, mediaType, dataStructure);
         if (asset) {
           message.push(asset);
