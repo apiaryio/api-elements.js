@@ -37,6 +37,14 @@ const findAdapter = (adapters, mediaType, method) => {
  */
 
 /**
+ * Adapter Options
+ * @typedef {Object} AdapterOptions
+ * @property {boolean} generateSourceMap
+ * @property {boolean} generateMessageBody
+ * @property {boolean} generateMessageBodySchema
+ */
+
+/**
  * @function validate
  *
  * @param {Object} options
@@ -133,7 +141,7 @@ class Fury {
    * @param {Object} options
    * @param {string} options.source
    * @param {string} [options.mediaType]
-   * @param {Object} [options.adapterOptions]
+   * @param {AdapterOptions} [options.adapterOptions]
    * @param callback {ParseCallback}
    */
   validate({ source, mediaType, adapterOptions }, done) {
@@ -192,7 +200,7 @@ class Fury {
    * @param {Object} options
    * @param {string} options.source
    * @param {string} [options.mediaType]
-   * @param {Object} [options.adapterOptions]
+   * @param {AdapterOptions} [options.adapterOptions]
    * @param callback {ParseCallback}
    */
   parse({
