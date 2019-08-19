@@ -40,11 +40,25 @@ function parseOauthFlowObject(context, object) {
       return scope;
     }));
 
+  const parseUrl = pipeParseResult(namespace,
+    parseString(context, name, false),
+    (url) => {
+      const transition = new namespace.elements.Transition();
+
+      transition.href = url.value.clone();
+      transition.relation = url.key.clone();
+
+      // remove 'Url' from key
+      transition.relation.content = transition.relation.toValue().slice(0, -3);
+
+      return transition;
+    });
+
   const parseMember = R.cond([
     [hasKey('scopes'), R.compose(parseScopes, getValue)],
-    [hasKey('refreshUrl'), parseString(context, name, false)],
-    [hasKey('authorizationUrl'), parseString(context, name, false)],
-    [hasKey('tokenUrl'), parseString(context, name, false)],
+    [hasKey('refreshUrl'), parseUrl],
+    [hasKey('authorizationUrl'), parseUrl],
+    [hasKey('tokenUrl'), parseUrl],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],

@@ -10,21 +10,22 @@ const {
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
+const parseOauthFlowsObject = require('./parseOauthFlowsObject');
 
 const name = 'Security Scheme Object';
 const requiredKeys = ['type'];
 const unsupportedKeys = ['bearerFormat', 'openIdConnectUrl'];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
-const passThrough = R.anyPass(R.map(hasKey, ['name', 'in', 'scheme', 'flows']));
+const outerPassThrough = R.anyPass(R.map(hasKey, ['name', 'in', 'scheme', 'flows']));
+const innerPassThrough = R.anyPass(R.map(hasKey, ['type', 'description']));
 
 const isApiKeyScheme = securityScheme => securityScheme.getValue('type') === 'apiKey';
 const isHttpScheme = securityScheme => securityScheme.getValue('type') === 'http';
-// const isOauth2Scheme = securityScheme => securityScheme.getValue('type') === 'oauth2';
+const isOauth2Scheme = securityScheme => securityScheme.getValue('type') === 'oauth2';
 
 const isValidTypeValue = R.anyPass(R.map(hasValue, ['apiKey', 'http', 'oauth2', 'openIdConnect']));
 const isSupportedType = R.anyPass(R.map(hasValue, ['apiKey', 'http', 'oauth2']));
 const isValidInValue = R.anyPass(R.map(hasValue, ['query', 'header', 'cookie']));
-const isSupportedIn = R.anyPass(R.map(hasValue, ['query', 'header']));
 
 function validateApiKeyScheme(context, securityScheme) {
   const { namespace } = context;
@@ -35,33 +36,54 @@ function validateApiKeyScheme(context, securityScheme) {
   );
   const validateIn = R.unless(isValidInValue, createInvalidInWarning);
 
-  const createUnsupportedInWarning = member => createWarning(namespace,
-    `'${name}' 'in' '${member.value.toValue()}' is unsupported`, member.value);
-  const ensureSupportedIn = R.unless(isSupportedIn, createUnsupportedInWarning);
-
   const parseIn = pipeParseResult(namespace,
     parseString(context, name, false),
-    validateIn,
-    ensureSupportedIn);
+    validateIn);
 
   const parseMember = R.cond([
     [hasKey('name'), parseString(context, name, false)],
     [hasKey('in'), parseIn],
 
-    [R.T, e => e],
+    [innerPassThrough, e => e],
+    [isUnsupportedKey, e => e],
+    [isExtension, e => e],
+
+    [R.T, createInvalidMemberWarning(namespace, `${name}' 'apiKey`)],
   ]);
 
   return parseObject(context, name, parseMember, ['name', 'in'], [], true)(securityScheme);
 }
 
 function validateHttpScheme(context, securityScheme) {
+  const { namespace } = context;
+
   const parseMember = R.cond([
     [hasKey('scheme'), parseString(context, name, false)],
 
-    [R.T, e => e],
+    [innerPassThrough, e => e],
+    [isUnsupportedKey, e => e],
+    [isExtension, e => e],
+
+    [R.T, createInvalidMemberWarning(namespace, `${name}' 'http`)],
   ]);
 
   return parseObject(context, name, parseMember, ['scheme'], [], true)(securityScheme);
+}
+
+function validateOauth2Scheme(context, securityScheme) {
+  const { namespace } = context;
+
+  const parseMember = R.cond([
+    [hasKey('flows'), R.compose(parseOauthFlowsObject(context), getValue)],
+
+    [innerPassThrough, e => e],
+    [isUnsupportedKey, e => e],
+    [isExtension, e => e],
+
+    [R.T, createInvalidMemberWarning(namespace, `${name}' 'oauth2`)],
+  ]);
+
+  return parseObject(context, name, parseMember, ['flows'], [], true)(securityScheme);
 }
 
 /**
@@ -95,7 +117,7 @@ function parseSecuritySchemeObject(context, object) {
   const parseMember = R.cond([
     [hasKey('type'), parseType],
     [hasKey('description'), parseString(context, name, false)],
-    [passThrough, e => e],
+    [outerPassThrough, e => e],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -110,20 +132,35 @@ function parseSecuritySchemeObject(context, object) {
     parseObject(context, name, parseMember, requiredKeys, [], true),
     R.when(isApiKeyScheme, R.curry(validateApiKeyScheme)(context)),
     R.when(isHttpScheme, R.curry(validateHttpScheme)(context)),
-    // R.when(isOauth2Scheme, parseSecuritySchemeFlowsObject),
+    R.when(isOauth2Scheme, R.curry(validateOauth2Scheme)(context)),
     (securityScheme) => {
       const authScheme = new namespace.elements.AuthScheme();
 
       const type = securityScheme.getValue('type');
       const scheme = securityScheme.getValue('scheme');
+      const description = securityScheme.get('description');
+
+      if (type === 'oauth2') {
+        const flows = securityScheme.get('flows');
+
+        if (description) {
+          flows.forEach((flow) => {
+            // eslint-disable-next-line no-param-reassign
+            flow.description = description.clone();
+          });
+        }
+
+        return flows;
+      }
 
       if (type === 'apiKey' || (type === 'http' && scheme === 'bearer')) {
         authScheme.element = 'Token Authentication Scheme';
       } else if (type === 'http' && scheme === 'basic') {
         authScheme.element = 'Basic Authentication Scheme';
+      } else {
+        throw new Error(`Invalid security Scheme '${type}' '${scheme}'`);
       }
 
-      const description = securityScheme.get('description');
       if (description) {
         authScheme.description = description;
       }
@@ -136,6 +173,8 @@ function parseSecuritySchemeObject(context, object) {
           key = 'httpHeaderName';
         } else if (inValue === 'query') {
           key = 'queryParameterName';
+        } else if (inValue === 'cookie') {
+          key = 'cookieName';
         }
 
         authScheme.push(new namespace.elements.Member(key, securityScheme.get('name')));

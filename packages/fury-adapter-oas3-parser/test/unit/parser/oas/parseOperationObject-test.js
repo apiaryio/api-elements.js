@@ -105,17 +105,6 @@ describe('Operation Object', () => {
       expect(parseResult).to.contain.warning("'Operation Object' contains unsupported key 'deprecated'");
     });
 
-    it('provides warning for unsupported security key', () => {
-      const operation = new namespace.elements.Member('get', {
-        security: '',
-        responses: {},
-      });
-
-      const parseResult = parse(context, path, operation);
-
-      expect(parseResult).to.contain.warning("'Operation Object' contains unsupported key 'security'");
-    });
-
     it('does not provide warning/errors for extensions', () => {
       const operation = new namespace.elements.Member('get', {
         responses: {},
@@ -501,6 +490,97 @@ describe('Operation Object', () => {
           },
         ]);
       });
+    });
+  });
+
+  describe('#security', () => {
+    it('warns when security is not an array', () => {
+      const operation = new namespace.elements.Member('get', {
+        security: {},
+        responses: {},
+      });
+
+      const parseResult = parse(context, path, operation);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+      expect(parseResult).to.contain.warning("'Operation Object' 'security' is not an array");
+    });
+
+    it('parses correctly when there is a security requirement', () => {
+      const operation = new namespace.elements.Member('get', {
+        security: [
+          {
+            apiKey: [],
+          },
+        ],
+        responses: {
+          200: {
+            description: 'dummy',
+          },
+        },
+      });
+
+      const parseResult = parse(context, path, operation);
+
+      expect(parseResult.length).to.equal(1);
+
+      const transition = parseResult.get(0);
+
+      expect(transition).to.be.instanceof(namespace.elements.Transition);
+      expect(transition.transactions.length).to.equal(1);
+
+      const transaction = transition.transactions.get(0);
+      const { authSchemes } = transaction;
+
+      expect(authSchemes).to.be.instanceof(namespace.elements.Array);
+      expect(authSchemes.length).to.equal(1);
+      expect(authSchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(authSchemes.get(0).element).to.equal('apiKey');
+    });
+
+    it('parses correctly when there are multiple security requirement', () => {
+      const operation = new namespace.elements.Member('get', {
+        security: [
+          {
+            apiKey: [],
+          },
+          {
+            custom1: [],
+            custom2: [],
+          },
+        ],
+        responses: {
+          200: {
+            description: 'dummy',
+          },
+        },
+      });
+
+      const parseResult = parse(context, path, operation);
+
+      expect(parseResult.length).to.equal(1);
+
+      const transition = parseResult.get(0);
+
+      expect(transition).to.be.instanceof(namespace.elements.Transition);
+      expect(transition.transactions.length).to.equal(1);
+
+      const transaction = transition.transactions.get(0);
+      const { authSchemes } = transaction;
+
+      expect(authSchemes).to.be.instanceof(namespace.elements.Array);
+      expect(authSchemes.length).to.equal(2);
+      expect(authSchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(authSchemes.get(0).element).to.equal('apiKey');
+      expect(authSchemes.get(1)).to.be.instanceof(namespace.elements.Extension);
+      expect(authSchemes.get(1).content.length).to.equal(2);
+      // TODO: Remove content[n] and use get(n) when moved to allOf element
+      expect(authSchemes.get(1).content[0]).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(authSchemes.get(1).content[0].element).to.equal('custom1');
+      expect(authSchemes.get(1).content[1]).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(authSchemes.get(1).content[1].element).to.equal('custom2');
     });
   });
 

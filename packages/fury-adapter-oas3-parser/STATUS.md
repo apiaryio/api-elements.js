@@ -72,7 +72,7 @@ Key:
 | responses | [~](#responses-object) |
 | callbacks | [✕](https://github.com/apiaryio/api-elements.js/issues/74) |
 | deprecated | ✕ |
-| security | [✕](https://github.com/apiaryio/api-elements.js/issues/77) |
+| security |  [✕](https://github.com/apiaryio/api-elements.js/issues/329)  |
 | servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
 
 ## Parameter Object

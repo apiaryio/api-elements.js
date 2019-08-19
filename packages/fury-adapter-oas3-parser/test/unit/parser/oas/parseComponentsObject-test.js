@@ -340,7 +340,40 @@ describe('Components Object', () => {
       const securitySchemes = parsedComponents.get('securitySchemes');
       expect(securitySchemes).to.be.instanceof(namespace.elements.Array);
       expect(securitySchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
-      expect(securitySchemes.get(0).meta.id.toValue()).to.equal('token');
+      expect(securitySchemes.get(0).id.toValue()).to.equal('token');
+    });
+
+    it('parses oauth2 securityScheme with multiple flows', () => {
+      const components = new namespace.elements.Object({
+        securitySchemes: {
+          oauth: {
+            type: 'oauth2',
+            flows: {
+              password: {
+                tokenUrl: '/token',
+                scopes: {},
+              },
+              implicit: {
+                authorizationUrl: '/authorization',
+                scopes: {},
+              },
+            },
+          },
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(1);
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const securitySchemes = parsedComponents.get('securitySchemes');
+      expect(securitySchemes).to.be.instanceof(namespace.elements.Array);
+      expect(securitySchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(securitySchemes.get(0).id.toValue()).to.equal('oauth resource owner password credentials');
+      expect(securitySchemes.get(1)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(securitySchemes.get(1).id.toValue()).to.equal('oauth implicit');
     });
 
     it('handles invalid security scheme', () => {

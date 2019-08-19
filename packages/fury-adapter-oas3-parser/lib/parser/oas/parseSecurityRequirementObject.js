@@ -40,6 +40,7 @@ function parseSecurityRequirementObject(context, object) {
   const parseSecurityRequirement = pipeParseResult(namespace,
     parseObject(context, name, parseMember),
     (securityRequirement) => {
+      // TODO: expand oauth requirements into multiples depending on flows
       const arr = new namespace.elements.Array([]);
 
       securityRequirement.forEach((value, key) => {
@@ -47,9 +48,9 @@ function parseSecurityRequirementObject(context, object) {
         const scopes = value.map(scope => scope.toValue());
 
         if (scopes.length) {
-          e = new namespace.elements.Object({ scopes });
+          e = new namespace.elements.AuthScheme({ scopes });
         } else {
-          e = new namespace.elements.Object({});
+          e = new namespace.elements.AuthScheme({});
         }
 
         e.element = key.toValue();

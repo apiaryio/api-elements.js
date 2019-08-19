@@ -156,9 +156,20 @@ function parseComponentsObject(context, element) {
 
       object.forEach((value, key) => {
         if (value) {
-          // eslint-disable-next-line no-param-reassign
-          value.meta.id = key.clone();
-          array.push(value);
+          if (value instanceof namespace.elements.AuthScheme) {
+            // eslint-disable-next-line no-param-reassign
+            value.id = key.clone();
+            array.push(value);
+
+            return;
+          }
+
+          // append oauth2 flow names
+          value.forEach((flow) => {
+            // eslint-disable-next-line no-param-reassign
+            flow.id = `${key.toValue()} ${flow.grantTypeValue}`;
+            array.push(flow);
+          });
         }
       });
 
