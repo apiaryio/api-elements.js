@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.2.0",
     "fury": "3.0.0-beta.12",
     "mocha": "^5.2.0"
   },
