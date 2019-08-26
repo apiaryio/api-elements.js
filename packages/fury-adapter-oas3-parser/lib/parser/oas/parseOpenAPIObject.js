@@ -15,10 +15,11 @@ const parseOpenAPI = require('../openapi');
 const parseInfoObject = require('./parseInfoObject');
 const parsePathsObject = require('./parsePathsObject');
 const parseComponentsObject = require('./parseComponentsObject');
+const parseSecurityRequirementsArray = require('./parseSecurityRequirementsArray');
 
 const name = 'OpenAPI Object';
 const requiredKeys = ['openapi', 'info', 'paths'];
-const unsupportedKeys = ['servers', 'security', 'tags', 'externalDocs'];
+const unsupportedKeys = ['servers', 'tags', 'externalDocs'];
 
 /**
  * Returns whether the given member element is unsupported
@@ -111,6 +112,7 @@ function parseOASObject(context, object) {
     [hasKey('info'), R.compose(parseInfoObject(context), getValue)],
     [hasKey('paths'), R.compose(asArray, parsePathsObject(context), getValue)],
     [hasKey('components'), R.compose(parseComponentsObject(context), getValue)],
+    [hasKey('security'), R.compose(parseSecurityRequirementsArray(context), getValue)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
@@ -126,6 +128,7 @@ function parseOASObject(context, object) {
     (object) => {
       const api = object.get('info');
       const components = object.get('components');
+      const security = object.get('security');
 
       if (components) {
         const schemes = R.or(components.get('securitySchemes'), new namespace.elements.Array());
@@ -141,6 +144,20 @@ function parseOASObject(context, object) {
       if (resources) {
         api.content = api.content.concat(resources.content);
       }
+
+      api.resources.forEach((resource) => {
+        resource.transitions.forEach((transition) => {
+          transition.transactions.forEach((transaction) => {
+            if (!transaction.authSchemes && security && !security.isEmpty) {
+              transaction.attributes.set('authSchemes', security.clone());
+            }
+
+            if (transaction.authSchemes && transaction.authSchemes.isEmpty) {
+              transaction.attributes.remove('authSchemes');
+            }
+          });
+        });
+      });
 
       if (components) {
         const schemas = R.or(components.get('schemas'), new namespace.elements.Array())

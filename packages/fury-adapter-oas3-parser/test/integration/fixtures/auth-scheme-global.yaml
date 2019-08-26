@@ -1,0 +1,48 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Auth Scheme
+security:
+  - basic: []
+  - token: []
+paths:
+  /user:
+    get:
+      summary: View the current User
+      responses:
+        '200':
+          description: An user
+          content:
+            application/json:
+              schema:
+                type: string
+    patch:
+      summary: Edit an User
+      security:
+        - basic: []
+      responses:
+        '200':
+          description: An user
+          content:
+            application/json:
+              schema:
+                type: string
+    put:
+      summary: Create an User
+      security: []
+      responses:
+        '201':
+          description: An user
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+    token:
+      type: apiKey
+      name: token
+      in: query

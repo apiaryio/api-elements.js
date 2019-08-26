@@ -10,7 +10,7 @@ paths:
         - basic: []
       responses:
         '200':
-          description: A user
+          description: An user
           content:
             application/json:
               schema:
