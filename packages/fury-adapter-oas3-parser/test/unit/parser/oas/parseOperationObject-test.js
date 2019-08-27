@@ -11,6 +11,7 @@ describe('Operation Object', () => {
 
   beforeEach(() => {
     context = new Context(namespace);
+    context.registerScheme('apiKey');
   });
 
   it('returns a transition', () => {

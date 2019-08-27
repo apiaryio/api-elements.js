@@ -110,8 +110,8 @@ function parseOASObject(context, object) {
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(context)],
     [hasKey('info'), R.compose(parseInfoObject(context), getValue)],
-    [hasKey('paths'), R.compose(asArray, parsePathsObject(context), getValue)],
     [hasKey('components'), R.compose(parseComponentsObject(context), getValue)],
+    [hasKey('paths'), R.compose(asArray, parsePathsObject(context), getValue)],
     [hasKey('security'), R.compose(parseSecurityRequirementsArray(context), getValue)],
 
     // FIXME Support exposing extensions into parse result

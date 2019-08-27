@@ -10,6 +10,9 @@ describe('Security Requirements Array', () => {
 
   beforeEach(() => {
     context = new Context(namespace);
+    context.registerScheme('apiKey');
+    context.registerScheme('custom1');
+    context.registerScheme('custom2');
   });
 
   it('warns when it is not an array', () => {

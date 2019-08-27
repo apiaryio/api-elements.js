@@ -16,6 +16,18 @@ class Context {
   registerId(id) {
     return this.state.registerId(id);
   }
+
+  oauthFlow(id, flow) {
+    return this.state.oauthFlow(id, flow);
+  }
+
+  registerScheme(id) {
+    return this.state.registerScheme(id);
+  }
+
+  hasScheme(id) {
+    return this.state.hasScheme(id);
+  }
 }
 
 module.exports = Context;

@@ -376,6 +376,70 @@ describe('Components Object', () => {
       expect(securitySchemes.get(1).id.toValue()).to.equal('oauth implicit');
     });
 
+    it('provides warning when oauth2 flow scheme name is already used', () => {
+      const components = new namespace.elements.Object({
+        securitySchemes: {
+          'oauth implicit': {
+            type: 'http',
+            scheme: 'basic',
+          },
+          oauth: {
+            type: 'oauth2',
+            flows: {
+              implicit: {
+                authorizationUrl: '/authorization',
+                scopes: {},
+              },
+            },
+          },
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'oauth implicit' security scheme can't be created from 'oauth' security scheme because it is already defined");
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const securitySchemes = parsedComponents.get('securitySchemes');
+      expect(securitySchemes).to.be.instanceof(namespace.elements.Array);
+      expect(securitySchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(securitySchemes.get(0).id.toValue()).to.equal('oauth implicit');
+    });
+
+    it('provides warning when scheme name is already used by oauth2 flow', () => {
+      const components = new namespace.elements.Object({
+        securitySchemes: {
+          oauth: {
+            type: 'oauth2',
+            flows: {
+              implicit: {
+                authorizationUrl: '/authorization',
+                scopes: {},
+              },
+            },
+          },
+          'oauth implicit': {
+            type: 'http',
+            scheme: 'basic',
+          },
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'oauth implicit' security scheme is already defined");
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const securitySchemes = parsedComponents.get('securitySchemes');
+      expect(securitySchemes).to.be.instanceof(namespace.elements.Array);
+      expect(securitySchemes.get(0)).to.be.instanceof(namespace.elements.AuthScheme);
+      expect(securitySchemes.get(0).id.toValue()).to.equal('oauth implicit');
+    });
+
     it('handles invalid security scheme', () => {
       const components = new namespace.elements.Object({
         securitySchemes: {
@@ -388,10 +452,7 @@ describe('Components Object', () => {
 
       const parsedComponents = parseResult.get(0);
       expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
-
-      const schemes = parsedComponents.get('securitySchemes');
-      expect(schemes).to.be.instanceof(namespace.elements.Array);
-      expect(schemes.isEmpty).to.be.true;
+      expect(parsedComponents.get('securitySchemes')).to.be.undefined;
     });
   });
 

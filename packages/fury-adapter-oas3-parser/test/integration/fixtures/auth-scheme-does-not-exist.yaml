@@ -1,0 +1,17 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Auth Scheme
+paths:
+  /user:
+    get:
+      summary: View the current User
+      security:
+        - basic: []
+      responses:
+        '200':
+          description: An user
+          content:
+            application/json:
+              schema:
+                type: string
