@@ -47,17 +47,30 @@ function parseSecurityRequirementObject(context, object) {
         let e;
         const schemeName = key.toValue();
 
+        const scopes = value.map(scope => scope.toValue());
+
+        if (scopes.length) {
+          e = new namespace.elements.AuthScheme({ scopes });
+        } else {
+          e = new namespace.elements.AuthScheme({});
+        }
+
+        // Expand oauth2 flows
+        const hasFlows = context.state.oauthFlows[schemeName] || [];
+
+        if (hasFlows.length !== 0) {
+          hasFlows.forEach((flow) => {
+            const element = e.clone();
+            element.element = flow;
+            array.push(element);
+          });
+
+          return;
+        }
+
         if (!context.hasScheme(schemeName)) {
           parseResult.push(createWarning(namespace, `'${schemeName}' security scheme not found`, key));
         } else {
-          const scopes = value.map(scope => scope.toValue());
-
-          if (scopes.length) {
-            e = new namespace.elements.AuthScheme({ scopes });
-          } else {
-            e = new namespace.elements.AuthScheme({});
-          }
-
           e.element = schemeName;
           array.push(e);
         }

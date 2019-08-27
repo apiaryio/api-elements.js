@@ -16,8 +16,8 @@ class State {
   }
 
   oauthFlow(id, flow) {
-    this.oauthFlows[id] = this.oauthFlows[id] || [];
-    this.oauthFlows[id].push(flow);
+    this.oauthFlows[id] = this.oauthFlows[id] || new Set();
+    this.oauthFlows[id].add(flow);
 
     return this.registerScheme(flow);
   }
