@@ -26,31 +26,6 @@
       },
       "content": [
         {
-          "element": "category",
-          "meta": {
-            "classes": {
-              "element": "array",
-              "content": [
-                {
-                  "element": "string",
-                  "content": "authSchemes"
-                }
-              ]
-            }
-          },
-          "content": [
-            {
-              "element": "Basic Authentication Scheme",
-              "meta": {
-                "id": {
-                  "element": "string",
-                  "content": "basic"
-                }
-              }
-            }
-          ]
-        },
-        {
           "element": "resource",
           "attributes": {
             "href": {
@@ -70,16 +45,6 @@
               "content": [
                 {
                   "element": "httpTransaction",
-                  "attributes": {
-                    "authSchemes": {
-                      "element": "array",
-                      "content": [
-                        {
-                          "element": "basic"
-                        }
-                      ]
-                    }
-                  },
                   "content": [
                     {
                       "element": "httpRequest",
@@ -136,6 +101,66 @@
           ]
         }
       ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 10
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 11
+                        }
+                      },
+                      "content": 149
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 10
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 16
+                        }
+                      },
+                      "content": 5
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "'basic' security scheme not found"
     }
   ]
 }

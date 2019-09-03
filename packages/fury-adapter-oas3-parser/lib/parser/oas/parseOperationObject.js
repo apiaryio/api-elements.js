@@ -1,9 +1,8 @@
 const R = require('ramda');
 const {
-  isArray, isMember, isExtension, hasKey, getValue,
+  isMember, isExtension, hasKey, getValue,
 } = require('../../predicates');
 const {
-  createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
   createIdentifierNotUniqueWarning,
@@ -14,8 +13,8 @@ const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseResponsesObject = require('./parseResponsesObject');
 const parseParameterObjects = require('./parseParameterObjects');
-const parseSecurityRequirementObject = require('./parseSecurityRequirementObject');
 const parseRequestBodyObject = require('./parseRequestBodyObject');
+const parseSecurityRequirementsArray = require('./parseSecurityRequirementsArray');
 const parseReference = require('../parseReference');
 
 const parseRequestBodyObjectOrRef = parseReference('requestBodies', parseRequestBodyObject);
@@ -104,24 +103,6 @@ function parseOperationObject(context, path, member) {
     ),
   ]));
 
-  const parseSecurity = pipeParseResult(namespace,
-    R.unless(isArray, createWarning(namespace, `'${name}' 'security' is not an array`)),
-    R.compose(R.chain(parseSecurityRequirementObject(context)), R.constructN(1, namespace.elements.Array)),
-    requirements => requirements.map((requirement) => {
-      if (requirement.length === 1) {
-        return requirement.get(0);
-      }
-
-      const link = new namespace.elements.Link();
-      link.relation = 'profile';
-      link.href = 'https://github.com/refractproject/rfcs/issues/39';
-
-      const allOf = new namespace.elements.Extension(requirement.content);
-      allOf.meta.set('links', new namespace.elements.Array([link]));
-
-      return allOf;
-    }));
-
   const parseMember = R.cond([
     [hasKey('summary'), parseString(context, name, false)],
     [hasKey('description'), parseCopy(context, name, false)],
@@ -129,7 +110,7 @@ function parseOperationObject(context, path, member) {
     [hasKey('responses'), R.compose(parseResponsesObject(context), getValue)],
     [hasKey('requestBody'), R.compose(parseRequestBodyObjectOrRef(context), getValue)],
     [hasKey('parameters'), R.compose(parseParameterObjects(context, name), getValue)],
-    [hasKey('security'), R.compose(parseSecurity, getValue)],
+    [hasKey('security'), R.compose(parseSecurityRequirementsArray(context), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 

@@ -40,11 +40,13 @@ function parseSecurityRequirementObject(context, object) {
   const parseSecurityRequirement = pipeParseResult(namespace,
     parseObject(context, name, parseMember),
     (securityRequirement) => {
-      // TODO: expand oauth requirements into multiples depending on flows
-      const arr = new namespace.elements.Array([]);
+      const parseResult = new namespace.elements.ParseResult([]);
+      const array = new namespace.elements.Array([]);
 
       securityRequirement.forEach((value, key) => {
         let e;
+        const schemeName = key.toValue();
+
         const scopes = value.map(scope => scope.toValue());
 
         if (scopes.length) {
@@ -53,11 +55,32 @@ function parseSecurityRequirementObject(context, object) {
           e = new namespace.elements.AuthScheme({});
         }
 
-        e.element = key.toValue();
-        arr.push(e);
+        // Expand oauth2 flows
+        const hasFlows = context.state.oauthFlows[schemeName] || [];
+
+        if (hasFlows.length !== 0) {
+          hasFlows.forEach((flow) => {
+            const element = e.clone();
+            element.element = flow;
+            array.push(element);
+          });
+
+          return;
+        }
+
+        if (!context.hasScheme(schemeName)) {
+          parseResult.push(createWarning(namespace, `'${schemeName}' security scheme not found`, key));
+        } else {
+          e.element = schemeName;
+          array.push(e);
+        }
       });
 
-      return arr;
+      if (!array.isEmpty) {
+        parseResult.push(array);
+      }
+
+      return parseResult;
     });
 
   return parseSecurityRequirement(object);

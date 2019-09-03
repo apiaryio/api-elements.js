@@ -20,7 +20,7 @@ Key:
 | servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
 | paths | [~](#paths-object) |
 | components | ~ |
-| security | [✕](https://github.com/apiaryio/api-elements.js/issues/77) |
+| security | ✓ |
 | tags | [✕](https://github.com/apiaryio/api-elements.js/issues/75) |
 | externalDocs | [✕](https://github.com/apiaryio/api-elements.js/issues/82) |
 
@@ -72,7 +72,7 @@ Key:
 | responses | [~](#responses-object) |
 | callbacks | [✕](https://github.com/apiaryio/api-elements.js/issues/74) |
 | deprecated | ✕ |
-| security |  [✕](https://github.com/apiaryio/api-elements.js/issues/329)  |
+| security | ✓ |
 | servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
 
 ## Parameter Object
@@ -211,15 +211,17 @@ support.
 
 ## Security Scheme Object
 
+See https://github.com/apiaryio/api-elements.js/issues/329 to track things left to do.
+
 | Field Name | Support |
 |:--|:--|
 | type | [~](#security-scheme-type) |
 | description | ✓ |
 | name | ✓ |
-| in | ~ |
+| in | ✓ |
 | scheme | ~ |
 | bearerFormat | ✕ |
-| flows | ✕ |
+| flows | ✓ |
 | openIdConnectUrl | ✕ |
 
 ## Security Scheme Type
@@ -228,7 +230,7 @@ support.
 |:--|:--|
 | apiKey | ✓ |
 | http | ✓ |
-| oauth2 | ✕ |
+| oauth2 | ✓ |
 | openIdConnect | ✕ |
 
 ## Example Object

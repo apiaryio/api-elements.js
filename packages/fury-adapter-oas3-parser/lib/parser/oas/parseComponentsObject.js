@@ -152,28 +152,47 @@ function parseComponentsObject(context, element) {
   const parseSecuritySchemes = pipeParseResult(namespace,
     parseComponentObjectMember(parseSecuritySchemeObject),
     (object) => {
+      const parseResult = new namespace.elements.ParseResult([]);
       const array = new namespace.elements.Array([]);
 
       object.forEach((value, key) => {
+        const keyValue = key.toValue();
+
         if (value) {
           if (value instanceof namespace.elements.AuthScheme) {
-            // eslint-disable-next-line no-param-reassign
-            value.id = key.clone();
-            array.push(value);
+            if (!context.registerScheme(keyValue)) {
+              parseResult.push(createWarning(namespace,
+                `'${keyValue}' security scheme is already defined`, key));
+            } else {
+              // eslint-disable-next-line no-param-reassign
+              value.id = key.clone();
+              array.push(value);
+            }
 
             return;
           }
 
           // append oauth2 flow names
           value.forEach((flow) => {
-            // eslint-disable-next-line no-param-reassign
-            flow.id = `${key.toValue()} ${flow.grantTypeValue}`;
-            array.push(flow);
+            const flowSchemeName = `${keyValue} ${flow.grantTypeValue}`;
+
+            if (!context.oauthFlow(keyValue, flowSchemeName)) {
+              parseResult.push(createWarning(namespace,
+                `'${flowSchemeName}' security scheme can't be created from '${keyValue}' security scheme because it is already defined`, key));
+            } else {
+              // eslint-disable-next-line no-param-reassign
+              flow.id = flowSchemeName;
+              array.push(flow);
+            }
           });
         }
       });
 
-      return array;
+      if (!array.isEmpty) {
+        parseResult.push(array);
+      }
+
+      return parseResult;
     });
 
   const parseMember = R.cond([

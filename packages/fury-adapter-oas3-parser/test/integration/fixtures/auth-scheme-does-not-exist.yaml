@@ -15,8 +15,3 @@ paths:
             application/json:
               schema:
                 type: string
-components:
-  securitySchemes:
-    basic:
-      type: http
-      scheme: basic

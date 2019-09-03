@@ -152,22 +152,6 @@ describe('#parseOpenAPIObject', () => {
     expect(parseResult).to.contain.warning("'OpenAPI Object' contains invalid key 'invalid'");
   });
 
-  it('provides warning for unsupported security key', () => {
-    const object = new namespace.elements.Object({
-      openapi: '3.0.0',
-      info: {
-        title: 'My API',
-        version: '1.0.0',
-      },
-      paths: {},
-      security: {},
-    });
-
-    const parseResult = parse(context, object);
-
-    expect(parseResult).to.contain.warning("'OpenAPI Object' contains unsupported key 'security'");
-  });
-
   it('provides warning for unsupported tags key', () => {
     const object = new namespace.elements.Object({
       openapi: '3.0.0',
