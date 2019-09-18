@@ -1,0 +1,5 @@
+--- Sample API ---
+GET /message
+< 200
+< Content-Type: text/plain
+Hello World!
