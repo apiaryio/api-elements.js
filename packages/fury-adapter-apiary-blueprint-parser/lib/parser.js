@@ -86,7 +86,9 @@ class Parser {
     const { Copy, Category, Resource } = this.namespace.elements;
 
     const group = new Category();
-    group.title = section.name;
+    if (section.name) {
+      group.title = section.name;
+    }
     group.classes.push('resourceGroup');
 
     if (section.description) {
