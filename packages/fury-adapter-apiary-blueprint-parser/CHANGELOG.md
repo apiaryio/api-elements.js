@@ -1,5 +1,12 @@
 # Changelog
 
+## Master
+
+### Bug Fixes
+
+- Prevents placing a null title element in a resource group when the section
+  name is empty.
+
 ## 3.0.0-beta.9 (2019-07-02)
 
 ### Enhancements

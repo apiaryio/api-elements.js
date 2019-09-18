@@ -22,10 +22,6 @@
         {
           "element": "category",
           "meta": {
-            "title": {
-              "element": "null",
-              "content": null
-            },
             "classes": {
               "element": "array",
               "content": [
