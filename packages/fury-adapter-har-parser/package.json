@@ -1,0 +1,4 @@
+{
+  "name": "fury-adapter-har-parser",
+  "main": "lib/adapter.js"
+}

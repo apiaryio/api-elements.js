@@ -16,6 +16,7 @@ const apiBlueprintSerializer = require('fury-adapter-apib-serializer');
 const apiaryBlueprintParser = require('fury-adapter-apiary-blueprint-parser');
 const oas2Parser = require('fury-adapter-swagger');
 const oas3Parser = require('fury-adapter-oas3-parser');
+const harParser = require('fury-adapter-har-parser');
 const pkg = require('../package.json');
 
 const adapters = [
@@ -24,6 +25,7 @@ const adapters = [
   'fury-adapter-apiary-blueprint-parser',
   'fury-adapter-swagger',
   'fury-adapter-oas3-parser',
+  'fury-adapter-har-parser',
 ];
 
 fury.use(apiBlueprintParser);
@@ -31,6 +33,7 @@ fury.use(apiBlueprintSerializer);
 fury.use(apiaryBlueprintParser);
 fury.use(oas2Parser);
 fury.use(oas3Parser);
+fury.use(harParser);
 
 function isRefract(source) {
   let parseResult;
