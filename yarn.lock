@@ -1957,11 +1957,6 @@ core-js@^2.4.0, core-js@^2.5.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.4.tgz#b8897c062c4d769dd30a0ac5c73976c47f92ea0d"
   integrity sha512-05qQ5hXShcqGkPZpXEFLIpxayZscVD2kuMBZewxiIPPEagukO4mqgPA9CWhUvFBJfy3ODdK2p9xyHh7FTU9/7A==
 
-core-js@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.2.1.tgz#cd41f38534da6cc59f7db050fe67307de9868b09"
-  integrity sha512-Qa5XSVefSVPRxy2XfUC13WbvqkxhkwB3ve+pgCQveNgYzbM/UxZeu1dcOX/xr4UmfUd+muuvsaxilQzCyUurMw==
-
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -6652,11 +6647,10 @@ yargs@^3.32.0:
     y18n "^3.2.0"
 
 z-schema@^4.1.0, z-schema@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/z-schema/-/z-schema-4.1.1.tgz#f987f52142de54943bd85bb6f6d63bf44807fb6c"
-  integrity sha512-0aKvR9FgrghUXXndYNDmAEazl8jykuHSkqkmPw2ZSuTWuLcEscn1zUTbR3LEfyxHl5EEHpqqOpF+Sd7wZvuDxw==
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/z-schema/-/z-schema-4.2.1.tgz#3f6f644897eab9f66aad615b6910e4c86a19c8ce"
+  integrity sha512-UWhAk5QzeIhks51TjHa6d4WexEokzbbwT+Dzq9yOBOx9sNnALo4hpYz9CfJ6IUE2cmzB0vWW3KHePYOfw3L4gQ==
   dependencies:
-    core-js "^3.2.1"
     lodash.get "^4.4.2"
     lodash.isequal "^4.5.0"
     validator "^11.0.0"
