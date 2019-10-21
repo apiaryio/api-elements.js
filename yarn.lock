@@ -3696,10 +3696,10 @@ json-parse-better-errors@^1.0.0, json-parse-better-errors@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
   integrity sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
 
-json-schema-faker@0.5.0-rc19:
-  version "0.5.0-rc19"
-  resolved "https://registry.yarnpkg.com/json-schema-faker/-/json-schema-faker-0.5.0-rc19.tgz#185d80905c40fda93bf44c61f09ea9d887a6bf69"
-  integrity sha512-yJLDodgoc/BOONGFmyuKoj3bSRXZ55FWIp1WjN0yC76kfoIz+lI5ttjUtU8NxgNULGFppJzpUM0ydyAWH3qp7A==
+json-schema-faker@0.5.0-rc22:
+  version "0.5.0-rc22"
+  resolved "https://registry.yarnpkg.com/json-schema-faker/-/json-schema-faker-0.5.0-rc22.tgz#2235e9dd3c6e5309a98b9ed9cfd087e913d5859a"
+  integrity sha512-I4uHXHapmR9qLJtzZSEHhhri1LMsaFsw3PycmFq0lBCR2Q1oIRm0OTPJbSbmIyPLJgN4+8+WRgR3AF0qmU1XDw==
   dependencies:
     json-schema-ref-parser "^6.1.0"
     jsonpath-plus "^1.0.0"
