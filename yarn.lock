@@ -6027,9 +6027,9 @@ swagger-methods@^2.0.1:
   integrity sha512-+Wb4jXbZA724K1VriN1bFwUxoL0+Nr5vA4GT4Yz5rldxa+tG2aDjt5ONWeE6diviBbLTvncfuD3nQrPPFElYpA==
 
 swagger-parser@^8.0.0:
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/swagger-parser/-/swagger-parser-8.0.2.tgz#64c172b71b0c0cb5279e1f8f3a2b481490b3a10f"
-  integrity sha512-/PpU/XjHdxhfj9A6TM9k8fuZ9jPcIp28rqqQOpFv1Qhxx8/1XQxL/rWuE33s1Z/zIkbYUtAlauBMRScBGq8tLQ==
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/swagger-parser/-/swagger-parser-8.0.3.tgz#2f577527c5307d94050785cfb8939aaefe3575d8"
+  integrity sha512-y2gw+rTjn7Z9J+J1qwbBm0UL93k/VREDCveKBK6iGjf7KXC6QGshbnpEmeHL0ZkCgmIghsXzpNzPSbBH91BAEQ==
   dependencies:
     call-me-maybe "^1.0.1"
     json-schema-ref-parser "^7.1.1"
