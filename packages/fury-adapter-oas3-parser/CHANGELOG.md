@@ -1,5 +1,11 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Enhancements
+
+- Added support for `info.license` (License Object).
+
 ## 0.9.1 (2019-08-08)
 
 ### Enhancements

@@ -5,16 +5,17 @@ const {
   createInvalidMemberWarning,
 } = require('../annotations');
 const {
-  isObject, hasKey, isExtension,
+  isObject, hasKey, getValue, isExtension,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
+const parseLicenseObject = require('./parseLicenseObject');
 
 const name = 'Info Object';
 const requiredKeys = ['title', 'version'];
-const unsupportedKeys = ['termsOfService', 'contact', 'license'];
+const unsupportedKeys = ['termsOfService', 'contact'];
 
 /**
  * Returns whether the given member element is unsupported
@@ -38,6 +39,7 @@ function parseInfo(context, info) {
     [hasKey('title'), parseString(context, name, true)],
     [hasKey('version'), parseString(context, name, true)],
     [hasKey('description'), parseCopy(context, name, false)],
+    [hasKey('license'), R.compose(parseLicenseObject(context), getValue)],
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // FIXME Support exposing extensions into parse result
@@ -58,6 +60,10 @@ function parseInfo(context, info) {
 
       if (info.get('description')) {
         api.push(info.get('description'));
+      }
+
+      if (info.get('license')) {
+        api.links.push(info.get('license'));
       }
 
       return api;

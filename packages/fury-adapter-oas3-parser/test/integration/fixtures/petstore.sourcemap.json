@@ -41,6 +41,55 @@
             }
           },
           "content": "Swagger Petstore"
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 87
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 3
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "MIT"
+                }
+              },
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "license"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://purl.org/atompub/license#unspecified"
+                }
+              }
+            }
+          ]
         }
       },
       "attributes": {
@@ -1276,66 +1325,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 5
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 3
-                        }
-                      },
-                      "content": 68
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 5
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 10
-                        }
-                      },
-                      "content": 7
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Info Object' contains unsupported key 'license'"
     },
     {
       "element": "annotation",
