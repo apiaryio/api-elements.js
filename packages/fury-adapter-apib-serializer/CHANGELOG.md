@@ -1,5 +1,13 @@
 # Fury API Blueprint Serializer
 
+## Master
+
+### Bug Fixes
+
+- Prevents an exception from being thrown when serializing href variables which
+  do not include a value.
+  [#357](https://github.com/apiaryio/api-elements.js/issues/357)
+
 ## 0.12.1 (2019-07-12)
 
 ### Bug Fixes

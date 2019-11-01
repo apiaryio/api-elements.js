@@ -50,7 +50,7 @@ FORMAT: 1A
 
   {% for item in hrefVariables.content %}
     {% set typeAttributes = item.attributes.get('typeAttributes') %}
-    + {{ item.key.toValue() }}{% if item.value.toValue() %}: {{ item.value.toValue() }}{% endif %}{% if typeAttributes %} ({{ typeAttributes.toValue() }}){% endif %}{% if item.description and item.description.toValue() %} - {{ item.description.toValue() }}{% endif %}{% endfor %}
+    + {{ item.key.toValue() }}{% if item.value and item.value.toValue() %}: {{ item.value.toValue() }}{% endif %}{% if typeAttributes %} ({{ typeAttributes.toValue() }}){% endif %}{% if item.description and item.description.toValue() %} - {{ item.description.toValue() }}{% endif %}{% endfor %}
 
 {% endmacro %}
 
