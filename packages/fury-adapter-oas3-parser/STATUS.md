@@ -32,7 +32,7 @@ Key:
 | description | ✓ |
 | termsOfService | [✕](https://github.com/apiaryio/api-elements.js/issues/78) |
 | contact | [✕](https://github.com/apiaryio/api-elements.js/issues/79) |
-| license | [✕](https://github.com/apiaryio/api-elements.js/issues/80) |
+| license | ✓ |
 | version | ✓ |
 
 ## Paths Object
