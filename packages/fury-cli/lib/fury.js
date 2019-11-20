@@ -228,7 +228,8 @@ if (require.main === module) {
 
   if (commander.adapter) {
     // eslint-disable-next-line import/no-dynamic-require, global-require
-    fury.use(require(commander.adapter));
+    const adapter = require(commander.adapter);
+    fury.adapters.unshift(adapter);
   }
 
   const furyCLI = new FuryCLI(input, output, commander.format,

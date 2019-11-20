@@ -1,5 +1,15 @@
 # Changelog
 
+## Master
+
+### Enhancements
+
+- Any adapter added via the `--adapter` option will be preferred for parsing
+  when there are multiple adapters loaded for the same media types. For example
+  if you want to use `--adapter fury-adapter-remote` and there is already a
+  conflicting adapter such as `fury-adapter-apib-parser` which previously took
+  precedence.
+
 ## 0.9.1 (2019-07-02)
 
 This update incorporates changes from Fury Adapters:
