@@ -21,7 +21,7 @@
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "jsdoc": "^3.5.5",
+    "jsdoc": "^3.6.3",
     "lerna": "^3.4.0",
     "nyc": "^14.1.1"
   }
