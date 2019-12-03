@@ -44,7 +44,7 @@ jobs:
   docs:
     <<: *defaults
     docker:
-      - image: circleci/python:3.6-node-browsers
+      - image: circleci/python:3.6.8-node-browsers
     steps:
       - checkout
       - <<: *install
