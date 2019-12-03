@@ -228,7 +228,13 @@ if (require.main === module) {
 
   if (commander.adapter) {
     // eslint-disable-next-line import/no-dynamic-require, global-require
-    const adapter = require(commander.adapter);
+    let adapter = require(commander.adapter);
+
+    if (adapter.constructor) {
+      // eslint-disable-next-line new-cap
+      adapter = new adapter();
+    }
+
     fury.adapters.unshift(adapter);
   }
 
