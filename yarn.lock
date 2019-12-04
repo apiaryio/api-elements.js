@@ -6645,9 +6645,9 @@ yargs@^3.32.0:
     y18n "^3.2.0"
 
 z-schema@^4.1.0, z-schema@^4.1.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/z-schema/-/z-schema-4.2.1.tgz#3f6f644897eab9f66aad615b6910e4c86a19c8ce"
-  integrity sha512-UWhAk5QzeIhks51TjHa6d4WexEokzbbwT+Dzq9yOBOx9sNnALo4hpYz9CfJ6IUE2cmzB0vWW3KHePYOfw3L4gQ==
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/z-schema/-/z-schema-4.2.2.tgz#43fa2709ae5016885db50e1ce31b254b72c0886c"
+  integrity sha512-7bGR7LohxSdlK1EOdvA/OHksvKGE4jTLSjd8dBj9YKT0S43N9pdMZ0Z7GZt9mHrBFhbNTRh3Ky6Eu2MHsPJe8g==
   dependencies:
     lodash.get "^4.4.2"
     lodash.isequal "^4.5.0"
