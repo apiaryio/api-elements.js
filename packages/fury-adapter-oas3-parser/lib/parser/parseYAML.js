@@ -111,8 +111,10 @@ function parse(source, context) {
     if (error.problem) {
       const problem = error.problem.replace('\t', '\\t');
       message = `${problem}, ${error.context}`;
-    } else {
+    } else if (error.context) {
       message = error.context;
+    } else {
+      ({ message } = error);
     }
 
     const annotation = new namespace.elements.Annotation(
@@ -121,12 +123,14 @@ function parse(source, context) {
     );
 
     const marker = error.context_mark || error.problem_mark;
-    copySourceMap(
-      marker,
-      marker,
-      annotation,
-      namespace
-    );
+    if (marker) {
+      copySourceMap(
+        marker,
+        marker,
+        annotation,
+        namespace
+      );
+    }
 
     parseResult.push(annotation);
     return parseResult;

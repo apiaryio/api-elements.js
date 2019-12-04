@@ -31,6 +31,18 @@ describe('#parseYAML', () => {
 
       expect(parseResult).contain.error('YAML Syntax: found character \\t that cannot start any token, while scanning for the next token').with.sourceMap([[14, 0]]);
     });
+
+    it('can handle internal YAML parser error', () => {
+      // Protection against YAML parser bug where source map information isn't available
+      // Particular case: https://github.com/connec/yaml-js/issues/46
+
+      const parseResult = parseYAML("key:\n  key:\n      key: 'x\nkey: 'string'", context);
+
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+      expect(parseResult.errors.length).to.equal(1);
+
+      expect(parseResult).contain.error('YAML Syntax: logic failure');
+    });
   });
 
   it('can parse a string into a string element', () => {
