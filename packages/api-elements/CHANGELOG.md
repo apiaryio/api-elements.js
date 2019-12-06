@@ -1,5 +1,9 @@
 # API Elements (JavaScript) CHANGELOG
 
+## 0.2.3 (2019-12-05)
+
+Internal changes.
+
 ## 0.2.2 (2019-07-02)
 
 Internal changes.

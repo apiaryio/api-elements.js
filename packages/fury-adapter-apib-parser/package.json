@@ -1,11 +1,13 @@
 {
   "name": "fury-adapter-apib-parser",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "API Blueprint parser for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/adapter.js",
-  "files": ["lib/adapter.js"],
+  "files": [
+    "lib/adapter.js"
+  ],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-apib-parser",
   "repository": {
     "type": "git",
@@ -22,12 +24,12 @@
     "drafter": "2.0.0-pre.1"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.12"
+    "fury": "3.0.0-beta.13"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
-    "fury": "3.0.0-beta.12",
+    "fury": "3.0.0-beta.13",
     "mocha": "^5.2.0"
   },
   "engines": {

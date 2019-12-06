@@ -1,5 +1,9 @@
 # Fury Changelog
 
+## 3.0.0-beta.13 (2019-12-06)
+
+This release contains internal changes needed for included Fury adapters.
+
 ## 3.0.0-beta.12 (2019-07-02)
 
 This release contains internal changes needed to improve the performance for
