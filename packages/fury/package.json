@@ -1,11 +1,13 @@
 {
   "name": "fury",
-  "version": "3.0.0-beta.12",
+  "version": "3.0.0-beta.13",
   "description": "API Description SDK",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/fury.js",
-  "files": ["lib/fury.js"],
+  "files": [
+    "lib/fury.js"
+  ],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury",
   "repository": {
     "type": "git",
@@ -18,7 +20,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "api-elements": "^0.2.2"
+    "api-elements": "^0.2.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",

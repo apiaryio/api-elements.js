@@ -1,5 +1,11 @@
 # Fury Remote Adapter Changelog
 
+## 0.4.0 (2019-12-06)
+
+### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 13](https://github.com/apiaryio/api-elements.js/releases/tag/fury@3.0.0-beta.13).
+
 ## 0.3.0 (2019-07-02)
 
 ### Enhancements

@@ -1,11 +1,13 @@
 {
   "name": "fury-adapter-remote",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Provide adapter for Element API based on callin remote API site",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/adapter.js",
-  "files": ["lib/adapter.js"],
+  "files": [
+    "lib/adapter.js"
+  ],
   "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-remote",
   "repository": {
     "type": "git",
@@ -24,12 +26,12 @@
     "deckardcain": "^1.0.0"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.12"
+    "fury": "3.0.0-beta.13"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
-    "fury": "3.0.0-beta.12",
+    "fury": "3.0.0-beta.13",
     "mocha": "^5.2.0"
   }
 }

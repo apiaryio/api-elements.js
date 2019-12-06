@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 3.0.0-beta.10 (2019-12-06)
 
 ### Bug Fixes
 
