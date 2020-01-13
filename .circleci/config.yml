@@ -2,7 +2,7 @@ version: 2
 
 aliases:
   - &install
-    run: sudo npm install -g yarn && yarn install --frozen-lockfile --ignore-optional
+    run: yarn install --frozen-lockfile --ignore-optional
   - &defaults
     working_directory: ~/repo
     docker:
