@@ -72,7 +72,9 @@ class FuryRemoteAdapter {
     return false;
   }
 
-  parse({ source, namespace, mediaType }) {
+  parse({
+    source, generateSourceMap, namespace, mediaType,
+  }) {
     const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
 
     return axios({
@@ -80,6 +82,9 @@ class FuryRemoteAdapter {
       url: this.options.parseEndpoint,
       baseURL: this.options.url,
       data: source,
+      params: {
+        generateSourceMap,
+      },
       headers: {
         'Content-Type': inputMediaType,
         Accept: outputMediaType,
