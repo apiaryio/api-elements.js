@@ -32,6 +32,30 @@ describe('Adapter works with Fury interface (with default config)', function rem
       });
     });
 
+    it('blueprint with generateSourceMap set to true', (done) => {
+      fury.parse({ source: blueprintSource, generateSourceMap: true }, (err, result) => {
+        expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
+        expect(result.api.title.sourceMapValue).to.not.be.undefined;
+        done();
+      });
+    });
+
+    it('blueprint with generateSourceMap set to false', (done) => {
+      fury.parse({ source: blueprintSource, generateSourceMap: false }, (err, result) => {
+        expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
+        expect(result.api.title.sourceMapValue).to.be.undefined;
+        done();
+      });
+    });
+
+    it('blueprint without generateSourceMap', (done) => {
+      fury.parse({ source: blueprintSource }, (err, result) => {
+        expect(result).to.be.instanceof(fury.minim.elements.ParseResult);
+        expect(result.api.title.sourceMapValue).to.be.undefined;
+        done();
+      });
+    });
+
     it('valid swagger with mediaType', (done) => {
       fury.parse({ source: swaggerSource, mediaType: 'application/swagger+json' }, (err, result) => {
         expect(result).to.be.instanceof(fury.minim.elements.ParseResult);

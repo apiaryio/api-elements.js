@@ -1,5 +1,11 @@
 # Fury Remote Adapter Changelog
 
+## master
+
+### Bug Fixes
+
+- `generateSourceMap` value respected by the parse function.
+
 ## 0.4.0 (2019-12-06)
 
 ### Enhancements
