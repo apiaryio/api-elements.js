@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "cardinal": "^2.1.1",
-    "commander": "^3.0.0",
+    "commander": "^4.1.0",
     "fury": "3.0.0-beta.13",
     "fury-adapter-apiary-blueprint-parser": "3.0.0-beta.10",
     "fury-adapter-apib-parser": "^0.17.0",
