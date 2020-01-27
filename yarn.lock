@@ -3898,14 +3898,14 @@ json-schema-ref-parser@^6.1.0:
     js-yaml "^3.12.1"
     ono "^4.0.11"
 
-json-schema-ref-parser@^7.1.1:
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/json-schema-ref-parser/-/json-schema-ref-parser-7.1.2.tgz#b0b324a7453d4102a271ca23cbc18c9d0d187062"
-  integrity sha512-bi2Nns2UqdX7wThX5qSHd+lOxlu9oeJvlCnWGuR3qS4Ex4UZtuwygkyq/43J31GuNGX8xBHeV6zjQztYk/G5VA==
+json-schema-ref-parser@^7.1.3:
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/json-schema-ref-parser/-/json-schema-ref-parser-7.1.3.tgz#21468cd180b2f1939ce93fe291f743b441e97d49"
+  integrity sha512-/Lmyl0PW27dOmCO03PI339+1gs4Z2PlqIyUgzIOtoRp08zkkMCB30TRbdppbPO7WWzZX0uT98HqkDiZSujkmbA==
   dependencies:
     call-me-maybe "^1.0.1"
     js-yaml "^3.13.1"
-    ono "^5.1.0"
+    ono "^6.0.0"
 
 json-schema-traverse@^0.4.1:
   version "0.4.1"
@@ -4884,10 +4884,10 @@ ono@^4.0.11:
   dependencies:
     format-util "^1.0.3"
 
-ono@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/ono/-/ono-5.1.0.tgz#8cafa7e56afa2211ad63dd2eb798427e64f1a070"
-  integrity sha512-GgqRIUWErLX4l9Up0khRtbrlH8Fyj59A0nKv8V6pWEto38aUgnOGOOF7UmgFFLzFnDSc8REzaTXOc0hqEe7yIw==
+ono@^6.0.0:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/ono/-/ono-6.0.1.tgz#1bc14ffb8af1e5db3f7397f75b88e4a2d64bbd71"
+  integrity sha512-5rdYW/106kHqLeG22GE2MHKq+FlsxMERZev9DCzQX1zwkxnFwBivSn5i17a5O/rDmOJOdf4Wyt80UZljzx9+DA==
 
 openapi-schemas@^1.0.2:
   version "1.0.3"
@@ -6239,17 +6239,17 @@ swagger-methods@^2.0.1:
   integrity sha512-+Wb4jXbZA724K1VriN1bFwUxoL0+Nr5vA4GT4Yz5rldxa+tG2aDjt5ONWeE6diviBbLTvncfuD3nQrPPFElYpA==
 
 swagger-parser@^8.0.0:
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/swagger-parser/-/swagger-parser-8.0.3.tgz#2f577527c5307d94050785cfb8939aaefe3575d8"
-  integrity sha512-y2gw+rTjn7Z9J+J1qwbBm0UL93k/VREDCveKBK6iGjf7KXC6QGshbnpEmeHL0ZkCgmIghsXzpNzPSbBH91BAEQ==
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/swagger-parser/-/swagger-parser-8.0.4.tgz#ddec68723d13ee3748dd08fd5b7ba579327595da"
+  integrity sha512-KGRdAaMJogSEB7sPKI31ptKIWX8lydEDAwWgB4pBMU7zys5cd54XNhoPSVlTxG/A3LphjX47EBn9j0dOGyzWbA==
   dependencies:
     call-me-maybe "^1.0.1"
-    json-schema-ref-parser "^7.1.1"
-    ono "^5.1.0"
+    json-schema-ref-parser "^7.1.3"
+    ono "^6.0.0"
     openapi-schemas "^1.0.2"
     openapi-types "^1.3.5"
     swagger-methods "^2.0.1"
-    z-schema "^4.1.1"
+    z-schema "^4.2.2"
 
 table@^5.2.3:
   version "5.2.3"
@@ -6889,7 +6889,7 @@ yargs@^3.32.0:
     window-size "^0.1.4"
     y18n "^3.2.0"
 
-z-schema@^4.1.0, z-schema@^4.1.1:
+z-schema@^4.1.0, z-schema@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/z-schema/-/z-schema-4.2.2.tgz#43fa2709ae5016885db50e1ce31b254b72c0886c"
   integrity sha512-7bGR7LohxSdlK1EOdvA/OHksvKGE4jTLSjd8dBj9YKT0S43N9pdMZ0Z7GZt9mHrBFhbNTRh3Ky6Eu2MHsPJe8g==
