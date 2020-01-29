@@ -202,7 +202,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Question\"},\"definitions\":{\"Question\":{\"title\":\"Question\",\"type\":\"object\",\"properties\":{\"question\":{\"type\":\"string\",\"examples\":[\"hi\"]},\"published_at\":{\"type\":\"string\",\"examples\":[2019]},\"choices\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Choice\"}}},\"required\":[\"question\",\"published_at\",\"choices\"]},\"Choice\":{\"title\":\"Choice\",\"type\":\"object\",\"properties\":{\"votes\":{\"type\":\"integer\",\"format\":\"int32\",\"examples\":[512]},\"choice\":{\"type\":\"string\",\"examples\":[\"Swift\"]}},\"required\":[\"votes\",\"choice\"]}}}"
+                          "content": "{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Question\"},\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"definitions\":{\"Question\":{\"title\":\"Question\",\"type\":\"object\",\"properties\":{\"question\":{\"type\":\"string\",\"examples\":[\"hi\"]},\"published_at\":{\"type\":\"string\",\"examples\":[2019]},\"choices\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/Choice\"}}},\"required\":[\"question\",\"published_at\",\"choices\"]},\"Choice\":{\"title\":\"Choice\",\"type\":\"object\",\"properties\":{\"votes\":{\"type\":\"integer\",\"format\":\"int32\",\"examples\":[512]},\"choice\":{\"type\":\"string\",\"examples\":[\"Swift\"]}},\"required\":[\"votes\",\"choice\"]}}}"
                         },
                         {
                           "element": "dataStructure",

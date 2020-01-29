@@ -82,7 +82,7 @@ describe('Parser', () => {
       const payload = new fury.minim.elements.HttpResponse();
       parser.pushAssets(schema, payload);
 
-      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object"}');
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object","$schema":"http://json-schema.org/draft-04/schema#"}');
     });
 
     it('strips extensions from schema', () => {
@@ -90,7 +90,7 @@ describe('Parser', () => {
       const payload = new fury.minim.elements.HttpResponse();
       parser.pushAssets(schema, payload);
 
-      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object"}');
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"object","$schema":"http://json-schema.org/draft-04/schema#"}');
     });
 
     it('adds null to type when x-nullable is provided', () => {
@@ -98,7 +98,7 @@ describe('Parser', () => {
       const payload = new fury.minim.elements.HttpResponse();
       parser.pushAssets(schema, payload);
 
-      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":["object","null"]}');
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":["object","null"],"$schema":"http://json-schema.org/draft-04/schema#"}');
     });
 
     it('sets null as type when x-nullable is provided without type', () => {
@@ -106,7 +106,7 @@ describe('Parser', () => {
       const payload = new fury.minim.elements.HttpResponse();
       parser.pushAssets(schema, payload);
 
-      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"null"}');
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"type":"null","$schema":"http://json-schema.org/draft-04/schema#"}');
     });
 
     it('adds null value to enum when x-nullable is provided', () => {
@@ -114,7 +114,7 @@ describe('Parser', () => {
       const payload = new fury.minim.elements.HttpResponse();
       parser.pushAssets(schema, payload);
 
-      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"enum":["north","south",null]}');
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"enum":["north","south",null],"$schema":"http://json-schema.org/draft-04/schema#"}');
     });
 
     it('does not add null value to enum when x-nullable is provided and null in enum', () => {
@@ -122,7 +122,7 @@ describe('Parser', () => {
       const payload = new fury.minim.elements.HttpResponse();
       parser.pushAssets(schema, payload);
 
-      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"enum":["north","south",null]}');
+      expect(payload.messageBodySchema.toValue()).to.deep.equal('{"enum":["north","south",null],"$schema":"http://json-schema.org/draft-04/schema#"}');
     });
   });
 });

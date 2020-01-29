@@ -5,44 +5,63 @@ describe('Swagger Schema to JSON Schema', () => {
   it('returns compatible schema when given valid JSON Schema', () => {
     const schema = convertSchema({ type: 'object' });
 
-    expect(schema).to.deep.equal({ type: 'object' });
+    expect(schema).to.deep.equal({
+      $schema: 'http://json-schema.org/draft-04/schema#',
+      type: 'object',
+    });
   });
 
   describe('extension removal', () => {
     it('removes Swagger vendored extensions', () => {
       const schema = convertSchema({ type: 'object', 'x-extension': 'example' });
 
-      expect(schema).to.deep.equal({ type: 'object' });
+      expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
+        type: 'object',
+      });
     });
 
     it('removes Swagger discriminator extension', () => {
       const schema = convertSchema({ type: 'object', discriminator: 'example' });
 
-      expect(schema).to.deep.equal({ type: 'object' });
+      expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
+        type: 'object',
+      });
     });
 
     it('removes Swagger readOnly extension', () => {
       const schema = convertSchema({ type: 'object', readOnly: true });
 
-      expect(schema).to.deep.equal({ type: 'object' });
+      expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
+        type: 'object',
+      });
     });
 
     it('removes Swagger xml extension', () => {
       const schema = convertSchema({ type: 'object', xml: { name: 'example' } });
 
-      expect(schema).to.deep.equal({ type: 'object' });
+      expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
+        type: 'object',
+      });
     });
 
     it('removes Swagger externalDocs extension', () => {
       const schema = convertSchema({ type: 'object', externalDocs: { url: 'https://example.com' } });
 
-      expect(schema).to.deep.equal({ type: 'object' });
+      expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
+        type: 'object',
+      });
     });
 
     it('translates Swagger example extension to examples', () => {
       const schema = convertSchema({ type: 'object', example: { message: 'hello' } });
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         examples: [
           { message: 'hello' },
@@ -54,6 +73,7 @@ describe('Swagger Schema to JSON Schema', () => {
       const schema = convertSchema({ type: 'object', example: { length: 2 } });
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         examples: [
           { length: 2 },
@@ -76,6 +96,7 @@ describe('Swagger Schema to JSON Schema', () => {
       const schema = convertSchema(swaggerSchema, {}, root);
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         examples: [
           { message: 'hello' },
@@ -100,6 +121,7 @@ describe('Swagger Schema to JSON Schema', () => {
       const schema = convertSchema(swaggerSchema, {}, root);
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         examples: [
           {
@@ -126,6 +148,7 @@ describe('Swagger Schema to JSON Schema', () => {
       const schema = convertSchema(swaggerSchema, {}, root);
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'object',
         examples: [
           [{ message: 'hello' }],
@@ -138,19 +161,28 @@ describe('Swagger Schema to JSON Schema', () => {
     it('ignores false x-nullable', () => {
       const schema = convertSchema({ type: 'string', 'x-nullable': false });
 
-      expect(schema).to.deep.equal({ type: 'string' });
+      expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
+        type: 'string',
+      });
     });
 
     it('translates x-nullable to type null without existing type', () => {
       const schema = convertSchema({ 'x-nullable': true });
 
-      expect(schema).to.deep.equal({ type: 'null' });
+      expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
+        type: 'null',
+      });
     });
 
     it('translates x-nullable to type null with existing type', () => {
       const schema = convertSchema({ type: 'string', 'x-nullable': true });
 
-      expect(schema).to.deep.equal({ type: ['string', 'null'] });
+      expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
+        type: ['string', 'null'],
+      });
     });
   });
 
@@ -166,6 +198,7 @@ describe('Swagger Schema to JSON Schema', () => {
       });
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         allOf: [
           {
             type: 'string',
@@ -185,6 +218,7 @@ describe('Swagger Schema to JSON Schema', () => {
       });
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         anyOf: [
           {
             type: 'string',
@@ -204,6 +238,7 @@ describe('Swagger Schema to JSON Schema', () => {
       });
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         oneOf: [
           {
             type: 'string',
@@ -221,6 +256,7 @@ describe('Swagger Schema to JSON Schema', () => {
       });
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         not: {
           type: 'string',
         },
@@ -238,6 +274,7 @@ describe('Swagger Schema to JSON Schema', () => {
         });
 
         expect(schema).to.deep.equal({
+          $schema: 'http://json-schema.org/draft-04/schema#',
           type: 'array',
           items: {
             type: 'string',
@@ -257,6 +294,7 @@ describe('Swagger Schema to JSON Schema', () => {
         });
 
         expect(schema).to.deep.equal({
+          $schema: 'http://json-schema.org/draft-04/schema#',
           type: 'array',
           items: [
             {
@@ -276,6 +314,7 @@ describe('Swagger Schema to JSON Schema', () => {
         });
 
         expect(schema).to.deep.equal({
+          $schema: 'http://json-schema.org/draft-04/schema#',
           type: 'array',
           additionalItems: {
             type: 'string',
@@ -290,6 +329,7 @@ describe('Swagger Schema to JSON Schema', () => {
         });
 
         expect(schema).to.deep.equal({
+          $schema: 'http://json-schema.org/draft-04/schema#',
           type: 'array',
           additionalItems: true,
         });
@@ -309,6 +349,7 @@ describe('Swagger Schema to JSON Schema', () => {
         });
 
         expect(schema).to.deep.equal({
+          $schema: 'http://json-schema.org/draft-04/schema#',
           type: 'object',
           properties: {
             example: {
@@ -330,6 +371,7 @@ describe('Swagger Schema to JSON Schema', () => {
         });
 
         expect(schema).to.deep.equal({
+          $schema: 'http://json-schema.org/draft-04/schema#',
           type: 'object',
           patternProperties: {
             '[0-9]': {
@@ -349,6 +391,7 @@ describe('Swagger Schema to JSON Schema', () => {
         });
 
         expect(schema).to.deep.equal({
+          $schema: 'http://json-schema.org/draft-04/schema#',
           type: 'object',
           additionalProperties: {
             type: 'string',
@@ -363,6 +406,7 @@ describe('Swagger Schema to JSON Schema', () => {
         });
 
         expect(schema).to.deep.equal({
+          $schema: 'http://json-schema.org/draft-04/schema#',
           type: 'object',
           additionalProperties: true,
         });
@@ -482,6 +526,7 @@ describe('Swagger Schema to JSON Schema', () => {
       }, root);
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'array',
         items: {
           $ref: '#/definitions/User',
@@ -516,6 +561,7 @@ describe('Swagger Schema to JSON Schema', () => {
       }, root);
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'array',
         items: {
           $ref: '#/definitions/User/properties/name',
@@ -558,6 +604,7 @@ describe('Swagger Schema to JSON Schema', () => {
       }, root);
 
       expect(schema).to.deep.equal({
+        $schema: 'http://json-schema.org/draft-04/schema#',
         type: 'array',
         items: {
           $ref: '#/definitions/User',

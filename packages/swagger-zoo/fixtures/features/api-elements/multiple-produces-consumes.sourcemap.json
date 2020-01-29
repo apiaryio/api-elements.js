@@ -301,7 +301,7 @@
                               ]
                             }
                           },
-                          "content": "{\"type\":\"object\"}"
+                          "content": "{\"type\":\"object\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",
@@ -493,7 +493,7 @@
                               ]
                             }
                           },
-                          "content": "{\"type\":\"object\"}"
+                          "content": "{\"type\":\"object\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",
@@ -694,7 +694,7 @@
                               ]
                             }
                           },
-                          "content": "{\"type\":\"object\"}"
+                          "content": "{\"type\":\"object\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",
@@ -886,7 +886,7 @@
                               ]
                             }
                           },
-                          "content": "{\"type\":\"object\"}"
+                          "content": "{\"type\":\"object\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",

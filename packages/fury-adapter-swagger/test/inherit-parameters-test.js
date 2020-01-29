@@ -1,4 +1,5 @@
 const { expect } = require('chai');
+const cloneDeep = require('lodash/cloneDeep');
 const fury = require('fury');
 const adapter = require('../lib/adapter');
 
@@ -28,6 +29,12 @@ function doParse(source, done, expectations) {
 
     return done();
   });
+}
+
+function getJSONSchemaFromSource(sourceSchema) {
+  const parameterSchema = cloneDeep(sourceSchema);
+  parameterSchema.$schema = 'http://json-schema.org/draft-04/schema#';
+  return JSON.stringify(parameterSchema);
 }
 
 function makeParameter(aName, aIn, aValue) {
@@ -228,7 +235,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].parameters.push(makeParameter('test', 'body'));
 
       doParse(source, done, (result) => {
-        const schema = JSON.stringify(source.paths['/'].parameters[0].schema);
+        const schema = getJSONSchemaFromSource(source.paths['/'].parameters[0].schema);
 
         // ensure there is no warning about unsupported "Path-level Body Parameter")
         expect(result.result.annotations.toValue()).to.be.empty;
@@ -241,7 +248,7 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'body'));
 
       doParse(source, done, (result) => {
-        const schema = JSON.stringify(source.paths['/'].get.parameters[0].schema);
+        const schema = getJSONSchemaFromSource(source.paths['/'].get.parameters[0].schema);
 
         expect(result.request.messageBodySchema.content).to.equal(schema);
       });
@@ -268,8 +275,9 @@ describe('Inherit Path Parameters', () => {
       source.paths['/'].get.parameters.push(makeParameter('test', 'body', { type: 'number' }));
 
       doParse(source, done, (result) => {
-        expect(result.request.messageBodySchema.content).to
-          .equal(JSON.stringify(source.paths['/'].get.parameters[0].schema));
+        const schema = getJSONSchemaFromSource(source.paths['/'].get.parameters[0].schema);
+
+        expect(result.request.messageBodySchema.content).to.equal(schema);
       });
     });
   });
