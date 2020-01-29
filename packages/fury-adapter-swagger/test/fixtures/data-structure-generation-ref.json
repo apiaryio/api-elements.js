@@ -91,7 +91,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"$ref\":\"#/definitions/User\"}},\"examples\":[{\"id\":123,\"user\":{\"name\":\"Doe\"}}],\"definitions\":{\"User\":{\"type\":\"object\",\"examples\":[{\"name\":\"Doe\"}]}}}"
+                          "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"$ref\":\"#/definitions/User\"}},\"examples\":[{\"id\":123,\"user\":{\"name\":\"Doe\"}}],\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"definitions\":{\"User\":{\"type\":\"object\",\"examples\":[{\"name\":\"Doe\"}]}}}"
                         },
                         {
                           "element": "dataStructure",

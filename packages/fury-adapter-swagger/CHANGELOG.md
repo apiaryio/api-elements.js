@@ -1,5 +1,13 @@
 # Fury Swagger Parser Changelog
 
+## 0.28.1 (2020-01-30)
+
+### Bug Fixes
+
+- Sets an explicit `$schema` property on JSON Schema generated from a Swagger
+  document in `convertSchema`. Sets a JSON Schema Draft V4 as the value of the
+  `$schema` property, making generated schema implement a JSON Schema Draft V4.
+
 ## 0.28.0 (2019-12-06)
 
 ### Enhancements

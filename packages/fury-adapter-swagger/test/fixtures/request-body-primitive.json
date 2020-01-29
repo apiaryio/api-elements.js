@@ -151,7 +151,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"type\":\"string\",\"examples\":[\"Http Request Body\"]}"
+                          "content": "{\"type\":\"string\",\"examples\":[\"Http Request Body\"],\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",
@@ -309,7 +309,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"type\":\"number\",\"examples\":[1]}"
+                          "content": "{\"type\":\"number\",\"examples\":[1],\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",
@@ -467,7 +467,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"type\":\"boolean\",\"examples\":[true]}"
+                          "content": "{\"type\":\"boolean\",\"examples\":[true],\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",

@@ -345,6 +345,8 @@ const convertSchema = (schema, root, swagger, copyDefinitions = true) => {
   const result = convertSubSchema(schema, references, swagger);
 
   if (copyDefinitions) {
+    result.$schema = 'http://json-schema.org/draft-04/schema#';
+
     if (references.length !== 0) {
       result.definitions = {};
     }

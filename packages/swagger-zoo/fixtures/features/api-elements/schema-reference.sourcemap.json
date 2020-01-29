@@ -301,7 +301,7 @@
                               ]
                             }
                           },
-                          "content": "{\"type\":\"string\",\"examples\":[\"Hello\"]}"
+                          "content": "{\"type\":\"string\",\"examples\":[\"Hello\"],\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",

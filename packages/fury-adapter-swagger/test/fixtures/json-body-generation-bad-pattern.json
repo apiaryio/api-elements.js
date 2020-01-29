@@ -196,7 +196,7 @@
                               "content": "application/schema+json"
                             }
                           },
-                          "content": "{\"type\":\"string\",\"minLength\":1,\"maxLength\":255,\"pattern\":\"^[A-z]+$\"}"
+                          "content": "{\"type\":\"string\",\"minLength\":1,\"maxLength\":255,\"pattern\":\"^[A-z]+$\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
                         },
                         {
                           "element": "dataStructure",
