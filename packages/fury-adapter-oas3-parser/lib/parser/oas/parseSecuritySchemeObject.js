@@ -57,8 +57,20 @@ function validateApiKeyScheme(context, securityScheme) {
 function validateHttpScheme(context, securityScheme) {
   const { namespace } = context;
 
+  const schemes = ['bearer', 'basic'];
+  const isValidScheme = R.anyPass(R.map(hasValue, schemes));
+  const createInvalidSchemeWarning = scheme => createWarning(
+    namespace,
+    `'${name}' 'http' contains unsupported scheme '${scheme.value.toValue()}', supported schemes ${schemes.join(', ')}`,
+    scheme.value
+  );
+
+  const parseScheme = pipeParseResult(namespace,
+    parseString(context, name, false),
+    R.unless(isValidScheme, createInvalidSchemeWarning));
+
   const parseMember = R.cond([
-    [hasKey('scheme'), parseString(context, name, false)],
+    [hasKey('scheme'), parseScheme],
 
     [innerPassThrough, e => e],
     [isUnsupportedKey, e => e],

@@ -1,5 +1,12 @@
 # Fury OAS3 Parser Changelog
 
+## TBD
+
+### Bug Fixes
+
+- Prevents the parser from throwing an error when encountering an unsupported
+  scheme in a http Security Scheme Object.
+
 ## 0.10.0 (2019-12-06)
 
 ### Enhancements
