@@ -413,6 +413,20 @@ describe('Security Scheme Object', () => {
       expect(parseResult.length).to.equal(2);
       expect(parseResult).to.contain.warning("'Security Scheme Object' 'http' contains invalid key 'flows'");
     });
+
+    it('provides warning for invalid scheme', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'http',
+        scheme: 'basic[',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning(
+        "'Security Scheme Object' 'http' contains unsupported scheme 'basic[', supported schemes bearer, basic"
+      );
+    });
   });
 
   describe('warnings for unsupported properties', () => {
