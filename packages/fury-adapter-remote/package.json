@@ -1,6 +1,6 @@
 {
   "name": "fury-adapter-remote",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Provide adapter for Element API based on callin remote API site",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
