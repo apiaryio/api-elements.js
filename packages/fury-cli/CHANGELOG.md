@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.3 (2020-01-30)
+
+This update incorporates bug fixes from Fury Adapters:
+
+- fury-adapter-oas3-parser 0.10.1
+- fury-adapter-swagger 0.28.1
+
 ## 0.9.2 (2019-12-06)
 
 ### Enhancements

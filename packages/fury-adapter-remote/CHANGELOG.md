@@ -1,6 +1,6 @@
 # Fury Remote Adapter Changelog
 
-## master
+## 0.4.1 (2020-01-30)
 
 ### Bug Fixes
 
