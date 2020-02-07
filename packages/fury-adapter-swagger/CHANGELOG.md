@@ -1,5 +1,13 @@
 # Fury Swagger Parser Changelog
 
+## 0.28.2 (2020-02-07)
+
+### Bug Fixes
+
+- This release includes performance improvements to parsing documents which
+  contain the same schema re-used via a reference (`$ref`) many times in
+  request parameters and response bodies.
+
 ## 0.28.1 (2020-01-30)
 
 ### Bug Fixes
