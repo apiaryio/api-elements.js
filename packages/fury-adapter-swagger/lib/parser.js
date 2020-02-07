@@ -1530,7 +1530,16 @@ class Parser {
 
   pushAssets(schema, payload, contentType, pushBody) {
     let jsonSchema;
+
+    if (this.bodyCache === undefined) {
+      this.bodyCache = {};
+    }
+
     const referencedPathValue = this.referencedPathValue();
+    let cacheKey;
+    if (referencedPathValue && referencedPathValue.$ref) {
+      cacheKey = `${referencedPathValue.$ref};${contentType}`;
+    }
 
     try {
       const root = { definitions: this.definitions };
@@ -1542,7 +1551,15 @@ class Parser {
     }
 
     if (pushBody) {
-      bodyFromSchema(jsonSchema, payload, this, contentType);
+      if (cacheKey && this.bodyCache[cacheKey]) {
+        const asset = this.bodyCache[cacheKey];
+        payload.push(asset.clone());
+      } else {
+        const asset = bodyFromSchema(jsonSchema, payload, this, contentType);
+        if (cacheKey) {
+          this.bodyCache[cacheKey] = asset;
+        }
+      }
     }
 
     this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
