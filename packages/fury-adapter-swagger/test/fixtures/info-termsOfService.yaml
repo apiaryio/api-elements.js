@@ -1,0 +1,6 @@
+swagger: '2.0'
+info:
+  title: Sample Pet Store App
+  termsOfService: http://example.com/terms/
+  version: 1.0.1
+paths: {}

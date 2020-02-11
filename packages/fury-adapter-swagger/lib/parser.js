@@ -325,6 +325,22 @@ class Parser {
           });
         }
 
+        if (this.swagger.info.termsOfService) {
+          this.withPath('termsOfService', () => {
+            const { Link } = this.namespace.elements;
+            const link = new Link();
+
+            link.relation = 'terms-of-service';
+            link.href = this.swagger.info.termsOfService;
+
+            if (this.generateSourceMap) {
+              this.createSourceMap(link, this.path);
+            }
+
+            return this.api.links.push(link);
+          });
+        }
+
         if (this.swagger.info.version) {
           this.withPath('version', () => {
             this.api.attributes.set('version', this.swagger.info.version);
