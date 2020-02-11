@@ -1,5 +1,20 @@
 # Fury Swagger Parser Changelog
 
+## Master
+
+### Enhancements
+
+- Adds support for `info.termsOfService`.
+  For example the following document:
+
+  ```yaml
+  swagger: '2.0'
+  info:
+    termsOfService: http://example.com/terms/
+  ```
+
+  will add the link to the terms of service `http://example.com/terms/`
+
 ## 0.28.2 (2020-02-07)
 
 ### Bug Fixes
