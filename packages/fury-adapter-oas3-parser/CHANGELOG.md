@@ -1,5 +1,11 @@
 # Fury OAS3 Parser Changelog
 
+## 0.10.2 (2020-02-17)
+
+### Enhancements
+
+- Adds support for the `info.termsOfService` schema extension.
+
 ## 0.10.1 (2020-01-30)
 
 ### Bug Fixes

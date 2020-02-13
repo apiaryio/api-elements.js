@@ -85,19 +85,6 @@ describe('#parseInfoObject', () => {
   });
 
   describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported termsOfService key', () => {
-      const object = new namespace.elements.Object({
-        title: 'My API',
-        version: '1.0.0',
-        termsOfService: '',
-      });
-
-      const parseResult = parse(context, object);
-
-      expect(parseResult.warnings.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Info Object' contains unsupported key 'termsOfService'");
-    });
-
     it('provides warning for unsupported contact key', () => {
       const object = new namespace.elements.Object({
         title: 'My API',
@@ -177,5 +164,20 @@ describe('#parseInfoObject', () => {
     const license = parseResult.api.links.get(0);
     expect(license.relation.toValue()).to.equal('license');
     expect(license.href.toValue()).to.equal('https://www.apache.org/licenses/LICENSE-2.0.html');
+  });
+
+  it('provides api category with terms of service', () => {
+    const info = new namespace.elements.Object({
+      title: 'My API',
+      version: '1.0.0',
+      termsOfService: 'http://example.com/terms/',
+    });
+
+    const parseResult = parse(context, info);
+    expect(parseResult.length).to.equal(1);
+
+    const termsOfService = parseResult.api.links.get(0);
+    expect(termsOfService.relation.toValue()).to.equal('terms-of-service');
+    expect(termsOfService.href.toValue()).to.equal('http://example.com/terms/');
   });
 });
