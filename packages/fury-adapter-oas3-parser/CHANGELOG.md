@@ -1,5 +1,11 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Enhancements
+
+- Adds support for `termsOfService` in 'Info Object'.
+
 ## 0.10.1 (2020-01-30)
 
 ### Bug Fixes

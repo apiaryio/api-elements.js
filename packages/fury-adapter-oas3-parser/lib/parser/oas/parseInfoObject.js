@@ -15,7 +15,7 @@ const parseLicenseObject = require('./parseLicenseObject');
 
 const name = 'Info Object';
 const requiredKeys = ['title', 'version'];
-const unsupportedKeys = ['termsOfService', 'contact'];
+const unsupportedKeys = ['contact'];
 
 /**
  * Returns whether the given member element is unsupported
@@ -35,8 +35,20 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 function parseInfo(context, info) {
   const { namespace } = context;
 
+  const parseTermsOfService = pipeParseResult(namespace,
+    parseString(context, name, false),
+    getValue,
+    (termsOfService) => {
+      const link = new namespace.elements.Link();
+      link.relation = 'terms-of-service';
+      link.href = termsOfService;
+
+      return link;
+    });
+
   const parseMember = R.cond([
     [hasKey('title'), parseString(context, name, true)],
+    [hasKey('termsOfService'), parseTermsOfService],
     [hasKey('version'), parseString(context, name, true)],
     [hasKey('description'), parseCopy(context, name, false)],
     [hasKey('license'), R.compose(parseLicenseObject(context), getValue)],
@@ -57,6 +69,10 @@ function parseInfo(context, info) {
       api.classes = ['api'];
       api.title = info.get('title');
       api.attributes.set('version', info.get('version'));
+
+      if (info.get('termsOfService')) {
+        api.links.push(info.get('termsOfService'));
+      }
 
       if (info.get('description')) {
         api.push(info.get('description'));
