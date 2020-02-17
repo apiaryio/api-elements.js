@@ -1,0 +1,501 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 23
+                        },
+                        {
+                          "element": "number",
+                          "content": 17
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "Parameters"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 43
+                        },
+                        {
+                          "element": "number",
+                          "content": 14
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "1.0"
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "content": 67
+                            },
+                            {
+                              "element": "number",
+                              "content": 298
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": "/"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "attributes": {
+                "href": {
+                  "element": "string",
+                  "content": "/{?arg}"
+                },
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 147
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 27
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Query argument"
+                        }
+                      },
+                      "attributes": {
+                        "sourceMap": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "sourceMap",
+                              "content": [
+                                {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "number",
+                                      "content": 107
+                                    },
+                                    {
+                                      "element": "number",
+                                      "content": 159
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "optional"
+                            }
+                          ]
+                        }
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "arg"
+                        },
+                        "value": {
+                          "element": "array",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 107
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 159
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "string",
+                              "attributes": {
+                                "sourceMap": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "sourceMap",
+                                      "content": [
+                                        {
+                                          "element": "array",
+                                          "content": [
+                                            {
+                                              "element": "number",
+                                              "content": 207
+                                            },
+                                            {
+                                              "element": "number",
+                                              "content": 42
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 74
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 291
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "GET"
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 285
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 80
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "200"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 300
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 21
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Response"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            },
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 332
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 33
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "{\"type\":\"string\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "string"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "warning"
+            }
+          ]
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "origin"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "code": {
+          "element": "number",
+          "content": 6
+        },
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 14
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 10
+                        }
+                      },
+                      "content": 249
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 14
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 20
+                        }
+                      },
+                      "content": 10
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "Expected type array but found type string"
+    }
+  ]
+}

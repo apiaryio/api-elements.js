@@ -1,0 +1,666 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 40
+                        },
+                        {
+                          "element": "number",
+                          "content": 44
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "Authentication with multiple consumes"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 23
+                        },
+                        {
+                          "element": "number",
+                          "content": 14
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "1.0.0"
+        }
+      },
+      "content": [
+        {
+          "element": "category",
+          "meta": {
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "authSchemes"
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "Token Authentication Scheme",
+              "meta": {
+                "id": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 108
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 64
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "Bearer"
+                }
+              },
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 137
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 19
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "content": "httpHeaderName"
+                    },
+                    "value": {
+                      "element": "string",
+                      "content": "Authorization"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "content": 181
+                            },
+                            {
+                              "element": "number",
+                              "content": 231
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": "/query"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "attributes": {
+                    "authSchemes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "APIKeyHeader",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 289
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 16
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 193
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 219
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "POST"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 331
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 81
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "200"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 348
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 20
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Example"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            },
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 379
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 33
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "{\"type\":\"object\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "object"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "httpTransaction",
+                  "attributes": {
+                    "authSchemes": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "APIKeyHeader",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 289
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 16
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 193
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 219
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "POST"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "text/plain"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 331
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 81
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "200"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 348
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 20
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Example"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            },
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 379
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 33
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "{\"type\":\"object\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "object"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

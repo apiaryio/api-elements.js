@@ -1,0 +1,288 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 40
+                        },
+                        {
+                          "element": "number",
+                          "content": 37
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "Authentication with extensions"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 23
+                        },
+                        {
+                          "element": "number",
+                          "content": 14
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "1.0.0"
+        }
+      },
+      "content": [
+        {
+          "element": "category",
+          "meta": {
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "authSchemes"
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "Token Authentication Scheme",
+              "meta": {
+                "id": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 101
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 472
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "APIGatewayAuthorizer"
+                }
+              },
+              "content": [
+                {
+                  "element": "member",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 144
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 19
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": {
+                    "key": {
+                      "element": "string",
+                      "content": "httpHeaderName"
+                    },
+                    "value": {
+                      "element": "string",
+                      "content": "Authorization"
+                    }
+                  }
+                },
+                {
+                  "element": "extension",
+                  "meta": {
+                    "links": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "link",
+                          "attributes": {
+                            "relation": {
+                              "element": "string",
+                              "content": "profile"
+                            },
+                            "href": {
+                              "element": "string",
+                              "content": "https://help.apiary.io/profiles/api-elements/vendor-extensions/"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "member",
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "x-amazon-apigateway-authtype"
+                        },
+                        "value": {
+                          "element": "string",
+                          "content": "oauth2"
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "x-amazon-apigateway-authorizer"
+                        },
+                        "value": {
+                          "element": "object",
+                          "content": [
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "token"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "authorizerUri"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:account-id:function:function-name/invocations"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "authorizerCredentials"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "arn:aws:iam::account-id:role"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "identityValidationExpression"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "^x-[a-z]+"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "authorizerResultTtlInSeconds"
+                                },
+                                "value": {
+                                  "element": "number",
+                                  "content": 60
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

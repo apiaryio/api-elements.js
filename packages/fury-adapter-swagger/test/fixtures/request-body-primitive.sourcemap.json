@@ -1,0 +1,999 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 23
+                        },
+                        {
+                          "element": "number",
+                          "content": 21
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "Primitive Body"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 47
+                        },
+                        {
+                          "element": "number",
+                          "content": 14
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "1.0.0"
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "content": 94
+                            },
+                            {
+                              "element": "number",
+                              "content": 298
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": "/string"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 119
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 44
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "Example Operation Using String Body"
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 107
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 285
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "POST"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "text/plain"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            },
+                            "links": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "link",
+                                  "attributes": {
+                                    "relation": {
+                                      "element": "string",
+                                      "content": "inferred"
+                                    },
+                                    "href": {
+                                      "element": "string",
+                                      "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "text/plain"
+                            }
+                          },
+                          "content": "Http Request Body"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            },
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 257
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 78
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "{\"type\":\"string\",\"examples\":[\"Http Request Body\"],\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "string",
+                            "content": "Http Request Body"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 354
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 38
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "204"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 369
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 20
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Success"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "content": 392
+                            },
+                            {
+                              "element": "number",
+                              "content": 284
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": "/number"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 417
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 44
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "Example Operation Using Number Body"
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 405
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 271
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "POST"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "text/plain"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            },
+                            "links": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "link",
+                                  "attributes": {
+                                    "relation": {
+                                      "element": "string",
+                                      "content": "inferred"
+                                    },
+                                    "href": {
+                                      "element": "string",
+                                      "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "text/plain"
+                            }
+                          },
+                          "content": "1"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            },
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 555
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 64
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "{\"type\":\"number\",\"examples\":[1],\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "number",
+                            "content": 1
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 638
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 38
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "204"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 653
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 20
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Success"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "content": 676
+                            },
+                            {
+                              "element": "number",
+                              "content": 286
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": "/boolean"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 702
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 45
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "Example Operation Using Boolean Body"
+                }
+              },
+              "content": [
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 690
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 272
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "POST"
+                        },
+                        "headers": {
+                          "element": "httpHeaders",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "links": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "link",
+                                      "attributes": {
+                                        "relation": {
+                                          "element": "string",
+                                          "content": "inferred"
+                                        },
+                                        "href": {
+                                          "element": "string",
+                                          "content": "http://docs.apiary.io/validations/swagger#consumes-content-type"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "Content-Type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "text/plain"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBody"
+                                }
+                              ]
+                            },
+                            "links": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "link",
+                                  "attributes": {
+                                    "relation": {
+                                      "element": "string",
+                                      "content": "inferred"
+                                    },
+                                    "href": {
+                                      "element": "string",
+                                      "content": "http://docs.apiary.io/validations/swagger#message-body-generation"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "text/plain"
+                            }
+                          },
+                          "content": "true"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            },
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 841
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 66
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "{\"type\":\"boolean\",\"examples\":[true],\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "boolean",
+                            "content": true
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 926
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 36
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "204"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 941
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 20
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "Success"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

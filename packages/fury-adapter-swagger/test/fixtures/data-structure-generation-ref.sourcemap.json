@@ -1,0 +1,479 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 40
+                        },
+                        {
+                          "element": "number",
+                          "content": 32
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "Data Structure Generation"
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 23
+                        },
+                        {
+                          "element": "number",
+                          "content": 14
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "1.0.0"
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
+          "attributes": {
+            "href": {
+              "element": "string",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "content": 82
+                            },
+                            {
+                              "element": "number",
+                              "content": 446
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": "/user"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
+              "meta": {
+                "id": {
+                  "element": "string",
+                  "content": "getResource"
+                }
+              },
+              "content": [
+                {
+                  "element": "copy",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "sourceMap",
+                          "content": [
+                            {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 104
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 27
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": "Get a resource"
+                },
+                {
+                  "element": "httpTransaction",
+                  "content": [
+                    {
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 93
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 435
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "GET"
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 188
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 340
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "200"
+                        }
+                      },
+                      "content": [
+                        {
+                          "element": "copy",
+                          "attributes": {
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 203
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 33
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "response description"
+                        },
+                        {
+                          "element": "asset",
+                          "meta": {
+                            "classes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "messageBodySchema"
+                                }
+                              ]
+                            }
+                          },
+                          "attributes": {
+                            "contentType": {
+                              "element": "string",
+                              "content": "application/schema+json"
+                            },
+                            "sourceMap": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "sourceMap",
+                                  "content": [
+                                    {
+                                      "element": "array",
+                                      "content": [
+                                        {
+                                          "element": "number",
+                                          "content": 247
+                                        },
+                                        {
+                                          "element": "number",
+                                          "content": 281
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "content": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"$ref\":\"#/definitions/User\"}},\"examples\":[{\"id\":123,\"user\":{\"name\":\"Doe\"}}],\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"definitions\":{\"User\":{\"type\":\"object\",\"examples\":[{\"name\":\"Doe\"}]}}}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "object",
+                            "attributes": {
+                              "samples": {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "object",
+                                    "content": [
+                                      {
+                                        "element": "member",
+                                        "content": {
+                                          "key": {
+                                            "element": "string",
+                                            "content": "id"
+                                          },
+                                          "value": {
+                                            "element": "number",
+                                            "content": 123
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "element": "member",
+                                        "content": {
+                                          "key": {
+                                            "element": "string",
+                                            "content": "user"
+                                          },
+                                          "value": {
+                                            "element": "object",
+                                            "content": [
+                                              {
+                                                "element": "member",
+                                                "content": {
+                                                  "key": {
+                                                    "element": "string",
+                                                    "content": "name"
+                                                  },
+                                                  "value": {
+                                                    "element": "string",
+                                                    "content": "Doe"
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "content": [
+                              {
+                                "element": "member",
+                                "attributes": {
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "optional"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "content": "id"
+                                  },
+                                  "value": {
+                                    "element": "number"
+                                  }
+                                }
+                              },
+                              {
+                                "element": "member",
+                                "attributes": {
+                                  "typeAttributes": {
+                                    "element": "array",
+                                    "content": [
+                                      {
+                                        "element": "string",
+                                        "content": "optional"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "content": {
+                                  "key": {
+                                    "element": "string",
+                                    "content": "name"
+                                  },
+                                  "value": {
+                                    "element": "definitions/User"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "dataStructures"
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "dataStructure",
+              "attributes": {
+                "sourceMap": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "sourceMap",
+                      "content": [
+                        {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "number",
+                              "content": 543
+                            },
+                            {
+                              "element": "number",
+                              "content": 52
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "element": "object",
+                "meta": {
+                  "id": {
+                    "element": "string",
+                    "content": "definitions/User"
+                  }
+                },
+                "content": [
+                  {
+                    "element": "member",
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "name"
+                      },
+                      "value": {
+                        "element": "string",
+                        "content": "Doe"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
