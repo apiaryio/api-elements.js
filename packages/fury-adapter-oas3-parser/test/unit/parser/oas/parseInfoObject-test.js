@@ -166,18 +166,31 @@ describe('#parseInfoObject', () => {
     expect(license.href.toValue()).to.equal('https://www.apache.org/licenses/LICENSE-2.0.html');
   });
 
-  it('provides api category with terms of service', () => {
-    const info = new namespace.elements.Object({
-      title: 'My API',
-      version: '1.0.0',
-      termsOfService: 'http://example.com/terms/',
+  describe('#termsOfService', () => {
+    it('provides a warning when termsOfService is not a string', () => {
+      const info = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        termsOfService: 6,
+      });
+
+      const parseResult = parse(context, info);
+      expect(parseResult).to.contain.warning("'Info Object' 'termsOfService' is not a string");
     });
 
-    const parseResult = parse(context, info);
-    expect(parseResult.length).to.equal(1);
+    it('provides api category with termsOfService', () => {
+      const info = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        termsOfService: 'http://example.com/terms/',
+      });
 
-    const termsOfService = parseResult.api.links.get(0);
-    expect(termsOfService.relation.toValue()).to.equal('terms-of-service');
-    expect(termsOfService.href.toValue()).to.equal('http://example.com/terms/');
+      const parseResult = parse(context, info);
+      expect(parseResult.length).to.equal(1);
+
+      const termsOfService = parseResult.api.links.get(0);
+      expect(termsOfService.relation.toValue()).to.equal('terms-of-service');
+      expect(termsOfService.href.toValue()).to.equal('http://example.com/terms/');
+    });
   });
 });

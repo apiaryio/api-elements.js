@@ -4,7 +4,7 @@
 
 ### Enhancements
 
-- Adds support for the `info.termsOfService` schema extension.
+- Adds support for `termsOfService` in 'Info Object'.
 
 ## 0.10.1 (2020-01-30)
 
