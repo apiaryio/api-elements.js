@@ -153,6 +153,7 @@ describe('Swagger 2.0 adapter', () => {
 
       const swagger = fs.readFileSync(file, 'utf-8');
       const apiElementsPath = path.join(__dirname, 'fixtures', `${name}.json`);
+      const apiElementsSourceMapPath = path.join(__dirname, 'fixtures', `${name}.sourcemap.json`);
 
       const options = { swagger };
 
@@ -167,7 +168,19 @@ describe('Swagger 2.0 adapter', () => {
         },
       });
 
+      Object.defineProperty(options, 'apiElementsSourceMap', {
+        get() {
+          return require(apiElementsSourceMapPath);
+        },
+
+        set(value) {
+          fs.writeFileSync(apiElementsSourceMapPath, JSON.stringify(value, null, 2));
+          return value;
+        },
+      });
+
       testFixture(`Parses ${name}`, options);
+      testFixture(`Parses ${name} with source maps`, options, true);
     });
   });
 });
