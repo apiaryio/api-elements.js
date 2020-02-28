@@ -85,19 +85,6 @@ describe('#parseInfoObject', () => {
   });
 
   describe('warnings for unsupported properties', () => {
-    it('provides warning for unsupported contact key', () => {
-      const object = new namespace.elements.Object({
-        title: 'My API',
-        version: '1.0.0',
-        contact: {},
-      });
-
-      const parseResult = parse(context, object);
-
-      expect(parseResult.warnings.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Info Object' contains unsupported key 'contact'");
-    });
-
     it('does not provide warning for Info Object extensions', () => {
       const object = new namespace.elements.Object({
         title: 'My API',
@@ -191,6 +178,112 @@ describe('#parseInfoObject', () => {
       const termsOfService = parseResult.api.links.get(0);
       expect(termsOfService.relation.toValue()).to.equal('terms-of-service');
       expect(termsOfService.href.toValue()).to.equal('http://example.com/terms/');
+    });
+  });
+
+  describe('#contact', () => {
+    it('provides a warning when contact is not an object', () => {
+      const info = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        contact: 6,
+      });
+
+      const parseResult = parse(context, info);
+      expect(parseResult).to.contain.warning("'Contact Object' is not an object");
+    });
+
+    it('provides api category only with contact name', () => {
+      const info = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        contact: {
+          name: 'API Support',
+        },
+      });
+
+      const parseResult = parse(context, info);
+      const parsedLinks = parseResult.api.links;
+      expect(parsedLinks.length).to.equal(0);
+    });
+
+    it('provides api category with contact URL', () => {
+      const info = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        contact: {
+          name: 'API Support',
+          url: 'http://example.com/support/',
+        },
+      });
+
+      const parseResult = parse(context, info);
+      expect(parseResult.length).to.equal(1);
+
+      const contact = parseResult.api.links.get(0);
+      expect(contact.relation.toValue()).to.equal('contact');
+      expect(contact.href.toValue()).to.equal('http://example.com/support/');
+    });
+
+    it('provides api category with contact email', () => {
+      const info = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        contact: {
+          name: 'API Support',
+          email: 'support@example.com',
+        },
+      });
+
+      const parseResult = parse(context, info);
+      expect(parseResult.length).to.equal(1);
+
+      const contact = parseResult.api.links.get(0);
+      expect(contact.relation.toValue()).to.equal('contact');
+      expect(contact.meta.toValue().title).to.equal('API Support');
+      expect(contact.href.toValue()).to.equal('support@example.com');
+    });
+
+    it('provides api category with contact URL and email', () => {
+      const info = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        contact: {
+          url: 'http://example.com/support/',
+          email: 'support@example.com',
+        },
+      });
+
+      const parseResult = parse(context, info);
+      expect(parseResult.length).to.equal(1);
+
+      const contactUrl = parseResult.api.links.get(0);
+      expect(contactUrl.relation.toValue()).to.equal('contact');
+      expect(contactUrl.href.toValue()).to.equal('http://example.com/support/');
+
+      const contactEmail = parseResult.api.links.get(1);
+      expect(contactEmail.relation.toValue()).to.equal('contact');
+      expect(contactEmail.href.toValue()).to.equal('support@example.com');
+    });
+
+    it('provides api category with contact name and URL', () => {
+      const info = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        contact: {
+          name: 'API Support',
+          url: 'http://example.com/support/',
+          email: 'support@example.com',
+        },
+      });
+
+      const parseResult = parse(context, info);
+      expect(parseResult.length).to.equal(1);
+
+      const contact = parseResult.api.links.get(0);
+      expect(contact.relation.toValue()).to.equal('contact');
+      expect(contact.meta.toValue().title).to.equal('API Support');
+      expect(contact.href.toValue()).to.equal('http://example.com/support/');
     });
   });
 });
