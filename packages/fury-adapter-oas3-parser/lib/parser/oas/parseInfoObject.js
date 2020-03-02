@@ -1,7 +1,6 @@
 const R = require('ramda');
 const { createError } = require('../../elements');
 const {
-  createUnsupportedMemberWarning,
   createInvalidMemberWarning,
 } = require('../annotations');
 const {
@@ -12,10 +11,10 @@ const parseString = require('../parseString');
 const parseCopy = require('../parseCopy');
 const pipeParseResult = require('../../pipeParseResult');
 const parseLicenseObject = require('./parseLicenseObject');
+const parseContactObject = require('./parseContactObject');
 
 const name = 'Info Object';
 const requiredKeys = ['title', 'version'];
-const unsupportedKeys = ['contact'];
 
 /**
  * Returns whether the given member element is unsupported
@@ -24,7 +23,6 @@ const unsupportedKeys = ['contact'];
  * @see unsupportedKeys
  * @private
  */
-const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
 /**
  * Parse the OpenAPI 'Info Object' (`#/info`)
@@ -52,7 +50,7 @@ function parseInfo(context, info) {
     [hasKey('version'), parseString(context, name, true)],
     [hasKey('description'), parseCopy(context, name, false)],
     [hasKey('license'), R.compose(parseLicenseObject(context), getValue)],
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [hasKey('contact'), R.compose(parseContactObject(context), getValue)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
@@ -80,6 +78,11 @@ function parseInfo(context, info) {
 
       if (info.get('license')) {
         api.links.push(info.get('license'));
+      }
+
+      if (info.get('contact')) {
+        const contactArray = info.get('contact');
+        contactArray.forEach(contact => api.links.push(contact));
       }
 
       return api;

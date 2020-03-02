@@ -31,7 +31,7 @@ Key:
 | title | ✓ |
 | description | ✓ |
 | termsOfService | ✓ |
-| contact | [✕](https://github.com/apiaryio/api-elements.js/issues/79) |
+| contact | ✓ |
 | license | ✓ |
 | version | ✓ |
 
