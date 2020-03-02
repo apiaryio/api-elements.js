@@ -366,6 +366,45 @@ class Parser {
           });
         }
 
+        if (this.swagger.info.contact) {
+          this.withPath('contact', () => {
+            const { Link } = this.namespace.elements;
+            const { name, url, email } = this.swagger.info.contact;
+
+            if (url) {
+              const link = new Link();
+              link.relation = 'contact';
+              link.href = url;
+
+              if (name) {
+                link.title = name.clone();
+              }
+
+              if (this.generateSourceMap) {
+                this.createSourceMap(link, this.path);
+              }
+
+              this.api.links.push(link);
+            }
+
+            if (email) {
+              const link = new Link();
+              link.relation = 'contact';
+              link.href = email;
+
+              if (!url && name) {
+                link.title = name.clone();
+              }
+
+              if (this.generateSourceMap) {
+                this.createSourceMap(link, this.path);
+              }
+
+              this.api.links.push(link);
+            }
+          });
+        }
+
         this.handleSwaggerVendorExtensions(this.api, this.swagger.info);
       });
     }

@@ -1,0 +1,66 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Sample Store App"
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "content": "API Support"
+                }
+              },
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "contact"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://www.example.com/support"
+                }
+              }
+            },
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "contact"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "support@example.com"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "version": {
+          "element": "string",
+          "content": "1.0"
+        }
+      }
+    }
+  ]
+}
