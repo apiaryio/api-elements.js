@@ -40,7 +40,7 @@ const parseContactObject = context => pipeParseResult(
       link.href = contactUrl;
 
       if (contactName) {
-        link.title = contactName;
+        link.title = contactName.clone();
       }
 
       links.push(link);
@@ -52,7 +52,7 @@ const parseContactObject = context => pipeParseResult(
       link.href = contactEmail;
 
       if (!contactUrl && contactName) {
-        link.title = contactName;
+        link.title = contactName.clone();
       }
 
       links.push(link);
