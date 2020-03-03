@@ -377,7 +377,7 @@ class Parser {
               link.href = url;
 
               if (name) {
-                link.title = name.clone();
+                link.title = name;
               }
 
               if (this.generateSourceMap) {
@@ -393,7 +393,7 @@ class Parser {
               link.href = email;
 
               if (!url && name) {
-                link.title = name.clone();
+                link.title = name;
               }
 
               if (this.generateSourceMap) {
