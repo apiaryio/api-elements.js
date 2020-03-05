@@ -15,6 +15,18 @@
 
   will add the link to the terms of service `http://example.com/terms/`
 
+- Adds support for `info.contact`.
+  For example the following document:
+
+  ```yaml
+  swagger: '2.0'
+  info:
+    url: http://www.example.com/support
+    email: support@example.com
+  ```
+
+  will add a link to the contact URL and a second link to the contact email
+
 ## 0.28.2 (2020-02-07)
 
 ### Bug Fixes
