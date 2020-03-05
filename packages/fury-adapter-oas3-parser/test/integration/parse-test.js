@@ -41,4 +41,11 @@ describe('#parse', () => {
     const file = path.join(__dirname, 'fixtures', 'auth-scheme-does-not-exist');
     return testParseFixture(file, true);
   });
+
+  describe('regression fixtures', () => {
+    it('can parse Dredd #1685', () => {
+      const file = path.join(__dirname, 'fixtures', 'regression', 'dredd-1685');
+      return testParseFixture(file);
+    });
+  });
 });

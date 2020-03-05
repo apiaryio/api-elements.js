@@ -8,6 +8,12 @@
 
 - Adds support for `contact` in 'Info Object'.
 
+### Bug Fixes
+
+- Prevents an exception being raised when using `freeze()` on the parse result
+  returned by the parser when the OpenAPI document uses a request header with
+  multiple request/response pairs.
+
 ## 0.10.1 (2020-01-30)
 
 ### Bug Fixes
