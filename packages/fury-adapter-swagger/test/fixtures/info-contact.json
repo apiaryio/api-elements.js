@@ -48,7 +48,7 @@
                 },
                 "href": {
                   "element": "string",
-                  "content": "support@example.com"
+                  "content": "mailto:support@example.com"
                 }
               }
             }

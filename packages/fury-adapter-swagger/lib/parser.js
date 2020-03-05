@@ -372,35 +372,39 @@ class Parser {
             const { name, url, email } = this.swagger.info.contact;
 
             if (url) {
-              const link = new Link();
-              link.relation = 'contact';
-              link.href = url;
+              this.withPath('url', () => {
+                const link = new Link();
+                link.relation = 'contact';
+                link.href = url;
 
-              if (name) {
-                link.title = name;
-              }
+                if (name) {
+                  link.title = name;
+                }
 
-              if (this.generateSourceMap) {
-                this.createSourceMap(link, this.path);
-              }
+                if (this.generateSourceMap) {
+                  this.createSourceMap(link.href, this.path);
+                }
 
-              this.api.links.push(link);
+                this.api.links.push(link);
+              });
             }
 
             if (email) {
-              const link = new Link();
-              link.relation = 'contact';
-              link.href = email;
+              this.withPath('email', () => {
+                const link = new Link();
+                link.relation = 'contact';
+                link.href = `mailto:${email}`;
 
-              if (!url && name) {
-                link.title = name;
-              }
+                if (!url && name) {
+                  link.title = name;
+                }
 
-              if (this.generateSourceMap) {
-                this.createSourceMap(link, this.path);
-              }
+                if (this.generateSourceMap) {
+                  this.createSourceMap(link.href, this.path);
+                }
 
-              this.api.links.push(link);
+                this.api.links.push(link);
+              });
             }
           });
         }

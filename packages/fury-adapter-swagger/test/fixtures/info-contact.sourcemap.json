@@ -60,30 +60,32 @@
                 },
                 "href": {
                   "element": "string",
-                  "content": "http://www.example.com/support"
-                },
-                "sourceMap": {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "sourceMap",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
                       "content": [
                         {
-                          "element": "array",
+                          "element": "sourceMap",
                           "content": [
                             {
-                              "element": "number",
-                              "content": 66
-                            },
-                            {
-                              "element": "number",
-                              "content": 101
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 101
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 35
+                                }
+                              ]
                             }
                           ]
                         }
                       ]
                     }
-                  ]
+                  },
+                  "content": "http://www.example.com/support"
                 }
               }
             },
@@ -96,30 +98,32 @@
                 },
                 "href": {
                   "element": "string",
-                  "content": "support@example.com"
-                },
-                "sourceMap": {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "sourceMap",
+                  "attributes": {
+                    "sourceMap": {
+                      "element": "array",
                       "content": [
                         {
-                          "element": "array",
+                          "element": "sourceMap",
                           "content": [
                             {
-                              "element": "number",
-                              "content": 66
-                            },
-                            {
-                              "element": "number",
-                              "content": 101
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "number",
+                                  "content": 141
+                                },
+                                {
+                                  "element": "number",
+                                  "content": 26
+                                }
+                              ]
                             }
                           ]
                         }
                       ]
                     }
-                  ]
+                  },
+                  "content": "mailto:support@example.com"
                 }
               }
             }
