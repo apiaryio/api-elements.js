@@ -241,7 +241,7 @@ describe('#parseInfoObject', () => {
       const contact = parseResult.api.links.get(0);
       expect(contact.relation.toValue()).to.equal('contact');
       expect(contact.meta.toValue().title).to.equal('API Support');
-      expect(contact.href.toValue()).to.equal('support@example.com');
+      expect(contact.href.toValue()).to.equal('mailto:support@example.com');
     });
 
     it('provides api category with contact URL and email', () => {
@@ -263,7 +263,7 @@ describe('#parseInfoObject', () => {
 
       const contactEmail = parseResult.api.links.get(1);
       expect(contactEmail.relation.toValue()).to.equal('contact');
-      expect(contactEmail.href.toValue()).to.equal('support@example.com');
+      expect(contactEmail.href.toValue()).to.equal('mailto:support@example.com');
     });
 
     it('provides api category with contact name and URL', () => {
