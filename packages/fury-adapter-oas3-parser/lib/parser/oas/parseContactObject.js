@@ -49,7 +49,7 @@ const parseContactObject = context => pipeParseResult(
     if (contactEmail) {
       const link = new context.namespace.elements.Link();
       link.relation = 'contact';
-      link.href = contactEmail;
+      link.href = `mailto:${contactEmail.toValue()}`;
 
       if (!contactUrl && contactName) {
         link.title = contactName.clone();
