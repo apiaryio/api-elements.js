@@ -2388,19 +2388,19 @@ dot-prop@^4.2.0:
   dependencies:
     is-obj "^1.0.0"
 
-drafter.js@^3.0.0-pre.2:
-  version "3.0.0-pre.2"
-  resolved "https://registry.yarnpkg.com/drafter.js/-/drafter.js-3.0.0-pre.2.tgz#8e380f16abf3dc1b9198c8708ccfb4f691c9b410"
-  integrity sha512-w3AwtCWvrhxs2oYAwA5zXTdRH0dvIrylUjfI4LOlhI4TOND1mss8f3B4YFd3SQOP19KbT5VaB7AcirWcXjB8ew==
+drafter.js@^3.0.2:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/drafter.js/-/drafter.js-3.1.0.tgz#f810f63be3464bbaf1cf689b3f2721ce9c5a6ba0"
+  integrity sha512-05E5x8oVPSq0WqYHv2VQ16uNnF9gP10FrFwZgBFimRm+72baLSuOUSH4C2R26phaVCnoZj62ohyE7CdpNthsaA==
 
-drafter@2.0.0-pre.1:
-  version "2.0.0-pre.1"
-  resolved "https://registry.yarnpkg.com/drafter/-/drafter-2.0.0-pre.1.tgz#757e213feb5295b345c92b64c7eb437c507c4e70"
-  integrity sha512-6iiQwW7vZy5WDtWtg77JnPYyUn02DoaOyApLk1FkQWmuG9zRO44skWIfvRqe6CSoj7lI8s1h8HIvdz4XsEsZlA==
+drafter@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/drafter/-/drafter-2.0.0.tgz#a3c66e242775732405179f568f493086038ce9d9"
+  integrity sha512-dguGHbBkCRaan26eyGb0eEaCYdO6wtA7I+EuUVzte5EU46j9x0W98GThUBxsKzUfbvPaS6TR8wcPymfZUoeplg==
   dependencies:
-    drafter.js "^3.0.0-pre.2"
+    drafter.js "^3.0.2"
   optionalDependencies:
-    protagonist "^2.0.0-pre.2"
+    protagonist "^2.0.2"
 
 drange@^1.0.2:
   version "1.1.1"
@@ -5351,10 +5351,10 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-protagonist@^2.0.0-pre.2:
-  version "2.0.0-pre.10"
-  resolved "https://registry.yarnpkg.com/protagonist/-/protagonist-2.0.0-pre.10.tgz#481321e269795b3a7b519f4370549772fb12107a"
-  integrity sha512-IlyoYv8ZvnsbcVtbluOP3rvHcnW2qZZ0F952S9A5xpdpwTDA1OTrHr9QInXpOAcH8V0GynGOGJ4RFRC3L9hq9A==
+protagonist@^2.0.2:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/protagonist/-/protagonist-2.1.0.tgz#15815dfd3574e466e92d5a1780dec29b54625e9b"
+  integrity sha512-NZMBG7S/5r44b9q8IDcYxAzvRCiOxd2VLZsCjuOfeZ6bNlc+U9WDoba9lHt6BJJRh77iaBb4WIRLKR55gcHgLw==
   dependencies:
     nan "^2.13.2"
 
