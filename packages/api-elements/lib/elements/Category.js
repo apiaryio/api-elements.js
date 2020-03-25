@@ -78,6 +78,15 @@ class Category extends ArrayElement {
     return this.children.filter(item => schemes.indexOf(item.element) !== -1);
   }
 
+  /**
+   * @name hosts
+   * @type ArraySlice
+   * @memberof Category.prototype
+   */
+  get hosts() {
+    return this.children.filter(item => item.element === 'hosts');
+  }
+
   metadata(value) {
     const metadata = this.attributes.get('metadata');
 
