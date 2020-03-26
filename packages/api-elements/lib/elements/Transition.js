@@ -129,16 +129,6 @@ class Transition extends ArrayElement {
   get transactions() {
     return this.children.filter(item => item.element === 'httpTransaction');
   }
-
-  /**
-   * @name host
-   * @type StringElement
-   * @memberof ParseResult.prototype
-   */
-  get host() {
-    return this.children
-      .filter(item => item.classes.contains('host'));
-  }
 }
 
 module.exports = Transition;

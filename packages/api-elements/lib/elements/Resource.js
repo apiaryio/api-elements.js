@@ -72,16 +72,6 @@ class Resource extends ArrayElement {
   get dataStructure() {
     return this.children.filter(item => item.element === 'dataStructure').first;
   }
-
-  /**
-   * @name host
-   * @type StringElement
-   * @memberof ParseResult.prototype
-   */
-  get host() {
-    return this.children
-      .filter(item => item.classes.contains('host'));
-  }
 }
 
 module.exports = Resource;
