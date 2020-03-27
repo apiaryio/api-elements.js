@@ -12,6 +12,7 @@ const {
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseOpenAPI = require('../openapi');
+const parseHostsObject = require('./parseHostsObject');
 const parseInfoObject = require('./parseInfoObject');
 const parsePathsObject = require('./parsePathsObject');
 const parseComponentsObject = require('./parseComponentsObject');
@@ -109,6 +110,7 @@ function parseOASObject(context, object) {
 
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(context)],
+    [hasKey('servers'), R.compose(parseHostsObject(context), getValue)],
     [hasKey('info'), R.compose(parseInfoObject(context), getValue)],
     [hasKey('components'), R.compose(parseComponentsObject(context), getValue)],
     [hasKey('paths'), R.compose(asArray, parsePathsObject(context), getValue)],
@@ -127,6 +129,7 @@ function parseOASObject(context, object) {
     parseObject(context, name, parseMember, requiredKeys, ['components']),
     (object) => {
       const api = object.get('info');
+      const hosts = object.get('server');
       const components = object.get('components');
       const security = object.get('security');
 
@@ -136,6 +139,14 @@ function parseOASObject(context, object) {
         if (!schemes.isEmpty) {
           api.push(new namespace.elements.Category(
             schemes.content, { classes: ['authSchemes'] }
+          ));
+        }
+      }
+
+      if (hosts) {
+        if (!hosts.isEmpty) {
+          api.push(new namespace.elements.Category(
+            hosts.content, { classes: ['hosts'] }
           ));
         }
       }
