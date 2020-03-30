@@ -16,24 +16,13 @@ Key:
 | Field Name | Support |
 |:--|:--|
 | openapi | ✓ |
-| info | | ✓ |
+| info | ✓ |
 | servers | | ✓ |
 | paths | [~](#paths-object) |
 | components | ~ |
 | security | ✓ |
 | tags | [✕](https://github.com/apiaryio/api-elements.js/issues/75) |
 | externalDocs | [✕](https://github.com/apiaryio/api-elements.js/issues/82) |
-
-## Info Object
-
-| Field Name | Support |
-|:--|:--|
-| title | ✓ |
-| description | ✓ |
-| termsOfService | ✓ |
-| contact | ✓ |
-| license | ✓ |
-| version | ✓ |
 
 ## Paths Object
 
