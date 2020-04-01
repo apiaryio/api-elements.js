@@ -47,6 +47,41 @@ describe('#parseOpenAPIObject', () => {
     expect(parseResult.api.get(0).href.toValue()).to.equal('/');
   });
 
+  it('can parse a document with servers array', () => {
+    const object = new namespace.elements.Object({
+      openapi: '3.0.0',
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
+      paths: {},
+      servers: [
+        {
+          url: 'https://user.server.com/1.0',
+        },
+        {
+          url: 'https://user.server.com/2.0',
+          description: 'The production API server',
+        },
+      ],
+    });
+
+    const parseResult = parse(context, object);
+
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult.api.title.toValue()).to.equal('My API');
+    expect(parseResult.api.length).to.equal(1);
+
+    const serversArray = parseResult.api.get(0);
+    expect(serversArray).to.be.instanceof(namespace.elements.Category);
+    expect(serversArray.classes.toValue()).to.deep.equal(['hosts']);
+    expect(serversArray.length).to.equal(2);
+
+    const firstServer = serversArray.get(0);
+    expect(firstServer).to.be.instanceof(namespace.elements.Resource);
+    expect(firstServer.attributes.content[0].toValue().value).to.equal('https://user.server.com/1.0');
+  });
+
   describe('with schema components', () => {
     it('can parse a document with schema components into data structures', () => {
       const object = new namespace.elements.Object({
