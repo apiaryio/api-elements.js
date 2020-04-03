@@ -144,11 +144,7 @@ function parseOASObject(context, object) {
       }
 
       if (hosts) {
-        if (!hosts.isEmpty) {
-          api.push(new namespace.elements.Category(
-            hosts.content, { classes: ['hosts'] }
-          ));
-        }
+        api.push(hosts);
       }
 
       const resources = object.get('paths');

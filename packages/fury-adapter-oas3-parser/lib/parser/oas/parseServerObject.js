@@ -16,8 +16,7 @@ const requiredKeys = ['url'];
 const parseMember = context => R.cond([
   [hasKey('description'), parseString(context, name, false)],
   [hasKey('url'), parseString(context, name, true)],
-  // [hasKey('variables'), R.compose(parseServerVariablesObject(context), getValue)], // NOT SUPPORTED YET
-  [hasKey('variables'), createUnsupportedMemberWarning(context.namespace, name)],
+  [hasKey('variables'), createUnsupportedMemberWarning(context.namespace, name)], // NOT SUPPORTED YET
   [isExtension, () => new context.namespace.elements.ParseResult()],
   [R.T, createInvalidMemberWarning(context.namespace, name)],
 ]);
@@ -25,7 +24,7 @@ const parseMember = context => R.cond([
 /**
  * Parse the OpenAPI 'Server Object' (`#/server`)
  * @see http://spec.openapis.org/oas/v3.0.3#server-object
- * @returns ParseResult<Link>
+ * @returns ParseResult<Resource>
  * @private
  */
 const parseServerObject = context => pipeParseResult(context.namespace,
@@ -37,11 +36,10 @@ const parseServerObject = context => pipeParseResult(context.namespace,
     resource.classes.push('host');
 
     if (object.hasKey('description')) {
-      const description = object.getValue('description');
-      resource.description = description;
+      resource.description = object.get('description');
     }
 
-    resource.href = object.getValue('url');
+    resource.href = object.get('url');
 
     return resource;
   });

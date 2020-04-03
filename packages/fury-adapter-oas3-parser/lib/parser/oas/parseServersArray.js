@@ -18,7 +18,11 @@ function parseServersArray(context, element) {
   const { namespace } = context;
 
   const parseServers = pipeParseResult(namespace,
-    parseArray(context, name, R.curry(parseServerObject)(context)));
+    parseArray(context, name, R.curry(parseServerObject)(context)),
+    array => new namespace.elements.Category(
+      array.content, { classes: ['hosts'] }
+    ));
+
   return parseServers(element);
 }
 

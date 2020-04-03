@@ -22,6 +22,26 @@ describe('#parseHostsObject', () => {
   });
 
   describe('#url', () => {
+    it('warns when server object does not contain URL', () => {
+      const server = new namespace.elements.Object({
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Server Object' is missing required property 'url'");
+    });
+
+    it('warns when URL is not a string', () => {
+      const server = new namespace.elements.Object({
+        url: 1234,
+        description: 'The production API server',
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult).to.contain.annotations;
+      expect(parseResult).to.contain.error("'Server Object' 'url' is not a string");
+    });
+
     it('parse server object with URL', () => {
       const server = new namespace.elements.Object({
         url: 'https://{username}.gigantic-server.com/{version}',
@@ -38,15 +58,6 @@ describe('#parseHostsObject', () => {
       const href = resource.href.toValue();
       expect(href).to.be.equal('https://{username}.gigantic-server.com/{version}');
     });
-
-    it('warns when server object does not contain URL', () => {
-      const server = new namespace.elements.Object({
-      });
-
-      const parseResult = parse(context)(server);
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.warning("'Server Object' is missing required property 'url'");
-    });
   });
 
   describe('#description', () => {
@@ -58,6 +69,7 @@ describe('#parseHostsObject', () => {
 
       const parseResult = parse(context)(server);
       expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult).to.contain.annotations;
       expect(parseResult).to.contain.warning("'Server Object' 'description' is not a string");
     });
 

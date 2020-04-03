@@ -72,14 +72,14 @@ describe('#parseOpenAPIObject', () => {
     expect(parseResult.api.title.toValue()).to.equal('My API');
     expect(parseResult.api.length).to.equal(1);
 
-    const serversArray = parseResult.api.get(0);
-    expect(serversArray).to.be.instanceof(namespace.elements.Category);
-    expect(serversArray.classes.toValue()).to.deep.equal(['hosts']);
-    expect(serversArray.length).to.equal(2);
+    const hostsCategory = parseResult.api.get(0);
+    expect(hostsCategory).to.be.instanceof(namespace.elements.Category);
+    expect(hostsCategory.classes.toValue()).to.deep.equal(['hosts']);
+    expect(hostsCategory.length).to.equal(2);
 
-    const firstServer = serversArray.get(0);
+    const firstServer = hostsCategory.get(0);
     expect(firstServer).to.be.instanceof(namespace.elements.Resource);
-    expect(firstServer.attributes.content[0].toValue().value).to.equal('https://user.server.com/1.0');
+    expect(firstServer.href.toValue()).to.equal('https://user.server.com/1.0');
   });
 
   describe('with schema components', () => {
@@ -217,22 +217,6 @@ describe('#parseOpenAPIObject', () => {
     const parseResult = parse(context, object);
 
     expect(parseResult).to.contain.warning("'OpenAPI Object' contains unsupported key 'externalDocs'");
-  });
-
-  it('provides warning for unsupported servers key', () => {
-    const object = new namespace.elements.Object({
-      openapi: '3.0.0',
-      info: {
-        title: 'My API',
-        version: '1.0.0',
-      },
-      paths: {},
-      servers: [],
-    });
-
-    const parseResult = parse(context, object);
-
-    expect(parseResult).to.contain.warning("'OpenAPI Object' contains unsupported key 'servers'");
   });
 
   it('provides warning for invalid keys', () => {

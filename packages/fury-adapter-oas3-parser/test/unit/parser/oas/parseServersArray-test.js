@@ -5,7 +5,7 @@ const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
-describe('Servers Array', () => {
+describe('#parseHostsObject', () => {
   let context;
 
   beforeEach(() => {
@@ -33,14 +33,15 @@ describe('Servers Array', () => {
 
     expect(parseResult.length).to.equal(1);
 
-    const servers = parseResult.get(0);
+    const hosts = parseResult.get(0);
+    const host = hosts.get(0);
 
-    expect(servers).to.be.instanceof(namespace.elements.Array);
-    expect(servers.length).to.equal(1);
-    expect(servers.get(0)).to.be.instanceof(namespace.elements.Resource);
-    expect(servers.get(0).meta.content[0].content.value.content[0].content).to.equal('host');
-    expect(servers.get(0).meta.content[1].content.value.content).to.equal('The production API server');
-    expect(servers.get(0).attributes.content[0].content.value.content).to.equal('https://user.server.com/1.0');
+    expect(hosts).to.be.instanceof(namespace.elements.Array);
+    expect(hosts.length).to.equal(1);
+    expect(host).to.be.instanceof(namespace.elements.Resource);
+    expect(host.classes.toValue()).to.deep.equal(['host']);
+    expect(host.description.toValue()).to.equal('The production API server');
+    expect(host.href.toValue()).to.equal('https://user.server.com/1.0');
   });
 
   it('parses correctly when there are multiple servers', () => {
@@ -58,17 +59,19 @@ describe('Servers Array', () => {
 
     expect(parseResult.length).to.equal(1);
 
-    const servers = parseResult.get(0);
+    const hosts = parseResult.get(0);
+    const firstHost = hosts.get(0);
+    const secondHost = hosts.get(1);
 
-    expect(servers).to.be.instanceof(namespace.elements.Array);
-    expect(servers.length).to.equal(2);
-    expect(servers.get(0)).to.be.instanceof(namespace.elements.Resource);
-    expect(servers.get(0).meta.content[0].content.value.content[0].content).to.equal('host');
-    expect(servers.get(0).attributes.content[0].content.value.content).to.equal('https://user.server.com/1.0');
+    expect(hosts).to.be.instanceof(namespace.elements.Array);
+    expect(hosts.length).to.equal(2);
+    expect(firstHost).to.be.instanceof(namespace.elements.Resource);
+    expect(firstHost.classes.toValue()).to.deep.equal(['host']);
+    expect(firstHost.href.toValue()).to.equal('https://user.server.com/1.0');
 
-    expect(servers.get(1)).to.be.instanceof(namespace.elements.Resource);
-    expect(servers.get(1).meta.content[0].content.value.content[0].content).to.equal('host');
-    expect(servers.get(1).meta.content[1].content.value.content).to.equal('The production API server');
-    expect(servers.get(1).attributes.content[0].content.value.content).to.equal('https://user.server.com/2.0');
+    expect(secondHost).to.be.instanceof(namespace.elements.Resource);
+    expect(secondHost.classes.toValue()).to.deep.equal(['host']);
+    expect(secondHost.description.toValue()).to.equal('The production API server');
+    expect(secondHost.href.toValue()).to.equal('https://user.server.com/2.0');
   });
 });
