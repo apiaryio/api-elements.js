@@ -5,7 +5,7 @@ const Context = require('../../../../lib/context');
 
 const { minim: namespace } = new Fury();
 
-describe('#parseHostsObject', () => {
+describe('#parseServersArray', () => {
   let context;
 
   beforeEach(() => {
