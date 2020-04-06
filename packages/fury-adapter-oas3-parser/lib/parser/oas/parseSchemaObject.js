@@ -6,12 +6,13 @@ const {
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const {
-  isArray, isNull, isString, hasKey, hasValue, getValue,
+  isString, hasKey, hasValue, getValue,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseArray = require('../parseArray');
 const parseString = require('../parseString');
 const parseBoolean = require('../parseBoolean');
+const parseEnum = require('../parseEnum');
 const parseReference = require('../parseReference');
 
 const name = 'Schema Object';
@@ -32,17 +33,6 @@ const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 // purposely in the order defined in the JSON Schema spec, integer is an OAS 3 specific addition and thus is at the end
 const types = ['boolean', 'object', 'array', 'number', 'string', 'integer'];
 const isValidType = R.anyPass(R.map(hasValue, types));
-
-const parseEnum = context => pipeParseResult(context.namespace,
-  R.unless(isArray, createWarning(context.namespace, `'${name}' 'enum' is not an array`)),
-  (element) => {
-    const enumElement = new context.namespace.elements.Enum();
-    enumElement.enumerations = element;
-    enumElement.enumerations.forEach(
-      R.unless(isNull, value => value.attributes.set('typeAttributes', ['fixed']))
-    );
-    return enumElement;
-  });
 
 function constructObjectStructure(namespace, schema) {
   const element = R.or(schema.get('properties'), new namespace.elements.Object());
@@ -152,7 +142,7 @@ function parseSchema(context) {
 
   const parseMember = R.cond([
     [hasKey('type'), parseType],
-    [hasKey('enum'), R.compose(parseEnum(context), getValue)],
+    [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
     [hasKey('properties'), R.compose(parseProperties, getValue)],
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
     [hasKey('required'), R.compose(parseRequired, getValue)],
