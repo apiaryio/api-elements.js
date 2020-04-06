@@ -88,4 +88,51 @@ describe('#parseServerObject', () => {
       expect(description).to.be.equal('The production API server');
     });
   });
+
+  describe('#variables', () => {
+    it('warns when variables is not an array', () => {
+      const server = new namespace.elements.Object({
+        url: 'https://{username}.gigantic-server.com/{version}',
+        variables: 1234,
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult).to.contain.annotations;
+      expect(parseResult).to.contain.warning("'Server Variables Array' is not an array");
+    });
+
+    it('parse server object with variables', () => {
+      const server = new namespace.elements.Object({
+        url: 'https://{username}.gigantic-server.com/{version}',
+        variables: [
+          {
+            default: 'https://user.server.com/1.0',
+          },
+          {
+            default: 'https://user.server.com/2.0',
+            description: 'The production API server',
+          },
+        ],
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult).to.not.contain.annotations;
+
+      const resource = parseResult.get(0);
+      expect(resource).to.be.instanceof(namespace.elements.Resource);
+
+      expect(parseResult.length).to.equal(1);
+
+      const hrefVariables = resource.get(0);
+      const secondHrefVariable = hrefVariables.content[1];
+
+      expect(hrefVariables).to.be.instanceof(namespace.elements.Array);
+      expect(hrefVariables.length).to.equal(2);
+
+      expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(secondHrefVariable.default).to.equal('https://user.server.com/2.0');
+      expect(secondHrefVariable.description.toValue()).to.equal('The production API server');
+    });
+  });
 });
