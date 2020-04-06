@@ -49,6 +49,19 @@ class Transition extends ArrayElement {
   }
 
   /**
+   * @name hosts
+   * @type ArraySlice
+   * @memberof Resource.prototype
+   */
+  get hosts() {
+    return this.attributes.get('hosts');
+  }
+
+  set hosts(value) {
+    this.attributes.set('hosts', value);
+  }
+
+  /**
    * @name href
    * @type StringElement
    * @memberof Transition.prototype

@@ -12,6 +12,7 @@ const {
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseOpenAPI = require('../openapi');
+const parseServersArray = require('./parseServersArray');
 const parseInfoObject = require('./parseInfoObject');
 const parsePathsObject = require('./parsePathsObject');
 const parseComponentsObject = require('./parseComponentsObject');
@@ -19,7 +20,7 @@ const parseSecurityRequirementsArray = require('./parseSecurityRequirementsArray
 
 const name = 'OpenAPI Object';
 const requiredKeys = ['openapi', 'info', 'paths'];
-const unsupportedKeys = ['servers', 'tags', 'externalDocs'];
+const unsupportedKeys = ['tags', 'externalDocs'];
 
 /**
  * Returns whether the given member element is unsupported
@@ -109,6 +110,7 @@ function parseOASObject(context, object) {
 
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(context)],
+    [hasKey('servers'), R.compose(parseServersArray(context), getValue)],
     [hasKey('info'), R.compose(parseInfoObject(context), getValue)],
     [hasKey('components'), R.compose(parseComponentsObject(context), getValue)],
     [hasKey('paths'), R.compose(asArray, parsePathsObject(context), getValue)],
@@ -127,6 +129,7 @@ function parseOASObject(context, object) {
     parseObject(context, name, parseMember, requiredKeys, ['components']),
     (object) => {
       const api = object.get('info');
+      const hosts = object.get('servers');
       const components = object.get('components');
       const security = object.get('security');
 
@@ -138,6 +141,10 @@ function parseOASObject(context, object) {
             schemes.content, { classes: ['authSchemes'] }
           ));
         }
+      }
+
+      if (hosts) {
+        api.push(hosts);
       }
 
       const resources = object.get('paths');
