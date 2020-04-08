@@ -118,18 +118,18 @@ describe('#parseServerObject', () => {
 
       const parseResult = parse(context)(server);
       expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(1);
 
       const resource = parseResult.get(0);
       expect(resource).to.be.instanceof(namespace.elements.Resource);
 
-      expect(parseResult.length).to.equal(1);
-
-      const hrefVariables = resource.get(0);
+      const { hrefVariables } = resource;
       const secondHrefVariable = hrefVariables.content[1];
 
       expect(hrefVariables).to.be.instanceof(namespace.elements.Array);
       expect(hrefVariables.length).to.equal(2);
 
+      expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
       expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(secondHrefVariable.default).to.equal('https://user.server.com/2.0');
       expect(secondHrefVariable.description.toValue()).to.equal('The production API server');
