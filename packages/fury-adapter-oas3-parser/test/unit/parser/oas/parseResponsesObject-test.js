@@ -82,6 +82,25 @@ describe('Responses Object', () => {
     expect(response.statusCode.toValue()).to.equal('200');
   });
 
+  it('can parse a default responses', () => {
+    const responses = new namespace.elements.Object({
+      default: {
+        description: 'dummy',
+      },
+    });
+
+    const parseResult = parse(context, responses);
+    expect(parseResult.length).to.equal(1);
+
+    const array = parseResult.get(0);
+    expect(array).to.be.instanceof(namespace.elements.Array);
+    expect(array.length).to.equal(1);
+
+    const response = array.get(0);
+    expect(response).to.be.instanceof(namespace.elements.HttpResponse);
+    expect(response.statusCode).to.be.undefined;
+  });
+
   it('can parse a number status code with warning', () => {
     const statusCode = new namespace.elements.Number(200);
     const responses = new namespace.elements.Object([
@@ -103,15 +122,6 @@ describe('Responses Object', () => {
     expect(parseResult).to.contain.warning(
       "'Responses Object' response status code must be a string and should be wrapped in quotes"
     );
-  });
-
-  it('parses default response as warning', () => {
-    const responses = new namespace.elements.Object({
-      default: {},
-    });
-
-    const parseResult = parse(context, responses);
-    expect(parseResult).to.contain.warning("'Responses Object' default responses are unsupported");
   });
 
   it('parses a status code range as warning', () => {

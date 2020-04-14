@@ -118,7 +118,7 @@ Key:
 
 | Field Name | Support |
 |:--|:--|
-| default | ✕ |
+| default | ✓ |
 | HTTP Status Code | [~](#response-object) |
 
 HTTP Status Code ranges are not currently supported.
