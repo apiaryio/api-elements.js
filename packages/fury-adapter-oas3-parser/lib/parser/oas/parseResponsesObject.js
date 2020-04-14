@@ -39,14 +39,7 @@ function parseResponsesObject(context, element) {
   const { namespace } = context;
 
   const createUnsupportedStatusCodeWarning = (member) => {
-    let message;
-
-    if (member.key.toValue() === 'default') {
-      message = `'${name}' default responses are unsupported`;
-    } else {
-      message = `'${name}' response status code ranges are unsupported`;
-    }
-
+    const message = `'${name}' response status code ranges are unsupported`;
     return createWarning(namespace, message, member.key);
   };
 
@@ -55,10 +48,12 @@ function parseResponsesObject(context, element) {
     createWarning(namespace, `'${name}' response status code must be a string and should be wrapped in quotes`, member.key),
   ]);
 
+  const isStatusCodeOrDefault = R.anyPass([isStatusCode, hasKey('default')]);
+
   // FIXME Add support for status code ranges
   // https://github.com/apiaryio/fury-adapter-oas3-parser/issues/64
   const validateStatusCode = pipeParseResult(namespace,
-    R.unless(isStatusCode, createUnsupportedStatusCodeWarning),
+    R.unless(isStatusCodeOrDefault, createUnsupportedStatusCodeWarning),
     R.unless(isKeyString, attachStatusCodeNotStringWarning));
 
   const parseResponse = pipeParseResult(namespace,
@@ -79,7 +74,11 @@ function parseResponsesObject(context, element) {
     parseObject(context, name, parseMember),
     object => object.content.map((member) => {
       const response = member.value;
-      response.statusCode = String(member.key.toValue());
+
+      if (isStatusCode(member)) {
+        response.statusCode = String(member.key.toValue());
+      }
+
       return response;
     }));
 
