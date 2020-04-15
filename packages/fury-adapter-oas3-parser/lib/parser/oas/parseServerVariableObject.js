@@ -28,11 +28,11 @@ const parseMember = context => R.cond([
  * @returns ParseResult<Member>
  * @private
  */
-const parseServerVariableObject = context => pipeParseResult(context.namespace,
+const parseServerVariableObject = (context, element) => pipeParseResult(context.namespace,
   R.unless(isObject, createWarning(context.namespace, `'${name}' is not an object`)),
   parseObject(context, name, parseMember(context), requiredKeys, [], true),
   (object) => {
-    const variable = new context.namespace.elements.Member();
+    const variable = new context.namespace.elements.String();
 
     variable.default = object.getValue('default');
 
@@ -45,6 +45,6 @@ const parseServerVariableObject = context => pipeParseResult(context.namespace,
     }
 
     return variable;
-  });
+  })(element);
 
-module.exports = parseServerVariableObject;
+module.exports = R.curry(parseServerVariableObject);

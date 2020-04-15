@@ -90,7 +90,7 @@ describe('#parseServerObject', () => {
   });
 
   describe('#variables', () => {
-    it('warns when variables is not an array', () => {
+    it('warns when variables is not an object', () => {
       const server = new namespace.elements.Object({
         url: 'https://{username}.gigantic-server.com/{version}',
         variables: 1234,
@@ -99,21 +99,21 @@ describe('#parseServerObject', () => {
       const parseResult = parse(context)(server);
       expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
       expect(parseResult).to.contain.annotations;
-      expect(parseResult).to.contain.warning("'Server Variables Array' is not an array");
+      expect(parseResult).to.contain.warning("'Server Object' 'variables' is not an object");
     });
 
     it('parse server object with variables', () => {
       const server = new namespace.elements.Object({
         url: 'https://{username}.gigantic-server.com/{version}',
-        variables: [
-          {
-            default: 'https://user.server.com/1.0',
+        variables: {
+          username: {
+            default: 'Mario',
+            description: 'API user name',
           },
-          {
-            default: 'https://user.server.com/2.0',
-            description: 'The production API server',
+          version: {
+            default: '1.0',
           },
-        ],
+        },
       });
 
       const parseResult = parse(context)(server);
@@ -124,15 +124,20 @@ describe('#parseServerObject', () => {
       expect(resource).to.be.instanceof(namespace.elements.Resource);
 
       const { hrefVariables } = resource;
-      const secondHrefVariable = hrefVariables.content[1];
-
-      expect(hrefVariables).to.be.instanceof(namespace.elements.Array);
-      expect(hrefVariables.length).to.equal(2);
+      const firstHrefVariable = hrefVariables.content.content[0];
+      const secondHrefVariable = hrefVariables.content.content[1];
 
       expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
+      expect(hrefVariables.length).to.equal(2);
+
+      expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(firstHrefVariable.key.toValue()).to.equal('username');
+      expect(firstHrefVariable.value.default).to.equal('Mario');
+      expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
+
       expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
-      expect(secondHrefVariable.default).to.equal('https://user.server.com/2.0');
-      expect(secondHrefVariable.description.toValue()).to.equal('The production API server');
+      expect(secondHrefVariable.key.toValue()).to.equal('version');
+      expect(secondHrefVariable.value.default).to.equal('1.0');
     });
   });
 });

@@ -4,12 +4,13 @@ const {
   createInvalidMemberWarning,
 } = require('../annotations');
 const {
-  isObject, hasKey, isExtension, getValue,
+  isObject, hasKey, isExtension,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
+const parseMap = require('../parseMap');
 const pipeParseResult = require('../../pipeParseResult');
-const parseServerVariablesArray = require('./parseServerVariablesArray');
+const parseServerVariableObject = require('./parseServerVariableObject');
 
 const name = 'Server Object';
 const requiredKeys = ['url'];
@@ -17,7 +18,7 @@ const requiredKeys = ['url'];
 const parseMember = context => R.cond([
   [hasKey('description'), parseString(context, name, false)],
   [hasKey('url'), parseString(context, name, true)],
-  [hasKey('variables'), R.compose(parseServerVariablesArray(context), getValue)],
+  [hasKey('variables'), parseMap(context, name, 'variables', parseServerVariableObject)],
   [isExtension, () => new context.namespace.elements.ParseResult()],
   [R.T, createInvalidMemberWarning(context.namespace, name)],
 ]);
@@ -43,7 +44,7 @@ const parseServerObject = context => pipeParseResult(context.namespace,
     resource.href = object.get('url');
 
     if (object.hasKey('variables')) {
-      resource.hrefVariables = object.get('variables');
+      resource.hrefVariables = new context.namespace.elements.HrefVariables(object.get('variables'));
     }
 
     return resource;

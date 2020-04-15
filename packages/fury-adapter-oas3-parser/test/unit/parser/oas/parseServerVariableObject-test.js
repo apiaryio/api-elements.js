@@ -34,7 +34,7 @@ describe('#parseServerVariableObject', () => {
     it('warns when default is not a string', () => {
       const serverVariable = new namespace.elements.Object({
         default: 1234,
-        description: 'User name',
+        description: 'API user name',
       });
 
       const parseResult = parse(context)(serverVariable);
@@ -50,7 +50,7 @@ describe('#parseServerVariableObject', () => {
       expect(parseResult).to.not.contain.annotations;
 
       const member = parseResult.get(0);
-      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member).to.be.instanceof(namespace.elements.String);
       expect(member.default).to.be.equal('Mario');
     });
   });
@@ -63,24 +63,24 @@ describe('#parseServerVariableObject', () => {
       });
 
       const parseResult = parse(context)(serverVariable);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.String);
       expect(parseResult).to.contain.warning("'Server Variable Object' 'description' is not a string");
     });
 
     it('parse server variable object with description', () => {
       const serverVariable = new namespace.elements.Object({
         default: 'Mario',
-        description: 'User name',
+        description: 'API user name',
       });
 
       const parseResult = parse(context)(serverVariable);
       expect(parseResult).to.not.contain.annotations;
 
       const member = parseResult.get(0);
-      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member).to.be.instanceof(namespace.elements.String);
 
       const description = member.description.toValue();
-      expect(description).to.be.equal('User name');
+      expect(description).to.be.equal('API user name');
     });
   });
 
@@ -107,7 +107,7 @@ describe('#parseServerVariableObject', () => {
       expect(parseResult).to.not.contain.annotations;
 
       const member = parseResult.get(0);
-      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member).to.be.instanceof(namespace.elements.String);
 
       const enumElement = member.enum;
       expect(enumElement).to.be.instanceof(namespace.elements.Enum);
