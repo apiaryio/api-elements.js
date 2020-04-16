@@ -100,22 +100,48 @@ describe('#parseServerVariableObject', () => {
     it('parse server variable object with enum', () => {
       const serverVariable = new namespace.elements.Object({
         default: 'Mario',
-        enum: [['Tony', 'Nina']],
+        enum: ['Tony', 'Nina'],
       });
 
       const parseResult = parse(context)(serverVariable);
       expect(parseResult).to.not.contain.annotations;
 
-      const member = parseResult.get(0);
-      expect(member).to.be.instanceof(namespace.elements.String);
-
-      const enumElement = member.enum;
+      const enumElement = parseResult.get(0);
       expect(enumElement).to.be.instanceof(namespace.elements.Enum);
-      expect(enumElement.enumerations.length).to.equal(1);
 
-      const enumeration = enumElement.enumerations.get(0);
-      expect(enumeration).to.be.instanceof(namespace.elements.Array);
-      expect(enumeration.toValue()).to.deep.equal(['Tony', 'Nina']);
+      const { enumerations } = enumElement;
+      expect(enumerations).to.be.instanceof(namespace.elements.Array);
+      expect(enumerations.length).to.equal(2);
+      expect(enumerations.toValue()).to.deep.equal(['Tony', 'Nina']);
+
+      const enumeration = enumerations.get(0);
+      expect(enumeration.toValue()).to.deep.equal('Tony');
+      expect(enumeration.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
+    });
+
+    it('parse server variable object with enum containing non-string', () => {
+      const serverVariable = new namespace.elements.Object({
+        default: 'Mario',
+        enum: ['Tony', 1, 'Nina', true],
+      });
+
+      const parseResult = parse(context)(serverVariable);
+      expect(parseResult).to.contain.annotations;
+
+      const { annotations } = parseResult;
+      expect(annotations.length).to.equal(2);
+      expect(annotations.get(0).toValue()).to.deep.equal("'Server Variable Object' 'enum' array value is not a string");
+
+      const enumElement = parseResult.get(0);
+      expect(enumElement).to.be.instanceof(namespace.elements.Enum);
+
+      const { enumerations } = enumElement;
+      expect(enumerations).to.be.instanceof(namespace.elements.Array);
+      expect(enumerations.length).to.equal(2);
+      expect(enumerations.toValue()).to.deep.equal(['Tony', 'Nina']);
+
+      const enumeration = enumerations.get(0);
+      expect(enumeration.toValue()).to.deep.equal('Tony');
       expect(enumeration.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     });
   });
