@@ -16,8 +16,8 @@ Key:
 | Field Name | Support |
 |:--|:--|
 | openapi | ✓ |
-| info | [~](#info-object) |
-| servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
+| info | | ✓ |
+| servers | | ✓ |
 | paths | [~](#paths-object) |
 | components | ~ |
 | security | ✓ |

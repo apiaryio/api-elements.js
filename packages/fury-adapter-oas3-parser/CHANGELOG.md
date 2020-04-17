@@ -6,6 +6,8 @@
 
 - Support for "default" response status codes.
 
+- Support for `Server Object` and `Server Variable Object`
+
 ## 0.10.2 (2020-03-16)
 
 ### Enhancements
