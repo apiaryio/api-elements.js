@@ -88,4 +88,56 @@ describe('#parseServerObject', () => {
       expect(description).to.be.equal('The production API server');
     });
   });
+
+  describe('#variables', () => {
+    it('warns when variables is not an object', () => {
+      const server = new namespace.elements.Object({
+        url: 'https://{username}.gigantic-server.com/{version}',
+        variables: 1234,
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult).to.contain.annotations;
+      expect(parseResult).to.contain.warning("'Server Object' 'variables' is not an object");
+    });
+
+    it('parse server object with variables', () => {
+      const server = new namespace.elements.Object({
+        url: 'https://{username}.gigantic-server.com/{version}',
+        variables: {
+          username: {
+            default: 'Mario',
+            description: 'API user name',
+          },
+          version: {
+            default: '1.0',
+          },
+        },
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult).to.not.contain.annotations;
+      expect(parseResult.length).to.equal(1);
+
+      const resource = parseResult.get(0);
+      expect(resource).to.be.instanceof(namespace.elements.Resource);
+
+      const { hrefVariables } = resource;
+      const firstHrefVariable = hrefVariables.content.content[0];
+      const secondHrefVariable = hrefVariables.content.content[1];
+
+      expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
+      expect(hrefVariables.length).to.equal(2);
+
+      expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(firstHrefVariable.key.toValue()).to.equal('username');
+      expect(firstHrefVariable.value.default).to.equal('Mario');
+      expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
+
+      expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(secondHrefVariable.key.toValue()).to.equal('version');
+      expect(secondHrefVariable.value.default).to.equal('1.0');
+    });
+  });
 });
