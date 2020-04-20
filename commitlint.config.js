@@ -11,6 +11,7 @@ module.exports = {
       'apiaryb',
       'remote',
       'form',
+      'json',
       'deps',
       'deps-dev',
     ]],
