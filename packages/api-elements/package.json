@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "minim": "^0.23.5",
-    "ramda": "^0.26.1"
+    "ramda": "^0.27.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
