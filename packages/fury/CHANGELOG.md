@@ -1,5 +1,11 @@
 # Fury Changelog
 
+## 3.0.0-beta.14 (2020-04-20)
+
+This release contains an updated api-elements models. See [api-elements
+0.2.4](https://github.com/apiaryio/api-elements.js/releases/tag/api-elements%400.2.4)
+for further details.
+
 ## 3.0.0-beta.13 (2019-12-06)
 
 This release contains internal changes needed for included Fury adapters.

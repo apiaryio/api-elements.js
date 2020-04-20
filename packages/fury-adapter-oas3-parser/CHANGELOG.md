@@ -1,8 +1,10 @@
 # Fury OAS3 Parser Changelog
 
-## Master
+## 0.11.0 (2020-04-20)
 
 ### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 14](https://github.com/apiaryio/api-elements.js/releases/tag/fury@3.0.0-beta.14).
 
 - Support for "default" response status codes.
 

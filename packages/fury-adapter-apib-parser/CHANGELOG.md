@@ -1,5 +1,11 @@
 # Fury API Blueprint Parser Changelog
 
+## 0.18.0 (2020-04-20)
+
+### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 14](https://github.com/apiaryio/api-elements.js/releases/tag/fury@3.0.0-beta.14).
+
 ## 0.17.0 (2019-12-06)
 
 ### Enhancements

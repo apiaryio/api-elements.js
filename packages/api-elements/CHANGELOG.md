@@ -1,5 +1,13 @@
 # API Elements (JavaScript) CHANGELOG
 
+## 0.2.4 (2020-04-20)
+
+### Enhancements
+
+- Added `hosts` properties on `Resource` and `Transition` to access the "hosts"
+  resources stored in the element attributes. `Cateogory` elements contain
+  `hosts` so that you can access hosts categories from the "api" category.
+
 ## 0.2.3 (2019-12-05)
 
 Internal changes.

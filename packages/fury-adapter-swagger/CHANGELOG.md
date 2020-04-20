@@ -1,8 +1,10 @@
 # Fury Swagger Parser Changelog
 
-## Master
+## 0.29.0 (2020-04-20)
 
 ### Enhancements
+
+- Compatibility with [Fury 3.0.0 Beta 14](https://github.com/apiaryio/api-elements.js/releases/tag/fury@3.0.0-beta.14).
 
 - The parser can now be configured to disable generation of example message
   bodies and message body schemas by providing an adapter option
