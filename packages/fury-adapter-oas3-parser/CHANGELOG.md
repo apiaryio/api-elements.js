@@ -1,5 +1,11 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Enhancements
+
+- Support for 'oneOf' in 'Schema Object'.
+
 ## 0.11.0 (2020-04-20)
 
 ### Enhancements

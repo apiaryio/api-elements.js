@@ -804,4 +804,47 @@ describe('Schema Object', () => {
       "'Schema Object' 'default' does not match expected type 'number'",
     ]);
   });
+
+  describe('#oneOf', () => {
+    it('warns when oneOf is not an array', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: 1,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'oneOf' is not an array"
+      );
+    });
+
+    it('warns when oneOf array item is not object', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: [1],
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' is not an object"
+      );
+    });
+
+    it('parses a oneOf into an enum', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: [
+          { type: 'string' },
+          { type: 'number' },
+        ],
+      });
+      const parseResult = parse(context, schema);
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+    });
+  });
 });

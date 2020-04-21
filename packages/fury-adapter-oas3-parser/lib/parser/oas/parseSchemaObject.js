@@ -23,7 +23,7 @@ const unsupportedKeys = [
   'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'required',
 
   // JSON Schema + OAS 3 specific rules
-  'allOf', 'oneOf', 'anyOf', 'not', 'additionalProperties', 'format',
+  'allOf', 'anyOf', 'not', 'additionalProperties', 'format',
 
   // OAS 3 specific
   'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs', 'deprecated',
@@ -140,9 +140,18 @@ function parseSchema(context) {
     createWarning(namespace, `'${name}' 'required' array value is not a string`));
   const parseRequired = parseArray(context, `${name}' 'required`, parseRequiredString);
 
+  const parseOneOf = pipeParseResult(namespace, getValue,
+    parseArray(context, `${name}' 'oneOf`, parseSubSchema),
+    (oneOf) => {
+      const enumeration = new namespace.elements.Enum();
+      enumeration.enumerations = oneOf;
+      return enumeration;
+    });
+
   const parseMember = R.cond([
     [hasKey('type'), parseType],
     [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
+    [hasKey('oneOf'), parseOneOf],
     [hasKey('properties'), R.compose(parseProperties, getValue)],
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
     [hasKey('required'), R.compose(parseRequired, getValue)],
@@ -163,10 +172,13 @@ function parseSchema(context) {
     (schema) => {
       let element;
 
+      const oneOf = schema.get('oneOf');
       const enumerations = schema.get('enum');
       const type = schema.getValue('type');
 
-      if (enumerations) {
+      if (oneOf) {
+        element = oneOf;
+      } else if (enumerations) {
         element = enumerations;
       } else if (type === 'object') {
         element = constructObjectStructure(namespace, schema);
