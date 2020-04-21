@@ -21,7 +21,10 @@
   },
   "dependencies": {
     "deckardcain": "^1.0.0",
-    "drafter": "2.0.0"
+    "drafter.js": "^3.2.0"
+  },
+  "optionalDependencies": {
+    "protagonist": "^2.1.0"
   },
   "peerDependencies": {
     "fury": "3.0.0-beta.14"

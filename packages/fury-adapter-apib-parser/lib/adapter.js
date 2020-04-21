@@ -1,7 +1,16 @@
 // API Blueprint parser for Fury.js
 
 const deckardcain = require('deckardcain');
-const drafter = require('drafter');
+
+let drafter;
+
+try {
+  // eslint-disable-next-line import/no-unresolved, global-require
+  drafter = require('protagonist');
+} catch (error) {
+  // eslint-disable-next-line global-require
+  drafter = require('drafter.js');
+}
 
 const name = 'api-blueprint';
 const mediaTypes = [
