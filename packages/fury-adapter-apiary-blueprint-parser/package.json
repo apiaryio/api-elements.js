@@ -33,7 +33,7 @@
     "eslint": "^5.16.0",
     "fury": "3.0.0-beta.14",
     "glob": "^7.1.2",
-    "mocha": "^5.2.0",
+    "mocha": "^7.1.1",
     "pegjs": "git://github.com/dmajda/pegjs.git#02af83f9b416778878e52e2cbbc22d96e312164e"
   },
   "engines": {
