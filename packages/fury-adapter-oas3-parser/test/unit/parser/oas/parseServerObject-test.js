@@ -122,7 +122,7 @@ describe('#parseServerObject', () => {
       const parseResult = parse(context)(server);
       expect(parseResult.length).to.equal(2);
       expect(parseResult).to.contain.annotations;
-      expect(parseResult).to.contain.warning("Server variable 'location' is not present in the URL and will be discarted");
+      expect(parseResult).to.contain.warning("Server variable 'location' is not present in the URL and will be ignored");
 
       const resource = parseResult.get(0);
       expect(resource).to.be.instanceof(namespace.elements.Resource);

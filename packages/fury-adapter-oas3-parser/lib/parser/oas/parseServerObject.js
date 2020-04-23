@@ -15,21 +15,20 @@ const parseServerVariableObject = require('./parseServerVariableObject');
 const name = 'Server Object';
 const requiredKeys = ['url'];
 
-const validateVariableInURL = (context, object) => {
+const validateVariablesInURL = (context, object) => {
   const url = object.getValue('url');
   const variables = object.get('variables');
   const parseResult = new context.namespace.elements.ParseResult();
 
-  const variablesKeys = variables.content.map(variable => variable.key.toValue());
   const urlVariables = url
     .match(/{(.*?)}/g)
     .map(x => x.replace(/[{}]/g, ''));
 
-  // if you define a variable that is not in URL it warns (and the variable is discarded).
-  variablesKeys.forEach((key) => {
-    if (urlVariables.indexOf(key) === -1) {
+  // if you define a variable that is not in URL it warns (and the variable is ignored).
+  variables.keys().forEach((key) => {
+    if (!urlVariables.includes(key)) {
       parseResult.push(createWarning(context.namespace,
-        `Server variable '${key}' is not present in the URL and will be discarted`, variables));
+        `Server variable '${key}' is not present in the URL and will be ignored`, variables));
 
       variables.remove(key);
     }
@@ -39,7 +38,7 @@ const validateVariableInURL = (context, object) => {
   urlVariables.forEach((key) => {
     if (!variables.hasKey(key)) {
       parseResult.push(createWarning(context.namespace,
-        `URL variable '${key}' is missing within the server variables`, variables));
+        `URL variable '${key}' is missing within the server variables`, object.get('url')));
     }
   });
 
@@ -66,7 +65,7 @@ const hasVariables = object => object.hasKey('variables');
 const parseServerObject = context => pipeParseResult(context.namespace,
   R.unless(isObject, createWarning(context.namespace, `'${name}' is not an object`)),
   parseObject(context, name, parseMember(context), requiredKeys, [], true),
-  R.when(hasVariables, R.curry(validateVariableInURL)(context)),
+  R.when(hasVariables, R.curry(validateVariablesInURL)(context)),
   (object) => {
     const resource = new context.namespace.elements.Resource();
 
