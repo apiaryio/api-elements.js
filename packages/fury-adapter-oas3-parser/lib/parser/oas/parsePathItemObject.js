@@ -132,7 +132,6 @@ function parsePathItemObject(context, member) {
     [isHttpMethodKey, parseOperationObject(context, member.key)],
 
     // FIXME Parse $ref
-    // FIXME Parse servers
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -152,10 +151,7 @@ function parsePathItemObject(context, member) {
       resource.href = hrefFromParameters(member.key, parameters);
       resource.hrefVariables = hrefVariablesFromParameters(namespace, parameters);
 
-      const hosts = pathItem.get('servers');
-      if (hosts) {
-        resource.push(hosts);
-      }
+      resource.hosts = pathItem.get('servers');
 
       const summary = pathItem.get('summary');
       if (summary) {

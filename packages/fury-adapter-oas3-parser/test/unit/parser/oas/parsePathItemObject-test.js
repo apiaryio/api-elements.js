@@ -445,7 +445,7 @@ describe('Path Item Object', () => {
       expect(parseResult.length).to.equal(1);
       expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
 
-      const hostsCategory = parseResult.get(0).get(0);
+      const hostsCategory = parseResult.get(0).hosts;
       expect(hostsCategory).to.be.instanceof(namespace.elements.Category);
       expect(hostsCategory.classes.toValue()).to.deep.equal(['hosts']);
       expect(hostsCategory.length).to.equal(2);
