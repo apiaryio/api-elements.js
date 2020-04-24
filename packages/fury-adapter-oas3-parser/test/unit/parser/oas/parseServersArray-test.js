@@ -7,6 +7,7 @@ const { minim: namespace } = new Fury();
 
 describe('#parseServersArray', () => {
   let context;
+  const name = 'parent-name';
 
   beforeEach(() => {
     context = new Context(namespace);
@@ -15,7 +16,6 @@ describe('#parseServersArray', () => {
   it('warns when it is not an array', () => {
     const servers = new namespace.elements.Object();
 
-    const name = 'parent-name';
     const parseResult = parse(context, name, servers);
 
     expect(parseResult.length).to.equal(1);
@@ -30,7 +30,6 @@ describe('#parseServersArray', () => {
       },
     ]);
 
-    const name = 'parent-name';
     const parseResult = parse(context, name, servers);
 
     expect(parseResult.length).to.equal(1);
@@ -57,7 +56,6 @@ describe('#parseServersArray', () => {
       },
     ]);
 
-    const name = 'parent-name';
     const parseResult = parse(context, name, servers);
 
     expect(parseResult.length).to.equal(1);
