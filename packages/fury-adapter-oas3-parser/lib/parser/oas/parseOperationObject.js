@@ -13,6 +13,7 @@ const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseResponsesObject = require('./parseResponsesObject');
 const parseParameterObjects = require('./parseParameterObjects');
+const parseServersArray = require('./parseServersArray');
 const parseRequestBodyObject = require('./parseRequestBodyObject');
 const parseSecurityRequirementsArray = require('./parseSecurityRequirementsArray');
 const parseReference = require('../parseReference');
@@ -110,6 +111,7 @@ function parseOperationObject(context, path, member) {
     [hasKey('responses'), R.compose(parseResponsesObject(context), getValue)],
     [hasKey('requestBody'), R.compose(parseRequestBodyObjectOrRef(context), getValue)],
     [hasKey('parameters'), R.compose(parseParameterObjects(context, name), getValue)],
+    [hasKey('servers'), R.compose(parseServersArray(context, name), getValue)],
     [hasKey('security'), R.compose(parseSecurityRequirementsArray(context), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
@@ -162,6 +164,8 @@ function parseOperationObject(context, path, member) {
           });
         }
       }
+
+      transition.hosts = operation.get('servers');
 
       const security = operation.get('security');
       if (security) {
