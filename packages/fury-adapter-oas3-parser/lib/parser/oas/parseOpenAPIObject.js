@@ -110,7 +110,7 @@ function parseOASObject(context, object) {
 
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(context)],
-    [hasKey('servers'), R.compose(parseServersArray(context), getValue)],
+    [hasKey('servers'), R.compose(parseServersArray(context, name), getValue)],
     [hasKey('info'), R.compose(parseInfoObject(context), getValue)],
     [hasKey('components'), R.compose(parseComponentsObject(context), getValue)],
     [hasKey('paths'), R.compose(asArray, parsePathsObject(context), getValue)],

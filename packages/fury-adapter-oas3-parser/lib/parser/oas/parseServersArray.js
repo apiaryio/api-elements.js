@@ -3,8 +3,6 @@ const pipeParseResult = require('../../pipeParseResult');
 const parseArray = require('../parseArray');
 const parseServerObject = require('./parseServerObject');
 
-const name = 'Servers Array';
-
 /**
  * Parse Servers Array
  *
@@ -14,11 +12,11 @@ const name = 'Servers Array';
  *
  * @private
  */
-function parseServersArray(context, element) {
+function parseServersArray(context, name, element) {
   const { namespace } = context;
 
   const parseServers = pipeParseResult(namespace,
-    parseArray(context, name, R.curry(parseServerObject)(context)),
+    parseArray(context, `${name}' 'servers`, R.curry(parseServerObject)(context)),
     array => new namespace.elements.Category(
       array.content, { classes: ['hosts'] }
     ));
