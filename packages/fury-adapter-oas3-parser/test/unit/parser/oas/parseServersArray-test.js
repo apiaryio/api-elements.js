@@ -15,21 +15,23 @@ describe('#parseServersArray', () => {
   it('warns when it is not an array', () => {
     const servers = new namespace.elements.Object();
 
-    const parseResult = parse(context, servers);
+    const name = 'parent-name';
+    const parseResult = parse(context, name, servers);
 
     expect(parseResult.length).to.equal(1);
-    expect(parseResult).to.contain.warning("'Servers Array' is not an array");
+    expect(parseResult).to.contain.warning("'parent-name' 'servers' is not an array");
   });
 
   it('parses correctly when there is a single server', () => {
-    const server = new namespace.elements.Array([
+    const servers = new namespace.elements.Array([
       {
         url: 'https://user.server.com/1.0',
         description: 'The production API server',
       },
     ]);
 
-    const parseResult = parse(context, server);
+    const name = 'parent-name';
+    const parseResult = parse(context, name, servers);
 
     expect(parseResult.length).to.equal(1);
 
@@ -45,7 +47,7 @@ describe('#parseServersArray', () => {
   });
 
   it('parses correctly when there are multiple servers', () => {
-    const server = new namespace.elements.Array([
+    const servers = new namespace.elements.Array([
       {
         url: 'https://user.server.com/1.0',
       },
@@ -55,7 +57,8 @@ describe('#parseServersArray', () => {
       },
     ]);
 
-    const parseResult = parse(context, server);
+    const name = 'parent-name';
+    const parseResult = parse(context, name, servers);
 
     expect(parseResult.length).to.equal(1);
 
