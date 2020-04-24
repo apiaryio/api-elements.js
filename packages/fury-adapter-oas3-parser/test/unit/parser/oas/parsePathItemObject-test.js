@@ -68,20 +68,6 @@ describe('Path Item Object', () => {
       expect(parseResult).to.contain.warning("'Path Item Object' contains unsupported key '$ref'");
     });
 
-    it('warns for a servers', () => {
-      const path = new namespace.elements.Member('/', {
-        servers: '',
-      });
-
-      const parseResult = parse(context, path);
-
-      expect(parseResult.length).to.equal(2);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
-      expect(parseResult.get(0).href.toValue()).to.equal('/');
-
-      expect(parseResult).to.contain.warning("'Path Item Object' contains unsupported key 'servers'");
-    });
-
     it('does not provide warning for Info Object extensions', () => {
       const path = new namespace.elements.Member('/', {
         'x-extension': '',
@@ -417,6 +403,76 @@ describe('Path Item Object', () => {
           },
         ]);
       });
+    });
+  });
+
+  describe('#servers', () => {
+    it('warns when servers is not an array', () => {
+      const path = new namespace.elements.Member('/', {
+        servers: {},
+      });
+
+      const parseResult = parse(context, path);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+      expect(parseResult.get(0).href.toValue()).to.equal('/');
+
+      expect(parseResult).to.contain.warning("'Path Item Object' 'servers' is not an array");
+    });
+
+    it('exposes servers as an array in the resource', () => {
+      const path = new namespace.elements.Member('/', {
+        servers: [
+          {
+            url: 'https://{username}.server.com/1.0',
+            variables: {
+              username: {
+                default: 'Mario',
+                enum: ['Tony', 'Nina'],
+              },
+            },
+          },
+          {
+            url: 'https://user.server.com/2.0',
+            description: 'The production API server',
+          },
+        ],
+      });
+
+      const parseResult = parse(context, path);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+
+      const hostsCategory = parseResult.get(0).get(0);
+      expect(hostsCategory).to.be.instanceof(namespace.elements.Category);
+      expect(hostsCategory.classes.toValue()).to.deep.equal(['hosts']);
+      expect(hostsCategory.length).to.equal(2);
+
+      const firstHost = hostsCategory.get(0);
+      expect(firstHost).to.be.instanceof(namespace.elements.Resource);
+      expect(firstHost.href.toValue()).to.equal('https://{username}.server.com/1.0');
+
+      const { hrefVariables } = firstHost;
+      expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
+      expect(hrefVariables.length).to.equal(1);
+
+      const hrefVariable = hrefVariables.content.content[0];
+      expect(hrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(hrefVariable.key.toValue()).to.equal('username');
+      expect(hrefVariable.value.default).to.equal('Mario');
+
+      const { enumerations } = hrefVariable.value;
+      expect(enumerations).to.be.instanceof(namespace.elements.Array);
+      expect(enumerations.length).to.equal(2);
+      expect(enumerations.toValue()).to.deep.equal(['Tony', 'Nina']);
+
+      const secondHost = hostsCategory.get(1);
+      expect(secondHost).to.be.instanceof(namespace.elements.Resource);
+      expect(secondHost.classes.toValue()).to.deep.equal(['host']);
+      expect(secondHost.description.toValue()).to.equal('The production API server');
+      expect(secondHost.href.toValue()).to.equal('https://user.server.com/2.0');
     });
   });
 });
