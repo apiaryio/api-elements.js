@@ -9,12 +9,13 @@ const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseCopy = require('../parseCopy');
 const parseParameterObjects = require('./parseParameterObjects');
+const parseServersArray = require('./parseServersArray');
 const parseOperationObject = require('./parseOperationObject');
 const pipeParseResult = require('../../pipeParseResult');
 
 const name = 'Path Item Object';
 const httpMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
-const unsupportedKeys = ['$ref', 'servers'];
+const unsupportedKeys = ['$ref'];
 
 const isHttpMethodKey = R.anyPass(R.map(hasKey, httpMethods));
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
@@ -127,6 +128,7 @@ function parsePathItemObject(context, member) {
     [hasKey('summary'), parseString(context, name, false)],
     [hasKey('description'), parseCopy(context, name, false)],
     [hasKey('parameters'), R.curry(parseParameters)(context, member.key)],
+    [hasKey('servers'), R.compose(parseServersArray(context, name), getValue)],
     [isHttpMethodKey, parseOperationObject(context, member.key)],
 
     // FIXME Parse $ref
@@ -149,6 +151,11 @@ function parsePathItemObject(context, member) {
       const parameters = pathItem.get('parameters');
       resource.href = hrefFromParameters(member.key, parameters);
       resource.hrefVariables = hrefVariablesFromParameters(namespace, parameters);
+
+      const hosts = pathItem.get('servers');
+      if (hosts) {
+        resource.push(hosts);
+      }
 
       const summary = pathItem.get('summary');
       if (summary) {
