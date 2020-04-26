@@ -29,7 +29,11 @@ function parseParameterObjects(context, name, array) {
 
   // Convert an array of parameters into the correct types
   const convertParameters = R.cond([
-    [isPathOrQuery, member => new namespace.elements.HrefVariables(member.value.clone().content)],
+    [isPathOrQuery, member => new namespace.elements.HrefVariables(member.value.content.map((element) => {
+      const member = element.clone();
+      member.explode = element.explode;
+      return member;
+    }))],
     // FIXME when headers and cookies are supported these should be converted
     [R.T, member => member.clone()],
   ]);

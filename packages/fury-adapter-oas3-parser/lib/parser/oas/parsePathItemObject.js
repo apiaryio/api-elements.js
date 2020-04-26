@@ -108,7 +108,15 @@ function hrefFromParameters(path, parameters) {
   const href = path.clone();
 
   if (parameters && parameters.get('query')) {
-    const queryString = parameters.get('query').keys().join(',');
+    const queryString = parameters.get('query')
+      .map((value, key, member) => {
+        if (member.explode) {
+          return `${key.toValue()}*`;
+        }
+
+        return key.toValue();
+      })
+      .join(',');
     href.content += `{?${queryString}}`;
   }
 

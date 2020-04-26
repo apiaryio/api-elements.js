@@ -122,7 +122,7 @@ Key:
 | Field Name | Support |
 |:--|:--|
 | style | ✕ |
-| explode | ✕ |
+| explode | ~ |
 | allowReserved | ✕ |
 | schema | ✕ |
 | example | ✕ |

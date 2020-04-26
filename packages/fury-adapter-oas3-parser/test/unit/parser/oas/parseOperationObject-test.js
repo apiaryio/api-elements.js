@@ -322,6 +322,27 @@ describe('Operation Object', () => {
         expect(transition.href.toValue()).to.equal('/{?categories}');
       });
 
+      it('exposes query parameter in href with explode', () => {
+        const operation = new namespace.elements.Member('get', {
+          parameters: [
+            {
+              name: 'categories',
+              in: 'query',
+              explode: true,
+            },
+          ],
+          responses: {},
+        });
+
+        const parseResult = parse(context, path, operation);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Transition);
+
+        const transition = parseResult.get(0);
+        expect(transition.href.toValue()).to.equal('/{?categories*}');
+      });
+
       it('exposes multiple query parameter in href', () => {
         const operation = new namespace.elements.Member('get', {
           parameters: [
