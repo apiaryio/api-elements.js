@@ -75,7 +75,14 @@ function hrefVariablesFromParameters(namespace, parameters) {
 
 function hrefFromParameters(path, queryParameters) {
   const href = path.clone();
-  const queryString = queryParameters.keys().join(',');
+  const keys = queryParameters.map((value, key, member) => {
+    if (member.explode) {
+      return `${key.toValue()}*`;
+    }
+
+    return key.toValue();
+  });
+  const queryString = keys.join(',');
   href.content += `{?${queryString}}`;
   return href;
 }

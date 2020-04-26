@@ -226,6 +226,26 @@ describe('Path Item Object', () => {
         expect(resource.href.toValue()).to.equal('/{?categories}');
       });
 
+      it('exposes query parameter in href with explode', () => {
+        const path = new namespace.elements.Member('/', {
+          parameters: [
+            {
+              name: 'categories',
+              in: 'query',
+              explode: true,
+            },
+          ],
+        });
+
+        const parseResult = parse(context, path);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Resource);
+
+        const resource = parseResult.get(0);
+        expect(resource.href.toValue()).to.equal('/{?categories*}');
+      });
+
       it('exposes multiple query parameter in href', () => {
         const path = new namespace.elements.Member('/', {
           parameters: [

@@ -2,7 +2,12 @@
 
 ## Master
 
+### Enhancements
+
 - Support for `servers` in `Path Item Object` and `Operation Object`
+
+- 'Parameter Object' 'explode' style is partially supported, it can be used
+  with query parameters.
 
 ## 0.11.0 (2020-04-20)
 

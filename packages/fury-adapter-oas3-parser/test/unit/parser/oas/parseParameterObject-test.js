@@ -317,6 +317,45 @@ describe('Parameter Object', () => {
     });
   });
 
+  describe('#explode', () => {
+    it('provides a warning when explode is not a boolean', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        explode: 1,
+      });
+
+      const parseResult = parse(context, parameter);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Parameter Object' 'explode' is not a boolean");
+    });
+
+    it('provides an unsupported warning when explode is used in header parameter', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'header',
+        explode: true,
+      });
+
+      const parseResult = parse(context, parameter);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Parameter Object' 'explode' is unsupported in header");
+    });
+
+    it('provides an unsupported warning when explode is used in path parameter', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'path',
+        required: true,
+        explode: true,
+      });
+
+      const parseResult = parse(context, parameter);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Parameter Object' 'explode' is unsupported in path");
+    });
+  });
+
   describe('#required', () => {
     it('create typeAttribute required', () => {
       const parameter = new namespace.elements.Object({
@@ -465,18 +504,6 @@ describe('Parameter Object', () => {
       const parseResult = parse(context, parameter);
 
       expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'style'");
-    });
-
-    it('provides warning for unsupported explode property', () => {
-      const parameter = new namespace.elements.Object({
-        name: 'example',
-        in: 'query',
-        explode: true,
-      });
-
-      const parseResult = parse(context, parameter);
-
-      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'explode'");
     });
 
     it('provides warning for unsupported allowReserved property', () => {

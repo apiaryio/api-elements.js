@@ -16,7 +16,7 @@ const parseBoolean = require('../parseBoolean');
 const name = 'Parameter Object';
 const requiredKeys = ['name', 'in'];
 const unsupportedKeys = [
-  'deprecated', 'allowEmptyValue', 'style', 'explode', 'allowReserved',
+  'deprecated', 'allowEmptyValue', 'style', 'allowReserved',
   'schema', 'examples', 'content',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
@@ -60,6 +60,11 @@ function validateRequiredForPathParameter(context, object, parameter) {
   return parseResult;
 }
 
+const hasExplodeWithoutQueryIn = R.allPass([
+  object => object.getValue('explode') === true,
+  object => object.getValue('in') !== 'query',
+]);
+
 /**
  * Parse Parameter Object
  *
@@ -95,6 +100,7 @@ function parseParameterObject(context, object) {
     [hasKey('in'), parseIn],
     [hasKey('description'), parseString(context, name, false)],
     [hasKey('required'), parseBoolean(context, name, false)],
+    [hasKey('explode'), parseBoolean(context, name, false)],
     [hasKey('example'), e => e.clone()],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
@@ -137,12 +143,25 @@ function parseParameterObject(context, object) {
     R.when(nameContainsReservedCharacter, createUnsupportedNameError),
     R.when(nameContainsReservedHeaderName, createReservedHeaderNamesWarning));
 
+  const createUnsupportedExplodeWarning = (object) => {
+    const member = object.getMember('explode');
+    const inValue = object.getValue('in');
+    const message = `'${name}' '${member.key.toValue()}' is unsupported in ${inValue}`;
+    return createWarning(namespace, message, member.key);
+  };
+
+  const attachWarning = R.curry((createWarning, value) => {
+    const warning = createWarning(value);
+    return new namespace.elements.ParseResult([value, warning]);
+  });
+
   const parseParameter = pipeParseResult(namespace,
     parseObject(context, name, parseMember, requiredKeys),
     R.when(hasLocation('path'), R.curry(validateRequiredForPathParameter)(context, object)),
     R.when(hasLocation('path'), validatePathName),
     R.when(hasLocation('query'), sanitizeQueryName),
     R.when(hasLocation('header'), validateHeaderName),
+    R.when(hasExplodeWithoutQueryIn, attachWarning(createUnsupportedExplodeWarning)),
     (parameter) => {
       const example = parameter.get('example');
       const member = new namespace.elements.Member(parameter.get('name'), example);
@@ -159,6 +178,7 @@ function parseParameterObject(context, object) {
       }
 
       member.in = parameter.getValue('in');
+      member.explode = parameter.getValue('explode');
 
       return member;
     });
