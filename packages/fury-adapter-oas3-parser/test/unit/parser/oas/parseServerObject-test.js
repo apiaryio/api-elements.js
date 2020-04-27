@@ -102,6 +102,87 @@ describe('#parseServerObject', () => {
       expect(parseResult).to.contain.warning("'Server Object' 'variables' is not an object");
     });
 
+    it("warns when a variable in server 'variables' is not defined in the URL and removes it", () => {
+      const server = new namespace.elements.Object({
+        url: 'https://{username}.gigantic-server.com/{version}/',
+        variables: {
+          username: {
+            default: 'Mario',
+            description: 'API user name',
+          },
+          version: {
+            default: '1.0',
+          },
+          location: {
+            default: 'Prague',
+          },
+        },
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.annotations;
+      expect(parseResult).to.contain.warning("Server variable 'location' is not present in the URL and will be ignored");
+
+      const resource = parseResult.get(0);
+      expect(resource).to.be.instanceof(namespace.elements.Resource);
+
+      const { hrefVariables } = resource;
+      const firstHrefVariable = hrefVariables.content.content[0];
+      const secondHrefVariable = hrefVariables.content.content[1];
+
+      expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
+      expect(hrefVariables.length).to.equal(2);
+
+      expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(firstHrefVariable.key.toValue()).to.equal('username');
+      expect(firstHrefVariable.value.default).to.equal('Mario');
+      expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
+
+      expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(secondHrefVariable.key.toValue()).to.equal('version');
+      expect(secondHrefVariable.value.default).to.equal('1.0');
+    });
+
+    it("warns when a URL defined variable is missing from 'variables'", () => {
+      const server = new namespace.elements.Object({
+        url: 'https://{username}.{server}/{version}/',
+        variables: {
+          username: {
+            default: 'Mario',
+            description: 'API user name',
+          },
+          version: {
+            default: '1.0',
+          },
+        },
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.annotations;
+      expect(parseResult).to.contain.warning("URL variable 'server' is missing within the server variables");
+
+      const resource = parseResult.get(0);
+      expect(resource).to.be.instanceof(namespace.elements.Resource);
+
+      const { hrefVariables } = resource;
+      const firstHrefVariable = hrefVariables.content.content[0];
+      const secondHrefVariable = hrefVariables.content.content[1];
+
+      expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
+      expect(hrefVariables.length).to.equal(2);
+
+      expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(firstHrefVariable.key.toValue()).to.equal('username');
+      expect(firstHrefVariable.value.default).to.equal('Mario');
+      expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
+
+      expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
+      expect(secondHrefVariable.key.toValue()).to.equal('version');
+      expect(secondHrefVariable.value.default).to.equal('1.0');
+    });
+
     it('parse server object with variables', () => {
       const server = new namespace.elements.Object({
         url: 'https://{username}.gigantic-server.com/{version}',
