@@ -36,7 +36,6 @@
           "content": [
             {
               "element": "transition",
-              "meta": {},
               "content": [
                 {
                   "element": "httpTransaction",
