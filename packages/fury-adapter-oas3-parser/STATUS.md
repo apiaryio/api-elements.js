@@ -26,6 +26,8 @@ Key:
 
 ## Info Object
 
+| Field Name | Support |
+|:--|:--|
 | title | ✓ |
 | description | ✓ |
 | termsOfService | ✓ |
@@ -35,23 +37,31 @@ Key:
 
 ## Contact Object
 
+| Field Name | Support |
+|:--|:--|
 | name | ✓ |
 | url | ✓ |
 | email | ✓ |
 
-## Licence Object
+## License Object
 
+| Field Name | Support |
+|:--|:--|
 | name | ✓ |
 | url | ✓ |
 
 ## Server Object
 
+| Field Name | Support |
+|:--|:--|
 | url | ✓ |
 | description | ✓ |
 | variables | ✓ |
 
 ## Server Variable Object
 
+| Field Name | Support |
+|:--|:--|
 | enum | ✓ |
 | default | ✓ |
 | description | ✓ |
