@@ -24,6 +24,38 @@ Key:
 | tags | [✕](https://github.com/apiaryio/api-elements.js/issues/75) |
 | externalDocs | [✕](https://github.com/apiaryio/api-elements.js/issues/82) |
 
+## Info Object
+
+| title | ✓ |
+| description | ✓ |
+| termsOfService | ✓ |
+| contact | ✓ |
+| license | ✓ |
+| version | ✓ |
+
+## Contact Object
+
+| name | ✓ |
+| url | ✓ |
+| email | ✓ |
+
+## Licence Object
+
+| name | ✓ |
+| url | ✓ |
+
+## Server Object
+
+| url | ✓ |
+| description | ✓ |
+| variables | ✓ |
+
+## Server Variable Object
+
+| enum | ✓ |
+| default | ✓ |
+| description | ✓ |
+
 ## Paths Object
 
 | Field Name | Support |
@@ -44,7 +76,7 @@ Key:
 | head | [~](#operation-object) |
 | patch | [~](#operation-object) |
 | trace | [~](#operation-object) |
-| servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
+| servers | ✓ |
 | parameters | [~](#parameter-object) |
 
 ## Operation Object
@@ -62,7 +94,7 @@ Key:
 | callbacks | [✕](https://github.com/apiaryio/api-elements.js/issues/74) |
 | deprecated | ✕ |
 | security | ✓ |
-| servers | [✕](https://github.com/apiaryio/api-elements.js/issues/76) |
+| servers | ✓ |
 
 ## Parameter Object
 

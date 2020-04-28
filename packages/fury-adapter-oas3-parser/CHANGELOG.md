@@ -1,5 +1,9 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+- Support for `servers` in `Path Item Object` and `Operation Object`
+
 ## 0.11.0 (2020-04-20)
 
 ### Enhancements
