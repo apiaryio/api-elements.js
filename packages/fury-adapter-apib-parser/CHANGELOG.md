@@ -1,5 +1,9 @@
 # Fury API Blueprint Parser Changelog
 
+## 0.18.1 (2020-04-28)
+
+Internal changes to the dependency tree to simplify package maintenance.
+
 ## 0.18.0 (2020-04-20)
 
 ### Enhancements
