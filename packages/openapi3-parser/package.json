@@ -1,6 +1,6 @@
 {
-  "name": "fury-adapter-oas3-parser",
-  "version": "0.11.1",
+  "name": "@apielements/openapi3-parser",
+  "version": "0.12.0",
   "description": "Open API Specification 3 API Elements Parser",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",

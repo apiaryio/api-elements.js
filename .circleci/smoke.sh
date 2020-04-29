@@ -25,7 +25,7 @@ install api-elements
 install fury
 install apib-parser
 install openapi2-parser
-install fury-adapter-oas3-parser
+install openapi3-parser
 install fury-adapter-apiary-blueprint-parser
 install fury-adapter-apib-serializer
 install fury-cli
