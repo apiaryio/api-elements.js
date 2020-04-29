@@ -1,25 +1,25 @@
-# Fury Swagger 2.0 Adapter
+# API Elements: OpenAPI 2.0 Adapter
 
-[![NPM version](https://img.shields.io/npm/v/fury-adapter-swagger.svg)](https://www.npmjs.org/package/fury-adapter-swagger)
-[![License](https://img.shields.io/npm/l/fury-adapter-swagger.svg)](https://www.npmjs.org/package/fury-adapter-swagger)
+[![NPM version](https://img.shields.io/npm/v/@apielements/openapi2.svg)](https://www.npmjs.org/package/@apielements/openapi2)
+[![License](https://img.shields.io/npm/l/@apielements/openapi2.svg)](https://www.npmjs.org/package/@apielements/openapi2)
 
 This adapter provides support for parsing [Swagger 2.0](http://swagger.io/) in [Fury](https://github.com/apiaryio/api-elements.js/tree/master/packages/fury). It does not yet provide a serializer.
 
 ## Install
 
 ```sh
-npm install fury-adapter-swagger
+$ npm install @apielements/openapi2
 ```
 
 ## Usage
 
 ```js
 import fury from 'fury';
-import swaggerAdapter from 'fury-adapter-swagger';
+import openApi2Parser from '@apielements/openapi2';
 
-fury.use(swaggerAdapter);
+fury.use(openApi2Parser);
 
-fury.parse({source: '... your Swagger 2.0 document ...'}, (err, result) => {
+fury.parse({source: '... your OpenAPI 2.0 document ...'}, (err, result) => {
   if (err) {
     console.log(err);
     return;

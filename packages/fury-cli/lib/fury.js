@@ -14,7 +14,7 @@ const fury = require('fury');
 const apiBlueprintParser = require('@apielements/apib-parser');
 const apiBlueprintSerializer = require('fury-adapter-apib-serializer');
 const apiaryBlueprintParser = require('fury-adapter-apiary-blueprint-parser');
-const oas2Parser = require('fury-adapter-swagger');
+const oas2Parser = require('@apielements/openapi2-parser');
 const oas3Parser = require('fury-adapter-oas3-parser');
 const pkg = require('../package.json');
 
@@ -22,7 +22,7 @@ const adapters = [
   '@apielements/apib-parser',
   'fury-adapter-apib-serializer',
   'fury-adapter-apiary-blueprint-parser',
-  'fury-adapter-swagger',
+  '@apielements/openapi2-parser',
   'fury-adapter-oas3-parser',
 ];
 

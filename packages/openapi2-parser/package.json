@@ -1,5 +1,5 @@
 {
-  "name": "fury-adapter-swagger",
+  "name": "@apielements/openapi2-parser",
   "version": "0.29.0",
   "description": "Swagger 2.0 parser for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
@@ -8,11 +8,11 @@
   "files": [
     "lib/*.js"
   ],
-  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-swagger",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/openapi2-parser",
   "repository": {
     "type": "git",
     "url": "https://github.com/apiaryio/api-elements.js.git",
-    "directory": "packages/fury-adapter-swagger"
+    "directory": "packages/openapi2-parser"
   },
   "scripts": {
     "lint": "eslint .",
