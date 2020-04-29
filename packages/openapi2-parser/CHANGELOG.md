@@ -1,4 +1,8 @@
-# Fury Swagger Parser Changelog
+# API Elements: OpenAPI 2 Parser Changelog
+
+## Master
+
+The package has been renamed to `@apielements/openapi2-parser`.
 
 ## 0.29.0 (2020-04-20)
 

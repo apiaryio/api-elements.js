@@ -10,7 +10,7 @@ API Elements adapters:
 
 - [API Blueprint Parser](packages/apib-parser)
 - [API Blueprint Serializer](packages/fury-adapter-apib-serializer)
-- [OpenAPI 2 Parser](packages/fury-adapter-swagger)
+- [OpenAPI 2 Parser](packages/openapi2-parser)
 - [OpenAPI 3 Parser](packages/fury-adapter-oas3-parser)
 
 ## Usage
@@ -24,7 +24,7 @@ const fury = new Fury();
 const apiBlueprintParser = require('@apielements/apib-parser');
 fury.use(apiBlueprintParser);
 
-const openAPI2Parser = require('fury-adapter-swagger');
+const openAPI2Parser = require('@apielements/openapi2-parser');
 fury.use(openAPI2Parser);
 
 const source = `
