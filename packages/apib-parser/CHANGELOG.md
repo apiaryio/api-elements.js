@@ -1,6 +1,6 @@
 # API Elements: API Blueprint Parser Changelog
 
-## Master
+## 0.19.0 (2020-04-29)
 
 The package has been renamed to `@apielements/apib-parser`.
 
