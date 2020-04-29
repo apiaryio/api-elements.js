@@ -28,7 +28,7 @@ Fury.js offers an interface based on the [Refract Project](https://github.com/re
 
 ```js
 import fury from 'fury';
-import apibParser from 'fury-adapter-apib-parser';
+import apibParser from '@apielements/apib-parser';
 
 // The input as a string
 const source = 'FORMAT: 1A\n# My API\n...';

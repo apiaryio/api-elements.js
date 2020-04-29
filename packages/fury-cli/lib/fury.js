@@ -11,7 +11,7 @@ const { highlight } = require('cardinal');
 const theme = require('cardinal/themes/tomorrow-night');
 const { JSON06Serialiser } = require('minim');
 const fury = require('fury');
-const apiBlueprintParser = require('fury-adapter-apib-parser');
+const apiBlueprintParser = require('@apielements/apib-parser');
 const apiBlueprintSerializer = require('fury-adapter-apib-serializer');
 const apiaryBlueprintParser = require('fury-adapter-apiary-blueprint-parser');
 const oas2Parser = require('fury-adapter-swagger');
@@ -19,7 +19,7 @@ const oas3Parser = require('fury-adapter-oas3-parser');
 const pkg = require('../package.json');
 
 const adapters = [
-  'fury-adapter-apib-parser',
+  '@apielements/apib-parser',
   'fury-adapter-apib-serializer',
   'fury-adapter-apiary-blueprint-parser',
   'fury-adapter-swagger',
