@@ -1,4 +1,8 @@
-# Fury API Blueprint Parser Changelog
+# API Elements: API Blueprint Parser Changelog
+
+## Master
+
+The package has been renamed to `@apielements/apib-parser`.
 
 ## 0.18.1 (2020-04-28)
 

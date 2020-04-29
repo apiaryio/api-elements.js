@@ -8,7 +8,7 @@ API Elements which can be used to validate API Description Documents.
 
 API Elements adapters:
 
-- [API Blueprint Parser](packages/fury-adapter-apib-parser)
+- [API Blueprint Parser](packages/apib-parser)
 - [API Blueprint Serializer](packages/fury-adapter-apib-serializer)
 - [OpenAPI 2 Parser](packages/fury-adapter-swagger)
 - [OpenAPI 3 Parser](packages/fury-adapter-oas3-parser)
@@ -21,7 +21,7 @@ const { Fury } = require('fury');
 const fury = new Fury();
 
 // Load any parsers or serializer adapters you wish to use
-const apiBlueprintParser = require('fury-adapter-apib-parser');
+const apiBlueprintParser = require('@apielements/apib-parser');
 fury.use(apiBlueprintParser);
 
 const openAPI2Parser = require('fury-adapter-swagger');
