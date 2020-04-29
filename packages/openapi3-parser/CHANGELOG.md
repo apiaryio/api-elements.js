@@ -1,5 +1,9 @@
 # Fury OAS3 Parser Changelog
 
+## 0.12.0 (2020-04-29)
+
+The package has been renamed to `@apielements/openapi3-parser`.
+
 ## 0.11.1 (2020-04-28)
 
 ### Enhancements
