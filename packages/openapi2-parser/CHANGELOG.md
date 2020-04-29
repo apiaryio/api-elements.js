@@ -1,6 +1,6 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
-## Master
+## 0.30.0 (2020-04-29)
 
 The package has been renamed to `@apielements/openapi2-parser`.
 
