@@ -1,7 +1,7 @@
 {
-  "name": "fury-adapter-apib-serializer",
-  "version": "0.14.0",
-  "description": "API Blueprint serializer for Fury.js",
+  "name": "@apielements/apib-serializer",
+  "version": "0.15.0",
+  "description": "API Blueprint serializer for API Elements",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
   "main": "./lib/adapter.js",
@@ -9,11 +9,11 @@
     "lib/*.js",
     "template.nunjucks"
   ],
-  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-adapter-apib-serializer",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/apib-serializer",
   "repository": {
     "type": "git",
     "url": "https://github.com/apiaryio/api-elements.js.git",
-    "directory": "packages/fury-adapter-apib-serializer"
+    "directory": "packages/apib-serializer"
   },
   "scripts": {
     "lint": "eslint .",

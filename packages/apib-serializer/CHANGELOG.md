@@ -1,4 +1,8 @@
-# Fury API Blueprint Serializer
+# API Elements: API Blueprint Serializer Changelog
+
+## 0.15.0 (2020-04-30)
+
+The package has been renamed to `@apielements/apib-serializer`.
 
 ## 0.14.0 (2020-04-20)
 
