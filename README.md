@@ -9,7 +9,7 @@ API Elements which can be used to validate API Description Documents.
 API Elements adapters:
 
 - [API Blueprint Parser](packages/apib-parser)
-- [API Blueprint Serializer](packages/fury-adapter-apib-serializer)
+- [API Blueprint Serializer](packages/apib-serializer)
 - [OpenAPI 2 Parser](packages/openapi2-parser)
 - [OpenAPI 3 Parser](packages/openapi3-parser)
 

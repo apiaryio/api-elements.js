@@ -1,21 +1,21 @@
-# Fury API Blueprint Serializer
+# API Elements: API Blueprint Serializer
 
-[![NPM version](https://img.shields.io/npm/v/fury-adapter-apib-serializer.svg)](https://www.npmjs.org/package/fury-adapter-apib-serializer)
-[![License](https://img.shields.io/npm/l/fury-adapter-apib-serializer.svg)](https://www.npmjs.org/package/fury-adapter-apib-serializer)
+[![NPM version](https://img.shields.io/npm/v/@apielements/apib-serializer.svg)](https://www.npmjs.org/package/@apielements/apib-serializer)
+[![License](https://img.shields.io/npm/l/@apielements/apib-serializer.svg)](https://www.npmjs.org/package/@apielements/apib-serializer)
 
 This adapter provides support for serializing [API Blueprint](https://apiblueprint.org/) in [Fury.js](https://github.com/apiaryio/api-elements.js/tree/master/packages/fury) from refract elements.
 
 ## Install
 
 ```sh
-npm install fury-adapter-apib-serializer
+$ npm install @apielements/apib-serializer
 ```
 
 ## Usage
 
 ```js
 import fury from 'fury';
-import apibSerializer from 'fury-adapter-apib-serializer';
+import apibSerializer from '@apielements/apib-serializer';
 
 fury.use(apibSerializer);
 

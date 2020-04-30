@@ -27,7 +27,7 @@ install apib-parser
 install openapi2-parser
 install openapi3-parser
 install fury-adapter-apiary-blueprint-parser
-install fury-adapter-apib-serializer
+install apib-serializer
 install fury-cli
 
 cd "$TMPDIR"
