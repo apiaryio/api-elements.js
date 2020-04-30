@@ -1,5 +1,22 @@
 # Fury OAS3 Parser Changelog
 
+## 0.12.1 (2020-04-30)
+
+### Bug Fixes
+
+- Prevent the parser from throwing an error when handling a Server Object with
+  variables when the URL does not contain any variables. For example:
+
+  ```yaml
+  openapi: 3.0.3
+  servers:
+    - url: https://example.com
+      variables:
+        version:
+          default: '1.0'
+  paths: {}
+  ```
+
 ## 0.12.0 (2020-04-29)
 
 The package has been renamed to `@apielements/openapi3-parser`.

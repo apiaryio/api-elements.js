@@ -15,14 +15,22 @@ const parseServerVariableObject = require('./parseServerVariableObject');
 const name = 'Server Object';
 const requiredKeys = ['url'];
 
+function extractURLVariables(path) {
+  const matches = path.match(/({.*?})/gm);
+
+  if (matches) {
+    return matches.map(x => x.substring(1, x.length - 1));
+  }
+
+  return [];
+}
+
 const validateVariablesInURL = (context, object) => {
   const url = object.getValue('url');
   const variables = object.get('variables');
   const parseResult = new context.namespace.elements.ParseResult();
 
-  const urlVariables = url
-    .match(/{(.*?)}/g)
-    .map(x => x.replace(/[{}]/g, ''));
+  const urlVariables = extractURLVariables(url);
 
   // if you define a variable that is not in URL it warns (and the variable is ignored).
   variables.keys().forEach((key) => {

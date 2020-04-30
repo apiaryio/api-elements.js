@@ -144,6 +144,26 @@ describe('#parseServerObject', () => {
       expect(secondHrefVariable.value.default).to.equal('1.0');
     });
 
+    it('warns when variables is defined, but no variables are in the url', () => {
+      const server = new namespace.elements.Object({
+        url: 'https://example.com/',
+        variables: {
+          version: {
+            default: '1.0',
+          },
+        },
+      });
+
+      const parseResult = parse(context)(server);
+      expect(parseResult).to.contain.warning("Server variable 'version' is not present in the URL and will be ignored");
+
+      const resource = parseResult.get(0);
+      expect(resource).to.be.instanceof(namespace.elements.Resource);
+
+      expect(resource.href.toValue()).to.equal('https://example.com/');
+      expect(resource.hrefVariables.isEmpty).to.be.true;
+    });
+
     it("warns when a URL defined variable is missing from 'variables'", () => {
       const server = new namespace.elements.Object({
         url: 'https://{username}.{server}/{version}/',
