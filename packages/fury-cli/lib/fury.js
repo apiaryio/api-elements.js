@@ -13,7 +13,7 @@ const { JSON06Serialiser } = require('minim');
 const fury = require('fury');
 const apiBlueprintParser = require('@apielements/apib-parser');
 const apiBlueprintSerializer = require('@apielements/apib-serializer');
-const apiaryBlueprintParser = require('fury-adapter-apiary-blueprint-parser');
+const apiaryBlueprintParser = require('@apielements/apiaryb-parser');
 const oas2Parser = require('@apielements/openapi2-parser');
 const oas3Parser = require('@apielements/openapi3-parser');
 const pkg = require('../package.json');
@@ -21,7 +21,7 @@ const pkg = require('../package.json');
 const adapters = [
   '@apielements/apib-parser',
   '@apielements/apib-serializer',
-  'fury-adapter-apiary-blueprint-parser',
+  '@apielements/apiaryb-parser',
   '@apielements/openapi2-parser',
   '@apielements/openapi3-parser',
 ];

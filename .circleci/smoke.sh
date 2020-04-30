@@ -26,7 +26,7 @@ install fury
 install apib-parser
 install openapi2-parser
 install openapi3-parser
-install fury-adapter-apiary-blueprint-parser
+install apiaryb-parser
 install apib-serializer
 install fury-cli
 

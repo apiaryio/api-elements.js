@@ -1,7 +1,7 @@
-# Fury Apiary Blueprint Parser
+# API Elements: Apiary Blueprint Parser
 
-[![NPM version](https://img.shields.io/npm/v/fury-adapter-apiary-blueprint-parser.svg)](https://www.npmjs.org/package/fury-adapter-apiary-blueprint-parser)
-[![License](https://img.shields.io/npm/l/fury-adapter-apiary-blueprint-parser.svg)](https://www.npmjs.org/package/fury-adapter-apiary-blueprint-parser)
+[![NPM version](https://img.shields.io/npm/v/@apielements/apiaryb-parser.svg)](https://www.npmjs.org/package/@apielements/apiaryb-parser)
+[![License](https://img.shields.io/npm/l/@apielements/apiaryb-parser.svg)](https://www.npmjs.org/package/@apielements/apiaryb-parser)
 
 This adapter provides support for parsing the deprecated [Apiary
 Blueprint](https://github.com/apiaryio/blueprint-parser) format in
@@ -12,14 +12,14 @@ the legacy format.
 ## Installation
 
 ```shell
-$ npm install fury-adapter-apiary-blueprint-parser
+$ npm install @apielements/apiaryb-parser
 ```
 
 ## Usage
 
 ```javascript
 import fury from 'fury';
-import apiaryBlueprintAdapter from 'fury-adapter-apiary-blueprint-parser';
+import apiaryBlueprintAdapter from '@apielements/apiaryb-parser';
 
 fury.use(apiaryBlueprintAdapter);
 

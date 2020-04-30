@@ -1,4 +1,8 @@
-# Changelog
+# API Elements: Apiary Blueprint Parser Changelog
+
+## 0.1.0 (2020-04-30)
+
+The package has been renamed to `@apielements/apiaryb-parser`.
 
 ## 3.0.0-beta.11 (2020-04-20)
 
