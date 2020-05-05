@@ -1,6 +1,6 @@
 const R = require('ramda');
 const {
-  isExtension, hasKey, hasValue, getValue,
+  isObject, isExtension, hasKey, hasValue, getValue,
 } = require('../../predicates');
 const {
   createError,
@@ -17,7 +17,7 @@ const name = 'Parameter Object';
 const requiredKeys = ['name', 'in'];
 const unsupportedKeys = [
   'deprecated', 'allowEmptyValue', 'style', 'allowReserved',
-  'schema', 'examples', 'content',
+  'examples', 'content',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -102,6 +102,7 @@ function parseParameterObject(context, object) {
     [hasKey('required'), parseBoolean(context, name, false)],
     [hasKey('explode'), parseBoolean(context, name, false)],
     [hasKey('example'), e => e.clone()],
+    [hasKey('schema'), e => e.clone()],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -163,7 +164,13 @@ function parseParameterObject(context, object) {
     R.when(hasLocation('header'), validateHeaderName),
     R.when(hasExplodeWithoutQueryIn, attachWarning(createUnsupportedExplodeWarning)),
     (parameter) => {
-      const example = parameter.get('example');
+      let example = parameter.get('example');
+      if (!example) {
+        const schema = parameter.get('schema');
+        if (schema && isObject(schema)) {
+          example = schema.get('example');
+        }
+      }
       const member = new namespace.elements.Member(parameter.get('name'), example);
 
       const description = parameter.get('description');

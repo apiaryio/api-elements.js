@@ -315,6 +315,22 @@ describe('Parameter Object', () => {
         bar: 'baz',
       });
     });
+
+    it('attaches integer example to member of schema object', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'schema_example',
+        in: 'query',
+        schema: { type: 'string', example: 10 },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      console.log(parseResult.get(0));
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.Member);
+      expect(parseResult.get(0).value.toValue()).to.equal(10);
+    });
   });
 
   describe('#explode', () => {
@@ -516,18 +532,6 @@ describe('Parameter Object', () => {
       const parseResult = parse(context, parameter);
 
       expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'allowReserved'");
-    });
-
-    it('provides warning for unsupported schema property', () => {
-      const parameter = new namespace.elements.Object({
-        name: 'example',
-        in: 'query',
-        schema: { type: 'string' },
-      });
-
-      const parseResult = parse(context, parameter);
-
-      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'schema'");
     });
 
     it('provides warning for unsupported examples property', () => {
