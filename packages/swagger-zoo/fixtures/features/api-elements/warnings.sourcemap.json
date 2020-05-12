@@ -289,6 +289,34 @@
                             }
                           },
                           "content": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
+                        },
+                        {
+                          "element": "dataStructure",
+                          "content": {
+                            "element": "enum",
+                            "attributes": {
+                              "enumerations": {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "string"
+                                  },
+                                  {
+                                    "element": "number"
+                                  },
+                                  {
+                                    "element": "boolean"
+                                  },
+                                  {
+                                    "element": "array"
+                                  },
+                                  {
+                                    "element": "object"
+                                  }
+                                ]
+                              }
+                            }
+                          }
                         }
                       ]
                     },

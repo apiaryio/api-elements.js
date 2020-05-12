@@ -22,6 +22,56 @@ function schemaToDataStructure(schema, root) {
 }
 
 describe('JSON Schema to Data Structure', () => {
+  context('schema without type', () => {
+    it('produces enum of any value', () => {
+      const schema = {};
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(EnumElement);
+
+      expect(dataStructure.content.enumerations.length).to.equal(5);
+      expect(dataStructure.content.enumerations.get(0)).to.be.instanceof(StringElement);
+      expect(dataStructure.content.enumerations.get(1)).to.be.instanceof(NumberElement);
+      expect(dataStructure.content.enumerations.get(2)).to.be.instanceof(BooleanElement);
+      expect(dataStructure.content.enumerations.get(3)).to.be.instanceof(ArrayElement);
+      expect(dataStructure.content.enumerations.get(4)).to.be.instanceof(ObjectElement);
+    });
+
+    it('produces array with items', () => {
+      const schema = {
+        items: {
+          type: 'string',
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(EnumElement);
+
+      const array = dataStructure.content.enumerations.content.find(element => element instanceof ArrayElement);
+      expect(array.get(0)).to.be.instanceof(StringElement);
+    });
+
+    it('produces array with properties', () => {
+      const schema = {
+        properties: {
+          name: { type: 'string' },
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(EnumElement);
+
+      const array = dataStructure.content.enumerations.content.find(element => element instanceof ObjectElement);
+      expect(array.get('name')).to.be.instanceof(StringElement);
+    });
+  });
+
   it('null type schema', () => {
     const schema = {
       type: 'null',
@@ -511,24 +561,6 @@ describe('JSON Schema to Data Structure', () => {
       expect(admin.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
     });
 
-    it('produces object element from properties when schema root doesnt provide a type', () => {
-      const schema = {
-        properties: {
-          name: {
-            type: 'string',
-          },
-        },
-      };
-
-      const dataStructure = schemaToDataStructure(schema);
-
-      expect(dataStructure.element).to.equal('dataStructure');
-      expect(dataStructure.content).to.be.instanceof(ObjectElement);
-
-      const name = dataStructure.content.get('name');
-      expect(name).not.to.be.undefined;
-    });
-
     it('produces object element from multiple allOf where one allOf is reference base type', () => {
       const schema = {
         allOf: [
@@ -754,14 +786,15 @@ describe('JSON Schema to Data Structure', () => {
     it('produces empty array element with empty items', () => {
       const schema = {
         type: 'array',
-        items: {},
+        items: { type: 'string' },
       };
 
       const dataStructure = schemaToDataStructure(schema);
 
       expect(dataStructure.element).to.equal('dataStructure');
       expect(dataStructure.content).to.be.instanceof(ArrayElement);
-      expect(dataStructure.content.content.length).to.be.equal(0);
+      expect(dataStructure.content.content.length).to.be.equal(1);
+      expect(dataStructure.content.content[0]).to.be.instanceof(StringElement);
     });
 
     it('produces value from example', () => {
@@ -922,14 +955,6 @@ describe('JSON Schema to Data Structure', () => {
     expect(dataStructure.content).to.be.instanceof(StringElement);
     expect(dataStructure.content.description.toValue())
       .to.equal("- Value must be of format 'email'");
-  });
-
-  it('returns null when there is no type in the given JSON schema', () => {
-    const schema = {};
-
-    const dataStructure = schemaToDataStructure(schema);
-
-    expect(dataStructure).to.be.null;
   });
 
   it('adds nullable typeAttribute with x-nullable extension', () => {

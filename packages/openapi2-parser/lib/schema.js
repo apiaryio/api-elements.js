@@ -203,11 +203,6 @@ class DataStructureGenerator {
           return uniqueTypes[0];
         }
       }
-
-      if (schema.properties) {
-        // Assume user meant object
-        return 'object';
-      }
     }
 
     return schema.type;
@@ -271,6 +266,15 @@ class DataStructureGenerator {
       element = new typeGeneratorMap[type]();
     } else if (type) {
       throw new Error(`Unhandled schema type '${type}'`);
+    } else {
+      element = new this.minim.elements.Enum();
+      element.enumerations = [
+        new this.minim.elements.String(),
+        new this.minim.elements.Number(),
+        new this.minim.elements.Boolean(),
+        this.generateArray(schema),
+        this.generateObject(schema),
+      ];
     }
 
     if (element) {
