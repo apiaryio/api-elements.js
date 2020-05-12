@@ -7,6 +7,20 @@
 - The parser will now produce a data structure for Schema Object's which do not
   contain a `type`.
 
+- Added the `fixedType` attribute to array data structures which describe
+  arrays with fixed types in the items. For example, the following schema which
+  describes an array where the values MUST be of type string:
+
+  ```yaml
+  type: array
+  items:
+    type: string
+  ```
+
+  Previously we generated a data structure for an array which didn't fix the
+  values of the array to be a string type. Instead provided an example that the
+  value of the array MAY be a string.
+
 ## 0.30.0 (2020-04-29)
 
 The package has been renamed to `@apielements/openapi2-parser`.
