@@ -111,6 +111,15 @@ class DataStructureGenerator {
       return member;
     }));
 
+    // Create member elements for required keys which are not defined in properties
+    const missingRequiredProperties = required.filter(name => properties[name] === undefined);
+    const requiredMembers = missingRequiredProperties.map((name) => {
+      const member = new this.minim.elements.Member(name);
+      member.attributes.set('typeAttributes', ['required']);
+      return member;
+    });
+    element.content = element.content.concat(requiredMembers);
+
     return element;
   }
 
