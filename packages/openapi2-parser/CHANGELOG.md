@@ -1,6 +1,6 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
-## Master
+## 0.31.0 (2020-05-12)
 
 ### Bug Fixes
 
