@@ -460,6 +460,21 @@ describe('JSON Schema to Data Structure', () => {
       expect(member.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
     });
 
+    it('produces object members from required which are not found in properties', () => {
+      const schema = {
+        type: 'object',
+        required: ['name'],
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      const name = dataStructure.content.getMember('name');
+      expect(name.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
+    });
+
     it('produces object element with description of maxProperties', () => {
       const schema = {
         type: 'object',

@@ -21,6 +21,9 @@
   values of the array to be a string type. Instead provided an example that the
   value of the array MAY be a string.
 
+- Support required keys in a Schema Object which are not found in the
+  properties list.
+
 ## 0.30.0 (2020-04-29)
 
 The package has been renamed to `@apielements/openapi2-parser`.
