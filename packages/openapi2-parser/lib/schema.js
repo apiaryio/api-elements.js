@@ -96,11 +96,11 @@ class DataStructureGenerator {
       } else if (refs.length > 1) {
         const { Ref: RefElement } = this.minim.elements;
         const refElements = refs.map(ref => new RefElement(ref));
-        element.content = element.content.concat(refElements);
+        element.content.push(...refElements);
       }
     }
 
-    element.content = element.content.concat(_.map(properties, (subschema, property) => {
+    element.content.push(..._.map(properties, (subschema, property) => {
       const member = this.generateMember(property, subschema);
 
       const isRequired = required.includes(property);
@@ -118,7 +118,7 @@ class DataStructureGenerator {
       member.attributes.set('typeAttributes', ['required']);
       return member;
     });
-    element.content = element.content.concat(requiredMembers);
+    element.content.push(...requiredMembers);
 
     return element;
   }
