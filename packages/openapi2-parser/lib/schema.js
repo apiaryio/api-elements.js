@@ -120,6 +120,8 @@ class DataStructureGenerator {
     const element = new ArrayElement();
 
     if (schema.items) {
+      element.attributes.set('typeAttributes', ['fixedType']);
+
       if (_.isArray(schema.items)) {
         schema.items.forEach((item) => {
           const itemElement = this.generateElement(item);

@@ -702,7 +702,7 @@ describe('JSON Schema to Data Structure', () => {
       const dataStructure = schemaToDataStructure(schema);
 
       expect(dataStructure.element).to.equal('dataStructure');
-      expect(dataStructure.content).to.be.instanceof(ArrayElement);
+      expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
       expect(dataStructure.content.get(0).element).to.equal('string');
     });
 
