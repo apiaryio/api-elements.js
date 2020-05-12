@@ -1,5 +1,12 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Support required keys in a Schema Object which are not found in the
+  properties list.
+
 ## 0.12.1 (2020-04-30)
 
 ### Bug Fixes

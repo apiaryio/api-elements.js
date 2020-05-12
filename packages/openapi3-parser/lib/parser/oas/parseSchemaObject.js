@@ -39,13 +39,19 @@ function constructObjectStructure(namespace, schema) {
 
   const required = schema.get('required');
   if (required) {
-    required.forEach((key) => {
-      const member = element.getMember(key.toValue());
+    const attachMember = element.push.bind(element);
+    const findMember = element.getMember.bind(element);
 
-      if (member) {
-        member.attributes.set('typeAttributes', ['required']);
-      }
-    });
+    const createMember = R.constructN(1, namespace.elements.Member);
+    const findOrCreateMember = R.either(
+      findMember,
+      R.pipe(createMember, R.tap(attachMember))
+    );
+
+    required
+      .toValue()
+      .map(findOrCreateMember)
+      .forEach(member => member.attributes.set('typeAttributes', ['required']));
   }
 
   return element;

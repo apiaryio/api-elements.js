@@ -315,7 +315,25 @@ describe('Schema Object', () => {
         ]);
       });
 
-      it('returns an object with required properties', () => {
+      it('returns an object with members from required keys', () => {
+        const schema = new namespace.elements.Object({
+          type: 'object',
+          required: ['name'],
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const object = parseResult.get(0).content;
+        expect(object).to.be.instanceof(namespace.elements.Object);
+
+        const name = object.getMember('name');
+        expect(name.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
+      });
+
+      it('returns an object with required properties by merging properties', () => {
         const schema = new namespace.elements.Object({
           type: 'object',
           properties: {
