@@ -1,5 +1,12 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- The parser will now produce a data structure for Schema Object's which do not
+  contain a `type`.
+
 ## 0.30.0 (2020-04-29)
 
 The package has been renamed to `@apielements/openapi2-parser`.
