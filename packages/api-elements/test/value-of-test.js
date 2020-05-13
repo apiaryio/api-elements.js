@@ -6,6 +6,7 @@ const namespace = new Namespace();
 const { Element } = namespace;
 const ArrayElement = namespace.elements.Array;
 const ObjectElement = namespace.elements.Object;
+const MemberElement = namespace.elements.Member;
 const BooleanElement = namespace.elements.Boolean;
 const EnumElement = namespace.elements.Enum;
 const NullElement = namespace.elements.Null;
@@ -843,6 +844,14 @@ describe('valueOf ObjectElement', () => {
     const value = element.valueOf();
 
     expect(value).to.deep.equal(undefined);
+  });
+
+  it('skips property without value', () => {
+    const element = new ObjectElement({ company: 'Oracle' });
+    element.push(new MemberElement('name'));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal({ company: 'Oracle' });
   });
 
   it('returns undefined when fixed and with item without value', () => {

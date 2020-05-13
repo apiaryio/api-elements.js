@@ -1,5 +1,12 @@
 # API Elements (JavaScript) CHANGELOG
 
+## 0.2.5 (2020-06-13)
+
+### Bug Fixes
+
+- Prevent `valueOf` from throwing an error while handling an object element
+  which contains a member element which does not include a value.
+
 ## 0.2.4 (2020-04-20)
 
 ### Enhancements
