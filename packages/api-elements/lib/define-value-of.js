@@ -108,6 +108,10 @@ function trivialValue(e) {
 }
 
 function mapValue(e, options, f, elements) {
+  if (e === undefined) {
+    return e;
+  }
+
   const opts = updateTypeAttributes(e, options);
   if (e.content && (!isPlural(e) || !e.isEmpty)) {
     const result = f(e, opts, elements, 'content');
