@@ -49,4 +49,19 @@ describe('#serializeResource', () => {
       },
     ]);
   });
+
+  it('serializes transition elements', () => {
+    const request = new namespace.elements.HttpRequest();
+    request.method = 'GET';
+    const transaction = new namespace.elements.HttpTransaction([request]);
+
+    const transition = new namespace.elements.Transition([transaction]);
+    const resource = new namespace.elements.Resource([transition]);
+    resource.href = '/';
+
+    const pathItem = serializeResource(resource);
+    expect(pathItem.get).to.deep.equal({
+      responses: {},
+    });
+  });
 });

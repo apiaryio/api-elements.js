@@ -1,4 +1,5 @@
 const serializeHrefVariables = require('./serializeHrefVariables');
+const serializeTransition = require('./serializeTransition');
 
 function serializeResource(resource) {
   const pathItem = {};
@@ -14,6 +15,14 @@ function serializeResource(resource) {
 
   if (resource.hrefVariables) {
     pathItem.parameters = serializeHrefVariables(resource.href, resource.hrefVariables);
+  }
+
+  if (resource.transitions) {
+    resource.transitions.forEach((transition) => {
+      if (transition.method) {
+        pathItem[transition.method.toValue().toLowerCase()] = serializeTransition(transition);
+      }
+    });
   }
 
   return pathItem;

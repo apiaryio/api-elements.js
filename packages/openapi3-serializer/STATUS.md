@@ -40,3 +40,30 @@
 |:--------|---------|
 | key     | ✓       |
 | value   |         |
+
+## Transition Element
+
+| Attributes    | Support |
+|:--------------|:--------|
+| contentTypes  |         |
+| hosts         |         |
+| href          |         |
+| hrefVariables |         |
+| relation      |         |
+
+| Content                  | Support |
+|:-------------------------|:--------|
+| Copy Element             |         |
+| HTTP Transaction Element |  ✓      |
+
+## HTTP Transaction Element
+
+| Attributes   | Support |
+|:-------------|:--------|
+| authSchemes  |         |
+
+| Content               | Support |
+|:----------------------|:--------|
+| Copy Element          |         |
+| HTTP Request Message  |         |
+| HTTP Response Message |         |
