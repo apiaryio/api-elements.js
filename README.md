@@ -12,6 +12,7 @@ API Elements adapters:
 - [API Blueprint Serializer](packages/apib-serializer)
 - [OpenAPI 2 Parser](packages/openapi2-parser)
 - [OpenAPI 3 Parser](packages/openapi3-parser)
+- [OpenAPI 3 Serializer](packages/openapi3-serializer)
 
 ## Usage
 

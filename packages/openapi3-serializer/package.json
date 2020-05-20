@@ -1,0 +1,31 @@
+{
+  "name": "@apielements/openapi3-serializer",
+  "version": "0.1.0",
+  "description": "Open API Specification 3 API Elements Serializer",
+  "main": "./lib/adapter.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apiaryio/api-elements.js.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha --recursive test"
+  },
+  "dependencies": {
+    "js-yaml": "^3.13.1"
+  },
+  "peerDependencies": {
+    "fury": "3.0.0-beta.14"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "fury": "3.0.0-beta.14",
+    "mocha": "^7.1.1"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "author": "Apiary.io <support@apiary.io>",
+  "license": "MIT"
+}
