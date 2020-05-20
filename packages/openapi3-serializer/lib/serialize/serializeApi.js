@@ -15,6 +15,10 @@ function serializeApi(api) {
     info.version = 'Unknown';
   }
 
+  if (api.copy.length > 0) {
+    info.description = api.copy.toValue().join('\n\n');
+  }
+
   const document = {
     openapi: '3.0.3',
     info,

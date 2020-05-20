@@ -37,5 +37,14 @@ describe('#serializeApi', () => {
       const document = serializeApi(api);
       expect(document.info.version).to.equal('1.0.0');
     });
+
+    it('serializes API resources with copy', () => {
+      const api = new namespace.elements.Category([], { classes: ['api'] });
+      api.push(new namespace.elements.Copy('Hello World'));
+      api.push(new namespace.elements.Copy('Another Copy'));
+
+      const document = serializeApi(api);
+      expect(document.info.description).to.equal('Hello World\n\nAnother Copy');
+    });
   });
 });
