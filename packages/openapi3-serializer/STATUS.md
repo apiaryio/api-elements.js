@@ -62,8 +62,36 @@
 |:-------------|:--------|
 | authSchemes  |         |
 
-| Content               | Support |
-|:----------------------|:--------|
-| Copy Element          |         |
-| HTTP Request Message  |         |
-| HTTP Response Message |         |
+| Content       | Support |
+|:--------------|:--------|
+| Copy Element  |         |
+| HTTP Request  |         |
+| HTTP Response | ✓       |
+
+## HTTP Request
+
+| Attributes    | Support |
+|:--------------|:--------|
+| method        | ✓       |
+| href          |         |
+| hrefVariables |         |
+| headers       |         |
+
+| Content         | Support |
+|:----------------|:--------|
+| Copy            |         |
+| Data Structure  |         |
+| Asset           |         |
+
+## HTTP Response
+
+| Attributes   | Support |
+|:-------------|:--------|
+| statusCode   | ✓       |
+| headers      |         |
+
+| Content         | Support |
+|:----------------|:--------|
+| Copy            |         |
+| Data Structure  |         |
+| Asset           |         |
