@@ -47,4 +47,44 @@ describe('#serializeApi', () => {
       expect(document.info.description).to.equal('Hello World\n\nAnother Copy');
     });
   });
+
+  describe('Paths Object', () => {
+    it('serializes resource in paths', () => {
+      const resource = new namespace.elements.Resource();
+      resource.href = '/users';
+
+      const api = new namespace.elements.Category([resource], { classes: ['api'] });
+
+      const document = serializeApi(api);
+      expect(document.paths).to.deep.equal({
+        '/users': {},
+      });
+    });
+
+    it('serializes resource inside resource group in paths', () => {
+      const resource = new namespace.elements.Resource();
+      resource.href = '/users';
+
+      const resourceGroup = new namespace.elements.Category([resource], { classes: ['resourceGroup'] });
+
+      const api = new namespace.elements.Category([resourceGroup], { classes: ['api'] });
+
+      const document = serializeApi(api);
+      expect(document.paths).to.deep.equal({
+        '/users': {},
+      });
+    });
+
+    it('serializes resource with URI Template in paths', () => {
+      const resource = new namespace.elements.Resource();
+      resource.href = '/users/{username}{/segments}{?filter,tags*}{&foo}';
+
+      const api = new namespace.elements.Category([resource], { classes: ['api'] });
+
+      const document = serializeApi(api);
+      expect(document.paths).to.deep.equal({
+        '/users/{username}': {},
+      });
+    });
+  });
 });
