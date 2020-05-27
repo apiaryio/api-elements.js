@@ -84,7 +84,7 @@ class Category extends ArrayElement {
    * @memberof Category.prototype
    */
   get hosts() {
-    return this.children.filter(item => item.element === 'hosts');
+    return this.children.filter(item => item.classes.contains('hosts'));
   }
 
   metadata(value) {
