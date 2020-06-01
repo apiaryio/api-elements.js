@@ -61,4 +61,15 @@ describe('API Blueprint parser adapter', () => {
       done();
     });
   });
+
+  it('can parse an API Blueprint skipping message body generation', (done) => {
+    const source = '# GET /\n+ Response 204\n';
+
+    fury.parse({ source, adapterOptions: { generateMessageBody: false } }, (err, parseResult) => {
+      expect(err).to.be.null;
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.errors.length).to.equal(0);
+      done();
+    });
+  });
 });
