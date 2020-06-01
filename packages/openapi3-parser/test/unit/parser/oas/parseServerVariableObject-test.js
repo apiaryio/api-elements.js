@@ -51,7 +51,7 @@ describe('#parseServerVariableObject', () => {
 
       const member = parseResult.get(0);
       expect(member).to.be.instanceof(namespace.elements.String);
-      expect(member.default).to.be.equal('Mario');
+      expect(member.attributes.get('default').toValue()).to.be.equal('Mario');
     });
   });
 

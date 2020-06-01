@@ -57,7 +57,13 @@ describe('#parseOpenAPIObject', () => {
       paths: {},
       servers: [
         {
-          url: 'https://user.server.com/1.0',
+          url: 'https://{username}.server.com/1.0',
+          variables: {
+            username: {
+              default: 'Mario',
+              enum: ['Tony', 'Nina'],
+            },
+          },
         },
         {
           url: 'https://user.server.com/2.0',
@@ -77,9 +83,23 @@ describe('#parseOpenAPIObject', () => {
     expect(hostsCategory.classes.toValue()).to.deep.equal(['hosts']);
     expect(hostsCategory.length).to.equal(2);
 
-    const firstServer = hostsCategory.get(0);
-    expect(firstServer).to.be.instanceof(namespace.elements.Resource);
-    expect(firstServer.href.toValue()).to.equal('https://user.server.com/1.0');
+    const firstHost = hostsCategory.get(0);
+    expect(firstHost).to.be.instanceof(namespace.elements.Resource);
+    expect(firstHost.href.toValue()).to.equal('https://{username}.server.com/1.0');
+
+    const { hrefVariables } = firstHost;
+    expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
+    expect(hrefVariables.length).to.equal(1);
+
+    const hrefVariable = hrefVariables.content.content[0];
+    expect(hrefVariable).to.be.instanceof(namespace.elements.Member);
+    expect(hrefVariable.key.toValue()).to.equal('username');
+    expect(hrefVariable.value.attributes.get('default').toValue()).to.equal('Mario');
+
+    const { enumerations } = hrefVariable.value;
+    expect(enumerations).to.be.instanceof(namespace.elements.Array);
+    expect(enumerations.length).to.equal(2);
+    expect(enumerations.toValue()).to.deep.equal(['Tony', 'Nina']);
   });
 
   describe('with schema components', () => {
