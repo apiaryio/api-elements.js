@@ -31,7 +31,9 @@ function validate({ source, requireBlueprintName }) {
 /*
  * Parse an API Blueprint into refract elements.
  */
-function parse({ source, generateSourceMap, requireBlueprintName, generateMessageBody, generateMessageBodySchema, }) {
+function parse({
+  source, generateSourceMap, requireBlueprintName, generateMessageBody, generateMessageBodySchema
+}) {
   const options = {
     exportSourcemap: !!generateSourceMap,
     requireBlueprintName,
