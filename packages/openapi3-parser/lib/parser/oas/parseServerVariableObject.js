@@ -56,7 +56,7 @@ const parseServerVariableObject = (context, element) => pipeParseResult(context.
   (object) => {
     const variable = R.or(object.get('enum'), new context.namespace.elements.String());
 
-    variable.default = object.getValue('default');
+    variable.attributes.set('default', object.get('default'));
 
     if (object.hasKey('description')) {
       variable.description = object.getValue('description');

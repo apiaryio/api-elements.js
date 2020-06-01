@@ -571,7 +571,7 @@ describe('Operation Object', () => {
       const hrefVariable = hrefVariables.content.content[0];
       expect(hrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(hrefVariable.key.toValue()).to.equal('username');
-      expect(hrefVariable.value.default).to.equal('Mario');
+      expect(hrefVariable.value.attributes.get('default').toValue()).to.equal('Mario');
 
       const { enumerations } = hrefVariable.value;
       expect(enumerations).to.be.instanceof(namespace.elements.Array);

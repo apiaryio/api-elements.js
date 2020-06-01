@@ -136,12 +136,12 @@ describe('#parseServerObject', () => {
 
       expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(firstHrefVariable.key.toValue()).to.equal('username');
-      expect(firstHrefVariable.value.default).to.equal('Mario');
+      expect(firstHrefVariable.value.attributes.get('default').toValue()).to.equal('Mario');
       expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
 
       expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(secondHrefVariable.key.toValue()).to.equal('version');
-      expect(secondHrefVariable.value.default).to.equal('1.0');
+      expect(secondHrefVariable.value.attributes.get('default').toValue()).to.equal('1.0');
     });
 
     it('warns when variables is defined, but no variables are in the url', () => {
@@ -195,12 +195,12 @@ describe('#parseServerObject', () => {
 
       expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(firstHrefVariable.key.toValue()).to.equal('username');
-      expect(firstHrefVariable.value.default).to.equal('Mario');
+      expect(firstHrefVariable.value.attributes.get('default').toValue()).to.equal('Mario');
       expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
 
       expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(secondHrefVariable.key.toValue()).to.equal('version');
-      expect(secondHrefVariable.value.default).to.equal('1.0');
+      expect(secondHrefVariable.value.attributes.get('default').toValue()).to.equal('1.0');
     });
 
     it('parse server object with variables', () => {
@@ -233,12 +233,12 @@ describe('#parseServerObject', () => {
 
       expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(firstHrefVariable.key.toValue()).to.equal('username');
-      expect(firstHrefVariable.value.default).to.equal('Mario');
+      expect(firstHrefVariable.value.attributes.get('default').toValue()).to.equal('Mario');
       expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
 
       expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(secondHrefVariable.key.toValue()).to.equal('version');
-      expect(secondHrefVariable.value.default).to.equal('1.0');
+      expect(secondHrefVariable.value.attributes.get('default').toValue()).to.equal('1.0');
     });
   });
 });
