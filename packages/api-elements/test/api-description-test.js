@@ -110,6 +110,20 @@ describe('API description namespace', () => {
                 content: [
                   {
                     element: 'string',
+                    content: 'hosts',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            element: 'category',
+            meta: {
+              classes: {
+                element: 'array',
+                content: [
+                  {
+                    element: 'string',
                     content: 'resourceGroup',
                   },
                 ],
@@ -210,6 +224,16 @@ describe('API description namespace', () => {
     it('should not get API metadata which doesn\'t exist', () => {
       const random = category.metadata('random');
       expect(random).to.be.undefined;
+    });
+
+    it('should contain hosts', () => {
+      const items = category.hosts;
+      expect(items).to.have.length(1);
+
+      items.forEach((item) => {
+        expect(item).to.be.an.instanceof(Category);
+        expect(item).to.have.class('hosts');
+      });
     });
 
     it('should contain a resource group', () => {
@@ -734,6 +758,20 @@ describe('API description namespace', () => {
               },
             ],
           },
+          hosts: {
+            element: 'array',
+            content: [
+              {
+                element: 'resource',
+                attributes: {
+                  href: {
+                    element: 'href',
+                    content: 'https://first-server.com',
+                  },
+                },
+              },
+            ],
+          },
         },
         content: [
           {
@@ -795,6 +833,18 @@ describe('API description namespace', () => {
       });
     });
 
+    it('should have hosts', () => {
+      expect(resource.hosts.first.attributes.get('href').toValue()).to.deep.equal('https://first-server.com');
+    });
+
+    it('should set hosts', () => {
+      const host = new namespace.elements.Resource();
+      host.href = 'https://second-server.com';
+      resource.hosts = [host];
+
+      expect(resource.hosts.first.attributes.get('href').toValue()).to.deep.equal('https://second-server.com');
+    });
+
     it('should contain a transition', () => {
       const items = resource.transitions;
       expect(items).to.have.length(1);
@@ -837,6 +887,20 @@ describe('API description namespace', () => {
                   value: {
                     element: 'string',
                     content: '123',
+                  },
+                },
+              },
+            ],
+          },
+          hosts: {
+            element: 'array',
+            content: [
+              {
+                element: 'resource',
+                attributes: {
+                  href: {
+                    element: 'href',
+                    content: 'https://first-server.com',
                   },
                 },
               },
@@ -941,6 +1005,18 @@ describe('API description namespace', () => {
       expect(attrValue(transition, 'hrefVariables')).to.deep.equal({
         id: '456',
       });
+    });
+
+    it('should have hosts', () => {
+      expect(transition.hosts.first.attributes.get('href').toValue()).to.deep.equal('https://first-server.com');
+    });
+
+    it('should set hosts', () => {
+      const host = new namespace.elements.Resource();
+      host.href = 'https://second-server.com';
+      transition.hosts = [host];
+
+      expect(transition.hosts.first.attributes.get('href').toValue()).to.deep.equal('https://second-server.com');
     });
 
     it('should have data', () => {
