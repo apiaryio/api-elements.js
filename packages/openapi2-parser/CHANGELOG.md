@@ -1,5 +1,13 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- This release includes performance improvements to parsing documents which
+  contain the same schema re-used via a reference (`$ref`) many times in
+  request parameters and response bodies under an `allOf` key.
+
 ## 0.31.0 (2020-05-12)
 
 ### Bug Fixes
