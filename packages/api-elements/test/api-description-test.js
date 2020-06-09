@@ -1008,7 +1008,7 @@ describe('API description namespace', () => {
     });
 
     it('should have hosts', () => {
-      expect(transition.hosts.first.attributes.get('href').toValue()).to.deep.equal('https://first-server.com');
+      expect(transition.hosts.first.href.toValue()).to.deep.equal('https://first-server.com');
     });
 
     it('should set hosts', () => {
@@ -1016,7 +1016,7 @@ describe('API description namespace', () => {
       host.href = 'https://second-server.com';
       transition.hosts = [host];
 
-      expect(transition.hosts.first.attributes.get('href').toValue()).to.deep.equal('https://second-server.com');
+      expect(transition.hosts.first.href.toValue()).to.deep.equal('https://second-server.com');
     });
 
     it('should have data', () => {
