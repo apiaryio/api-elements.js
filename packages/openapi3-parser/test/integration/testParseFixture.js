@@ -22,10 +22,10 @@ fury.use(adapter);
 const { minim: namespace } = fury;
 const parse = promisify(fury.parse.bind(fury));
 
-function testParseFixture(file, generateSourceMap = false) {
+function testParseFixture(file, generateSourceMap = false, generateMessageBody = true) {
   const source = fs.readFileSync(`${file}.yaml`, 'utf-8');
 
-  return parse({ source, generateSourceMap }).then((parseResult) => {
+  return parse({ source, generateSourceMap, adapterOptions: { generateMessageBody } }).then((parseResult) => {
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
 
     // freeze elements to ensure there is no duplicate elements in tree,

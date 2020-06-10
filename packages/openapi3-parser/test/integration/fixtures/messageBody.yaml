@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: My API
+  version: '2.0'
+paths:
+  /questions:
+    post:
+      summary: Description of the resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              example: hello world
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: string
+                example: hello world
