@@ -1611,7 +1611,16 @@ class Parser {
     const referencedPathValue = this.referencedPathValue();
     let cacheKey;
     if (referencedPathValue && referencedPathValue.$ref) {
+      // schema object with $ref
       cacheKey = `${referencedPathValue.$ref};${contentType}`;
+    } else if (
+      referencedPathValue
+      && referencedPathValue.allOf
+      && Object.keys(referencedPathValue).length === 1
+      && referencedPathValue.allOf.length === 1
+      && referencedPathValue.allOf[0].$ref) {
+      // schema object with single ref in allOf (`allOf: [{$ref: path}]`)
+      cacheKey = `${referencedPathValue.allOf[0].$ref};${contentType}`;
     }
 
     if (this.generateMessageBody || this.generateMessageBodySchema) {

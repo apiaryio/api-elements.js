@@ -1,7 +1,7 @@
-# Fury Remote Adapter
+# API Elements: Remote Adapter
 
-[![NPM version](https://img.shields.io/npm/v/fury-adapter-remote.svg)](https://www.npmjs.org/package/fury-adapter-remote)
-[![License](https://img.shields.io/npm/l/fury-adapter-remote.svg)](https://www.npmjs.org/package/fury-adapter-remote)
+[![NPM version](https://img.shields.io/npm/v/@apielements/remote.svg)](https://www.npmjs.org/package/@apielements/remote)
+[![License](https://img.shields.io/npm/l/@apielements/remote.svg)](https://www.npmjs.org/package/@apielements/remote)
 
 This adapter provides support for parsing, validation and serialization via the [API Elements Web Service](https://api.apielements.org/) in [Fury](https://github.com/apiaryio/api-elements.js/tree/master/packages/fury).
 
@@ -50,14 +50,14 @@ const defaultOptions = {
 ## Install
 
 ```sh
-$ npm install fury-adapter-remote
+$ npm install @apielements/remote
 ```
 
 ## Usage
 
 ```js
 const { Fury } = require('fury');
-const FuryRemoteAdapter = require('fury-adapter-remote');
+const FuryRemoteAdapter = require('@apielements/remote');
 
 const fury = new Fury();
 fury.use(new FuryRemoteAdapter(options);

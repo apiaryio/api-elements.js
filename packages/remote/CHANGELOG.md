@@ -1,4 +1,8 @@
-# Fury Remote Adapter Changelog
+# API Elements: Remote Adapter Changelog
+
+## 0.5.1 (2020-06-10)
+
+The package has been renamed to `@apielements/remote`.
 
 ## 0.5.0 (2020-04-20)
 
