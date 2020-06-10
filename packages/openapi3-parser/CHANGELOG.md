@@ -1,5 +1,14 @@
 # Fury OAS3 Parser Changelog
 
+## 0.12.3 (2020-06-10)
+
+### Bug Fixes
+
+- Prevent 'Server Object' variables from being incorrectly wrapped in an object
+  element.
+
+- Fix `generateMessageBody` option, the option had no affect in prior releases.
+
 ## 0.12.2 (2020-05-12)
 
 ### Bug Fixes
