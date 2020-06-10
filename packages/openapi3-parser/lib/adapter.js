@@ -18,6 +18,7 @@ function parse(options) {
     options.namespace,
     {
       generateSourceMap: options.generateSourceMap,
+      generateMessageBody: options.generateMessageBody,
     }
   );
 
