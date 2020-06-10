@@ -73,9 +73,21 @@ class FuryRemoteAdapter {
   }
 
   parse({
-    source, generateSourceMap, namespace, mediaType,
+    source, generateSourceMap, generateMessageBody, generateMessageBodySchema, namespace, mediaType,
   }) {
     const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
+
+    if (generateMessageBody === undefined) {
+      this.generateMessageBody = true;
+    } else {
+      this.generateMessageBody = generateMessageBody;
+    }
+
+    if (generateMessageBodySchema === undefined) {
+      this.generateMessageBodySchema = true;
+    } else {
+      this.generateMessageBodySchema = generateMessageBodySchema;
+    }
 
     return axios({
       method: 'post',
@@ -84,6 +96,10 @@ class FuryRemoteAdapter {
       data: source,
       params: {
         generateSourceMap,
+        adapterOptions: {
+          generateMessageBody: this.generateMessageBody,
+          generateMessageBodySchema: this.generateMessageBodySchema,
+        },
       },
       headers: {
         'Content-Type': inputMediaType,
