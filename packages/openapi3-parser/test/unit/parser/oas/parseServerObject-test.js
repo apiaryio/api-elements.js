@@ -128,8 +128,8 @@ describe('#parseServerObject', () => {
       expect(resource).to.be.instanceof(namespace.elements.Resource);
 
       const { hrefVariables } = resource;
-      const firstHrefVariable = hrefVariables.content.content[0];
-      const secondHrefVariable = hrefVariables.content.content[1];
+      const firstHrefVariable = hrefVariables.content[0];
+      const secondHrefVariable = hrefVariables.content[1];
 
       expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
       expect(hrefVariables.length).to.equal(2);
@@ -187,8 +187,8 @@ describe('#parseServerObject', () => {
       expect(resource).to.be.instanceof(namespace.elements.Resource);
 
       const { hrefVariables } = resource;
-      const firstHrefVariable = hrefVariables.content.content[0];
-      const secondHrefVariable = hrefVariables.content.content[1];
+      const firstHrefVariable = hrefVariables.content[0];
+      const secondHrefVariable = hrefVariables.content[1];
 
       expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
       expect(hrefVariables.length).to.equal(2);
@@ -225,8 +225,8 @@ describe('#parseServerObject', () => {
       expect(resource).to.be.instanceof(namespace.elements.Resource);
 
       const { hrefVariables } = resource;
-      const firstHrefVariable = hrefVariables.content.content[0];
-      const secondHrefVariable = hrefVariables.content.content[1];
+      const firstHrefVariable = hrefVariables.content[0];
+      const secondHrefVariable = hrefVariables.content[1];
 
       expect(hrefVariables).to.be.instanceof(namespace.elements.HrefVariables);
       expect(hrefVariables.length).to.equal(2);

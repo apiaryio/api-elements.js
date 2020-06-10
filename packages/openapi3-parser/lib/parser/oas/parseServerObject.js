@@ -86,7 +86,7 @@ const parseServerObject = context => pipeParseResult(context.namespace,
     resource.href = object.get('url');
 
     if (object.hasKey('variables')) {
-      resource.hrefVariables = new context.namespace.elements.HrefVariables(object.get('variables'));
+      resource.hrefVariables = new context.namespace.elements.HrefVariables(object.get('variables').content);
     }
 
     return resource;
