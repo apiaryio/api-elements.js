@@ -5379,9 +5379,9 @@ promzard@^0.3.0:
     read "1"
 
 protagonist@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/protagonist/-/protagonist-2.2.0.tgz#28036c57ae85a3936e6d3442da1059f4472e381d"
-  integrity sha512-oqHVxpjMZgOk4J99MYfTDrgHM6N5m4ATnKlgxJS3wd8aGFkYat9lakB1VEEr5Kb+rDSZUFmr2yp5o2xRfYG2YQ==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/protagonist/-/protagonist-2.2.1.tgz#67d112cf768d6a76c1402f5befdbd08c5efedee4"
+  integrity sha512-tgtsGUiFEDqcPzKOlfX9Y4RgcA/nXBEK5vbumqnEsyuktQCyBM6DPLNRL4BPbpcalHZnCBqOTJD+Oz0PiTjuEg==
   dependencies:
     nan "^2.13.2"
 
