@@ -96,10 +96,8 @@ class FuryRemoteAdapter {
       data: source,
       params: {
         generateSourceMap,
-        adapterOptions: {
-          generateMessageBody: this.generateMessageBody,
-          generateMessageBodySchema: this.generateMessageBodySchema,
-        },
+        generateMessageBody: this.generateMessageBody,
+        generateMessageBodySchema: this.generateMessageBodySchema,
       },
       headers: {
         'Content-Type': inputMediaType,

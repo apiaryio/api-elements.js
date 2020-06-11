@@ -16,6 +16,11 @@ const apiblueprintWithResponse = `# My API
         + message: Hello World
 `;
 
+function getFirstResponseElement(response) {
+  const resource = response.api.resources.get(0);
+  return resource.transitions.get(0).transactions.get(0).response;
+}
+
 describe('Adapter works with Fury interface (with default config)', function remoteAdapterTests() {
   this.timeout(4000);
 
@@ -92,15 +97,29 @@ describe('Adapter works with Fury interface (with default config)', function rem
     });
 
     it('blueprint with generateMessageBody set to true', (done) => {
-      fury.parse({ source: apiblueprintWithResponse, generateMessageBody: true }, (err, result) => {
-        expect(result.content[0].content[0].content[0].content[0].content[1].content[1].attributes.content).not.to.be.undefined;
+      fury.parse({
+        source: apiblueprintWithResponse,
+        mediaType: 'text/vnd.apiblueprint',
+        adapterOptions: {
+          generateMessageBody: true,
+          generateMessageBodySchema: true,
+        },
+      }, (err, result) => {
+        expect(getFirstResponseElement(result).messageBody).not.to.be.undefined;
         done();
       });
     });
 
     it('blueprint with generateMessageBody set to false', (done) => {
-      fury.parse({ source: apiblueprintWithResponse, generateMessageBody: false }, (err, result) => {
-        expect(result.content[0].content[0].content[0].content[0].content[1]).to.be.undefined;
+      fury.parse({
+        source: apiblueprintWithResponse,
+        mediaType: 'text/vnd.apiblueprint',
+        adapterOptions: {
+          generateMessageBody: false,
+          generateMessageBodySchema: false,
+        },
+      }, (err, result) => {
+        expect(getFirstResponseElement(result).messageBody).to.be.undefined;
         done();
       });
     });
