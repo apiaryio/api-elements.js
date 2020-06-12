@@ -155,6 +155,50 @@ describe('Swagger 2.0 adapter', () => {
     });
   });
 
+  describe('parsing the swagger key', () => {
+    it('returns error parse result for object without swagger key', (done) => {
+      const source = 'openapi: 3.0.0\ninfo: {title: hi, version: 0.1.0}\npaths: {}\n';
+
+      fury.parse({ source, mediaType: 'application/swagger+yaml' }, (err, parseResult) => {
+        expect(err).to.be.null;
+        expect(parseResult).to.exist;
+        expect(parseResult.api).to.be.undefined;
+        expect(parseResult.errors.toValue()).to.deep.equal([
+          'Missing required key "swagger"',
+        ]);
+        done();
+      });
+    });
+
+    it('returns error parse result when swagger key is number', (done) => {
+      const source = 'swagger: 2.0\ninfo: {title: hi, version: 0.1.0}\npaths: {}\n';
+
+      fury.parse({ source, mediaType: 'application/swagger+yaml' }, (err, parseResult) => {
+        expect(err).to.be.null;
+        expect(parseResult).to.exist;
+        expect(parseResult.api).to.be.undefined;
+        expect(parseResult.errors.toValue()).to.deep.equal([
+          'Swagger version number must be a string (e.g. "2.0") not a number.',
+        ]);
+        done();
+      });
+    });
+
+    it('returns error parse result when swagger key is not 2.0 version', (done) => {
+      const source = 'swagger: "1.0"\ninfo: {title: hi, version: 0.1.0}\npaths: {}\n';
+
+      fury.parse({ source, mediaType: 'application/swagger+yaml' }, (err, parseResult) => {
+        expect(err).to.be.null;
+        expect(parseResult).to.exist;
+        expect(parseResult.api).to.be.undefined;
+        expect(parseResult.errors.toValue()).to.deep.equal([
+          'Unrecognized Swagger version: 1.0. Expected 2.0',
+        ]);
+        done();
+      });
+    });
+  });
+
   describe('can parse fixtures', () => {
     const fixtures = swaggerZoo.features();
     fixtures.forEach((fixture) => {
