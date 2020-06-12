@@ -193,7 +193,7 @@ function getPackage(name) {
 }
 
 function getVersion() {
-  const packages = ['fury-cli'].concat(adapters);
+  const packages = ['@apielements/cli'].concat(adapters);
 
   return packages
     .map(getPackage)

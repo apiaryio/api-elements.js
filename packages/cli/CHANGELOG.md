@@ -1,4 +1,8 @@
-# Changelog
+# API Elements: CLI Changelog
+
+## 0.10.0 (2020-06-12)
+
+The package has been renamed to `@apielements/cli`.
 
 ## 0.9.4 (2020-04-20)
 

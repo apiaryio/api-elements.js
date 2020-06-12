@@ -1,14 +1,13 @@
-# Fury CLI
+# API Elements CLI
 
-Command line interface for the [fury](https://github.com/apiaryio/api-elements.js/tree/master/packages/fury)
-API Description SDK. Fury allows you to parse API Descriptions into [API
-Elements](http://api-elements.readthedocs.org/) or other API Description
-formats.
+Command line interface for [API Elements](https://apielements.org)
+and the [API Elements JavaScript
+tooling](https://apielements.org/projects/js/).
 
 ## Install
 
 ```shell
-$ npm install -g fury-cli
+$ npm install -g @apielements/cli
 ```
 
 ## Usage
