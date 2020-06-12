@@ -6,6 +6,20 @@ const blueprintSource = 'FORMAT: 1A\n\n# API\n';
 const swaggerSource = '{ "swagger": "2.0", "info": { "version": "1.0.0", "title": "swg" } }';
 const invalidSwaggerSource = '{ "swagger": "2.0", "info": { "version": 1, "title": "swg" } }';
 
+const apiblueprintWithResponse = `# My API
+## POST /
+
++ Response 200 (application/json)
+
+    + Attributes
+
+        + message: Hello World
+`;
+
+function getFirstResponseElement(response) {
+  const resource = response.api.resources.get(0);
+  return resource.transitions.get(0).transactions.get(0).response;
+}
 
 describe('Adapter works with Fury interface (with default config)', function remoteAdapterTests() {
   this.timeout(4000);
@@ -78,6 +92,58 @@ describe('Adapter works with Fury interface (with default config)', function rem
         expect(result.length).to.be.equal(1);
         expect(result.annotations.length).to.be.equal(1);
         expect(result.annotations.get(0).content).to.be.equal('API version number must be a string (e.g. "1.0.0") not a number.');
+        done();
+      });
+    });
+
+    it('blueprint with generateMessageBody set to true', (done) => {
+      fury.parse({
+        source: apiblueprintWithResponse,
+        mediaType: 'text/vnd.apiblueprint',
+        adapterOptions: {
+          generateMessageBody: true,
+        },
+      }, (err, result) => {
+        expect(getFirstResponseElement(result).messageBody).not.to.be.undefined;
+        done();
+      });
+    });
+
+    it('blueprint with generateMessageBody set to false', (done) => {
+      fury.parse({
+        source: apiblueprintWithResponse,
+        mediaType: 'text/vnd.apiblueprint',
+        adapterOptions: {
+          generateMessageBody: false,
+        },
+      }, (err, result) => {
+        expect(getFirstResponseElement(result).messageBody).to.be.undefined;
+        done();
+      });
+    });
+
+    it('blueprint with generateMessageBodySchema set to true', (done) => {
+      fury.parse({
+        source: apiblueprintWithResponse,
+        mediaType: 'text/vnd.apiblueprint',
+        adapterOptions: {
+          generateMessageBodySchema: true,
+        },
+      }, (err, result) => {
+        expect(getFirstResponseElement(result).messageBodySchema).not.to.be.undefined;
+        done();
+      });
+    });
+
+    it('blueprint with generateMessageBodySchema set to false', (done) => {
+      fury.parse({
+        source: apiblueprintWithResponse,
+        mediaType: 'text/vnd.apiblueprint',
+        adapterOptions: {
+          generateMessageBodySchema: false,
+        },
+      }, (err, result) => {
+        expect(getFirstResponseElement(result).messageBodySchema).to.be.undefined;
         done();
       });
     });

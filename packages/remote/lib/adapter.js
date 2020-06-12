@@ -73,7 +73,7 @@ class FuryRemoteAdapter {
   }
 
   parse({
-    source, generateSourceMap, namespace, mediaType,
+    source, generateSourceMap, generateMessageBody, generateMessageBodySchema, namespace, mediaType,
   }) {
     const inputMediaType = mediaType || detectMediaType(source, defaultInputMediaType);
 
@@ -84,6 +84,8 @@ class FuryRemoteAdapter {
       data: source,
       params: {
         generateSourceMap,
+        generateMessageBody,
+        generateMessageBodySchema,
       },
       headers: {
         'Content-Type': inputMediaType,
