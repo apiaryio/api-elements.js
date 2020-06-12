@@ -66,7 +66,7 @@ class HttpMessagePayload extends ArrayElement {
   get messageBody() {
     // Returns the *first* message body. Only one should be defined according
     // to the spec, but it's possible to include more.
-    return this.filter(item => item.element === 'asset' && item.classes.contains('messageBody')).first;
+    return this.filter(item => item.element === 'asset' && item.classes.includes('messageBody')).first;
   }
 
   /**
@@ -77,7 +77,7 @@ class HttpMessagePayload extends ArrayElement {
   get messageBodySchema() {
     // Returns the *first* message body schema. Only one should be defined
     // according to the spec, but it's possible to include more.
-    return this.filter(item => item.element === 'asset' && item.classes.contains('messageBodySchema')).first;
+    return this.filter(item => item.element === 'asset' && item.classes.includes('messageBodySchema')).first;
   }
 }
 

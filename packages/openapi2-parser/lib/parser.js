@@ -1320,7 +1320,7 @@ class Parser {
     const { Category, Copy } = this.namespace.elements;
 
     if (name) {
-      this.group = this.api.find(el => el.element === 'category' && el.classes.contains('resourceGroup') && el.title.toValue() === name).first;
+      this.group = this.api.find(el => el.element === 'category' && el.classes.includes('resourceGroup') && el.title.toValue() === name).first;
 
       if (!this.group) {
         // TODO: Source maps for these groups. The problem is that the location
