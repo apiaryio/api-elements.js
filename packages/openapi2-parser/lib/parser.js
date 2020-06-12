@@ -103,6 +103,15 @@ class Parser {
       return done(null, this.result);
     }
 
+    if (loaded.swagger === undefined) {
+      this.createAnnotation(
+        annotations.VALIDATION_ERROR, null,
+        ('Missing required key "swagger"')
+      );
+
+      return done(null, this.result);
+    }
+
     // Some sane defaults since these are sometimes left out completely
     if (loaded.info === undefined) {
       loaded.info = {};

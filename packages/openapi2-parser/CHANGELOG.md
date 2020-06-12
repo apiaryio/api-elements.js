@@ -1,5 +1,13 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Returns a validation error while trying to parse a YAML or JSON object which
+  does not contain the `swagger` key, in prior versions the parser may have
+  crashed under some inputs.
+
 ## 0.32.0 (2020-06-12)
 
 The package has been updated for compatibility with `@apielements/core`.
