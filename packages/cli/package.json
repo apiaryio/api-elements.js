@@ -1,6 +1,6 @@
 {
-  "name": "fury-cli",
-  "version": "0.9.4",
+  "name": "@apielements/cli",
+  "version": "0.10.0",
   "description": "Command line tool interface for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -10,11 +10,11 @@
   "files": [
     "lib/fury.js"
   ],
-  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury-cli",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/cli",
   "repository": {
     "type": "git",
     "url": "https://github.com/apiaryio/api-elements.js.git",
-    "directory": "packages/fury-cli"
+    "directory": "packages/cli"
   },
   "scripts": {
     "lint": "eslint .",
