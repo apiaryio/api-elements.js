@@ -28,7 +28,7 @@ install openapi2-parser
 install openapi3-parser
 install apiaryb-parser
 install apib-serializer
-install fury-cli
+install cli
 
 cd "$TMPDIR"
 npx fury --help
