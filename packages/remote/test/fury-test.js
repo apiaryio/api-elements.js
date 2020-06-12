@@ -96,31 +96,53 @@ describe('Adapter works with Fury interface (with default config)', function rem
       });
     });
 
-    it('blueprint with generateMessageBody and generateMessageBodySchema set to true', (done) => {
+    it('blueprint with generateMessageBody set to true', (done) => {
       fury.parse({
         source: apiblueprintWithResponse,
         mediaType: 'text/vnd.apiblueprint',
         adapterOptions: {
           generateMessageBody: true,
-          generateMessageBodySchema: true,
         },
       }, (err, result) => {
         expect(getFirstResponseElement(result).messageBody).not.to.be.undefined;
-        expect(getFirstResponseElement(result).messageBodySchema).not.to.be.undefined;
         done();
       });
     });
 
-    it('blueprint with generateMessageBody and generateMessageBodySchema set to false', (done) => {
+    it('blueprint with generateMessageBody set to false', (done) => {
       fury.parse({
         source: apiblueprintWithResponse,
         mediaType: 'text/vnd.apiblueprint',
         adapterOptions: {
           generateMessageBody: false,
-          generateMessageBodySchema: false,
         },
       }, (err, result) => {
         expect(getFirstResponseElement(result).messageBody).to.be.undefined;
+        done();
+      });
+    });
+
+    it('blueprint with generateMessageBodySchema set to true', (done) => {
+      fury.parse({
+        source: apiblueprintWithResponse,
+        mediaType: 'text/vnd.apiblueprint',
+        adapterOptions: {
+          generateMessageBodySchema: true,
+        },
+      }, (err, result) => {
+        expect(getFirstResponseElement(result).messageBodySchema).not.to.be.undefined;
+        done();
+      });
+    });
+
+    it('blueprint with generateMessageBodySchema set to false', (done) => {
+      fury.parse({
+        source: apiblueprintWithResponse,
+        mediaType: 'text/vnd.apiblueprint',
+        adapterOptions: {
+          generateMessageBodySchema: false,
+        },
+      }, (err, result) => {
         expect(getFirstResponseElement(result).messageBodySchema).to.be.undefined;
         done();
       });
