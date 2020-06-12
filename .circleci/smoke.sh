@@ -18,11 +18,11 @@ install() {
   cd "$TMPDIR" && npm install "$TARBALL" && cd "$PROJECT_DIR"
 }
 
-echo "Setting up Fury in $TMPDIR"
+echo "Setting up API Elements in $TMPDIR"
 
 create_package
 install api-elements
-install fury
+install core
 install apib-parser
 install openapi2-parser
 install openapi3-parser

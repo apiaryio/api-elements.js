@@ -1,4 +1,8 @@
-# Fury Changelog
+# API Elements: Core
+
+## 0.1.0 (2020-06-12)
+
+The package has been renamed to `@apielements/core`.
 
 ## 3.0.0-beta.14 (2020-04-20)
 

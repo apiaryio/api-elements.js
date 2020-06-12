@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const fury = require('fury');
+const fury = require('@apielements/core');
 const adapter = require('../lib/adapter');
 
 const { detect, mediaTypes } = adapter;

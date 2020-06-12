@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const cloneDeep = require('lodash/cloneDeep');
-const fury = require('fury');
+const fury = require('@apielements/core');
 const adapter = require('../lib/adapter');
 
 fury.adapters = [adapter];

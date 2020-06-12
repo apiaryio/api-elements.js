@@ -1,5 +1,5 @@
 const R = require('ramda');
-const { Fury } = require('fury');
+const { Fury } = require('@apielements/core');
 const { expect } = require('../chai');
 
 const parseMap = require('../../../lib/parser/parseMap');

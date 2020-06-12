@@ -1,7 +1,7 @@
-# Fury.js
+# API Elements: Core
 
-[![NPM version](https://img.shields.io/npm/v/fury.svg)](https://www.npmjs.org/package/fury)
-[![License](https://img.shields.io/npm/l/fury.svg)](https://www.npmjs.org/package/fury)
+[![NPM version](https://img.shields.io/npm/v/@apielements/core.svg)](https://www.npmjs.org/package/@apielements/core)
+[![License](https://img.shields.io/npm/l/@apielements/core.svg)](https://www.npmjs.org/package/@apielements/core)
 
 API Description SDK
 
@@ -19,7 +19,7 @@ Note: Fury requires *adapters* to support parsing and serializing. You will need
 Fury.js is available as an npm module.
 
 ```sh
-$ npm install --save fury
+$ npm install --save @apielements/core
 ```
 
 ### Refract Interface
@@ -27,7 +27,7 @@ $ npm install --save fury
 Fury.js offers an interface based on the [Refract Project](https://github.com/refractproject/refract-spec) element specification and makes use of the API description and data structure namespaces. Adapters convert from formats such as API Blueprint into Refract elements and Fury.js exposes these with API-related convenience functionality. For example:
 
 ```js
-import fury from 'fury';
+import fury from '@apielements/core';
 import apibParser from '@apielements/apib-parser';
 
 // The input as a string
@@ -102,7 +102,7 @@ Reference:
 There may come a day when you need to have multiple Fury instances with different adapters or other options set up in the same program. This is possible via the `Fury` class:
 
 ```js
-import {Fury} from 'fury';
+import {Fury} from '@apielements/core';
 
 const fury1 = new Fury();
 const fury2 = new Fury();
@@ -182,7 +182,7 @@ export default {name, mediaTypes, detect, parse, serialize};
 Now you can register your adapter with Fury.js:
 
 ```js
-import fury from 'fury';
+import fury from '@apielements/core';
 import myAdapter from './my-adapter';
 
 // Register my custom adapter

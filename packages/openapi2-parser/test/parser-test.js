@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const fury = require('fury');
+const fury = require('@apielements/core');
 const Parser = require('../lib/parser');
 
 describe('Parser', () => {

@@ -16,7 +16,7 @@ API Elements adapters:
 ## Usage
 
 ```javascript
-const { Fury } = require('fury');
+const { Fury } = require('@apielements/core');
 
 const fury = new Fury();
 

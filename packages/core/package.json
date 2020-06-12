@@ -1,6 +1,6 @@
 {
-  "name": "fury",
-  "version": "3.0.0-beta.14",
+  "name": "@apielements/core",
+  "version": "0.1.0",
   "description": "API Description SDK",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -8,11 +8,11 @@
   "files": [
     "lib/fury.js"
   ],
-  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/fury",
+  "homepage": "https://github.com/apiaryio/api-elements.js/tree/master/packages/core",
   "repository": {
     "type": "git",
     "url": "https://github.com/apiaryio/api-elements.js.git",
-    "directory": "packages/fury"
+    "directory": "packages/core"
   },
   "scripts": {
     "lint": "eslint .",
