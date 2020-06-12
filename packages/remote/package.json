@@ -1,6 +1,6 @@
 {
   "name": "@apielements/remote",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "API Elements adapter for performing actions via a remote API",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",

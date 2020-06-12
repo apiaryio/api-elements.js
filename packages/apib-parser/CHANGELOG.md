@@ -1,5 +1,9 @@
 # API Elements: API Blueprint Parser Changelog
 
+## 0.20.0 (2020-06-12)
+
+The package has been updated for compatibility with `@apielements/core`.
+
 ## 0.19.0 (2020-04-29)
 
 The package has been renamed to `@apielements/apib-parser`.

@@ -1,5 +1,9 @@
 # Fury OAS3 Parser Changelog
 
+## 0.13.0 (2020-06-12)
+
+The package has been updated for compatibility with `@apielements/core`.
+
 ## 0.12.3 (2020-06-10)
 
 ### Bug Fixes
