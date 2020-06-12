@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { Fury } = require('fury');
+const { Fury } = require('@apielements/core');
 const { bodyFromSchema } = require('../lib/generator');
 
 const { minim: namespace } = new Fury();

@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { Fury } = require('fury');
+const { Fury } = require('@apielements/core');
 const FuryRemoteAdapter = require('../lib/adapter');
 
 const blueprintSource = 'FORMAT: 1A\n\n# API\n';

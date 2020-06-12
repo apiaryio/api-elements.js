@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 
 const chai = require('chai');
-const { Fury } = require('fury');
+const { Fury } = require('@apielements/core');
 
 const { minim: namespace } = new Fury();
 

@@ -1,5 +1,9 @@
 # API Elements: Remote Adapter Changelog
 
+## 0.6.0 (2020-06-12)
+
+The package has been updated for compatibility with `@apielements/core`.
+
 ## 0.5.1 (2020-06-10)
 
 The package has been renamed to `@apielements/remote`.

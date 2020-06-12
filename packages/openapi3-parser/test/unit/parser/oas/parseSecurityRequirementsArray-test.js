@@ -1,4 +1,4 @@
-const { Fury } = require('fury');
+const { Fury } = require('@apielements/core');
 const { expect } = require('../../chai');
 const parse = require('../../../../lib/parser/oas/parseSecurityRequirementsArray');
 const Context = require('../../../../lib/context');

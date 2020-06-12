@@ -1,6 +1,6 @@
 {
   "name": "@apielements/apiaryb-parser",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "API Elements parser for deprecated Apiary Blueprint language",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -26,12 +26,12 @@
     "deckardcain": "^1.0.0"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.14"
+    "@apielements/core": "^0.1.0"
   },
   "devDependencies": {
+    "@apielements/core": "^0.1.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
-    "fury": "3.0.0-beta.14",
     "glob": "^7.1.2",
     "mocha": "^7.1.1",
     "pegjs": "git://github.com/dmajda/pegjs.git#02af83f9b416778878e52e2cbbc22d96e312164e"

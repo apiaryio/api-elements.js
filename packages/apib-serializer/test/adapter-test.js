@@ -6,7 +6,7 @@
 
 const { expect } = require('chai');
 const fs = require('fs');
-const { Fury } = require('fury');
+const { Fury } = require('@apielements/core');
 const glob = require('glob');
 const path = require('path');
 const adapter = require('../lib/adapter');

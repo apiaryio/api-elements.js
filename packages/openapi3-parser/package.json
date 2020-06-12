@@ -1,6 +1,6 @@
 {
   "name": "@apielements/openapi3-parser",
-  "version": "0.12.3",
+  "version": "0.13.0",
   "description": "Open API Specification 3 API Elements Parser",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -29,12 +29,12 @@
     "yaml-js": "^0.2.3"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.14"
+    "@apielements/core": "^0.1.0"
   },
   "devDependencies": {
+    "@apielements/core": "^0.1.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
-    "fury": "3.0.0-beta.14",
     "mocha": "^7.1.1"
   },
   "engines": {

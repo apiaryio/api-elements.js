@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { expect } = require('chai');
-const { Fury } = require('fury');
+const { Fury } = require('@apielements/core');
 const adapter = require('../../lib/adapter');
 
 // fixme use `util`.`promisify` for node 8+ or https://github.com/apiaryio/api-elements.js/issues/37

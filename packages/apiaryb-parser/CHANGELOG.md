@@ -1,5 +1,9 @@
 # API Elements: Apiary Blueprint Parser Changelog
 
+## 0.2.0 (2020-06-12)
+
+The package has been updated for compatibility with `@apielements/core`.
+
 ## 0.1.0 (2020-04-30)
 
 The package has been renamed to `@apielements/apiaryb-parser`.

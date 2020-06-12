@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
-const fury = require('fury');
+const fury = require('@apielements/core');
 const swaggerZoo = require('swagger-zoo');
 const { expect } = require('chai');
 const adapter = require('../lib/adapter');

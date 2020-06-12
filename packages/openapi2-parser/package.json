@@ -1,6 +1,6 @@
 {
   "name": "@apielements/openapi2-parser",
-  "version": "0.31.1",
+  "version": "0.32.0",
   "description": "Swagger 2.0 parser for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -30,12 +30,12 @@
     "z-schema": "^4.1.0"
   },
   "peerDependencies": {
-    "fury": "3.0.0-beta.14"
+    "@apielements/core": "^0.1.0"
   },
   "devDependencies": {
+    "@apielements/core": "^0.1.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
-    "fury": "3.0.0-beta.14",
     "glob": "^7.1.2",
     "mocha": "^7.1.1",
     "swagger-zoo": "^3.1.3"
