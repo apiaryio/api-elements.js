@@ -169,10 +169,10 @@ FORMAT: 1A
     {% if item.element == 'copy' %}
 {{ item.toValue() }}
     {% endif %}
-    {% if item.element == 'category' and item.classes.contains('resourceGroup') %}
+    {% if item.element == 'category' and item.classes.includes('resourceGroup') %}
       {{ renderGroup(item) }}
     {% endif %}
-    {% if item.element == 'category' and item.classes.contains('dataStructures') %}
+    {% if item.element == 'category' and item.classes.includes('dataStructures') %}
       {{ renderDataStructures(item) }}
     {% endif %}
     {% if item.element == 'resource' %}

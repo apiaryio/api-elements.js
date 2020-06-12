@@ -373,7 +373,7 @@ describe('Parameter Object', () => {
 
       expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
       expect(typeAttributes.length).to.be.equal(1);
-      expect(typeAttributes.contains('required')).to.be.true;
+      expect(typeAttributes.includes('required')).to.be.true;
     });
 
     it('ignore required param if it is `false`', () => {
@@ -421,7 +421,7 @@ describe('Parameter Object', () => {
 
       expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
       expect(typeAttributes.length).to.be.equal(1);
-      expect(typeAttributes.contains('required')).to.be.true;
+      expect(typeAttributes.includes('required')).to.be.true;
 
       expect(parseResult).to.contain.warning("'Parameter Object' 'required' must exist when 'in' is set to 'path'");
     });
@@ -442,7 +442,7 @@ describe('Parameter Object', () => {
 
       expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
       expect(typeAttributes.length).to.be.equal(1);
-      expect(typeAttributes.contains('required')).to.be.true;
+      expect(typeAttributes.includes('required')).to.be.true;
 
       expect(parseResult).to.contain.warning("'Parameter Object' 'required' must be 'true' when 'in' is set to 'path'");
     });
@@ -463,7 +463,7 @@ describe('Parameter Object', () => {
 
       expect(typeAttributes).to.be.instanceof(namespace.elements.Array);
       expect(typeAttributes.length).to.be.equal(1);
-      expect(typeAttributes.contains('required')).to.be.true;
+      expect(typeAttributes.includes('required')).to.be.true;
 
       expect(parseResult).to.contain.warning("'Parameter Object' 'required' is not a boolean");
     });

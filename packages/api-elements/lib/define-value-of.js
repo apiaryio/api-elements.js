@@ -36,7 +36,7 @@ function hasTypeAttribute(e, attribute) {
   if (undefined !== e._attributes) {
     const typeAttributes = e.attributes.get('typeAttributes');
     if (typeAttributes) {
-      return typeAttributes.contains(attribute);
+      return typeAttributes.includes(attribute);
     }
   }
 

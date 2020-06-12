@@ -21,7 +21,7 @@ class Category extends ArrayElement {
    * @memberof Category.prototype
    */
   get resourceGroups() {
-    return this.children.filter(item => item.classes.contains('resourceGroup'));
+    return this.children.filter(item => item.classes.includes('resourceGroup'));
   }
 
   /**
@@ -30,15 +30,15 @@ class Category extends ArrayElement {
    * @memberof Category.prototype
    */
   get dataStructures() {
-    return this.children.filter(item => item.classes.contains('dataStructures'));
+    return this.children.filter(item => item.classes.includes('dataStructures'));
   }
 
   get scenarios() {
-    return this.children.filter(item => item.classes.contains('scenario'));
+    return this.children.filter(item => item.classes.includes('scenario'));
   }
 
   get transitionGroups() {
-    return this.children.filter(item => item.classes.contains('transitions'));
+    return this.children.filter(item => item.classes.includes('transitions'));
   }
 
   /**
@@ -47,7 +47,7 @@ class Category extends ArrayElement {
    * @memberof Category.prototype
    */
   get authSchemeGroups() {
-    return this.children.filter(item => item.classes.contains('authSchemes'));
+    return this.children.filter(item => item.classes.includes('authSchemes'));
   }
 
   /**

@@ -21,7 +21,7 @@ class ParseResult extends ArrayElement {
    * @memberof ParseResult.prototype
    */
   get api() {
-    return this.children.filter(item => item.classes.contains('api')).first;
+    return this.children.filter(item => item.classes.includes('api')).first;
   }
 
   /**
@@ -40,7 +40,7 @@ class ParseResult extends ArrayElement {
    */
   get warnings() {
     return this.children
-      .filter(item => item.element === 'annotation' && item.classes.contains('warning'));
+      .filter(item => item.element === 'annotation' && item.classes.includes('warning'));
   }
 
   /**
@@ -50,7 +50,7 @@ class ParseResult extends ArrayElement {
    */
   get errors() {
     return this.children
-      .filter(item => item.element === 'annotation' && item.classes.contains('error'));
+      .filter(item => item.element === 'annotation' && item.classes.includes('error'));
   }
 }
 

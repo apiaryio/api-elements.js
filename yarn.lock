@@ -4449,10 +4449,10 @@ mimic-fn@^1.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
-minim@^0.23.4, minim@^0.23.5:
-  version "0.23.7"
-  resolved "https://registry.yarnpkg.com/minim/-/minim-0.23.7.tgz#cfacc31f247193c5887f4d0b834ddb8fde84b949"
-  integrity sha512-XAp54ttzelevD/iN0U+N7I0clxrFw9n01Ou0ZGS3tuweXpzjfnFq2rDrqFeHqBoYUtpt/3vt1JFvBtPMc5KW/Q==
+minim@^0.23.8:
+  version "0.23.8"
+  resolved "https://registry.yarnpkg.com/minim/-/minim-0.23.8.tgz#a529837afe1654f119dfb68ce7487dd8d4866b9c"
+  integrity sha512-bjdr2xW1dBCMsMGGsUeqM4eFI60m94+szhxWys+B1ztIt6gWSfeGBdSVCIawezeHYLYn0j6zrsXdQS/JllBzww==
   dependencies:
     lodash "^4.15.0"
 

@@ -35,7 +35,7 @@ chai.use((_chai, utils) => {
     const obj = this._obj;
 
     this.assert(
-      obj.classes.contains(name),
+      obj.classes.includes(name),
       'Expected class list #{act} to contain #{exp}',
       'Expected class list #{act} to not contain #{exp}',
       name,
