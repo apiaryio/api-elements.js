@@ -1985,7 +1985,7 @@
           ]
         }
       },
-      "content": "'Header Object' contains invalid key 'schema'"
+      "content": "'Header Object' contains unsupported key 'schema'"
     },
     {
       "element": "annotation",

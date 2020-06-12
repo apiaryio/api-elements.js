@@ -1,5 +1,13 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Prior versions of the adapter reported the following 'Header Object' keys as
+  invalid: `style`, `explode`, `allowReserved`, `schema`, `content`, `example`,
+  and `examples`. These will now return an unsupported warning instead.
+
 ## 0.13.0 (2020-06-12)
 
 The package has been updated for compatibility with `@apielements/core`.

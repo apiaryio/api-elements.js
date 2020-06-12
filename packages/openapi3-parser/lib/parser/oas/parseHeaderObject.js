@@ -10,6 +10,8 @@ const parseObject = require('../parseObject');
 const name = 'Header Object';
 const unsupportedKeys = [
   'description', 'required', 'deprecated', 'allowEmptyValue',
+  'style', 'explode', 'allowReserved', 'schema', 'content', 'example',
+  'examples',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
