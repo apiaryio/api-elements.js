@@ -149,23 +149,9 @@ class Parser {
         // Non-fatal errors, so let us try and create annotations for them and
         // continue with the parsing as best we can.
         if (err.details) {
-          const queue = [err.details];
-
-          while (queue.length) {
-            _.forEach(queue[0], (item) => {
-              this.createAnnotation(annotations.VALIDATION_ERROR, item.path, item.message);
-
-              if (item.inner) {
-                // TODO: I am honestly not sure what the correct behavior is
-                // here. Some items will have within them a tree of other items,
-                // some of which might contain more info (but it's unclear).
-                // Do we treat them as their own error or do something else?
-                queue.push(item.inner);
-              }
-            });
-
-            queue.shift();
-          }
+          err.details.forEach((error) => {
+            this.createValidationAnnotation(error);
+          });
 
           return done(null, this.result);
         }
@@ -1562,7 +1548,24 @@ class Parser {
 
   // Create annotation from swagger-parser error (ZSchema validation)
   createValidationAnnotation(error) {
-    this.createAnnotation(annotations.VALIDATION_ERROR, error.path, error.message);
+    let message;
+
+    if (error.code === 'ENUM_MISMATCH') {
+      const enumerations = error[ZSchema.schemaSymbol].enum.map((item, index, items) => {
+        if (index === items.length - 1) {
+          return `or '${item}'`;
+        }
+
+        return `'${item}'`;
+      }).join(', ');
+
+      const value = error.params[0];
+      message = `Value must be either ${enumerations} not '${value}'`;
+    } else {
+      ({ message } = error);
+    }
+
+    this.createAnnotation(annotations.VALIDATION_ERROR, error.path, message);
 
     if (error.inner) {
       error.inner.forEach((innerError) => {
