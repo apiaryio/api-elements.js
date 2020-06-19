@@ -1550,6 +1550,15 @@ class Parser {
   createValidationAnnotation(error) {
     let message;
 
+    // join array of words
+    const oxfordJoin = array => array.map((item, index) => {
+      if (index === array.length - 1) {
+        return `or '${item}'`;
+      }
+
+      return `'${item}'`;
+    }).join(', ');
+
     if (error.code === 'ANY_OF_MISSING'
       && _.last(error.path) === 'type'
       && error.inner.length === 2
@@ -1577,15 +1586,17 @@ class Parser {
       return;
     }
 
+    if (error.code === 'ONE_OF_MISSING'
+      && error.inner.every(subError => subError.code === 'OBJECT_MISSING_REQUIRED_PROPERTY')) {
+      // collase a collection of "one of" required property validations into one message
+      const missingProperties = oxfordJoin(error.inner.map(subError => subError.params[0]));
+      message = `Object must contain either ${missingProperties} properties`;
+      this.createAnnotation(annotations.VALIDATION_ERROR, error.path, message);
+      return;
+    }
+
     if (error.code === 'ENUM_MISMATCH') {
-      const enumerations = error[ZSchema.schemaSymbol].enum.map((item, index, items) => {
-        if (index === items.length - 1) {
-          return `or '${item}'`;
-        }
-
-        return `'${item}'`;
-      }).join(', ');
-
+      const enumerations = oxfordJoin(error[ZSchema.schemaSymbol].enum);
       const value = error.params[0];
       message = `Value must be either ${enumerations} not '${value}'`;
     } else {
