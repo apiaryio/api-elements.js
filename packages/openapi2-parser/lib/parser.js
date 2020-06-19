@@ -1550,6 +1550,23 @@ class Parser {
   createValidationAnnotation(error) {
     let message;
 
+    if (error.code === 'ANY_OF_MISSING'
+      && _.last(error.path) === 'type'
+      && error.inner.length === 2
+      && error.inner[0].code === 'ENUM_MISMATCH'
+      && error.inner[1].code === 'INVALID_TYPE'
+    ) {
+      // Schema Object 'type' validation can contain enum mismatch and type mismatch
+      // Prefer only the enum mismatch for less confusing error message
+      // Schema is something like the following which causes anyOf validation
+      // with two inner validation errors:
+      // anyOf:
+      //   - enum: ['array', 'number', ...]
+      //   - type: ['string', 'array']
+      this.createValidationAnnotation(error.inner[0]);
+      return;
+    }
+
     if (error.code === 'ENUM_MISMATCH') {
       const enumerations = error[ZSchema.schemaSymbol].enum.map((item, index, items) => {
         if (index === items.length - 1) {
