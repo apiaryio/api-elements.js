@@ -174,6 +174,15 @@ class Parser {
           annotation.attributes.set('sourceMap', [
             new SourceMap([location]),
           ]);
+        } else {
+          // Some validation errors contain `in '/some/path'`,
+          // we can extract path to get source map
+          const matchesPath = message.match(/in '\/(.*?)'/);
+
+          if (matchesPath) {
+            const path = matchesPath[1].split('/');
+            this.createSourceMap(annotation, path, true);
+          }
         }
 
         return done(null, this.result);

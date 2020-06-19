@@ -1,0 +1,9 @@
+swagger: '2.0'
+info:
+  title: Swagger Validation Errors
+  version: 1.0.0
+paths: {}
+definitions:
+  test:
+    type: object
+    required: [foo]

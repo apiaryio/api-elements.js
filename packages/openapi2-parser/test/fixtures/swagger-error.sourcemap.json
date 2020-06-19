@@ -1,0 +1,87 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "annotation",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "error"
+            }
+          ]
+        },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "origin"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "attributes": {
+        "code": {
+          "element": "number",
+          "content": 4
+        },
+        "sourceMap": {
+          "element": "array",
+          "content": [
+            {
+              "element": "sourceMap",
+              "content": [
+                {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 6
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 2
+                        }
+                      },
+                      "content": 98
+                    },
+                    {
+                      "element": "number",
+                      "attributes": {
+                        "line": {
+                          "element": "number",
+                          "content": 9
+                        },
+                        "column": {
+                          "element": "number",
+                          "content": 0
+                        }
+                      },
+                      "content": 43
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "content": "Validation failed. Property 'foo' listed as required but does not exist in '/definitions/test'"
+    }
+  ]
+}
