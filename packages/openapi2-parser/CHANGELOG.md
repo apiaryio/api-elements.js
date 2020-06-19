@@ -8,6 +8,9 @@
   does not contain the `swagger` key, in prior versions the parser may have
   crashed under some inputs.
 
+- Improved clarity of validation error messages for Schema Object 'type'
+  property.
+
 ## 0.32.0 (2020-06-12)
 
 The package has been updated for compatibility with `@apielements/core`.
