@@ -163,7 +163,7 @@
           ]
         }
       },
-      "content": "No enum match for: foo"
+      "content": "Value must be either 'array', 'boolean', 'integer', 'null', 'number', 'object', or 'string' not 'foo'"
     },
     {
       "element": "annotation",
