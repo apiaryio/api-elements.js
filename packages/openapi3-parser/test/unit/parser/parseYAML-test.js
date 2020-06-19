@@ -93,7 +93,7 @@ describe('#parseYAML', () => {
     expect(element.first).to.have.sourceMapEndColumn(4);
   });
 
-  it('can parse an boolean value into a boolean element', () => {
+  it('can parse an boolean yes value into a boolean element', () => {
     const element = parseYAML('yes', context);
 
     expect(element).to.be.instanceof(namespace.elements.ParseResult);
@@ -101,6 +101,86 @@ describe('#parseYAML', () => {
 
     expect(element.first).to.be.instanceof(namespace.elements.Boolean);
     expect(element.first.toValue()).to.deep.equal(true);
+    expect(element.first).to.have.sourceMapStart(0);
+    expect(element.first).to.have.sourceMapOffset(3);
+    expect(element.first).to.have.sourceMapStartLine(1);
+    expect(element.first).to.have.sourceMapStartColumn(1);
+    expect(element.first).to.have.sourceMapEndLine(1);
+    expect(element.first).to.have.sourceMapEndColumn(4);
+  });
+
+  it('can parse an boolean on value into a boolean element', () => {
+    const element = parseYAML('on', context);
+
+    expect(element).to.be.instanceof(namespace.elements.ParseResult);
+    expect(element.length).to.equal(1);
+
+    expect(element.first).to.be.instanceof(namespace.elements.Boolean);
+    expect(element.first.toValue()).to.deep.equal(true);
+    expect(element.first).to.have.sourceMapStart(0);
+    expect(element.first).to.have.sourceMapOffset(2);
+    expect(element.first).to.have.sourceMapStartLine(1);
+    expect(element.first).to.have.sourceMapStartColumn(1);
+    expect(element.first).to.have.sourceMapEndLine(1);
+    expect(element.first).to.have.sourceMapEndColumn(3);
+  });
+
+  it('can parse an boolean true value into a boolean element', () => {
+    const element = parseYAML('true', context);
+
+    expect(element).to.be.instanceof(namespace.elements.ParseResult);
+    expect(element.length).to.equal(1);
+
+    expect(element.first).to.be.instanceof(namespace.elements.Boolean);
+    expect(element.first.toValue()).to.deep.equal(true);
+    expect(element.first).to.have.sourceMapStart(0);
+    expect(element.first).to.have.sourceMapOffset(4);
+    expect(element.first).to.have.sourceMapStartLine(1);
+    expect(element.first).to.have.sourceMapStartColumn(1);
+    expect(element.first).to.have.sourceMapEndLine(1);
+    expect(element.first).to.have.sourceMapEndColumn(5);
+  });
+
+  it('can parse an boolean false value into a boolean element', () => {
+    const element = parseYAML('false', context);
+
+    expect(element).to.be.instanceof(namespace.elements.ParseResult);
+    expect(element.length).to.equal(1);
+
+    expect(element.first).to.be.instanceof(namespace.elements.Boolean);
+    expect(element.first.toValue()).to.deep.equal(false);
+    expect(element.first).to.have.sourceMapStart(0);
+    expect(element.first).to.have.sourceMapOffset(5);
+    expect(element.first).to.have.sourceMapStartLine(1);
+    expect(element.first).to.have.sourceMapStartColumn(1);
+    expect(element.first).to.have.sourceMapEndLine(1);
+    expect(element.first).to.have.sourceMapEndColumn(6);
+  });
+
+  it('can parse an boolean no value into a boolean element', () => {
+    const element = parseYAML('no', context);
+
+    expect(element).to.be.instanceof(namespace.elements.ParseResult);
+    expect(element.length).to.equal(1);
+
+    expect(element.first).to.be.instanceof(namespace.elements.Boolean);
+    expect(element.first.toValue()).to.deep.equal(false);
+    expect(element.first).to.have.sourceMapStart(0);
+    expect(element.first).to.have.sourceMapOffset(2);
+    expect(element.first).to.have.sourceMapStartLine(1);
+    expect(element.first).to.have.sourceMapStartColumn(1);
+    expect(element.first).to.have.sourceMapEndLine(1);
+    expect(element.first).to.have.sourceMapEndColumn(3);
+  });
+
+  it('can parse an boolean off value into a boolean element', () => {
+    const element = parseYAML('off', context);
+
+    expect(element).to.be.instanceof(namespace.elements.ParseResult);
+    expect(element.length).to.equal(1);
+
+    expect(element.first).to.be.instanceof(namespace.elements.Boolean);
+    expect(element.first.toValue()).to.deep.equal(false);
     expect(element.first).to.have.sourceMapStart(0);
     expect(element.first).to.have.sourceMapOffset(3);
     expect(element.first).to.have.sourceMapStartLine(1);

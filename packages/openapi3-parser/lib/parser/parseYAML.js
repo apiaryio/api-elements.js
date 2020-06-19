@@ -61,7 +61,7 @@ function convert(node, annotations, context) {
   } else if (node.tag === 'tag:yaml.org,2002:int' || node.tag === 'tag:yaml.org,2002:float') {
     element = new namespace.elements.Number(Number(node.value));
   } else if (node.tag === 'tag:yaml.org,2002:bool') {
-    element = new namespace.elements.Boolean(Boolean(node.value));
+    element = new namespace.elements.Boolean(node.value === 'true' || node.value === 'yes' || node.value === 'on');
   } else if (node.tag === 'tag:yaml.org,2002:null') {
     element = new namespace.elements.Null();
   } else if (node.tag === 'tag:yaml.org,2002:binary') {
