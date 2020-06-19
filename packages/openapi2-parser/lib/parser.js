@@ -1560,6 +1560,21 @@ class Parser {
     }
   }
 
+  // Create annotation from swagger-parser error (ZSchema validation)
+  createValidationAnnotation(error) {
+    this.createAnnotation(annotations.VALIDATION_ERROR, error.path, error.message);
+
+    if (error.inner) {
+      error.inner.forEach((innerError) => {
+        // TODO: I am honestly not sure what the correct behavior is
+        // here. Some items will have within them a tree of other items,
+        // some of which might contain more info (but it's unclear).
+        // Do we treat them as their own error or do something else?
+        this.createValidationAnnotation(innerError);
+      });
+    }
+  }
+
   // Make a new annotation for the given path and message
   createAnnotation(info, path, message) {
     const { Annotation } = this.namespace.elements;
