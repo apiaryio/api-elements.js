@@ -1567,6 +1567,16 @@ class Parser {
       return;
     }
 
+    if (error.code === 'ONE_OF_MISSING'
+      && error.inner.length === 2
+      && error.inner[1].code === 'OBJECT_MISSING_REQUIRED_PROPERTY'
+      && error.inner[1].params.length === 1 && error.inner[1].params[0] === '$ref') {
+      // one of validation error containing $ref, let's skip the ref part of message
+      // and only show the "main" branch. The $ref is rarely important aspect of validation.
+      this.createValidationAnnotation(error.inner[0]);
+      return;
+    }
+
     if (error.code === 'ENUM_MISMATCH') {
       const enumerations = error[ZSchema.schemaSymbol].enum.map((item, index, items) => {
         if (index === items.length - 1) {
