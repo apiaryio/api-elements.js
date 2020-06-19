@@ -122,17 +122,6 @@
                           "content": "How many items to return at one time (max 100)"
                         }
                       },
-                      "attributes": {
-                        "typeAttributes": {
-                          "element": "array",
-                          "content": [
-                            {
-                              "element": "string",
-                              "content": "required"
-                            }
-                          ]
-                        }
-                      },
                       "content": {
                         "key": {
                           "element": "string",

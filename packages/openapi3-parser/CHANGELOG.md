@@ -8,6 +8,10 @@
   invalid: `style`, `explode`, `allowReserved`, `schema`, `content`, `example`,
   and `examples`. These will now return an unsupported warning instead.
 
+- Negative boolean YAML values was previously treated as true and thus
+  Parameter Object's with `required: false` would have been incorrectly treated
+  as required.
+
 ## 0.13.0 (2020-06-12)
 
 The package has been updated for compatibility with `@apielements/core`.
