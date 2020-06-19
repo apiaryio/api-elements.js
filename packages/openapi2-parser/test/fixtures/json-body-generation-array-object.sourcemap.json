@@ -406,6 +406,17 @@
                           "element": "dataStructure",
                           "content": {
                             "element": "array",
+                            "attributes": {
+                              "typeAttributes": {
+                                "element": "array",
+                                "content": [
+                                  {
+                                    "element": "string",
+                                    "content": "fixedType"
+                                  }
+                                ]
+                              }
+                            },
                             "content": [
                               {
                                 "element": "definitions/Question"
@@ -553,6 +564,17 @@
                       },
                       "value": {
                         "element": "array",
+                        "attributes": {
+                          "typeAttributes": {
+                            "element": "array",
+                            "content": [
+                              {
+                                "element": "string",
+                                "content": "fixedType"
+                              }
+                            ]
+                          }
+                        },
                         "content": [
                           {
                             "element": "definitions/Choice"
