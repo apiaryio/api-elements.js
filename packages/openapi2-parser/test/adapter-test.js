@@ -104,6 +104,36 @@ describe('Swagger 2.0 adapter', () => {
     });
   });
 
+  context('#validate', () => {
+    it('validates source with no annotations', (done) => {
+      const source = { swagger: '2.0', info: { title: 'Test', version: '1.0' } };
+
+      fury.validate({ source }, (err, parseResult) => {
+        expect(err).to.be.null;
+        expect(parseResult).to.be.null;
+        done();
+      });
+    });
+
+    it('validates source with warnings', (done) => {
+      const source = {
+        swagger: '2.0',
+      };
+
+      fury.validate({ source }, (err, parseResult) => {
+        expect(err).to.be.null;
+        expect(parseResult).to.be.instanceof(fury.minim.elements.ParseResult);
+        expect(parseResult.length).to.equal(3);
+        expect(parseResult.toValue()).to.deep.equal([
+          'Missing required property: title',
+          'Source maps are only available with string input',
+          'Missing required property: version',
+        ]);
+        done();
+      });
+    });
+  });
+
   context('can parse Swagger object', () => {
     const source = { swagger: '2.0', info: { title: 'Test', version: '1.0' } };
     let result;

@@ -2,6 +2,11 @@
 
 ## Master
 
+### Enhancements
+
+- Performance improvements to OpenAPI 2 validation, this will only apply to
+  validation only. Full OpenAPI 2 parsing is not altered.
+
 ### Bug Fixes
 
 - Returns a validation error while trying to parse a YAML or JSON object which
