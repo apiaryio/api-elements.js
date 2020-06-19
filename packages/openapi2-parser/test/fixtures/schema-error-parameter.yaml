@@ -1,0 +1,9 @@
+swagger: '2.0'
+info:
+  title: Schema Errors
+  version: 1.0.0
+paths:
+  /:
+    parameters:
+      - in: query
+        name: foo
