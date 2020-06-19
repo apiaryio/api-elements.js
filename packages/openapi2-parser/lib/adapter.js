@@ -29,9 +29,29 @@ function parse(options) {
   });
 }
 
+function validate(options) {
+  return new Promise((fulfil, reject) => {
+    const parser = new Parser({
+      ...options,
+      generateMessageBody: false,
+      generateMessageBodySchema: false,
+    });
+
+    parser.parse((error, parseResult) => {
+      if (error) {
+        reject(error);
+      } else if (parseResult.annotations.length > 0) {
+        fulfil(new options.namespace.elements.ParseResult(parseResult.annotations));
+      } else {
+        fulfil(null);
+      }
+    });
+  });
+}
+
 /**
  * @implements {FuryAdapter}
  */
 module.exports = {
-  name, mediaTypes, detect, parse,
+  name, mediaTypes, detect, validate, parse,
 };
