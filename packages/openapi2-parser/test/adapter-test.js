@@ -242,7 +242,7 @@ describe('Swagger 2.0 adapter', () => {
       });
 
       testFixture(`Parses ${name}`, options);
-      testFixture(`Parses ${name} with source maps`, options, true);
+      testFixture(`Parses ${name} with source maps`, options, { generateSourceMap: true });
       testFixture(`Parses ${name}`, testFixtureOptions(swaggerPath, apiElementsPath));
     });
   });
