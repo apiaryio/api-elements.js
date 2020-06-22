@@ -1,6 +1,6 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
-## Master
+## 0.32.1 (2020-06-22)
 
 ### Enhancements
 
@@ -14,6 +14,9 @@
   crashed under some inputs.
 
 - Improved clarity of validation error messages.
+
+- Fixes a case where the source map information may be missing for one type of
+  validation errors.
 
 ## 0.32.0 (2020-06-12)
 

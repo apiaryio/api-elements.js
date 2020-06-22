@@ -1,6 +1,6 @@
 # Fury OAS3 Parser Changelog
 
-## Master
+## 0.13.1 (2020-06-22)
 
 ### Bug Fixes
 
