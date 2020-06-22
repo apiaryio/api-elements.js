@@ -1,6 +1,6 @@
 {
   "name": "@apielements/openapi3-parser",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Open API Specification 3 API Elements Parser",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",

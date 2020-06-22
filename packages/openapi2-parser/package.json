@@ -1,6 +1,6 @@
 {
   "name": "@apielements/openapi2-parser",
-  "version": "0.32.0",
+  "version": "0.32.1",
   "description": "Swagger 2.0 parser for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
