@@ -88,6 +88,29 @@ describe('Reference Object', () => {
     expect(parseResult.length).to.equal(0);
   });
 
+  it('can parse a reference to a reference', () => {
+    const nodeAlias = new namespace.elements.Element();
+    nodeAlias.element = 'Node';
+
+    context.state.components = new namespace.elements.Object({
+      schemas: {
+        Node: 'example',
+        NodeAlias: nodeAlias,
+      },
+    });
+
+    const reference = new namespace.elements.Object({
+      $ref: '#/components/schemas/NodeAlias',
+    });
+    const parseResult = parse(context, 'schemas', reference);
+
+    expect(parseResult.length).to.equal(1);
+    const structure = parseResult.get(0);
+    expect(structure).to.be.instanceof(namespace.elements.String);
+    expect(structure.element).to.equal('string');
+    expect(structure.toValue()).to.equal('example');
+  });
+
   describe('invalid references', () => {
     it('errors when parsing a non-components reference', () => {
       const reference = new namespace.elements.Object({
@@ -144,6 +167,32 @@ describe('Reference Object', () => {
       const parseResult = parse(context, 'schemas', reference);
 
       expect(parseResult).to.contain.error("'#/components' is not defined");
+    });
+
+    it('errors when parsing reference causing circular reference', () => {
+      const createElement = (name) => {
+        const element = new namespace.elements.Element();
+        element.element = name;
+        return element;
+      };
+
+      context.state.components = new namespace.elements.Object({
+        schemas: {
+          A: createElement('B'),
+          B: createElement('C'),
+          C: createElement('D'),
+          D: createElement('A'),
+        },
+      });
+
+      const reference = new namespace.elements.Object({
+        $ref: '#/components/schemas/A',
+      });
+
+      const parseResult = parse(context, 'schemas', reference);
+      expect(parseResult).to.contain.error(
+        "Reference cannot be circular, '#/components/schemas/A' causes a circular reference via C, D, A"
+      );
     });
   });
 

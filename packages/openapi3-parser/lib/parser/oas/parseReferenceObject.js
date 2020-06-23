@@ -13,6 +13,33 @@ const name = 'Reference Object';
 const requiredKeys = ['$ref'];
 
 /**
+ * Recursively dereference an element in the given component
+ *
+ * @param namespace {Namespace}
+ * @param component {ObjectElement}
+ * @param ref {StringElement}
+ * @param element {Element}
+ * @param parents {string[]} an optional collections of traversed parents
+ *
+ * @returns Element
+ */
+function dereference(namespace, component, ref, element, parents = []) {
+  if (parents && parents.includes(element.element)) {
+    // We've already cycled through this element. We're in a circular loop
+    parents.shift();
+    return createError(namespace, `Reference cannot be circular, '${ref.toValue()}' causes a circular reference via ${parents.join(', ')}`, ref);
+  }
+
+  const match = component.get(element.element);
+  if (match) {
+    parents.push(element.element);
+    return dereference(namespace, component, ref, match, parents);
+  }
+
+  return element;
+}
+
+/**
  * Parse Reference Object
  *
  * @param namespace {Namespace}
@@ -76,7 +103,7 @@ function parseReferenceObject(context, componentName, element, returnReferenceEl
     return new namespace.elements.ParseResult(
       component
         .filter((value, key) => key.toValue() === componentId && value)
-        .map(value => value)
+        .map(value => dereference(namespace, component, ref, value))
     );
   };
 
