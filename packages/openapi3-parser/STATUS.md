@@ -195,7 +195,6 @@ support.
 |:--|:--|
 | type | ✓ |
 | enum | ✓ |
-| examples | ✕ |
 | encoding | ✕ |
 | title | ✕ |
 | multipleOf | ✕ |
