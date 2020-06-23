@@ -1,0 +1,15 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Parameter Component with alias
+paths:
+  /:
+    parameters:
+      - $ref: '#/components/parameters/UserAlias'
+components:
+  parameters:
+    User:
+      in: query
+      name: foo
+    UserAlias:
+      $ref: '#/components/parameters/User'

@@ -8,6 +8,7 @@ const {
   createInvalidMemberWarning,
 } = require('../annotations');
 const parseObject = require('../parseObject');
+const parseReference = require('../parseReference');
 const pipeParseResult = require('../../pipeParseResult');
 const parseSchemaObject = require('./parseSchemaObject');
 const parseParameterObject = require('./parseParameterObject');
@@ -130,14 +131,17 @@ function parseComponentsObject(context, element) {
    * @returns ParseResult<ObjectElement>
    * @private
    */
-  const parseComponentObjectMember = (parser) => {
-    const parseMember = parseComponentMember(context, parser);
+  const parseComponentObjectMember = R.curry((parser, member) => {
+    const component = member.key.toValue();
 
-    return member => pipeParseResult(context.namespace,
+    const parseMember = parseComponentMember(context, parser);
+    const parseMemberOrRef = m => parseReference(component, () => parseMember(m), context, m.value, false, true);
+
+    return pipeParseResult(context.namespace,
       validateIsObject,
-      R.compose(parseObject(context, name, parseMember), getValue),
+      R.compose(parseObject(context, name, parseMemberOrRef), getValue),
       (object) => {
-        const contextMember = context.state.components.getMember(member.key.toValue());
+        const contextMember = context.state.components.getMember(component);
 
         if (contextMember) {
           contextMember.value = object;
@@ -145,7 +149,7 @@ function parseComponentsObject(context, element) {
 
         return object;
       })(member);
-  };
+  });
 
   const setDataStructureId = (dataStructure, key) => {
     if (dataStructure) {

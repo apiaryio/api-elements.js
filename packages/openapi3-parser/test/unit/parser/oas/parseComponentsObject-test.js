@@ -91,6 +91,34 @@ describe('Components Object', () => {
       expect(userState).to.be.instanceof(namespace.elements.Member);
       expect(userState.value).to.be.undefined;
     });
+
+    it('parses valid schemas with alias into data structures', () => {
+      const components = new namespace.elements.Object({
+        schemas: {
+          User: {
+            type: 'object',
+          },
+          UserAlias: { $ref: '#/components/schemas/User' },
+        },
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult.length).to.equal(1);
+
+      const parsedComponents = parseResult.get(0);
+      expect(parsedComponents).to.be.instanceof(namespace.elements.Object);
+
+      const schemas = parsedComponents.get('schemas');
+      expect(schemas).to.be.instanceof(namespace.elements.Object);
+
+      const userSchema = schemas.get('User');
+      expect(userSchema).to.be.instanceof(namespace.elements.DataStructure);
+      expect(userSchema.content).to.be.instanceof(namespace.elements.Object);
+
+      const userSchemaAlias = schemas.get('UserAlias');
+      expect(userSchemaAlias).to.be.instanceof(namespace.elements.DataStructure);
+      expect(userSchemaAlias.content.element).to.equal('User');
+    });
   });
 
   describe('#parameters', () => {

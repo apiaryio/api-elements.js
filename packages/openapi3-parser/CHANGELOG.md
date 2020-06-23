@@ -9,6 +9,19 @@
   or any annotation.  It is not supported in the case when one of is used in
   conjunction with other constraints in the same schema object.
 
+### Bug Fixes
+
+- Supports using `$ref` in the root of a component, for example:
+
+    ```yaml
+    components:
+      schemas:
+        UserAlias:
+          $ref: '#/components/schemas/User'
+        User:
+          type: object
+    ```
+
 ## 0.13.1 (2020-06-22)
 
 ### Bug Fixes
