@@ -20,7 +20,7 @@ const unsupportedKeys = [
   // JSON Schema
   'title', 'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum',
   'exclusiveMinimum', 'maxLength', 'minLength', 'pattern', 'maxItems',
-  'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'required',
+  'minItems', 'uniqueItems', 'maxProperties', 'minProperties',
 
   // JSON Schema + OAS 3 specific rules
   'allOf', 'anyOf', 'not', 'additionalProperties', 'format',
