@@ -41,7 +41,7 @@ const hasMember = R.curry((object, key) => {
 const validateObjectContainsRequiredKeys = R.curry((namespace, path, requiredKeys, sendWarning, object) => {
   const missingKeys = R.reject(hasMember(object), requiredKeys);
   const createAnnotation = sendWarning ? createWarning : createError;
-  const annotationFromKey = key => createAnnotation(namespace, `'${path}' is missing required property '${key}'`, object);
+  const annotationFromKey = key => createAnnotation(namespace, `'${path}' is missing required property '${key}'`, object.clone());
 
   if (missingKeys.length > 0) {
     return new namespace.elements.ParseResult(

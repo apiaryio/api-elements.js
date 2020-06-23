@@ -18,6 +18,9 @@ describe('#parseObject', () => {
       name: 'Doe',
       message: 'Hello',
     });
+    object.attributes.set('sourceMap', [
+      new namespace.elements.SourceMap([[0, 10]]),
+    ]);
   });
 
   it('provides warning when given element is non-object', () => {
@@ -141,6 +144,13 @@ describe('#parseObject', () => {
         "'Example Object' is missing required property 'required1'",
         "'Example Object' is missing required property 'required2'",
       ]);
+
+      // assert errors can be frozen (we're testing that the source map
+      // for object was cloned instead of referenced)
+      parseResult.freeze();
+
+      expect(parseResult.errors.get(0)).to.have.sourceMap([[0, 10]]);
+      expect(parseResult.errors.get(1)).to.have.sourceMap([[0, 10]]);
     });
 
     it('fails object parsing when member parse cannot parse required key', () => {
