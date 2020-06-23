@@ -1,5 +1,14 @@
 # Fury OAS3 Parser Changelog
 
+## Master
+
+### Enhancements
+
+- Adds partial support for using `oneOf` in a Schema Object. One of is
+  supported when used in a schema object alone, or with the nullable constraint
+  or any annotation.  It is not supported in the case when one of is used in
+  conjunction with other constraints in the same schema object.
+
 ## 0.13.1 (2020-06-22)
 
 ### Bug Fixes

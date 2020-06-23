@@ -822,4 +822,145 @@ describe('Schema Object', () => {
       "'Schema Object' 'default' does not match expected type 'number'",
     ]);
   });
+
+  describe('#oneOf', () => {
+    it('can parse oneOf', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: [
+          { type: 'string' },
+          { type: 'number' },
+        ],
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+
+      expect(element.enumerations.length).to.equal(2);
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+    });
+
+    it('can parse oneOf with description', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: [
+          { type: 'string' },
+          { type: 'number' },
+        ],
+        description: 'string or number',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+      expect(element.description.toValue()).to.equal('string or number');
+
+      expect(element.enumerations.length).to.equal(2);
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+    });
+
+    it('can parse oneOf with default', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: [
+          { type: 'string' },
+          { type: 'number' },
+        ],
+        default: 'unset',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+      expect(element.attributes.getValue('default')).to.equal('unset');
+
+      expect(element.enumerations.length).to.equal(2);
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+    });
+
+    it('can parse oneOf with example', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: [
+          { type: 'string' },
+          { type: 'number' },
+        ],
+        example: 52,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+      expect(element.attributes.getValue('samples')).to.deep.equal([52]);
+
+      expect(element.enumerations.length).to.equal(2);
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+    });
+
+    it('can parse oneOf with nullable', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: [
+          { type: 'string' },
+          { type: 'number' },
+        ],
+        nullable: true,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+      expect(element.attributes.getValue('typeAttributes')).to.deep.equal(['nullable']);
+
+      expect(element.enumerations.length).to.equal(2);
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+    });
+
+    it('warns for unsupported oneOf with other schema properties', () => {
+      const schema = new namespace.elements.Object({
+        oneOf: [
+          { type: 'string' },
+          { type: 'array' },
+        ],
+        items: {
+          type: 'string',
+        },
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' has limited support for 'oneOf', use of 'items' with 'oneOf' is not supported"
+      );
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+
+      expect(element.enumerations.length).to.equal(2);
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Array);
+    });
+  });
 });
