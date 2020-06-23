@@ -71,6 +71,36 @@ const parseComponentMember = R.curry((context, parser, member) => {
   return parseResult;
 });
 
+function registerComponentStateInContext(context, components) {
+  const { namespace } = context;
+
+  // Component referencing supports recursive (and circular in some cases)
+  // references and thus we must know about all of the component IDs upfront.
+  // Below we are putting in the unparsed components so we can keep the
+  // dereferencing logic simple, these are used during parsing the components
+  // and later on the components in our context is replaced by the final parsed
+  // result.
+  // eslint-disable-next-line no-param-reassign
+  context.state.components = new namespace.elements.Object();
+
+  if (isObject(components)) {
+    components.forEach((value, key) => {
+      if (isObject(value)) {
+        // Take each component object (f.e schemas, parameters) and convert to
+        // object with members for each key (discarding value). We don't want the
+        // value making it into final parse results under any circumstance, for
+        // example if the parse errors out and we leave bad state
+
+        const componentObject = new namespace.elements.Object(
+          value.map((value, key) => new namespace.elements.Member(key))
+        );
+
+        context.state.components.set(key.toValue(), componentObject);
+      }
+    });
+  }
+}
+
 /**
  * Parse Components Object
  *
@@ -84,24 +114,7 @@ const parseComponentMember = R.curry((context, parser, member) => {
 function parseComponentsObject(context, element) {
   const { namespace } = context;
 
-  // Schema Object supports recursive (and circular) references and thus we
-  // must know about all of the schema IDs upfront. Below we are putting
-  // in the unparsed schemas so we can keep the dereferencing logic simple,
-  // these are used during parsing the schema components and later on the
-  // components in our context is replaced by the final parsed result.
-  // eslint-disable-next-line no-param-reassign
-  context.state.components = new namespace.elements.Object();
-
-  if (isObject(element) && element.get('schemas') && isObject(element.get('schemas'))) {
-    // Take schemas and convert to object with members for each key (discarding value)
-    // We don't want the value making it into final parse results under any circumstance,
-    // for example if the parse errors out and we leave bad state
-    const schemas = new namespace.elements.Object(
-      element.get('schemas').map((value, key) => new namespace.elements.Member(key))
-    );
-
-    context.state.components.set('schemas', schemas);
-  }
+  registerComponentStateInContext(context, element);
 
   const createMemberValueNotObjectWarning = member => createWarning(namespace,
     `'${name}' '${member.key.toValue()}' is not an object`, member.value);
@@ -128,8 +141,6 @@ function parseComponentsObject(context, element) {
 
         if (contextMember) {
           contextMember.value = object;
-        } else {
-          context.state.components.push(new namespace.elements.Member(member.key, object));
         }
 
         return object;
