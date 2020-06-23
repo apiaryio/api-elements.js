@@ -23,7 +23,7 @@ const unsupportedKeys = [
   'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'required',
 
   // JSON Schema + OAS 3 specific rules
-  'allOf', 'oneOf', 'anyOf', 'not', 'additionalProperties', 'format',
+  'allOf', 'anyOf', 'not', 'additionalProperties', 'format',
 
   // OAS 3 specific
   'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs', 'deprecated',
@@ -124,6 +124,51 @@ function validateValuesMatchSchema(context, schema) {
   return parseObject(context, name, parseMember)(schema);
 }
 
+// Warns if oneOf is used with other unsupported constraints
+function validateOneOfIsNotUsedWithUnsupportedConstraints(context) {
+  // oneOf can be used like the following:
+  //
+  //   oneOf:
+  //     - ...
+  //     - ...
+  //   ...
+  //
+  // where its effectively a combination of "one of these two constraints"
+  // and "also these other constraits" which is effectively:
+  //
+  //   allOf:
+  //     - oneOf:
+  //         - ...
+  //         - ...
+  //      - ...
+  //
+  // API Element's doesn't have a way to support `allOf` and thus using
+  // `oneOf` alongside other constraints is unsupported.
+  //
+  // We can allow annotations and (nullable as that is simple to support).
+
+  // is a JSON Schema annotation (not constraint)
+  const isAnnotation = R.anyPass([
+    hasKey('title'),
+    hasKey('description'),
+    hasKey('default'),
+    hasKey('example'),
+  ]);
+
+  const createUnsupportedWithOneOfWarning = member => createWarning(context.namespace,
+    `'${name}' has limited support for 'oneOf', use of '${member.key.toValue()}' with 'oneOf' is not supported`,
+    member.key);
+
+  const parseMember = R.cond([
+    [hasKey('oneOf'), R.identity],
+    [hasKey('nullable'), R.identity],
+    [isAnnotation, R.identity],
+    [R.T, createUnsupportedWithOneOfWarning],
+  ]);
+
+  return parseObject(context, name, parseMember);
+}
+
 function parseSchema(context) {
   const { namespace } = context;
 
@@ -146,6 +191,14 @@ function parseSchema(context) {
     createWarning(namespace, `'${name}' 'required' array value is not a string`));
   const parseRequired = parseArray(context, `${name}' 'required`, parseRequiredString);
 
+  const parseOneOf = pipeParseResult(namespace,
+    parseArray(context, `${name}' 'oneOf`, parseSubSchema),
+    (oneOf) => {
+      const element = new namespace.elements.Enum();
+      element.enumerations = oneOf;
+      return element;
+    });
+
   const parseMember = R.cond([
     [hasKey('type'), parseType],
     [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
@@ -156,6 +209,7 @@ function parseSchema(context) {
     [hasKey('description'), parseString(context, name, false)],
     [hasKey('default'), e => e.clone()],
     [hasKey('example'), e => e.clone()],
+    [hasKey('oneOf'), R.compose(parseOneOf, getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -166,13 +220,17 @@ function parseSchema(context) {
   return pipeParseResult(namespace,
     parseObject(context, name, parseMember),
     R.curry(validateValuesMatchSchema)(context),
+    R.when(object => object.hasKey('oneOf'), validateOneOfIsNotUsedWithUnsupportedConstraints(context)),
     (schema) => {
       let element;
 
+      const oneOf = schema.get('oneOf');
       const enumerations = schema.get('enum');
       const type = schema.getValue('type');
 
-      if (enumerations) {
+      if (oneOf) {
+        element = oneOf;
+      } else if (enumerations) {
         element = enumerations;
       } else if (type === 'object') {
         element = constructObjectStructure(namespace, schema);
