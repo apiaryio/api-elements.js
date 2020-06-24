@@ -32,6 +32,15 @@ describe('#parseYAML', () => {
       expect(parseResult).contain.error('YAML Syntax: found character \\t that cannot start any token, while scanning for the next token').with.sourceMap([[14, 0]]);
     });
 
+    it('fails to parse YAML document with unknown tags', () => {
+      const parseResult = parseYAML('!!unknown\n', context);
+
+      expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+      expect(parseResult.errors.length).to.equal(1);
+
+      expect(parseResult).contain.error('YAML Syntax: Unsupported YAML node tag:yaml.org,2002:unknown').with.sourceMap([[0, 9]]);
+    });
+
     it('can handle internal YAML parser error', () => {
       // Protection against YAML parser bug where source map information isn't available
       // Particular case: https://github.com/connec/yaml-js/issues/46

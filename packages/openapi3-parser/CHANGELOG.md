@@ -22,6 +22,9 @@
           type: object
     ```
 
+- Prevents the parser from throwing an error upon encountering an unknown or
+  invalid YAML node tag, such as `!!unknown`.
+
 ## 0.13.1 (2020-06-22)
 
 ### Bug Fixes
