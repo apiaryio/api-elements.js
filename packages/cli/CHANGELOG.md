@@ -1,5 +1,11 @@
 # API Elements: CLI Changelog
 
+## 0.10.1 (2020-06-24)
+
+This update incorporates changes from API Element Adapters:
+
+- openapi3-parser 0.14.0
+
 ## 0.10.0 (2020-06-12)
 
 The package has been renamed to `@apielements/cli`.
