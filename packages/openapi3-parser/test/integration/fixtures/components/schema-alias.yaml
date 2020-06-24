@@ -1,0 +1,23 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Schemas Component with alias
+paths:
+  /:
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UserAlias'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+    UserAlias:
+      $ref: '#/components/schemas/User'

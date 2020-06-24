@@ -6,9 +6,9 @@ function isReferenceObject(element) {
   return isObject(element) && element.get('$ref') !== undefined;
 }
 
-function parseReference(component, parser, context, element, isInsideSchema) {
+function parseReference(component, parser, context, element, isInsideSchema, returnReferenceElement) {
   if (isReferenceObject(element)) {
-    const parseResult = parseReferenceObject(context, component, element, component === 'schemas');
+    const parseResult = parseReferenceObject(context, component, element, component === 'schemas' || returnReferenceElement);
 
     // If we're referencing a schema object and we're not inside a schema
     // parser (subschema), then we want to wrap the object in a data structure element

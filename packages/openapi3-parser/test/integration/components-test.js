@@ -19,6 +19,11 @@ describe('components', () => {
       const file = path.join(fixtures, 'path-item-object-parameters-unsupported-parameter');
       return testParseFixture(file);
     });
+
+    it('handles parameter referencing with reference to alias', () => {
+      const file = path.join(fixtures, 'path-item-object-parameters-alias');
+      return testParseFixture(file);
+    });
   });
 
   describe('Media Type Object', () => {
@@ -72,9 +77,16 @@ describe('components', () => {
     });
   });
 
-  it("'Schema Object' circular references", () => {
-    const file = path.join(fixtures, 'schema-object-circular');
-    return testParseFixture(file);
+  describe('Schema Object', () => {
+    it('handles circular references', () => {
+      const file = path.join(fixtures, 'schema-object-circular');
+      return testParseFixture(file);
+    });
+
+    it('handles schema with reference to alias', () => {
+      const file = path.join(fixtures, 'schema-alias');
+      return testParseFixture(file);
+    });
   });
 
   it("'Operation Object' requestBody references", () => {
