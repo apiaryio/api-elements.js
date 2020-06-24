@@ -90,7 +90,11 @@ function convert(node, annotations, context) {
     copySourceMap(node.start_mark, node.end_mark, warning, namespace);
     annotations.push(warning);
   } else {
-    throw new Error(`Unsupported YAML node '${node.tag}'`);
+    const error = new namespace.elements.Annotation(`YAML Syntax: Unsupported YAML node ${node.tag}`, { classes: ['error'] });
+    copySourceMap(node.start_mark, node.end_mark, error, namespace);
+    annotations.push(error);
+
+    element = new namespace.elements.Null();
   }
 
   copySourceMap(node.start_mark, node.end_mark, element, namespace);
