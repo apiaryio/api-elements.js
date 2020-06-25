@@ -647,6 +647,7 @@ describe('Operation Object', () => {
       expect(transaction1.length).to.equal(2);
 
       expect(transaction1.request).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(transaction1.request.header('Accept')[0].toValue()).to.equal('application/json');
       expect(transaction1.response).to.be.instanceof(namespace.elements.HttpResponse);
       expect(transaction1.response.contentType.toValue()).to.be.equal('application/json');
 
@@ -655,6 +656,7 @@ describe('Operation Object', () => {
       expect(transaction2.length).to.equal(2);
 
       expect(transaction2.request).to.be.instanceof(namespace.elements.HttpRequest);
+      expect(transaction2.request.header('Accept')[0].toValue()).to.equal('application/xml');
       expect(transaction2.response).to.be.instanceof(namespace.elements.HttpResponse);
       expect(transaction2.response.contentType.toValue()).to.be.equal('application/xml');
     });

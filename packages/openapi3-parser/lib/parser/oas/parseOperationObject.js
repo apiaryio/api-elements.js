@@ -47,6 +47,18 @@ function createTransactions(namespace, member, operation) {
       const clonedRequest = request.clone();
       clonedRequest.method = method;
 
+      const { contentType } = response;
+      if (contentType) {
+        let { headers } = clonedRequest;
+
+        if (!headers) {
+          headers = new namespace.elements.HttpHeaders();
+          clonedRequest.headers = headers;
+        }
+
+        headers.unshift(new namespace.elements.Member('Accept', contentType.toValue()));
+      }
+
       transactions.push(new namespace.elements.HttpTransaction([
         clonedRequest,
         response.clone(),

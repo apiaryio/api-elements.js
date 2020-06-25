@@ -57,6 +57,19 @@
                               "content": {
                                 "key": {
                                   "element": "string",
+                                  "content": "Accept"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
                                   "content": "Content-Type"
                                 },
                                 "value": {

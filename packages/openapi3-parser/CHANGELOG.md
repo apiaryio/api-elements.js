@@ -6,6 +6,10 @@
 
 - Adds support for the Schema Object title property.
 
+### Bug Fixes
+
+- Adds an accept header to requests with the matching responses content type.
+
 ## 0.14.0 (2020-06-24)
 
 ### Enhancements
