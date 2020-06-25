@@ -552,6 +552,34 @@ describe('Schema Object', () => {
     });
   });
 
+  describe('#title', () => {
+    it('warns when title is not a string', () => {
+      const schema = new namespace.elements.Object({
+        title: true,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'title' is not a string"
+      );
+    });
+
+    it('adds a title to the returned element', () => {
+      const schema = new namespace.elements.Object({
+        title: 'User',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.title.toValue()).to.equal('User');
+    });
+  });
+
   describe('#description', () => {
     it('warns when description is not a string', () => {
       const schema = new namespace.elements.Object({
