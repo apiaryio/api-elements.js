@@ -18,7 +18,7 @@ const parseReference = require('../parseReference');
 const name = 'Schema Object';
 const unsupportedKeys = [
   // JSON Schema
-  'title', 'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum',
+  'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum',
   'exclusiveMinimum', 'maxLength', 'minLength', 'pattern', 'maxItems',
   'minItems', 'uniqueItems', 'maxProperties', 'minProperties',
 
@@ -206,6 +206,7 @@ function parseSchema(context) {
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
     [hasKey('required'), R.compose(parseRequired, getValue)],
     [hasKey('nullable'), parseBoolean(context, name, false)],
+    [hasKey('title'), parseString(context, name, false)],
     [hasKey('description'), parseString(context, name, false)],
     [hasKey('default'), e => e.clone()],
     [hasKey('example'), e => e.clone()],
@@ -251,6 +252,11 @@ function parseSchema(context) {
           constructObjectStructure(namespace, schema),
           constructArrayStructure(namespace, schema),
         ];
+      }
+
+      const title = schema.getValue('title');
+      if (title) {
+        element.title = title;
       }
 
       const description = schema.getValue('description');

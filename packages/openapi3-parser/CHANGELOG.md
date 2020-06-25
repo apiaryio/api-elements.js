@@ -1,5 +1,11 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
+## Master
+
+### Enhancements
+
+- Adds support for the Schema Object title property.
+
 ## 0.14.0 (2020-06-24)
 
 ### Enhancements
