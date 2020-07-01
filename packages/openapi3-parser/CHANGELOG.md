@@ -1,6 +1,6 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
-## Master
+## 0.14.1 (2020-07-01)
 
 ### Enhancements
 
