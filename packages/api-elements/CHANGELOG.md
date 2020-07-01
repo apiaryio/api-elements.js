@@ -1,5 +1,11 @@
 # API Elements (JavaScript) CHANGELOG
 
+## 0.2.6 (2020-07-01)
+
+### Bug Fixes
+
+- Fixes the `hosts` property in api category to return the hosts category.
+
 ## 0.2.5 (2020-06-13)
 
 ### Bug Fixes
