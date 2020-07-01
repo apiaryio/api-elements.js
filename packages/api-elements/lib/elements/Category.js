@@ -16,6 +16,15 @@ class Category extends ArrayElement {
   }
 
   /**
+   * @name hosts
+   * @type ArraySlice
+   * @memberof Category.prototype
+   */
+  get hosts() {
+    return this.children.filter(item => item.classes.contains('hosts'));
+  }
+
+  /**
    * @name resourceGroups
    * @type ArraySlice
    * @memberof Category.prototype
@@ -76,15 +85,6 @@ class Category extends ArrayElement {
   get authSchemes() {
     const schemes = ['Basic Authentication Scheme', 'Token Authentication Scheme', 'OAuth2 Scheme'];
     return this.children.filter(item => schemes.indexOf(item.element) !== -1);
-  }
-
-  /**
-   * @name hosts
-   * @type ArraySlice
-   * @memberof Category.prototype
-   */
-  get hosts() {
-    return this.children.filter(item => item.element === 'hosts');
   }
 
   metadata(value) {
