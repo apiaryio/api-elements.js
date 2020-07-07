@@ -1,10 +1,10 @@
 const serializeForm = require('./serializeForm');
 
 const name = 'form';
-const mediaTypes = ['multipart/form-data'];
+const mediaTypes = ['multipart/form-data', 'application/x-www-form-urlencoded'];
 
-function serialize({ api }) {
-  return new Promise(resolve => resolve(serializeForm({ api })));
+function serialize({ api, mediaType }) {
+  return new Promise(resolve => resolve(serializeForm({ api, mediaType })));
 }
 
 module.exports = { name, mediaTypes, serialize };

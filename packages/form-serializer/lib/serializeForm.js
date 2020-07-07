@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const querystring = require('querystring');
 
 function collectElementByIDs(element) {
   const dataStructures = {};
@@ -24,28 +25,34 @@ function collectElementByIDs(element) {
   return dataStructures;
 }
 
-function serializeForm({ api }) {
+function serializeForm({ api, mediaType }) {
   const dataStructures = collectElementByIDs(api);
-  const values = api.valueOf(undefined, dataStructures);
+  let values = api.valueOf(undefined, dataStructures);
 
-  const boundary = 'BOUNDARY';
+  if (mediaType === 'multipart/form-data') {
+    const boundary = 'BOUNDARY';
 
-  let content = '';
+    let content = '';
 
-  if (typeof values === 'string') {
-    content += `--${boundary}\r\n`;
-    content += 'Content-Disposition: form-data; name="undefined"\r\n\r\n';
-    content += `${values}\r\n`;
-  } else {
-    _.forOwn(values, (value, key) => {
+    if (typeof values === 'string') {
       content += `--${boundary}\r\n`;
-      content += `Content-Disposition: form-data; name="${key}"\r\n\r\n`;
-      content += `${value}\r\n`;
-    });
-  }
+      content += 'Content-Disposition: form-data; name="undefined"\r\n\r\n';
+      content += `${values}\r\n`;
+    } else {
+      _.forOwn(values, (value, key) => {
+        content += `--${boundary}\r\n`;
+        content += `Content-Disposition: form-data; name="${key}"\r\n\r\n`;
+        content += `${value}\r\n`;
+      });
+    }
 
-  content += `--${boundary}--\r\n`;
-  return content;
+    content += `--${boundary}--\r\n`;
+    return content;
+  }
+  if (typeof values === 'string') {
+    values = { undefined: values };
+  }
+  return querystring.encode(values);
 }
 
 module.exports = serializeForm;
