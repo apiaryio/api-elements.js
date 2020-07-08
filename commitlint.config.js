@@ -10,6 +10,7 @@ module.exports = {
       'apib',
       'apiaryb',
       'remote',
+      'form',
       'deps',
       'deps-dev',
     ]],
