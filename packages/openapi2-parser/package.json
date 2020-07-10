@@ -25,7 +25,7 @@
     "json-schema-faker": "0.5.0-rc23",
     "lodash": "^4.17.0",
     "media-typer": "^1.0.1",
-    "swagger-parser": "^8.0.0",
+    "swagger-parser": "^10.0.0",
     "yaml-js": "^0.2.3",
     "z-schema": "^4.1.0"
   },
