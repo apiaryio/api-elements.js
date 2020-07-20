@@ -20,6 +20,20 @@ describe('Components Object', () => {
     expect(parseResult).to.contain.warning("'Components Object' is not an object");
   });
 
+  it('provides an error when a reusable component is named after an element', () => {
+    const components = new namespace.elements.Object({
+      schemas: {
+        member: {},
+      },
+    });
+
+    const parseResult = parse(context, components);
+
+    expect(parseResult).to.contain.error(
+      "'Components Object' 'schemas' contains a reserved key 'member' which is not currently supported by this parser"
+    );
+  });
+
   describe('#schemas', () => {
     it('provides a warning when schemas is non-object', () => {
       const components = new namespace.elements.Object({
