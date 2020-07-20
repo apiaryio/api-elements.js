@@ -17,16 +17,20 @@ faker.option({
   random: () => 0,
 });
 
-const schemaIsArrayAndHasItems = schema => schema.type && schema.type === 'array' && schema.items;
+const schemaIsArrayAndHasItems = schema => schema.type === 'array' && typeof schema.items === 'object';
 const isEmptyArray = value => value && Array.isArray(value) && value.length === 0;
 
 function generateBody(schema) {
-  if (schema.allOf && schema.allOf.length === 1 && schema.allOf[0].examples && schema.allOf[0].examples.length > 0) {
-    return schema.allOf[0].examples[0];
-  }
-
   if (schema.examples && schema.examples.length > 0) {
     return schema.examples[0];
+  }
+
+  if (schemaIsArrayAndHasItems(schema)) {
+    return [generateBody(schema.items)];
+  }
+
+  if (schema.allOf && schema.allOf.length === 1) {
+    return generateBody(schema.allOf[0]);
   }
 
   const body = faker.generate(schema);
