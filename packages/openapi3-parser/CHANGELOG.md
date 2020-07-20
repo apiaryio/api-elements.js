@@ -1,5 +1,15 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
+## 0.14.2 (2020-07-20)
+
+### Bug Fixes
+
+- Prevents the parser from throwing an unhandled error while parsing components
+  which use keys which are the same as an [API Element type
+  identifier](https://apielements.org/en/latest/element-definitions.html). The
+  parser will now produce a handled error mentioning that these keys are
+  reserved and currently unsupported in the parser.
+
 ## 0.14.1 (2020-07-01)
 
 ### Enhancements

@@ -13,6 +13,9 @@ const pipeParseResult = require('../pipeParseResult');
  */
 const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
 
+const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
+
+
 /**
  * Transform every non-annotation element in the parse result and then flatten all of the results into a parse result
  * @param transform {function}
@@ -20,16 +23,18 @@ const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
  * @private
  */
 const chainParseResult = R.curry((transform, parseResult) => {
+  if (parseResultHasErrors(parseResult)) {
+    return parseResult;
+  }
+
   const result = R.chain(transform, parseResult);
 
-  if (!result.errors.isEmpty) {
+  if (parseResultHasErrors(result)) {
     return new parseResult.constructor(result.errors);
   }
 
   return result;
 });
-
-const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
 
 // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
 const hasMember = R.curry((object, key) => {
@@ -145,13 +150,25 @@ function parseObject(context, name, parseMember, requiredKeys = [], orderedKeys 
     wrapObjectInParseResult,
     (value) => {
       // pre-parse the ordered keys in order
+      let errors = null;
+
       orderedKeys.forEach((key) => {
         const isOrderedKey = R.allPass([isMember, m => m.key.equals(key)]);
         const member = R.filter(isOrderedKey, value).get(0);
         if (member) {
-          member.value = parseMember(member);
+          const parseResult = parseMember(member);
+          member.value = parseResult;
+
+          if (parseResultHasErrors(parseResult)) {
+            ({ errors } = parseResult);
+          }
         }
       });
+
+      if (errors) {
+        return new namespace.elements.ParseResult(errors.elements);
+      }
+
       return value;
     },
     chainParseResult(transformMember),

@@ -1,8 +1,9 @@
 const R = require('ramda');
 const {
-  isObject, isAnnotation, hasKey, isExtension, getValue,
+  isObject, isAnnotation, hasKey, isExtension, getKey, getValue,
 } = require('../../predicates');
 const {
+  createError,
   createWarning,
   createUnsupportedMemberWarning,
   createInvalidMemberWarning,
@@ -134,8 +135,21 @@ function parseComponentsObject(context, element) {
   const parseComponentObjectMember = R.curry((parser, member) => {
     const component = member.key.toValue();
 
+    const createKeyIsReservedError = key => createError(
+      namespace,
+      `'${name}' '${component}' contains a reserved key '${key.toValue()}' which is not currently supported by this parser`,
+      key
+    );
+    const isReservedKey = key => namespace.elementMap[key.toValue()] !== undefined;
+    const validateKeyIsNotReservedKey = R.when(
+      R.compose(isReservedKey, getKey),
+      R.compose(createKeyIsReservedError, getKey)
+    );
+
     const parseMember = parseComponentMember(context, parser);
-    const parseMemberOrRef = m => parseReference(component, () => parseMember(m), context, m.value, false, true);
+    const parseMemberOrRef = pipeParseResult(namespace,
+      validateKeyIsNotReservedKey,
+      m => parseReference(component, () => parseMember(m), context, m.value, false, true));
 
     return pipeParseResult(context.namespace,
       validateIsObject,
