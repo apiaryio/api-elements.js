@@ -26,7 +26,7 @@ function generateBody(schema) {
   }
 
   if (schemaIsArrayAndHasItems(schema)) {
-    return [generateBody(schema.items)];
+    return Array.from({ length: Math.min(5, schema.minItems || 1) }, () => generateBody(schema.items));
   }
 
   if (schema.allOf && schema.allOf.length === 1) {
