@@ -220,5 +220,58 @@ describe('bodyFromSchema', () => {
         expect(body).to.deep.equal({ name: 'doe' });
       });
     });
+
+    describe('allOf w/length 1', () => {
+      it('can generate an object', () => {
+        const schema = {
+          allOf: [
+            {
+              type: 'object',
+              examples: [{ name: 'doe' }],
+            },
+          ],
+        };
+
+        const body = generate(schema);
+
+        expect(body).to.deep.equal({ name: 'doe' });
+      });
+
+      it('can generate an array', () => {
+        const schema = {
+          allOf: [
+            {
+              type: 'array',
+              items: {
+                type: 'string',
+              },
+              examples: [['doe']],
+            },
+          ],
+        };
+
+        const body = generate(schema);
+
+        expect(body).to.deep.equal(['doe']);
+      });
+
+      it('can generate an array with items', () => {
+        const schema = {
+          allOf: [
+            {
+              type: 'array',
+              items: {
+                type: 'string',
+                examples: ['doe'],
+              },
+            },
+          ],
+        };
+
+        const body = generate(schema);
+
+        expect(body).to.deep.equal(['doe']);
+      });
+    });
   });
 });
