@@ -1,5 +1,13 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## 0.32.2 (2020-07-22)
+
+### Bug Fixes
+
+- Improvements to generation of JSON message bodies to add more cases where
+  `example` property of a Schema Object will be respected.  
+  [#515](https://github.com/apiaryio/api-elements.js/pull/515)
+
 ## 0.32.1 (2020-06-22)
 
 ### Enhancements
