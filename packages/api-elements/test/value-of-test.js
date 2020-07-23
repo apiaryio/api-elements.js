@@ -24,9 +24,9 @@ describe('valueOf NullElement', () => {
   it('returns null with default and samples', () => {
     const element = new NullElement();
     element.attributes.set('default', new NullElement());
-    element.attributes.set('samples', new ArrayElement(
-      new NullElement()
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new NullElement(),
+    ]));
     const value = element.valueOf();
 
     expect(value).to.equal(null);
@@ -92,9 +92,9 @@ describe('valueOf BooleanElement', () => {
   it('prefers content over default and samples', () => {
     const element = new BooleanElement(true);
     element.attributes.set('default', new BooleanElement(false));
-    element.attributes.set('samples', new ArrayElement(
-      new BooleanElement(false)
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new BooleanElement(false),
+    ]));
     const value = element.valueOf();
 
     expect(value).to.equal(true);
@@ -148,9 +148,9 @@ describe('valueOf BooleanElement with source', () => {
   it('prefers content over default and samples', () => {
     const element = new BooleanElement(true);
     element.attributes.set('default', new BooleanElement(false));
-    element.attributes.set('samples', new ArrayElement(
-      new BooleanElement(false)
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new BooleanElement(false),
+    ]));
     const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal([true, 'content']);
@@ -204,9 +204,9 @@ describe('valueOf NumberElement', () => {
   it('prefers content over default and samples', () => {
     const element = new NumberElement(3);
     element.attributes.set('default', new NumberElement(42));
-    element.attributes.set('samples', new ArrayElement(
-      new NumberElement(27)
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new NumberElement(27),
+    ]));
     const value = element.valueOf();
 
     expect(value).to.equal(3);
@@ -260,9 +260,9 @@ describe('valueOf NumberElement with source', () => {
   it('prefers content over default and samples', () => {
     const element = new NumberElement(3);
     element.attributes.set('default', new NumberElement(42));
-    element.attributes.set('samples', new ArrayElement(
-      new NumberElement(27)
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new NumberElement(27),
+    ]));
     const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal([3, 'content']);
@@ -316,9 +316,9 @@ describe('valueOf StringElement', () => {
   it('prefers content over default and samples', () => {
     const element = new StringElement('hello');
     element.attributes.set('default', new StringElement('moin'));
-    element.attributes.set('samples', new ArrayElement(
-      new StringElement('zdravicko')
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new StringElement('zdravicko'),
+    ]));
     const value = element.valueOf();
 
     expect(value).to.equal('hello');
@@ -372,9 +372,9 @@ describe('valueOf StringElement with source', () => {
   it('prefers content over default and samples', () => {
     const element = new StringElement('hello');
     element.attributes.set('default', new StringElement('moin'));
-    element.attributes.set('samples', new ArrayElement(
-      new StringElement('zdravicko')
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new StringElement('zdravicko'),
+    ]));
     const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal(['hello', 'content']);
@@ -450,9 +450,9 @@ describe('valueOf EnumElement', () => {
       new StringElement(),
     ]);
     element.attributes.set('default', new EnumElement('moin'));
-    element.attributes.set('samples', new ArrayElement(
-      new EnumElement('zdravicko')
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new EnumElement('zdravicko'),
+    ]));
     const value = element.valueOf();
 
     expect(value).to.equal('hello');
@@ -555,9 +555,9 @@ describe('valueOf EnumElement with source', () => {
       new StringElement(),
     ]);
     element.attributes.set('default', new EnumElement('moin'));
-    element.attributes.set('samples', new ArrayElement(
-      new EnumElement(new EnumElement('zdravicko'))
-    )); const value = element.valueOf({ source: true });
+    element.attributes.set('samples', new ArrayElement([
+      new EnumElement(new EnumElement('zdravicko')),
+    ])); const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal(['hello', 'content']);
   });
@@ -673,9 +673,9 @@ describe('valueOf ArrayElement', () => {
   it('prefers content over default and samples', () => {
     const element = new ArrayElement([1, 2, 3]);
     element.attributes.set('default', new ArrayElement([4, 2]));
-    element.attributes.set('samples', new ArrayElement(
-      new ArrayElement([2, 'hello'])
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new ArrayElement([2, 'hello']),
+    ]));
     const value = element.valueOf();
 
     expect(value).to.deep.equal([1, 2, 3]);
@@ -765,9 +765,9 @@ describe('valueOf ArrayElement with source', () => {
   it('prefers content over default and samples', () => {
     const element = new ArrayElement([1, 2, 3]);
     element.attributes.set('default', new ArrayElement([4, 2]));
-    element.attributes.set('samples', new ArrayElement(
-      new ArrayElement([2, 'hello'])
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new ArrayElement([2, 'hello']),
+    ]));
     const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal([[1, 2, 3], 'content']);
@@ -922,9 +922,9 @@ describe('valueOf ObjectElement', () => {
   it('prefers content over default and samples', () => {
     const element = new ObjectElement({ abc: 3, c: 4 });
     element.attributes.set('default', new ObjectElement({ gaga: 'bing' }));
-    element.attributes.set('samples', new ArrayElement(
-      new ObjectElement({ a: 3 })
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new ObjectElement({ a: 3 }),
+    ]));
     const value = element.valueOf();
 
     expect(value).to.deep.equal({ abc: 3, c: 4 });
@@ -1071,9 +1071,9 @@ describe('valueOf ObjectElement with source', () => {
   it('prefers content over default and samples', () => {
     const element = new ObjectElement({ abc: 3, c: 4 });
     element.attributes.set('default', new ObjectElement({ gaga: 'bing' }));
-    element.attributes.set('samples', new ArrayElement(
-      new ObjectElement({ a: 3 })
-    ));
+    element.attributes.set('samples', new ArrayElement([
+      new ObjectElement({ a: 3 }),
+    ]));
     const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal([{ abc: 3, c: 4 }, 'content']);
