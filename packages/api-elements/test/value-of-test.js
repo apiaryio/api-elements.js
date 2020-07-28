@@ -700,6 +700,25 @@ describe('valueOf ArrayElement', () => {
     expect(value).to.deep.equal([4, 2]);
   });
 
+  it('prefers samples over empty primitive value', () => {
+    const element = new ArrayElement([new NumberElement()]);
+    element.attributes.set('default', new ArrayElement([4, 2]));
+    element.attributes.set('samples', new ArrayElement([
+      new ArrayElement([2, 'hello']),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([2, 'hello']);
+  });
+
+  it('prefers default over empty primitive value', () => {
+    const element = new ArrayElement([new NumberElement()]);
+    element.attributes.set('default', new ArrayElement([4, 2]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([4, 2]);
+  });
+
   it('generates [] if no content, default, samples and not nullable', () => {
     const element = new ArrayElement();
     const value = element.valueOf();

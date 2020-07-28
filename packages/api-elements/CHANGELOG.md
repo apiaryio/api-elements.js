@@ -1,5 +1,12 @@
 # API Elements (JavaScript) CHANGELOG
 
+## Master
+
+### Bug Fixes
+
+- Generating a value from an element will now prefer sample/default values for
+  arrays which contain empty primitive values.
+
 ## 0.2.6 (2020-07-01)
 
 ### Bug Fixes

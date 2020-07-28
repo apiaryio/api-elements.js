@@ -85,7 +85,16 @@ function findFirstSample(e) {
 
 const isPrimitive = e => (e instanceof StringElement) || (e instanceof NumberElement) || (e instanceof BooleanElement);
 const isEnumElement = e => e instanceof EnumElement;
-const isPlural = e => e instanceof ArrayElement;
+const isArrayElement = e => e instanceof ArrayElement;
+
+const hasSample = e => findFirstSample(e) !== null;
+const hasDefault = e => findDefault(e) !== null;
+const hasContent = e => e.content !== undefined;
+const hasValue = R.anyPass([hasContent, hasSample, hasDefault]);
+const hasNoValue = R.complement(hasValue);
+const isNoValuePrimitive = R.both(isPrimitive, hasNoValue);
+const isNonEmptyArrayElement = e => isArrayElement(e) && e.content && !e.isEmpty;
+
 
 function trivialValue(e) {
   if (e instanceof BooleanElement) {
@@ -113,8 +122,10 @@ function mapValue(e, options, f, elements) {
   }
 
   const opts = updateTypeAttributes(e, options);
-  if (e.content && (!isPlural(e) || !e.isEmpty)) {
+
+  if (e.content && !(isArrayElement(e) && e.content.every(isNoValuePrimitive))) {
     const result = f(e, opts, elements, 'content');
+
     if (undefined !== result) {
       return result;
     }
@@ -131,6 +142,15 @@ function mapValue(e, options, f, elements) {
   const dflt = findDefault(e);
   if (dflt) {
     const result = f(dflt, opts, elements, 'default');
+    if (undefined !== result) {
+      return result;
+    }
+  }
+
+  // reconsider content for array element (prefer sample/default first)
+  if (isNonEmptyArrayElement(e)) {
+    const result = f(e, opts, elements, 'content');
+
     if (undefined !== result) {
       return result;
     }
@@ -180,7 +200,7 @@ function mapValue(e, options, f, elements) {
     }
   }
 
-  if (isPlural(e) && e.isEmpty) {
+  if (isArrayElement(e) && e.isEmpty) {
     return f(e, opts, elements, 'generated');
   }
 
