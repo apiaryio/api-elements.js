@@ -96,6 +96,15 @@ function removeColumnLine(result) {
   }
 }
 
+function updateWarningAnnotationOccurances(context) {
+  Object.values(context.state.warnings).forEach((annotation) => {
+    if (annotation.count > 1) {
+      // eslint-disable-next-line no-param-reassign
+      annotation.content = `${annotation.content} (${annotation.count - 1} more occurances)`;
+    }
+  });
+}
+
 const filterColumnLine = recurseSkippingAnnotations(removeColumnLine);
 const filterSourceMaps = recurseSkippingAnnotations(removeSourceMap);
 
@@ -183,10 +192,16 @@ function parseOASObject(context, object) {
       return api;
     });
 
+  let parseResult;
   if (context.options.generateSourceMap) {
-    return filterColumnLine(parseOASObject(object));
+    parseResult = filterColumnLine(parseOASObject(object));
+  } else {
+    parseResult = filterSourceMaps(parseOASObject(object));
   }
-  return filterSourceMaps(parseOASObject(object));
+
+  updateWarningAnnotationOccurances(context);
+
+  return parseResult;
 }
 
 module.exports = R.curry(parseOASObject);

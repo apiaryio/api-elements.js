@@ -8,7 +8,18 @@ function createAnnotation(annotationClass, context, message, element) {
 }
 
 const createError = R.curry(createAnnotation)('error');
-const createWarning = R.curry(createAnnotation)('warning');
+
+function createWarning(context, message, element) {
+  if (context.state.hasWarning(message)) {
+    return new context.namespace.elements.ParseResult([]);
+  }
+
+  const annotation = new context.namespace.elements.Annotation(message);
+  annotation.classes = ['warning'];
+  annotation.attributes.set('sourceMap', element.attributes.get('sourceMap'));
+  context.state.registerWarning(annotation);
+  return annotation;
+}
 
 function createUnsupportedMemberWarning(context, path, member) {
   const message = `'${path}' contains unsupported key '${member.key.toValue()}'`;
@@ -42,7 +53,7 @@ function createMemberValueNotBooleanError(context, path, member) {
 
 module.exports = {
   createError,
-  createWarning,
+  createWarning: R.curry(createWarning),
   createUnsupportedMemberWarning: R.curry(createUnsupportedMemberWarning),
   createInvalidMemberWarning: R.curry(createInvalidMemberWarning),
   createIdentifierNotUniqueWarning: R.curry(createIdentifierNotUniqueWarning),

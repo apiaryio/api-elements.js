@@ -4,6 +4,8 @@ class State {
 
     this.registeredSchemes = new Set();
     this.oauthFlows = {};
+
+    this.warnings = {}; // {string: Annotation}
   }
 
   registerId(id) {
@@ -33,6 +35,23 @@ class State {
 
   hasScheme(id) {
     return this.registeredSchemes.has(id);
+  }
+
+  hasWarning(message) {
+    const annotation = this.warnings[message];
+
+    if (annotation !== undefined) {
+      annotation.count += 1;
+      return true;
+    }
+
+    return false;
+  }
+
+  registerWarning(annotation) {
+    // eslint-disable-next-line no-param-reassign
+    annotation.count = 1;
+    this.warnings[annotation.content] = annotation;
   }
 }
 
