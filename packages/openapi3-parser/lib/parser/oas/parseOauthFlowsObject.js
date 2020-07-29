@@ -44,9 +44,9 @@ function parseOauthFlowsObject(context, object) {
 
     const parse = pipeParseResult(namespace,
       R.compose(parseOauthFlowObject(context), getValue),
-      R.when(R.allPass([R.complement(hasAuthorizationUrl), needAuthorizationUrl]), () => createWarning(namespace,
+      R.when(R.allPass([R.complement(hasAuthorizationUrl), needAuthorizationUrl]), () => createWarning(context,
         `'${name}' '${key}' is missing required property 'authorizationUrl'`, member)),
-      R.when(R.allPass([R.complement(hasTokenUrl), needTokenUrl]), () => createWarning(namespace,
+      R.when(R.allPass([R.complement(hasTokenUrl), needTokenUrl]), () => createWarning(context,
         `'${name}' '${key}' is missing required property 'tokenUrl'`, member)));
 
     return parse(member);
@@ -59,7 +59,7 @@ function parseOauthFlowsObject(context, object) {
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseOauthFlows = pipeParseResult(namespace,

@@ -95,7 +95,7 @@ function parseArray(context, name, parseValue) {
   );
 
   return pipeParseResult(namespace,
-    R.unless(isArray, createWarning(namespace, `'${name}' is not an array`)),
+    R.unless(isArray, createWarning(context, `'${name}' is not an array`)),
     validateValues);
 }
 

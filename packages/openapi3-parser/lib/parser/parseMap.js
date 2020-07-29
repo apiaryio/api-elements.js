@@ -6,7 +6,7 @@ const {
 const { createWarning } = require('./annotations');
 const parseObject = require('./parseObject');
 
-const validateMapValueIsObject = (namespace, name, key) => R.unless(R.pipe(getValue, isObject), createWarning(namespace, `'${name}' '${key}' is not an object`));
+const validateMapValueIsObject = (context, name, key) => R.unless(R.pipe(getValue, isObject), createWarning(context, `'${name}' '${key}' is not an object`));
 
 const isParseResultEmpty = parseResult => R.reject(isAnnotation, parseResult).isEmpty;
 
@@ -40,7 +40,7 @@ const parseMapMember = R.curry((context, parser, member) => {
  * @private
  */
 const parseMap = (context, name, key, valueParser) => pipeParseResult(context.namespace,
-  validateMapValueIsObject(context.namespace, name, key),
+  validateMapValueIsObject(context, name, key),
   R.compose(parseObject(context, name, parseMapMember(context, valueParser)), getValue));
 
 

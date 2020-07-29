@@ -24,7 +24,7 @@ const isValueBoolean = R.compose(isBoolean, getValue);
 const parseOptionalBoolean = (context, name, member) => new context.namespace.elements.ParseResult([
   R.unless(
     isValueBoolean,
-    createMemberValueNotBooleanWarning(context.namespace, name),
+    createMemberValueNotBooleanWarning(context, name),
     member
   ),
 ]);
@@ -40,14 +40,14 @@ const parseOptionalBoolean = (context, name, member) => new context.namespace.el
 const parseRequiredBoolean = (context, name, member) => new context.namespace.elements.ParseResult([
   R.unless(
     isValueBoolean,
-    createMemberValueNotBooleanError(context.namespace, name),
+    createMemberValueNotBooleanError(context, name),
     member
   ),
 ]);
 
 /**
  * Parse a boolean from a member
- * @pram namespace
+ * @pram context
  * @pram name {string}
  * @pram required {boolean} - Whether the member is required, indicates if we return a warning or an error
  * @pram member {MemberElement}

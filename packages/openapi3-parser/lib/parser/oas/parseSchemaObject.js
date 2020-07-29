@@ -102,13 +102,13 @@ function validateValuesMatchSchema(context, schema) {
 
     const enumeration = schema.get('enum');
     if (enumeration && !valueMatchesEnumerationValues(enumeration, member.value)) {
-      return createWarning(namespace,
+      return createWarning(context,
         `'${name}' '${member.key.toValue()}' is not included in 'enum'`, member.value);
     }
 
     const type = schema.getValue('type');
     if (type && !valueMatchesType(type, member.value)) {
-      return createWarning(namespace,
+      return createWarning(context,
         `'${name}' '${member.key.toValue()}' does not match expected type '${type}'`, member.value);
     }
 
@@ -155,7 +155,7 @@ function validateOneOfIsNotUsedWithUnsupportedConstraints(context) {
     hasKey('example'),
   ]);
 
-  const createUnsupportedWithOneOfWarning = member => createWarning(context.namespace,
+  const createUnsupportedWithOneOfWarning = member => createWarning(context,
     `'${name}' has limited support for 'oneOf', use of '${member.key.toValue()}' with 'oneOf' is not supported`,
     member.key);
 
@@ -175,7 +175,7 @@ function parseSchema(context) {
   const ensureValidType = R.unless(
     isValidType,
     R.compose(
-      createWarning(namespace, `'Schema Object' 'type' must be either ${types.join(', ')}`),
+      createWarning(context, `'Schema Object' 'type' must be either ${types.join(', ')}`),
       getValue
     )
   );
@@ -188,7 +188,7 @@ function parseSchema(context) {
   const parseProperties = parseObject(context, `${name}' 'properties`, R.compose(parseSubSchema, getValue));
 
   const parseRequiredString = R.unless(isString,
-    createWarning(namespace, `'${name}' 'required' array value is not a string`));
+    createWarning(context, `'${name}' 'required' array value is not a string`));
   const parseRequired = parseArray(context, `${name}' 'required`, parseRequiredString);
 
   const parseOneOf = pipeParseResult(namespace,
@@ -212,10 +212,10 @@ function parseSchema(context) {
     [hasKey('example'), e => e.clone()],
     [hasKey('oneOf'), R.compose(parseOneOf, getValue)],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   return pipeParseResult(namespace,

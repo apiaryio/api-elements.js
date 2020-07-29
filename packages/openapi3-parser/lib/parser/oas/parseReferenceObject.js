@@ -15,7 +15,7 @@ const requiredKeys = ['$ref'];
 /**
  * Recursively dereference an element in the given component
  *
- * @param namespace {Namespace}
+ * @param context {Context}
  * @param component {ObjectElement}
  * @param ref {StringElement}
  * @param element {Element}
@@ -23,17 +23,17 @@ const requiredKeys = ['$ref'];
  *
  * @returns Element
  */
-function dereference(namespace, component, ref, element, parents = []) {
+function dereference(context, component, ref, element, parents = []) {
   if (parents && parents.includes(element.element)) {
     // We've already cycled through this element. We're in a circular loop
     parents.shift();
-    return createError(namespace, `Reference cannot be circular, '${ref.toValue()}' causes a circular reference via ${parents.join(', ')}`, ref);
+    return createError(context, `Reference cannot be circular, '${ref.toValue()}' causes a circular reference via ${parents.join(', ')}`, ref);
   }
 
   const match = component.get(element.element);
   if (match) {
     parents.push(element.element);
-    return dereference(namespace, component, ref, match, parents);
+    return dereference(context, component, ref, match, parents);
   }
 
   return element;
@@ -58,31 +58,31 @@ function parseReferenceObject(context, componentName, element, returnReferenceEl
 
   const parseRef = (ref) => {
     if (!ref.toValue().startsWith('#/components/')) {
-      return createError(namespace, "Only local references to '#/components' within the same file are supported", ref);
+      return createError(context, "Only local references to '#/components' within the same file are supported", ref);
     }
     const referenceParts = ref.toValue().split('/');
 
     if (referenceParts[2] !== componentName) {
-      return createError(namespace, `Only references to '${componentName}' are permitted from this location`, ref);
+      return createError(context, `Only references to '${componentName}' are permitted from this location`, ref);
     }
 
     if (referenceParts.length !== 4) {
-      return createError(namespace,
+      return createError(context,
         `Only references to a reusable component inside '#/components/${componentName}' are supported`, ref);
     }
 
     if (!components) {
-      return createError(namespace, "'#/components' is not defined", ref);
+      return createError(context, "'#/components' is not defined", ref);
     }
 
     const component = components.get(referenceParts[2]);
     if (!component) {
-      return createError(namespace, `'#/components/${componentName}' is not defined`, ref);
+      return createError(context, `'#/components/${componentName}' is not defined`, ref);
     }
 
     const componentId = referenceParts[3];
     if (!component.hasKey(componentId)) {
-      return createError(namespace, `'${ref.toValue()}' is not defined`, ref);
+      return createError(context, `'${ref.toValue()}' is not defined`, ref);
     }
 
     if (returnReferenceElement) {
@@ -103,14 +103,14 @@ function parseReferenceObject(context, componentName, element, returnReferenceEl
     return new namespace.elements.ParseResult(
       component
         .filter((value, key) => key.toValue() === componentId && value)
-        .map(value => dereference(namespace, component, ref, value))
+        .map(value => dereference(context, component, ref, value))
     );
   };
 
   const parseMember = R.cond([
     [hasKey('$ref'), parseString(context, name, true)],
-    [isExtension, createWarning(namespace, `Extensions are not permitted in '${name}'`)],
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [isExtension, createWarning(context, `Extensions are not permitted in '${name}'`)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseReference = pipeParseResult(namespace,

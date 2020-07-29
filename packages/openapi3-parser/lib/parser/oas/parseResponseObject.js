@@ -38,7 +38,7 @@ function parseResponseObject(context, element) {
   const { namespace } = context;
 
   const validateIsObject = key => R.unless(isObject,
-    createWarning(namespace, `'${name}' '${key}' is not an object`));
+    createWarning(context, `'${name}' '${key}' is not an object`));
 
   const parseHeaderObjectOrRef = parseReference('headers', parseHeaderObject);
 
@@ -55,13 +55,13 @@ function parseResponseObject(context, element) {
 
     [hasKey('headers'), parseMap(context, name, 'headers', parseHeaderObjectOrRef)],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseResponse = pipeParseResult(namespace,

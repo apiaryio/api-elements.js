@@ -40,12 +40,12 @@ function parseResponsesObject(context, element) {
 
   const createUnsupportedStatusCodeWarning = (member) => {
     const message = `'${name}' response status code ranges are unsupported`;
-    return createWarning(namespace, message, member.key);
+    return createWarning(context, message, member.key);
   };
 
   const attachStatusCodeNotStringWarning = member => new namespace.elements.ParseResult([
     member,
-    createWarning(namespace, `'${name}' response status code must be a string and should be wrapped in quotes`, member.key),
+    createWarning(context, `'${name}' response status code must be a string and should be wrapped in quotes`, member.key),
   ]);
 
   const isStatusCodeOrDefault = R.anyPass([isStatusCode, hasKey('default')]);
@@ -67,7 +67,7 @@ function parseResponsesObject(context, element) {
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseResponses = pipeParseResult(namespace,

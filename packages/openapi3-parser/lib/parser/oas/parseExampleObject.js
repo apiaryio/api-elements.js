@@ -29,13 +29,13 @@ function parseExampleObject(context, element) {
   const parseMember = R.cond([
     [hasKey('value'), R.identity],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   return pipeParseResult(namespace,

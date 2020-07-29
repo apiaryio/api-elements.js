@@ -1,5 +1,5 @@
 const R = require('ramda');
-const { createWarning } = require('../../elements');
+const { createWarning } = require('../annotations');
 const {
   createInvalidMemberWarning,
 } = require('../annotations');
@@ -35,7 +35,7 @@ const validateVariablesInURL = (context, object) => {
   // if you define a variable that is not in URL it warns (and the variable is ignored).
   variables.keys().forEach((key) => {
     if (!urlVariables.includes(key)) {
-      parseResult.push(createWarning(context.namespace,
+      parseResult.push(createWarning(context,
         `Server variable '${key}' is not present in the URL and will be ignored`, variables));
 
       variables.remove(key);
@@ -45,7 +45,7 @@ const validateVariablesInURL = (context, object) => {
   // if you place a variable in the URL and its not in variables you get a warning that the variable is missing.
   urlVariables.forEach((key) => {
     if (!variables.hasKey(key)) {
-      parseResult.push(createWarning(context.namespace,
+      parseResult.push(createWarning(context,
         `URL variable '${key}' is missing within the server variables`, object.get('url')));
     }
   });
@@ -71,7 +71,7 @@ const hasVariables = object => object.hasKey('variables');
  * @private
  */
 const parseServerObject = context => pipeParseResult(context.namespace,
-  R.unless(isObject, createWarning(context.namespace, `'${name}' is not an object`)),
+  R.unless(isObject, createWarning(context, `'${name}' is not an object`)),
   parseObject(context, name, parseMember(context), requiredKeys, [], true),
   R.when(hasVariables, R.curry(validateVariablesInURL)(context)),
   (object) => {

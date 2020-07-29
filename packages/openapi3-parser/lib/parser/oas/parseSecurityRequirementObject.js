@@ -23,7 +23,7 @@ function parseSecurityRequirementObject(context, object) {
   const parseScopes = (member) => {
     const key = member.key.toValue();
 
-    const createScopeNotStringWarning = createWarning(namespace,
+    const createScopeNotStringWarning = createWarning(context,
       `'${name}' '${key}' array value is not a string`);
 
     const parseScope = pipeParseResult(namespace,
@@ -69,7 +69,7 @@ function parseSecurityRequirementObject(context, object) {
         }
 
         if (!context.hasScheme(schemeName)) {
-          parseResult.push(createWarning(namespace, `'${schemeName}' security scheme not found`, key));
+          parseResult.push(createWarning(context, `'${schemeName}' security scheme not found`, key));
         } else {
           e.element = schemeName;
           array.push(e);

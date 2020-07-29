@@ -1,7 +1,7 @@
 
 const R = require('ramda');
-const { createWarning } = require('../../elements');
 const {
+  createWarning,
   createInvalidMemberWarning,
 } = require('../annotations');
 const {
@@ -18,7 +18,7 @@ const parseMember = context => R.cond([
   [hasKey('name'), parseString(context, name, false)],
   [hasKey('url'), parseString(context, name, false)],
   [isExtension, () => new context.namespace.elements.ParseResult()],
-  [R.T, createInvalidMemberWarning(context.namespace, name)],
+  [R.T, createInvalidMemberWarning(context, name)],
 ]);
 
 /**
@@ -28,7 +28,7 @@ const parseMember = context => R.cond([
  * @private
  */
 const parseLicenseObject = context => pipeParseResult(context.namespace,
-  R.unless(isObject, createWarning(context.namespace, `'${name}' is not an object`)),
+  R.unless(isObject, createWarning(context, `'${name}' is not an object`)),
   parseObject(context, name, parseMember(context), requiredKeys, [], true),
   (object) => {
     const link = new context.namespace.elements.Link();

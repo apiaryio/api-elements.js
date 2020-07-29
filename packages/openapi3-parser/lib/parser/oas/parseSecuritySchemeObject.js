@@ -31,7 +31,7 @@ function validateApiKeyScheme(context, securityScheme) {
   const { namespace } = context;
 
   const createInvalidInWarning = R.compose(
-    createWarning(namespace, `'${name}' 'in' must be either 'query', 'header' or 'cookie'`),
+    createWarning(context, `'${name}' 'in' must be either 'query', 'header' or 'cookie'`),
     getValue
   );
   const validateIn = R.unless(isValidInValue, createInvalidInWarning);
@@ -48,7 +48,7 @@ function validateApiKeyScheme(context, securityScheme) {
     [isUnsupportedKey, e => e],
     [isExtension, e => e],
 
-    [R.T, createInvalidMemberWarning(namespace, `${name}' 'apiKey`)],
+    [R.T, createInvalidMemberWarning(context, `${name}' 'apiKey`)],
   ]);
 
   return parseObject(context, name, parseMember, ['name', 'in'], [], true)(securityScheme);
@@ -60,7 +60,7 @@ function validateHttpScheme(context, securityScheme) {
   const schemes = ['bearer', 'basic'];
   const isValidScheme = R.anyPass(R.map(hasValue, schemes));
   const createInvalidSchemeWarning = scheme => createWarning(
-    namespace,
+    context,
     `'${name}' 'http' contains unsupported scheme '${scheme.value.toValue()}', supported schemes ${schemes.join(', ')}`,
     scheme.value
   );
@@ -76,15 +76,13 @@ function validateHttpScheme(context, securityScheme) {
     [isUnsupportedKey, e => e],
     [isExtension, e => e],
 
-    [R.T, createInvalidMemberWarning(namespace, `${name}' 'http`)],
+    [R.T, createInvalidMemberWarning(context, `${name}' 'http`)],
   ]);
 
   return parseObject(context, name, parseMember, ['scheme'], [], true)(securityScheme);
 }
 
 function validateOauth2Scheme(context, securityScheme) {
-  const { namespace } = context;
-
   const parseMember = R.cond([
     [hasKey('flows'), R.compose(parseOauthFlowsObject(context), getValue)],
 
@@ -92,7 +90,7 @@ function validateOauth2Scheme(context, securityScheme) {
     [isUnsupportedKey, e => e],
     [isExtension, e => e],
 
-    [R.T, createInvalidMemberWarning(namespace, `${name}' 'oauth2`)],
+    [R.T, createInvalidMemberWarning(context, `${name}' 'oauth2`)],
   ]);
 
   return parseObject(context, name, parseMember, ['flows'], [], true)(securityScheme);
@@ -112,12 +110,12 @@ function parseSecuritySchemeObject(context, object) {
   const { namespace } = context;
 
   const createInvalidTypeWarning = R.compose(
-    createWarning(namespace, `'${name}' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'`),
+    createWarning(context, `'${name}' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'`),
     getValue
   );
   const validateType = R.unless(isValidTypeValue, createInvalidTypeWarning);
 
-  const createUnsupportedTypeWarning = member => createWarning(namespace,
+  const createUnsupportedTypeWarning = member => createWarning(context,
     `'${name}' 'type' '${member.value.toValue()}' is unsupported`, member.value);
   const ensureSupportedType = R.unless(isSupportedType, createUnsupportedTypeWarning);
 
@@ -131,13 +129,13 @@ function parseSecuritySchemeObject(context, object) {
     [hasKey('description'), parseString(context, name, false)],
     [outerPassThrough, e => e],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseSecurityScheme = pipeParseResult(namespace,

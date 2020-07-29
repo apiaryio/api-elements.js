@@ -64,7 +64,7 @@ function parseOauthFlowObject(context, object) {
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseOauthFlow = pipeParseResult(namespace,

@@ -11,7 +11,7 @@ const { isArray, isNull } = require('../predicates');
  * @private
  */
 const parseEnum = (context, name) => pipeParseResult(context.namespace,
-  R.unless(isArray, createWarning(context.namespace, `'${name}' 'enum' is not an array`)),
+  R.unless(isArray, createWarning(context, `'${name}' 'enum' is not an array`)),
   (element) => {
     const enumElement = new context.namespace.elements.Enum();
     enumElement.enumerations = element;

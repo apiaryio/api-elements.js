@@ -39,7 +39,7 @@ function parseParameterObjects(context, name, array) {
   ]);
 
   const parseParameters = pipeParseResult(namespace,
-    R.unless(isArray, createWarning(namespace, `'${name}' 'parameters' is not an array`)),
+    R.unless(isArray, createWarning(context, `'${name}' 'parameters' is not an array`)),
     R.compose(R.chain(parseParameterObjectOrRef(context)), ParseResult),
     (...parameters) => new namespace.elements.Object([...parameters]),
     R.groupBy(parameter => parameter.in),

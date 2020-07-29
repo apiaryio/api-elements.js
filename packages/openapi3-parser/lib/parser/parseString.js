@@ -21,10 +21,10 @@ const isValueString = R.compose(isString, getValue);
  * @returns {ParseResult<MemberElement<StringElement>>}
  * @private
  */
-const parseOptionalString = (namespace, name, member) => new namespace.elements.ParseResult([
+const parseOptionalString = (context, name, member) => new context.namespace.elements.ParseResult([
   R.unless(
     isValueString,
-    createMemberValueNotStringWarning(namespace, name),
+    createMemberValueNotStringWarning(context, name),
     member
   ),
 ]);
@@ -37,17 +37,17 @@ const parseOptionalString = (namespace, name, member) => new namespace.elements.
  * @returns {ParseResult<MemberElement<StringElement>>}
  * @private
  */
-const parseRequiredString = (namespace, name, member) => new namespace.elements.ParseResult([
+const parseRequiredString = (context, name, member) => new context.namespace.elements.ParseResult([
   R.unless(
     isValueString,
-    createMemberValueNotStringError(namespace, name),
+    createMemberValueNotStringError(context, name),
     member
   ),
 ]);
 
 /**
  * Parse a string from a member
- * @pram namespace
+ * @pram context
  * @pram name {string}
  * @pram required {boolean} - Whether the member is required, indicates if we return a warning or an error
  * @pram member {MemberElement}
@@ -55,13 +55,11 @@ const parseRequiredString = (namespace, name, member) => new namespace.elements.
  * @private
  */
 function parseString(context, name, required, member) {
-  const { namespace } = context;
-
   if (required) {
-    return parseRequiredString(namespace, name, member);
+    return parseRequiredString(context, name, member);
   }
 
-  return parseOptionalString(namespace, name, member);
+  return parseOptionalString(context, name, member);
 }
 
 module.exports = R.curry(parseString);

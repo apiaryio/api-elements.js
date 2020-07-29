@@ -1,5 +1,5 @@
 const R = require('ramda');
-const { createWarning } = require('../../elements');
+const { createWarning } = require('../annotations');
 const {
   createInvalidMemberWarning,
 } = require('../annotations');
@@ -18,7 +18,7 @@ const parseEnumStrings = R.curry((context, element) => {
   const { namespace } = context;
 
   const parseEnumString = R.unless(isString,
-    createWarning(namespace, `'${name}' 'enum' array value is not a string`));
+    createWarning(context, `'${name}' 'enum' array value is not a string`));
 
   const parseEnum = pipeParseResult(
     namespace,
@@ -51,7 +51,7 @@ const parseMember = context => R.cond([
  * @private
  */
 const parseServerVariableObject = (context, element) => pipeParseResult(context.namespace,
-  R.unless(isObject, createWarning(context.namespace, `'${name}' is not an object`)),
+  R.unless(isObject, createWarning(context, `'${name}' is not an object`)),
   parseObject(context, name, parseMember(context), requiredKeys, [], true),
   (object) => {
     const variable = R.or(object.get('enum'), new context.namespace.elements.String());

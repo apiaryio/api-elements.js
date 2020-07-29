@@ -35,7 +35,7 @@ function parseRequestBodyObject(context, element) {
   const { namespace } = context;
 
   const validateIsObject = key => R.unless(isObject,
-    createWarning(namespace, `'${name}' '${key}' is not an object`));
+    createWarning(context, `'${name}' '${key}' is not an object`));
 
   const parseContent = pipeParseResult(namespace,
     validateIsObject('content'),
@@ -48,13 +48,13 @@ function parseRequestBodyObject(context, element) {
     [hasKey('content'), R.compose(parseContent, getValue)],
     [hasKey('description'), parseCopy(context, name, false)],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseRequestBodyObject = pipeParseResult(namespace,

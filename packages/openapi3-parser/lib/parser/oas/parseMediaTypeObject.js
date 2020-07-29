@@ -89,8 +89,8 @@ const createTextMessageBodyAsset = R.curry((namespace, mediaType, value) => {
   return asset;
 });
 
-function parseExample(namespace, mediaType) {
-  const createExampleNotJSONWarning = createWarning(namespace,
+function parseExample(context, mediaType) {
+  const createExampleNotJSONWarning = createWarning(context,
     `'${name}' 'example' is not supported for media type '${mediaType}'`);
 
   const isTextBasedType = R.anyPass([
@@ -99,8 +99,8 @@ function parseExample(namespace, mediaType) {
   ]);
 
   return R.compose(R.cond([
-    [() => isJSONMediaType(mediaType), createJSONMessageBodyAsset(namespace, mediaType)],
-    [() => isTextBasedType(mediaType), createTextMessageBodyAsset(namespace, mediaType)],
+    [() => isJSONMediaType(mediaType), createJSONMessageBodyAsset(context.namespace, mediaType)],
+    [() => isTextBasedType(mediaType), createTextMessageBodyAsset(context.namespace, mediaType)],
     [R.T, createExampleNotJSONWarning],
   ]), getValue);
 }
@@ -133,7 +133,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
   const { namespace } = context;
   const mediaType = element.key.toValue();
 
-  const createInvalidMediaTypeWarning = mediaType => createWarning(namespace,
+  const createInvalidMediaTypeWarning = mediaType => createWarning(context,
     `'${name}' media type '${mediaType.toValue()}' is invalid`, mediaType);
 
   const validateMediaType = R.unless(
@@ -141,7 +141,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
     R.compose(createInvalidMediaTypeWarning, getKey)
   );
 
-  const createExamplesNotJSONWarning = createWarning(namespace,
+  const createExamplesNotJSONWarning = createWarning(context,
     `'${name}' 'examples' is only supported for JSON media types`);
 
   const parseExamples = pipeParseResult(namespace,
@@ -159,7 +159,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
       }
 
       if (examples.length > 1) {
-        parseResult.push(createWarning(namespace, `'${name}' 'examples' only one example is supported, other examples have been ignored`, examples.content[1]));
+        parseResult.push(createWarning(context, `'${name}' 'examples' only one example is supported, other examples have been ignored`, examples.content[1]));
       }
 
       return parseResult;
@@ -167,17 +167,17 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
     createJSONMessageBodyAsset(namespace, mediaType));
 
   const parseMember = R.cond([
-    [hasKey('example'), parseExample(namespace, mediaType)],
+    [hasKey('example'), parseExample(context, mediaType)],
     [hasKey('examples'), R.compose(parseExamples, getValue)],
     [hasKey('schema'), R.compose(parseSchemaObjectOrRef(context), getValue)],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseMediaType = pipeParseResult(namespace,

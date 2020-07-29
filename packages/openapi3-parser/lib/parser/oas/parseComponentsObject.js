@@ -118,7 +118,7 @@ function parseComponentsObject(context, element) {
 
   registerComponentStateInContext(context, element);
 
-  const createMemberValueNotObjectWarning = member => createWarning(namespace,
+  const createMemberValueNotObjectWarning = member => createWarning(context,
     `'${name}' '${member.key.toValue()}' is not an object`, member.value);
   const validateIsObject = R.unless(valueIsObject, createMemberValueNotObjectWarning);
 
@@ -136,7 +136,7 @@ function parseComponentsObject(context, element) {
     const component = member.key.toValue();
 
     const createKeyIsReservedError = key => createError(
-      namespace,
+      context,
       `'${name}' '${component}' contains a reserved key '${key.toValue()}' which is not currently supported by this parser`,
       key
     );
@@ -190,7 +190,7 @@ function parseComponentsObject(context, element) {
         if (value) {
           if (value instanceof namespace.elements.AuthScheme) {
             if (!context.registerScheme(keyValue)) {
-              parseResult.push(createWarning(namespace,
+              parseResult.push(createWarning(context,
                 `'${keyValue}' security scheme is already defined`, key));
             } else {
               // eslint-disable-next-line no-param-reassign
@@ -206,7 +206,7 @@ function parseComponentsObject(context, element) {
             const flowSchemeName = `${keyValue} ${flow.grantTypeValue}`;
 
             if (!context.oauthFlow(keyValue, flowSchemeName)) {
-              parseResult.push(createWarning(namespace,
+              parseResult.push(createWarning(context,
                 `'${flowSchemeName}' security scheme can't be created from '${keyValue}' security scheme because it is already defined`, key));
             } else {
               // eslint-disable-next-line no-param-reassign
@@ -233,13 +233,13 @@ function parseComponentsObject(context, element) {
     [hasKey('headers'), parseComponentObjectMember(parseHeaderObject)],
     [hasKey('securitySchemes'), parseSecuritySchemes],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const order = ['schemas', 'headers'];

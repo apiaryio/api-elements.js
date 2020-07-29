@@ -48,10 +48,10 @@ function validateRequiredForPathParameter(context, object, parameter) {
   const required = parameter.get('required');
 
   if (!required && !object.get('required')) {
-    parseResult.push(createWarning(context.namespace,
+    parseResult.push(createWarning(context,
       "'Parameter Object' 'required' must exist when 'in' is set to 'path'", parameter));
   } else if (required && required.toValue() !== true) {
-    parseResult.push(createWarning(context.namespace,
+    parseResult.push(createWarning(context,
       "'Parameter Object' 'required' must be 'true' when 'in' is set to 'path'", required));
   }
 
@@ -79,12 +79,12 @@ function parseParameterObject(context, object) {
   const { namespace } = context;
 
   const createInvalidInWarning = R.compose(
-    createWarning(namespace, `'${name}' 'in' must be either 'query', 'header', 'path' or 'cookie'`),
+    createWarning(context, `'${name}' 'in' must be either 'query', 'header', 'path' or 'cookie'`),
     getValue
   );
   const validateIn = R.unless(isValidInValue, createInvalidInWarning);
 
-  const createUnsupportedInWarning = member => createWarning(namespace,
+  const createUnsupportedInWarning = member => createWarning(context,
     `'${name}' 'in' '${member.value.toValue()}' is unsupported`, member.value);
   const ensureSupportedIn = R.unless(isSupportedIn, createUnsupportedInWarning);
 
@@ -103,20 +103,20 @@ function parseParameterObject(context, object) {
     [hasKey('explode'), parseBoolean(context, name, false)],
     [hasKey('example'), e => e.clone()],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
-  const createUnsupportedNameError = createError(namespace, `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`);
+  const createUnsupportedNameError = createError(context, `'${name}' 'name' contains unsupported characters. Only alphanumeric characters are currently supported`);
 
-  const createReservedHeaderNamesWarning = createWarning(namespace, `'${name}' 'name' in location 'header' should not be 'Accept', 'Content-Type' or 'Authorization'`);
+  const createReservedHeaderNamesWarning = createWarning(context, `'${name}' 'name' in location 'header' should not be 'Accept', 'Content-Type' or 'Authorization'`);
 
-  const createMalformedUriCharacterError = createError(namespace, `'${name}' 'name' in location 'query' contains URI malformed characters`);
+  const createMalformedUriCharacterError = createError(context, `'${name}' 'name' in location 'query' contains URI malformed characters`);
 
   const hasLocation = R.curry((location, parameter) => parameter.getValue('in') === location);
 
@@ -147,7 +147,7 @@ function parseParameterObject(context, object) {
     const member = object.getMember('explode');
     const inValue = object.getValue('in');
     const message = `'${name}' '${member.key.toValue()}' is unsupported in ${inValue}`;
-    return createWarning(namespace, message, member.key);
+    return createWarning(context, message, member.key);
   };
 
   const attachWarning = R.curry((createWarning, value) => {

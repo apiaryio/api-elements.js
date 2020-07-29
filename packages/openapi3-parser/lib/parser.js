@@ -2,7 +2,7 @@ const R = require('ramda');
 const parseYAML = require('./parser/parseYAML');
 
 const { isAnnotation, isObject } = require('./predicates');
-const { createError } = require('./elements');
+const { createError } = require('./parser/annotations');
 const pipeParseResult = require('./pipeParseResult');
 
 const parseOpenAPIObject = require('./parser/oas/parseOpenAPIObject');
@@ -13,7 +13,7 @@ function parse(source, context) {
   const document = parseYAML(source, context);
 
   const parseDocument = pipeParseResult(context.namespace,
-    R.unless(isObjectOrAnnotation, createError(context.namespace, 'Source document is not an object')),
+    R.unless(isObjectOrAnnotation, createError(context, 'Source document is not an object')),
     R.unless(isAnnotation, parseOpenAPIObject(context)));
 
   return R.chain(parseDocument, document);

@@ -14,7 +14,7 @@ function parseDummy(context, object) {
   const { namespace } = context;
 
   return pipeParseResult(namespace,
-    R.unless(element => element.element === 'object', createWarning(namespace, 'dummy warning')),
+    R.unless(element => element.element === 'object', createWarning(context, 'dummy warning')),
     () => new namespace.elements.String('dummy'))(object);
 }
 

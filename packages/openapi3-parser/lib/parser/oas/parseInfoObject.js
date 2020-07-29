@@ -1,6 +1,6 @@
 const R = require('ramda');
-const { createError } = require('../../elements');
 const {
+  createError,
   createInvalidMemberWarning,
 } = require('../annotations');
 const {
@@ -56,11 +56,11 @@ function parseInfo(context, info) {
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseInfo = pipeParseResult(namespace,
-    R.unless(isObject, createError(namespace, `'${name}' is not an object`)),
+    R.unless(isObject, createError(context, `'${name}' is not an object`)),
     parseObject(context, name, parseMember, requiredKeys),
     (info) => {
       const api = new namespace.elements.Category();

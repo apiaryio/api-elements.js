@@ -66,27 +66,27 @@ function convert(node, annotations, context) {
     element = new namespace.elements.Null();
   } else if (node.tag === 'tag:yaml.org,2002:binary') {
     element = new namespace.elements.String(node.value);
-    const warning = createWarning(namespace, 'Interpreting YAML !!binary as string', element);
+    const warning = createWarning(context, 'Interpreting YAML !!binary as string', element);
     copySourceMap(node.start_mark, node.end_mark, warning, namespace);
     annotations.push(warning);
   } else if (node.tag === 'tag:yaml.org,2002:timestamp') {
     element = new namespace.elements.String(node.value);
-    const warning = createWarning(namespace, 'Interpreting YAML !!timestamp as string', element);
+    const warning = createWarning(context, 'Interpreting YAML !!timestamp as string', element);
     copySourceMap(node.start_mark, node.end_mark, warning, namespace);
     annotations.push(warning);
   } else if (node.tag === 'tag:yaml.org,2002:omap') {
     element = yamlToObject(node, annotations, context);
-    const warning = createWarning(namespace, 'Interpreting YAML !!omap as object', element);
+    const warning = createWarning(context, 'Interpreting YAML !!omap as object', element);
     copySourceMap(node.start_mark, node.end_mark, warning, namespace);
     annotations.push(warning);
   } else if (node.tag === 'tag:yaml.org,2002:pairs') {
     element = yamlToObject(node, annotations, context);
-    const warning = createWarning(namespace, 'Interpreting YAML !!pairs as object', element);
+    const warning = createWarning(context, 'Interpreting YAML !!pairs as object', element);
     copySourceMap(node.start_mark, node.end_mark, warning, namespace);
     annotations.push(warning);
   } else if (node.tag === 'tag:yaml.org,2002:set') {
     element = yamlToArray(node, annotations, context);
-    const warning = createWarning(namespace, 'Interpreting YAML !!set as array', element);
+    const warning = createWarning(context, 'Interpreting YAML !!set as array', element);
     copySourceMap(node.start_mark, node.end_mark, warning, namespace);
     annotations.push(warning);
   } else {

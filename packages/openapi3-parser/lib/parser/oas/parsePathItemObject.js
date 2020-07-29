@@ -37,35 +37,35 @@ function extractPathVariables(path) {
   return [];
 }
 
-function createErrorForMissingPathVariable(namespace, path, variable) {
-  return createError(namespace, `Path '${path.toValue()}' is missing path variable '${variable}'. Add '{${variable}}' to the path`, path);
+function createErrorForMissingPathVariable(context, path, variable) {
+  return createError(context, `Path '${path.toValue()}' is missing path variable '${variable}'. Add '{${variable}}' to the path`, path);
 }
 
 /**
  * Validates that each href variable is found within the given path
- * @param namespace
+ * @param context {Context}
  * @param path {StringElement}
  * @param hrefVariables {HrefVariables}
  * @retuns ParseResult<HrefVariables>
  * @private
  */
-const validateHrefVariablesInPath = R.curry((namespace, path, hrefVariables) => {
+const validateHrefVariablesInPath = R.curry((context, path, hrefVariables) => {
   const pathVariables = extractPathVariables(path.toValue());
   const variables = hrefVariables.content.map(member => member.key.toValue());
   const missingPathVariables = variables.filter(name => !pathVariables.includes(name));
 
   if (missingPathVariables.length > 0) {
-    const toError = R.curry(createErrorForMissingPathVariable)(namespace, path);
+    const toError = R.curry(createErrorForMissingPathVariable)(context, path);
     const errors = missingPathVariables.map(toError);
-    return new namespace.elements.ParseResult(errors);
+    return new context.namespace.elements.ParseResult(errors);
   }
 
-  return new namespace.elements.ParseResult([hrefVariables]);
+  return new context.namespace.elements.ParseResult([hrefVariables]);
 });
 
 /**
  * Parse parameters member
- * @param namespace
+ * @param context
  * @param path {StringElement}
  * @param member {MemberElement} parameters member from an object element
  * @private
@@ -74,7 +74,7 @@ function parseParameters(context, path, member) {
   const { namespace } = context;
 
   const parseParameter = R.cond([
-    [hasKey('path'), R.compose(validateHrefVariablesInPath(namespace, path), getValue)],
+    [hasKey('path'), R.compose(validateHrefVariablesInPath(context, path), getValue)],
     [hasKey('query'), member => member],
     [hasKey('header'), member => member],
   ]);
@@ -141,13 +141,13 @@ function parsePathItemObject(context, member) {
 
     // FIXME Parse $ref
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for every other key
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parsePathItem = pipeParseResult(namespace,

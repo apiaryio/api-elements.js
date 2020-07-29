@@ -43,18 +43,18 @@ const hasMember = R.curry((object, key) => {
   return matchingMembers.length > 0;
 });
 
-const validateObjectContainsRequiredKeys = R.curry((namespace, path, requiredKeys, sendWarning, object) => {
+const validateObjectContainsRequiredKeys = R.curry((context, path, requiredKeys, sendWarning, object) => {
   const missingKeys = R.reject(hasMember(object), requiredKeys);
   const createAnnotation = sendWarning ? createWarning : createError;
-  const annotationFromKey = key => createAnnotation(namespace, `'${path}' is missing required property '${key}'`, object.clone());
+  const annotationFromKey = key => createAnnotation(context, `'${path}' is missing required property '${key}'`, object.clone());
 
   if (missingKeys.length > 0) {
-    return new namespace.elements.ParseResult(
+    return new context.namespace.elements.ParseResult(
       R.map(annotationFromKey, missingKeys)
     );
   }
 
-  return new namespace.elements.ParseResult([object]);
+  return new context.namespace.elements.ParseResult([object]);
 });
 
 const validateObjectContainsRequiredKeysNoError = R.curry((namespace, requiredKeys, object) => {
@@ -176,8 +176,8 @@ function parseObject(context, name, parseMember, requiredKeys = [], orderedKeys 
   )(object);
 
   return pipeParseResult(namespace,
-    R.unless(isObject, createWarning(namespace, `'${name}' is not an object`)),
-    validateObjectContainsRequiredKeys(namespace, name, requiredKeys, sendWarning),
+    R.unless(isObject, createWarning(context, `'${name}' is not an object`)),
+    validateObjectContainsRequiredKeys(context, name, requiredKeys, sendWarning),
     validateMembers,
     validateObjectContainsRequiredKeysNoError(namespace, requiredKeys));
 }

@@ -118,7 +118,7 @@ function parseOperationObject(context, path, member) {
   const parseOperationId = R.curry(member => new namespace.elements.ParseResult([
     R.unless(
       R.compose(isUnique, getValue),
-      createIdentifierNotUniqueWarning(namespace, name),
+      createIdentifierNotUniqueWarning(context, name),
       member
     ),
   ]));
@@ -133,13 +133,13 @@ function parseOperationObject(context, path, member) {
     [hasKey('servers'), R.compose(parseServersArray(context, name), getValue)],
     [hasKey('security'), R.compose(parseSecurityRequirementsArray(context), getValue)],
 
-    [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [isUnsupportedKey, createUnsupportedMemberWarning(context, name)],
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, createInvalidMemberWarning(namespace, name)],
+    [R.T, createInvalidMemberWarning(context, name)],
   ]);
 
   const parseOperation = pipeParseResult(namespace,

@@ -27,13 +27,13 @@ function parsePaths(context, paths) {
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, R.compose(createParseResult, createInvalidMemberWarning(namespace, name))],
+    [R.T, R.compose(createParseResult, createInvalidMemberWarning(context, name))],
   ]);
 
   const parseMembers = object => R.chain(parseMember, new namespace.elements.ParseResult(object.content));
 
   const parsePaths = pipeParseResult(namespace,
-    R.unless(isObject, createError(namespace, `'${name}' is not an object`)),
+    R.unless(isObject, createError(context, `'${name}' is not an object`)),
     parseMembers);
 
   return parsePaths(paths);
