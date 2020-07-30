@@ -1,5 +1,22 @@
 const R = require('ramda');
 
+const hasClass = R.curry((cls, element) => {
+  // eslint-disable-next-line no-underscore-dangle
+  if (element._meta === undefined) {
+    // accessing meta will create and attach empty ObjectElement
+    // which we can avoid by checking `_meta`.
+    // We do not want to mutate the provided element.
+    return false;
+  }
+
+  const classes = element.meta.get('classes');
+  if (classes === undefined) {
+    return false;
+  }
+
+  return classes.includes(cls);
+});
+
 /**
  * @module predicates
  * @private
@@ -14,6 +31,7 @@ const isString = element => element.element === 'string';
 const isBoolean = element => element.element === 'boolean';
 const isNull = element => element.element === 'null';
 const isDataStructure = element => element.element === 'dataStructure';
+const isWarningAnnotation = R.both(isAnnotation, hasClass('warning'));
 
 // Member
 
@@ -69,6 +87,7 @@ module.exports = {
   isBoolean,
   isNull,
   isDataStructure,
+  isWarningAnnotation,
 
   hasKey: R.curry(hasKey),
   hasValue: R.curry(hasValue),

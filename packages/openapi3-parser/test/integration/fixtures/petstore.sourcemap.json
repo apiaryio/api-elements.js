@@ -1884,7 +1884,7 @@
           ]
         }
       },
-      "content": "'Operation Object' contains unsupported key 'tags'"
+      "content": "'Operation Object' contains unsupported key 'tags' (3 occurances)"
     },
     {
       "element": "annotation",
@@ -1944,7 +1944,7 @@
           ]
         }
       },
-      "content": "'Parameter Object' contains unsupported key 'schema'"
+      "content": "'Parameter Object' contains unsupported key 'schema' (2 occurances)"
     },
     {
       "element": "annotation",
@@ -2094,186 +2094,6 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 45
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 7
-                        }
-                      },
-                      "content": 1083
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 45
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 4
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Operation Object' contains unsupported key 'tags'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 62
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 9
-                        }
-                      },
-                      "content": 1504
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 62
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 15
-                        }
-                      },
-                      "content": 6
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Parameter Object' contains unsupported key 'schema'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 67
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 7
-                        }
-                      },
-                      "content": 1620
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 67
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 4
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Operation Object' contains unsupported key 'tags'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
                           "content": 92
                         },
                         "column": {
@@ -2304,67 +2124,7 @@
           ]
         }
       },
-      "content": "'Schema Object' contains unsupported key 'format'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 109
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 2506
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 109
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 17
-                        }
-                      },
-                      "content": 6
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Schema Object' contains unsupported key 'format'"
+      "content": "'Schema Object' contains unsupported key 'format' (2 occurances)"
     }
   ]
 }
