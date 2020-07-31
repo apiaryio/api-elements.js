@@ -143,6 +143,22 @@ describe('Media Type Object', () => {
         "'Media Type Object' 'example' is not supported for media type 'application/plist'"
       );
     });
+
+    it('warns for non-string example with text type', () => {
+      const mediaType = new namespace.elements.Member('text/plain', {
+        example: { message: 'Hello World' },
+      });
+
+      const parseResult = parse(context, messageBodyClass, mediaType);
+
+      expect(parseResult).to.contain.warning(
+        "'Media Type Object' 'example' should be a string for media type 'text/plain'"
+      );
+
+      const message = parseResult.get(0);
+      expect(message).to.be.instanceof(messageBodyClass);
+      expect(message.messageBody).to.be.undefined;
+    });
   });
 
   describe('#examples', () => {
