@@ -1,5 +1,14 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
+## Master
+
+### Bug Fixes
+
+- Return a warning when parsing a document with a 'Media Type Object'
+  using a text based media type when the example value is not a string.
+  Previously an invalid asset element was created which contained non-string
+  content.
+
 ## 0.14.2 (2020-07-20)
 
 ### Bug Fixes

@@ -3,7 +3,7 @@ const contentTyper = require('content-type');
 const mediaTyper = require('media-typer');
 const pipeParseResult = require('../../pipeParseResult');
 const {
-  isExtension, hasKey, getKey, getValue,
+  isString, isExtension, hasKey, getKey, getValue,
 } = require('../../predicates');
 const {
   createWarning,
@@ -89,19 +89,28 @@ const createTextMessageBodyAsset = R.curry((namespace, mediaType, value) => {
   return asset;
 });
 
-function parseExample(namespace, mediaType) {
-  const createExampleNotJSONWarning = createWarning(namespace,
+function parseExample(context, mediaType) {
+  const { namespace } = context;
+
+  const createExampleNotSupportedForMediaTypeWarning = createWarning(namespace,
     `'${name}' 'example' is not supported for media type '${mediaType}'`);
+
+  const createExampleNotStringWarning = createWarning(namespace,
+    `'${name}' 'example' should be a string for media type '${mediaType}'`);
 
   const isTextBasedType = R.anyPass([
     () => isTextMediaType(mediaType),
     () => isXMLMediaType(mediaType),
   ]);
 
+  const parseTextExample = pipeParseResult(namespace,
+    R.unless(isString, createExampleNotStringWarning),
+    createTextMessageBodyAsset(namespace, mediaType));
+
   return R.compose(R.cond([
     [() => isJSONMediaType(mediaType), createJSONMessageBodyAsset(namespace, mediaType)],
-    [() => isTextBasedType(mediaType), createTextMessageBodyAsset(namespace, mediaType)],
-    [R.T, createExampleNotJSONWarning],
+    [() => isTextBasedType(mediaType), parseTextExample],
+    [R.T, createExampleNotSupportedForMediaTypeWarning],
   ]), getValue);
 }
 
@@ -167,7 +176,7 @@ function parseMediaTypeObject(context, MessageBodyClass, element) {
     createJSONMessageBodyAsset(namespace, mediaType));
 
   const parseMember = R.cond([
-    [hasKey('example'), parseExample(namespace, mediaType)],
+    [hasKey('example'), parseExample(context, mediaType)],
     [hasKey('examples'), R.compose(parseExamples, getValue)],
     [hasKey('schema'), R.compose(parseSchemaObjectOrRef(context), getValue)],
 
