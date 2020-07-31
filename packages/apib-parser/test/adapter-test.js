@@ -9,6 +9,14 @@ const adapter = require('../lib/adapter');
 const fury = new Fury();
 fury.use(adapter);
 
+const source = `
+# GET /
++ Response 200 (application/json)
+    + Attributes
+        + message: Hello World
+`;
+
+
 describe('API Blueprint parser adapter', () => {
   context('detection', () => {
     it('detects FORMAT: 1A', () => {
@@ -28,7 +36,6 @@ describe('API Blueprint parser adapter', () => {
     let result;
 
     before((done) => {
-      const source = 'FORMAT: 1A\n# My API\n## Foo [/foo]\n';
       fury.parse({ source }, (err, output) => {
         if (err) {
           return done(err);
@@ -59,6 +66,100 @@ describe('API Blueprint parser adapter', () => {
       expect(parseResult.length).to.equal(1);
       expect(parseResult.errors.length).to.equal(1);
       done();
+    });
+  });
+
+  describe('generateMessageBody option', () => {
+    it('should generate message bodies when generateMessageBody is not set', (done) => {
+      fury.parse({ source }, (error, parseResult) => {
+        expect(error).to.be.null;
+
+        const resource = parseResult.api.resources.get(0);
+        const transaction = resource.transitions.get(0).transactions.get(0);
+        const { response } = transaction;
+
+        expect(response.messageBody).to.be.instanceof(fury.minim.elements.Asset);
+        expect(response.messageBodySchema).to.be.instanceof(fury.minim.elements.Asset);
+
+        done();
+      });
+    });
+
+    it('should generate message bodies when generateMessageBody is enabled', (done) => {
+      fury.parse({ source, adapterOptions: { generateMessageBody: true } }, (error, parseResult) => {
+        expect(error).to.be.null;
+
+        const resource = parseResult.api.resources.get(0);
+        const transaction = resource.transitions.get(0).transactions.get(0);
+        const { response } = transaction;
+
+        expect(response.messageBody).to.be.instanceof(fury.minim.elements.Asset);
+        expect(response.messageBodySchema).to.be.instanceof(fury.minim.elements.Asset);
+
+        done();
+      });
+    });
+
+    it('should not generate message bodies when generateMessageBody is disabled', (done) => {
+      fury.parse({ source, adapterOptions: { generateMessageBody: false } }, (error, parseResult) => {
+        expect(error).to.be.null;
+
+        const resource = parseResult.api.resources.get(0);
+        const transaction = resource.transitions.get(0).transactions.get(0);
+        const { response } = transaction;
+
+        expect(response.messageBody).to.be.undefined;
+        expect(response.messageBodySchema).to.be.instanceof(fury.minim.elements.Asset);
+
+        done();
+      });
+    });
+  });
+
+  describe('generateMessageBodySchema option', () => {
+    it('should generate message bodies when generateMessageBodySchema is not set', (done) => {
+      fury.parse({ source }, (error, parseResult) => {
+        expect(error).to.be.null;
+
+        const resource = parseResult.api.resources.get(0);
+        const transaction = resource.transitions.get(0).transactions.get(0);
+        const { response } = transaction;
+
+        expect(response.messageBody).to.be.instanceof(fury.minim.elements.Asset);
+        expect(response.messageBodySchema).to.be.instanceof(fury.minim.elements.Asset);
+
+        done();
+      });
+    });
+
+    it('should generate message bodies when generateMessageBodySchema is enabled', (done) => {
+      fury.parse({ source, adapterOptions: { generateMessageBodySchema: true } }, (error, parseResult) => {
+        expect(error).to.be.null;
+
+        const resource = parseResult.api.resources.get(0);
+        const transaction = resource.transitions.get(0).transactions.get(0);
+        const { response } = transaction;
+
+        expect(response.messageBody).to.be.instanceof(fury.minim.elements.Asset);
+        expect(response.messageBodySchema).to.be.instanceof(fury.minim.elements.Asset);
+
+        done();
+      });
+    });
+
+    it('should not generate message bodies when generateMessageBodySchema is disabled', (done) => {
+      fury.parse({ source, adapterOptions: { generateMessageBodySchema: false } }, (error, parseResult) => {
+        expect(error).to.be.null;
+
+        const resource = parseResult.api.resources.get(0);
+        const transaction = resource.transitions.get(0).transactions.get(0);
+        const { response } = transaction;
+
+        expect(response.messageBody).to.be.instanceof(fury.minim.elements.Asset);
+        expect(response.messageBodySchema).to.be.undefined;
+
+        done();
+      });
     });
   });
 });

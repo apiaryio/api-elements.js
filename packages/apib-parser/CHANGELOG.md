@@ -1,5 +1,14 @@
 # API Elements: API Blueprint Parser Changelog
 
+## Master
+
+### Enhancements
+
+- The parser can now be configured to disable generation of example message
+  bodies and message body schemas by providing the adapter options
+  `generateMessageBody` and/or `generateMessageBodySchema` as `false` during
+  parse.
+
 ## 0.20.0 (2020-06-12)
 
 The package has been updated for compatibility with `@apielements/core`.
