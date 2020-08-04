@@ -27,7 +27,7 @@ const unsupportedKeys = [
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-const isRequestBody = R.allPass([isMember, hasKey('requestBody')]);
+const isRequestBody = R.both(isMember, hasKey('requestBody'));
 
 function createTransactions(namespace, member, operation) {
   const requests = R.map(getValue, R.filter(isRequestBody, operation.content));
