@@ -1,5 +1,31 @@
 {
   "element": "parseResult",
+  "meta": {
+    "links": {
+      "element": "array",
+      "content": [
+        {
+          "element": "link",
+          "meta": {
+            "title": {
+              "element": "string",
+              "content": "OpenAPI 2"
+            }
+          },
+          "attributes": {
+            "relation": {
+              "element": "string",
+              "content": "via"
+            },
+            "href": {
+              "element": "string",
+              "content": "https://spec.openapis.org/oas/v2.0"
+            }
+          }
+        }
+      ]
+    }
+  },
   "content": [
     {
       "element": "category",
@@ -13,28 +39,13 @@
             }
           ]
         },
+        "title": {
+          "element": "string",
+          "content": "Sample Pet Store App"
+        },
         "links": {
           "element": "array",
           "content": [
-            {
-              "element": "link",
-              "meta": {
-                "title": {
-                  "element": "string",
-                  "content": "OpenAPI 2"
-                }
-              },
-              "attributes": {
-                "relation": {
-                  "element": "string",
-                  "content": "via"
-                },
-                "href": {
-                  "element": "string",
-                  "content": "https://spec.openapis.org/oas/v2.0"
-                }
-              }
-            },
             {
               "element": "link",
               "attributes": {
@@ -49,10 +60,6 @@
               }
             }
           ]
-        },
-        "title": {
-          "element": "string",
-          "content": "Sample Pet Store App"
         }
       },
       "attributes": {
