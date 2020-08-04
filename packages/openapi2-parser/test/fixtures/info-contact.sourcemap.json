@@ -13,38 +13,28 @@
             }
           ]
         },
-        "title": {
-          "element": "string",
-          "attributes": {
-            "sourceMap": {
-              "element": "array",
-              "content": [
-                {
-                  "element": "sourceMap",
-                  "content": [
-                    {
-                      "element": "array",
-                      "content": [
-                        {
-                          "element": "number",
-                          "content": 23
-                        },
-                        {
-                          "element": "number",
-                          "content": 23
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          "content": "Sample Store App"
-        },
         "links": {
           "element": "array",
           "content": [
+            {
+              "element": "link",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "content": "OpenAPI 2"
+                }
+              },
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "via"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "https://spec.openapis.org/oas/v2.0"
+                }
+              }
+            },
             {
               "element": "link",
               "meta": {
@@ -128,6 +118,35 @@
               }
             }
           ]
+        },
+        "title": {
+          "element": "string",
+          "attributes": {
+            "sourceMap": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "sourceMap",
+                  "content": [
+                    {
+                      "element": "array",
+                      "content": [
+                        {
+                          "element": "number",
+                          "content": 23
+                        },
+                        {
+                          "element": "number",
+                          "content": 23
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "content": "Sample Store App"
         }
       },
       "attributes": {

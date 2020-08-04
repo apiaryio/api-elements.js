@@ -13,6 +13,30 @@
             }
           ]
         },
+        "links": {
+          "element": "array",
+          "content": [
+            {
+              "element": "link",
+              "meta": {
+                "title": {
+                  "element": "string",
+                  "content": "OpenAPI 2"
+                }
+              },
+              "attributes": {
+                "relation": {
+                  "element": "string",
+                  "content": "via"
+                },
+                "href": {
+                  "element": "string",
+                  "content": "https://spec.openapis.org/oas/v2.0"
+                }
+              }
+            }
+          ]
+        },
         "title": {
           "element": "string",
           "content": "Authentication with extensions"
