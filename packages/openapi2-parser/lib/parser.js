@@ -335,7 +335,7 @@ class Parser {
     link.relation = 'via';
     link.href = 'https://spec.openapis.org/oas/v2.0';
 
-    return this.api.links.push(link);
+    return this.result.links.push(link);
   }
 
   // Converts the Swagger title and description
