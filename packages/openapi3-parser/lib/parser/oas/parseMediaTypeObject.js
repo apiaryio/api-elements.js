@@ -37,7 +37,7 @@ function isXMLMediaType(mediaType) {
   return type === 'application' && (suffix === 'xml' || subtype === 'xml');
 }
 
-const canGenerateMessageBodyForMediaType = R.anyPass([isJSONMediaType, isTextMediaType]);
+const canGenerateMessageBodyForMediaType = R.either(isJSONMediaType, isTextMediaType);
 
 function generateMessageBody(context, mediaType, dataStructure) {
   const elements = {};
@@ -98,10 +98,10 @@ function parseExample(context, mediaType) {
   const createExampleNotStringWarning = createWarning(namespace,
     `'${name}' 'example' should be a string for media type '${mediaType}'`);
 
-  const isTextBasedType = R.anyPass([
+  const isTextBasedType = R.either(
     () => isTextMediaType(mediaType),
-    () => isXMLMediaType(mediaType),
-  ]);
+    () => isXMLMediaType(mediaType)
+  );
 
   const parseTextExample = pipeParseResult(namespace,
     R.unless(isString, createExampleNotStringWarning),
