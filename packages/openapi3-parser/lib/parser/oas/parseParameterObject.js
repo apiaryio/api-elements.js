@@ -60,10 +60,10 @@ function validateRequiredForPathParameter(context, object, parameter) {
   return parseResult;
 }
 
-const hasExplodeWithoutQueryIn = R.allPass([
+const hasExplodeWithoutQueryIn = R.both(
   object => object.getValue('explode') === true,
-  object => object.getValue('in') !== 'query',
-]);
+  object => object.getValue('in') !== 'query'
+);
 
 /**
  * Parse Parameter Object
