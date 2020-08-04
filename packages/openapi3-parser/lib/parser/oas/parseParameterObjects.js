@@ -10,7 +10,7 @@ const parseReference = require('../parseReference');
 const parseParameterObjectOrRef = parseReference('parameters', parseParameterObject);
 
 // Given MemberElement has key `path` or `query`
-const isPathOrQuery = R.anyPass([hasKey('path'), hasKey('query')]);
+const isPathOrQuery = R.either(hasKey('path'), hasKey('query'));
 
 /**
  * Parse parameters array

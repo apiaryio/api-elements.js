@@ -11,7 +11,7 @@ const pipeParseResult = require('../pipeParseResult');
  * @returns {boolean}
  * @private
  */
-const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
+const isAnnotationOrMember = R.either(isAnnotation, isMember);
 
 const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
 

@@ -6,7 +6,7 @@ const {
 const { createWarning } = require('./annotations');
 const parseObject = require('./parseObject');
 
-const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
+const isAnnotationOrMember = R.either(isAnnotation, isMember);
 
 const validateMapValueIsObject = (namespace, name, key) => R.unless(R.pipe(getValue, isObject), createWarning(namespace, `'${name}' '${key}' is not an object`));
 
