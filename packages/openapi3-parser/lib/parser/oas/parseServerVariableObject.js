@@ -61,7 +61,7 @@ const parseServerVariableObject = (context, element, variableName) => pipeParseR
     const member = new context.namespace.elements.Member(variableName, variable);
 
     if (object.hasKey('description')) {
-      member.description = object.getValue('description');
+      member.description = object.get('description');
     }
 
     return member;
