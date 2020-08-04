@@ -137,7 +137,7 @@ describe('#parseServerObject', () => {
       expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(firstHrefVariable.key.toValue()).to.equal('username');
       expect(firstHrefVariable.value.attributes.get('default').toValue()).to.equal('Mario');
-      expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
+      expect(firstHrefVariable.description.toValue()).to.equal('API user name');
 
       expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(secondHrefVariable.key.toValue()).to.equal('version');
@@ -196,7 +196,7 @@ describe('#parseServerObject', () => {
       expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(firstHrefVariable.key.toValue()).to.equal('username');
       expect(firstHrefVariable.value.attributes.get('default').toValue()).to.equal('Mario');
-      expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
+      expect(firstHrefVariable.description.toValue()).to.equal('API user name');
 
       expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(secondHrefVariable.key.toValue()).to.equal('version');
@@ -234,7 +234,7 @@ describe('#parseServerObject', () => {
       expect(firstHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(firstHrefVariable.key.toValue()).to.equal('username');
       expect(firstHrefVariable.value.attributes.get('default').toValue()).to.equal('Mario');
-      expect(firstHrefVariable.value.description.toValue()).to.equal('API user name');
+      expect(firstHrefVariable.description.toValue()).to.equal('API user name');
 
       expect(secondHrefVariable).to.be.instanceof(namespace.elements.Member);
       expect(secondHrefVariable.key.toValue()).to.equal('version');
