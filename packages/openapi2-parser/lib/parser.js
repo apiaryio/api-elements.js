@@ -197,6 +197,7 @@ class Parser {
         // By default there are no groups, just the root API element
         this.group = this.api;
 
+        this.addFormatLink();
         this.handleSwaggerInfo();
         this.handleSwaggerHost();
         this.handleSwaggerAuth();
@@ -323,6 +324,18 @@ class Parser {
       url: docs.url,
       path: this.path.concat(['externalDocs']),
     });
+  }
+
+  // Add the link to the format version specs
+  addFormatLink() {
+    const { Link } = this.namespace.elements;
+    const link = new Link();
+
+    link.title = 'OpenAPI 2';
+    link.relation = 'via';
+    link.href = 'https://spec.openapis.org/oas/v2.0';
+
+    return this.api.links.push(link);
   }
 
   // Converts the Swagger title and description

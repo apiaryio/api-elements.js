@@ -1,5 +1,9 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## Master
+
+- added a Link element to the specific format/version in the parse result.
+
 ## 0.32.2 (2020-07-22)
 
 ### Bug Fixes
