@@ -964,66 +964,6 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 21
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 414
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 21
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 17
-                        }
-                      },
-                      "content": 6
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Parameter Object' contains unsupported key 'schema'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
                           "content": 29
                         },
                         "column": {
@@ -1175,66 +1115,6 @@
         }
       },
       "content": "'Operation Object' contains unsupported key 'tags'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 62
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 9
-                        }
-                      },
-                      "content": 1504
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 62
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 15
-                        }
-                      },
-                      "content": 6
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Parameter Object' contains unsupported key 'schema'"
     },
     {
       "element": "annotation",
