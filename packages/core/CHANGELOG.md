@@ -1,5 +1,11 @@
 # API Elements: Core
 
+## 0.2.0 (2020-08-05)
+
+This package updates the version of `api-elements` being used. See
+[api-elements@0.2.0](https://github.com/apiaryio/api-elements.js/releases/tag/%40apielements%2Fcore%400.2.0)
+for more details on the contents of the change.
+
 ## 0.1.0 (2020-06-12)
 
 The package has been renamed to `@apielements/core`.

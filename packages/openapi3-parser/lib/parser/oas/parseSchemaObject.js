@@ -115,7 +115,7 @@ function validateValuesMatchSchema(context, schema) {
     return member;
   };
 
-  const isDefaultOrExample = R.anyPass([hasKey('example'), hasKey('default')]);
+  const isDefaultOrExample = R.either(hasKey('example'), hasKey('default'));
   const parseMember = R.cond([
     [isDefaultOrExample, validate],
     [R.T, e => e],

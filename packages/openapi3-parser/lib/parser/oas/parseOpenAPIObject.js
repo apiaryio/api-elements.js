@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 const R = require('ramda');
 
 const {
@@ -30,74 +28,6 @@ const unsupportedKeys = ['tags', 'externalDocs'];
  * @private
  */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
-
-const recurseSkippingAnnotations = R.curry((visitor, e) => {
-  if (isAnnotation(e)) {
-    return e;
-  }
-  if (e) {
-    if (!e.element) {
-      return e;
-    }
-
-    visitor(e);
-
-    if (e._attributes) {
-      e.attributes.forEach((value, key, member) => {
-        recurseSkippingAnnotations(visitor, member);
-      });
-    }
-    if (e._meta) {
-      e.meta.forEach((value, key, member) => {
-        recurseSkippingAnnotations(visitor, member);
-      });
-    }
-    if (e.content) {
-      if (Array.isArray(e.content)) {
-        e.content.forEach((value) => {
-          recurseSkippingAnnotations(visitor, value);
-        });
-      }
-      if (e.content.key) {
-        recurseSkippingAnnotations(visitor, e.content.key);
-        if (e.content.value) {
-          recurseSkippingAnnotations(visitor, e.content.value);
-        }
-      }
-      if (e.content.element) {
-        recurseSkippingAnnotations(visitor, e.content);
-      }
-    }
-  }
-  return e;
-});
-
-function removeSourceMap(e) {
-  if (e._attributes) {
-    e.attributes.remove('sourceMap');
-  }
-}
-
-function removeColumnLine(result) {
-  if (result._attributes) {
-    const sourceMaps = result.attributes.get('sourceMap');
-    if (sourceMaps) {
-      sourceMaps.content.forEach((sourceMap) => {
-        sourceMap.content.forEach((sourcePoint) => {
-          sourcePoint.content.forEach((sourceCoordinate) => {
-            if (sourceCoordinate._attributes) {
-              sourceCoordinate.attributes.remove('line');
-              sourceCoordinate.attributes.remove('column');
-            }
-          });
-        });
-      });
-    }
-  }
-}
-
-const filterColumnLine = recurseSkippingAnnotations(removeColumnLine);
-const filterSourceMaps = recurseSkippingAnnotations(removeSourceMap);
 
 function parseOASObject(context, object) {
   const { namespace } = context;
@@ -183,10 +113,7 @@ function parseOASObject(context, object) {
       return api;
     });
 
-  if (context.options.generateSourceMap) {
-    return filterColumnLine(parseOASObject(object));
-  }
-  return filterSourceMaps(parseOASObject(object));
+  return parseOASObject(object);
 }
 
 module.exports = R.curry(parseOASObject);

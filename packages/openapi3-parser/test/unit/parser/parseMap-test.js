@@ -68,6 +68,38 @@ describe('#parseMap', () => {
     expect(member2.value.toValue()).to.be.equal('dummy');
   });
 
+  it('propagate members from parser', () => {
+    const member = new context.namespace.elements.Member('key', {
+      uno: {},
+    });
+
+    const parseToMember = (context, object, key) => pipeParseResult(
+      namespace,
+      () => {
+        const member = new context.namespace.elements.Member(key, 'dummy');
+        member.description = `${key.toValue()} description`;
+        return member;
+      }
+    )(object);
+
+    const result = parseMap(context, 'dummy', 'key', parseToMember)(member);
+
+    expect(result).to.not.contain.annotations;
+    expect(result.length).to.be.equal(1);
+
+    const members = result.get(0);
+
+    expect(members.length).to.be.equal(1);
+
+    const member1 = members.content[0];
+    expect(member1).to.be.instanceof(context.namespace.elements.Member);
+    expect(member1.key.toValue()).to.be.equal('uno');
+    expect(member1.value).to.be.instanceof(context.namespace.elements.String);
+    expect(member1.value.toValue()).to.be.equal('dummy');
+    expect(member1.description).to.be.instanceof(context.namespace.elements.String);
+    expect(member1.description.toValue()).to.equal('uno description');
+  });
+
   it('propagate annotations from parser', () => {
     const member = new context.namespace.elements.Member('key', {
       uno: {},

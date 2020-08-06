@@ -22,7 +22,7 @@ const hasValue = parseResult => !R.reject(isAnnotation, parseResult).isEmpty;
  * @param parseResult {ParseResult}
  * @returns boolean
  */
-const hasNoErrorsAndHasValue = R.allPass([hasNoErrors, hasValue]);
+const hasNoErrorsAndHasValue = R.both(hasNoErrors, hasValue);
 
 /**
  * Concatate the lhs and rhs array into a parse result

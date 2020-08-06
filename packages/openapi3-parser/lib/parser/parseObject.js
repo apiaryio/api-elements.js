@@ -11,7 +11,7 @@ const pipeParseResult = require('../pipeParseResult');
  * @returns {boolean}
  * @private
  */
-const isAnnotationOrMember = R.anyPass([isAnnotation, isMember]);
+const isAnnotationOrMember = R.either(isAnnotation, isMember);
 
 const parseResultHasErrors = parseResult => !parseResult.errors.isEmpty;
 
@@ -38,7 +38,7 @@ const chainParseResult = R.curry((transform, parseResult) => {
 
 // FIXME Can be simplified once https://github.com/refractproject/minim/issues/201 is completed
 const hasMember = R.curry((object, key) => {
-  const findKey = R.allPass([isMember, member => member.key.toValue() === key]);
+  const findKey = R.both(isMember, member => member.key.toValue() === key);
   const matchingMembers = object.content.filter(findKey);
   return matchingMembers.length > 0;
 });
@@ -153,7 +153,7 @@ function parseObject(context, name, parseMember, requiredKeys = [], orderedKeys 
       let errors = null;
 
       orderedKeys.forEach((key) => {
-        const isOrderedKey = R.allPass([isMember, m => m.key.equals(key)]);
+        const isOrderedKey = R.both(isMember, m => m.key.equals(key));
         const member = R.filter(isOrderedKey, value).get(0);
         if (member) {
           const parseResult = parseMember(member);

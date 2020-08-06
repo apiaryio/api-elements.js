@@ -48,7 +48,7 @@ function parseResponsesObject(context, element) {
     createWarning(namespace, `'${name}' response status code must be a string and should be wrapped in quotes`, member.key),
   ]);
 
-  const isStatusCodeOrDefault = R.anyPass([isStatusCode, hasKey('default')]);
+  const isStatusCodeOrDefault = R.either(isStatusCode, hasKey('default'));
 
   // FIXME Add support for status code ranges
   // https://github.com/apiaryio/fury-adapter-oas3-parser/issues/64

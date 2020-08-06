@@ -1,10 +1,12 @@
 const R = require('ramda');
 const pipeParseResult = require('../pipeParseResult');
 const {
-  isObject, getValue, isAnnotation,
+  isObject, getValue, isAnnotation, isMember,
 } = require('../predicates');
 const { createWarning } = require('./annotations');
 const parseObject = require('./parseObject');
+
+const isAnnotationOrMember = R.either(isAnnotation, isMember);
 
 const validateMapValueIsObject = (namespace, name, key) => R.unless(R.pipe(getValue, isObject), createWarning(namespace, `'${name}' '${key}' is not an object`));
 
@@ -15,8 +17,8 @@ const parseMapMember = R.curry((context, parser, member) => {
   const Member = R.constructN(2, context.namespace.elements.Member)(member.key);
 
   const parseResult = R.map(
-    R.unless(isAnnotation, Member),
-    parser(context, member.value)
+    R.unless(isAnnotationOrMember, Member),
+    parser(context, member.value, member.key)
   );
 
   if (isParseResultEmpty(parseResult)) {

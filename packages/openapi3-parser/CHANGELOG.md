@@ -1,6 +1,12 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
-## Master
+## 0.15.0 (2020-08-06)
+
+### Enhancements
+
+- The parser will only emit warnings for unsupported features a single time.
+  This can dramatically increase the performance when dealing with documents
+  which use many unsupported features.
 
 ### Bug Fixes
 
@@ -8,6 +14,16 @@
   using a text based media type when the example value is not a string.
   Previously an invalid asset element was created which contained non-string
   content.
+
+- Moves the description from 'Server Object' variable values into the member
+  element which contain it for consistency.
+
+- Fixes a case where source map information for the description of a 'Server
+  Object' variable would be missing.
+
+- Prevent the generation of message body examples for text-based media types
+  when the value is not string based. A warning will now be emitted under this
+  circumstance.
 
 ## 0.14.2 (2020-07-20)
 

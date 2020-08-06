@@ -1,6 +1,8 @@
 # API Elements: API Blueprint Parser Changelog
 
-## Master
+## 0.20.1 (2020-08-05)
+
+Adds compatibility for @apielements/core 0.2.0.
 
 ### Enhancements
 
