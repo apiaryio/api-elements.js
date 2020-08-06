@@ -1,5 +1,9 @@
 # API Elements: Remote Adapter Changelog
 
+## 0.6.2 (2020-08-06)
+
+Adds compatibility for @apielements/core 0.2.0.
+
 ## 0.6.1 (2020-06-22)
 
 ### Bug Fixes

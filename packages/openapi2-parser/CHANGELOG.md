@@ -1,5 +1,9 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## 0.32.3 (2020-08-06)
+
+Adds compatibility for @apielements/core 0.2.0.
+
 ## 0.32.2 (2020-07-22)
 
 ### Bug Fixes
