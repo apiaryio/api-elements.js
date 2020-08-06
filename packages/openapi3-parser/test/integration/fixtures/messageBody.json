@@ -1,5 +1,31 @@
 {
   "element": "parseResult",
+  "meta": {
+    "links": {
+      "element": "array",
+      "content": [
+        {
+          "element": "link",
+          "meta": {
+            "title": {
+              "element": "string",
+              "content": "OpenAPI 3.0.1"
+            }
+          },
+          "attributes": {
+            "relation": {
+              "element": "string",
+              "content": "via"
+            },
+            "href": {
+              "element": "string",
+              "content": "https://spec.openapis.org/oas/v3.0.1"
+            }
+          }
+        }
+      ]
+    }
+  },
   "content": [
     {
       "element": "category",
