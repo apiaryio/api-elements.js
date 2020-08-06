@@ -126,7 +126,7 @@ function parse(source, context) {
     R.unless(isObjectOrAnnotation, createError(context.namespace, 'Source document is not an object')),
     R.unless(isAnnotation, parseOpenAPIObject(context)));
 
-  return R.chain(
+  const parseResult = R.chain(
     R.pipe(
       parseDocument,
       deduplicateUnsupportedAnnotations(context.namespace),
@@ -134,6 +134,22 @@ function parse(source, context) {
     ),
     document
   );
+
+  if (!isAnnotation(parseResult.content[0])) {
+    const formatVersion = (/3\.\d+\.\d+/).exec(source)[0];
+    const formatLink = `https://spec.openapis.org/oas/v${formatVersion}`;
+
+    const { Link } = context.namespace.elements;
+    const link = new Link();
+
+    link.title = `OpenAPI ${formatVersion}`;
+    link.relation = 'via';
+    link.href = formatLink;
+
+    parseResult.links.push(link);
+  }
+
+  return parseResult;
 }
 
 module.exports = parse;

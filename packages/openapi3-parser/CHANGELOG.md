@@ -8,6 +8,10 @@
   This can dramatically increase the performance when dealing with documents
   which use many unsupported features.
 
+### Enhancements
+
+- added a Link element to the specific format/version in the parse result.
+
 ### Bug Fixes
 
 - Return a warning when parsing a document with a 'Media Type Object'
