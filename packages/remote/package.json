@@ -1,6 +1,6 @@
 {
   "name": "@apielements/remote",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "API Elements adapter for performing actions via a remote API",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -26,10 +26,10 @@
     "deckardcain": "^1.0.0"
   },
   "peerDependencies": {
-    "@apielements/core": "^0.1.0"
+    "@apielements/core": ">=0.1.0 <0.3.0"
   },
   "devDependencies": {
-    "@apielements/core": "^0.1.0",
+    "@apielements/core": ">=0.1.0 <0.3.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "mocha": "^7.1.1"

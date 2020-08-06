@@ -1,5 +1,9 @@
 # API Elements: API Blueprint Serializer Changelog
 
+## 0.16.1 (2020-08-06)
+
+Adds compatibility for @apielements/core 0.2.0.
+
 ## 0.16.0 (2020-06-12)
 
 The package has been updated for compatibility with `@apielements/core`.
