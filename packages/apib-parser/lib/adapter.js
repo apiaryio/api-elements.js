@@ -42,9 +42,46 @@ function parse({
     requireBlueprintName,
   };
 
-  return drafter.parse(source, options);
+  const formatLink = {
+    links: {
+      element: 'array',
+      content: [
+        {
+          element: 'link',
+          meta: {
+            title: {
+              element: 'string',
+              content: 'Apiary Blueprint',
+            },
+          },
+          attributes: {
+            relation: {
+              element: 'string',
+              content: 'via',
+            },
+            href: {
+              element: 'string',
+              content: 'https://apiary.io/blueprint',
+            },
+          },
+        },
+      ],
+    },
+  };
+
+  return drafter.parse(source, options).then((result) => {
+    const refractElement = {};
+    refractElement.element = result.element;
+    refractElement.meta = formatLink;
+    refractElement.content = result.content;
+    return refractElement;
+  });
 }
 
 module.exports = {
-  name, mediaTypes, detect, validate, parse,
+  name,
+  mediaTypes,
+  detect,
+  validate,
+  parse,
 };
