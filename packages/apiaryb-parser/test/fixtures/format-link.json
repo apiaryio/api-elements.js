@@ -1,0 +1,49 @@
+{
+  "element": "parseResult",
+  "meta": {
+    "links": {
+      "element": "array",
+      "content": [
+        {
+          "element": "link",
+          "meta": {
+            "title": {
+              "element": "string",
+              "content": "Apiary Blueprint"
+            }
+          },
+          "attributes": {
+            "relation": {
+              "element": "string",
+              "content": "via"
+            },
+            "href": {
+              "element": "string",
+              "content": "https://apiary.io/blueprint"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Blueprint with Format Link"
+        }
+      }
+    }
+  ]
+}
