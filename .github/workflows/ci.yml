@@ -1,0 +1,96 @@
+name: CI
+on:
+  push:
+    branches: [master]
+    paths-ignore: ["docs/**"]
+  pull_request:
+    branches: [master]
+    types: [opened, reopened, synchronize]
+    paths-ignore: ["docs/**"]
+jobs:
+  ci:
+    name: CI
+    needs: [test, lint, cover]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Done
+        run: exit 0
+  test:
+    name: Tests
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [8, 10, 12]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Cache node modules
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: ~/.npm
+          key: deps-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            deps-
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --ignore-optional
+      - name: Test
+        run: yarn test
+  lint:
+    name: Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install Node.js
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+      - name: Cache node modules
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: ~/.npm
+          key: deps-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            deps-
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --ignore-optional
+      - name: Linter
+        run: npm run lint
+      - name: Commit Linter
+        uses: wagoid/commitlint-github-action@v2
+  cover:
+    name: Coverage
+    needs: [test]
+    runs-on: ubuntu-latest
+    env:
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+      - name: Cache node modules
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: ~/.npm
+          key: deps-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            deps-
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --ignore-optional
+      - name: Build Coverage
+        run: npm run cover
+      - name: Upload Coverage
+        run: npm run coveralls

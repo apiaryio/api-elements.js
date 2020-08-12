@@ -16,7 +16,7 @@
     "directory": "packages/form-serializer"
   },
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "mocha test"
   },

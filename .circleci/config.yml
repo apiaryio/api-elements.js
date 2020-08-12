@@ -13,19 +13,6 @@ aliases:
       - run: npm test
 
 jobs:
-  test-node8:
-    <<: *defaults
-    docker:
-      - image: circleci/node:8
-
-  test-node10:
-    <<: *defaults
-
-  test-node12:
-    <<: *defaults
-    docker:
-      - image: circleci/node:12
-
   test-smoke:
     <<: *defaults
     steps:
@@ -33,49 +20,8 @@ jobs:
       - <<: *install
       - run: ./.circleci/smoke.sh
 
-  lint:
-    <<: *defaults
-    steps:
-      - checkout
-      - <<: *install
-      - run: npm run lint
-      - run: npx commitlint --from origin/master
-
-  docs:
-    <<: *defaults
-    docker:
-      - image: circleci/python:3.6.8-node-browsers
-    steps:
-      - checkout
-      - <<: *install
-      - run:
-          working_directory: docs
-          command: pipenv install --dev
-      - run:
-          working_directory: docs
-          command: |
-            export PATH="$(yarn bin):$PATH"
-            pipenv run make html
-
-  cover:
-    <<: *defaults
-    steps:
-      - checkout
-      - <<: *install
-      - run: npm run cover
-      - run: npm run coveralls
-
 workflows:
   version: 2
   test-publish:
     jobs:
-      - test-node8
-      - test-node10
-      - test-node12
       - test-smoke
-      - lint
-      - docs
-      - cover:
-          requires:
-            - test-node12
-
