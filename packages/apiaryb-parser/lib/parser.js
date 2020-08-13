@@ -63,8 +63,6 @@ class Parser {
 
     this.result.push(this.api);
 
-    // console.log('RES', this.result);
-
     return this.result;
   }
 
