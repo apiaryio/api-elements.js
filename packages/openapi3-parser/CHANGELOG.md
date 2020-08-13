@@ -1,5 +1,11 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
+## Unreleased
+
+### Enhancements
+
+- added a Link element to the specific format/version in the parse result.
+
 ## 0.15.0 (2020-08-06)
 
 ### Enhancements
@@ -7,10 +13,6 @@
 - The parser will only emit warnings for unsupported features a single time.
   This can dramatically increase the performance when dealing with documents
   which use many unsupported features.
-
-### Enhancements
-
-- added a Link element to the specific format/version in the parse result.
 
 ### Bug Fixes
 
