@@ -136,7 +136,7 @@ function parse(source, context) {
   );
 
   if (!isAnnotation(parseResult.content[0])) {
-    const formatVersion = (/3\.\d+\.\d+/).exec(source)[0];
+    const formatVersion = (/(?<=(["']?)openapi\1\s*:\s*(["']?))(3\.\d+\.\d+)/).exec(source)[0];
     const formatLink = `https://spec.openapis.org/oas/v${formatVersion}`;
 
     const { Link } = context.namespace.elements;
