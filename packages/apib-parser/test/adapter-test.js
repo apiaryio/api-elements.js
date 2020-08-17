@@ -65,7 +65,7 @@ describe('API Blueprint parser adapter', () => {
       expect(link.relation.toValue()).to.equal('via');
       expect(link.title.toValue()).to.equal('Apiary Blueprint');
       expect(link.href.toValue()).to.equal(
-        'https://apiary.io/blueprint'
+        'https://apiblueprint.org/'
       );
     });
   });

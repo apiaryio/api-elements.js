@@ -33,7 +33,7 @@ function validate({ source, requireBlueprintName }) {
  */
 function parse({
   source, generateSourceMap, generateMessageBody, generateMessageBodySchema,
-  requireBlueprintName,
+  requireBlueprintName, namespace,
 }) {
   const options = {
     exportSourcemap: !!generateSourceMap,
@@ -42,39 +42,22 @@ function parse({
     requireBlueprintName,
   };
 
-  const formatLink = {
-    links: {
-      element: 'array',
-      content: [
-        {
-          element: 'link',
-          meta: {
-            title: {
-              element: 'string',
-              content: 'Apiary Blueprint',
-            },
-          },
-          attributes: {
-            relation: {
-              element: 'string',
-              content: 'via',
-            },
-            href: {
-              element: 'string',
-              content: 'https://apiary.io/blueprint',
-            },
-          },
-        },
-      ],
-    },
-  };
-
   return drafter.parse(source, options).then((result) => {
-    const refractElement = {};
-    refractElement.element = result.element;
-    refractElement.meta = formatLink;
-    refractElement.content = result.content;
-    return refractElement;
+    const parseResult = namespace.fromRefract(result);
+    const isAnnotation = element => element.element === 'annotation';
+    const { Link } = namespace.elements;
+
+    if (!isAnnotation(parseResult.content[0])) {
+      const link = new Link();
+
+      link.title = 'Apiary Blueprint';
+      link.relation = 'via';
+      link.href = 'https://apiblueprint.org/';
+
+      parseResult.links.push(link);
+    }
+
+    return parseResult;
   });
 }
 
