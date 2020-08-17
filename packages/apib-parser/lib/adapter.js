@@ -50,7 +50,8 @@ function parse({
     if (!isAnnotation(parseResult.content[0])) {
       const link = new Link();
 
-      link.title = 'Apiary Blueprint';
+      link.title = 'API Blueprint';
+
       link.relation = 'via';
       link.href = 'https://apiblueprint.org/';
 
