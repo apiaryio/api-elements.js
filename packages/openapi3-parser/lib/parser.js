@@ -3,7 +3,9 @@
 const R = require('ramda');
 const parseYAML = require('./parser/parseYAML');
 
-const { isAnnotation, isWarningAnnotation, isObject } = require('./predicates');
+const {
+ isAnnotation, isWarningAnnotation, isObject, isMember, hasKey,
+} = require('./predicates');
 const { createError } = require('./elements');
 const pipeParseResult = require('./pipeParseResult');
 
@@ -136,9 +138,14 @@ function parse(source, context) {
   );
 
   if (!isAnnotation(parseResult.content[0])) {
-    const formatVersion = (/(?<=(["']?)openapi\1\s*:\s*(["']?))(3\.\d+\.\d+)/).exec(source)[0];
-    const formatLink = `https://spec.openapis.org/oas/v${formatVersion}`;
+    const formatVersion = R.pipe(
+      R.prop('content'),
+      R.find(isObject),
+      R.prop('content'),
+      R.find(R.both(isMember, hasKey('openapi')))
+    )(document).toValue().value;
 
+    const formatLink = `https://spec.openapis.org/oas/v${formatVersion}`;
     const { Link } = context.namespace.elements;
     const link = new Link();
 
