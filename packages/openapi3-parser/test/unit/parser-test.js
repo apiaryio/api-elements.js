@@ -51,4 +51,15 @@ describe('#parse', () => {
     expect(link.title.toValue()).to.equal('OpenAPI 3.0.0');
     expect(link.href.toValue()).to.equal('https://spec.openapis.org/oas/v3.0.0');
   });
+
+  it('add OpenAPI 3.0.3 format link when fails to parse an OAS3 document', () => {
+    const source = '{}{}';
+    const parseResult = parse(source, context);
+
+    const link = parseResult.links.get(0);
+    expect(link).to.be.instanceof(Link);
+    expect(link.relation.toValue()).to.equal('via');
+    expect(link.title.toValue()).to.equal('OpenAPI 3.0.3');
+    expect(link.href.toValue()).to.equal('https://spec.openapis.org/oas/v3.0.3');
+  });
 });
