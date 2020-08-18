@@ -10,16 +10,18 @@ function collectElementByIDs(element) {
   }
 
   const { parents } = element;
-  if (parents) {
-    const rootElement = parents.get(0);
+  if (!parents || parents.isEmpty) {
+    return dataStructures;
+  }
 
-    if (rootElement) {
-      rootElement.recursiveChildren.forEach((element) => {
-        if (element.id) {
-          dataStructures[element.id.toValue()] = element;
-        }
-      });
-    }
+  const rootElement = parents.get(parents.length - 1);
+
+  if (rootElement) {
+    rootElement.recursiveChildren.forEach((element) => {
+      if (element.id) {
+        dataStructures[element.id.toValue()] = element;
+      }
+    });
   }
 
   return dataStructures;
