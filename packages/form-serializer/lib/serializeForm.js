@@ -28,6 +28,10 @@ function collectElementByIDs(element) {
 }
 
 function serializeForm({ api, mediaType }) {
+  if (api.element === 'dataStructure') {
+    return serializeForm({ api: api.content, mediaType });
+  }
+
   const dataStructures = collectElementByIDs(api);
   let values = api.valueOf(undefined, dataStructures);
 
@@ -51,9 +55,11 @@ function serializeForm({ api, mediaType }) {
     content += `--${boundary}--\r\n`;
     return content;
   }
+
   if (typeof values === 'string') {
     values = { undefined: values };
   }
+
   return querystring.encode(values);
 }
 
