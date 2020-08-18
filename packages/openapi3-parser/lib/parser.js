@@ -144,7 +144,7 @@ function parse(source, context) {
       R.prop('content'),
       R.find(R.both(isMember, hasKey('openapi'))),
       R.path(['content', 'value']),
-      R.and(isString, R.prop('content'))
+      R.ifElse(isString, R.prop('content'), R.always('3.0.3'))
     ), R.always('3.0.3')
   )(document);
 

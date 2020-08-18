@@ -62,4 +62,15 @@ describe('#parse', () => {
     expect(link.title.toValue()).to.equal('OpenAPI 3.0.3');
     expect(link.href.toValue()).to.equal('https://spec.openapis.org/oas/v3.0.3');
   });
+
+  it('add OpenAPI 3.0.3 format link when OpenAPI property is not a string', () => {
+    const source = 'openapi: {"test": "3.0.0"}\ninfo: {title: My API, version: 1.0.0}\npaths: {}\n';
+    const parseResult = parse(source, context);
+
+    const link = parseResult.links.get(0);
+    expect(link).to.be.instanceof(Link);
+    expect(link.relation.toValue()).to.equal('via');
+    expect(link.title.toValue()).to.equal('OpenAPI 3.0.3');
+    expect(link.href.toValue()).to.equal('https://spec.openapis.org/oas/v3.0.3');
+  });
 });
