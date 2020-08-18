@@ -18,7 +18,10 @@ function collectElementByIDs(element) {
 
   if (rootElement) {
     rootElement.recursiveChildren.forEach((element) => {
-      if (element.id) {
+      // eslint-disable-next-line no-underscore-dangle
+      const isNotEmptyStringElement = element._meta && element._meta.get('id');
+
+      if (isNotEmptyStringElement) {
         dataStructures[element.id.toValue()] = element;
       }
     });
