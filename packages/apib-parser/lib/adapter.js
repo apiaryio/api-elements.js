@@ -44,19 +44,14 @@ function parse({
 
   return drafter.parse(source, options).then((result) => {
     const parseResult = namespace.fromRefract(result);
-    const isAnnotation = element => element.element === 'annotation';
     const { Link } = namespace.elements;
+    const link = new Link();
 
-    if (!isAnnotation(parseResult.content[0])) {
-      const link = new Link();
+    link.title = 'API Blueprint';
+    link.relation = 'via';
+    link.href = 'https://apiblueprint.org/';
 
-      link.title = 'API Blueprint';
-
-      link.relation = 'via';
-      link.href = 'https://apiblueprint.org/';
-
-      parseResult.links.push(link);
-    }
+    parseResult.links.push(link);
 
     return parseResult;
   });
