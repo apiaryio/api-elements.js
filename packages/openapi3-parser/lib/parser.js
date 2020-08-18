@@ -4,7 +4,7 @@ const R = require('ramda');
 const parseYAML = require('./parser/parseYAML');
 
 const {
- isAnnotation, isWarningAnnotation, isObject, isMember, hasKey,
+  isAnnotation, isWarningAnnotation, isObject, isMember, hasKey,
 } = require('./predicates');
 const { createError } = require('./elements');
 const pipeParseResult = require('./pipeParseResult');
