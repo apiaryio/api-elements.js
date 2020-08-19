@@ -20,8 +20,13 @@ function collectElementByIDs(element) {
 }
 
 function serializeJSON(element) {
+  if (element.element === 'dataStructure') {
+    return serializeJSON(element.content);
+  }
+
   const dataStructures = collectElementByIDs(element);
   const value = element.valueOf(undefined, dataStructures);
+
   return JSON.stringify(value);
 }
 
