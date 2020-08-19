@@ -1,6 +1,6 @@
 {
   "name": "@apielements/json-serializer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JSON serializer for API Elements",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
