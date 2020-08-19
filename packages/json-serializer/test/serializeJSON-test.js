@@ -26,7 +26,9 @@ describe('#serializeJSON', () => {
       new namespace.elements.Category([
         new namespace.elements.String('hello world', { id: 'message' }),
       ], { classes: ['dataStructures'] }),
-      element,
+      new namespace.elements.Category([
+        element,
+      ]),
     ]).freeze();
 
     expect(serializeJSON(element)).to.equal('"hello world"');

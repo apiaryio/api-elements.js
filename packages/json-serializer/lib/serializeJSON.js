@@ -1,17 +1,19 @@
 function collectElementByIDs(element) {
   const dataStructures = {};
-
   const { parents } = element;
-  if (parents) {
-    const rootElement = parents.get(0);
 
-    if (rootElement) {
-      rootElement.recursiveChildren.forEach((element) => {
-        if (element.id) {
-          dataStructures[element.id.toValue()] = element;
-        }
-      });
-    }
+  if (!parents || parents.isEmpty) {
+    return dataStructures;
+  }
+
+  const rootElement = parents.get(parents.length - 1);
+
+  if (rootElement) {
+    rootElement.recursiveChildren.forEach((element) => {
+      if (element.id) {
+        dataStructures[element.id.toValue()] = element;
+      }
+    });
   }
 
   return dataStructures;
