@@ -33,4 +33,12 @@ describe('#serializeJSON', () => {
 
     expect(serializeJSON(element)).to.equal('"hello world"');
   });
+
+  it('can serialize a dataStructure element', () => {
+    const element = new namespace.elements.DataStructure(
+      new namespace.elements.String('hello world')
+    );
+
+    expect(serializeJSON(element)).to.equal('"hello world"');
+  });
 });
