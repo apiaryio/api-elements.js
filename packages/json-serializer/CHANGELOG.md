@@ -1,5 +1,11 @@
 # JSON Serializer Changelog
 
+## 0.1.3 (2020-08-20)
+
+### Enhancements
+
+- Add indentation to the output.
+
 ## 0.1.2 (2020-08-19)
 
 ### Enhancements
