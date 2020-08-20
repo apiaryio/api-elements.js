@@ -30,7 +30,7 @@ function serializeJSON(element) {
   const dataStructures = collectElementByIDs(element);
   const value = element.valueOf(undefined, dataStructures);
 
-  return JSON.stringify(value);
+  return JSON.stringify(value, null, 2);
 }
 
 module.exports = serializeJSON;

@@ -19,6 +19,8 @@ const api = new fury.minim.elements.Object({ name });
 const mediaType = 'application/json';
 fury.serialize({ api, mediaType }, (error, body) => {
   console.log(body);
-  // { "name": "Doe" }
+  // {
+  //   "name": "Doe"
+  // }
 });
 ```
