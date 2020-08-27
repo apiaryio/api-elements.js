@@ -4,7 +4,7 @@ const minim = new Namespace();
 
 /*
  * Find an adapter by a given media type and method name, which should be
- * either `parse` or `serialize`. If no adapter is found, then
+ * either `parse`, `serialize` or `serializeSync`. If no adapter is found, then
  * undefined is returned.
  */
 const findAdapter = (adapters, mediaType, method) => {
@@ -265,7 +265,7 @@ class Fury {
    * @param {string} [options.mediaType]
    */
   serializeSync({ api, mediaType = 'text/vnd.apiblueprint' }) {
-    const adapter = findAdapter(this.adapters, mediaType, 'serialize');
+    const adapter = findAdapter(this.adapters, mediaType, 'serializeSync');
 
     if (!adapter) {
       throw new Error('Media type did not match any registered serializer!');
@@ -276,9 +276,7 @@ class Fury {
       api = new this.minim.elements.Category();
     }
 
-    return adapter.serialize({
-      api, namespace: this.minim, mediaType, sync: true,
-    });
+    return adapter.serializeSync({ api, namespace: this.minim, mediaType });
   }
 
   /**
@@ -315,9 +313,7 @@ class Fury {
       api = new this.minim.elements.Category();
     }
 
-    const promise = adapter.serialize({
-      api, namespace: this.minim, mediaType, sync: false,
-    });
+    const promise = adapter.serialize({ api, namespace: this.minim, mediaType });
 
     if (done) {
       promise.then(result => done(null, result), done);

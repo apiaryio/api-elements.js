@@ -124,7 +124,7 @@ describe('Serialize', () => {
       fury.use({
         name: 'json',
         mediaTypes: ['application/json'],
-        serialize: ({ api, namespace }) => JSON.stringify(namespace.serialiser.serialise(api)),
+        serializeSync: ({ api, namespace }) => JSON.stringify(namespace.serialiser.serialise(api)),
       });
 
       const api = new fury.minim.elements.Category();

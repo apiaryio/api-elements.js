@@ -5,12 +5,14 @@ const mediaTypes = [
   'application/json',
 ];
 
-function serialize({ api, sync }) {
-  if (sync) {
-    return serializeJSON(api);
-  }
-
+function serialize({ api }) {
   return new Promise(resolve => resolve(serializeJSON(api)));
 }
 
-module.exports = { name, mediaTypes, serialize };
+function serializeSync({ api }) {
+  return serializeJSON(api);
+}
+
+module.exports = {
+  name, mediaTypes, serialize, serializeSync,
+};
