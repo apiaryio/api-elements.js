@@ -81,6 +81,18 @@ const findAdapter = (adapters, mediaType, method) => {
  */
 
 /**
+ * @function serializeSync
+ *
+ * @param {Object} options
+ * @param {Category} options.api
+ * @param {Namespace} options.namespace
+ *
+ * @returns {(String|null)}
+ *
+ * @memberof FuryAdapter
+ */
+
+/**
  */
 class Fury {
   constructor() {
@@ -245,6 +257,33 @@ class Fury {
   }
 
   /**
+   * Serialize synchronously an API Description into the given output format.
+   *
+   * @param {Object} options
+   * @param {Category} options.api
+   * @param {string} [options.mediaType]
+   */
+  serializeSync({ api, mediaType = 'text/vnd.apiblueprint' }) {
+    const adapter = findAdapter(this.adapters, mediaType, 'serialize');
+
+    if (!adapter) {
+      // eslint-disable-next-line no-console
+      console.warn('Media type did not match any registered serializer!');
+
+      return null;
+    }
+
+    if (!api) {
+      // eslint-disable-next-line no-param-reassign
+      api = new this.minim.elements.Category();
+    }
+
+    return adapter.serialize({
+      api, namespace: this.minim, mediaType, sync: true,
+    });
+  }
+
+  /**
    * @callback SerializeCallback
    *
    * @param {Error} error
@@ -252,7 +291,7 @@ class Fury {
    */
 
   /**
-   * Serialize an API Description into the given output format.
+   * Serialize asynchronously an API Description into the given output format.
    *
    * @param {Object} options
    * @param {Category} options.api
@@ -278,7 +317,9 @@ class Fury {
       api = new this.minim.elements.Category();
     }
 
-    const promise = adapter.serialize({ api, namespace: this.minim, mediaType });
+    const promise = adapter.serialize({
+      api, namespace: this.minim, mediaType, sync: false,
+    });
 
     if (done) {
       promise.then(result => done(null, result), done);

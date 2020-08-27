@@ -108,4 +108,28 @@ describe('Serialize', () => {
       expect(result).to.equal('{"element":"category"}');
     });
   });
+
+  describe('using serializeSync', () => {
+    it('returns null with unknown mediaType', () => {
+      const fury = new Fury();
+      const api = new fury.minim.elements.Category();
+
+      const result = fury.serializeSync({ api, mediaType: 'application/unregistered' });
+      expect(result).to.equal(null);
+    });
+
+    it('can serialize with matching adapter', async () => {
+      const fury = new Fury();
+      fury.use({
+        name: 'json',
+        mediaTypes: ['application/json'],
+        serialize: ({ api, namespace }) => JSON.stringify(namespace.serialiser.serialise(api)),
+      });
+
+      const api = new fury.minim.elements.Category();
+
+      const result = fury.serializeSync({ api, mediaType: 'application/json' });
+      expect(result).to.equal('{"element":"category"}');
+    });
+  });
 });

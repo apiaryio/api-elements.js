@@ -1,5 +1,11 @@
 # Form Serializer Changelog
 
+## 0.1.3 (2020-08-27)
+
+### Enhancements
+
+- Enable synchronous serialization.
+
 ## 0.1.2 (2020-08-19)
 
 ### Enhancements
