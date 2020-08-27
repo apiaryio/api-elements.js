@@ -110,12 +110,13 @@ describe('Serialize', () => {
   });
 
   describe('using serializeSync', () => {
-    it('returns null with unknown mediaType', () => {
+    it('errors with unknown mediaType', () => {
       const fury = new Fury();
       const api = new fury.minim.elements.Category();
 
-      const result = fury.serializeSync({ api, mediaType: 'application/unregistered' });
-      expect(result).to.equal(null);
+      expect(() => {
+        fury.serializeSync({ api, mediaType: 'application/unregistered' });
+      }).to.throw('Media type did not match any registered serializer!');
     });
 
     it('can serialize with matching adapter', async () => {

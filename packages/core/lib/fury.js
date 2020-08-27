@@ -87,7 +87,8 @@ const findAdapter = (adapters, mediaType, method) => {
  * @param {Category} options.api
  * @param {Namespace} options.namespace
  *
- * @returns {(String|null)}
+ * @returns {String}
+ * @throws {Error} error
  *
  * @memberof FuryAdapter
  */
@@ -267,10 +268,7 @@ class Fury {
     const adapter = findAdapter(this.adapters, mediaType, 'serialize');
 
     if (!adapter) {
-      // eslint-disable-next-line no-console
-      console.warn('Media type did not match any registered serializer!');
-
-      return null;
+      throw new Error('Media type did not match any registered serializer!');
     }
 
     if (!api) {
