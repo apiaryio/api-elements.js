@@ -119,6 +119,19 @@ describe('Serialize', () => {
       }).to.throw('Media type did not match any registered serializer!');
     });
 
+    it('can serialize undefined `api` by creating default category', async () => {
+      const fury = new Fury();
+      fury.use({
+        name: 'json',
+        mediaTypes: ['application/json'],
+        serializeSync: ({ api, namespace }) => JSON.stringify(namespace.serialiser.serialise(api)),
+      });
+
+      expect(
+        fury.serializeSync({ api: undefined, mediaType: 'application/json' })
+      ).to.equal('{"element":"category"}');
+    });
+
     it('can serialize with matching adapter', async () => {
       const fury = new Fury();
       fury.use({
