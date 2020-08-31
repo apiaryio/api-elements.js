@@ -1,5 +1,11 @@
 # API Elements: API Blueprint Serializer Changelog
 
+## 0.16.2 (2020-08-31)
+
+### Enhancements
+
+- Enable synchronous serialization.
+
 ## 0.16.1 (2020-08-06)
 
 Adds compatibility for @apielements/core 0.2.0.

@@ -1,5 +1,11 @@
 # API Elements: CLI Changelog
 
+## 0.10.3 (2019-08-31)
+
+This update incorporates changes from Fury Adapter:
+
+- @apielements/apib-serializer 0.16.2
+
 ## 0.10.2 (2020-08-05)
 
 This update incorporates changes from API Element Adapters:
