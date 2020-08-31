@@ -21,7 +21,7 @@ describe('#serializeForm', () => {
   it('can serialize a dataStructure element', () => {
     const element = new namespace.elements.DataStructure(
       new namespace.elements.String('Hello world')
-    );
+  );
 
     expect(serializeForm({ api: element, mediaType: 'multipart/form-data' })).to.equal('--BOUNDARY\r\nContent-Disposition: form-data; name="undefined"\r\n\r\nHello world\r\n--BOUNDARY--\r\n');
   });

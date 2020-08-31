@@ -29,10 +29,10 @@
     "yaml-js": "^0.2.3"
   },
   "peerDependencies": {
-    "@apielements/core": ">=0.1.0 <0.4.0"
+    "@apielements/core": ">=0.1.0 <0.3.0"
   },
   "devDependencies": {
-    "@apielements/core": ">=0.1.0 <0.4.0",
+    "@apielements/core": ">=0.1.0 <0.3.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "mocha": "^7.1.1"
