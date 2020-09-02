@@ -18,7 +18,7 @@ describe('JSON Serialiser Adapter', () => {
     expect(adapter.mediaTypes).to.deep.equal(['application/json']);
   });
 
-  it('can serialize an element', (done) => {
+  it('can serialize an element asynchronously', (done) => {
     const element = new fury.minim.elements.String('hello world');
 
     fury.serialize({ api: element, mediaType: 'application/json' }, (error, result) => {
@@ -26,5 +26,12 @@ describe('JSON Serialiser Adapter', () => {
       expect(result).to.equal('"hello world"');
       done();
     });
+  });
+
+  it('can serialize an element synchronously', () => {
+    const element = new fury.minim.elements.String('hello world');
+    const result = fury.serializeSync({ api: element, mediaType: 'application/json' });
+
+    expect(result).to.equal('"hello world"');
   });
 });

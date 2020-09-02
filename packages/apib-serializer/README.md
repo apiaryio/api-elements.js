@@ -13,6 +13,8 @@ $ npm install @apielements/apib-serializer
 
 ## Usage
 
+### Async
+
 ```js
 import fury from 'fury';
 import apibSerializer from '@apielements/apib-serializer';
@@ -20,7 +22,24 @@ import apibSerializer from '@apielements/apib-serializer';
 fury.use(apibSerializer);
 
 // Assume `api` is a Minim element instance, e.g. from `fury.parse(...)`
-fury.serialize({api}, (err, content) => {
+fury.serialize({ api }, (err, content) => {
   fs.write('serialized.apib', content, 'utf8');
 });
+```
+
+### Sync
+
+```js
+import fury from 'fury';
+import apibSerializer from '@apielements/apib-serializer';
+
+fury.use(apibSerializer);
+
+try {
+  // Assume `api` is a Minim element instance, e.g. from `fury.parse(...)`
+  const content = fury.serializeSync({ api });
+  fs.write('serialized.apib', content, 'utf8');
+} catch (error) {
+  console.log(error);
+}
 ```

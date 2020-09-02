@@ -7,4 +7,10 @@ function serialize({ api, mediaType }) {
   return new Promise(resolve => resolve(serializeForm({ api, mediaType })));
 }
 
-module.exports = { name, mediaTypes, serialize };
+function serializeSync({ api, mediaType }) {
+  return serializeForm({ api, mediaType });
+}
+
+module.exports = {
+  name, mediaTypes, serialize, serializeSync,
+};

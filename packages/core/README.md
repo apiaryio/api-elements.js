@@ -137,7 +137,7 @@ export const mediaTypes = {
 ```
 
 
-Adapters are made up of a name, a list of media types, and up to three optional public functions: `detect`, `parse`, and `serialize`. A simple example might look like this:
+Adapters are made up of a name, a list of media types, and up to four optional public functions: `detect`, `parse`, `serialize` and `serializeSync`. A simple example might look like this:
 
 ```js
 export const name = 'my-adapter';
@@ -176,7 +176,14 @@ export async function serialize({api, mediaType, minim}) {
   return outputString;
 }
 
-export default {name, mediaTypes, detect, parse, serialize};
+export function serializeSync({api, mediaType, minim}) {
+  // Here you convert `api` from javascript element objects to the serialized
+  // source format.
+  // ...
+  return outputString;
+}
+
+export default {name, mediaTypes, detect, parse, serialize, serializeSync};
 ```
 
 Now you can register your adapter with Fury.js:

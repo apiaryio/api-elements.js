@@ -1,5 +1,11 @@
 # JSON Serializer Changelog
 
+## 0.1.4 (2020-08-27)
+
+### Enhancements
+
+- Enable synchronous serialization.
+
 ## 0.1.3 (2020-08-20)
 
 ### Enhancements

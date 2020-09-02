@@ -4,7 +4,7 @@ const minim = new Namespace();
 
 /*
  * Find an adapter by a given media type and method name, which should be
- * either `parse` or `serialize`. If no adapter is found, then
+ * either `parse`, `serialize` or `serializeSync`. If no adapter is found, then
  * undefined is returned.
  */
 const findAdapter = (adapters, mediaType, method) => {
@@ -76,6 +76,19 @@ const findAdapter = (adapters, mediaType, method) => {
  * @param {Namespace} options.namespace
  *
  * @returns {Promise}
+ *
+ * @memberof FuryAdapter
+ */
+
+/**
+ * @function serializeSync
+ *
+ * @param {Object} options
+ * @param {Category} options.api
+ * @param {Namespace} options.namespace
+ *
+ * @returns {String}
+ * @throws {Error} error
  *
  * @memberof FuryAdapter
  */
@@ -245,6 +258,28 @@ class Fury {
   }
 
   /**
+   * Synchronously serialize an API Description into the given output format.
+   *
+   * @param {Object} options
+   * @param {Category} options.api
+   * @param {string} [options.mediaType]
+   */
+  serializeSync({ api, mediaType = 'text/vnd.apiblueprint' }) {
+    const adapter = findAdapter(this.adapters, mediaType, 'serializeSync');
+
+    if (!adapter) {
+      throw new Error('Media type did not match any registered serializer!');
+    }
+
+    if (!api) {
+      // eslint-disable-next-line no-param-reassign
+      api = new this.minim.elements.Category();
+    }
+
+    return adapter.serializeSync({ api, namespace: this.minim, mediaType });
+  }
+
+  /**
    * @callback SerializeCallback
    *
    * @param {Error} error
@@ -252,7 +287,7 @@ class Fury {
    */
 
   /**
-   * Serialize an API Description into the given output format.
+   * Asynchronously serialize an API Description into the given output format.
    *
    * @param {Object} options
    * @param {Category} options.api

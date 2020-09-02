@@ -29,6 +29,12 @@ const mediaTypes = [
 /*
  * Serialize an API into API Blueprint.
  */
+function filterExtraSpacing(apib) {
+  const result = apib.trim().replace(/\n\s*\n\s*\n/g, '\n\n');
+
+  return `${result}\n`;
+}
+
 function serialize({ api }) {
   return new Promise((resolve, reject) => {
     nunjucks.render('template.nunjucks', { api }, (err, apib) => {
@@ -36,11 +42,17 @@ function serialize({ api }) {
         return reject(err);
       }
 
-      // Attempt to filter out extra spacing
-      const result = apib.trim().replace(/\n\s*\n\s*\n/g, '\n\n');
-      return resolve(`${result}\n`);
+      return resolve(filterExtraSpacing(apib));
     });
   });
 }
 
-module.exports = { name, mediaTypes, serialize };
+function serializeSync({ api }) {
+  const apib = nunjucks.render('template.nunjucks', { api });
+
+  return filterExtraSpacing(apib);
+}
+
+module.exports = {
+  name, mediaTypes, serialize, serializeSync,
+};
