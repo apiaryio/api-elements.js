@@ -258,7 +258,7 @@ class Fury {
   }
 
   /**
-   * Serialize synchronously an API Description into the given output format.
+   * Synchronously serialize an API Description into the given output format.
    *
    * @param {Object} options
    * @param {Category} options.api
@@ -287,7 +287,7 @@ class Fury {
    */
 
   /**
-   * Serialize asynchronously an API Description into the given output format.
+   * Asynchronously serialize an API Description into the given output format.
    *
    * @param {Object} options
    * @param {Category} options.api
