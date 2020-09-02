@@ -1,6 +1,6 @@
 {
   "name": "@apielements/cli",
-  "version": "0.10.3",
+  "version": "0.10.2",
   "description": "Command line tool interface for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
