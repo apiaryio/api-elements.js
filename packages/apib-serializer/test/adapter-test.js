@@ -23,7 +23,7 @@ describe('API Blueprint serializer adapter', () => {
   files.forEach((file) => {
     const apib = `${file.substr(0, file.length - 4)}apib`;
 
-    it(`serializes asynchronously ${path.basename(file)}`, (done) => {
+    it(`serializes ${path.basename(file)} asynchronously`, (done) => {
       let serializedRefract;
       let expectedBlueprint;
       let api;
@@ -48,28 +48,15 @@ describe('API Blueprint serializer adapter', () => {
       });
     });
 
-    it(`serializes synchronously ${path.basename(file)}`, (done) => {
-      let serializedRefract;
-      let expectedBlueprint;
-      let api;
+    it(`serializes ${path.basename(file)} synchronously`, () => {
+      const serializedRefract = require(file);
+      const expectedBlueprint = fs.readFileSync(apib, 'utf-8');
 
-      try {
-        serializedRefract = require(file);
-        expectedBlueprint = fs.readFileSync(apib, 'utf-8');
+      const parseResult = fury.load(serializedRefract);
+      const { api } = parseResult;
 
-        const parseResult = fury.load(serializedRefract);
-        ({ api } = parseResult);
-      } catch (loadErr) {
-        return done(loadErr);
-      }
-
-      try {
-        const serialized = fury.serializeSync({ api });
-        expect(serialized).to.deep.equal(expectedBlueprint);
-        return done();
-      } catch (err) {
-        return done(err);
-      }
+      const serialized = fury.serializeSync({ api });
+      expect(serialized).to.deep.equal(expectedBlueprint);
     });
   });
 });
