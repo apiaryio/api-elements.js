@@ -22,7 +22,7 @@ function collectElementByIDs(element) {
   return dataStructures;
 }
 
-const isPrimitive = e => (e !== Object(e));
+const isPrimitive = element => element && element.element.match(/^(string|number|boolean|null)$/);
 
 function serializeText(element) {
   if (element.element === 'dataStructure') {
@@ -30,12 +30,13 @@ function serializeText(element) {
   }
 
   const dataStructures = collectElementByIDs(element);
-  const value = element.valueOf(undefined, dataStructures);
-  if (!isPrimitive(value)) {
-    throw new Error('Only primitive elements can be serialized as text/plain');
+  if (isPrimitive(element) || isPrimitive(dataStructures[element.element])) {
+    const value = element.valueOf(undefined, dataStructures);
+
+    return String(value);
   }
 
-  return String(value);
+  throw new Error('Only primitive elements can be serialized as text/plain');
 }
 
 module.exports = serializeText;

@@ -7,7 +7,7 @@ const { minim: namespace } = new Fury();
 describe('#serializeText', () => {
   it('can serialize a primitive element with value', () => {
     const stringElement = new namespace.elements.String('hello world');
-    const numberElement = new namespace.elements.String(1);
+    const numberElement = new namespace.elements.Number(1);
     const booleanElement = new namespace.elements.Boolean(true);
     const nullElement = new namespace.elements.Null();
 
@@ -51,8 +51,10 @@ describe('#serializeText', () => {
   it('errors with a non primitive element', () => {
     const objectElement = new namespace.elements.Object({ message: 'Hello world' });
     const arrayElement = new namespace.elements.Array(['Hello', 'Doe']);
+    const emptyEnumElement = new namespace.elements.Enum();
 
     expect(() => serializeText(objectElement)).to.throw('Only primitive elements can be serialized as text/plain');
     expect(() => serializeText(arrayElement)).to.throw('Only primitive elements can be serialized as text/plain');
+    expect(() => serializeText(emptyEnumElement)).to.throw('Only primitive elements can be serialized as text/plain');
   });
 });
