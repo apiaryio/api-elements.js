@@ -968,6 +968,25 @@ describe('valueOf ObjectElement', () => {
     expect(value).to.deep.equal({ gaga: 'bing' });
   });
 
+  it('prefers samples over undefined property values', () => {
+    const element = new ObjectElement({ key1: new StringElement(), key2: new StringElement() });
+    element.attributes.set('default', new ObjectElement({ key1: 'defaultValue', key2: 'otherDefaultValue' }));
+    element.attributes.set('samples', new ArrayElement([
+      new ObjectElement({ key1: 'sampleValue', key2: 'otherSampleValue' }),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal({ key1: 'sampleValue', key2: 'otherSampleValue' });
+  });
+
+  it('prefers default over undefined property values', () => {
+    const element = new ObjectElement({ key1: new StringElement(), key2: new StringElement() });
+    element.attributes.set('default', new ObjectElement({ key1: 'defaultValue', key2: 'otherDefaultValue' }));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal({ key1: 'defaultValue', key2: 'otherDefaultValue' });
+  });
+
   it('generates {} if no content, default, samples and not nullable', () => {
     const element = new ObjectElement();
     const value = element.valueOf();
