@@ -22,7 +22,7 @@ function collectElementByIDs(element) {
   return dataStructures;
 }
 
-const isPrimitive = element => element && element.element.match(/^(string|number|boolean|null)$/);
+const isPrimitive = value => value !== undefined && (value !== Object(value));
 
 function serializeText(element, done) {
   if (element.element === 'dataStructure') {
@@ -30,9 +30,9 @@ function serializeText(element, done) {
   }
 
   const dataStructures = collectElementByIDs(element);
-  if (isPrimitive(element) || isPrimitive(dataStructures[element.element])) {
-    const value = element.valueOf(undefined, dataStructures);
+  const value = element.valueOf(undefined, dataStructures);
 
+  if (isPrimitive(value)) {
     return done(null, String(value));
   }
 

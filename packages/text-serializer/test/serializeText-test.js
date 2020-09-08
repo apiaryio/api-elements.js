@@ -25,6 +25,13 @@ describe('#serializeText', () => {
     expect(serializeText(nullElement, done)).to.equal('null');
   });
 
+  it('can serialize an enum element with primitive values', () => {
+    const enumElement = new namespace.elements.Enum();
+    enumElement.enumerations = ['north', 'east', 'south', 'west'];
+
+    expect(serializeText(enumElement, done)).to.equal('north');
+  });
+
   it('can serialize a primitive element with default value', () => {
     const element = new namespace.elements.String();
     element.attributes.set('default', 'hello world');
@@ -34,24 +41,42 @@ describe('#serializeText', () => {
 
   it('can serialize an element with references via parent tree', () => {
     const element = new namespace.elements.Element();
-    element.element = 'message';
+    element.element = 'error';
+
+    const error = new namespace.elements.Element();
+    error.element = 'message';
+    error.id = 'error';
 
     new namespace.elements.Category([
       new namespace.elements.Category([
-        new namespace.elements.String('hello world', { id: 'message' }),
+        new namespace.elements.String('error message', { id: 'message' }),
+        error,
       ], { classes: ['dataStructures'] }),
       new namespace.elements.Category([
         element,
       ]),
     ]).freeze();
 
-    expect(serializeText(element, done)).to.equal('hello world');
+    expect(serializeText(element, done)).to.equal('error message');
   });
 
   it('can serialize a dataStructure element', () => {
     const element = new namespace.elements.DataStructure(
       new namespace.elements.String('hello world')
     );
+
+    expect(serializeText(element, done)).to.equal('hello world');
+  });
+
+  it('can serialize from referenced element', () => {
+    const element = new namespace.elements.Element();
+    element.element = 'ref';
+    element.content = 'message';
+
+    new namespace.elements.Category([
+      new namespace.elements.String('hello world', { id: 'message' }),
+      element,
+    ]).freeze();
 
     expect(serializeText(element, done)).to.equal('hello world');
   });
