@@ -96,7 +96,8 @@ const hasNoValue = R.complement(hasValue);
 const isNoValuePrimitive = R.both(isPrimitive, hasNoValue);
 const isNonEmptyArrayElement = e => isArrayElement(e) && e.content && !e.isEmpty;
 const isEmptyArray = e => isArrayElement(e) && e.content.every(isNoValuePrimitive);
-const isObjectWithUndefinedValues = e => isObjectElement(e) && e.content.every(prop => prop.value.content === undefined);
+const isObjectWithUndefinedValues = e => isObjectElement(e)
+  && e.content.every(prop => prop.value === undefined || prop.value.content === undefined);
 
 
 function trivialValue(e) {
