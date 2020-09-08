@@ -24,19 +24,19 @@ function collectElementByIDs(element) {
 
 const isPrimitive = element => element && element.element.match(/^(string|number|boolean|null)$/);
 
-function serializeText(element) {
+function serializeText(element, done) {
   if (element.element === 'dataStructure') {
-    return serializeText(element.content);
+    return serializeText(element.content, done);
   }
 
   const dataStructures = collectElementByIDs(element);
   if (isPrimitive(element) || isPrimitive(dataStructures[element.element])) {
     const value = element.valueOf(undefined, dataStructures);
 
-    return String(value);
+    return done(null, String(value));
   }
 
-  throw new Error('Only primitive elements can be serialized as text/plain');
+  return done(new Error('Only primitive elements can be serialized as text/plain'));
 }
 
 module.exports = serializeText;

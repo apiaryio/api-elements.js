@@ -6,11 +6,29 @@ const mediaTypes = [
 ];
 
 function serialize({ api }) {
-  return new Promise(resolve => resolve(serializeText(api)));
+  return new Promise((resolve, reject) => {
+    const done = (err, body) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(body);
+      }
+    };
+
+    serializeText(api, done);
+  });
 }
 
 function serializeSync({ api }) {
-  return serializeText(api);
+  const done = (err, body) => {
+    if (err) {
+      throw err;
+    } else {
+      return body;
+    }
+  };
+
+  return serializeText(api, done);
 }
 
 module.exports = {

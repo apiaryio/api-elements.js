@@ -4,6 +4,14 @@ const serializeText = require('../lib/serializeText');
 
 const { minim: namespace } = new Fury();
 
+const done = (err, body) => {
+  if (err) {
+    throw err;
+  } else {
+    return body;
+  }
+};
+
 describe('#serializeText', () => {
   it('can serialize a primitive element with value', () => {
     const stringElement = new namespace.elements.String('hello world');
@@ -11,17 +19,17 @@ describe('#serializeText', () => {
     const booleanElement = new namespace.elements.Boolean(true);
     const nullElement = new namespace.elements.Null();
 
-    expect(serializeText(stringElement)).to.equal('hello world');
-    expect(serializeText(numberElement)).to.equal('1');
-    expect(serializeText(booleanElement)).to.equal('true');
-    expect(serializeText(nullElement)).to.equal('null');
+    expect(serializeText(stringElement, done)).to.equal('hello world');
+    expect(serializeText(numberElement, done)).to.equal('1');
+    expect(serializeText(booleanElement, done)).to.equal('true');
+    expect(serializeText(nullElement, done)).to.equal('null');
   });
 
   it('can serialize a primitive element with default value', () => {
     const element = new namespace.elements.String();
     element.attributes.set('default', 'hello world');
 
-    expect(serializeText(element)).to.equal('hello world');
+    expect(serializeText(element, done)).to.equal('hello world');
   });
 
   it('can serialize an element with references via parent tree', () => {
@@ -37,7 +45,7 @@ describe('#serializeText', () => {
       ]),
     ]).freeze();
 
-    expect(serializeText(element)).to.equal('hello world');
+    expect(serializeText(element, done)).to.equal('hello world');
   });
 
   it('can serialize a dataStructure element', () => {
@@ -45,7 +53,7 @@ describe('#serializeText', () => {
       new namespace.elements.String('hello world')
     );
 
-    expect(serializeText(element)).to.equal('hello world');
+    expect(serializeText(element, done)).to.equal('hello world');
   });
 
   it('errors with a non primitive element', () => {
@@ -53,8 +61,8 @@ describe('#serializeText', () => {
     const arrayElement = new namespace.elements.Array(['Hello', 'Doe']);
     const emptyEnumElement = new namespace.elements.Enum();
 
-    expect(() => serializeText(objectElement)).to.throw('Only primitive elements can be serialized as text/plain');
-    expect(() => serializeText(arrayElement)).to.throw('Only primitive elements can be serialized as text/plain');
-    expect(() => serializeText(emptyEnumElement)).to.throw('Only primitive elements can be serialized as text/plain');
+    expect(() => serializeText(objectElement, done)).to.throw('Only primitive elements can be serialized as text/plain');
+    expect(() => serializeText(arrayElement, done)).to.throw('Only primitive elements can be serialized as text/plain');
+    expect(() => serializeText(emptyEnumElement, done)).to.throw('Only primitive elements can be serialized as text/plain');
   });
 });

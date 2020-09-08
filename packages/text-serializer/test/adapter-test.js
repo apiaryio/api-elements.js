@@ -18,20 +18,41 @@ describe('Text Serializer Adapter', () => {
     expect(adapter.mediaTypes).to.deep.equal(['text/plain']);
   });
 
-  it('can serialize an element asynchronously', (done) => {
-    const element = new fury.minim.elements.String('hello world');
+  describe('using serialize', () => {
+    it('can serialize a primitive element', (done) => {
+      const element = new fury.minim.elements.String('hello world');
 
-    fury.serialize({ api: element, mediaType: 'text/plain' }, (error, result) => {
-      expect(error).to.be.null;
-      expect(result).to.equal('hello world');
-      done();
+      fury.serialize({ api: element, mediaType: 'text/plain' }, (error, result) => {
+        expect(error).to.be.null;
+        expect(result).to.equal('hello world');
+        done();
+      });
+    });
+
+    it('errors with a non-primitive element', (done) => {
+      const element = new fury.minim.elements.Object({ message: 'Hello world' });
+
+      fury.serialize({ api: element, mediaType: 'text/plain' }, (error, result) => {
+        expect(error.message).to.equal('Only primitive elements can be serialized as text/plain');
+        expect(result).to.be.undefined;
+        done();
+      });
     });
   });
 
-  it('can serialize an element synchronously', () => {
-    const element = new fury.minim.elements.String('hello world');
-    const result = fury.serializeSync({ api: element, mediaType: 'text/plain' });
+  describe('using serializeSync', () => {
+    it('can serialize a primitive element', () => {
+      const element = new fury.minim.elements.String('hello world');
+      const result = fury.serializeSync({ api: element, mediaType: 'text/plain' });
 
-    expect(result).to.equal('hello world');
+      expect(result).to.equal('hello world');
+    });
+
+    it('errors with a non-primitive element', () => {
+      const element = new fury.minim.elements.Object({ message: 'Hello world' });
+
+      expect(() => fury.serializeSync({ api: element, mediaType: 'text/plain' }))
+        .to.throw('Only primitive elements can be serialized as text/plain');
+    });
   });
 });
