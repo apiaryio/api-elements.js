@@ -1,5 +1,12 @@
 # API Elements (JavaScript) CHANGELOG
 
+## 0.3.1 (2020-09-07)
+
+### Bug Fixes
+
+- Generating a value from an element will now prefer sample/default values for
+  objects which contain only undefined property values.
+
 ## 0.3.0 (2020-08-05)
 
 ### Bug Fixes

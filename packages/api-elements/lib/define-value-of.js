@@ -86,6 +86,7 @@ function findFirstSample(e) {
 const isPrimitive = e => (e instanceof StringElement) || (e instanceof NumberElement) || (e instanceof BooleanElement);
 const isEnumElement = e => e instanceof EnumElement;
 const isArrayElement = e => e instanceof ArrayElement;
+const isObjectElement = e => e instanceof ObjectElement;
 
 const hasSample = e => findFirstSample(e) !== null;
 const hasDefault = e => findDefault(e) !== null;
@@ -94,6 +95,9 @@ const hasValue = R.anyPass([hasContent, hasSample, hasDefault]);
 const hasNoValue = R.complement(hasValue);
 const isNoValuePrimitive = R.both(isPrimitive, hasNoValue);
 const isNonEmptyArrayElement = e => isArrayElement(e) && e.content && !e.isEmpty;
+const isEmptyArray = e => isArrayElement(e) && e.content.every(isNoValuePrimitive);
+const isObjectWithUndefinedValues = e => isObjectElement(e)
+  && e.content.every(prop => prop.value === undefined || prop.value.content === undefined);
 
 
 function trivialValue(e) {
@@ -123,7 +127,7 @@ function mapValue(e, options, f, elements) {
 
   const opts = updateTypeAttributes(e, options);
 
-  if (e.content && !(isArrayElement(e) && e.content.every(isNoValuePrimitive))) {
+  if (e.content && !isEmptyArray(e) && !isObjectWithUndefinedValues(e)) {
     const result = f(e, opts, elements, 'content');
 
     if (undefined !== result) {
@@ -226,7 +230,7 @@ function reduceValue(e, options, elements) {
     return mapValue(e.content, inheritFlags(opts), reduceValue, elements);
   }
 
-  if (e instanceof ObjectElement) {
+  if (isObjectElement(e)) {
     let result = {};
 
     const isFixed = isFlag(FIXED_FLAG, opts);
