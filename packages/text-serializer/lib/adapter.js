@@ -7,11 +7,11 @@ const mediaTypes = [
 
 function serialize({ api }) {
   return new Promise((resolve, reject) => {
-    const done = (err, body) => {
-      if (err) {
-        reject(err);
+    const done = (error, result) => {
+      if (error) {
+        reject(error);
       } else {
-        resolve(body);
+        resolve(result);
       }
     };
 
@@ -20,11 +20,11 @@ function serialize({ api }) {
 }
 
 function serializeSync({ api }) {
-  const done = (err, body) => {
-    if (err) {
-      throw err;
+  const done = (error, result) => {
+    if (error) {
+      throw error;
     } else {
-      return body;
+      return result;
     }
   };
 

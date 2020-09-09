@@ -4,11 +4,11 @@ const serializeText = require('../lib/serializeText');
 
 const { minim: namespace } = new Fury();
 
-const done = (err, body) => {
-  if (err) {
-    throw err;
+const done = (error, result) => {
+  if (error) {
+    throw error;
   } else {
-    return body;
+    return result;
   }
 };
 
