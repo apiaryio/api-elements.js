@@ -12,6 +12,7 @@ module.exports = {
       'remote',
       'form',
       'json',
+      'text',
       'deps',
       'deps-dev',
     ]],
