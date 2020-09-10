@@ -8,7 +8,9 @@ const mediaTyper = require('media-typer');
 const SwaggerParser = require('swagger-parser');
 const ZSchema = require('z-schema');
 const annotations = require('./annotations');
-const { bodyFromSchema, bodyFromFormParameter } = require('./generator');
+const {
+  bodyFromSchema, bodyFromFormParameter, bodyFromDataStructure,
+} = require('./generator');
 const uriTemplate = require('./uri-template');
 const { baseLink, origin } = require('./link');
 const { pushHeader, pushHeaderObject } = require('./headers');
@@ -728,8 +730,16 @@ class Parser {
       });
     });
 
+    this.dataStructureIndex = {};
+
     if (dataStructures.length > 0) {
       this.api.push(dataStructures);
+
+      // create an index of data structures per ID for element.valueOf,
+      // this is used by pushAssets
+      dataStructures.forEach((element) => {
+        this.dataStructureIndex[element.content.id.toValue()] = element.content;
+      });
     }
   }
 
@@ -1697,7 +1707,30 @@ class Parser {
       cacheKey = `${referencedPathValue.allOf[0].$ref};${contentType}`;
     }
 
-    if (this.generateMessageBody || this.generateMessageBodySchema) {
+    let dataStructure;
+
+    try {
+      const generator = new DataStructureGenerator(this.namespace, this.referencedSwagger);
+      dataStructure = generator.generateDataStructure(referencedPathValue || schema);
+    } catch (exception) {
+      // TODO: Expose errors once feature is more-complete
+      dataStructure = null;
+    }
+
+    if (this.generateMessageBody && dataStructure && pushBody) {
+      if (cacheKey && this.bodyCache[cacheKey]) {
+        const asset = this.bodyCache[cacheKey];
+        payload.push(asset.clone());
+      } else {
+        const asset = bodyFromDataStructure(dataStructure, payload, this, contentType);
+
+        if (cacheKey) {
+          this.bodyCache[cacheKey] = asset;
+        }
+      }
+    }
+
+    if (this.generateMessageBodySchema) {
       let jsonSchema;
       try {
         const root = { definitions: this.definitions };
@@ -1708,24 +1741,12 @@ class Parser {
         return;
       }
 
-      if (pushBody && this.generateMessageBody) {
-        if (cacheKey && this.bodyCache[cacheKey]) {
-          const asset = this.bodyCache[cacheKey];
-          payload.push(asset.clone());
-        } else {
-          const asset = bodyFromSchema(jsonSchema, payload, this, contentType);
-          if (cacheKey) {
-            this.bodyCache[cacheKey] = asset;
-          }
-        }
-      }
-
-      if (this.generateMessageBodySchema) {
-        this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
-      }
+      this.pushSchemaAsset(schema, jsonSchema, payload, this.path);
     }
 
-    this.pushDataStructureAsset(referencedPathValue || schema, payload);
+    if (dataStructure) {
+      payload.content.push(dataStructure);
+    }
   }
 
   // Create a Refract asset element containing JSON Schema and push into payload
@@ -1759,18 +1780,6 @@ class Parser {
     });
 
     return value;
-  }
-
-  pushDataStructureAsset(schema, payload) {
-    try {
-      const generator = new DataStructureGenerator(this.namespace, this.referencedSwagger);
-      const dataStructure = generator.generateDataStructure(schema);
-      if (dataStructure) {
-        payload.content.push(dataStructure);
-      }
-    } catch (exception) {
-      // TODO: Expose errors once feature is more-complete
-    }
   }
 
   // Create a new Refract transition element with a blank request and response.

@@ -4,7 +4,9 @@ const faker = require('json-schema-faker');
 const { dereference } = require('./json-schema');
 const annotations = require('./annotations');
 const { inferred } = require('./link');
-const { isFormURLEncoded, isMultiPartFormData, parseBoundary } = require('./media-type');
+const {
+  isJsonContentType, isFormURLEncoded, isMultiPartFormData, parseBoundary,
+} = require('./media-type');
 
 faker.option({
   failOnInvalidFormat: false,
@@ -124,4 +126,40 @@ const bodyFromFormParameter = (param, schema) => {
   return retSchema;
 };
 
-module.exports = { bodyFromSchema, bodyFromFormParameter };
+function bodyFromDataStructure(dataStructure, payload, parser, contentType) {
+  let asset = null;
+  let body = null;
+
+  const value = dataStructure.content.valueOf(undefined, parser.dataStructureIndex);
+
+  if (isJsonContentType(contentType)) {
+    body = JSON.stringify(value, null, 2);
+  } else if (isFormURLEncoded(contentType) && typeof value === 'string') {
+    body = querystring.stringify(value);
+  } else if (isMultiPartFormData(contentType) && typeof value === 'object') {
+    const boundary = parseBoundary(contentType);
+    body = '';
+
+    _.forOwn(body, (value, key) => {
+      body += `--${boundary}\r\n`;
+      body += `body-Disposition: form-data; name="${key}"\r\n\r\n`;
+      body += `${value}\r\n`;
+    });
+
+    body += `\r\n--${boundary}--\r\n`;
+  } else if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    body = String(value);
+  }
+
+  if (body) {
+    asset = new parser.namespace.elements.Asset(body);
+    asset.classes.push('messageBody');
+    asset.contentType = contentType;
+    inferred('message-body-generation', asset, parser);
+    payload.content.push(asset);
+  }
+
+  return asset;
+}
+
+module.exports = { bodyFromSchema, bodyFromFormParameter, bodyFromDataStructure };
