@@ -1,0 +1,14 @@
+on: push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+      - run: yarn install --frozen-lockfile --ignore-optional
+      - run: yarn run lint
+      - run: yarn run commitlint --from origin/master

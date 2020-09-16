@@ -1,0 +1,42 @@
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [8, 10, 12]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+      - run: yarn install --frozen-lockfile --ignore-optional
+      - run: yarn test:cover
+      - run: |
+          mkdir coverage
+          yarn run nyc report --reporter=text-lcov > coverage/lcov.info
+      - uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          flag-name: node-${{ matrix.node }}
+          parallel: true
+
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn install --frozen-lockfile --ignore-optional
+      - run: ./scripts/smoke.sh
+
+  coverage:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
