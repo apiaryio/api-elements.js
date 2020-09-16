@@ -11,8 +11,7 @@
     "lint": "lerna exec --concurrency 1 --no-bail -- npm run lint",
     "lint:fix": "lerna exec --concurrency 1 --no-bail -- npm run lint:fix",
     "test": "lerna exec --concurrency 1 --no-bail -- npm run test",
-    "cover": "nyc npm test",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "test:cover": "nyc npm test"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
