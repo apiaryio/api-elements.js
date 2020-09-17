@@ -135,6 +135,41 @@ describe('valueOf BooleanElement', () => {
 
     expect(value).to.equal(null);
   });
+
+  it('generates a boolean from RefElement', () => {
+    const booleanElement = new BooleanElement(true);
+    booleanElement.id = 'booleanElement';
+
+    const element = booleanElement.toRef('element');
+    const value = element.valueOf(undefined, { booleanElement });
+
+    expect(value).to.equal(true);
+  });
+
+  it('generates a boolean from dereferenced element', () => {
+    const booleanElement = new BooleanElement(true);
+    booleanElement.id = 'booleanElement';
+
+    const element = new BooleanElement();
+    element.element = 'booleanElement';
+    const value = element.valueOf(undefined, { booleanElement });
+
+    expect(value).to.equal(true);
+  });
+
+  it('generates a boolean from dereferenced element recursively', () => {
+    const booleanElement = new BooleanElement();
+    booleanElement.element = 'booleanElement2';
+    booleanElement.id = 'booleanElement';
+    const booleanElement2 = new BooleanElement(true);
+    booleanElement2.id = 'booleanElement2';
+
+    const element = new BooleanElement();
+    element.element = 'booleanElement';
+    const value = element.valueOf(undefined, { booleanElement, booleanElement2 });
+
+    expect(value).to.equal(true);
+  });
 });
 
 describe('valueOf BooleanElement with source', () => {
@@ -247,6 +282,41 @@ describe('valueOf NumberElement', () => {
 
     expect(value).to.equal(null);
   });
+
+  it('generates a number from RefElement', () => {
+    const numberElement = new NumberElement(1);
+    numberElement.id = 'numberElement';
+
+    const element = numberElement.toRef('element');
+    const value = element.valueOf(undefined, { numberElement });
+
+    expect(value).to.equal(1);
+  });
+
+  it('generates a number from dereferenced element', () => {
+    const numberElement = new NumberElement(1);
+    numberElement.id = 'numberElement';
+
+    const element = new NumberElement();
+    element.element = 'numberElement';
+    const value = element.valueOf(undefined, { numberElement });
+
+    expect(value).to.equal(1);
+  });
+
+  it('generates a number from dereferenced element recursively', () => {
+    const numberElement = new NumberElement();
+    numberElement.element = 'numberElement2';
+    numberElement.id = 'numberElement';
+    const numberElement2 = new NumberElement(2);
+    numberElement2.id = 'numberElement2';
+
+    const element = new NumberElement();
+    element.element = 'numberElement';
+    const value = element.valueOf(undefined, { numberElement, numberElement2 });
+
+    expect(value).to.equal(2);
+  });
 });
 
 describe('valueOf NumberElement with source', () => {
@@ -358,6 +428,41 @@ describe('valueOf StringElement', () => {
     const value = element.valueOf();
 
     expect(value).to.equal(null);
+  });
+
+  it('generates a string from RefElement', () => {
+    const stringElement = new StringElement('joe');
+    stringElement.id = 'stringElement';
+
+    const element = stringElement.toRef('element');
+    const value = element.valueOf(undefined, { stringElement });
+
+    expect(value).to.equal('joe');
+  });
+
+  it('generates a string from dereferenced element', () => {
+    const stringElement = new StringElement('joe');
+    stringElement.id = 'stringElement';
+
+    const element = new StringElement();
+    element.element = 'stringElement';
+    const value = element.valueOf(undefined, { stringElement });
+
+    expect(value).to.equal('joe');
+  });
+
+  it('generates a string from dereferenced element recursively', () => {
+    const stringElement = new StringElement();
+    stringElement.element = 'stringElement2';
+    stringElement.id = 'stringElement';
+    const stringElement2 = new StringElement('foe');
+    stringElement2.id = 'stringElement2';
+
+    const element = new StringElement();
+    element.element = 'stringElement';
+    const value = element.valueOf(undefined, { stringElement, stringElement2 });
+
+    expect(value).to.equal('foe');
   });
 });
 
@@ -519,6 +624,49 @@ describe('valueOf EnumElement', () => {
     const value = element.valueOf();
 
     expect(value).to.equal(null);
+  });
+
+  it('generates the first enumerations from RefElement', () => {
+    const numberElement = new NumberElement(5);
+    numberElement.id = 'numberElement';
+
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      numberElement.toRef('content'),
+      new NumberElement(3),
+    ]);
+    const value = element.valueOf(undefined, { numberElement });
+
+    expect(value).to.equal(5);
+  });
+
+  it('generates the first enumerations from dereferenced element', () => {
+    const enumerationElement = new EnumElement();
+    enumerationElement.enumerations = new ArrayElement([1]);
+    enumerationElement.id = 'enumerationElement';
+
+    const element = new EnumElement();
+    element.enumerations = new ArrayElement([
+      2,
+    ]);
+    element.element = 'enumerationElement';
+    const value = element.valueOf(undefined, { enumerationElement });
+
+    expect(value).to.equal(1);
+  });
+
+  it('generates the first enumerations from dereferenced element recursively', () => {
+    const enumerationElement = new EnumElement();
+    enumerationElement.element = 'enumerationElement2';
+    enumerationElement.id = 'enumerationElement';
+    const enumerationElement2 = new EnumElement(2);
+    enumerationElement2.id = 'enumerationElement2';
+
+    const element = new EnumElement();
+    element.element = 'enumerationElement';
+    const value = element.valueOf(undefined, { enumerationElement, enumerationElement2 });
+
+    expect(value).to.equal(2);
   });
 });
 
@@ -734,6 +882,49 @@ describe('valueOf ArrayElement', () => {
     const value = element.valueOf();
 
     expect(value).to.deep.equal(null);
+  });
+
+  it('inherits items from RefElement', () => {
+    const numberElement = new NumberElement(3);
+    numberElement.id = 'numberElement';
+    const arrayElement = new ArrayElement([0]);
+    arrayElement.id = 'arrayElement';
+
+    const element = new ArrayElement([
+      3, numberElement.toRef('content'), 'test', arrayElement.toRef('content'), 2, 3,
+    ]);
+    const value = element.valueOf(undefined, { numberElement, arrayElement });
+
+    expect(value).to.deep.equal([3, 3, 'test', 0, 2, 3]);
+  });
+
+  it('inherits items from dereferenced elements', () => {
+    const arrayElement = new ArrayElement([1, 2, 3]);
+    arrayElement.id = 'arrayElement';
+    const arrayElement2 = new ArrayElement([7, 8, 9]);
+    arrayElement2.id = 'arrayElement2';
+    const reference = new Element();
+    reference.element = 'arrayElement2';
+
+    const element = new ArrayElement([4, 5, 6, reference]);
+    element.element = 'arrayElement';
+    const value = element.valueOf(undefined, { arrayElement, arrayElement2 });
+
+    expect(value).to.deep.equal([1, 2, 3, 4, 5, 6, [7, 8, 9]]);
+  });
+
+  it('inherits items from dereferenced element recursively', () => {
+    const arrayElement = new ArrayElement([4, 5, 6]);
+    arrayElement.element = 'arrayElement2';
+    arrayElement.id = 'arrayElement';
+    const arrayElement2 = new ArrayElement([1, 2, 3]);
+    arrayElement2.id = 'arrayElement2';
+
+    const element = new ArrayElement([7, 8, 9]);
+    element.element = 'arrayElement';
+    const value = element.valueOf(undefined, { arrayElement, arrayElement2 });
+
+    expect(value).to.deep.equal([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
 });
 
@@ -979,7 +1170,7 @@ describe('valueOf ObjectElement', () => {
     expect(value).to.deep.equal({ key1: 'sampleValue', key2: 'otherSampleValue' });
   });
 
-  it.only('prefers default over undefined property values', () => {
+  it('prefers default over undefined property values', () => {
     const defaults = new ObjectElement({ key1: 'defaultValue', key2: 'otherDefaultValue' });
 
     const element1 = new ObjectElement({ key1: new StringElement(), key2: new StringElement() });
@@ -1011,6 +1202,65 @@ describe('valueOf ObjectElement', () => {
     const value = element.valueOf();
 
     expect(value).to.deep.equal(null);
+  });
+
+  it('inherits properties from RefElement', () => {
+    const objectElement = new ObjectElement({ name: 'joe' });
+    objectElement.id = 'objectElement';
+    const objectElement2 = new ObjectElement({ abc: 3, c: 4 });
+    objectElement2.id = 'objectElement2';
+
+    const element = new ObjectElement([
+      objectElement.toRef('content'),
+      new MemberElement('oneProp', 1),
+      objectElement2.toRef('content'),
+      new MemberElement('otherProp', 2),
+    ]);
+    const value = element.valueOf(undefined, { objectElement, objectElement2 });
+
+    expect(value).to.deep.equal({
+      oneProp: 1, name: 'joe', abc: 3, c: 4, otherProp: 2,
+    });
+  });
+
+  it('inherits properties from dereferenced element', () => {
+    const objectElement = new ObjectElement({ name: 'joe' });
+    objectElement.id = 'objectElement';
+
+    const element = new ObjectElement({ abc: 3, c: 4 });
+    element.element = 'objectElement';
+    const value = element.valueOf(undefined, { objectElement });
+
+    expect(value).to.deep.equal({ name: 'joe', abc: 3, c: 4 });
+  });
+
+  it('overrides properties from dereferenced element', () => {
+    const objectElement = new ObjectElement({ name: 'joe', kingdom: 'Babylon' });
+    objectElement.id = 'objectElement';
+
+    const element = new ObjectElement({ abc: 3, c: 4, name: 'bob' });
+    element.element = 'objectElement';
+    const value = element.valueOf(undefined, { objectElement });
+
+    expect(value).to.deep.equal({
+      kingdom: 'Babylon', abc: 3, c: 4, name: 'bob',
+    });
+  });
+
+  it('inherits properties from dereferenced element recursively', () => {
+    const objectElement = new ObjectElement({ name: 'joe', kingdom: 'Babylon' });
+    objectElement.id = 'objectElement';
+    objectElement.element = 'objectElement2';
+    const objectElement2 = new ObjectElement({ abc: 3, c: 4 });
+    objectElement2.id = 'objectElement2';
+
+    const element = new ObjectElement({ oneProp: 1 });
+    element.element = 'objectElement';
+    const value = element.valueOf(undefined, { objectElement, objectElement2 });
+
+    expect(value).to.deep.equal({
+      abc: 3, c: 4, name: 'joe', kingdom: 'Babylon', oneProp: 1,
+    });
   });
 });
 

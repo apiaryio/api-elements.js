@@ -21,6 +21,7 @@ const {
   isRef,
   isObjectWithUndefinedValues,
   trivialValue,
+  getStructureMembers,
 } = require('./utils');
 
 /**
@@ -35,7 +36,7 @@ function mapValue(e, f, elements) {
     return undefined;
   }
 
-  if (e.content && !isEmptyArray(e) && !isObjectWithUndefinedValues(e)) {
+  if (e.content && !isEmptyArray(e, elements) && !isObjectWithUndefinedValues(e, elements)) {
     const result = f(e, elements, 'content');
 
     if (result !== undefined) {
@@ -59,8 +60,8 @@ function mapValue(e, f, elements) {
     }
   }
 
-  // reconsider content for array element (prefer sample/default first)
-  if (isNonEmptyArray(e)) {
+  // reconsider content for array and object element (prefer sample/default first)
+  if (isNonEmptyArray(e, elements) && isObject(e, elements)) {
     const result = f(e, elements, 'content');
 
     if (result !== undefined) {
@@ -88,16 +89,17 @@ function mapValue(e, f, elements) {
     }
 
     const result = elements[e.element];
-    if (result) {
+    if (result !== undefined) {
       const inheritedElements = R.filter(el => !el.id.equals(e.element), elements);
       return mapValue(result, f, inheritedElements);
     }
   }
 
-  if (isEnum(e)) {
-    const enums = e.enumerations;
-    if (enums && enums.content && enums.content[0]) {
-      const result = f(enums.content[0], elements, 'generated');
+  if (isEnum(e, elements)) {
+    const content = getStructureMembers(e, elements);
+
+    if (content && content[0]) {
+      const result = f(content[0], elements, 'generated');
       if (result !== undefined) {
         return result;
       }
@@ -112,7 +114,7 @@ function mapValue(e, f, elements) {
     }
   }
 
-  if (isArray(e) && e.isEmpty) {
+  if ((isArray(e, elements) && e.isEmpty) || isObject(e, elements)) {
     return f(e, elements, 'generated');
   }
 
@@ -130,7 +132,7 @@ function reduceValue(e, elements) {
     return mapValue(e, e => e.content, elements);
   }
 
-  if (isPrimitive(e)) {
+  if (isPrimitive(e, elements)) {
     return e.content;
   }
 
@@ -138,16 +140,18 @@ function reduceValue(e, elements) {
     return null;
   }
 
-  if (isEnum(e)) {
+  if (isEnum(e, elements)) {
     return mapValue(e.content, reduceValue, elements);
   }
 
-  if (isObject(e)) {
+  if (isObject(e, elements)) {
     let result = {};
 
     const isFixedElement = isFixed(e);
 
-    e.content.some((item) => {
+    const content = getStructureMembers(e, elements);
+
+    content.some((item) => {
       const isSkippable = isOptional(item) || (!isFixedElement && !isRequired(item));
 
       const key = mapValue(item.key, reduceValue, elements);
@@ -177,8 +181,9 @@ function reduceValue(e, elements) {
     return result;
   }
 
-  if (isArray(e)) {
-    const result = e.map(item => mapValue(item, reduceValue, elements));
+  if (isArray(e, elements)) {
+    const content = getStructureMembers(e, elements);
+    const result = content.map(item => mapValue(item, reduceValue, elements));
 
     if (!isFixed(e)) {
       return result.filter(item => item !== undefined);
