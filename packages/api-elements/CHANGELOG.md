@@ -1,5 +1,11 @@
 # API Elements (JavaScript) CHANGELOG
 
+## 0.3.2 (2020-09-15)
+
+### Enhancements
+
+- Dereference elements in valueOf
+
 ## 0.3.1 (2020-09-07)
 
 ### Bug Fixes

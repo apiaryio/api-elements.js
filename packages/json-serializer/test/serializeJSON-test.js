@@ -36,9 +36,29 @@ describe('#serializeJSON', () => {
 
   it('can serialize a dataStructure element', () => {
     const element = new namespace.elements.DataStructure(
-      new namespace.elements.String('hello world')
+      new namespace.elements.Object({ message: 'hello world' })
     );
 
-    expect(serializeJSON(element)).to.equal('"hello world"');
+    expect(serializeJSON(element)).to.equal('{\n  "message": "hello world"\n}');
+  });
+
+  it('can serialize an object element with references', () => {
+    const include = new namespace.elements.Element();
+    include.element = 'ref';
+    include.content = 'delivered';
+
+    const element = new namespace.elements.Object([
+      new namespace.elements.Member('message', 'hello world'),
+      include,
+    ]);
+
+    new namespace.elements.Category([
+      new namespace.elements.Object({
+        status: 'pending',
+      }, { id: 'delivered' }),
+      element,
+    ]).freeze();
+
+    expect(serializeJSON(element)).to.equal('{\n  "message": "hello world",\n  "status": "pending"\n}');
   });
 });

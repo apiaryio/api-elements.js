@@ -1,16 +1,20 @@
 /* eslint-disable no-underscore-dangle */
-
 const R = require('ramda');
+
 const {
-  ArrayElement,
-  ObjectElement,
   StringElement,
   BooleanElement,
   NumberElement,
   NullElement,
 } = require('minim');
 
-const EnumElement = require('./elements/Enum');
+/**
+ * Get element attribute
+ * @param {element} e - element - element
+ * @param {string} attribute
+ * @return {boolean}
+ */
+const getAttribute = (e, attribute) => e._attributes && e.attributes.get(attribute);
 
 /**
  * Check if element has a typeAttribute
@@ -19,7 +23,7 @@ const EnumElement = require('./elements/Enum');
  * @return {boolean}
  */
 function hasTypeAttribute(e, attribute) {
-  const typeAttributes = e._attributes && e.attributes.get('typeAttributes');
+  const typeAttributes = getAttribute(e, 'typeAttributes');
   if (typeAttributes) {
     return typeAttributes.includes(attribute);
   }
@@ -55,33 +59,71 @@ const isNullable = e => hasTypeAttribute(e, 'nullable');
  */
 const isOptional = e => hasTypeAttribute(e, 'optional');
 
+const baseTypes = new Set(['boolean', 'string', 'number', 'array', 'object', 'enum']);
 /**
- * Check if the element is of a primitive type
+ * Check if element is one of the base types
  * @param {element} e - element
  * @return {boolean}
  */
-const isPrimitive = e => (e instanceof StringElement) || (e instanceof NumberElement) || (e instanceof BooleanElement);
+const isBaseType = e => baseTypes.has(e && e.element);
+
+/**
+ * Get the element type - prefer a base type, if found
+ * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
+ * @return {string}
+ */
+const getType = (e, elements) => {
+  if (e === undefined) {
+    return undefined;
+  }
+  if (isBaseType(e)) {
+    return e.element;
+  }
+
+  const inheritedType = e.element && elements && elements[e.element];
+  if (inheritedType !== undefined) {
+    return getType(inheritedType, elements);
+  }
+
+  return e && e.element;
+};
+
+const primitives = new Set(['string', 'number', 'boolean', 'null']);
+/**
+ * Check if the element is of a primitive type
+ * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
+ * @return {boolean}
+ */
+const isPrimitive = (e, elements) => {
+  const type = getType(e, elements);
+  return primitives.has(String(type));
+};
 
 /**
  * Check if the element type is Enum
  * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
  * @return {boolean}
  */
-const isEnum = e => e instanceof EnumElement;
+const isEnum = (e, elements) => getType(e, elements) === 'enum';
 
 /**
  * Check if the element type is Array
  * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
  * @return {boolean}
  */
-const isArray = e => e instanceof ArrayElement;
+const isArray = (e, elements) => getType(e, elements) === 'array';
 
 /**
  * Check if the element type is Object
  * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
  * @return {boolean}
  */
-const isObject = e => e instanceof ObjectElement;
+const isObject = (e, elements) => getType(e, elements) === 'object';
 
 /**
  * Get the element default
@@ -149,23 +191,27 @@ const hasNoValue = R.complement(hasValue);
 /**
  * Check if the element is of a primitive type and has no value (content/sample/default)
  * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
  * @return {boolean}
  */
-const isNoValuePrimitive = R.both(isPrimitive, hasNoValue);
+const isNoValuePrimitive = (e, elements) => isPrimitive(e, elements) && hasNoValue(e);
 
 /**
  * Check if the element type is array and is not empty
  * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
  * @return {boolean}
  */
-const isNonEmptyArray = e => isArray(e) && e.content && !e.isEmpty;
+const isNonEmptyArray = (e, elements) => isArray(e, elements) && e.content !== undefined && !e.isEmpty;
 
 /**
  * Check if the element type is array and has only primitive elements with no value
  * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
  * @return {boolean}
  */
-const isEmptyArray = e => isArray(e) && e.content.every(isNoValuePrimitive);
+const isEmptyArray = (e, elements) => isArray(e, elements)
+  && (e.content === undefined || e.content.every(member => isNoValuePrimitive(member, elements)));
 
 /**
  * Check if the element type is 'ref'
@@ -177,10 +223,12 @@ const isRef = e => e && e.element === 'ref';
 /**
  * Check if the element type is object and has all property values undefined
  * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
  * @return {boolean}
  */
-const isObjectWithUndefinedValues = e => isObject(e)
-  && e.content.every(prop => prop.value === undefined || prop.value.content === undefined);
+const isObjectWithUndefinedValues = (e, elements) => isObject(e, elements) && e.content.every(
+  prop => prop.value === undefined || prop.value.content === undefined
+);
 
 /**
  * Get a trivial value, to fill the unset, according to the element type
@@ -207,6 +255,93 @@ function trivialValue(e) {
   return undefined;
 }
 
+/**
+ * Get a key for the element member
+ * This is used to identify each member on the Map, allowing overrides in Objects
+ * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
+ * @return {(string|number|object|null)} - Map key
+ */
+function getMemberKey(e, elements) {
+  if (isPrimitive(e, elements)) {
+    // return unique identifier
+    return Math.random();
+  }
+
+  const key = e && e.content && e.content.key && e.content.key.toValue();
+  const content = e && e.content;
+  const type = e.element;
+
+  return key || content || type;
+}
+
+/**
+ * Get an Array with the element members
+ * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
+ * @return {element[]} - element members
+ */
+function getMembers(e, elements) {
+  if (e === undefined) {
+    return [];
+  }
+
+  if (isEnum(e, elements)) {
+    const enumerations = getAttribute(e, 'enumerations');
+    if (enumerations && enumerations.content !== undefined) {
+      return enumerations.content;
+    }
+  }
+
+  if (Array.isArray(e.content)) {
+    return e.content;
+  }
+
+  return [e];
+}
+
+/**
+ * Get a Map with all the element members, including references
+ * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
+ * @return {Map<element>} - element members
+ */
+function getAllMembersMap(e, elements) {
+  if (e === undefined) {
+    return new Map();
+  }
+
+  const typeElement = elements && elements[e.element];
+  const typeMembersMap = getAllMembersMap(typeElement, elements);
+  const ownMembers = getMembers(e, elements);
+  const ownMembersMap = new Map();
+
+  ownMembers.forEach((member) => {
+    if (isRef(member)) {
+      const refElement = elements && elements[member.content];
+      const refMembersMap = getAllMembersMap(refElement, elements);
+      refMembersMap.forEach((refMember) => {
+        ownMembersMap.set(getMemberKey(refMember, elements), refMember);
+      });
+    } else {
+      ownMembersMap.set(getMemberKey(member, elements), member);
+    }
+  });
+  return new Map([...typeMembersMap, ...ownMembersMap]);
+}
+
+/**
+ * Get an Array with all the element members, including references
+ * @param {element} e - element
+ * @param {object=} elements - object map of elements to look for inherited type
+ * @return {element[]} - element members
+ */
+function getStructureMembers(e, elements) {
+  const membersMap = getAllMembersMap(e, elements);
+
+  return Array.from(membersMap.values());
+}
+
 module.exports = {
   isFixed,
   isRequired,
@@ -223,4 +358,5 @@ module.exports = {
   isRef,
   isObjectWithUndefinedValues,
   trivialValue,
+  getStructureMembers,
 };
