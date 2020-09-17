@@ -1,7 +1,6 @@
-/* eslint-disable no-bitwise, no-underscore-dangle */
+/* eslint-disable no-underscore-dangle */
 
 const R = require('ramda');
-
 const {
   Element,
   ArrayElement,
@@ -14,91 +13,53 @@ const {
 
 const EnumElement = require('./elements/Enum');
 
-const setFlag = (mask, options) => (options | mask);
-const clearFlag = (mask, options) => (options & ~mask);
-const isFlag = (mask, options) => (options & mask) !== 0;
-
-const FIXED_FLAG = 1 << 0;
-const NULLABLE_FLAG = 1 << 1;
-const FIXED_TYPE_FLAG = 1 << 2;
-
-function findDefault(e) {
-  if (undefined !== e._attributes) {
-    const result = e.attributes.get('default');
-    if (undefined !== result) {
-      return result;
-    }
-  }
-  return null;
-}
-
 function hasTypeAttribute(e, attribute) {
-  if (undefined !== e._attributes) {
-    const typeAttributes = e.attributes.get('typeAttributes');
-    if (typeAttributes) {
-      return typeAttributes.includes(attribute);
-    }
+  const typeAttributes = e._attributes && e.attributes.get('typeAttributes');
+  if (typeAttributes) {
+    return typeAttributes.includes(attribute);
   }
 
   return false;
 }
 
-const hasFixedTypeAttribute = e => hasTypeAttribute(e, 'fixed');
-const hasFixedTypeTypeAttribute = e => hasTypeAttribute(e, 'fixedType');
-const hasNullableTypeAttribute = e => hasTypeAttribute(e, 'nullable');
-const hasOptionalTypeAttribute = e => hasTypeAttribute(e, 'optional');
+const isFixed = e => hasTypeAttribute(e, 'fixed') || hasTypeAttribute(e, 'fixedType');
+const isRequired = e => hasTypeAttribute(e, 'required');
+const isNullable = e => hasTypeAttribute(e, 'nullable');
+const isOptional = e => hasTypeAttribute(e, 'optional');
+const isPrimitive = e => (e instanceof StringElement) || (e instanceof NumberElement) || (e instanceof BooleanElement);
+const isEnum = e => e instanceof EnumElement;
+const isArray = e => e instanceof ArrayElement;
+const isObject = e => e instanceof ObjectElement;
 
-function updateTypeAttributes(e, options) {
-  let result = options;
-
-  if (hasFixedTypeAttribute(e)) {
-    result = setFlag(FIXED_FLAG, result);
-  }
-
-  if (hasFixedTypeTypeAttribute(e)) {
-    result = setFlag(FIXED_TYPE_FLAG, result);
-  }
-
-  if (hasNullableTypeAttribute(e)) {
-    result = setFlag(NULLABLE_FLAG, result);
-  }
-
-  return result;
-}
-
-function inheritFlags(options) {
-  return clearFlag(clearFlag(FIXED_TYPE_FLAG | NULLABLE_FLAG, options));
-}
-
-function findFirstSample(e) {
-  if (undefined !== e._attributes) {
-    const samples = e.attributes.get('samples');
-    if (samples instanceof ArrayElement) {
-      if (undefined !== samples.content && samples.content.length > 0) {
-        return samples.content[0];
-      }
-    }
+function getDefault(e) {
+  const result = e._attributes && e.attributes.get('default');
+  if (result !== undefined) {
+    return result;
   }
 
   return null;
 }
 
-const isPrimitive = e => (e instanceof StringElement) || (e instanceof NumberElement) || (e instanceof BooleanElement);
-const isEnumElement = e => e instanceof EnumElement;
-const isArrayElement = e => e instanceof ArrayElement;
-const isObjectElement = e => e instanceof ObjectElement;
+function getFirstSample(e) {
+  const samples = e._attributes && e.attributes.get('samples');
+  if (isArray(samples) && samples.content && !samples.isEmpty) {
+    return samples.content[0];
+  }
 
-const hasSample = e => findFirstSample(e) !== null;
-const hasDefault = e => findDefault(e) !== null;
+  return null;
+}
+
+const hasSample = e => getFirstSample(e) !== null;
+const hasDefault = e => getDefault(e) !== null;
 const hasContent = e => e.content !== undefined;
 const hasValue = R.anyPass([hasContent, hasSample, hasDefault]);
 const hasNoValue = R.complement(hasValue);
 const isNoValuePrimitive = R.both(isPrimitive, hasNoValue);
-const isNonEmptyArrayElement = e => isArrayElement(e) && e.content && !e.isEmpty;
-const isEmptyArray = e => isArrayElement(e) && e.content.every(isNoValuePrimitive);
-const isObjectWithUndefinedValues = e => isObjectElement(e)
+const isNonEmptyArray = e => isArray(e) && e.content && !e.isEmpty;
+const isEmptyArray = e => isArray(e) && e.content.every(isNoValuePrimitive);
+const isRef = e => e && e.element === 'ref';
+const isObjectWithUndefinedValues = e => isObject(e)
   && e.content.every(prop => prop.value === undefined || prop.value.content === undefined);
-
 
 function trivialValue(e) {
   if (e instanceof BooleanElement) {
@@ -120,77 +81,75 @@ function trivialValue(e) {
   return undefined;
 }
 
-function mapValue(e, options, f, elements) {
+function mapValue(e, f, elements) {
   if (e === undefined) {
-    return e;
+    return undefined;
   }
-
-  const opts = updateTypeAttributes(e, options);
 
   if (e.content && !isEmptyArray(e) && !isObjectWithUndefinedValues(e)) {
-    const result = f(e, opts, elements, 'content');
+    const result = f(e, elements, 'content');
 
-    if (undefined !== result) {
+    if (result !== undefined) {
       return result;
     }
   }
 
-  const sample = findFirstSample(e);
+  const sample = getFirstSample(e);
   if (sample) {
-    const result = f(sample, opts, elements, 'sample');
-    if (undefined !== result) {
+    const result = f(sample, elements, 'sample');
+    if (result !== undefined) {
       return result;
     }
   }
 
-  const dflt = findDefault(e);
+  const dflt = getDefault(e);
   if (dflt) {
-    const result = f(dflt, opts, elements, 'default');
-    if (undefined !== result) {
+    const result = f(dflt, elements, 'default');
+    if (result !== undefined) {
       return result;
     }
   }
 
   // reconsider content for array element (prefer sample/default first)
-  if (isNonEmptyArrayElement(e)) {
-    const result = f(e, opts, elements, 'content');
+  if (isNonEmptyArray(e)) {
+    const result = f(e, elements, 'content');
 
-    if (undefined !== result) {
+    if (result !== undefined) {
       return result;
     }
   }
 
-  if (isFlag(NULLABLE_FLAG, opts)) {
-    const result = f(new NullElement(), opts, elements, 'nullable');
-    if (undefined !== result) {
+  if (isNullable(e)) {
+    const result = f(new NullElement(), elements, 'nullable');
+    if (result !== undefined) {
       return result;
     }
   }
 
   if (elements) {
-    if (e.element === 'ref') {
+    if (isRef(e)) {
       const result = elements[e.content];
       const inheritedElements = R.filter(el => !el.id.equals(e.content), elements);
 
       if (e.path && e.path.toValue() === 'content') {
-        return mapValue(result.content, opts, f, inheritedElements);
+        return mapValue(result.content, f, inheritedElements);
       }
 
-      return mapValue(result, opts, f, inheritedElements);
+      return mapValue(result, f, inheritedElements);
     }
 
     const result = elements[e.element];
     if (result) {
       const inheritedElements = R.filter(el => !el.id.equals(e.element), elements);
-      return mapValue(result, opts, f, inheritedElements);
+      return mapValue(result, f, inheritedElements);
     }
   }
 
-  if (isEnumElement(e)) {
+  if (isEnum(e)) {
     const enums = e.enumerations;
     if (enums && enums.content && enums.content[0]) {
-      const result = f(enums.content[0], opts, elements, 'generated');
-      if (undefined !== result) {
+      const result = f(enums.content[0], elements, 'generated');
+      if (result !== undefined) {
         return result;
       }
     }
@@ -198,24 +157,22 @@ function mapValue(e, options, f, elements) {
 
   const trivial = trivialValue(e);
   if (trivial) {
-    const result = f(trivial, opts, elements, 'generated');
-    if (undefined !== result) {
+    const result = f(trivial, elements, 'generated');
+    if (result !== undefined) {
       return result;
     }
   }
 
-  if (isArrayElement(e) && e.isEmpty) {
-    return f(e, opts, elements, 'generated');
+  if (isArray(e) && e.isEmpty) {
+    return f(e, elements, 'generated');
   }
 
   return undefined;
 }
 
-function reduceValue(e, options, elements) {
-  const opts = updateTypeAttributes(e, options);
-
+function reduceValue(e, elements) {
   if (e.content === undefined) {
-    return mapValue(e, opts, e => e.content, elements);
+    return mapValue(e, e => e.content, elements);
   }
 
   if (isPrimitive(e)) {
@@ -226,22 +183,21 @@ function reduceValue(e, options, elements) {
     return null;
   }
 
-  if (isEnumElement(e)) {
-    return mapValue(e.content, inheritFlags(opts), reduceValue, elements);
+  if (isEnum(e)) {
+    return mapValue(e.content, reduceValue, elements);
   }
 
-  if (isObjectElement(e)) {
+  if (isObject(e)) {
     let result = {};
 
-    const isFixed = isFlag(FIXED_FLAG, opts);
-    const isFixedType = isFlag(FIXED_TYPE_FLAG, opts);
+    const isFixedElement = isFixed(e);
 
     e.content.some((item) => {
-      const skippable = hasOptionalTypeAttribute(item) || (!isFixed && !isFixedType && !hasTypeAttribute(item, 'required'));
+      const isSkippable = isOptional(item) || (!isFixedElement && !isRequired(item));
 
-      const key = mapValue(item.key, inheritFlags(opts), reduceValue, elements);
+      const key = mapValue(item.key, reduceValue, elements);
       if (key === undefined) {
-        if (skippable) {
+        if (isSkippable) {
           return false;
         }
 
@@ -249,9 +205,9 @@ function reduceValue(e, options, elements) {
         return true;
       }
 
-      const value = mapValue(item.value, inheritFlags(opts), reduceValue, elements);
+      const value = mapValue(item.value, reduceValue, elements);
       if (value === undefined) {
-        if (skippable) {
+        if (isSkippable) {
           return false;
         }
 
@@ -266,10 +222,10 @@ function reduceValue(e, options, elements) {
     return result;
   }
 
-  if (e instanceof ArrayElement) {
-    const result = e.map(item => mapValue(item, inheritFlags(opts), reduceValue, elements));
+  if (isArray(e)) {
+    const result = e.map(item => mapValue(item, reduceValue, elements));
 
-    if (!isFlag(FIXED_FLAG, opts) && !isFlag(FIXED_TYPE_FLAG, opts)) {
+    if (!isFixed(e)) {
       return result.filter(item => item !== undefined);
     }
 
@@ -284,20 +240,22 @@ function reduceValue(e, options, elements) {
 }
 
 module.exports = () => {
-  if (!Object.getOwnPropertyNames(Element.prototype).includes('valueOf')) {
-    Object.defineProperty(Element.prototype, 'valueOf', {
-      value(flags, elements) {
-        if (flags !== undefined && flags.source) {
-          return mapValue(this, 0, (value, opts, elements, source) => {
-            const result = reduceValue(value, opts, elements);
-            if (undefined === result) {
-              return undefined;
-            }
-            return [reduceValue(value, opts, elements), source];
-          }, elements);
-        }
-        return mapValue(this, 0, (value, opts) => reduceValue(value, opts, elements), elements);
-      },
-    });
+  if (Object.getOwnPropertyNames(Element.prototype).includes('valueOf')) {
+    return;
   }
+
+  Object.defineProperty(Element.prototype, 'valueOf', {
+    value(flags, elements) {
+      if (flags && flags.source) {
+        return mapValue(this, (value, elements, source) => {
+          const result = reduceValue(value, elements);
+          if (result === undefined) {
+            return undefined;
+          }
+          return [reduceValue(value, elements), source];
+        }, elements);
+      }
+      return mapValue(this, value => reduceValue(value, elements), elements);
+    },
+  });
 };
