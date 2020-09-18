@@ -818,6 +818,16 @@ describe('valueOf ArrayElement', () => {
     expect(value).to.deep.equal(undefined);
   });
 
+  it('returns undefined when inherited fixed and with item without value', () => {
+    const element = new ArrayElement([8, 4, [new EnumElement()], 42]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixed'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal(undefined);
+  });
+
   it('prefers content over default and samples', () => {
     const element = new ArrayElement([1, 2, 3]);
     element.attributes.set('default', new ArrayElement([4, 2]));
@@ -972,6 +982,16 @@ describe('valueOf ArrayElement with source', () => {
     expect(value).to.deep.equal(undefined);
   });
 
+  it('returns undefined when inherited fixed and with item without value', () => {
+    const element = new ArrayElement([8, 4, [new EnumElement()], 42]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixed'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(undefined);
+  });
+
   it('prefers content over default and samples', () => {
     const element = new ArrayElement([1, 2, 3]);
     element.attributes.set('default', new ArrayElement([4, 2]));
@@ -1067,6 +1087,22 @@ describe('valueOf ObjectElement', () => {
   it('returns undefined when fixed and with item without value', () => {
     const element = new ObjectElement({
       a: 8, b: 4, c: new EnumElement(), d: 42,
+    });
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixed'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal(undefined);
+  });
+
+  it('returns undefined when inherited fixed and with item without value', () => {
+    const element = new ObjectElement({
+      a: 8,
+      b: 4,
+      c: new ObjectElement({
+        d: new EnumElement(),
+      }),
     });
     element.attributes.set('typeAttributes', new ArrayElement([
       new StringElement('fixed'),
@@ -1303,6 +1339,22 @@ describe('valueOf ObjectElement with source', () => {
   it('returns undefined when fixed and with item without value', () => {
     const element = new ObjectElement({
       a: 8, b: 4, c: new EnumElement(), d: 42,
+    });
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixed'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal(undefined);
+  });
+
+  it('returns undefined when inherited fixed and with item without value', () => {
+    const element = new ObjectElement({
+      a: 8,
+      b: 4,
+      c: new ObjectElement({
+        d: new EnumElement(),
+      }),
     });
     element.attributes.set('typeAttributes', new ArrayElement([
       new StringElement('fixed'),
