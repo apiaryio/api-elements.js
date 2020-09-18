@@ -59,7 +59,21 @@ const isNullable = e => hasTypeAttribute(e, 'nullable');
  */
 const isOptional = e => hasTypeAttribute(e, 'optional');
 
-const baseTypes = new Set(['boolean', 'string', 'number', 'array', 'object', 'enum']);
+const baseTypes = new Set([
+  'boolean',
+  'string',
+  'number',
+  'array',
+  'object',
+  'enum',
+  'null',
+  'member',
+  'select',
+  'option',
+  'extend',
+  'ref',
+  'link',
+]);
 /**
  * Check if element is one of the base types
  * @param {element} e - element
