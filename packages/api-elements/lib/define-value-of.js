@@ -25,19 +25,32 @@ const {
 } = require('./utils');
 
 /**
+ * @typedef InheritedAttrs
+ * @type {object}
+ * @property {boolean} isFixed
+ * @property {boolean} isNullable
+ */
+
+/**
  * Map the element values
  * @param {element} e - element
+ * @param {InheritedAttrs} inheritedAttrs - inherited attributes
  * @param {function} f - map function
  * @param {object=} elements - object map of elements to look for inherited types
  * @return {any}
  */
-function mapValue(e, f, elements) {
+function mapValue(e, f, inheritedAttrs, elements) {
   if (e === undefined) {
     return undefined;
   }
 
+  const attrs = {
+    isFixed: inheritedAttrs.isFixed || isFixed(e),
+    isNullable: inheritedAttrs.isNullable || isNullable(e),
+  };
+
   if (e.content && !isEmptyArray(e, elements) && !isObjectWithUndefinedValues(e, elements)) {
-    const result = f(e, elements, 'content');
+    const result = f(e, attrs, elements, 'content');
 
     if (result !== undefined) {
       return result;
@@ -46,7 +59,7 @@ function mapValue(e, f, elements) {
 
   const sample = getFirstSample(e);
   if (sample) {
-    const result = f(sample, elements, 'sample');
+    const result = f(sample, attrs, elements, 'sample');
     if (result !== undefined) {
       return result;
     }
@@ -54,7 +67,7 @@ function mapValue(e, f, elements) {
 
   const dflt = getDefault(e);
   if (dflt) {
-    const result = f(dflt, elements, 'default');
+    const result = f(dflt, attrs, elements, 'default');
     if (result !== undefined) {
       return result;
     }
@@ -62,15 +75,15 @@ function mapValue(e, f, elements) {
 
   // reconsider content for array and object element (prefer sample/default first)
   if (isNonEmptyArray(e, elements) && isObject(e, elements)) {
-    const result = f(e, elements, 'content');
+    const result = f(e, attrs, elements, 'content');
 
     if (result !== undefined) {
       return result;
     }
   }
 
-  if (isNullable(e)) {
-    const result = f(new NullElement(), elements, 'nullable');
+  if (attrs.isNullable) {
+    const result = f(new NullElement(), attrs, elements, 'nullable');
     if (result !== undefined) {
       return result;
     }
@@ -82,16 +95,16 @@ function mapValue(e, f, elements) {
       const inheritedElements = R.filter(el => !el.id.equals(e.content), elements);
 
       if (e.path && e.path.toValue() === 'content') {
-        return mapValue(result.content, f, inheritedElements);
+        return mapValue(result.content, f, attrs, inheritedElements);
       }
 
-      return mapValue(result, f, inheritedElements);
+      return mapValue(result, f, attrs, inheritedElements);
     }
 
     const result = elements[e.element];
     if (result !== undefined) {
       const inheritedElements = R.filter(el => !el.id.equals(e.element), elements);
-      return mapValue(result, f, inheritedElements);
+      return mapValue(result, f, attrs, inheritedElements);
     }
   }
 
@@ -99,7 +112,7 @@ function mapValue(e, f, elements) {
     const content = getStructureMembers(e, elements);
 
     if (content && content[0]) {
-      const result = f(content[0], elements, 'generated');
+      const result = f(content[0], attrs, elements, 'generated');
       if (result !== undefined) {
         return result;
       }
@@ -108,14 +121,14 @@ function mapValue(e, f, elements) {
 
   const trivial = trivialValue(e);
   if (trivial) {
-    const result = f(trivial, elements, 'generated');
+    const result = f(trivial, attrs, elements, 'generated');
     if (result !== undefined) {
       return result;
     }
   }
 
   if ((isArray(e, elements) && e.isEmpty) || isObject(e, elements)) {
-    return f(e, elements, 'generated');
+    return f(e, attrs, elements, 'generated');
   }
 
   return undefined;
@@ -124,12 +137,13 @@ function mapValue(e, f, elements) {
 /**
  * Reduce the element value
  * @param {element} e - element
+ * @param {InheritedAttrs} attrs - inherited attributes
  * @param {object=} elements - object map of elements to look for inherited types
  * @return {any}
  */
-function reduceValue(e, elements) {
+function reduceValue(e, attrs, elements) {
   if (e.content === undefined) {
-    return mapValue(e, e => e.content, elements);
+    return mapValue(e, e => e.content, attrs, elements);
   }
 
   if (isPrimitive(e, elements)) {
@@ -141,20 +155,18 @@ function reduceValue(e, elements) {
   }
 
   if (isEnum(e, elements)) {
-    return mapValue(e.content, reduceValue, elements);
+    return mapValue(e.content, reduceValue, attrs, elements);
   }
 
   if (isObject(e, elements)) {
     let result = {};
 
-    const isFixedElement = isFixed(e);
-
     const content = getStructureMembers(e, elements);
 
     content.some((item) => {
-      const isSkippable = isOptional(item) || (!isFixedElement && !isRequired(item));
+      const isSkippable = isOptional(item) || (!attrs.isFixed && !isRequired(item));
 
-      const key = mapValue(item.key, reduceValue, elements);
+      const key = mapValue(item.key, reduceValue, attrs, elements);
       if (key === undefined) {
         if (isSkippable) {
           return false;
@@ -164,7 +176,7 @@ function reduceValue(e, elements) {
         return true;
       }
 
-      const value = mapValue(item.value, reduceValue, elements);
+      const value = mapValue(item.value, reduceValue, attrs, elements);
       if (value === undefined) {
         if (isSkippable) {
           return false;
@@ -183,9 +195,9 @@ function reduceValue(e, elements) {
 
   if (isArray(e, elements)) {
     const content = getStructureMembers(e, elements);
-    const result = content.map(item => mapValue(item, reduceValue, elements));
+    const result = content.map(item => mapValue(item, reduceValue, attrs, elements));
 
-    if (!isFixed(e)) {
+    if (!attrs.isFixed) {
       return result.filter(item => item !== undefined);
     }
 
@@ -206,16 +218,21 @@ module.exports = () => {
 
   Object.defineProperty(Element.prototype, 'valueOf', {
     value(flags, elements) {
+      const initialAttrs = { isFixed: false, isNullable: false };
+
       if (flags && flags.source) {
-        return mapValue(this, (value, elements, source) => {
-          const result = reduceValue(value, elements);
+        return mapValue(this, (value, attrs, elements, source) => {
+          const result = reduceValue(value, attrs, elements);
+
           if (result === undefined) {
             return undefined;
           }
-          return [reduceValue(value, elements), source];
-        }, elements);
+
+          return [result, source];
+        }, initialAttrs, elements);
       }
-      return mapValue(this, value => reduceValue(value, elements), elements);
+
+      return mapValue(this, reduceValue, initialAttrs, elements);
     },
   });
 };
