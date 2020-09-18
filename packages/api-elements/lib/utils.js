@@ -12,7 +12,7 @@ const {
  * Get element attribute
  * @param {element} e - element - element
  * @param {string} attribute
- * @return {boolean}
+ * @return {element}
  */
 const getAttribute = (e, attribute) => e._attributes && e.attributes.get(attribute);
 
