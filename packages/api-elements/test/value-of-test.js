@@ -808,6 +808,16 @@ describe('valueOf ArrayElement', () => {
     expect(value).to.deep.equal(undefined);
   });
 
+  it('skips the items of inner structures if no value and only the outer structure has fixedType', () => {
+    const element = new ArrayElement([8, 4, [new EnumElement()], 42]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixedType'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([8, 4, [], 42]);
+  });
+
   it('returns undefined when fixed and with item without value', () => {
     const element = new ArrayElement([8, 4, new EnumElement(), 42]);
     element.attributes.set('typeAttributes', new ArrayElement([
@@ -894,6 +904,27 @@ describe('valueOf ArrayElement', () => {
     expect(value).to.deep.equal(null);
   });
 
+  it('generates [] on the inner array without content, default, samples and only the outer array is nullable', () => {
+    const element = new ArrayElement([2, new ArrayElement(), 'hello']);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([2, [], 'hello']);
+  });
+
+  it('generates null on the inner array if no content, default, samples and is nullable', () => {
+    const innerElement = new ArrayElement();
+    innerElement.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const element = new ArrayElement([2, innerElement, 'hello']);
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal([2, null, 'hello']);
+  });
+
   it('inherits items from RefElement', () => {
     const numberElement = new NumberElement(3);
     numberElement.id = 'numberElement';
@@ -972,6 +1003,16 @@ describe('valueOf ArrayElement with source', () => {
     expect(value).to.deep.equal(undefined);
   });
 
+  it('skips items of inner structures if no value and only the outer structure has fixedType', () => {
+    const element = new ArrayElement([8, 4, [new EnumElement()], 42]);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixedType'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[8, 4, [], 42], 'content']);
+  });
+
   it('returns undefined when fixed and with item without value', () => {
     const element = new ArrayElement([8, 4, new EnumElement(), 42]);
     element.attributes.set('typeAttributes', new ArrayElement([
@@ -1038,6 +1079,27 @@ describe('valueOf ArrayElement with source', () => {
 
     expect(value).to.deep.equal([null, 'nullable']);
   });
+
+  it('generates [] on the inner array if no values, default, samples and only the outer array is nullable', () => {
+    const element = new ArrayElement([2, new ArrayElement(), 'hello']);
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[2, [], 'hello'], 'content']);
+  });
+
+  it('generates null on the inner array if no values, default, samples, and is nullable', () => {
+    const innerElement = new ArrayElement();
+    innerElement.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const element = new ArrayElement([2, innerElement, 'hello']);
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([[2, null, 'hello'], 'content']);
+  });
 });
 
 describe('valueOf ObjectElement', () => {
@@ -1082,6 +1144,16 @@ describe('valueOf ObjectElement', () => {
     const value = element.valueOf();
 
     expect(value).to.deep.equal({ company: 'Oracle' });
+  });
+
+  it('skips properties of inner structures if no value and only the outer structure has fixedType', () => {
+    const element = new ObjectElement({ company: 'Oracle', address: { door: new EnumElement() } });
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixedType'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal({ company: 'Oracle', address: {} });
   });
 
   it('returns undefined when fixed and with item without value', () => {
@@ -1240,6 +1312,27 @@ describe('valueOf ObjectElement', () => {
     expect(value).to.deep.equal(null);
   });
 
+  it('generates {} on the inner object if no content, default, samples and only the outer object is nullable', () => {
+    const element = new ObjectElement({ gaga: new ObjectElement() });
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal({ gaga: {} });
+  });
+
+  it('generates null on the inner object if no content, default, samples and is nullable', () => {
+    const innerElement = new ObjectElement();
+    innerElement.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const element = new ObjectElement({ gaga: innerElement });
+    const value = element.valueOf();
+
+    expect(value).to.deep.equal({ gaga: null });
+  });
+
   it('inherits properties from RefElement', () => {
     const objectElement = new ObjectElement({ name: 'joe' });
     objectElement.id = 'objectElement';
@@ -1334,6 +1427,16 @@ describe('valueOf ObjectElement with source', () => {
     const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal(undefined);
+  });
+
+  it('skips properties of inner structures if no value and only the outer structure has fixedType', () => {
+    const element = new ObjectElement({ company: 'Oracle', address: { door: new EnumElement() } });
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('fixedType'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([{ company: 'Oracle', address: {} }, 'content']);
   });
 
   it('returns undefined when fixed and with item without value', () => {
@@ -1462,6 +1565,27 @@ describe('valueOf ObjectElement with source', () => {
     const value = element.valueOf({ source: true });
 
     expect(value).to.deep.equal([null, 'nullable']);
+  });
+
+  it('generates {} on the inner object if no content, default, samples and only the outer object is nullable', () => {
+    const element = new ObjectElement({ gaga: new ObjectElement() });
+    element.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([{ gaga: {} }, 'content']);
+  });
+
+  it('generates null on the inner object if no content, default, samples and is nullable', () => {
+    const innerElement = new ObjectElement();
+    innerElement.attributes.set('typeAttributes', new ArrayElement([
+      new StringElement('nullable'),
+    ]));
+    const element = new ObjectElement({ gaga: innerElement });
+    const value = element.valueOf({ source: true });
+
+    expect(value).to.deep.equal([{ gaga: null }, 'content']);
   });
 });
 

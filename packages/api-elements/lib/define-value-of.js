@@ -7,6 +7,7 @@ const {
 } = require('minim');
 const {
   isFixed,
+  isFixedType,
   isRequired,
   isNullable,
   isOptional,
@@ -28,6 +29,7 @@ const {
  * @typedef InheritedAttrs
  * @type {object}
  * @property {boolean} isFixed
+ * @property {boolean} isFixedType
  * @property {boolean} isNullable
  */
 
@@ -46,7 +48,8 @@ function mapValue(e, f, inheritedAttrs, elements) {
 
   const attrs = {
     isFixed: inheritedAttrs.isFixed || isFixed(e),
-    isNullable: inheritedAttrs.isNullable || isNullable(e),
+    isFixedType: (inheritedAttrs.isFixed && isPrimitive(e)) || isFixedType(e),
+    isNullable: (inheritedAttrs.isNullable && isPrimitive(e)) || isNullable(e),
   };
 
   if (e.content && !isEmptyArray(e, elements) && !isObjectWithUndefinedValues(e, elements)) {
@@ -164,7 +167,7 @@ function reduceValue(e, attrs, elements) {
     const content = getStructureMembers(e, elements);
 
     content.some((item) => {
-      const isSkippable = isOptional(item) || (!attrs.isFixed && !isRequired(item));
+      const isSkippable = isOptional(item) || (!(attrs.isFixed || attrs.isFixedType) && !isRequired(item));
 
       const key = mapValue(item.key, reduceValue, attrs, elements);
       if (key === undefined) {
@@ -197,7 +200,7 @@ function reduceValue(e, attrs, elements) {
     const content = getStructureMembers(e, elements);
     const result = content.map(item => mapValue(item, reduceValue, attrs, elements));
 
-    if (!attrs.isFixed) {
+    if (!attrs.isFixed && !attrs.isFixedType) {
       return result.filter(item => item !== undefined);
     }
 
@@ -218,7 +221,7 @@ module.exports = () => {
 
   Object.defineProperty(Element.prototype, 'valueOf', {
     value(flags, elements) {
-      const initialAttrs = { isFixed: false, isNullable: false };
+      const initialAttrs = { isFixed: false, isFixedType: false, isNullable: false };
 
       if (flags && flags.source) {
         return mapValue(this, (value, attrs, elements, source) => {

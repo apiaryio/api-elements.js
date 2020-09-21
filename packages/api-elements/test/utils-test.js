@@ -1,6 +1,7 @@
 const { expect } = require('chai');
 const {
   isFixed,
+  isFixedType,
   isRequired,
   isNullable,
   isOptional,
@@ -42,19 +43,28 @@ describe('isFixed', () => {
     expect(value).to.be.true;
   });
 
+  it('returns `false` if the element typeAttributes do not contain`fixed`', () => {
+    const element = new Element();
+    const value = isFixed(element);
+
+    expect(value).to.be.false;
+  });
+});
+
+describe('isFixedType', () => {
   it('returns `true` if the element typeAttributes contain `fixedType`', () => {
     const element = new Element();
     element.attributes.set('typeAttributes', new ArrayElement([
       new StringElement('fixedType'),
     ]));
-    const value = isFixed(element);
+    const value = isFixedType(element);
 
     expect(value).to.be.true;
   });
 
-  it('returns `false` if the element typeAttributes do not contain`fixed` or `fixedType`', () => {
+  it('returns `false` if the element typeAttributes do not contain `fixedType`', () => {
     const element = new Element();
-    const value = isFixed(element);
+    const value = isFixedType(element);
 
     expect(value).to.be.false;
   });
