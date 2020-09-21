@@ -1,6 +1,10 @@
 # API Elements (JavaScript) CHANGELOG
 
-## 0.3.2 (2020-09-15)
+## 0.3.2 (2020-09-21)
+
+### Bug Fixes
+
+- Do not inherit fixedType and nullable attributes on valueOf
 
 ### Enhancements
 
