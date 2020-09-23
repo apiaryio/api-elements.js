@@ -32,11 +32,18 @@ function hasTypeAttribute(e, attribute) {
 }
 
 /**
- * Check if element has 'fixed' or 'fixedType' typeAttribute set
+ * Check if element has 'fixed' typeAttribute set
  * @param {element} e - element
  * @return {boolean}
  */
-const isFixed = e => hasTypeAttribute(e, 'fixed') || hasTypeAttribute(e, 'fixedType');
+const isFixed = e => hasTypeAttribute(e, 'fixed');
+
+/**
+ * Check if element has 'fixedType' typeAttribute set
+ * @param {element} e - element
+ * @return {boolean}
+ */
+const isFixedType = e => hasTypeAttribute(e, 'fixedType');
 
 /**
  * Check if element has 'required' typeAttribute set
@@ -358,6 +365,7 @@ function getStructureMembers(e, elements) {
 
 module.exports = {
   isFixed,
+  isFixedType,
   isRequired,
   isNullable,
   isOptional,
