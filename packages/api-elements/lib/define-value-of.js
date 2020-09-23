@@ -153,9 +153,10 @@ function reduceValue(e, inheritFixed, elements) {
     let result = {};
 
     const content = getStructureMembers(e, elements);
+    const isElementFixedType = isFixedType(e);
 
     content.some((item) => {
-      const isSkippable = isOptional(item) || (!(inheritFixed || isFixedType(e)) && !isRequired(item));
+      const isSkippable = isOptional(item) || (!inheritFixed && !isElementFixedType && !isRequired(item));
 
       const key = mapValue(item.key, reduceValue, inheritFixed, elements);
       if (key === undefined) {
