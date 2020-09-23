@@ -1,10 +1,10 @@
 # API Elements (JavaScript) CHANGELOG
 
-## 0.3.2 (2020-09-21)
+## 0.3.2 (2020-09-23)
 
 ### Bug Fixes
 
-- Do not inherit fixedType and nullable attributes on valueOf
+- Inherit fixed attribute in `valueOf`
 
 ### Enhancements
 
