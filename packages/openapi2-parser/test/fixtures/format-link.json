@@ -41,54 +41,52 @@
         },
         "title": {
           "element": "string",
-          "attributes": {
-            "sourceMap": {
-              "element": "array",
-              "content": [
-                {
-                  "element": "sourceMap",
-                  "content": [
-                    {
-                      "element": "array",
-                      "content": [
-                        {
-                          "element": "number",
-                          "content": 23
-                        },
-                        {
-                          "element": "number",
-                          "content": 30
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          "content": "Minimal Swagger Example"
+          "content": "Format Link"
         }
       },
       "attributes": {
         "version": {
           "element": "string",
+          "content": "1.0.0"
+        }
+      },
+      "content": [
+        {
+          "element": "resource",
           "attributes": {
-            "sourceMap": {
-              "element": "array",
+            "href": {
+              "element": "string",
+              "content": "/greeting"
+            }
+          },
+          "content": [
+            {
+              "element": "transition",
               "content": [
                 {
-                  "element": "sourceMap",
+                  "element": "httpTransaction",
                   "content": [
                     {
-                      "element": "array",
+                      "element": "httpRequest",
+                      "attributes": {
+                        "method": {
+                          "element": "string",
+                          "content": "GET"
+                        }
+                      }
+                    },
+                    {
+                      "element": "httpResponse",
+                      "attributes": {
+                        "statusCode": {
+                          "element": "string",
+                          "content": "200"
+                        }
+                      },
                       "content": [
                         {
-                          "element": "number",
-                          "content": 56
-                        },
-                        {
-                          "element": "number",
-                          "content": 14
+                          "element": "copy",
+                          "content": "OK"
                         }
                       ]
                     }
@@ -96,10 +94,9 @@
                 }
               ]
             }
-          },
-          "content": "1.0"
+          ]
         }
-      }
+      ]
     }
   ]
 }

@@ -1,5 +1,9 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## Master
+
+- added a Link element to the specific format/version in the parse result.
+
 ## 0.32.3 (2020-08-06)
 
 Adds compatibility for @apielements/core 0.2.0.

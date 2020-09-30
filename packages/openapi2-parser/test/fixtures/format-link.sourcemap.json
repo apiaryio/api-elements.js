@@ -53,11 +53,11 @@
                       "content": [
                         {
                           "element": "number",
-                          "content": 23
+                          "content": 40
                         },
                         {
                           "element": "number",
-                          "content": 46
+                          "content": 18
                         }
                       ]
                     }
@@ -66,7 +66,7 @@
               ]
             }
           },
-          "content": "Consumes JSON with invalid content type"
+          "content": "Format Link"
         }
       },
       "attributes": {
@@ -84,7 +84,7 @@
                       "content": [
                         {
                           "element": "number",
-                          "content": 72
+                          "content": 23
                         },
                         {
                           "element": "number",
@@ -97,7 +97,7 @@
               ]
             }
           },
-          "content": "1.0"
+          "content": "1.0.0"
         }
       },
       "content": [
@@ -118,11 +118,11 @@
                           "content": [
                             {
                               "element": "number",
-                              "content": 140
+                              "content": 68
                             },
                             {
                               "element": "number",
-                              "content": 211
+                              "content": 79
                             }
                           ]
                         }
@@ -131,7 +131,7 @@
                   ]
                 }
               },
-              "content": "/test"
+              "content": "/greeting"
             }
           },
           "content": [
@@ -158,11 +158,11 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 153
+                                          "content": 85
                                         },
                                         {
                                           "element": "number",
-                                          "content": 198
+                                          "content": 62
                                         }
                                       ]
                                     }
@@ -173,59 +173,7 @@
                           },
                           "content": "GET"
                         }
-                      },
-                      "content": [
-                        {
-                          "element": "asset",
-                          "meta": {
-                            "classes": {
-                              "element": "array",
-                              "content": [
-                                {
-                                  "element": "string",
-                                  "content": "messageBodySchema"
-                                }
-                              ]
-                            }
-                          },
-                          "attributes": {
-                            "contentType": {
-                              "element": "string",
-                              "content": "application/schema+json"
-                            },
-                            "sourceMap": {
-                              "element": "array",
-                              "content": [
-                                {
-                                  "element": "sourceMap",
-                                  "content": [
-                                    {
-                                      "element": "array",
-                                      "content": [
-                                        {
-                                          "element": "number",
-                                          "content": 251
-                                        },
-                                        {
-                                          "element": "number",
-                                          "content": 39
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          },
-                          "content": "{\"type\":\"object\",\"$schema\":\"http://json-schema.org/draft-04/schema#\"}"
-                        },
-                        {
-                          "element": "dataStructure",
-                          "content": {
-                            "element": "object"
-                          }
-                        }
-                      ]
+                      }
                     },
                     {
                       "element": "httpResponse",
@@ -244,11 +192,11 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 309
+                                          "content": 115
                                         },
                                         {
                                           "element": "number",
-                                          "content": 42
+                                          "content": 32
                                         }
                                       ]
                                     }
@@ -275,11 +223,11 @@
                                       "content": [
                                         {
                                           "element": "number",
-                                          "content": 324
+                                          "content": 132
                                         },
                                         {
                                           "element": "number",
-                                          "content": 26
+                                          "content": 15
                                         }
                                       ]
                                     }
@@ -288,7 +236,7 @@
                               ]
                             }
                           },
-                          "content": "My Response"
+                          "content": "OK"
                         }
                       ]
                     }
@@ -299,88 +247,6 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        },
-        "links": {
-          "element": "array",
-          "content": [
-            {
-              "element": "link",
-              "attributes": {
-                "relation": {
-                  "element": "string",
-                  "content": "origin"
-                },
-                "href": {
-                  "element": "string",
-                  "content": "http://docs.apiary.io/validations/swagger#swagger-validation"
-                }
-              }
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "code": {
-          "element": "number",
-          "content": 6
-        },
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 5
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 4
-                        }
-                      },
-                      "content": 101
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 5
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 33
-                        }
-                      },
-                      "content": 29
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "Invalid content type 'application/hal+json; invalid', invalid parameter format"
     }
   ]
 }
