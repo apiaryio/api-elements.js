@@ -21,6 +21,11 @@ function parseOpenAPI(context, openapi) {
     return new namespace.elements.ParseResult([createError(namespace, `OpenAPI version does not contain valid semantic version string '${openapi.value.toValue()}'`, openapi.value)]);
   }
 
+  /* eslint-disable no-param-reassign */
+  context.openapiVersion.major = Number(versionInfo[1]);
+  context.openapiVersion.minor = Number(versionInfo[2]);
+  context.openapiVersion.patch = Number(versionInfo[3]);
+
   if (parseInt(versionInfo[1], 10) !== supportedMajorVersion) {
     return new namespace.elements.ParseResult([createError(namespace, `Unsupported OpenAPI version '${openapi.value.toValue()}'`, openapi.value)]);
   }
@@ -28,7 +33,6 @@ function parseOpenAPI(context, openapi) {
   if (parseInt(versionInfo[2], 10) > supportedMinorVersion) {
     return new namespace.elements.ParseResult([openapi, createWarning(namespace, `Version '${openapi.value.toValue()}' is not fully supported`, openapi.value)]);
   }
-
 
   return new namespace.elements.ParseResult([openapi]);
 }
