@@ -63,4 +63,14 @@ describe('#parseOpenAPI', () => {
     expect(parseResult).to.contain.warning("Version '3.1.0' is not fully supported");
     expect(parseResult.get(0).value.toValue()).to.equal('3.1.0');
   });
+
+  it('adds the version to context', () => {
+    const openapi = new namespace.elements.Member('openapi', '3.1.2');
+
+    parseOpenAPI(context, openapi);
+
+    expect(context.openapiVersion.major).to.equal(3);
+    expect(context.openapiVersion.minor).to.equal(1);
+    expect(context.openapiVersion.patch).to.equal(2);
+  });
 });

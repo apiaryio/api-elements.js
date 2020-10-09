@@ -3,6 +3,11 @@ const State = require('./state.js');
 class Context {
   constructor(namespace, options) {
     this.namespace = namespace;
+    this.openapiVersion = {
+      major: 3,
+      minor: 0,
+      patch: 0,
+    };
     this.options = options || {};
 
     if (this.options.generateSourceMap === undefined) {

@@ -56,7 +56,7 @@ function parseOASObject(context, object) {
   ]);
 
   const parseOASObject = pipeParseResult(namespace,
-    parseObject(context, name, parseMember, requiredKeys, ['components']),
+    parseObject(context, name, parseMember, requiredKeys, ['openapi', 'components']),
     (object) => {
       const api = object.get('info');
       const hosts = object.get('servers');
