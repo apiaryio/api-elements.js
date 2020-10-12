@@ -21,7 +21,6 @@ const parseReference = require('../parseReference');
 const parseRequestBodyObjectOrRef = parseReference('requestBodies', parseRequestBodyObject);
 
 const name = 'Operation Object';
-const requiredKeys = ['responses'];
 const unsupportedKeys = [
   'tags', 'externalDocs', 'callbacks', 'deprecated',
 ];
@@ -31,10 +30,14 @@ const isRequestBody = R.both(isMember, hasKey('requestBody'));
 
 function createTransactions(namespace, member, operation) {
   const requests = R.map(getValue, R.filter(isRequestBody, operation.content));
-  const responses = operation.get('responses');
+  const responses = R.or(operation.get('responses'), new namespace.elements.Array());
 
   if (requests.length === 0) {
     requests.push(new namespace.elements.HttpRequest());
+  }
+
+  if (responses.length === 0) {
+    responses.push(new namespace.elements.HttpResponse());
   }
 
   const transactions = [];
@@ -122,6 +125,11 @@ function parseOperationObject(context, path, member) {
       member
     ),
   ]));
+
+  const requiredKeys = [];
+  if (context.isOpenAPIVersionLessThan(3, 1)) {
+    requiredKeys.push('responses');
+  }
 
   const parseMember = R.cond([
     [hasKey('summary'), parseString(context, name, false)],
