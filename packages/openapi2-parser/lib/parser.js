@@ -449,6 +449,8 @@ class Parser {
           }
 
           hostname = `${this.swagger.schemes[0]}://${hostname}`;
+        } else {
+          hostname = `https://${hostname}`;
         }
 
         const metadata = [];

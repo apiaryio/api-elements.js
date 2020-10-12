@@ -46,7 +46,7 @@
                 },
                 "value": {
                   "element": "string",
-                  "content": "custom-instance.filter.ly"
+                  "content": "https://custom-instance.filter.ly"
                 }
               }
             }

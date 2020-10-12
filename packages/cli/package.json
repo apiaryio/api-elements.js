@@ -26,7 +26,7 @@
     "@apielements/apib-parser": "^0.20.1",
     "@apielements/apib-serializer": "^0.16.2",
     "@apielements/core": ">=0.1.0 <0.3.0",
-    "@apielements/openapi2-parser": "^0.32.3",
+    "@apielements/openapi2-parser": "^0.32.4",
     "@apielements/openapi3-parser": "^0.15.0",
     "cardinal": "^2.1.1",
     "commander": "^5.1.0",
