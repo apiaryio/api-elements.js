@@ -41,6 +41,10 @@ class Context {
   isOpenAPIVersionLessThan(major, minor) {
     return this.openapiVersion.major < major || (this.openapiVersion.major === major && this.openapiVersion.minor < minor);
   }
+
+  isOpenAPIVersionMoreThanOrEqual(major, minor) {
+    return this.openapiVersion.major > major || (this.openapiVersion.major === major && this.openapiVersion.minor >= minor);
+  }
 }
 
 module.exports = Context;
