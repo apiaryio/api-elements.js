@@ -1,5 +1,13 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## 0.32.4 (2020-10-13)
+
+### Bug Fixes
+
+- The HOST URI metadata produced from `schemes`, `host` and `basePath` will now
+  default to `https` when `schemes` is not defined. Previously a partial URI
+  without a scheme was returned.
+
 ## 0.32.3 (2020-08-06)
 
 Adds compatibility for @apielements/core 0.2.0.

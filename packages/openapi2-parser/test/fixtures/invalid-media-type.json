@@ -46,7 +46,7 @@
                 },
                 "value": {
                   "element": "string",
-                  "content": "petstore.swagger.io"
+                  "content": "https://petstore.swagger.io"
                 }
               }
             }
