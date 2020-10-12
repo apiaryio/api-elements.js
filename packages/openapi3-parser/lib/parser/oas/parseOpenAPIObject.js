@@ -38,6 +38,8 @@ function parseOASObject(context, object) {
     return new namespace.elements.ParseResult([array].concat(parseResult.annotations.elements));
   };
 
+  const isOpenAPI31OrHigher = () => context.isOpenAPIVersionMoreThanOrEqual(3, 1);
+
   const parseMember = R.cond([
     [hasKey('openapi'), parseOpenAPI(context)],
     [hasKey('servers'), R.compose(parseServersArray(context, name), getValue)],
@@ -49,6 +51,10 @@ function parseOASObject(context, object) {
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
 
+    [
+      R.both(hasKey('webhooks'), isOpenAPI31OrHigher),
+      createUnsupportedMemberWarning(namespace, name),
+    ],
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
     // Return a warning for additional properties

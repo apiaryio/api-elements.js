@@ -239,6 +239,38 @@ describe('#parseOpenAPIObject', () => {
     expect(parseResult).to.contain.warning("'OpenAPI Object' contains unsupported key 'externalDocs'");
   });
 
+  it('provides warning for unsupported webhooks key in OpenAPI 3.1', () => {
+    const object = new namespace.elements.Object({
+      openapi: '3.1.0',
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
+      paths: {},
+      webhooks: {},
+    });
+
+    const parseResult = parse(context, object);
+
+    expect(parseResult.warnings.get(1).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'webhooks'");
+  });
+
+  it('provides warning for invalid key webhooks in OpenAPI 3.0', () => {
+    const object = new namespace.elements.Object({
+      openapi: '3.0.0',
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
+      paths: {},
+      webhooks: {},
+    });
+
+    const parseResult = parse(context, object);
+
+    expect(parseResult).to.contain.warning("'OpenAPI Object' contains invalid key 'webhooks'");
+  });
+
   it('provides warning for invalid keys', () => {
     const object = new namespace.elements.Object({
       openapi: '3.0.0',
