@@ -36,6 +36,11 @@ class Context {
   hasScheme(id) {
     return this.state.hasScheme(id);
   }
+
+  // Versioning
+  isOpenAPIVersionLessThan(major, minor) {
+    return this.openapiVersion.major < major || (this.openapiVersion.major === major && this.openapiVersion.minor < minor);
+  }
 }
 
 module.exports = Context;

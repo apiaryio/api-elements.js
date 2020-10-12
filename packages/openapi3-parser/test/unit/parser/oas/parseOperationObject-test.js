@@ -129,18 +129,6 @@ describe('Operation Object', () => {
     expect(parseResult).to.contain.warning("'Operation Object' contains invalid key 'invalid'");
   });
 
-  describe('missing required properties', () => {
-    it('provides error for missing responses', () => {
-      const operation = new namespace.elements.Member('get', {});
-
-      const parseResult = parse(context, path, operation);
-
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult).to.contain.error("'Operation Object' is missing required property 'responses'");
-    });
-  });
-
-
   describe('#summary', () => {
     it('warns when summary is not a string', () => {
       const operation = new namespace.elements.Member('get', {
@@ -621,6 +609,26 @@ describe('Operation Object', () => {
   });
 
   describe('#responses', () => {
+    it('provides error for missing responses for OpenAPI 3.0', () => {
+      const operation = new namespace.elements.Member('get', {});
+
+      const parseResult = parse(context, path, operation);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.error("'Operation Object' is missing required property 'responses'");
+    });
+
+    it('does not require responses for OpenAPI >= 3.1', () => {
+      context.openapiVersion.minor = 1;
+      const operation = new namespace.elements.Member('get', {});
+
+      const parseResult = parse(context, path, operation);
+
+      expect(parseResult.length).to.equal(1);
+      const transition = parseResult.get(0);
+      expect(transition).to.be.instanceof(namespace.elements.Transition);
+    });
+
     it('returns a transition including a transaction', () => {
       const operation = new namespace.elements.Member('get', {
         responses: {
