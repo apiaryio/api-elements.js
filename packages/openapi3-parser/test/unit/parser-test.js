@@ -2,10 +2,10 @@ const { Fury } = require('@apielements/core');
 const { expect } = require('./chai');
 
 const parse = require('../../lib/parser');
+const Context = require('../../lib/context');
 
 const { minim: namespace } = new Fury();
-
-const Context = require('../../lib/context');
+const { Link } = namespace.elements;
 
 describe('#parse', () => {
   let context;
@@ -39,5 +39,38 @@ describe('#parse', () => {
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
     expect(parseResult.length).to.equal(1);
     expect(parseResult.api.title.toValue()).to.equal('My API');
+  });
+
+  it('add the format link', () => {
+    const source = 'openapi: "3.0.0"\ninfo: {title: My API, version: 1.0.0}\npaths: {}\n';
+    const parseResult = parse(source, context);
+
+    const link = parseResult.links.get(0);
+    expect(link).to.be.instanceof(Link);
+    expect(link.relation.toValue()).to.equal('via');
+    expect(link.title.toValue()).to.equal('OpenAPI 3.0.0');
+    expect(link.href.toValue()).to.equal('https://spec.openapis.org/oas/v3.0.0');
+  });
+
+  it('add OpenAPI 3.0.3 format link when fails to parse an OAS3 document', () => {
+    const source = '{}{}';
+    const parseResult = parse(source, context);
+
+    const link = parseResult.links.get(0);
+    expect(link).to.be.instanceof(Link);
+    expect(link.relation.toValue()).to.equal('via');
+    expect(link.title.toValue()).to.equal('OpenAPI 3.0.3');
+    expect(link.href.toValue()).to.equal('https://spec.openapis.org/oas/v3.0.3');
+  });
+
+  it('add OpenAPI 3.0.3 format link when OpenAPI property is not a string', () => {
+    const source = 'openapi: {"test": "3.0.0"}\ninfo: {title: My API, version: 1.0.0}\npaths: {}\n';
+    const parseResult = parse(source, context);
+
+    const link = parseResult.links.get(0);
+    expect(link).to.be.instanceof(Link);
+    expect(link.relation.toValue()).to.equal('via');
+    expect(link.title.toValue()).to.equal('OpenAPI 3.0.3');
+    expect(link.href.toValue()).to.equal('https://spec.openapis.org/oas/v3.0.3');
   });
 });

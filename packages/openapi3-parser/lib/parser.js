@@ -3,7 +3,9 @@
 const R = require('ramda');
 const parseYAML = require('./parser/parseYAML');
 
-const { isAnnotation, isWarningAnnotation, isObject } = require('./predicates');
+const {
+  isAnnotation, isWarningAnnotation, isObject, isMember, hasKey, isString,
+} = require('./predicates');
 const { createError } = require('./elements');
 const pipeParseResult = require('./pipeParseResult');
 
@@ -126,7 +128,7 @@ function parse(source, context) {
     R.unless(isObjectOrAnnotation, createError(context.namespace, 'Source document is not an object')),
     R.unless(isAnnotation, parseOpenAPIObject(context)));
 
-  return R.chain(
+  const parseResult = R.chain(
     R.pipe(
       parseDocument,
       deduplicateUnsupportedAnnotations(context.namespace),
@@ -134,6 +136,29 @@ function parse(source, context) {
     ),
     document
   );
+
+  const formatVersion = R.tryCatch(
+    R.pipe(
+      R.prop('content'),
+      R.find(isObject),
+      R.prop('content'),
+      R.find(R.both(isMember, hasKey('openapi'))),
+      R.path(['content', 'value']),
+      R.ifElse(isString, R.prop('content'), R.always('3.0.3'))
+    ), R.always('3.0.3')
+  )(document);
+
+  const formatLink = `https://spec.openapis.org/oas/v${formatVersion}`;
+  const { Link } = context.namespace.elements;
+  const link = new Link();
+
+  link.title = `OpenAPI ${formatVersion}`;
+  link.relation = 'via';
+  link.href = formatLink;
+
+  parseResult.links.push(link);
+
+  return parseResult;
 }
 
 module.exports = parse;
