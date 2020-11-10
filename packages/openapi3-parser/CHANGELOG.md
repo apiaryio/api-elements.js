@@ -1,5 +1,12 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
+## TBD
+
+### Bug Fixes
+
+- Return a parsing warning when Paths Object contains keys which are not
+  strings. Previously the parser would throw an error.
+
 ## 0.15.0 (2020-08-06)
 
 ### Enhancements

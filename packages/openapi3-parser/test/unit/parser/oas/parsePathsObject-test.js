@@ -28,6 +28,16 @@ describe('#parsePathsObject', () => {
     expect(parseResult.isEmpty).to.be.true;
   });
 
+  it('provides a warning when paths contains non-string field', () => {
+    const paths = new namespace.elements.Object();
+    paths.push(new namespace.elements.Member(true, {}));
+
+    const parseResult = parse(context, paths);
+
+    expect(parseResult.length).to.equal(1);
+    expect(parseResult).to.contain.warning("'Paths Object' path must be a string, found boolean");
+  });
+
   it('provides a warning when paths contains non-path field pattern', () => {
     const paths = new namespace.elements.Object({
       test: {},
@@ -36,7 +46,9 @@ describe('#parsePathsObject', () => {
     const parseResult = parse(context, paths);
 
     expect(parseResult.length).to.equal(1);
-    expect(parseResult).to.contain.warning("'Paths Object' contains invalid key 'test'");
+    expect(parseResult).to.contain.warning(
+      "'Paths Object' contains invalid key 'test', key must be a path starting with a leading forward slash '/', or an extension starting with 'x-'"
+    );
   });
 
   it('ignores extension objects', () => {
