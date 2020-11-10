@@ -35,7 +35,7 @@ describe('#parseOpenAPIObject', () => {
     expect(result.annotations.toValue()).to.deep.equal([
       "Version '3.1337.0' is not fully supported",
       "'Info Object' contains invalid key 'invalid'",
-      "'Paths Object' contains invalid key 'invalid'",
+      "'Paths Object' contains invalid key 'invalid', key must be a path starting with a leading forward slash '/', or an extension starting with 'x-'",
       "'Components Object' contains invalid key 'invalid'",
       "'OpenAPI Object' contains invalid key 'invalid'",
     ]);

@@ -1,13 +1,16 @@
 const R = require('ramda');
-const { isObject, isExtension } = require('../../predicates');
-const { createError, createInvalidMemberWarning } = require('../annotations');
+const {
+  isObject, isString, isExtension, getKey,
+} = require('../../predicates');
+const { createError, createWarning } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const parsePathItemObject = require('./parsePathItemObject');
 
 const name = 'Paths Object';
 
-// Returns true if the member's key starts with a slash
-const isPathField = member => member.key.toValue().startsWith('/');
+// Returns true if the member's key is a string, and starts with a slash
+const isPathField = R.compose(R.both(isString, key => key.toValue().startsWith('/')), getKey);
+const isKeyString = R.compose(isString, getKey);
 
 /**
  * Parse Paths Object
@@ -19,6 +22,12 @@ function parsePaths(context, paths) {
   const { namespace } = context;
 
   const createParseResult = annotation => new namespace.elements.ParseResult([annotation]);
+  const createPathNotStringWarning = member => createWarning(namespace,
+    `'${name}' path must be a string, found ${member.key.element}`,
+    member.value);
+  const createKeyNotPathOrExtensionWarning = member => createWarning(namespace,
+    `'${name}' contains invalid key '${member.key.toValue()}', key must be a path starting with a leading forward slash '/', or an extension starting with 'x-'`,
+    member.value);
 
   const parseMember = R.cond([
     [isPathField, parsePathItemObject(context)],
@@ -27,7 +36,8 @@ function parsePaths(context, paths) {
     [isExtension, () => new namespace.elements.ParseResult()],
 
     // Return a warning for additional properties
-    [R.T, R.compose(createParseResult, createInvalidMemberWarning(namespace, name))],
+    [isKeyString, R.compose(createParseResult, createKeyNotPathOrExtensionWarning)],
+    [R.T, R.compose(createParseResult, createPathNotStringWarning)],
   ]);
 
   const parseMembers = object => R.chain(parseMember, new namespace.elements.ParseResult(object.content));
