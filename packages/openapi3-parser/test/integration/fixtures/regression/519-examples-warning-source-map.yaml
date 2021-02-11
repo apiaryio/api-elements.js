@@ -1,0 +1,19 @@
+openapi: 3.0.1
+info:
+  title: Media Type Object - Multiple Examples Warning
+  description: 'https://github.com/apiaryio/api-elements.js/issues/519'
+  version: '2.0'
+paths:
+  /questions:
+    get:
+      summary: Description of the resource
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+                examples:
+                  one:
+                    value: hello world
+                  two:
+                    value: hello world
