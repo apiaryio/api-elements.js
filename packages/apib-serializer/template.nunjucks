@@ -19,7 +19,7 @@ FORMAT: 1A
     + Headers
 
       {% for header in example.headers.exclude('Content-Type').elements %}
-            {{ header.key.toValue() }}: {{ header.value.toValue() }}{% endfor %}
+            {{ header.key.toValue() }}:{% if header.value %} {{ header.value.toValue() }}{% endif %}{% endfor %}
 
   {% endif %}
   {% if example.dataStructure %}
