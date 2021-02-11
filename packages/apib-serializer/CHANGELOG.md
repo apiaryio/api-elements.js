@@ -1,5 +1,11 @@
 # API Elements: API Blueprint Serializer Changelog
 
+## TBD
+
+### Bug Fixes
+
+- Fixes handling of headers which do not contain values.
+
 ## 0.16.2 (2020-08-31)
 
 ### Enhancements
