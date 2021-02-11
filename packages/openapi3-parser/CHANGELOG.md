@@ -4,8 +4,8 @@
 
 ### Enhancements
 
-- Minimal support for 'Parameter Object' schemas, simplest schemas using 'type'
-  are supported.
+- Minimal support for 'Parameter Object' schemas, simple schemas using 'type'
+  and 'example' are supported.
 
 ## 0.15.1 (2020-11-10)
 
