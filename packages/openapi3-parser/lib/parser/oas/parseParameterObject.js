@@ -12,12 +12,13 @@ const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseBoolean = require('../parseBoolean');
+const parseSchemaObject = require('./parseParameterObjectSchemaObject');
 
 const name = 'Parameter Object';
 const requiredKeys = ['name', 'in'];
 const unsupportedKeys = [
   'deprecated', 'allowEmptyValue', 'style', 'allowReserved',
-  'schema', 'examples', 'content',
+  'examples', 'content',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
@@ -102,6 +103,7 @@ function parseParameterObject(context, object) {
     [hasKey('required'), parseBoolean(context, name, false)],
     [hasKey('explode'), parseBoolean(context, name, false)],
     [hasKey('example'), e => e.clone()],
+    [hasKey('schema'), R.pipe(getValue, parseSchemaObject(context))],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -165,6 +167,14 @@ function parseParameterObject(context, object) {
     (parameter) => {
       const example = parameter.get('example');
       const member = new namespace.elements.Member(parameter.get('name'), example);
+
+      if (example === undefined) {
+        const schema = parameter.get('schema');
+
+        if (schema) {
+          member.value = schema;
+        }
+      }
 
       const description = parameter.get('description');
       if (description) {

@@ -469,6 +469,157 @@ describe('Parameter Object', () => {
     });
   });
 
+  describe('#schema', () => {
+    it('uses boolean type schema as value', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'boolean',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.Boolean);
+      expect(member.value.content).to.be.undefined;
+    });
+
+    it('uses number type schema as value', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'number',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.Number);
+      expect(member.value.content).to.be.undefined;
+    });
+
+    it('uses integer type schema as value', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'integer',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.Number);
+      expect(member.value.content).to.be.undefined;
+    });
+
+    it('uses string type schema as value', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'integer',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.Number);
+      expect(member.value.content).to.be.undefined;
+    });
+
+    it('uses array type schema as value', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'array',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.Array);
+      expect(member.value.content).to.deep.equal([]);
+    });
+
+    it('uses object type schema as value', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'object',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.Object);
+      expect(member.value.content).to.deep.equal([]);
+    });
+
+    it('ignores empty schema', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {},
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.undefined;
+    });
+
+    it('provides a warning when schema is not an object', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: [],
+      });
+
+      const parseResult = parse(context, parameter);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Schema Object' is not an object");
+    });
+
+    it('provides a warning when schema is a reference', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          $ref: '#/components/schema/Date',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning("'Schema Object' contains unsupported key '$ref'");
+    });
+  });
+
   describe('warnings for unsupported properties', () => {
     it('provides warning for unsupported deprecated property', () => {
       const parameter = new namespace.elements.Object({
@@ -516,18 +667,6 @@ describe('Parameter Object', () => {
       const parseResult = parse(context, parameter);
 
       expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'allowReserved'");
-    });
-
-    it('provides warning for unsupported schema property', () => {
-      const parameter = new namespace.elements.Object({
-        name: 'example',
-        in: 'query',
-        schema: { type: 'string' },
-      });
-
-      const parseResult = parse(context, parameter);
-
-      expect(parseResult).to.contain.warning("'Parameter Object' contains unsupported key 'schema'");
     });
 
     it('provides warning for unsupported examples property', () => {
