@@ -52,5 +52,10 @@ describe('#parse', () => {
       const file = path.join(__dirname, 'fixtures', 'regression', 'dredd-1685');
       return testParseFixture(file);
     });
+
+    it('can parse #519 media types examples warning missing source maps', () => {
+      const file = path.join(__dirname, 'fixtures', 'regression', '519-examples-warning-source-map');
+      return testParseFixture(file);
+    });
   });
 });
