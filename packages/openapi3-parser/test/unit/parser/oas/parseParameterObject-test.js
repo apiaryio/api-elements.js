@@ -593,6 +593,43 @@ describe('Parameter Object', () => {
       expect(member.value).to.be.undefined;
     });
 
+    it('warns when example does not match expected type', () => {
+      const schema = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'integer',
+          example: true,
+        },
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'example' does not match expected type 'integer'"
+      );
+    });
+
+    it('uses example with type as value', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'integer',
+          example: 2048,
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.Number);
+      expect(member.value.content).to.be.undefined;
+      expect(member.value.attributes.get('samples').toValue()).to.deep.equal([2048]);
+    });
+
     it('provides a warning when schema is not an object', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',

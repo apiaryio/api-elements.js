@@ -19,13 +19,47 @@ const unsupportedKeys = [
   'properties', 'items', 'required', 'nullable', 'title', 'description',
   'default', 'oneOf', 'allOf', 'anyOf', 'not', 'additionalProperties',
   'format', 'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs',
-  'deprecated', 'example',
+  'deprecated',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-// purposely in the order defined in the JSON Schema spec, integer is an OAS 3 specific addition and thus is at the end
 const types = ['boolean', 'object', 'array', 'number', 'string', 'integer'];
 const isValidType = R.anyPass(R.map(hasValue, types));
+
+const typeToElementNameMap = {
+  array: 'array',
+  boolean: 'boolean',
+  integer: 'number',
+  null: 'null',
+  number: 'number',
+  object: 'object',
+  string: 'string',
+};
+
+// Returns whether the given element value matches the provided schema type
+const valueMatchesType = (type, value) => {
+  const expectedElementType = typeToElementNameMap[type];
+  return value.element === expectedElementType;
+};
+
+function validateValuesMatchSchema(context, schema) {
+  const validate = (member) => {
+    const type = schema.getValue('type');
+    if (type && !valueMatchesType(type, member.value)) {
+      return createWarning(context.namespace,
+        `'${name}' '${member.key.toValue()}' does not match expected type '${type}'`, member.value);
+    }
+
+    return member;
+  };
+
+  const parseMember = R.cond([
+    [hasKey('example'), validate],
+    [R.T, e => e],
+  ]);
+
+  return parseObject(context, name, parseMember)(schema);
+}
 
 /**
  * Parse Parameter Object's Schema Object
@@ -53,6 +87,7 @@ function parseSchemaObject(context) {
 
   const parseMember = R.cond([
     [hasKey('type'), parseType],
+    [hasKey('example'), e => e.clone()],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
     [isExtension, () => new namespace.elements.ParseResult()],
@@ -61,6 +96,7 @@ function parseSchemaObject(context) {
 
   return pipeParseResult(namespace,
     parseObject(context, name, parseMember, []),
+    R.curry(validateValuesMatchSchema)(context),
     (schema) => {
       const type = schema.getValue('type');
       let element;
@@ -76,7 +112,12 @@ function parseSchemaObject(context) {
       } else if (type === 'boolean') {
         element = new namespace.elements.Boolean();
       } else {
-        element = new namespace.elements.ParseResult([]);
+        return new namespace.elements.ParseResult([]);
+      }
+
+      const example = schema.get('example');
+      if (example) {
+        element.attributes.set('samples', [example]);
       }
 
       return element;
