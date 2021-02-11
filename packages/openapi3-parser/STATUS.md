@@ -124,7 +124,7 @@ Key:
 | style | ✕ |
 | explode | ~ |
 | allowReserved | ✕ |
-| schema | ✕ |
+| schema | ~ (minimal) |
 | example | ✕ |
 | examples | ✕ |
 

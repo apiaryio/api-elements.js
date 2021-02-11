@@ -1,5 +1,12 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
+## TBD
+
+### Enhancements
+
+- Minimal support for 'Parameter Object' schemas, simplest schemas using 'type'
+  are supported.
+
 ## 0.15.1 (2020-11-10)
 
 ### Bug Fixes

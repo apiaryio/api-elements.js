@@ -376,6 +376,9 @@
                             }
                           },
                           "content": "limit"
+                        },
+                        "value": {
+                          "element": "number"
                         }
                       }
                     }
@@ -1094,6 +1097,9 @@
                         }
                       },
                       "content": "petId"
+                    },
+                    "value": {
+                      "element": "string"
                     }
                   }
                 }
@@ -1914,25 +1920,25 @@
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 21
+                          "content": 23
                         },
                         "column": {
                           "element": "number",
-                          "content": 11
+                          "content": 13
                         }
                       },
-                      "content": 414
+                      "content": 460
                     },
                     {
                       "element": "number",
                       "attributes": {
                         "line": {
                           "element": "number",
-                          "content": 21
+                          "content": 23
                         },
                         "column": {
                           "element": "number",
-                          "content": 17
+                          "content": 19
                         }
                       },
                       "content": 6
@@ -1944,7 +1950,7 @@
           ]
         }
       },
-      "content": "'Parameter Object' contains unsupported key 'schema' (2 occurances)"
+      "content": "'Schema Object' contains unsupported key 'format' (3 occurances)"
     },
     {
       "element": "annotation",
@@ -2065,66 +2071,6 @@
         }
       },
       "content": "'Header Object' contains unsupported key 'schema'"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": {
-          "element": "array",
-          "content": [
-            {
-              "element": "string",
-              "content": "warning"
-            }
-          ]
-        }
-      },
-      "attributes": {
-        "sourceMap": {
-          "element": "array",
-          "content": [
-            {
-              "element": "sourceMap",
-              "content": [
-                {
-                  "element": "array",
-                  "content": [
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 92
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 11
-                        }
-                      },
-                      "content": 2192
-                    },
-                    {
-                      "element": "number",
-                      "attributes": {
-                        "line": {
-                          "element": "number",
-                          "content": 92
-                        },
-                        "column": {
-                          "element": "number",
-                          "content": 17
-                        }
-                      },
-                      "content": 6
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "content": "'Schema Object' contains unsupported key 'format' (2 occurances)"
     }
   ]
 }
