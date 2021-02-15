@@ -1,6 +1,6 @@
 # API Elements: API Blueprint Serializer Changelog
 
-## TBD
+## 0.16.3 (2021-02-15)
 
 ### Bug Fixes
 

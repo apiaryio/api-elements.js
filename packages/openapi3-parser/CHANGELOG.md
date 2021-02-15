@@ -1,6 +1,6 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
-## TBD
+## 0.15.2 (2021-02-15)
 
 ### Enhancements
 

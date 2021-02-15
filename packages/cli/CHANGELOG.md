@@ -1,5 +1,12 @@
 # API Elements: CLI Changelog
 
+## 0.10.3 (2021-02-15)
+
+This update incorporates changes from API Element Adapters:
+
+- apib-serializer 0.16.3
+- openapi3-parser 0.15.2
+
 ## 0.10.2 (2020-08-05)
 
 This update incorporates changes from API Element Adapters:
