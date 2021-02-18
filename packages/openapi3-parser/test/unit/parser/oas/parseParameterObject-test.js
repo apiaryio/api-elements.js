@@ -648,6 +648,44 @@ describe('Parameter Object', () => {
       expect(member.value.enumerations.toValue()).to.deep.equal(['0', '1']);
     });
 
+    it('attaches title', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'string',
+          title: 'Example Title',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.String);
+      expect(member.value.title.toValue()).to.equal('Example Title');
+    });
+
+    it('attaches description', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          type: 'string',
+          description: 'Example Description',
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.String);
+      expect(member.value.description.toValue()).to.equal('Example Description');
+    });
+
     it('provides a warning when schema is not an object', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',

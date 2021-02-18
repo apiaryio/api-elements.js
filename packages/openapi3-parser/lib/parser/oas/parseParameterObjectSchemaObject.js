@@ -16,8 +16,8 @@ const name = 'Schema Object';
 const unsupportedKeys = [
   '$ref', 'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum',
   'exclusiveMinimum', 'maxLength', 'minLength', 'pattern', 'maxItems',
-  'minItems', 'uniqueItems', 'maxProperties', 'minProperties', 'enum',
-  'properties', 'items', 'required', 'nullable', 'title', 'description',
+  'minItems', 'uniqueItems', 'maxProperties', 'minProperties',
+  'properties', 'items', 'required', 'nullable',
   'default', 'oneOf', 'allOf', 'anyOf', 'not', 'additionalProperties',
   'format', 'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs',
   'deprecated',
@@ -91,6 +91,9 @@ function parseSchemaObject(context) {
     [hasKey('example'), e => e.clone()],
     [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
 
+    [hasKey('title'), parseString(context, name, false)],
+    [hasKey('description'), parseString(context, name, false)],
+
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
     [isExtension, () => new namespace.elements.ParseResult()],
     [R.T, createInvalidMemberWarning(namespace, name)],
@@ -119,6 +122,16 @@ function parseSchemaObject(context) {
         element = new namespace.elements.Boolean();
       } else {
         return new namespace.elements.ParseResult([]);
+      }
+
+      const title = schema.getValue('title');
+      if (title) {
+        element.title = title;
+      }
+
+      const description = schema.getValue('description');
+      if (description) {
+        element.description = description;
       }
 
       const example = schema.get('example');

@@ -4,8 +4,8 @@
 
 ### Enhancements
 
-- Support for the 'enum' property in 'Schema Object's found within 'Parameter
-  Object'.
+- Support for the 'title', 'description', and 'enum' properties in 'Schema
+  Object's found within 'Parameter Object'.
 
 ## 0.15.2 (2021-02-15)
 
