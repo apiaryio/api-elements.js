@@ -1,5 +1,12 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
+## TBD
+
+### Enhancements
+
+- Support for the 'enum' property in 'Schema Object's found within 'Parameter
+  Object'.
+
 ## 0.15.2 (2021-02-15)
 
 ### Enhancements

@@ -630,6 +630,24 @@ describe('Parameter Object', () => {
       expect(member.value.attributes.get('samples').toValue()).to.deep.equal([2048]);
     });
 
+    it('uses enum', () => {
+      const parameter = new namespace.elements.Object({
+        name: 'example',
+        in: 'query',
+        schema: {
+          enum: ['0', '1'],
+        },
+      });
+
+      const parseResult = parse(context, parameter);
+
+      expect(parseResult.length).to.equal(1);
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.Enum);
+      expect(member.value.enumerations.toValue()).to.deep.equal(['0', '1']);
+    });
+
     it('provides a warning when schema is not an object', () => {
       const parameter = new namespace.elements.Object({
         name: 'example',

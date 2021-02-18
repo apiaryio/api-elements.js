@@ -10,6 +10,7 @@ const {
 const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
+const parseEnum = require('../parseEnum');
 
 const name = 'Schema Object';
 const unsupportedKeys = [
@@ -88,6 +89,7 @@ function parseSchemaObject(context) {
   const parseMember = R.cond([
     [hasKey('type'), parseType],
     [hasKey('example'), e => e.clone()],
+    [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
     [isExtension, () => new namespace.elements.ParseResult()],
@@ -101,7 +103,11 @@ function parseSchemaObject(context) {
       const type = schema.getValue('type');
       let element;
 
-      if (type === 'object') {
+      const enumerations = schema.get('enum');
+
+      if (enumerations) {
+        element = enumerations;
+      } else if (type === 'object') {
         element = new namespace.elements.Object();
       } else if (type === 'array') {
         element = new namespace.elements.Array();
