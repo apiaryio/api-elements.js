@@ -115,7 +115,15 @@ function parseSecuritySchemeObject(context, object) {
     createWarning(namespace, `'${name}' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'`),
     getValue
   );
-  const validateType = R.unless(isValidTypeValue, createInvalidTypeWarning);
+
+  const isMutalTLSOnOpenAPI31 = R.both(
+    hasValue('mutalTLS'),
+    () => context.isOpenAPIVersionMoreThanOrEqual(3, 1)
+  );
+  const validateType = R.unless(
+    R.either(isValidTypeValue, isMutalTLSOnOpenAPI31),
+    createInvalidTypeWarning
+  );
 
   const createUnsupportedTypeWarning = member => createWarning(namespace,
     `'${name}' 'type' '${member.value.toValue()}' is unsupported`, member.value);

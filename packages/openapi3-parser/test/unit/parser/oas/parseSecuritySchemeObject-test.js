@@ -53,6 +53,29 @@ describe('Security Scheme Object', () => {
       expect(parseResult.length).to.equal(1);
       expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' 'openIdConnect' is unsupported");
     });
+
+    it('provides an unsupported warning for mutalTLS type in OpenAPI >= 3.1', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const securityScheme = new namespace.elements.Object({
+        type: 'mutalTLS',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' 'mutalTLS' is unsupported");
+    });
+
+    it('provides an invalid warning for mutalTLS type in OpenAPI 3.0', () => {
+      const securityScheme = new namespace.elements.Object({
+        type: 'mutalTLS',
+      });
+
+      const parseResult = parse(context, securityScheme);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult).to.contain.warning("'Security Scheme Object' 'type' must be either 'apiKey', 'http', 'oauth2' or 'openIdConnect'");
+    });
   });
 
   describe('#name', () => {
