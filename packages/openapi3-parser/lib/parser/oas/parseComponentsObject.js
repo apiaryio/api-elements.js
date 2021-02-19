@@ -224,6 +224,7 @@ function parseComponentsObject(context, element) {
       return parseResult;
     });
 
+  const isOpenAPI31OrHigher = () => context.isOpenAPIVersionMoreThanOrEqual(3, 1);
   const parseMember = R.cond([
     [hasKey('schemas'), parseSchemas],
     [hasKey('parameters'), parseComponentObjectMember(parseParameterObject)],
@@ -232,6 +233,7 @@ function parseComponentsObject(context, element) {
     [hasKey('examples'), parseComponentObjectMember(parseExampleObject)],
     [hasKey('headers'), parseComponentObjectMember(parseHeaderObject)],
     [hasKey('securitySchemes'), parseSecuritySchemes],
+    [R.both(hasKey('pathItems'), isOpenAPI31OrHigher), createUnsupportedMemberWarning(namespace, name)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 

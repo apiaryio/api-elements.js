@@ -239,6 +239,27 @@ describe('Components Object', () => {
     });
   });
 
+  describe('#pathItems', () => {
+    it('provides a warning when using OpenAPI < 3.1', () => {
+      const components = new namespace.elements.Object({
+        pathItems: {},
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult).to.contain.warning("'Components Object' contains invalid key 'pathItems'");
+    });
+
+    it('provides an unsupported warning when using OpenAPI >= 3.1', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const components = new namespace.elements.Object({
+        pathItems: {},
+      });
+
+      const parseResult = parse(context, components);
+      expect(parseResult).to.contain.warning("'Components Object' contains unsupported key 'pathItems'");
+    });
+  });
+
   describe('#requestBodies', () => {
     it('provides a warning when requestBodies is not an object', () => {
       const components = new namespace.elements.Object({
