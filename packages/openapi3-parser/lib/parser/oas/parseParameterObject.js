@@ -12,7 +12,7 @@ const pipeParseResult = require('../../pipeParseResult');
 const parseObject = require('../parseObject');
 const parseString = require('../parseString');
 const parseBoolean = require('../parseBoolean');
-const parseSchemaObject = require('./parseParameterObjectSchemaObject');
+const parseSchemaObject = require('./parseSchemaObject');
 
 const name = 'Parameter Object';
 const requiredKeys = ['name', 'in'];
@@ -96,6 +96,10 @@ function parseParameterObject(context, object) {
 
   const parseName = pipeParseResult(namespace, parseString(context, name, true));
 
+  const parseSchema = pipeParseResult(namespace,
+    parseSchemaObject(context),
+    dataStructure => dataStructure.content);
+
   const parseMember = R.cond([
     [hasKey('name'), parseName],
     [hasKey('in'), parseIn],
@@ -103,7 +107,7 @@ function parseParameterObject(context, object) {
     [hasKey('required'), parseBoolean(context, name, false)],
     [hasKey('explode'), parseBoolean(context, name, false)],
     [hasKey('example'), e => e.clone()],
-    [hasKey('schema'), R.pipe(getValue, parseSchemaObject(context))],
+    [hasKey('schema'), R.pipe(getValue, parseSchema)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
