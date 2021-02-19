@@ -19,6 +19,7 @@ const parseSecurityRequirementsArray = require('./parseSecurityRequirementsArray
 const name = 'OpenAPI Object';
 const requiredKeys = ['openapi', 'info', 'paths'];
 const unsupportedKeys = ['tags', 'externalDocs'];
+const unsupportedOpenAPI31Keys = ['webhooks', 'jsonSchemaDialect'];
 
 /**
  * Returns whether the given member element is unsupported
@@ -28,6 +29,7 @@ const unsupportedKeys = ['tags', 'externalDocs'];
  * @private
  */
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
+const isUnsupportedOpenAPI31Key = R.anyPass(R.map(hasKey, unsupportedOpenAPI31Keys));
 
 function parseOASObject(context, object) {
   const { namespace } = context;
@@ -52,7 +54,7 @@ function parseOASObject(context, object) {
     [isExtension, () => new namespace.elements.ParseResult()],
 
     [
-      R.both(hasKey('webhooks'), isOpenAPI31OrHigher),
+      R.both(isUnsupportedOpenAPI31Key, isOpenAPI31OrHigher),
       createUnsupportedMemberWarning(namespace, name),
     ],
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],

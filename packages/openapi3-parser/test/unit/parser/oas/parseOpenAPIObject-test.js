@@ -255,6 +255,38 @@ describe('#parseOpenAPIObject', () => {
     expect(parseResult.warnings.get(1).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'webhooks'");
   });
 
+  it('provides warning for invalid key jsonSchemaDialect in OpenAPI 3.0', () => {
+    const object = new namespace.elements.Object({
+      openapi: '3.0.0',
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
+      paths: {},
+      jsonSchemaDialect: 'https://spec.openapis.org/oas/3.1/dialect/base',
+    });
+
+    const parseResult = parse(context, object);
+
+    expect(parseResult).to.contain.warning("'OpenAPI Object' contains invalid key 'jsonSchemaDialect'");
+  });
+
+  it('provides warning for unsupported jsonSchemaDialect key in OpenAPI 3.1', () => {
+    const object = new namespace.elements.Object({
+      openapi: '3.1.0',
+      info: {
+        title: 'My API',
+        version: '1.0.0',
+      },
+      paths: {},
+      jsonSchemaDialect: 'https://spec.openapis.org/oas/3.1/dialect/base',
+    });
+
+    const parseResult = parse(context, object);
+
+    expect(parseResult.warnings.get(1).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'jsonSchemaDialect'");
+  });
+
   it('provides warning for invalid key webhooks in OpenAPI 3.0', () => {
     const object = new namespace.elements.Object({
       openapi: '3.0.0',
