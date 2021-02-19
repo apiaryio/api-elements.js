@@ -20,9 +20,15 @@ const parseEnumStrings = R.curry((context, element) => {
   const parseEnumString = R.unless(isString,
     createWarning(namespace, `'${name}' 'enum' array value is not a string`));
 
+  const validateArrayNotEmpty = R.when(
+    array => array.isEmpty,
+    createWarning(namespace, `'${name}' 'enum' array must contain 1 or more values`)
+  );
+
   const parseEnum = pipeParseResult(
     namespace,
     parseArray(context, `${name}' 'enum`, parseEnumString),
+    validateArrayNotEmpty,
     (array) => {
       const element = new context.namespace.elements.Enum();
       element.enumerations = array.map((value) => {
