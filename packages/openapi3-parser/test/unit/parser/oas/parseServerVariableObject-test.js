@@ -149,5 +149,20 @@ describe('#parseServerVariableObject', () => {
       expect(enumeration.toValue()).to.deep.equal('Tony');
       expect(enumeration.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
     });
+
+    it('warns when enum is empty', () => {
+      const serverVariable = new namespace.elements.Object({
+        default: 'Mario',
+        enum: [],
+      });
+
+      const parseResult = parse(context)(serverVariable, 'name');
+
+      expect(parseResult).to.contain.warning("'Server Variable Object' 'enum' array must contain 1 or more values");
+
+      const member = parseResult.get(0);
+      expect(member).to.be.instanceof(namespace.elements.Member);
+      expect(member.value).to.be.instanceof(namespace.elements.String);
+    });
   });
 });
