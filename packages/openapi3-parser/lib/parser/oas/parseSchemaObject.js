@@ -285,6 +285,10 @@ function parseSchema(context) {
           constructObjectStructure(namespace, schema),
           constructArrayStructure(namespace, schema),
         ];
+
+        if (context.isOpenAPIVersionMoreThanOrEqual(3, 1)) {
+          element.attributes.set('typeAttributes', ['nullable']);
+        }
       }
 
       const title = schema.getValue('title');
