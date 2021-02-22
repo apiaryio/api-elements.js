@@ -21,13 +21,23 @@ describe('Schema Object', () => {
   });
 
   describe('#type', () => {
-    it('warns when type is not a string', () => {
+    it('warns when type is unexpected on OpenAPI 3.0', () => {
       const schema = new namespace.elements.Object({
-        type: ['null'],
+        type: true,
       });
       const parseResult = parse(context, schema);
 
       expect(parseResult).to.contain.warning("'Schema Object' 'type' is not a string");
+    });
+
+    it('warns when type is unexpected on OpenAPI 3.1', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const schema = new namespace.elements.Object({
+        type: true,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult).to.contain.warning("'Schema Object' 'type' is not a string or an array");
     });
 
     it('warns when type is not a valid type', () => {
@@ -82,114 +92,206 @@ describe('Schema Object', () => {
       expect(element.attributes.getValue('typeAttributes')).to.deep.equal(['nullable']);
     });
 
-    it('returns a boolean structure for boolean type', () => {
-      const schema = new namespace.elements.Object({
-        type: 'boolean',
+    describe('when type is a string', () => {
+      it('returns a boolean structure for boolean type', () => {
+        const schema = new namespace.elements.Object({
+          type: 'boolean',
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const string = parseResult.get(0).content;
+        expect(string).to.be.instanceof(namespace.elements.Boolean);
       });
-      const parseResult = parse(context, schema);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-      expect(parseResult).to.not.contain.annotations;
+      it('returns an object structure for object type', () => {
+        const schema = new namespace.elements.Object({
+          type: 'object',
+        });
+        const parseResult = parse(context, schema);
 
-      const string = parseResult.get(0).content;
-      expect(string).to.be.instanceof(namespace.elements.Boolean);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const object = parseResult.get(0).content;
+        expect(object).to.be.instanceof(namespace.elements.Object);
+      });
+
+      it('returns an array structure for array type', () => {
+        const schema = new namespace.elements.Object({
+          type: 'array',
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const array = parseResult.get(0).content;
+        expect(array).to.be.instanceof(namespace.elements.Array);
+      });
+
+      it('returns a number structure for number type', () => {
+        const schema = new namespace.elements.Object({
+          type: 'number',
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const string = parseResult.get(0).content;
+        expect(string).to.be.instanceof(namespace.elements.Number);
+      });
+
+      it('returns a string structure for string type', () => {
+        const schema = new namespace.elements.Object({
+          type: 'string',
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const string = parseResult.get(0).content;
+        expect(string).to.be.instanceof(namespace.elements.String);
+      });
+
+      it('returns a number structure for integer type', () => {
+        const schema = new namespace.elements.Object({
+          type: 'integer',
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const string = parseResult.get(0).content;
+        expect(string).to.be.instanceof(namespace.elements.Number);
+      });
+
+      it('returns a warning for null type on OpenAPI prior 3.1', () => {
+        const schema = new namespace.elements.Object({
+          type: 'null',
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult).to.contain.warning(
+          "'Schema Object' 'type' must be either boolean, object, array, number, string, integer"
+        );
+      });
+
+      it('returns a null structure for null type on OpenAPI 3.1', () => {
+        context.openapiVersion = { major: 3, minor: 1 };
+        const schema = new namespace.elements.Object({
+          type: 'null',
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const element = parseResult.get(0).content;
+        expect(element).to.be.instanceof(namespace.elements.Null);
+      });
     });
 
-    it('returns an object structure for object type', () => {
-      const schema = new namespace.elements.Object({
-        type: 'object',
+    describe('when type is an array', () => {
+      beforeEach(() => {
+        context = new Context(namespace);
+        context.openapiVersion = { major: 3, minor: 1 };
       });
-      const parseResult = parse(context, schema);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-      expect(parseResult).to.not.contain.annotations;
+      it('warns when using array on OpenAPI 3.0', () => {
+        context.openapiVersion = { major: 3, minor: 0 };
 
-      const object = parseResult.get(0).content;
-      expect(object).to.be.instanceof(namespace.elements.Object);
-    });
+        const schema = new namespace.elements.Object({
+          type: [],
+        });
+        const parseResult = parse(context, schema);
 
-    it('returns an array structure for array type', () => {
-      const schema = new namespace.elements.Object({
-        type: 'array',
+        expect(parseResult).to.contain.warning(
+          "'Schema Object' 'type' is not a string"
+        );
       });
-      const parseResult = parse(context, schema);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-      expect(parseResult).to.not.contain.annotations;
+      it('warns when array items is empty', () => {
+        const schema = new namespace.elements.Object({
+          type: [],
+        });
+        const parseResult = parse(context, schema);
 
-      const array = parseResult.get(0).content;
-      expect(array).to.be.instanceof(namespace.elements.Array);
-    });
-
-    it('returns a number structure for number type', () => {
-      const schema = new namespace.elements.Object({
-        type: 'number',
+        expect(parseResult).to.contain.warning(
+          "'Schema Object' 'type' array must contain at least one type"
+        );
       });
-      const parseResult = parse(context, schema);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-      expect(parseResult).to.not.contain.annotations;
+      it('warns when array items are not a string', () => {
+        const schema = new namespace.elements.Object({
+          type: [true],
+        });
+        const parseResult = parse(context, schema);
 
-      const string = parseResult.get(0).content;
-      expect(string).to.be.instanceof(namespace.elements.Number);
-    });
-
-    it('returns a string structure for string type', () => {
-      const schema = new namespace.elements.Object({
-        type: 'string',
+        expect(parseResult).to.contain.warning(
+          "'Schema Object' 'type' array value is not a string"
+        );
       });
-      const parseResult = parse(context, schema);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-      expect(parseResult).to.not.contain.annotations;
+      it('warns when array items are not valid types', () => {
+        const schema = new namespace.elements.Object({
+          type: ['invalid'],
+        });
+        const parseResult = parse(context, schema);
 
-      const string = parseResult.get(0).content;
-      expect(string).to.be.instanceof(namespace.elements.String);
-    });
-
-    it('returns a number structure for integer type', () => {
-      const schema = new namespace.elements.Object({
-        type: 'integer',
+        expect(parseResult).to.contain.warning(
+          "'Schema Object' 'type' array must only contain values: boolean, object, array, number, string, integer, null"
+        );
       });
-      const parseResult = parse(context, schema);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-      expect(parseResult).to.not.contain.annotations;
+      it('warns when array items are duplicated', () => {
+        const schema = new namespace.elements.Object({
+          type: ['string', 'string'],
+        });
+        const parseResult = parse(context, schema);
 
-      const string = parseResult.get(0).content;
-      expect(string).to.be.instanceof(namespace.elements.Number);
-    });
-
-    it('returns a warning for null type on OpenAPI prior 3.1', () => {
-      const schema = new namespace.elements.Object({
-        type: 'null',
+        expect(parseResult).to.contain.warning(
+          "'Schema Object' 'type' array must contain unique items, string is already present"
+        );
       });
-      const parseResult = parse(context, schema);
 
-      expect(parseResult).to.contain.warning(
-        "'Schema Object' 'type' must be either boolean, object, array, number, string, integer"
-      );
-    });
+      it('warns when array items contain more than 1 entry', () => {
+        // FIXME support more than one entry :)
+        const schema = new namespace.elements.Object({
+          type: ['string', 'number'],
+        });
+        const parseResult = parse(context, schema);
 
-    it('returns a null structure for null type on OpenAPI 3.1', () => {
-      context.openapiVersion = { major: 3, minor: 1 };
-      const schema = new namespace.elements.Object({
-        type: 'null',
+        expect(parseResult).to.contain.warning(
+          "'Schema Object' 'type' more than one type is current unsupported"
+        );
       });
-      const parseResult = parse(context, schema);
 
-      expect(parseResult.length).to.equal(1);
-      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
-      expect(parseResult).to.not.contain.annotations;
+      it('when type contains a single value', () => {
+        const schema = new namespace.elements.Object({
+          type: ['string'],
+        });
+        const parseResult = parse(context, schema);
 
-      const element = parseResult.get(0).content;
-      expect(element).to.be.instanceof(namespace.elements.Null);
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const string = parseResult.get(0).content;
+        expect(string).to.be.instanceof(namespace.elements.String);
+      });
     });
   });
 
