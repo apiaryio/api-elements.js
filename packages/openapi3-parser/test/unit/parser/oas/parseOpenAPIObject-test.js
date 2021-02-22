@@ -252,7 +252,7 @@ describe('#parseOpenAPIObject', () => {
 
     const parseResult = parse(context, object);
 
-    expect(parseResult.warnings.get(1).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'webhooks'");
+    expect(parseResult).to.contain.warning("'OpenAPI Object' contains unsupported key 'webhooks'");
   });
 
   it('provides warning for invalid key jsonSchemaDialect in OpenAPI 3.0', () => {
@@ -284,7 +284,7 @@ describe('#parseOpenAPIObject', () => {
 
     const parseResult = parse(context, object);
 
-    expect(parseResult.warnings.get(1).toValue()).to.equal("'OpenAPI Object' contains unsupported key 'jsonSchemaDialect'");
+    expect(parseResult).to.contain.warning("'OpenAPI Object' contains unsupported key 'jsonSchemaDialect'");
   });
 
   it('provides warning for invalid key webhooks in OpenAPI 3.0', () => {
