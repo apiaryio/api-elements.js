@@ -201,6 +201,7 @@ describe('Schema Object', () => {
 
         const element = parseResult.get(0).content;
         expect(element).to.be.instanceof(namespace.elements.Null);
+        expect(element.attributes.getValue('typeAttributes')).to.be.undefined;
       });
     });
 
@@ -291,6 +292,21 @@ describe('Schema Object', () => {
 
         const string = parseResult.get(0).content;
         expect(string).to.be.instanceof(namespace.elements.String);
+      });
+
+      it('when type contains a single value with null', () => {
+        const schema = new namespace.elements.Object({
+          type: ['string', 'null'],
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const string = parseResult.get(0).content;
+        expect(string).to.be.instanceof(namespace.elements.String);
+        expect(string.attributes.getValue('typeAttributes')).to.deep.equal(['nullable']);
       });
     });
   });
@@ -860,6 +876,21 @@ describe('Schema Object', () => {
       expect(element.attributes.get('default').toValue()).to.equal(null);
     });
 
+    it('allows a null default value with null type on OpenAPI 3.1', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const schema = new namespace.elements.Object({
+        type: ['string', 'null'],
+        default: null,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+
+      const element = parseResult.get(0).content;
+      expect(element.attributes.get('default').toValue()).to.equal(null);
+    });
+
     it('allows a null default value when nullable is enabled with enum', () => {
       const schema = new namespace.elements.Object({
         enum: ['my default'],
@@ -885,6 +916,20 @@ describe('Schema Object', () => {
       expect(parseResult.length).to.equal(2);
       expect(parseResult).to.contain.warning(
         "'Schema Object' 'default' does not match expected type 'number'"
+      );
+    });
+
+    it('warns when default does not match expected types on OpenAPI 3.1', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const schema = new namespace.elements.Object({
+        type: ['number', 'null'],
+        default: 'my default',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'default' does not match expected type 'number', 'null'"
       );
     });
 
