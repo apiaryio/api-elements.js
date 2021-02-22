@@ -41,7 +41,7 @@ describe('Schema Object', () => {
       );
     });
 
-    it('returns a data structure representing all types for no type limitations', () => {
+    it('returns a data structure representing all types excluding null for no type limitations on OpenAPI less than 3.1', () => {
       const schema = new namespace.elements.Object({});
       const parseResult = parse(context, schema);
 
@@ -58,6 +58,28 @@ describe('Schema Object', () => {
       expect(element.enumerations.get(2)).to.be.instanceof(namespace.elements.Boolean);
       expect(element.enumerations.get(3)).to.be.instanceof(namespace.elements.Object);
       expect(element.enumerations.get(4)).to.be.instanceof(namespace.elements.Array);
+      expect(element.attributes.getValue('typeAttributes')).to.be.undefined;
+    });
+
+    it('returns a data structure representing all types for no type limitations on OpenAPI 3.1', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const schema = new namespace.elements.Object({});
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Enum);
+
+      expect(element.enumerations.length).to.equal(5);
+      expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+      expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+      expect(element.enumerations.get(2)).to.be.instanceof(namespace.elements.Boolean);
+      expect(element.enumerations.get(3)).to.be.instanceof(namespace.elements.Object);
+      expect(element.enumerations.get(4)).to.be.instanceof(namespace.elements.Array);
+      expect(element.attributes.getValue('typeAttributes')).to.deep.equal(['nullable']);
     });
 
     it('returns a boolean structure for boolean type', () => {
@@ -577,6 +599,7 @@ describe('Schema Object', () => {
 
     it('adds nullable type attribute to element', () => {
       const schema = new namespace.elements.Object({
+        type: 'array',
         nullable: true,
       });
       const parseResult = parse(context, schema);
