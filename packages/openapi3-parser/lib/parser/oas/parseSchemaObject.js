@@ -238,6 +238,12 @@ function parseSchema(context) {
       return element;
     });
 
+  const parseConst = (value) => {
+    const element = value.clone();
+    element.attributes.set('typeAttributes', ['fixed']);
+    return element;
+  };
+
   const parseMember = R.cond([
     [hasKey('type'), R.compose(parseType(context), getValue)],
     [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
@@ -250,6 +256,11 @@ function parseSchema(context) {
     [hasKey('default'), e => e.clone()],
     [hasKey('example'), e => e.clone()],
     [hasKey('oneOf'), R.compose(parseOneOf, getValue)],
+
+    [
+      R.both(hasKey('const'), R.always(context.isOpenAPIVersionMoreThanOrEqual(3, 1))),
+      R.compose(parseConst, getValue),
+    ],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
 
@@ -265,11 +276,14 @@ function parseSchema(context) {
       let element;
 
       const oneOf = schema.get('oneOf');
+      const constValue = schema.get('const');
       const enumerations = schema.get('enum');
       const type = schema.getValue('type') || [];
 
       if (oneOf) {
         element = oneOf;
+      } else if (constValue) {
+        element = constValue;
       } else if (enumerations) {
         element = enumerations;
       } else if (type.length > 1) {
