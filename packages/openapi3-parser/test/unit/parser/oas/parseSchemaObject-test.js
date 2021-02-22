@@ -143,6 +143,32 @@ describe('Schema Object', () => {
       const string = parseResult.get(0).content;
       expect(string).to.be.instanceof(namespace.elements.Number);
     });
+
+    it('returns a warning for null type on OpenAPI 3.1', () => {
+      const schema = new namespace.elements.Object({
+        type: 'null',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'type' must be either boolean, object, array, number, string, integer"
+      );
+    });
+
+    it('returns a null structure for null type on OpenAPI 3.1', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const schema = new namespace.elements.Object({
+        type: 'null',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Null);
+    });
   });
 
   describe('#enum', () => {
