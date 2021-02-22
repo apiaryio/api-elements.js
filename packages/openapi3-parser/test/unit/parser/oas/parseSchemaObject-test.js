@@ -310,6 +310,36 @@ describe('Schema Object', () => {
     });
   });
 
+  describe('#const', () => {
+    it('warns when used on OpenAPI 3.0', () => {
+      const schema = new namespace.elements.Object({
+        const: { message: 'Hello' },
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' contains invalid key 'const'"
+      );
+    });
+
+    it('returns a fixed element', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const schema = new namespace.elements.Object({
+        const: { message: 'Hello' },
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+      expect(parseResult).to.not.contain.annotations;
+
+      const element = parseResult.get(0).content;
+      expect(element).to.be.instanceof(namespace.elements.Object);
+      expect(element.toValue()).to.deep.equal({ message: 'Hello' });
+      expect(element.attributes.getValue('typeAttributes')).to.deep.equal(['fixed']);
+    });
+  });
+
   describe('object type', () => {
     describe('#required', () => {
       it('warns when required is not an array', () => {
