@@ -144,7 +144,7 @@ describe('Schema Object', () => {
       expect(string).to.be.instanceof(namespace.elements.Number);
     });
 
-    it('returns a warning for null type on OpenAPI 3.1', () => {
+    it('returns a warning for null type on OpenAPI prior 3.1', () => {
       const schema = new namespace.elements.Object({
         type: 'null',
       });
