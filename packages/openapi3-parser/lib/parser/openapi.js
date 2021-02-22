@@ -4,7 +4,7 @@ const { isString } = require('../predicates');
 
 const semanticVersionRE = /^(\d+)\.(\d+).(\d+)$/;
 
-const supportedMinorVersion = 0;
+const supportedMinorVersion = 1;
 const supportedMajorVersion = 3;
 
 // Parse the OpenAPI Version member

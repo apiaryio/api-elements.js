@@ -46,6 +46,15 @@ describe('#parseOpenAPI', () => {
     expect(parseResult.get(0).value.toValue()).to.equal('3.0.0');
   });
 
+  it('allows openapi 3.1.0', () => {
+    const openapi = new namespace.elements.Member('openapi', '3.1.0');
+
+    const parseResult = parseOpenAPI(context, openapi);
+    expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
+    expect(parseResult).to.not.contain.annotations;
+    expect(parseResult.get(0).value.toValue()).to.equal('3.1.0');
+  });
+
   it('allows openapi patch version 3.0.11', () => {
     const openapi = new namespace.elements.Member('openapi', '3.0.11');
 
@@ -56,12 +65,12 @@ describe('#parseOpenAPI', () => {
   });
 
   it('warns for unsuported minor versions', () => {
-    const openapi = new namespace.elements.Member('openapi', '3.1.0');
+    const openapi = new namespace.elements.Member('openapi', '3.2.0');
 
     const parseResult = parseOpenAPI(context, openapi);
     expect(parseResult).to.be.instanceof(namespace.elements.ParseResult);
-    expect(parseResult).to.contain.warning("Version '3.1.0' is not fully supported");
-    expect(parseResult.get(0).value.toValue()).to.equal('3.1.0');
+    expect(parseResult).to.contain.warning("Version '3.2.0' is not fully supported");
+    expect(parseResult.get(0).value.toValue()).to.equal('3.2.0');
   });
 
   it('adds the version to context', () => {
