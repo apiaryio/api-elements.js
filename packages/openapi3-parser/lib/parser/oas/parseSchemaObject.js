@@ -192,7 +192,10 @@ function parseType(context) {
     ensureTypesAreUnique,
 
     // FIXME support >1 type
-    R.when(e => e.length > 1, createWarning(namespace, `'${name}' 'type' more than one type is current unsupported`)));
+    R.unless(
+      e => e.length === 0 || e.length === 1 || (e.length === 2 && e.contains('null')),
+      createWarning(namespace, `'${name}' 'type' more than one type is current unsupported`)
+    ));
 
   return R.cond([
     [isString, parseStringType],
@@ -213,10 +216,10 @@ function parseType(context) {
 }
 
 // Returns whether the given element value matches the provided schema type
-const valueMatchesType = (type, value) => {
+const valueMatchesType = R.curry((value, type) => {
   const expectedElementType = typeToElementNameMap[type];
   return value.element === expectedElementType;
-};
+});
 
 // Returns whether the given element value matches an enumeration of fixed values
 const valueMatchesEnumerationValues = (enumeration, value) => {
@@ -240,9 +243,10 @@ function validateValuesMatchSchema(context, schema) {
     }
 
     const type = schema.getValue('type');
-    if (type && !valueMatchesType(type, member.value)) {
+    if (type && R.none(valueMatchesType(member.value), type)) {
+      const types = type.map(t => `'${t}'`).join(', ');
       return createWarning(namespace,
-        `'${name}' '${member.key.toValue()}' does not match expected type '${type}'`, member.value);
+        `'${name}' '${member.key.toValue()}' does not match expected type ${types}`, member.value);
     }
 
     return member;
@@ -375,10 +379,11 @@ function parseSchema(context) {
         element = constValue;
       } else if (enumerations) {
         element = enumerations;
+      } else if (type.length === 1 || (type.length === 2 && type.includes('null'))) {
+        const findType = R.find(R.complement(R.equals('nullable')));
+        element = constructStructure(namespace, schema, findType(type));
       } else if (type.length > 1) {
         throw new Error('Implementation error: unexpected multiple types');
-      } else if (type.length === 1) {
-        element = constructStructure(namespace, schema, type[0]);
       } else {
         element = new namespace.elements.Enum();
         element.enumerations = [
@@ -404,8 +409,9 @@ function parseSchema(context) {
         element.description = description;
       }
 
+      // On OAS 3.0, nullable is a keyword, on OAS 3.1, null goes in type
       const nullable = schema.getValue('nullable');
-      if (nullable) {
+      if (nullable || (type.includes('null') && element.element !== 'null')) {
         const typeAttributes = element.attributes.get('typeAttributes') || new namespace.elements.Array();
         typeAttributes.push('nullable');
         element.attributes.set('typeAttributes', typeAttributes);
