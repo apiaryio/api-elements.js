@@ -69,6 +69,18 @@ describe('#parseLicenseObject', () => {
       expect(parseResult).to.not.contain.annotations;
     });
 
+    it('provides warning for unsupported OpenAPI 3.1 keys', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const object = new namespace.elements.Object({
+        name: 'Apache 2.0',
+        identifier: 'MIT',
+      });
+
+      const parseResult = parse(context)(object);
+
+      expect(parseResult).to.contain.warning("'License Object' contains unsupported key 'identifier'");
+    });
+
     it('provides warning for invalid keys', () => {
       const object = new namespace.elements.Object({
         name: 'Apache 2.0',

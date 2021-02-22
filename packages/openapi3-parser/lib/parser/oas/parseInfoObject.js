@@ -2,6 +2,7 @@ const R = require('ramda');
 const { createError } = require('../../elements');
 const {
   createInvalidMemberWarning,
+  createUnsupportedMemberWarning,
 } = require('../annotations');
 const {
   isObject, hasKey, getValue, isExtension,
@@ -15,6 +16,9 @@ const parseContactObject = require('./parseContactObject');
 
 const name = 'Info Object';
 const requiredKeys = ['title', 'version'];
+
+const unsupported31Keys = ['summary'];
+const isUnsupported31Key = R.anyPass(R.map(hasKey, unsupported31Keys));
 
 /**
  * Returns whether the given member element is unsupported
@@ -54,6 +58,14 @@ function parseInfo(context, info) {
 
     // FIXME Support exposing extensions into parse result
     [isExtension, () => new namespace.elements.ParseResult()],
+
+    [
+      R.both(
+        isUnsupported31Key,
+        R.always(context.isOpenAPIVersionMoreThanOrEqual(3, 1))
+      ),
+      createUnsupportedMemberWarning(context.namespace, name),
+    ],
 
     // Return a warning for additional properties
     [R.T, createInvalidMemberWarning(namespace, name)],

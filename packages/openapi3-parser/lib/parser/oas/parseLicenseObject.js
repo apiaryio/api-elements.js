@@ -3,6 +3,7 @@ const R = require('ramda');
 const { createWarning } = require('../../elements');
 const {
   createInvalidMemberWarning,
+  createUnsupportedMemberWarning,
 } = require('../annotations');
 const {
   isObject, hasKey, isExtension,
@@ -14,10 +15,20 @@ const pipeParseResult = require('../../pipeParseResult');
 const name = 'License Object';
 const requiredKeys = ['name'];
 
+const unsupported31Keys = ['identifier'];
+const isUnsupported31Key = R.anyPass(R.map(hasKey, unsupported31Keys));
+
 const parseMember = context => R.cond([
   [hasKey('name'), parseString(context, name, false)],
   [hasKey('url'), parseString(context, name, false)],
   [isExtension, () => new context.namespace.elements.ParseResult()],
+  [
+    R.both(
+      isUnsupported31Key,
+      R.always(context.isOpenAPIVersionMoreThanOrEqual(3, 1))
+    ),
+    createUnsupportedMemberWarning(context.namespace, name),
+  ],
   [R.T, createInvalidMemberWarning(context.namespace, name)],
 ]);
 
