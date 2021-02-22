@@ -330,13 +330,19 @@ function parseSchema(context) {
     return element;
   };
 
+  const parseNullable = R.ifElse(
+    R.always(context.isOpenAPIVersionMoreThanOrEqual(3, 1)),
+    createWarning(context.namespace, `'${name}' 'nullable' is removed in OpenAPI 3.1, use 'null' in type`),
+    parseBoolean(context, name, false)
+  );
+
   const parseMember = R.cond([
     [hasKey('type'), R.compose(parseType(context), getValue)],
     [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
     [hasKey('properties'), R.compose(parseProperties, getValue)],
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
     [hasKey('required'), R.compose(parseRequired, getValue)],
-    [hasKey('nullable'), parseBoolean(context, name, false)],
+    [hasKey('nullable'), parseNullable],
     [hasKey('title'), parseString(context, name, false)],
     [hasKey('description'), parseString(context, name, false)],
     [hasKey('default'), e => e.clone()],
