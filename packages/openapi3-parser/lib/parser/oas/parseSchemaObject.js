@@ -30,9 +30,6 @@ const unsupportedKeys = [
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 
-// purposely in the order defined in the JSON Schema spec, integer is an OAS 3 specific addition and thus is at the end
-const types = ['boolean', 'object', 'array', 'number', 'string', 'integer'];
-const isValidType = R.anyPass(R.map(hasValue, types));
 
 function constructObjectStructure(namespace, schema) {
   const element = R.or(schema.get('properties'), new namespace.elements.Object());
@@ -69,6 +66,11 @@ function constructArrayStructure(namespace, schema) {
   return element;
 }
 
+const openapi30Types = ['boolean', 'object', 'array', 'number', 'string', 'integer'];
+const openapi31Types = openapi30Types.concat(['null']);
+const isValidOpenAPI30Type = R.anyPass(R.map(hasValue, openapi30Types));
+const isValidOpenAPI31Type = R.anyPass(R.map(hasValue, openapi31Types));
+
 const typeToElementNameMap = {
   array: 'array',
   boolean: 'boolean',
@@ -78,6 +80,31 @@ const typeToElementNameMap = {
   object: 'object',
   string: 'string',
 };
+
+function parseType(context) {
+  let types;
+  let isValidType;
+
+  if (context.isOpenAPIVersionMoreThanOrEqual(3, 1)) {
+    types = openapi31Types;
+    isValidType = isValidOpenAPI31Type;
+  } else {
+    types = openapi30Types;
+    isValidType = isValidOpenAPI30Type;
+  }
+
+  const ensureValidType = R.unless(
+    isValidType,
+    R.compose(
+      createWarning(context.namespace, `'${name}' 'type' must be either ${types.join(', ')}`),
+      getValue
+    )
+  );
+
+  return pipeParseResult(context.namespace,
+    parseString(context, name, false),
+    ensureValidType);
+}
 
 // Returns whether the given element value matches the provided schema type
 const valueMatchesType = (type, value) => {
@@ -172,18 +199,6 @@ function validateOneOfIsNotUsedWithUnsupportedConstraints(context) {
 function parseSchema(context) {
   const { namespace } = context;
 
-  const ensureValidType = R.unless(
-    isValidType,
-    R.compose(
-      createWarning(namespace, `'Schema Object' 'type' must be either ${types.join(', ')}`),
-      getValue
-    )
-  );
-
-  const parseType = pipeParseResult(namespace,
-    parseString(context, name, false),
-    ensureValidType);
-
   const parseSubSchema = element => parseReference('schemas', R.uncurryN(2, parseSchema), context, element, true);
   const parseProperties = parseObject(context, `${name}' 'properties`, R.compose(parseSubSchema, getValue));
 
@@ -200,7 +215,7 @@ function parseSchema(context) {
     });
 
   const parseMember = R.cond([
-    [hasKey('type'), parseType],
+    [hasKey('type'), parseType(context)],
     [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
     [hasKey('properties'), R.compose(parseProperties, getValue)],
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
@@ -243,6 +258,8 @@ function parseSchema(context) {
         element = new namespace.elements.Number();
       } else if (type === 'boolean') {
         element = new namespace.elements.Boolean();
+      } else if (type === 'null') {
+        element = new namespace.elements.Null();
       } else {
         element = new namespace.elements.Enum();
         element.enumerations = [
