@@ -1017,4 +1017,43 @@ describe('Schema Object', () => {
       expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Array);
     });
   });
+
+  describe('warnings for unsupported properties', () => {
+    it('provides warning for unsupported property', () => {
+      const schema = new namespace.elements.Object({
+        deprecated: true,
+      });
+
+      const parseResult = parse(context, schema);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' contains unsupported key 'deprecated'"
+      );
+    });
+
+    it('provides invalid warning for unsupported OpenAPI 3.1 property on OpenAPI 3.0', () => {
+      const schema = new namespace.elements.Object({
+        if: true,
+      });
+
+      const parseResult = parse(context, schema);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' contains invalid key 'if'"
+      );
+    });
+
+    it('provides warning for unsupported OpenAPI 3.1 property', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const schema = new namespace.elements.Object({
+        if: true,
+      });
+
+      const parseResult = parse(context, schema);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' contains unsupported key 'if'"
+      );
+    });
+  });
 });

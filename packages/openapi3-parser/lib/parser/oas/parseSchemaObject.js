@@ -17,18 +17,38 @@ const parseReference = require('../parseReference');
 
 const name = 'Schema Object';
 const unsupportedKeys = [
-  // JSON Schema
-  'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum',
-  'exclusiveMinimum', 'maxLength', 'minLength', 'pattern', 'maxItems',
-  'minItems', 'uniqueItems', 'maxProperties', 'minProperties',
+  // JSON Schema Core applicators
+  'allOf', 'anyOf', 'not',
 
-  // JSON Schema + OAS 3 specific rules
-  'allOf', 'anyOf', 'not', 'additionalProperties', 'format',
+  // JSON Schema Validation (6.2 Numeric)
+  'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum', 'exclusiveMinimum',
+
+  // JSON Schema Validation (6.3 Strings)
+  'maxLength', 'minLength', 'pattern', 'format',
+
+  // JSON Schema Validation (6.4 Array)
+  'maxItems', 'minItems', 'uniqueItems',
+
+  // JSON Schema Validation (6.5 Objects)
+  'maxProperties', 'minProperties',
 
   // OAS 3 specific
   'discriminator', 'readOnly', 'writeOnly', 'xml', 'externalDocs', 'deprecated',
 ];
+const unsupportedJSONSchemaDraft202012 = [
+  // General applicators
+  'if', 'then', 'else', 'dependentSchemas',
+
+  // Array
+  'prefixItems', 'unevaluatedItems', 'contains', 'minContains', 'maxContains',
+
+  // Object
+  'propertiesNames', 'unevaluatedProperties', 'dependentRequired',
+];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
+const isUnsupportedKeyJSONSchemaDraft202012 = R.anyPass(
+  R.map(hasKey, unsupportedJSONSchemaDraft202012)
+);
 
 
 function constructObjectStructure(namespace, schema) {
@@ -252,6 +272,13 @@ function parseSchema(context) {
     [hasKey('oneOf'), R.compose(parseOneOf, getValue)],
 
     [isUnsupportedKey, createUnsupportedMemberWarning(namespace, name)],
+    [
+      R.both(
+        isUnsupportedKeyJSONSchemaDraft202012,
+        R.always(context.isOpenAPIVersionMoreThanOrEqual(3, 1))
+      ),
+      createUnsupportedMemberWarning(namespace, name),
+    ],
 
     // Return a warning for additional properties
     [R.T, createInvalidMemberWarning(namespace, name)],
