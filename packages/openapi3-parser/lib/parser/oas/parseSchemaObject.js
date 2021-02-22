@@ -6,7 +6,7 @@ const {
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const {
-  isString, hasKey, getValue,
+  isArray, isString, hasKey, getValue,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseArray = require('../parseArray');
@@ -128,10 +128,14 @@ const typeToElementNameMap = {
  * Normalises result into an ArrayElement of StringElement
  */
 function parseType(context) {
+  const { namespace } = context;
+
   let types;
   let isValidType;
 
-  if (context.isOpenAPIVersionMoreThanOrEqual(3, 1)) {
+  const isOpenAPI31OrHigher = R.always(context.isOpenAPIVersionMoreThanOrEqual(3, 1));
+
+  if (isOpenAPI31OrHigher()) {
     types = openapi31Types;
     isValidType = isValidOpenAPI31Type;
   } else {
@@ -141,13 +145,71 @@ function parseType(context) {
 
   const ensureValidType = R.unless(
     element => isValidType(element.toValue()),
-    createWarning(context.namespace, `'${name}' 'type' must be either ${types.join(', ')}`)
+    createWarning(namespace, `'${name}' 'type' must be either ${types.join(', ')}`)
   );
 
-  return pipeParseResult(context.namespace,
-    R.unless(isString, value => createWarning(context.namespace, `'${name}' 'type' is not a string`, value)),
+  const parseStringType = pipeParseResult(namespace,
     ensureValidType,
-    type => new context.namespace.elements.Array([type]));
+    type => new namespace.elements.Array([type]));
+
+  const ensureValidTypeInArray = R.unless(
+    element => isValidType(element.toValue()),
+    createWarning(namespace, `'${name}' 'type' array must only contain values: ${types.join(', ')}`)
+  );
+
+  const parseArrayTypeItem = pipeParseResult(namespace,
+    R.unless(isString, createWarning(namespace, `'${name}' 'type' array value is not a string`)),
+    ensureValidTypeInArray);
+
+  const isEmpty = arrayElement => arrayElement.isEmpty;
+
+  // ArrayElement -> ParseResult<ArrayElement, Annotation>
+  const ensureTypesAreUnique = (types) => {
+    const inspectedTypes = [];
+    const warnings = [];
+    const permittedTypes = R.filter((type) => {
+      if (inspectedTypes.includes(type.toValue())) {
+        warnings.push(createWarning(namespace, `'${name}' 'type' array must contain unique items, ${type.toValue()} is already present`, type));
+        return false;
+      }
+
+      inspectedTypes.push(type.toValue());
+      return true;
+    }, types);
+
+    const parseResult = new namespace.elements.ParseResult();
+    parseResult.push(permittedTypes.elements);
+
+    if (warnings.length > 0) {
+      parseResult.push(...warnings);
+    }
+    return parseResult;
+  };
+
+  const parseArrayType = pipeParseResult(namespace,
+    R.when(isEmpty, createWarning(namespace, `'${name}' 'type' array must contain at least one type`)),
+    parseArray(context, `${name}' 'type`, parseArrayTypeItem),
+    ensureTypesAreUnique,
+
+    // FIXME support >1 type
+    R.when(e => e.length > 1, createWarning(namespace, `'${name}' 'type' more than one type is current unsupported`)));
+
+  return R.cond([
+    [isString, parseStringType],
+    [
+      R.both(isArray, isOpenAPI31OrHigher),
+      parseArrayType,
+    ],
+
+    [
+      isOpenAPI31OrHigher,
+      value => createWarning(namespace, `'${name}' 'type' is not a string or an array`, value),
+    ],
+    [
+      R.T,
+      value => createWarning(namespace, `'${name}' 'type' is not a string`, value),
+    ],
+  ]);
 }
 
 // Returns whether the given element value matches the provided schema type
