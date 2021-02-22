@@ -702,6 +702,20 @@ describe('Schema Object', () => {
   });
 
   describe('#nullable', () => {
+    it('warns when nullable is used with OpenAPI 3.1', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const schema = new namespace.elements.Object({
+        nullable: true,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'nullable' is removed in OpenAPI 3.1, use 'null' in type"
+      );
+    });
+
     it('warns when nullable is not boolean', () => {
       const schema = new namespace.elements.Object({
         nullable: 1,
