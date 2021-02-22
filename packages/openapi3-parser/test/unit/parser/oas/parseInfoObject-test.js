@@ -97,6 +97,19 @@ describe('#parseInfoObject', () => {
       expect(parseResult).to.not.contain.annotations;
     });
 
+    it('provides warning for unsupported OpenAPI 3.1 keys', () => {
+      context.openapiVersion = { major: 3, minor: 1 };
+      const object = new namespace.elements.Object({
+        title: 'My API',
+        version: '1.0.0',
+        summary: '',
+      });
+
+      const parseResult = parse(context, object);
+
+      expect(parseResult).to.contain.warning("'Info Object' contains unsupported key 'summary'");
+    });
+
     it('provides warning for invalid keys', () => {
       const object = new namespace.elements.Object({
         title: 'My API',
