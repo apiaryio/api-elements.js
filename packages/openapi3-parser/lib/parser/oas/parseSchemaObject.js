@@ -6,7 +6,7 @@ const {
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const {
-  isString, hasKey, hasValue, getValue,
+  isString, hasKey, getValue,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseArray = require('../parseArray');
@@ -66,10 +66,32 @@ function constructArrayStructure(namespace, schema) {
   return element;
 }
 
+function constructStructure(namespace, schema, type) {
+  let element;
+
+  if (type === 'object') {
+    element = constructObjectStructure(namespace, schema);
+  } else if (type === 'array') {
+    element = constructArrayStructure(namespace, schema);
+  } else if (type === 'string') {
+    element = new namespace.elements.String();
+  } else if (type === 'number' || type === 'integer') {
+    element = new namespace.elements.Number();
+  } else if (type === 'boolean') {
+    element = new namespace.elements.Boolean();
+  } else if (type === 'null') {
+    element = new namespace.elements.Null();
+  } else {
+    throw new Error(`Internal Inconsistency: constructStructure called with unexpected type: '${type}'`);
+  }
+
+  return element;
+}
+
 const openapi30Types = ['boolean', 'object', 'array', 'number', 'string', 'integer'];
 const openapi31Types = openapi30Types.concat(['null']);
-const isValidOpenAPI30Type = R.anyPass(R.map(hasValue, openapi30Types));
-const isValidOpenAPI31Type = R.anyPass(R.map(hasValue, openapi31Types));
+const isValidOpenAPI30Type = R.anyPass(R.map(R.equals, openapi30Types));
+const isValidOpenAPI31Type = R.anyPass(R.map(R.equals, openapi31Types));
 
 const typeToElementNameMap = {
   array: 'array',
@@ -81,6 +103,10 @@ const typeToElementNameMap = {
   string: 'string',
 };
 
+/*
+ * Parse StringElement containing OpenAPI Schema type
+ * Normalises result into an ArrayElement of StringElement
+ */
 function parseType(context) {
   let types;
   let isValidType;
@@ -94,16 +120,14 @@ function parseType(context) {
   }
 
   const ensureValidType = R.unless(
-    isValidType,
-    R.compose(
-      createWarning(context.namespace, `'${name}' 'type' must be either ${types.join(', ')}`),
-      getValue
-    )
+    element => isValidType(element.toValue()),
+    createWarning(context.namespace, `'${name}' 'type' must be either ${types.join(', ')}`)
   );
 
   return pipeParseResult(context.namespace,
-    parseString(context, name, false),
-    ensureValidType);
+    R.unless(isString, value => createWarning(context.namespace, `'${name}' 'type' is not a string`, value)),
+    ensureValidType,
+    type => new context.namespace.elements.Array([type]));
 }
 
 // Returns whether the given element value matches the provided schema type
@@ -215,7 +239,7 @@ function parseSchema(context) {
     });
 
   const parseMember = R.cond([
-    [hasKey('type'), parseType(context)],
+    [hasKey('type'), R.compose(parseType(context), getValue)],
     [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
     [hasKey('properties'), R.compose(parseProperties, getValue)],
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
@@ -242,24 +266,16 @@ function parseSchema(context) {
 
       const oneOf = schema.get('oneOf');
       const enumerations = schema.get('enum');
-      const type = schema.getValue('type');
+      const type = schema.getValue('type') || [];
 
       if (oneOf) {
         element = oneOf;
       } else if (enumerations) {
         element = enumerations;
-      } else if (type === 'object') {
-        element = constructObjectStructure(namespace, schema);
-      } else if (type === 'array') {
-        element = constructArrayStructure(namespace, schema);
-      } else if (type === 'string') {
-        element = new namespace.elements.String();
-      } else if (type === 'number' || type === 'integer') {
-        element = new namespace.elements.Number();
-      } else if (type === 'boolean') {
-        element = new namespace.elements.Boolean();
-      } else if (type === 'null') {
-        element = new namespace.elements.Null();
+      } else if (type.length > 1) {
+        throw new Error('Implementation error: unexpected multiple types');
+      } else if (type.length === 1) {
+        element = constructStructure(namespace, schema, type[0]);
       } else {
         element = new namespace.elements.Enum();
         element.enumerations = [
