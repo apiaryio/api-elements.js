@@ -120,6 +120,12 @@ class DataStructureGenerator {
     });
     element.content.push(...requiredMembers);
 
+    if (schema.additionalProperties === false) {
+      const typeAttributes = element.attributes.get('typeAttributes') || new this.minim.elements.Array([]);
+      typeAttributes.push('fixed-type');
+      element.attributes.set('typeAttributes', typeAttributes);
+    }
+
     return element;
   }
 

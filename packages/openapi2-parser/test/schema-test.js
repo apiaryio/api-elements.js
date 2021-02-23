@@ -692,6 +692,36 @@ describe('JSON Schema to Data Structure', () => {
       expect(samples).to.be.instanceof(ArrayElement);
       expect(samples.toValue()).to.be.deep.equal([{ name: 'Doe' }]);
     });
+
+    it('produces object with additionalProperties as true', () => {
+      const schema = {
+        type: 'object',
+        additionalProperties: true,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      expect(dataStructure.content.length).to.equal(0);
+      expect(dataStructure.content.attributes.getValue('typeAttributes')).to.be.undefined;
+    });
+
+    it('produces object with additionalProperties as false', () => {
+      const schema = {
+        type: 'object',
+        additionalProperties: false,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      expect(dataStructure.content.length).to.equal(0);
+      expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed-type']);
+    });
   });
 
   context('array schema', () => {
