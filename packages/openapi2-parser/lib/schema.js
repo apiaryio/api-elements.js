@@ -114,16 +114,29 @@ class DataStructureGenerator {
     // Create member elements for required keys which are not defined in properties
     const missingRequiredProperties = required.filter(name => properties[name] === undefined);
     const requiredMembers = missingRequiredProperties.map((name) => {
-      const member = new this.minim.elements.Member(name);
+      let member;
+
+      if (schema.additionalProperties !== undefined && typeof schema.additionalProperties !== 'boolean') {
+        member = this.generateMember(name, schema.additionalProperties);
+      } else {
+        member = new this.minim.elements.Member(name);
+      }
+
       member.attributes.set('typeAttributes', ['required']);
       return member;
     });
     element.content.push(...requiredMembers);
 
-    if (schema.additionalProperties === false) {
+    if (schema.additionalProperties !== undefined && schema.additionalProperties !== true) {
       const typeAttributes = element.attributes.get('typeAttributes') || new this.minim.elements.Array([]);
-      typeAttributes.push('fixed-type');
+      typeAttributes.push('fixedType');
       element.attributes.set('typeAttributes', typeAttributes);
+
+      if (schema.additionalProperties !== false) {
+        const member = this.generateMember('', schema.additionalProperties);
+        member.attributes.set('variable', true);
+        element.content.push(member);
+      }
     }
 
     return element;

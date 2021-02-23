@@ -720,7 +720,90 @@ describe('JSON Schema to Data Structure', () => {
       expect(dataStructure.content).to.be.instanceof(ObjectElement);
 
       expect(dataStructure.content.length).to.equal(0);
-      expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixed-type']);
+      expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+    });
+
+    it('produces object with additionalProperties as false with required properties', () => {
+      const schema = {
+        type: 'object',
+        required: ['type'],
+        additionalProperties: false,
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      expect(dataStructure.content.length).to.equal(1);
+      expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+
+      const type = dataStructure.content.getMember('type');
+      expect(type).to.be.instanceof(MemberElement);
+      expect(type.attributes.getValue('variable')).to.be.undefined;
+      expect(type.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
+      expect(type.value).to.be.undefined;
+    });
+
+    it('produces object with additionalProperties containing a structure', () => {
+      const schema = {
+        type: 'object',
+        additionalProperties: {
+          type: 'string',
+        },
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+
+      expect(dataStructure.content.length).to.equal(1);
+
+      const member = dataStructure.content.getMember('');
+      expect(member).to.be.instanceof(MemberElement);
+      expect(member.attributes.getValue('variable')).to.be.true;
+      expect(member.value).to.be.instanceof(StringElement);
+
+      expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+    });
+
+    it('produces object with required additionalProperties containing a structure', () => {
+      const schema = {
+        type: 'object',
+        additionalProperties: {
+          type: 'string',
+        },
+        required: ['type', 'mode'],
+      };
+
+      const dataStructure = schemaToDataStructure(schema);
+
+      expect(dataStructure.element).to.equal('dataStructure');
+      expect(dataStructure.content).to.be.instanceof(ObjectElement);
+      expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+
+      expect(dataStructure.content.length).to.equal(3);
+
+      // Variable property
+      const variable = dataStructure.content.getMember('');
+      expect(variable).to.be.instanceof(MemberElement);
+      expect(variable.attributes.getValue('variable')).to.be.true;
+      expect(variable.value).to.be.instanceof(StringElement);
+
+      // Required 'type' property
+      const type = dataStructure.content.getMember('type');
+      expect(type).to.be.instanceof(MemberElement);
+      expect(type.attributes.getValue('variable')).to.be.undefined;
+      expect(type.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
+      expect(type.value).to.be.instanceof(StringElement);
+
+      // Required 'mode' property
+      const mode = dataStructure.content.getMember('mode');
+      expect(mode).to.be.instanceof(MemberElement);
+      expect(mode.attributes.getValue('variable')).to.be.undefined;
+      expect(mode.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
+      expect(mode.value).to.be.instanceof(StringElement);
     });
   });
 
