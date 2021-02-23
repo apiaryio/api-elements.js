@@ -29,7 +29,7 @@
     "@apielements/openapi2-parser": "^0.32.4",
     "@apielements/openapi3-parser": "^0.16.0",
     "cardinal": "^2.1.1",
-    "commander": "^5.1.0",
+    "commander": "^7.1.0",
     "js-yaml": "^3.12.0",
     "minim": "^0.23.8"
   },
