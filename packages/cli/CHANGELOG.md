@@ -1,5 +1,11 @@
 # API Elements: CLI Changelog
 
+## 0.10.4 (2021-02-23)
+
+This update incorporates changes from API Element Adapters:
+
+- openapi3-parser 0.16.0
+
 ## 0.10.3 (2021-02-15)
 
 This update incorporates changes from API Element Adapters:

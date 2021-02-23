@@ -1,8 +1,13 @@
 # API Elements: OpenAPI 3 Parser Changelog
 
-## TBD
+## 0.16.0 (2021-02-23)
 
 ### Enhancements
+
+- Support for OpenAPI 3.1, some features and fields are not supported (these
+  will emit the appropriate unsupported warnings).
+
+  This includes support for `const` and array `type` in 'Schema Object'.
 
 - Support for the 'title', 'description', and 'enum' properties in 'Schema
   Object's found within 'Parameter Object'.
