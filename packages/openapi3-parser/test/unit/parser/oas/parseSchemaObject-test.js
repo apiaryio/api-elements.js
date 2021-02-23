@@ -665,6 +665,75 @@ describe('Schema Object', () => {
     });
   });
 
+  describe('#additionalProperties', () => {
+    it('warns when additionalProperties is not boolean or object', () => {
+      const schema = new namespace.elements.Object({
+        type: 'object',
+        additionalProperties: 5,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'additionalProperties' must be a boolean value, or a Schema Object"
+      );
+    });
+
+    it('warns when additionalProperties is an object', () => {
+      const schema = new namespace.elements.Object({
+        type: 'object',
+        additionalProperties: {},
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(2);
+      expect(parseResult).to.contain.warning(
+        "'Schema Object' 'additionalProperties' containing a Schema Object is currently unsupported"
+      );
+    });
+
+    it('defaults additionalProperties to true', () => {
+      const schema = new namespace.elements.Object({
+        type: 'object',
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      const object = parseResult.get(0).content;
+      expect(object).to.be.instanceof(namespace.elements.Object);
+      expect(object.length).to.equal(0);
+      expect(object.attributes.getValue('typeAttributes')).to.be.undefined;
+    });
+
+    it('supports additionalProperties as true', () => {
+      const schema = new namespace.elements.Object({
+        type: 'object',
+        additionalProperties: true,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      const object = parseResult.get(0).content;
+      expect(object).to.be.instanceof(namespace.elements.Object);
+      expect(object.length).to.equal(0);
+      expect(object.attributes.getValue('typeAttributes')).to.be.undefined;
+    });
+
+    it('supports additionalProperties as false', () => {
+      const schema = new namespace.elements.Object({
+        type: 'object',
+        additionalProperties: false,
+      });
+      const parseResult = parse(context, schema);
+
+      expect(parseResult.length).to.equal(1);
+      const object = parseResult.get(0).content;
+      expect(object).to.be.instanceof(namespace.elements.Object);
+      expect(object.length).to.equal(0);
+      expect(object.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+    });
+  });
+
   describe('#items', () => {
     it('warns when items is not an object', () => {
       const schema = new namespace.elements.Object({
