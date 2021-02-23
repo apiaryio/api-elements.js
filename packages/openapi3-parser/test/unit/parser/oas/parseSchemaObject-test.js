@@ -268,18 +268,6 @@ describe('Schema Object', () => {
         );
       });
 
-      it('warns when array items contain more than 1 entry', () => {
-        // FIXME support more than one entry :)
-        const schema = new namespace.elements.Object({
-          type: ['string', 'number'],
-        });
-        const parseResult = parse(context, schema);
-
-        expect(parseResult).to.contain.warning(
-          "'Schema Object' 'type' more than one type is current unsupported"
-        );
-      });
-
       it('when type contains a single value', () => {
         const schema = new namespace.elements.Object({
           type: ['string'],
@@ -307,6 +295,44 @@ describe('Schema Object', () => {
         const string = parseResult.get(0).content;
         expect(string).to.be.instanceof(namespace.elements.String);
         expect(string.attributes.getValue('typeAttributes')).to.deep.equal(['nullable']);
+      });
+
+      it('when type contains multiple values', () => {
+        const schema = new namespace.elements.Object({
+          type: ['string', 'number'],
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const element = parseResult.get(0).content;
+        expect(element).to.be.instanceof(namespace.elements.Enum);
+
+        expect(element.enumerations.length).to.equal(2);
+        expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+        expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+        expect(element.attributes.getValue('typeAttributes')).to.be.undefined;
+      });
+
+      it('when type contains multiple values with null', () => {
+        const schema = new namespace.elements.Object({
+          type: ['string', 'number', 'null'],
+        });
+        const parseResult = parse(context, schema);
+
+        expect(parseResult.length).to.equal(1);
+        expect(parseResult.get(0)).to.be.instanceof(namespace.elements.DataStructure);
+        expect(parseResult).to.not.contain.annotations;
+
+        const element = parseResult.get(0).content;
+        expect(element).to.be.instanceof(namespace.elements.Enum);
+
+        expect(element.enumerations.length).to.equal(2);
+        expect(element.enumerations.get(0)).to.be.instanceof(namespace.elements.String);
+        expect(element.enumerations.get(1)).to.be.instanceof(namespace.elements.Number);
+        expect(element.attributes.getValue('typeAttributes')).to.deep.equal(['nullable']);
       });
     });
   });

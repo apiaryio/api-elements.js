@@ -86,7 +86,7 @@ function constructArrayStructure(namespace, schema) {
   return element;
 }
 
-function constructStructure(namespace, schema, type) {
+const constructStructure = R.curry((namespace, schema, type) => {
   let element;
 
   if (type === 'object') {
@@ -106,7 +106,7 @@ function constructStructure(namespace, schema, type) {
   }
 
   return element;
-}
+});
 
 const openapi30Types = ['boolean', 'object', 'array', 'number', 'string', 'integer'];
 const openapi31Types = openapi30Types.concat(['null']);
@@ -189,13 +189,7 @@ function parseType(context) {
   const parseArrayType = pipeParseResult(namespace,
     R.when(isEmpty, createWarning(namespace, `'${name}' 'type' array must contain at least one type`)),
     parseArray(context, `${name}' 'type`, parseArrayTypeItem),
-    ensureTypesAreUnique,
-
-    // FIXME support >1 type
-    R.unless(
-      e => e.length === 0 || e.length === 1 || (e.length === 2 && e.contains('null')),
-      createWarning(namespace, `'${name}' 'type' more than one type is current unsupported`)
-    ));
+    ensureTypesAreUnique);
 
   return R.cond([
     [isString, parseStringType],
@@ -385,11 +379,17 @@ function parseSchema(context) {
         element = constValue;
       } else if (enumerations) {
         element = enumerations;
-      } else if (type.length === 1 || (type.length === 2 && type.includes('null'))) {
-        const findType = R.find(R.complement(R.equals('nullable')));
+      } else if (type.length === 1) {
+        element = constructStructure(namespace, schema, type[0]);
+      } else if (type.length === 2 && type.includes('null')) {
+        const findType = R.find(R.complement(R.equals('null')));
         element = constructStructure(namespace, schema, findType(type));
       } else if (type.length > 1) {
-        throw new Error('Implementation error: unexpected multiple types');
+        const removeNull = R.filter(R.complement(R.equals('null')));
+        const types = removeNull(type);
+
+        element = new namespace.elements.Enum();
+        element.enumerations = R.map(constructStructure(namespace, schema), types);
       } else {
         element = new namespace.elements.Enum();
         element.enumerations = [
