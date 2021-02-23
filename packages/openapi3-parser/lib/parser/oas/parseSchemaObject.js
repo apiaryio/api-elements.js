@@ -6,7 +6,7 @@ const {
 } = require('../annotations');
 const pipeParseResult = require('../../pipeParseResult');
 const {
-  isArray, isString, hasKey, getValue,
+  isArray, isBoolean, isString, isObject, hasKey, getValue,
 } = require('../../predicates');
 const parseObject = require('../parseObject');
 const parseArray = require('../parseArray');
@@ -43,7 +43,7 @@ const unsupportedJSONSchemaDraft202012 = [
   'prefixItems', 'unevaluatedItems', 'contains', 'minContains', 'maxContains',
 
   // Object
-  'propertiesNames', 'unevaluatedProperties', 'dependentRequired',
+  'propertyNames', 'unevaluatedProperties', 'dependentRequired',
 ];
 const isUnsupportedKey = R.anyPass(R.map(hasKey, unsupportedKeys));
 const isUnsupportedKeyJSONSchemaDraft202012 = R.anyPass(
@@ -69,6 +69,11 @@ function constructObjectStructure(namespace, schema) {
       .toValue()
       .map(findOrCreateMember)
       .forEach(member => member.attributes.set('typeAttributes', ['required']));
+  }
+
+  const additionalProperties = schema.get('additionalProperties');
+  if (additionalProperties && additionalProperties.toValue() === false) {
+    element.attributes.set('typeAttributes', ['fixedType']);
   }
 
   return element;
@@ -305,6 +310,11 @@ function parseSchema(context) {
 
   const parseSubSchema = element => parseReference('schemas', R.uncurryN(2, parseSchema), context, element, true);
   const parseProperties = parseObject(context, `${name}' 'properties`, R.compose(parseSubSchema, getValue));
+  const parseAdditionalProperties = R.cond([
+    [isBoolean, R.identity],
+    [isObject, createWarning(namespace, `'${name}' 'additionalProperties' containing a Schema Object is currently unsupported`)],
+    [R.T, createWarning(namespace, `'${name}' 'additionalProperties' must be a boolean value, or a Schema Object`)],
+  ]);
 
   const parseRequiredString = R.unless(isString,
     createWarning(namespace, `'${name}' 'required' array value is not a string`));
@@ -334,6 +344,7 @@ function parseSchema(context) {
     [hasKey('type'), R.compose(parseType(context), getValue)],
     [hasKey('enum'), R.compose(parseEnum(context, name), getValue)],
     [hasKey('properties'), R.compose(parseProperties, getValue)],
+    [hasKey('additionalProperties'), R.compose(parseAdditionalProperties, getValue)],
     [hasKey('items'), R.compose(parseSubSchema, getValue)],
     [hasKey('required'), R.compose(parseRequired, getValue)],
     [hasKey('nullable'), parseNullable],
