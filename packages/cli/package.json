@@ -1,6 +1,6 @@
 {
   "name": "@apielements/cli",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "Command line tool interface for Fury.js",
   "author": "Apiary.io <support@apiary.io>",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "@apielements/apib-serializer": "^0.16.3",
     "@apielements/core": ">=0.1.0 <0.3.0",
     "@apielements/openapi2-parser": "^0.32.4",
-    "@apielements/openapi3-parser": "^0.15.2",
+    "@apielements/openapi3-parser": "^0.16.0",
     "cardinal": "^2.1.1",
     "commander": "^5.1.0",
     "js-yaml": "^3.12.0",
