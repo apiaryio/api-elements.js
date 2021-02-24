@@ -1,5 +1,12 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## 0.32.5 (2020-02-24)
+
+### Enhancements
+
+- `additionalProperties` found within 'Schema Object' will now be translated
+  into the parse result's data structure section.
+
 ## 0.32.4 (2020-10-13)
 
 ### Bug Fixes
