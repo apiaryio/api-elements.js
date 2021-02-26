@@ -133,7 +133,13 @@ class DataStructureGenerator {
       element.attributes.set('typeAttributes', typeAttributes);
 
       if (schema.additionalProperties !== false) {
-        const member = this.generateMember('', schema.additionalProperties);
+        let key;
+
+        if (schema.example && typeof schema.example === 'object') {
+          key = Object.keys(schema.example).find(key => element.getMember(key) === undefined);
+        }
+
+        const member = this.generateMember(key || '', schema.additionalProperties);
         member.attributes.set('variable', true);
         element.content.push(member);
       }
