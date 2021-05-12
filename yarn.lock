@@ -6674,6 +6674,11 @@ validator@^12.0.0:
   resolved "https://registry.yarnpkg.com/validator/-/validator-12.2.0.tgz#660d47e96267033fd070096c3b1a6f2db4380a0a"
   integrity sha512-jJfE/DW6tIK1Ek8nCfNFqt8Wb3nzMoAbocBF6/Icgg1ZFSBpObdnwVY2jQj6qUqzhx5jc71fpvBWyLGO7Xl+nQ==
 
+validator@^13.6.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.6.0.tgz#1e71899c14cdc7b2068463cb24c1cc16f6ec7059"
+  integrity sha512-gVgKbdbHgtxpRyR8K0O6oFZPhhB5tT1jeEHZR0Znr9Svg03U0+r9DXWMrnRAB+HtCStDQKlaIZm42tVsVjqtjg==
+
 verror@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.10.0.tgz#3a105ca17053af55d6e270c1f8288682e18da400"
@@ -6952,7 +6957,7 @@ yargs@^15.0.2:
     y18n "^4.0.0"
     yargs-parser "^16.1.0"
 
-z-schema@^4.1.0, z-schema@^4.2.2:
+z-schema@^4.2.2:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/z-schema/-/z-schema-4.2.3.tgz#85f7eea7e6d4fe59a483462a98f511bd78fe9882"
   integrity sha512-zkvK/9TC6p38IwcrbnT3ul9in1UX4cm1y/VZSs4GHKIiDCrlafc+YQBgQBUdDXLAoZHf2qvQ7gJJOo6yT1LH6A==
@@ -6960,5 +6965,16 @@ z-schema@^4.1.0, z-schema@^4.2.2:
     lodash.get "^4.4.2"
     lodash.isequal "^4.5.0"
     validator "^12.0.0"
+  optionalDependencies:
+    commander "^2.7.1"
+
+z-schema@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/z-schema/-/z-schema-5.0.1.tgz#f4d4efb1e8763c968b5539e42d11b6a47e91da62"
+  integrity sha512-Gp8xU2lULhREqTWj9t4BEAeA7M835n4fWJ9KjGWksV3wmLUdOJo2hAr+QYvkVZIGOOTyeN274g1f95dKRsgYgQ==
+  dependencies:
+    lodash.get "^4.4.2"
+    lodash.isequal "^4.5.0"
+    validator "^13.6.0"
   optionalDependencies:
     commander "^2.7.1"
