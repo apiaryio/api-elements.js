@@ -3965,14 +3965,15 @@ json-parse-better-errors@^1.0.0, json-parse-better-errors@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
   integrity sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
 
-json-schema-faker@0.5.0-rc23:
-  version "0.5.0-rc23"
-  resolved "https://registry.yarnpkg.com/json-schema-faker/-/json-schema-faker-0.5.0-rc23.tgz#f6cfab390e429b1f57ac83199480439db60962fa"
-  integrity sha512-lRzFEnp55TihRzMvUBrtvTlM/aHGhCwfes0/T9bN9OiB2n36/SUFxtMn7anYoES+f95eU3viJ/foXKosCwsiJw==
+json-schema-faker@0.5.0-rcv.35:
+  version "0.5.0-rcv.35"
+  resolved "https://registry.yarnpkg.com/json-schema-faker/-/json-schema-faker-0.5.0-rcv.35.tgz#021bb4476b6c55d3382c837d0be577e482325672"
+  integrity sha512-UsIroMY2VdhO/4Fw2Vv40lnl37YjGp8pjadLJBW5k/eVldKED9xXV++TJUJaCEqnpwg7ixazLUKSm8C81APD4g==
   dependencies:
     json-schema-ref-parser "^6.1.0"
-    jsonpath-plus "^1.0.0"
+    jsonpath-plus "^5.1.0"
     randexp "^0.5.3"
+    yaml "^1.10.2"
 
 json-schema-ref-parser@^6.1.0:
   version "6.1.0"
@@ -4038,10 +4039,10 @@ jsonparse@^1.2.0:
   resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.3.1.tgz#3f4dae4a91fac315f71062f8521cc239f1366280"
   integrity sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=
 
-jsonpath-plus@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-1.0.0.tgz#78fa5c4ae62968476268d505d9f78c65469d0e7c"
-  integrity sha512-CXQJ/tsgFogKYBuCRmnlChIw66JBXp8kAkT+R4mSB2cuzCSBi88lx2A+vHvo27RY4Wtj5xVVGu2/2O7NwZ79mg==
+jsonpath-plus@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-5.1.0.tgz#2fc4b2e461950626c98525425a3a3518b85af6c3"
+  integrity sha512-890w2Pjtj0iswAxalRlt2kHthi6HKrXEfZcn+ZNZptv7F3rUGIeDuZo+C+h4vXBHLEsVjJrHeCm35nYeZLzSBQ==
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -6861,6 +6862,11 @@ yaml-js@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/yaml-js/-/yaml-js-0.2.3.tgz#f4cf6c1b3c784f59f55547d7dfcdd06418303291"
   integrity sha512-6xUQtVKl1qcd0EXtTEzUDVJy9Ji1fYa47LtkDtYKlIjhibPE9knNPmoRyf6SGREFHlOAUyDe9OdYqRP4DuSi5Q==
+
+yaml@^1.10.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
+  integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
 yargs-parser@13.1.2, yargs-parser@^13.1.2:
   version "13.1.2"
