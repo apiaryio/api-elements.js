@@ -76,12 +76,12 @@ const pathHasCircularReference = (paths, path, reference) => {
   const currentPath = (path || []).join('/');
 
   // Check for direct circular reference
-  if (currentPath.startsWith(reference)) {
+  if (currentPath === reference || currentPath.startsWith(`${reference}/`)) {
     return true;
   }
 
   // Check for indirect circular Reference
-  if ((paths || []).find(p => p.startsWith(reference))) {
+  if ((paths || []).find(p => p === reference || p.startsWith(`${reference}/`))) {
     return true;
   }
 
@@ -393,5 +393,11 @@ const convertSchemaDefinitions = (definitions) => {
 };
 
 module.exports = {
-  isExtension, parseReference, lookupReference, dereference, convertSchema, convertSchemaDefinitions,
+  isExtension,
+  parseReference,
+  lookupReference,
+  dereference,
+  convertSchema,
+  convertSchemaDefinitions,
+  pathHasCircularReference,
 };
