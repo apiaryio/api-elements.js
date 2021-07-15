@@ -1,5 +1,7 @@
 const { expect } = require('chai');
-const { convertSchema, convertSchemaDefinitions, dereference } = require('../lib/json-schema');
+const {
+  convertSchema, convertSchemaDefinitions, dereference, pathHasCircularReference,
+} = require('../lib/json-schema');
 
 describe('Swagger Schema to JSON Schema', () => {
   it('returns compatible schema when given valid JSON Schema', () => {
@@ -851,5 +853,52 @@ describe('Dereferencing', () => {
         },
       },
     });
+  });
+});
+
+
+describe('#pathHasCircularReference', () => {
+  it('does not detect circular reference when reference is not circular', () => {
+    const reference = '#/definitions/User';
+    const currentPath = ['#', 'definitions', 'ListUsers'];
+
+    expect(pathHasCircularReference([], currentPath, reference)).to.be.false;
+  });
+
+  it('detects circular reference when current path is reference path', () => {
+    const reference = '#/definitions/User';
+    const currentPath = ['#', 'definitions', 'User'];
+
+    expect(pathHasCircularReference([], currentPath, reference)).to.be.true;
+  });
+
+  it('detects circular reference when current path contains reference path', () => {
+    const reference = '#/definitions/User';
+    const currentPath = ['#', 'definitions', 'User', 'properties', 'parent'];
+
+    expect(pathHasCircularReference([], currentPath, reference)).to.be.true;
+  });
+
+  it('detects incircular reference when current path is in the prior referenced tree', () => {
+    const reference = '#/definitions/User';
+    const currentPath = ['#', 'definitions', 'ListUsers'];
+    const currentTree = ['#/definitions/User/properties/children'];
+
+    expect(pathHasCircularReference(currentTree, currentPath, reference)).to.be.true;
+  });
+
+  it('does not detect circular reference when reference last component prefixes current path', () => {
+    const reference = '#/definitions/User';
+    const currentPath = ['#', 'definitions', 'UserList'];
+
+    expect(pathHasCircularReference([], currentPath, reference)).to.be.false;
+  });
+
+  it('does not detect incircular reference when reference last component prefixes path in prior reference tree', () => {
+    const reference = '#/definitions/User';
+    const currentPath = ['#', 'definitions', 'UserDetail'];
+    const currentTree = ['#/definitions/UserList/items'];
+
+    expect(pathHasCircularReference(currentTree, currentPath, reference)).to.be.false;
   });
 });
