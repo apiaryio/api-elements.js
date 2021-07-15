@@ -1,5 +1,14 @@
 # API Elements: OpenAPI 2 Parser Changelog
 
+## 0.32.6 (2021-07-21)
+
+### Bug Fixes
+
+- Fixes generating example JSON bodies from Swagger Schema when the schema
+  contains a reference to a JSON path which prefixes the current path, for
+  example when handling a path such as `$ref: '#/definitions/User'` from a path
+  which prefixes it such as `$ref: '#/definitions/UserList'`.
+
 ## 0.32.5 (2020-02-24)
 
 ### Enhancements
