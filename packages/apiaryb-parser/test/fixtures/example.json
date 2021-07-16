@@ -1,5 +1,31 @@
 {
   "element": "parseResult",
+  "meta": {
+    "links": {
+      "element": "array",
+      "content": [
+        {
+          "element": "link",
+          "meta": {
+            "title": {
+              "element": "string",
+              "content": "Apiary Blueprint"
+            }
+          },
+          "attributes": {
+            "relation": {
+              "element": "string",
+              "content": "via"
+            },
+            "href": {
+              "element": "string",
+              "content": "https://apiary.io/blueprint"
+            }
+          }
+        }
+      ]
+    }
+  },
   "content": [
     {
       "element": "category",
