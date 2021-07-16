@@ -805,6 +805,92 @@ describe('JSON Schema to Data Structure', () => {
       expect(mode.attributes.getValue('typeAttributes')).to.deep.equal(['required']);
       expect(mode.value).to.be.instanceof(StringElement);
     });
+
+    describe('infering from example', () => {
+      it('produces object with additionalProperties containing example', () => {
+        const schema = {
+          type: 'object',
+          additionalProperties: {
+            type: 'string',
+          },
+          example: {
+            'application/json': 'https://tools.ietf.org/html/rfc7159',
+          },
+        };
+
+        const dataStructure = schemaToDataStructure(schema);
+
+        expect(dataStructure.element).to.equal('dataStructure');
+        expect(dataStructure.content).to.be.instanceof(ObjectElement);
+        expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+
+        expect(dataStructure.content.length).to.equal(1);
+
+        const variable = dataStructure.content.getMember('application/json');
+        expect(variable).to.be.instanceof(MemberElement);
+        expect(variable.attributes.getValue('variable')).to.be.true;
+        expect(variable.value).to.be.instanceof(StringElement);
+        expect(variable.value.toValue()).to.be.undefined;
+      });
+
+      it('produces object with additionalProperties containing example excluding required', () => {
+        const schema = {
+          type: 'object',
+          additionalProperties: {
+            type: 'string',
+          },
+          required: ['application/json'],
+          example: {
+            'application/json': 'https://tools.ietf.org/html/rfc7159',
+          },
+        };
+
+        const dataStructure = schemaToDataStructure(schema);
+
+        expect(dataStructure.element).to.equal('dataStructure');
+        expect(dataStructure.content).to.be.instanceof(ObjectElement);
+        expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+
+        expect(dataStructure.content.length).to.equal(2);
+
+        const variable = dataStructure.content.getMember('');
+        expect(variable).to.be.instanceof(MemberElement);
+        expect(variable.attributes.getValue('variable')).to.be.true;
+        expect(variable.value).to.be.instanceof(StringElement);
+        expect(variable.value.toValue()).to.be.undefined;
+      });
+
+      it('produces object with additionalProperties containing example excluding defined properties', () => {
+        const schema = {
+          type: 'object',
+          properties: {
+            'application/json': {
+              type: 'boolean',
+            },
+          },
+          additionalProperties: {
+            type: 'string',
+          },
+          example: {
+            'application/json': 'https://tools.ietf.org/html/rfc7159',
+          },
+        };
+
+        const dataStructure = schemaToDataStructure(schema);
+
+        expect(dataStructure.element).to.equal('dataStructure');
+        expect(dataStructure.content).to.be.instanceof(ObjectElement);
+        expect(dataStructure.content.attributes.getValue('typeAttributes')).to.deep.equal(['fixedType']);
+
+        expect(dataStructure.content.length).to.equal(2);
+
+        const variable = dataStructure.content.getMember('');
+        expect(variable).to.be.instanceof(MemberElement);
+        expect(variable.attributes.getValue('variable')).to.be.true;
+        expect(variable.value).to.be.instanceof(StringElement);
+        expect(variable.value.toValue()).to.be.undefined;
+      });
+    });
   });
 
   context('array schema', () => {
