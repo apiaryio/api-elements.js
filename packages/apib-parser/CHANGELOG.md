@@ -1,5 +1,11 @@
 # API Elements: API Blueprint Parser Changelog
 
+## Master
+
+### Enhancements
+
+- added a Link element to the specific format/version in the parse result.
+
 ## 0.20.1 (2020-08-05)
 
 Adds compatibility for @apielements/core 0.2.0.
