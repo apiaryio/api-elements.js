@@ -12,7 +12,7 @@ class Parser {
 
   parse() {
     const {
-      Annotation, Category, Copy, ParseResult,
+      Annotation, Category, Copy, ParseResult, Link,
     } = this.namespace.elements;
 
     this.result = new ParseResult();
@@ -33,6 +33,12 @@ class Parser {
 
       return this.result;
     }
+
+    const link = new Link();
+    link.title = 'Apiary Blueprint';
+    link.relation = 'via';
+    link.href = 'https://apiary.io/blueprint';
+    this.result.links.push(link);
 
     this.api = new Category();
     this.api.classes.push('api');
@@ -56,6 +62,7 @@ class Parser {
     });
 
     this.result.push(this.api);
+
     return this.result;
   }
 
