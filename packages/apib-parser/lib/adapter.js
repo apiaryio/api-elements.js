@@ -33,7 +33,7 @@ function validate({ source, requireBlueprintName }) {
  */
 function parse({
   source, generateSourceMap, generateMessageBody, generateMessageBodySchema,
-  requireBlueprintName,
+  requireBlueprintName, namespace,
 }) {
   const options = {
     exportSourcemap: !!generateSourceMap,
@@ -42,9 +42,25 @@ function parse({
     requireBlueprintName,
   };
 
-  return drafter.parse(source, options);
+  return drafter.parse(source, options).then((result) => {
+    const parseResult = namespace.fromRefract(result);
+    const { Link } = namespace.elements;
+    const link = new Link();
+
+    link.title = 'API Blueprint';
+    link.relation = 'via';
+    link.href = 'https://apiblueprint.org/';
+
+    parseResult.links.push(link);
+
+    return parseResult;
+  });
 }
 
 module.exports = {
-  name, mediaTypes, detect, validate, parse,
+  name,
+  mediaTypes,
+  detect,
+  validate,
+  parse,
 };

@@ -51,10 +51,22 @@ describe('API Blueprint parser adapter', () => {
     });
 
     it('has API category inside parse result', () => {
-      const filtered = result.children.filter(item => item.element === 'category' && item.classes.includes('api'));
+      const filtered = result.children.filter(
+        item => item.element === 'category' && item.classes.includes('api')
+      );
 
       expect(filtered).to.have.length(1);
       expect(filtered.first).to.be.an('object');
+    });
+
+    it('has the format link', () => {
+      const link = result.links.get(0);
+
+      expect(link.relation.toValue()).to.equal('via');
+      expect(link.title.toValue()).to.equal('API Blueprint');
+      expect(link.href.toValue()).to.equal(
+        'https://apiblueprint.org/'
+      );
     });
   });
 
