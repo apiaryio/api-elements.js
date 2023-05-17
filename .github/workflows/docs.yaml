@@ -10,7 +10,7 @@ jobs:
           node-version: 10
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.6
+          python-version: 3.8
       - run: pip install -r docs/requirements.txt
       - run: yarn --frozen-lockfile --ignore-optional
       - run: env PATH="$(yarn bin):$PATH" make html
