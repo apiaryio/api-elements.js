@@ -183,7 +183,7 @@ function parseType(context) {
     }, types);
 
     const parseResult = new namespace.elements.ParseResult();
-    parseResult.push(permittedTypes.elements);
+    parseResult.push(permittedTypes.content);
 
     if (warnings.length > 0) {
       parseResult.push(...warnings);

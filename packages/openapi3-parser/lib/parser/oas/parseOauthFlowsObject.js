@@ -72,7 +72,8 @@ function parseOauthFlowsObject(context, object) {
       authScheme.push(new namespace.elements.Member('grantType', grantTypes[member.key.toValue()]));
       authScheme.push(member.value.getMember('scopes'));
 
-      R.filter(R.is(namespace.elements.Transition), member.value).forEach((item) => {
+      const isTransitionElement = R.is(namespace.elements.Transition);
+      member.value.filter(isTransitionElement).forEach((item) => {
         authScheme.push(item);
       });
 

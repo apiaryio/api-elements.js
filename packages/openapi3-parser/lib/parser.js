@@ -104,7 +104,7 @@ const deduplicateUnsupportedAnnotations = R.curry((namespace, parseResult) => {
     },
     R.T);
 
-  const result = new namespace.elements.ParseResult(R.filter(filterWarnings, parseResult));
+  const result = R.filter(filterWarnings, parseResult);
 
   // Update warning messages to include count
   R.forEach(
