@@ -37,7 +37,7 @@ function parseOASObject(context, object) {
   // Takes a parse result, and wraps all of the non annotations inside an array
   const asArray = (parseResult) => {
     const array = new namespace.elements.Array(R.reject(isAnnotation, parseResult));
-    return new namespace.elements.ParseResult([array].concat(parseResult.annotations.elements));
+    return new namespace.elements.ParseResult([array.content].concat(parseResult.annotations.elements));
   };
 
   const isOpenAPI31OrHigher = () => context.isOpenAPIVersionMoreThanOrEqual(3, 1);

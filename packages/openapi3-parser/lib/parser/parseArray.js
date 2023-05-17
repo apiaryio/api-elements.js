@@ -81,8 +81,8 @@ function parseArray(context, name, parseValue) {
   const convertParseResultMembersToArray = (parseResult) => {
     const values = R.reject(isAnnotation, parseResult);
     const annotations = R.filter(isAnnotation, parseResult);
-    const array = new namespace.elements.Array(values);
-    return new namespace.elements.ParseResult([array].concat(annotations.elements));
+    const array = new namespace.elements.Array(values.content);
+    return new namespace.elements.ParseResult([array].concat(annotations.content));
   };
 
   // Create a parse result from an array using all of the members

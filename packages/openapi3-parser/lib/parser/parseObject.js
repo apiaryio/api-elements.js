@@ -139,8 +139,8 @@ function parseObject(context, name, parseMember, requiredKeys = [], orderedKeys 
   const convertParseResultMembersToObject = (parseResult) => {
     const members = R.filter(isMember, parseResult);
     const annotations = R.filter(isAnnotation, parseResult);
-    const object = new namespace.elements.Object(members);
-    return new namespace.elements.ParseResult([object].concat(annotations.elements));
+    const object = new namespace.elements.Object(members.content);
+    return new namespace.elements.ParseResult([object].concat(annotations.content));
   };
 
   // Create a parse result from an object using all of the members
